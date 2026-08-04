@@ -192,7 +192,23 @@ p { margin: 0; }
   background: var(--accent);
 }
 
+.hero-visual {
+  display: grid;
+  width: min(100%, 400px);
+  margin-inline: auto;
+}
+
+.hero-figure {
+  margin: 0;
+  border-radius: 240px 240px var(--radius) var(--radius);
+  overflow: hidden;
+}
+.hero-figure img { width: 100%; height: auto; }
+
+/* La tarjeta se monta sobre el borde inferior de la ilustración. */
 .hero-card {
+  margin: -64px 20px 0;
+  position: relative;
   background: var(--bg-alt);
   border: 1px solid var(--line);
   border-radius: var(--radius);

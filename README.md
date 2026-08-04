@@ -11,6 +11,7 @@ HTML, CSS y JavaScript puros. Sin build, sin dependencias, sin framework.
 index.html        Toda la página (hero, tratamientos, clínica, formulario, footer)
 css/styles.css    Estilos
 js/main.js        Validación del formulario y envío por WhatsApp
+img/clinica.svg   Ilustración del hero
 ```
 
 ## Ver en local
@@ -31,6 +32,7 @@ python3 -m http.server 8000   # http://localhost:8000
 | Cifras del panel (años, pacientes, calificación) | `index.html`, bloque `.stats` |
 | Testimonio | `index.html`, bloque `.quote` |
 | Colores | `css/styles.css` → variables `--brand`, `--accent` |
+| Imagen del hero | `img/clinica.svg`. Para usar una foto real, reemplaza el `<img>` de `.hero-figure` en `index.html`; el marco de arco lo aplica el CSS, así que cualquier foto vertical encaja |
 
 ## Cómo funciona el formulario
 

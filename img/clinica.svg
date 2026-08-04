@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" role="img" aria-labelledby="titulo">
+  <title id="titulo">Ilustración de una pieza dental sana sobre un arco</title>
+
+  <defs>
+    <!-- El arco: guiño arquitectónico al nombre "Imperial". -->
+    <clipPath id="arco">
+      <path d="M0 240a240 240 0 0 1 480 0v320q0 40-40 40H40q-40 0-40-40Z"/>
+    </clipPath>
+
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#12484d"/>
+      <stop offset="1" stop-color="#0a2b2f"/>
+    </linearGradient>
+
+    <radialGradient id="luz" cx="0.5" cy="0.32" r="0.62">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g clip-path="url(#arco)">
+    <rect width="480" height="600" fill="url(#fondo)"/>
+    <rect width="480" height="600" fill="url(#luz)"/>
+
+    <!-- Arcos concéntricos que repiten la forma del marco. -->
+    <g fill="none" stroke="#ffffff" stroke-opacity="0.09" stroke-width="1.5">
+      <path d="M52 240a188 188 0 0 1 376 0v360H52Z"/>
+      <path d="M104 240a136 136 0 0 1 272 0v360H104Z"/>
+    </g>
+
+    <!-- La pieza dental, recortada por el arco. -->
+    <g transform="translate(0 150) scale(20)">
+      <path d="M12 5.5c-2-1.6-4.2-2-5.9-1.2C4 5.2 3.3 7.6 3.9 10.4c.4 1.9.9 3.3 1.4 5 .5 1.8.8 3.6 2.2 3.6 1.3 0 1.6-1.6 2-3.3.3-1.3.8-2.2 2.5-2.2s2.2.9 2.5 2.2c.4 1.7.7 3.3 2 3.3 1.4 0 1.7-1.8 2.2-3.6.5-1.7 1-3.1 1.4-5 .6-2.8-.1-5.2-2.2-6.1-1.7-.8-3.9-.4-5.9 1.2Z"
+            fill="#ffffff" fill-opacity="0.07"
+            stroke="#f2ede4" stroke-opacity="0.85" stroke-width="0.12"
+            stroke-linejoin="round"/>
+      <!-- Reflejo sobre el esmalte. -->
+      <path d="M8.6 7.1c-.7.9-1 2.1-.8 3.4"
+            fill="none" stroke="#ffffff" stroke-opacity="0.5"
+            stroke-width="0.16" stroke-linecap="round"/>
+    </g>
+
+    <!-- Destello: el resultado del tratamiento. -->
+    <path d="M348 168c0 15 3 18 18 18-15 0-18 3-18 18 0-15-3-18-18-18 15 0 18-3 18-18Z" fill="#d9bd85"/>
+    <path d="M386 214c0 8.5 1.7 10.2 10.2 10.2-8.5 0-10.2 1.7-10.2 10.2 0-8.5-1.7-10.2-10.2-10.2 8.5 0 10.2-1.7 10.2-10.2Z" fill="#d9bd85" fill-opacity="0.6"/>
+  </g>
+</svg>
