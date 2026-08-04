@@ -110,11 +110,13 @@ function correrFfmpeg(args) {
 
 function escribir(stream, buf) {
   return new Promise((resolve, reject) => {
-    if (stream.write(buf)) resolve();
-    else {
-      stream.once('drain', resolve);
-      stream.once('error', reject);
-    }
+    if (stream.write(buf)) return resolve();
+    // Hay que quitar el listener que no se usa: si no, cada fotograma que
+    // espera a que se vacíe el buffer deja uno colgado en el socket.
+    const alFallar = (e) => { stream.off('drain', alDrenar); reject(e); };
+    const alDrenar = () => { stream.off('error', alFallar); resolve(); };
+    stream.once('drain', alDrenar);
+    stream.once('error', alFallar);
   });
 }
 
@@ -154,6 +156,11 @@ async function renderFormato(page, { oracion, tema, canal, formato, opciones, de
   const ff = spawn(ffmpegPath, [
     '-y',
     '-f', 'image2pipe', '-vcodec', 'png', '-framerate', String(fps), '-i', 'pipe:0',
+    // El degradado del fondo se dibuja en 8 bits y deja anillos de banding muy
+    // visibles sobre un fondo oscuro. gradfun los deshace y el grano —con
+    // semilla fija, para no perder la reproducibilidad— evita que el propio
+    // x264 los vuelva a crear al cuantizar.
+    '-vf', 'gradfun=strength=1.5:radius=24,noise=alls=2:allf=t:all_seed=20260804',
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
     '-pix_fmt', 'yuv420p', '-r', String(fps), '-movflags', '+faststart',
     salidaCruda,

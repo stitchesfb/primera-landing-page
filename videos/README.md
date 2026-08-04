@@ -88,6 +88,10 @@ cada fotograma y se los pasa a ffmpeg por una tubería.
 Como no depende del reloj del navegador, da igual que la máquina vaya lenta:
 no se pierde ni un fotograma y dos renders del mismo texto salen idénticos.
 
+Antes de codificar pasa un `gradfun` con un grano finísimo de semilla fija: el
+degradado del fondo se dibuja en 8 bits y, sobre negro, deja anillos de
+banding bien visibles. Ese paso los deshace y evita que x264 los recree.
+
 ## Sonido
 
 `--tono` genera un fondo sonoro sobrio (tres notas graves con un vibrato muy
