@@ -9,14 +9,14 @@
  *
  * Uso:
  *   node render.mjs --oracion manana --formato ambos
- *   node render.mjs --oracion todas --formato shorts --tono
+ *   node render.mjs --oracion todas --formato shorts --sin-musica
  *
  * Opciones:
  *   --oracion <id|todas>   Qué oración renderizar (por defecto: todas)
  *   --formato <f>          shorts | wide | ambos        (por defecto: ambos)
  *   --fps <n>              Fotogramas por segundo       (por defecto: 30)
  *   --velocidad <n>        Multiplicador de ritmo, 1.2 = más pausado
- *   --tono                 Añade un fondo sonoro suave generado con ffmpeg
+ *   --sin-musica           Deja el video mudo, para ponerle tu propio audio
  *   --sin-miniatura        No genera la imagen de portada
  *   --salida <dir>         Carpeta de salida             (por defecto: ./out)
  */
@@ -27,6 +27,7 @@ import { spawn } from 'node:child_process';
 import { readFileSync, mkdirSync, writeFileSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { generarMusica } from './audio.mjs';
 
 const AQUI = dirname(fileURLToPath(import.meta.url));
 
@@ -43,7 +44,7 @@ function parseArgs(argv) {
     formato: 'ambos',
     fps: 30,
     velocidad: 1,
-    tono: false,
+    musica: true,
     miniatura: true,
     salida: join(AQUI, 'out'),
   };
@@ -53,7 +54,7 @@ function parseArgs(argv) {
     else if (a === '--formato') o.formato = argv[++i];
     else if (a === '--fps') o.fps = Number(argv[++i]);
     else if (a === '--velocidad') o.velocidad = Number(argv[++i]);
-    else if (a === '--tono') o.tono = true;
+    else if (a === '--sin-musica') o.musica = false;
     else if (a === '--sin-miniatura') o.miniatura = false;
     else if (a === '--salida') o.salida = argv[++i];
     else if (a === '--ayuda' || a === '-h') { console.log(ayuda()); process.exit(0); }
@@ -120,20 +121,6 @@ function escribir(stream, buf) {
   });
 }
 
-/** Fondo sonoro: tres senos graves con un vibrato lento y fundidos largos. */
-function filtroTono(duracion) {
-  const d = duracion.toFixed(2);
-  const salida = Math.max(0, duracion - 4).toFixed(2);
-  return [
-    `sine=frequency=110:duration=${d}[a]`,
-    `sine=frequency=164.81:duration=${d}[b]`,
-    `sine=frequency=220:duration=${d}[c]`,
-    `[a][b][c]amix=inputs=3:weights=1 0.55 0.35:normalize=0[mix]`,
-    `[mix]tremolo=f=0.11:d=0.32,lowpass=f=760,volume=0.11,` +
-      `afade=t=in:st=0:d=3,afade=t=out:st=${salida}:d=4,` +
-      `aformat=channel_layouts=stereo[out]`,
-  ].join(';');
-}
 
 // --- render de un formato --------------------------------------------
 
@@ -151,7 +138,7 @@ async function renderFormato(page, { oracion, tema, canal, formato, opciones, de
   const fps = opciones.fps;
   const total = Math.round(duracion * fps);
   const salidaVideo = join(destino, `${oracion.id}-${formato}.mp4`);
-  const salidaCruda = opciones.tono ? join(destino, `.${oracion.id}-${formato}.tmp.mp4`) : salidaVideo;
+  const salidaCruda = opciones.musica ? join(destino, `.${oracion.id}-${formato}.tmp.mp4`) : salidaVideo;
 
   const ff = spawn(ffmpegPath, [
     '-y',
@@ -186,15 +173,17 @@ async function renderFormato(page, { oracion, tema, canal, formato, opciones, de
   process.stdout.write(' listo\n');
   await cerrado;
 
-  if (opciones.tono) {
+  if (opciones.musica) {
+    const wav = join(destino, `.${oracion.id}-${formato}.wav`);
+    generarMusica(wav, duracion);
     await correrFfmpeg([
-      '-y', '-i', salidaCruda,
-      '-filter_complex', filtroTono(duracion),
-      '-map', '0:v', '-map', '[out]',
+      '-y', '-i', salidaCruda, '-i', wav,
+      '-map', '0:v', '-map', '1:a',
       '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest',
       '-movflags', '+faststart', salidaVideo,
     ]);
     rmSync(salidaCruda, { force: true });
+    rmSync(wav, { force: true });
   }
 
   // Miniatura: un fotograma de la portada, ya compuesto.

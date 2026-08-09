@@ -55,11 +55,21 @@
     return el;
   }
 
+  /** Carga una imagen de fondo propia antes de empezar a dibujar. */
+  function cargarImagen(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('No se pudo cargar la imagen de fondo: ' + src));
+      img.src = src;
+    });
+  }
+
   /**
    * Monta el DOM y calcula la línea de tiempo completa.
    * config = { oracion, tema, canal, formato, velocidad }
    */
-  window.montar = function montar(config) {
+  window.montar = async function montar(config) {
     const { oracion, tema, canal } = config;
     const velocidad = config.velocidad || 1;
 
@@ -140,13 +150,23 @@
       t += dur;
     }
 
+    const lienzo = document.getElementById('fondo');
+    const imagen = oracion.fondo && oracion.fondo.imagen
+      ? await cargarImagen(oracion.fondo.imagen)
+      : null;
+
     escena = {
       bloques,
       eyebrow,
       handle,
-      glow: document.getElementById('glow'),
       bar: document.getElementById('bar'),
       duracion: t,
+      fondo: window.crearFondo(lienzo, {
+        ancho: stage.clientWidth,
+        alto: stage.clientHeight,
+        duracion: t,
+        imagen,
+      }),
     };
 
     // Estado inicial coherente antes del primer fotograma.
@@ -159,6 +179,8 @@
   window.seek = function seek(t) {
     if (!escena) throw new Error('Hay que llamar a montar() antes de seek()');
     const D = escena.duracion;
+
+    escena.fondo.dibujar(t);
 
     escena.bloques.forEach((b) => {
       const salidaInicio = b.fin - SALIDA;
@@ -199,12 +221,5 @@
 
     // Barra de progreso.
     escena.bar.style.width = (clamp(t / D, 0, 1) * 100).toFixed(3) + '%';
-
-    // Resplandor de fondo: respiración muy lenta, sin llamar la atención.
-    const fase = (t / 13) * Math.PI * 2;
-    escena.glow.style.opacity = (0.72 + 0.22 * Math.sin(fase)).toFixed(4);
-    escena.glow.style.transform =
-      'translate(-50%, -50%) translateY(' + (Math.sin(fase * 0.6) * 26).toFixed(2) + 'px) ' +
-      'scale(' + (1 + 0.045 * Math.sin(fase + 1.1)).toFixed(4) + ')';
   };
 })();
