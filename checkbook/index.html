@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Check register that knows what really cleared your bank.">
+<meta name="theme-color" content="#0f172a">
+<title>Real Balance</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💵</text></svg>">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">RB</span>
+    <div>
+      <h1>Real Balance</h1>
+      <p class="sub" id="syncStatus">Not synced yet</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn btn-primary" id="syncBtn">Sync bank</button>
+    <button class="btn btn-ghost" id="menuBtn" aria-label="More options" aria-haspopup="menu">⋯</button>
+  </div>
+</header>
+
+<main>
+  <!-- What you actually have ------------------------------------------------>
+  <section class="totals" aria-label="Totals">
+    <div class="total total-hero">
+      <span class="total-label">Real balance</span>
+      <strong class="total-value" id="totalReal">—</strong>
+      <span class="total-note">after everything pending</span>
+    </div>
+    <div class="total">
+      <span class="total-label">Cleared at the bank</span>
+      <strong class="total-value" id="totalCleared">—</strong>
+      <span class="total-note" id="clearedNote">what the bank shows today</span>
+    </div>
+    <div class="total">
+      <span class="total-label">Pending out</span>
+      <strong class="total-value negative" id="totalPendingOut">—</strong>
+      <span class="total-note" id="pendingOutNote">not taken yet</span>
+    </div>
+    <div class="total">
+      <span class="total-label">Pending in</span>
+      <strong class="total-value positive" id="totalPendingIn">—</strong>
+      <span class="total-note" id="pendingInNote">not deposited yet</span>
+    </div>
+  </section>
+
+  <!-- Accounts -------------------------------------------------------------->
+  <section class="panel" aria-labelledby="accountsTitle">
+    <div class="panel-head">
+      <h2 id="accountsTitle">Accounts</h2>
+      <button class="btn btn-small btn-ghost" id="addAccountBtn">Add account by hand</button>
+    </div>
+    <div class="accounts" id="accounts"></div>
+  </section>
+
+  <!-- Things only you can decide -------------------------------------------->
+  <section class="panel review-panel" id="reviewPanel" hidden aria-labelledby="reviewTitle">
+    <div class="panel-head">
+      <h2 id="reviewTitle">Needs your review <span class="badge" id="reviewCount">0</span></h2>
+    </div>
+    <div id="reviewBody"></div>
+  </section>
+
+  <!-- Register -------------------------------------------------------------->
+  <section class="panel" aria-labelledby="registerTitle">
+    <div class="panel-head">
+      <h2 id="registerTitle">Register</h2>
+      <div class="filters">
+        <div class="tabs" role="tablist" aria-label="Filter by status">
+          <button class="tab is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="tab" data-filter="pending" role="tab" aria-selected="false">Pending</button>
+          <button class="tab" data-filter="cleared" role="tab" aria-selected="false">Cleared</button>
+        </div>
+        <select id="accountFilter" aria-label="Filter by account"><option value="all">All accounts</option></select>
+        <input type="search" id="search" placeholder="Search…" aria-label="Search the register">
+      </div>
+    </div>
+
+    <form class="entry-form" id="entryForm" autocomplete="off">
+      <div class="field field-date">
+        <label for="fDate">Date</label>
+        <input type="date" id="fDate" required>
+      </div>
+      <div class="field field-desc">
+        <label for="fDesc">Description</label>
+        <input type="text" id="fDesc" placeholder="Rent, Wawa, check to plumber…" required>
+      </div>
+      <div class="field field-account">
+        <label for="fAccount">Account</label>
+        <select id="fAccount" required></select>
+      </div>
+      <div class="field field-dir">
+        <label for="fDirection">Type</label>
+        <select id="fDirection">
+          <option value="out">Money out</option>
+          <option value="in">Money in</option>
+        </select>
+      </div>
+      <div class="field field-amount">
+        <label for="fAmount">Amount</label>
+        <input type="text" inputmode="decimal" id="fAmount" placeholder="0.00" required>
+      </div>
+      <div class="field field-check">
+        <label for="fCheck">Check #</label>
+        <input type="text" id="fCheck" placeholder="opt.">
+      </div>
+      <button type="submit" class="btn btn-primary">Add as pending</button>
+    </form>
+
+    <div class="table-wrap">
+      <table class="register">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Account</th>
+            <th scope="col" class="num">Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col"><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody id="registerBody"></tbody>
+      </table>
+      <p class="empty" id="registerEmpty" hidden>Nothing here yet. Add what you spend as it happens — it stays pending until the bank takes it.</p>
+    </div>
+  </section>
+</main>
+
+<!-- Sync dialog ------------------------------------------------------------->
+<dialog id="syncDialog" class="dialog">
+  <form method="dialog" class="dialog-head">
+    <h2>Sync bank</h2>
+    <button class="btn btn-ghost btn-small" value="close" aria-label="Close">✕</button>
+  </form>
+  <div class="dialog-body">
+    <p class="dialog-lead">Load the latest snapshot of your accounts. Pending entries that have posted get cleared automatically; anything unclear is listed for you to confirm.</p>
+    <div class="sync-options">
+      <button class="btn btn-primary" id="syncFileBtn">Load data/bank-snapshot.json</button>
+      <label class="btn btn-secondary" for="syncUpload">Choose a file…<input type="file" id="syncUpload" accept=".json,application/json" hidden></label>
+    </div>
+    <details class="paste">
+      <summary>Or paste the snapshot</summary>
+      <textarea id="syncPaste" rows="6" placeholder='{ "accounts": [...], "transactions": [...] }'></textarea>
+      <button class="btn btn-secondary btn-small" id="syncPasteBtn">Apply pasted snapshot</button>
+    </details>
+    <p class="sync-result" id="syncResult" role="status" aria-live="polite"></p>
+  </div>
+</dialog>
+
+<!-- Menu dialog ------------------------------------------------------------->
+<dialog id="menuDialog" class="dialog">
+  <form method="dialog" class="dialog-head">
+    <h2>Options</h2>
+    <button class="btn btn-ghost btn-small" value="close" aria-label="Close">✕</button>
+  </form>
+  <div class="dialog-body menu-body">
+    <label class="switch">
+      <input type="checkbox" id="autoClearToggle" checked>
+      <span><strong>Clear automatically</strong><small>Turn this off to confirm every match yourself before an entry stops being pending.</small></span>
+    </label>
+    <div class="menu-actions">
+      <button class="btn btn-secondary btn-small" id="exportBtn">Export my data</button>
+      <label class="btn btn-secondary btn-small" for="importInput">Import backup<input type="file" id="importInput" accept=".json,application/json" hidden></label>
+      <button class="btn btn-danger btn-small" id="resetBtn">Erase everything</button>
+    </div>
+    <p class="fine">Everything is stored in this browser only. Nothing is uploaded anywhere.</p>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

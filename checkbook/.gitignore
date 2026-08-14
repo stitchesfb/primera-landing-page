@@ -1,0 +1,4 @@
+# Your real bank data. Never commit this — it holds balances and transactions.
+data/bank-snapshot.json
+data/*.raw.json
+node_modules/

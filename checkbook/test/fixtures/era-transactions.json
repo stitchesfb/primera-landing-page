@@ -1,0 +1,42 @@
+{
+  "transactions": [
+    {
+      "transaction_id": "utgr_mcd",
+      "account_group_key": "uagr_visible_checking",
+      "amount": -11.40,
+      "currency": "USD",
+      "description": "McDonald's",
+      "transaction_date": "2026-08-12",
+      "posted_date": "2026-08-13",
+      "is_pending": false,
+      "merchant_name": "McDonald's",
+      "category": "Dining out",
+      "original_description": "PURCHASE                                AUTHORIZED ON   08/12 MCDONALD'S F1075          TOMS RIVER    NJ  SXXXXXXXXXXX7688   CARD 2846"
+    },
+    {
+      "transaction_id": "utgr_mtg",
+      "account_group_key": "uagr_visible_checking",
+      "amount": -2245.96,
+      "currency": "USD",
+      "description": "Fifth Third Bank Jacquelyn Guevara",
+      "transaction_date": "2026-08-13",
+      "posted_date": "2026-08-13",
+      "is_pending": false,
+      "merchant_name": "Fifth Third Bank",
+      "category": "Rent",
+      "original_description": "FIFTH THIRD BANK MTG PMT    XXXXXX XXXXXX0104      JACQUELYN GUEVARA"
+    },
+    {
+      "transaction_id": "utgr_hold",
+      "account_group_key": "uagr_visible_checking",
+      "amount": -60.00,
+      "currency": "USD",
+      "description": "Pending gas hold",
+      "transaction_date": "2026-08-14",
+      "posted_date": "2026-08-14",
+      "is_pending": true,
+      "category": "Gas"
+    }
+  ],
+  "pagination": { "current_page": 1, "page_size": 50, "total_items": 3, "total_pages": 1 }
+}

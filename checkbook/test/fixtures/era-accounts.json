@@ -1,0 +1,41 @@
+{
+  "accounts": [
+    {
+      "account_group_key": "uagr_visible_checking",
+      "connection_id": "agco_bank",
+      "name": "EVERYDAY CHECKING ...7930",
+      "institution": "Wells Fargo",
+      "provider_id": "mx",
+      "type": "Checking",
+      "balance": { "current": 29.19, "available": 6.30, "currency": "USD" },
+      "balance_as_of": "2026-08-14T18:01:10.0000000+00:00",
+      "supports_transactions": true
+    },
+    {
+      "account_group_key": "uagr_visible_credit",
+      "connection_id": "agco_bank",
+      "name": "BUSINESSLINE LINE OF CREDIT ...9733",
+      "institution": "Wells Fargo",
+      "provider_id": "mx",
+      "type": "CreditCard",
+      "balance": { "current": 5075.83, "available": 4924.00, "currency": "USD" },
+      "balance_as_of": "2026-08-14T18:01:10.0000000+00:00",
+      "supports_transactions": true
+    },
+    {
+      "account_group_key": "uagr_excluded_card",
+      "connection_id": "agco_amex",
+      "name": "Blue from American Express",
+      "institution": "American Express",
+      "provider_id": "mx",
+      "type": "CreditCard",
+      "balance": { "currency": "USD" },
+      "visibility": "tier_excluded",
+      "supports_transactions": true
+    }
+  ],
+  "total_count": 3,
+  "excluded_account_count": 1,
+  "account_limit": 2,
+  "visible_account_count": 2
+}

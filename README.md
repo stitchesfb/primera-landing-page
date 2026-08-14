@@ -44,6 +44,12 @@ Si más adelante quieres que las solicitudes lleguen por correo o a un CRM,
 solo hay que reemplazar el bloque de envío al final de `js/main.js` por un
 `fetch()` al endpoint correspondiente.
 
+## Otra app en este repo
+
+`checkbook/` es una app aparte, sin relación con la landing: un registro de
+saldo que marca cada gasto como pendiente y lo pasa a cobrado cuando el banco
+realmente lo descuenta. Ver `checkbook/README.md`.
+
 ## Publicar
 
 Es un sitio estático: sirve cualquier hosting (GitHub Pages, Netlify, Vercel,

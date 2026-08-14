@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-08-14T18:01:10Z",
+  "source": "sample",
+  "note": "Fake data so you can try the app before connecting anything. Copy this file to bank-snapshot.json to load it automatically.",
+  "accounts": [
+    {
+      "key": "acct_checking",
+      "name": "EVERYDAY CHECKING ...7930",
+      "institution": "Sample Bank",
+      "type": "Checking",
+      "balance": { "current": 1284.55, "available": 1259.55, "currency": "USD" },
+      "balance_as_of": "2026-08-14T18:01:10Z"
+    },
+    {
+      "key": "acct_savings",
+      "name": "WAY2SAVE SAVINGS ...1937",
+      "institution": "Sample Bank",
+      "type": "Savings",
+      "balance": { "current": 2400.00, "currency": "USD" },
+      "balance_as_of": "2026-08-14T18:01:10Z"
+    },
+    {
+      "key": "acct_card",
+      "name": "VISA SIGNATURE ...0965",
+      "institution": "Sample Bank",
+      "type": "CreditCard",
+      "balance": { "current": 612.30, "available": 4387.70, "currency": "USD" },
+      "balance_as_of": "2026-08-14T18:01:10Z"
+    },
+    {
+      "key": "acct_hidden",
+      "name": "BUSINESS CHECKING ...2631",
+      "institution": "Sample Bank",
+      "type": "Checking",
+      "balance": { "currency": "USD" },
+      "balance_unavailable_reason": "balance not included on your current plan"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "txn_1001",
+      "accountKey": "acct_checking",
+      "date": "2026-08-13",
+      "postedDate": "2026-08-13",
+      "description": "McDonald's",
+      "merchantName": "McDonald's",
+      "amount": -11.40,
+      "category": "Dining out",
+      "pending": false
+    },
+    {
+      "id": "txn_1002",
+      "accountKey": "acct_checking",
+      "date": "2026-08-13",
+      "postedDate": "2026-08-13",
+      "description": "Wawa",
+      "merchantName": "Wawa",
+      "amount": -15.76,
+      "category": "Dining out",
+      "pending": false
+    },
+    {
+      "id": "txn_1003",
+      "accountKey": "acct_checking",
+      "date": "2026-08-12",
+      "postedDate": "2026-08-13",
+      "description": "Fifth Third Bank mortgage payment",
+      "merchantName": "Fifth Third Bank",
+      "amount": -2245.96,
+      "category": "Rent",
+      "pending": false
+    },
+    {
+      "id": "txn_1004",
+      "accountKey": "acct_checking",
+      "date": "2026-08-12",
+      "postedDate": "2026-08-12",
+      "description": "ATM Withdrawal",
+      "merchantName": "Sample Bank",
+      "amount": -40.00,
+      "category": "Cash, checks, and misc",
+      "pending": false
+    },
+    {
+      "id": "txn_1005",
+      "accountKey": "acct_checking",
+      "date": "2026-08-11",
+      "postedDate": "2026-08-12",
+      "description": "CHECK # 1042",
+      "originalDescription": "CHECK NUMBER 1042 PAID",
+      "amount": -450.00,
+      "category": "Cash, checks, and misc",
+      "pending": false
+    },
+    {
+      "id": "txn_1006",
+      "accountKey": "acct_checking",
+      "date": "2026-08-10",
+      "postedDate": "2026-08-10",
+      "description": "Payroll deposit",
+      "merchantName": "ACME Payroll",
+      "amount": 2150.00,
+      "category": "Income",
+      "pending": false
+    },
+    {
+      "id": "txn_1007",
+      "accountKey": "acct_card",
+      "date": "2026-08-12",
+      "postedDate": "2026-08-13",
+      "description": "Signature Barb",
+      "amount": -56.65,
+      "category": "Healthcare and pharmacy",
+      "pending": false
+    },
+    {
+      "id": "txn_1008",
+      "accountKey": "acct_card",
+      "date": "2026-08-09",
+      "postedDate": "2026-08-10",
+      "description": "Applebees Toms River",
+      "merchantName": "Applebees",
+      "amount": -47.50,
+      "category": "Dining out",
+      "pending": false
+    }
+  ]
+}
