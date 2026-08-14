@@ -13,6 +13,7 @@ const EMPTY = {
   bankTxns: [],       // last synced posted transactions, kept for matching + review
   links: {},          // bankTxnId -> entryId
   ignoredTxns: [],    // bank transactions you chose not to add to the register
+  startedOn: null,    // first sync date — history before it is not "new"
   lastSync: null,
   settings: { autoClear: true },
 };
@@ -201,17 +202,18 @@ export const store = {
       linkedTxnIds: Object.keys(this.state.links),
     });
 
+    // First sync draws the line between "history" and "from now on".
+    if (!this.state.startedOn) this.state.startedOn = today();
     this.state.lastSync = new Date().toISOString();
     this.save();
 
-    const ignored = new Set(this.state.ignoredTxns);
     return {
       autoCleared: this.state.settings.autoClear ? autoCleared : [],
       suggestions: [
         ...(this.state.settings.autoClear ? [] : result.cleared),
         ...result.suggestions,
       ],
-      newFromBank: result.unmatchedTxns.filter((txn) => !ignored.has(txn.id)),
+      newFromBank: result.unmatchedTxns.filter((txn) => this.isNew(txn)),
       stillPending: result.stillPending,
       addedTxnCount: added,
       accountCount: snapshot.accounts.length,
@@ -278,14 +280,23 @@ export const store = {
     this.save();
   },
 
-  pendingReview() {
+  // Transactions from before you started using the app are already baked into
+  // the bank balance. Offering to file three weeks of history is noise, so only
+  // activity from the first sync onward counts as "new".
+  isNew(txn) {
     const ignored = new Set(this.state.ignoredTxns);
+    if (ignored.has(txn.id)) return false;
+    if (!this.state.startedOn) return true;
+    return (txn.postedDate || txn.date) >= this.state.startedOn;
+  },
+
+  pendingReview() {
     const result = reconcile(this.state.entries, this.state.bankTxns, {
       linkedTxnIds: Object.keys(this.state.links),
     });
     return {
       suggestions: [...(this.state.settings.autoClear ? [] : result.cleared), ...result.suggestions],
-      newFromBank: result.unmatchedTxns.filter((txn) => !ignored.has(txn.id)),
+      newFromBank: result.unmatchedTxns.filter((txn) => this.isNew(txn)),
     };
   },
 

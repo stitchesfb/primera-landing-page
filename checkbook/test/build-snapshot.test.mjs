@@ -15,11 +15,16 @@ const snapshot = JSON.parse(execFileSync('node', [
 ], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }));
 
 test('every account from the feed lands in the snapshot', () => {
-  assert.equal(snapshot.accounts.length, 3);
+  assert.equal(snapshot.accounts.length, 4);
   assert.deepEqual(
     snapshot.accounts.map((account) => account.key),
-    ['uagr_visible_checking', 'uagr_visible_credit', 'uagr_excluded_card'],
+    ['uagr_visible_checking', 'uagr_visible_credit', 'uagr_excluded_card', 'uagr_mangled'],
   );
+});
+
+test('a name mangled by the provider is cleaned up', () => {
+  const account = snapshot.accounts.find((candidate) => candidate.key === 'uagr_mangled');
+  assert.equal(account.name, 'WAY2SAVE SAVINGS ...1937');
 });
 
 test('a known balance is carried across', () => {

@@ -30,7 +30,7 @@ No build step, no framework, no dependencies. Same as the rest of this repo.
 ```bash
 cd checkbook
 python3 -m http.server 8000   # http://localhost:8000
-npm test                      # 28 tests, no install needed
+npm test                      # 42 tests, no install needed
 ```
 
 Open it on your phone too — the register turns into cards on small screens.
@@ -66,6 +66,9 @@ Rules the engine sticks to:
   the row shows both numbers.
 - A balance the feed cannot provide shows as **unavailable** and is left out of
   the totals. It is never shown as $0.
+- Transactions from before your first sync are treated as history — they are
+  already inside the bank balance, so the app does not ask you to file three
+  weeks of past charges. Only activity from that day forward counts as new.
 
 Turn off **⋯ → Clear automatically** if you would rather confirm every match.
 

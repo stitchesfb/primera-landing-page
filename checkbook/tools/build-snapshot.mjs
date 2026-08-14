@@ -20,6 +20,17 @@ if (!files.length) {
 const accounts = new Map();
 const transactions = new Map();
 
+// Some institutions send trademark symbols that arrive mangled — "WAY2SAVE��
+// SAVINGS". Drop the replacement characters and tidy the gap they leave.
+function cleanName(value) {
+  // Note the "...1937" suffix banks use for the last four digits: the space
+  // before it is meaningful, so only collapse runs of whitespace.
+  return String(value || '')
+    .replace(/�/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 function addAccount(raw) {
   const key = raw.account_group_key || raw.key;
   if (!key) return;
@@ -28,8 +39,8 @@ function addAccount(raw) {
 
   accounts.set(key, {
     key,
-    name: raw.name,
-    institution: raw.institution || '',
+    name: cleanName(raw.name),
+    institution: cleanName(raw.institution),
     type: raw.type || 'Checking',
     // An account excluded by the plan comes back with a currency and nothing
     // else. Keep it that way: unknown must never be rendered as zero.

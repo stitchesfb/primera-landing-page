@@ -7,7 +7,11 @@
       "institution": "Wells Fargo",
       "provider_id": "mx",
       "type": "Checking",
-      "balance": { "current": 29.19, "available": 6.30, "currency": "USD" },
+      "balance": {
+        "current": 29.19,
+        "available": 6.3,
+        "currency": "USD"
+      },
       "balance_as_of": "2026-08-14T18:01:10.0000000+00:00",
       "supports_transactions": true
     },
@@ -18,7 +22,11 @@
       "institution": "Wells Fargo",
       "provider_id": "mx",
       "type": "CreditCard",
-      "balance": { "current": 5075.83, "available": 4924.00, "currency": "USD" },
+      "balance": {
+        "current": 5075.83,
+        "available": 4924.0,
+        "currency": "USD"
+      },
       "balance_as_of": "2026-08-14T18:01:10.0000000+00:00",
       "supports_transactions": true
     },
@@ -29,7 +37,20 @@
       "institution": "American Express",
       "provider_id": "mx",
       "type": "CreditCard",
-      "balance": { "currency": "USD" },
+      "balance": {
+        "currency": "USD"
+      },
+      "visibility": "tier_excluded",
+      "supports_transactions": true
+    },
+    {
+      "account_group_key": "uagr_mangled",
+      "name": "WAY2SAVE��  SAVINGS ...1937",
+      "institution": "Wells Fargo",
+      "type": "Savings",
+      "balance": {
+        "currency": "USD"
+      },
       "visibility": "tier_excluded",
       "supports_transactions": true
     }
