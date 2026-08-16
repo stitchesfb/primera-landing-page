@@ -1,0 +1,13 @@
+node_modules/
+.env
+
+# Material de produccion: pesado y no versionable
+proyectos/*/output/
+proyectos/*/audio_fuente/
+proyectos/*/music/
+proyectos/*/*.png
+proyectos/*/*.jpg
+!proyectos/ejemplo_noche/**
+
+# Estado medido en vivo contra la API
+calibracion.json
