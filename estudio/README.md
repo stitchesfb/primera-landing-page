@@ -15,6 +15,24 @@ cp .env.example .env      # y rellena la clave y el voice_id
 node cli.mjs voces        # para ver el ID de "El Faraón"
 ```
 
+## La clave de API
+
+Cuatro barreras, en orden de dentro hacia fuera:
+
+1. **`.env` está en `.gitignore`.** No puede llegar a un commit por descuido.
+2. **`.env.example` no lleva valores**, solo los nombres de las variables.
+3. **La clave vive en un campo privado de clase** (`#apiKey`). No es enumerable,
+   así que no aparece en un `console.dir`, un `JSON.stringify` ni el volcado de
+   un objeto en una traza de error.
+4. **Todo lo que se imprime pasa por `redactar()`**, que sustituye la clave por
+   `«ELEVENLABS_API_KEY oculta»` si por cualquier vía acabara dentro de un
+   mensaje. Nunca se registra entera: como mucho, los últimos 4 caracteres para
+   confirmar cuál se cargó.
+
+`calibracion.json` guarda solo métricas —créditos, ritmo, duraciones, voice_id
+y ajustes de voz— y además está en `.gitignore`, así que ni siquiera esas
+medidas salen del equipo.
+
 ## Lo primero: medir, no suponer
 
 ```bash
@@ -113,6 +131,36 @@ subtítulos exactos sin regenerar voz: no cuesta créditos de TTS. En este modo
 el segmento es el bloque, no el párrafo, porque las pausas internas ya vienen
 grabadas; los huecos que añade el pipeline son los interludios entre bloques
 declarados en el plan.
+
+### Las 8 comprobaciones obligatorias
+
+`importar` no marca el proyecto como válido hasta que pasan todas:
+
+| Comprobación | Qué verifica |
+| --- | --- |
+| `audios_presentes` | Están todos los bloques y se mapearon |
+| `block_end_coinciden` | Los cortes son límites reales, en orden y sin repetir |
+| `parrafos_alineados` | Ningún párrafo queda fuera y todo bloque produjo alineación |
+| `sin_subtitulos_en_interludios` | Ningún subtítulo se solapa con música sola |
+| `sin_solapes` | Ningún subtítulo empieza antes de que acabe el anterior |
+| `subtitulos_dentro_de_narracion` | Ninguno sobrevive al final de la voz |
+| `duracion_coincide` | `audio.mp3` y `timeline.json` cuadran (±250 ms) |
+| `sin_drift_acumulativo` | El silencio de cola por bloque no crece ni se vuelve negativo |
+
+El informe queda en `output/validacion.json`. Si algo falla, el comando
+termina con código 1 y el estado **no** avanza.
+
+## Pruebas
+
+```bash
+npm test
+```
+
+Verifica sin tocar la API: duraciones por párrafo, offsets absolutos, duración
+final de la pista montada, subtítulos fuera de los interludios, ausencia de
+solapes, las 8 comprobaciones de importación —inyectando cada fallo por
+separado para confirmar que se detectan— y que la revisión doctrinal marca los
+patrones prohibidos sin falsos positivos.
 
 ## Por qué los subtítulos no se desincronizan
 

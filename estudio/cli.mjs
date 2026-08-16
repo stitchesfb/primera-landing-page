@@ -14,7 +14,7 @@
  *   node cli.mjs estado   [proyecto]   Muestra el estado
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
@@ -26,6 +26,7 @@ import { validarPlan, construirLinea } from './lib/plan.mjs';
 import { estimar, comparar, mmss, miles } from './lib/estimacion.mjs';
 import { palabrasDesdeAlineacion, agruparEnSubtitulos, renderSRT } from './lib/srt.mjs';
 import { revisar, CHECKLIST } from './lib/revision.mjs';
+import { validarImportacion } from './lib/validacion.mjs';
 import { montarNarracion, duracionSegundos } from './lib/audio.mjs';
 
 const canal = cargarCanal();
@@ -43,6 +44,23 @@ const c = {
 };
 
 const titulo = (t) => console.log(`\n${c.bold(t)}\n${'─'.repeat(t.length)}`);
+
+/**
+ * Ultima barrera antes de imprimir: si por cualquier via un secreto acabara
+ * dentro de un mensaje de error (una traza de red, un cuerpo de respuesta que
+ * lo refleje), no sale por pantalla ni queda en el scrollback del terminal.
+ */
+function redactar(texto) {
+  let s = String(texto ?? '');
+  for (const clave of ['ELEVENLABS_API_KEY', 'ELEVENLABS_VOICE_ID']) {
+    const valor = env[clave];
+    if (valor && valor.length >= 8) s = s.split(valor).join(`«${clave} oculta»`);
+  }
+  return s;
+}
+
+/** Muestra solo los ultimos 4 caracteres, para poder confirmar cual se cargo. */
+const huella = (valor) => (valor ? `…${valor.slice(-4)} (${valor.length} caracteres)` : '—');
 
 function cliente() {
   return new ElevenLabs({
@@ -82,83 +100,125 @@ async function cmdSonda() {
   const el = cliente();
   const voz = vozId();
   const modelo = canal.voz.modelo;
+  const ajustes = canal.voz.ajustes;
 
   const TEXTO = 'Padre, gracias por este dia nuevo y por tu fidelidad constante.';
   const CONTEXTO = 'Antes de dormir, entrega a Dios lo que hoy te preocupa.';
 
   titulo('Sonda de creditos');
-  console.log(`Modelo:  ${c.cian(modelo)}`);
-  console.log(`Voz:     ${voz}`);
-  console.log(`Texto:   "${TEXTO}" ${c.dim(`(${TEXTO.length} caracteres)`)}`);
+  console.log(`Modelo          ${c.cian(modelo)}`);
+  console.log(`Voice ID        ${voz}`);
+  console.log(`Texto           "${TEXTO}"`);
+  console.log(`Caracteres      ${TEXTO.length}`);
+  console.log(`Ajustes         speed ${ajustes.speed} · stability ${ajustes.stability} · ` +
+    `similarity ${ajustes.similarity_boost} · style ${ajustes.style} · ` +
+    `speaker_boost ${ajustes.use_speaker_boost ? 'on' : 'off'}`);
+
+  let datosVoz = null;
+  try {
+    datosVoz = await el.voz(voz);
+    console.log(`Voz             ${c.bold(datosVoz.nombre)} ${c.dim(`(${datosVoz.categoria})`)}`);
+  } catch (e) {
+    console.log(c.ambar(`  ! No se pudieron leer los datos de la voz: ${redactar(e.message)}`));
+  }
 
   const antes = await el.suscripcion();
   console.log(`\nPlan ${c.bold(antes.plan)} — usados ${miles(antes.usados)} de ${miles(antes.limite)}`);
 
-  // Medida 1: llamada limpia, sin contexto.
+  // Medida 1: llamada limpia, sin contexto de prosodia.
   process.stdout.write('\nGenerando muestra sin contexto… ');
   const r1 = await el.vozConTiempos({
-    voiceId: voz, texto: TEXTO, modelo,
-    ajustes: canal.voz.ajustes, formatoSalida: canal.api.formato_salida,
+    voiceId: voz, texto: TEXTO, modelo, ajustes,
+    formatoSalida: canal.api.formato_salida,
   });
   const tras1 = await el.suscripcion();
   const coste1 = tras1.usados - antes.usados;
   console.log(c.verde('hecho'));
 
-  // Medida 2: misma longitud de texto narrado, ahora con contexto vecino.
+  // Medida 2: mismo texto narrado, ahora con contexto vecino a ambos lados.
   process.stdout.write('Generando muestra con contexto…  ');
   await el.vozConTiempos({
-    voiceId: voz, texto: TEXTO, modelo,
-    ajustes: canal.voz.ajustes, formatoSalida: canal.api.formato_salida,
+    voiceId: voz, texto: TEXTO, modelo, ajustes,
+    formatoSalida: canal.api.formato_salida,
     previoTexto: CONTEXTO, siguienteTexto: CONTEXTO,
   });
   const tras2 = await el.suscripcion();
   const coste2 = tras2.usados - tras1.usados;
   console.log(c.verde('hecho'));
 
+  // Duracion medida del archivo real, no deducida de la alineacion.
+  const { mkdtempSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const dirTmp = mkdtempSync(join(tmpdir(), 'sonda-'));
+  const rutaMuestra = join(dirTmp, 'muestra.mp3');
+  writeFileSync(rutaMuestra, r1.audio);
+  const segundos = await duracionSegundos(rutaMuestra);
+
   const ratio = coste1 / TEXTO.length;
-  const segundos = duracionAlineacion(r1.alineacion);
+  const extra = coste2 - coste1;
+  const contextoFacturado = extra > Math.max(2, TEXTO.length * 0.05);
+  const carPorMin = Math.round((TEXTO.length / segundos) * 60);
 
   titulo('Resultado');
-  console.log(`Caracteres enviados        ${TEXTO.length}`);
-  console.log(`Creditos descontados       ${c.bold(String(coste1))}`);
-  console.log(`Ratio real                 ${c.bold(ratio.toFixed(3))} creditos/caracter`);
+  console.log(`Creditos antes             ${miles(antes.usados)}`);
+  console.log(`Creditos despues           ${miles(tras1.usados)}`);
+  console.log(`Creditos consumidos        ${c.bold(String(coste1))}`);
+  console.log(`Costo efectivo             ${c.bold(ratio.toFixed(3))} creditos/caracter`);
   console.log(
     ratio <= 0.6
       ? c.verde('  → El descuento de Flash SI aplica por API. Capacidad mensual al doble.')
       : ratio >= 0.9
-        ? c.ambar('  → Flash cobra 1:1 tambien por API, igual que en la web.')
+        ? c.ambar('  → Flash cobra 1:1 tambien por API, igual que en la web (879 = 879).')
         : c.ambar('  → Ratio intermedio; conviene repetir la sonda con otro texto.')
   );
 
-  console.log(`\nCon contexto de prosodia   ${coste2} creditos`);
-  const extra = coste2 - coste1;
+  console.log(`\nCon contexto de prosodia   ${coste2} creditos (${extra >= 0 ? '+' : ''}${extra})`);
   console.log(
-    extra <= Math.max(2, TEXTO.length * 0.05)
-      ? c.verde('  → previous_text/next_text NO se facturan. Segmentamos con contexto sin penalizacion.')
-      : c.ambar(`  → El contexto suma ~${extra} creditos por llamada. Habra que usarlo solo entre bloques.`)
+    contextoFacturado
+      ? c.ambar(`  → previous_text/next_text SI se facturan. Usarlos solo donde la union se note.`)
+      : c.verde('  → previous_text/next_text NO se facturan. Segmentamos con contexto sin penalizacion.')
   );
 
-  if (segundos) {
-    console.log(`\nRitmo medido               ${Math.round((TEXTO.length / segundos) * 60)} caracteres/minuto`);
-  }
+  console.log(`\nDuracion del audio         ${segundos.toFixed(2)} s`);
+  console.log(`Ritmo medido               ${carPorMin} caracteres/minuto`);
+  console.log(c.dim(`  A este ritmo, 100.000 creditos ≈ ${(100000 / ratio / carPorMin).toFixed(0)} min de narracion`));
+
+  rmSync(dirTmp, { recursive: true, force: true });
+
+  const registro = {
+    fecha: new Date().toISOString(),
+    modelo,
+    voice_id: voz,
+    voz_nombre: datosVoz?.nombre ?? null,
+    ajustes_enviados: ajustes,
+    ajustes_guardados_en_la_voz: datosVoz?.ajustes_guardados ?? null,
+    caracteres_enviados: TEXTO.length,
+    creditos_antes: antes.usados,
+    creditos_despues: tras1.usados,
+    creditos_consumidos: coste1,
+    costo_por_caracter: ratio,
+    creditos_con_contexto: coste2,
+    contexto_facturado: contextoFacturado,
+    duracion_audio_s: segundos,
+    caracteres_por_minuto: carPorMin,
+    plan: antes.plan,
+    limite_del_ciclo: antes.limite,
+  };
 
   const cal = cargarCalibracion();
+  cal.sonda = registro;
   registrarMedida(cal, {
     origen: 'sonda',
     modelo,
     caracteres: TEXTO.length,
     creditos: coste1,
     creditos_por_caracter: ratio,
-    creditos_con_contexto: coste2,
     segundos,
   });
   guardarCalibracion(cal);
-  console.log(c.dim('\nGuardado en calibracion.json. "estimar" ya usa estos numeros reales.'));
-}
 
-function duracionAlineacion(al) {
-  const f = al?.finales;
-  return f?.length ? f[f.length - 1] : null;
+  console.log(c.dim('\nGuardado en calibracion.json (fuera de git). "estimar" ya usa estos numeros.'));
+  console.log(c.bold('\nSonda terminada. No se ha generado ningun video.'));
 }
 
 async function cmdVoces() {
@@ -359,7 +419,6 @@ async function cmdVoz(id, opciones) {
 
   const salida = asegurarSalida(proyecto);
   const dirParrafos = join(salida, 'parrafos');
-  const { mkdirSync } = await import('node:fs');
   mkdirSync(dirParrafos, { recursive: true });
 
   const alineaciones = [];
@@ -510,14 +569,45 @@ async function cmdImportar(id) {
     duracionTotal,
   });
 
-  escribirEstado(proyecto, 'audio', `importado de ${archivos.length} bloques`);
+  // Validaciones obligatorias antes de dar la importacion por buena.
+  const informe = validarImportacion({
+    archivos,
+    bloques,
+    proyecto,
+    plan: proyecto.plan,
+    linea,
+    alineaciones,
+    duracionesBloques: duraciones,
+    cues: resultado.listaCues,
+    duracionAudio: duracionTotal,
+  });
+
+  titulo('Validacion');
+  for (const p of informe.pruebas) {
+    const marca = p.ok ? c.verde('✓') : c.rojo('✗');
+    console.log(`  ${marca} ${p.id.padEnd(32)} ${c.dim(p.detalle)}`);
+  }
+
+  writeFileSync(
+    join(salida, 'validacion.json'),
+    JSON.stringify({ fecha: new Date().toISOString(), proyecto: proyecto.id, ...informe }, null, 2) + '\n'
+  );
 
   titulo('Salida');
   console.log(`  audio.mp3       ${mmss(duracionTotal)}`);
   console.log(`  subtitles.srt   ${resultado.cues} subtitulos`);
-  console.log(`  alignment.json  ${resultado.palabras} palabras`);
   console.log(`  timeline.json   ${linea.huecos.length} interludios + cierre de ${linea.outro.music_seconds}s`);
-  console.log(c.dim('\nSin gasto de creditos de TTS. Listo para el render.'));
+  console.log(c.dim(`  alignment.json  ${resultado.palabras} palabras (fuente de sincronia)`));
+  console.log(c.dim('  validacion.json informe de las comprobaciones'));
+
+  if (informe.ok) {
+    escribirEstado(proyecto, 'audio', `importado de ${archivos.length} bloques, validacion OK`);
+    console.log(c.verde('\n✓ Las 8 comprobaciones pasan. Sin gasto de creditos de TTS.'));
+    console.log(c.bold('Revisa el audio y los subtitulos antes de pasar al renderer.'));
+  } else {
+    console.log(c.rojo(`\n✗ ${informe.fallos} comprobacion(es) fallan. No marco la importacion como valida.`));
+    process.exitCode = 1;
+  }
 }
 
 /** Reparte los parrafos entre N bloques usando los block_end del plan. */
@@ -617,7 +707,7 @@ function escribirSincronizacion({ proyecto, salida, linea, alineaciones, duracio
     ) + '\n'
   );
 
-  return { cues: cues.length, palabras: palabras.length };
+  return { cues: cues.length, palabras: palabras.length, listaCues: cues };
 }
 
 // --- estado -----------------------------------------------------------
@@ -682,6 +772,6 @@ async function principal() {
 }
 
 principal().catch((e) => {
-  console.error(`\n${c.rojo('Error:')} ${e.message}`);
+  console.error(`\n${c.rojo('Error:')} ${redactar(e.message)}`);
   process.exitCode = 1;
 });

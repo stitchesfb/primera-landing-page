@@ -4,9 +4,12 @@
   "private": true,
   "type": "module",
   "description": "Pipeline de produccion para el canal Oraciones Biblicas Diarias",
-  "bin": { "estudio": "./cli.mjs" },
+  "bin": {
+    "estudio": "./cli.mjs"
+  },
   "scripts": {
-    "estudio": "node cli.mjs"
+    "estudio": "node cli.mjs",
+    "test": "node test/revision.test.mjs && node test/montaje.test.mjs && node test/validacion.test.mjs"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0",

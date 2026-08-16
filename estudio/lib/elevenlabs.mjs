@@ -19,9 +19,13 @@ class ErrorAPI extends Error {
 }
 
 export class ElevenLabs {
+  // Campo privado de clase: no es enumerable ni accesible desde fuera, asi que
+  // no puede acabar en un console.dir, un JSON.stringify ni un volcado de error.
+  #apiKey;
+
   constructor({ apiKey, base = 'https://api.elevenlabs.io', reintentos = 3 }) {
     if (!apiKey) throw new Error('Falta ELEVENLABS_API_KEY. Copia .env.example a .env y rellenalo.');
-    this.apiKey = apiKey;
+    this.#apiKey = apiKey;
     this.base = base.replace(/\/$/, '');
     this.reintentos = reintentos;
   }
@@ -38,7 +42,7 @@ export class ElevenLabs {
       try {
         const res = await fetch(url, {
           ...opciones,
-          headers: { 'xi-api-key': this.apiKey, ...(opciones.headers || {}) },
+          headers: { 'xi-api-key': this.#apiKey, ...(opciones.headers || {}) },
         });
 
         if (!res.ok) {
@@ -83,6 +87,17 @@ export class ElevenLabs {
   async voces() {
     const r = await this.#peticion('/v1/voices');
     return (r.voices || []).map((v) => ({ id: v.voice_id, nombre: v.name, categoria: v.category }));
+  }
+
+  /** Datos y ajustes guardados de una voz, para dejar constancia de cual se uso. */
+  async voz(voiceId) {
+    const v = await this.#peticion(`/v1/voices/${voiceId}`);
+    return {
+      id: v.voice_id,
+      nombre: v.name,
+      categoria: v.category,
+      ajustes_guardados: v.settings ?? null,
+    };
   }
 
   /**
