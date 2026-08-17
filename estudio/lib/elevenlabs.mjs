@@ -47,7 +47,7 @@ export class ElevenLabs {
 
         if (!res.ok) {
           const cuerpo = await res.text().catch(() => '');
-          const err = new ErrorAPI(`${res.status} ${res.statusText} en ${ruta}`, res.status, cuerpo);
+          const err = new ErrorAPI(`${res.status} ${res.statusText} en ${ruta}${pista(res.status, ruta)}`, res.status, cuerpo);
           // 4xx que no sea 429 es culpa nuestra: reintentar no lo arregla.
           if (res.status !== 429 && res.status >= 400 && res.status < 500) throw err;
           ultimoError = err;
@@ -162,6 +162,41 @@ export class ElevenLabs {
     // Algunas respuestas traen solo palabras; reconstruimos caracteres desde ahi.
     return alineacionDesdePalabras(r.words || []);
   }
+}
+
+/**
+ * Traduce el codigo HTTP a la causa concreta.
+ *
+ * La diferencia entre 401 y 403 es la que decide que hay que arreglar, y sin
+ * explicarla los dos se leen igual de opacos:
+ *   401 — la clave no vale: revocada, caducada, mal copiada o de otra cuenta.
+ *   403 — la clave vale, pero no tiene permiso para ESE endpoint.
+ */
+function pista(estado, ruta) {
+  if (estado === 401) {
+    return (
+      '\n  La clave no es valida. Comprueba que sigue existiendo en ElevenLabs' +
+      '\n  (Profile > API keys) y que el secreto no lleva espacios ni saltos de linea.' +
+      '\n  Una clave borrada o regenerada da este mismo error.'
+    );
+  }
+  if (estado === 403) {
+    const permiso = ruta.startsWith('/v1/user')
+      ? 'User read'
+      : ruta.startsWith('/v1/voices')
+        ? 'Voices read'
+        : ruta.startsWith('/v1/text-to-speech')
+          ? 'Text to Speech'
+          : ruta.startsWith('/v1/forced-alignment')
+            ? 'Forced alignment'
+            : null;
+    return permiso
+      ? `\n  La clave es valida pero le falta el permiso "${permiso}".` +
+        '\n  Editala en ElevenLabs y marca ese scope.'
+      : '\n  La clave es valida pero no tiene permiso para este endpoint.';
+  }
+  if (estado === 429) return '\n  Limite de peticiones o de creditos alcanzado.';
+  return '';
 }
 
 function normalizarAlineacion(a) {
