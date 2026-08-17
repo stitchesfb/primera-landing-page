@@ -1,0 +1,15 @@
+{
+  "name": "oraciones-video",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generador de videos animados de oraciones diarias para YouTube",
+  "scripts": {
+    "render": "node render.mjs",
+    "muestra": "node render.mjs --oracion manana --formato ambos"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "playwright": "^1.49.0"
+  }
+}

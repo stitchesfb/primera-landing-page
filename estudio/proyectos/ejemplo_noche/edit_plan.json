@@ -1,0 +1,25 @@
+{
+  "id": "ejemplo_noche",
+  "pilar": "noche",
+  "titulo_trabajo": "Entrega tus preocupaciones antes de dormir",
+
+  "_nota": "Ejemplo de estructura. El texto es corto a proposito, para que 'estimar' quepa en pantalla: por eso el validador avisa de que la duracion queda por debajo del objetivo de 35-40 min. En un guion real habria unos 20.000 caracteres.",
+
+  "defaults": {
+    "pause_after_paragraph": 3.0
+  },
+
+  "events": [
+    { "after": 4,  "type": "block_end", "seconds": 10, "block": 1, "note": "cierra apertura y entrega" },
+    { "after": 5,  "type": "interlude", "seconds": 6,  "note": "tras Salmo 4:8" },
+    { "after": 7,  "type": "interlude", "seconds": 6,  "note": "tras Salmo 91:1" },
+    { "after": 8,  "type": "block_end", "seconds": 10, "block": 2, "note": "cierra lectura biblica" },
+    { "after": 9,  "type": "image", "src": "escena_02.png", "crossfade": 2.5 },
+    { "after": 12, "type": "block_end", "seconds": 10, "block": 3, "note": "cierra familia y perdon" },
+    { "after": 14, "type": "interlude", "seconds": 6,  "note": "tras Filipenses 4:6" },
+    { "after": 16, "type": "block_end", "seconds": 10, "block": 4, "note": "cierra preocupaciones" },
+    { "after": 17, "type": "image", "src": "escena_03.png", "crossfade": 2.5 },
+
+    { "at": "end", "type": "outro", "music_seconds": 25, "fade_out": 8 }
+  ]
+}

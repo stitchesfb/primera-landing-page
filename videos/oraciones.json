@@ -1,0 +1,89 @@
+{
+  "canal": {
+    "handle": "@oracionesdiarias",
+    "cta": "Suscríbete para tu oración de cada día"
+  },
+  "temas": {
+    "tinta": {
+      "fondo": "#0F0E0D",
+      "texto": "#F2ECE2",
+      "acento": "#C9A66B",
+      "brillo": "rgba(201, 166, 107, 0.17)"
+    },
+    "papel": {
+      "fondo": "#F5F1E8",
+      "texto": "#221F1A",
+      "acento": "#9A7B3F",
+      "brillo": "rgba(154, 123, 63, 0.14)"
+    }
+  },
+  "oraciones": [
+    {
+      "id": "manana",
+      "tema": "tinta",
+      "eyebrow": "Oración diaria",
+      "titulo": "Oración de la mañana",
+      "subtitulo": "Para empezar el día con el corazón en calma",
+      "segmentos": [
+        {
+          "lineas": [
+            "Señor, antes de que el día",
+            "me pida algo,",
+            "vengo a ti en silencio."
+          ]
+        },
+        {
+          "lineas": [
+            "Gracias por esta mañana,",
+            "por el aire que respiro",
+            "y por la vida que me devuelves",
+            "cada vez que abro los ojos."
+          ]
+        },
+        {
+          "lineas": [
+            "Aquieta lo que en mí está inquieto.",
+            "Ordena lo que traigo revuelto.",
+            "Sostén lo que siento frágil."
+          ]
+        },
+        {
+          "lineas": [
+            "Que mis palabras hoy",
+            "no hieran a nadie,",
+            "y que mis manos sirvan",
+            "sin esperar aplauso."
+          ]
+        },
+        {
+          "lineas": [
+            "Si el día se hace cuesta arriba,",
+            "recuérdame que no camino solo."
+          ]
+        },
+        {
+          "lineas": [
+            "Pongo en tus manos las horas",
+            "que todavía no conozco.",
+            "Confío."
+          ]
+        }
+      ],
+      "cierre": "Amén.",
+      "youtube": {
+        "titulo": "Oración de la mañana — para empezar el día en paz 🙏 | Oraciones diarias",
+        "descripcion": "Una oración corta para comenzar el día con el corazón en calma.\n\nDedica un minuto antes de que empiece el ruido: respira, lee despacio y deja que cada línea se asiente.\n\n🙏 Si esta oración te acompañó hoy, escribe «Amén» en los comentarios.\n🔔 Suscríbete y activa la campana para recibir tu oración de cada día.\n\n#OracionDeLaManana #OracionesDiarias #Fe",
+        "etiquetas": [
+          "oración de la mañana",
+          "oraciones diarias",
+          "oración corta",
+          "oración para empezar el día",
+          "fe",
+          "espiritualidad",
+          "oración en español",
+          "reflexión diaria"
+        ]
+      }
+    }
+  ]
+}

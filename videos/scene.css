@@ -1,0 +1,235 @@
+/* Escena tipográfica minimalista.
+   Todo el movimiento lo calcula scene.js en función del tiempo: aquí no hay
+   ninguna animación ni transición CSS, para que cada fotograma sea
+   reproducible exactamente igual en cada render. */
+
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('fonts/eb-garamond.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('fonts/eb-garamond-italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: #000;
+  overflow: hidden;
+}
+
+#stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--fondo, #0F0E0D);
+  color: var(--texto, #F2ECE2);
+  font-kerning: normal;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Formatos ------------------------------------------------------- */
+
+#stage.fmt-shorts {
+  width: 1080px;
+  height: 1920px;
+  --pad-x: 118px;
+  --medida: 844px;
+  --fs-linea: 60px;
+  --fs-titulo: 88px;
+  --fs-subtitulo: 32px;
+  --fs-eyebrow: 26px;
+  --fs-cierre: 96px;
+  --fs-handle: 26px;
+  --y-contenido: -60px;   /* sube el bloque: la UI de Shorts tapa la parte baja */
+  --footer-bottom: 250px;
+}
+
+#stage.fmt-wide {
+  width: 1920px;
+  height: 1080px;
+  --pad-x: 200px;
+  --medida: 1320px;
+  --fs-linea: 56px;
+  --fs-titulo: 84px;
+  --fs-subtitulo: 30px;
+  --fs-eyebrow: 24px;
+  --fs-cierre: 88px;
+  --fs-handle: 24px;
+  --y-contenido: 0px;
+  --footer-bottom: 76px;
+}
+
+/* --- Fondo ----------------------------------------------------------- */
+
+#fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Grano finísimo. No se ve como textura: está para romper los anillos de
+   banding que los degradados del fondo dejan al comprimirse a 8 bits. */
+.grano {
+  position: absolute;
+  inset: 0;
+  opacity: .5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* --- Capas de texto --------------------------------------------------- */
+
+.eyebrow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 9%;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: .42em;
+  text-indent: .42em;      /* compensa el letter-spacing final para centrar bien */
+  text-transform: uppercase;
+  color: var(--acento, #C9A66B);
+  text-shadow: 0 2px 18px rgba(4, 6, 16, .8);
+  will-change: opacity;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  padding: 0 var(--pad-x);
+}
+
+.block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0 var(--pad-x);
+  transform: translateY(var(--y-contenido));
+}
+
+.linea {
+  font-family: 'EB Garamond', serif;
+  font-weight: 400;
+  font-size: var(--fs-linea);
+  line-height: 1.46;
+  letter-spacing: .005em;
+  text-align: center;
+  max-width: var(--medida);
+  /* Sombra ancha y muy suave: no se ve, pero despega el texto del cielo. */
+  text-shadow: 0 2px 26px rgba(4, 6, 16, .75), 0 1px 3px rgba(4, 6, 16, .5);
+  will-change: opacity, transform;
+}
+
+.block.titulo .linea.t {
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--fs-titulo);
+  line-height: 1.18;
+  margin-bottom: 34px;
+}
+
+.block.titulo .linea.s {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: var(--fs-subtitulo);
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--acento, #C9A66B);
+  max-width: calc(var(--medida) * .82);
+}
+
+.regla {
+  height: 1px;
+  background: var(--acento, #C9A66B);
+  margin: 44px 0 0;
+  opacity: .55;
+  will-change: width, opacity;
+}
+
+.block.cierre .linea.a {
+  font-style: italic;
+  font-size: var(--fs-cierre);
+  letter-spacing: .02em;
+}
+
+.block.cierre .linea.c {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: var(--fs-subtitulo);
+  letter-spacing: .04em;
+  color: var(--acento, #C9A66B);
+  margin-top: 46px;
+}
+
+/* --- Pie -------------------------------------------------------------- */
+
+.footer {
+  position: absolute;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: var(--footer-bottom);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.handle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: var(--fs-handle);
+  letter-spacing: .26em;
+  text-indent: .26em;
+  color: var(--acento, #C9A66B);
+  text-shadow: 0 2px 18px rgba(4, 6, 16, .8);
+  will-change: opacity;
+}
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: 2px;
+}
+
+.progress::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: .12;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 4px;
+  width: 0;
+  background: var(--acento, #C9A66B);
+  will-change: width;
+}

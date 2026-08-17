@@ -1,0 +1,73 @@
+{
+  "canal": "Oraciones Biblicas Diarias",
+  "voz": {
+    "nombre": "El Faraon - Full, Clear, Mellow",
+    "modelo": "eleven_flash_v2_5",
+    "ajustes": {
+      "speed": 0.91,
+      "stability": 0.65,
+      "similarity_boost": 0.88,
+      "style": 0.0,
+      "use_speaker_boost": true
+    }
+  },
+
+  "_nota_modelo": "Flash v2.5 aprobado tras prueba de calidad A/B contra Multilingual v2. El descuento real de creditos NO se asume: lo mide 'node cli.mjs sonda' contra la API y se guarda en calibracion.json.",
+
+  "api": {
+    "base": "https://api.elevenlabs.io",
+    "formato_salida": "mp3_44100_128",
+    "max_caracteres_por_peticion": 2000,
+    "peticiones_en_paralelo": 1,
+    "reintentos": 3
+  },
+
+  "formatos": {
+    "noche": {
+      "duracion_objetivo_min": 35,
+      "duracion_objetivo_max": 40,
+      "bloques_esperados": 5,
+      "interludios_estrategicos_min": 7,
+      "interludios_estrategicos_max": 9
+    },
+    "manana": {
+      "duracion_objetivo_min": 12,
+      "duracion_objetivo_max": 30,
+      "bloques_esperados": 4,
+      "interludios_estrategicos_min": 4,
+      "interludios_estrategicos_max": 7
+    },
+    "necesidad": {
+      "duracion_objetivo_min": 10,
+      "duracion_objetivo_max": 30,
+      "bloques_esperados": 4,
+      "interludios_estrategicos_min": 4,
+      "interludios_estrategicos_max": 7
+    }
+  },
+
+  "reglas_edicion": {
+    "pausa_parrafo_min": 2.0,
+    "pausa_parrafo_max": 4.0,
+    "interludio_bloque_min": 8.0,
+    "interludio_bloque_max": 12.0,
+    "interludio_versiculo_min": 5.0,
+    "interludio_versiculo_max": 7.0,
+    "cierre_musica_min": 20.0,
+    "cierre_musica_max": 30.0
+  },
+
+  "subtitulos": {
+    "max_caracteres_linea": 42,
+    "max_lineas": 2,
+    "duracion_min_s": 1.2,
+    "duracion_max_s": 6.0,
+    "hueco_min_s": 0.08
+  },
+
+  "estimacion_inicial": {
+    "_nota": "Valores de arranque. 'sonda' y 'voz' los reemplazan por medidas reales.",
+    "creditos_por_caracter": 1.0,
+    "caracteres_por_minuto": 650
+  }
+}
