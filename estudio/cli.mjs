@@ -34,13 +34,18 @@ const env = cargarEnv();
 
 // --- presentacion -----------------------------------------------------
 
+// Sin color cuando la salida no es un terminal: en un log de CI o en el
+// resumen de GitHub, los codigos ANSI se ven como basura.
+const COLOR = stdout.isTTY && !env.NO_COLOR;
+const pinta = (codigo) => (s) => (COLOR ? `\x1b[${codigo}m${s}\x1b[0m` : String(s));
+
 const c = {
-  bold: (s) => `\x1b[1m${s}\x1b[0m`,
-  dim: (s) => `\x1b[2m${s}\x1b[0m`,
-  rojo: (s) => `\x1b[31m${s}\x1b[0m`,
-  verde: (s) => `\x1b[32m${s}\x1b[0m`,
-  ambar: (s) => `\x1b[33m${s}\x1b[0m`,
-  cian: (s) => `\x1b[36m${s}\x1b[0m`,
+  bold: pinta(1),
+  dim: pinta(2),
+  rojo: pinta(31),
+  verde: pinta(32),
+  ambar: pinta(33),
+  cian: pinta(36),
 };
 
 const titulo = (t) => console.log(`\n${c.bold(t)}\n${'─'.repeat(t.length)}`);
@@ -710,6 +715,86 @@ function escribirSincronizacion({ proyecto, salida, linea, alineaciones, duracio
   return { cues: cues.length, palabras: palabras.length, listaCues: cues };
 }
 
+// --- resumen seguro ---------------------------------------------------
+
+/**
+ * Vuelca la calibracion en un formato apto para publicar (log de CI, artifact).
+ *
+ * calibracion.json nunca contiene la clave, pero si el voice_id. No es una
+ * credencial, pero tampoco hace falta que salga entero de la maquina: aqui se
+ * reduce a sus ultimos 4 caracteres, suficiente para saber que voz se midio.
+ */
+function sanearCalibracion(cal) {
+  const acortar = (v) => (typeof v === 'string' && v.length > 4 ? `…${v.slice(-4)}` : v ?? null);
+  const s = cal.sonda;
+
+  return {
+    generado: new Date().toISOString(),
+    creditos_por_caracter: cal.creditos_por_caracter,
+    caracteres_por_minuto: cal.caracteres_por_minuto,
+    sonda: s
+      ? {
+          fecha: s.fecha,
+          modelo: s.modelo,
+          voz_nombre: s.voz_nombre,
+          voice_id: acortar(s.voice_id),
+          ajustes_enviados: s.ajustes_enviados,
+          ajustes_guardados_en_la_voz: s.ajustes_guardados_en_la_voz,
+          caracteres_enviados: s.caracteres_enviados,
+          creditos_antes: s.creditos_antes,
+          creditos_despues: s.creditos_despues,
+          creditos_consumidos: s.creditos_consumidos,
+          costo_por_caracter: s.costo_por_caracter,
+          creditos_con_contexto: s.creditos_con_contexto,
+          contexto_facturado: s.contexto_facturado,
+          duracion_audio_s: s.duracion_audio_s,
+          caracteres_por_minuto: s.caracteres_por_minuto,
+          plan: s.plan,
+          limite_del_ciclo: s.limite_del_ciclo,
+        }
+      : null,
+    medidas: (cal.medidas ?? []).map((m) => ({ ...m, voice_id: undefined })),
+  };
+}
+
+async function cmdResumen(destino) {
+  const cal = cargarCalibracion();
+  const limpio = sanearCalibracion(cal);
+  const s = limpio.sonda;
+
+  titulo('Resumen de calibracion');
+  if (!s) {
+    console.log(c.ambar('Todavia no se ha ejecutado la sonda.'));
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log(`Modelo                     ${s.modelo}`);
+  console.log(`Voz                        ${s.voz_nombre ?? '—'} (${s.voice_id})`);
+  console.log(`Plan                       ${s.plan} · limite ${miles(s.limite_del_ciclo)}`);
+  console.log('');
+  console.log(`Caracteres enviados        ${s.caracteres_enviados}`);
+  console.log(`Creditos antes             ${miles(s.creditos_antes)}`);
+  console.log(`Creditos despues           ${miles(s.creditos_despues)}`);
+  console.log(`Creditos consumidos        ${c.bold(String(s.creditos_consumidos))}`);
+  console.log(`Costo por caracter         ${c.bold(s.costo_por_caracter.toFixed(3))}`);
+  console.log(`Con contexto de prosodia   ${s.creditos_con_contexto} ` +
+    `(${s.contexto_facturado ? 'SE FACTURA' : 'no se factura'})`);
+  console.log(`Duracion del audio         ${s.duracion_audio_s.toFixed(2)} s`);
+  console.log(`Ritmo                      ${s.caracteres_por_minuto} caracteres/minuto`);
+
+  const minutosPorCiclo = s.limite_del_ciclo / s.costo_por_caracter / s.caracteres_por_minuto;
+  console.log('');
+  console.log(`Capacidad del ciclo        ${c.bold(minutosPorCiclo.toFixed(0))} minutos de narracion`);
+  console.log(c.dim(`  ≈ ${(minutosPorCiclo / 37).toFixed(1)} nocturnos de 37 min, o ` +
+    `${(minutosPorCiclo / 18).toFixed(1)} videos de manana de 20 min`));
+
+  if (destino) {
+    writeFileSync(destino, JSON.stringify(limpio, null, 2) + '\n');
+    console.log(c.dim(`\nEscrito en ${destino} (sin clave; voice_id acortado)`));
+  }
+}
+
 // --- estado -----------------------------------------------------------
 
 async function cmdEstado(id) {
@@ -742,6 +827,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
+  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -764,6 +850,10 @@ async function principal() {
     case 'aprobar-audio': return cmdAprobarAudio(exigeProyecto(), resto.filter((r) => !r.startsWith('--')).join(' '));
     case 'voz': return cmdVoz(exigeProyecto(), opciones);
     case 'importar': return cmdImportar(exigeProyecto());
+    case 'resumen': {
+      const i = process.argv.indexOf('--json');
+      return cmdResumen(i > -1 ? process.argv[i + 1] : null);
+    }
     case 'estado': return cmdEstado(arg && !arg.startsWith('--') ? arg : null);
     default:
       console.log(AYUDA);

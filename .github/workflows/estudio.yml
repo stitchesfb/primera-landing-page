@@ -1,0 +1,124 @@
+# Pipeline del canal "Oraciones Biblicas Diarias".
+#
+# Se lanza a mano desde la pestana Actions con el boton "Run workflow".
+# No corre solo: no hay push, ni pull_request, ni schedule.
+#
+# Checkpoint 1 — solo mide. No genera voz nueva, ni video, ni miniaturas,
+# ni Shorts, y no publica nada.
+name: Estudio — Checkpoint 1
+
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: 'Que ejecutar'
+        type: choice
+        options:
+          - sonda
+        default: sonda
+      confirmar:
+        description: 'Escribe SI para confirmar. La sonda gasta ~130 creditos de ElevenLabs'
+        type: string
+        required: true
+
+# Solo lectura del repositorio: el workflow no escribe nada de vuelta.
+permissions:
+  contents: read
+
+# Dos ejecuciones a la vez podrian medir creditos la una sobre la otra.
+concurrency:
+  group: estudio-checkpoint1
+  cancel-in-progress: false
+
+jobs:
+  checkpoint1:
+    name: Sonda de creditos
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Confirmar el gasto
+        if: inputs.confirmar != 'SI'
+        run: |
+          echo "::error::Escribe SI en el campo de confirmacion para ejecutar la sonda."
+          exit 1
+
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: estudio/package-lock.json
+
+      - name: Instalar dependencias
+        working-directory: estudio
+        run: npm ci
+
+      # Comprueba que los secretos llegaron, sin revelarlos. Imprime unicamente
+      # si existen y cuantos caracteres tienen: nunca el valor ni un fragmento.
+      - name: Comprobar que los secretos existen
+        working-directory: estudio
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: |
+          node -e '
+            let falta = false;
+            for (const clave of ["ELEVENLABS_API_KEY", "ELEVENLABS_VOICE_ID"]) {
+              const v = process.env[clave];
+              if (v) {
+                console.log(clave.padEnd(20) + " presente (" + v.length + " caracteres)");
+              } else {
+                console.log("::error::" + clave + " no esta definido. Crealo en Settings > Secrets and variables > Actions.");
+                falta = true;
+              }
+            }
+            process.exit(falta ? 1 : 0);
+          '
+
+      # Reachability sin autenticar: no mandamos la clave. Cualquier respuesta
+      # HTTP (401 incluido) demuestra que DNS, TLS y rutado funcionan, que es
+      # justo lo que fallaba en el entorno anterior.
+      - name: Comprobar acceso a api.elevenlabs.io
+        run: |
+          codigo=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 \
+            https://api.elevenlabs.io/v1/models || echo 000)
+          echo "HTTP $codigo desde api.elevenlabs.io"
+          if [ "$codigo" = "000" ]; then
+            echo "::error::No hay salida de red hacia api.elevenlabs.io."
+            exit 1
+          fi
+          echo "Host alcanzable."
+
+      - name: Ejecutar la sonda
+        if: inputs.modo == 'sonda'
+        working-directory: estudio
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: node cli.mjs sonda
+
+      # El resumen acorta el voice_id a sus ultimos 4 caracteres y no incluye
+      # la clave, que nunca llega a escribirse en disco.
+      - name: Preparar el resumen publicable
+        if: always() && inputs.modo == 'sonda'
+        working-directory: estudio
+        run: |
+          if [ ! -f calibracion.json ]; then
+            echo "No hay calibracion.json: la sonda no llego a completarse."
+            exit 0
+          fi
+          mkdir -p ../resultado
+          node cli.mjs resumen --json ../resultado/resumen-sonda.json | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar el resumen como artifact
+        if: always() && inputs.modo == 'sonda'
+        uses: actions/upload-artifact@v4
+        with:
+          name: resumen-sonda
+          path: resultado/resumen-sonda.json
+          if-no-files-found: ignore
+          retention-days: 30

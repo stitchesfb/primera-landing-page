@@ -6,7 +6,20 @@ Convierte un guion en prosa y un plan de edición en una pista de narración
 montada, con subtítulos sincronizados al milisegundo y contabilidad real de
 créditos de ElevenLabs.
 
-## Puesta en marcha
+## Cómo se ejecuta
+
+**La forma estándar es GitHub Actions**, no una terminal local. El workflow
+`.github/workflows/estudio.yml` se lanza a mano desde la pestaña **Actions**
+con el botón *Run workflow*.
+
+Ahí la clave vive como **Actions Secret**, que sí es un almacén de secretos de
+verdad: GitHub la enmascara automáticamente en los logs y nunca queda en el
+repositorio. Y el runner tiene salida de red sin restricciones, que era lo que
+bloqueaba a `api.elevenlabs.io` en otros entornos.
+
+Vercel sirve solo la landing page y no interviene en el pipeline.
+
+### En local (opcional)
 
 ```bash
 cd estudio
