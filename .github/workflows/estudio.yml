@@ -104,7 +104,7 @@ jobs:
       # El resumen acorta el voice_id a sus ultimos 4 caracteres y no incluye
       # la clave, que nunca llega a escribirse en disco.
       - name: Preparar el resumen publicable
-        if: always() && inputs.modo == 'sonda'
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'sonda'
         working-directory: estudio
         run: |
           if [ ! -f calibracion.json ]; then
@@ -115,7 +115,7 @@ jobs:
           node cli.mjs resumen --json ../resultado/resumen-sonda.json | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Guardar el resumen como artifact
-        if: always() && inputs.modo == 'sonda'
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'sonda'
         uses: actions/upload-artifact@v4
         with:
           name: resumen-sonda
