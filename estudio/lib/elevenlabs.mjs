@@ -234,3 +234,23 @@ function alineacionDesdePalabras(words) {
 
   return { caracteres, inicios, finales, palabras };
 }
+
+/**
+ * Espera a que el contador de consumo refleje la llamada.
+ *
+ * ElevenLabs actualiza character_count de forma asincrona: leerlo justo
+ * despues de generar devuelve el valor anterior y la resta da cero. Aqui se
+ * sondea hasta que se mueva; lo que no se hace es inventar un cero y guardarlo
+ * como si fuera la tarifa real.
+ */
+export async function esperarConsumo(el, usadosAntes, { intentos = 20, esperaMs = 3000 } = {}) {
+  let ultima = null;
+  for (let i = 1; i <= intentos; i++) {
+    await new Promise((r) => setTimeout(r, esperaMs));
+    ultima = await el.suscripcion();
+    if (ultima.usados !== usadosAntes) {
+      return { sub: ultima, movio: true, segundos: (i * esperaMs) / 1000 };
+    }
+  }
+  return { sub: ultima, movio: false, segundos: (intentos * esperaMs) / 1000 };
+}

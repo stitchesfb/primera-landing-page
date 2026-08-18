@@ -20,7 +20,7 @@ import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 
 import { cargarCanal, cargarEnv, cargarCalibracion, guardarCalibracion, registrarMedida, constantes } from './lib/config.mjs';
-import { ElevenLabs } from './lib/elevenlabs.mjs';
+import { ElevenLabs, esperarConsumo } from './lib/elevenlabs.mjs';
 import { cargarProyecto, listarProyectos, escribirEstado, exigirEstado, asegurarSalida } from './lib/proyecto.mjs';
 import { validarPlan, construirLinea } from './lib/plan.mjs';
 import { estimar, comparar, mmss, miles } from './lib/estimacion.mjs';
