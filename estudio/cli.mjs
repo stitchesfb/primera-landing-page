@@ -543,9 +543,10 @@ async function cmdPlanAuto(id, opciones = {}) {
   const proyecto = cargarProyecto(id);
   const rutaPlan = join(proyecto.dir, 'edit_plan.json');
 
-  if (existsSync(rutaPlan) && !opciones.forzar) {
+  const yaExiste = existsSync(rutaPlan);
+  if (yaExiste && !opciones.forzar && !opciones.comparar) {
     console.log(c.ambar(`${id}/edit_plan.json ya existe; no lo toco.`));
-    console.log(c.dim('  Usa --forzar para regenerarlo.'));
+    console.log(c.dim('  Usa --forzar para regenerarlo, o --comparar para contrastarlo.'));
     return;
   }
 
@@ -581,6 +582,40 @@ async function cmdPlanAuto(id, opciones = {}) {
     ));
     console.log(c.dim('    La alineacion posterior lo confirmara: si un limite estuviera mal,'));
     console.log(c.dim('    "sin_drift_acumulativo" fallaria. Revisa el reparto si eso ocurre.'));
+  }
+
+  // Con un plan escrito a mano, la inferencia no manda: solo contrasta. Si los
+  // limites del autor y los que sugiere el audio discrepan mucho, es senal de
+  // que uno de los dos no corresponde a este material, y vale la pena mirarlo
+  // antes de gastar una alineacion entera.
+  if (yaExiste && opciones.comparar) {
+    const manual = (proyecto.plan?.events ?? [])
+      .filter((e) => e.type === 'block_end')
+      .map((e) => e.after)
+      .sort((x, y) => x - y);
+    const inferidos = bloques.slice(0, -1).map((b) => b[b.length - 1] + 1);
+
+    titulo('Contraste con los limites del guion');
+    console.log(`  Del autor   [${manual.join(', ')}]`);
+    console.log(`  Inferidos   [${inferidos.join(', ')}]`);
+
+    if (manual.length !== inferidos.length) {
+      console.log(c.ambar('  ! Distinto numero de cortes; no son comparables.'));
+    } else {
+      const difs = manual.map((m, i) => Math.abs(m - inferidos[i]));
+      const peor = Math.max(...difs);
+      console.log(`  Diferencia  [${difs.join(', ')}] parrafos · maxima ${peor}`);
+      console.log(
+        peor <= 5
+          ? c.verde('  ✓ Coinciden. Los limites del autor cuadran con las duraciones del audio.')
+          : c.ambar(
+              `  ! Se separan hasta ${peor} parrafos. Manda el plan del autor, pero si la\n` +
+              '    alineacion falla "sin_drift_acumulativo", este es el primer sitio donde mirar.'
+            )
+      );
+    }
+    console.log(c.dim('\n  No se ha modificado edit_plan.json.'));
+    return;
   }
 
   const estrategicos = plan.events.filter((e) => e.seconds >= canal.reglas_edicion.interludio_versiculo_min).length;
@@ -952,6 +987,7 @@ async function principal() {
     case 'voz': return cmdVoz(exigeProyecto(), opciones);
     case 'plan-auto': return cmdPlanAuto(exigeProyecto(), {
       forzar: resto.includes('--forzar'),
+      comparar: resto.includes('--comparar'),
       pilar: resto.includes('--pilar') ? resto[resto.indexOf('--pilar') + 1] : undefined,
     });
     case 'importar': return cmdImportar(exigeProyecto());

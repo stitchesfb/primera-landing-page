@@ -26,6 +26,20 @@ export function validarPlan(proyecto, canal) {
   }
 
   const nParrafos = proyecto.parrafos.length;
+
+  // Cuando el plan lleva limites escritos a mano, esos numeros solo significan
+  // algo si el texto trocea igual que cuando se escribieron. Basta una linea en
+  // blanco de mas o de menos para desplazar todas las fronteras de bloque sin
+  // que nada mas lo delate, asi que se comprueba antes de tocar la API.
+  if (plan.parrafos_esperados != null && plan.parrafos_esperados !== nParrafos) {
+    problemas.push(
+      `narration.txt trocea en ${nParrafos} parrafos, pero el plan se escribio para ` +
+        `${plan.parrafos_esperados}. Los limites de bloque apuntarian a otro sitio.\n` +
+        '    Los parrafos se separan por UNA linea en blanco; revisa si el archivo ' +
+        'usa otra convencion o trae lineas en blanco de mas.'
+    );
+  }
+
   const formato = canal.formatos[plan.pilar];
   if (!formato) {
     problemas.push(

@@ -1,0 +1,22 @@
+{
+  "id": "video_001",
+  "pilar": "noche",
+
+  "_limites": "Limites reales del guion final de cinco bloques, facilitados por el autor. NO deducidos: 'plan-auto' no toca este archivo porque ya existe.",
+  "_interludios": "Solo los cuatro huecos ENTRE bloques y el cierre. El validador avisara de que son 4 y el formato nocturno pide 7-9: es intencionado en esta primera importacion. Los internos se anaden despues, con los timestamps de la alineacion, una vez validada la sincronia.",
+
+  "parrafos_esperados": 246,
+
+  "defaults": {
+    "pause_after_paragraph": 3.0
+  },
+
+  "events": [
+    { "after": 33,  "type": "block_end", "seconds": 10, "block": 1, "note": "fin del bloque 1" },
+    { "after": 76,  "type": "block_end", "seconds": 10, "block": 2, "note": "fin del bloque 2" },
+    { "after": 113, "type": "block_end", "seconds": 10, "block": 3, "note": "fin del bloque 3" },
+    { "after": 159, "type": "block_end", "seconds": 10, "block": 4, "note": "fin del bloque 4" },
+
+    { "at": "end", "type": "outro", "music_seconds": 25, "fade_out": 8 }
+  ]
+}

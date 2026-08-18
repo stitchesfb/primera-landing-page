@@ -159,7 +159,7 @@ jobs:
         if: inputs.modo == 'importar'
         working-directory: estudio
         run: |
-          node cli.mjs plan-auto "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+          node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
         if: inputs.modo == 'importar'
