@@ -798,13 +798,18 @@ function eventosEntreBloques(proyecto, bloques) {
 // --- escritura de sincronizacion --------------------------------------
 
 function escribirSincronizacion({ proyecto, salida, linea, alineaciones, duracionTotal }) {
+  // Los subtitulos se agrupan POR SEGMENTO, no sobre la palabra suelta de todo
+  // el video. Asi ninguno puede cruzar una frontera de bloque ni alargarse
+  // dentro de un interludio: cada uno queda encerrado en el audio del que sale.
   const palabras = [];
+  const cues = [];
   linea.segmentos.forEach((seg, i) => {
     const al = alineaciones[i];
-    if (al) palabras.push(...palabrasDesdeAlineacion(al, seg.inicio));
+    if (!al) return;
+    const suyas = palabrasDesdeAlineacion(al, seg.inicio);
+    palabras.push(...suyas);
+    cues.push(...agruparEnSubtitulos(suyas, canal.subtitulos, seg.fin));
   });
-
-  const cues = agruparEnSubtitulos(palabras, canal.subtitulos, linea.finNarracion);
   writeFileSync(join(salida, 'subtitles.srt'), renderSRT(cues, canal.subtitulos));
 
   writeFileSync(
