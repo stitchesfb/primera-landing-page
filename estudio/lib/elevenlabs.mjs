@@ -236,21 +236,49 @@ function alineacionDesdePalabras(words) {
 }
 
 /**
- * Espera a que el contador de consumo refleje la llamada.
+ * Espera a que el contador de consumo se ESTABILICE.
  *
- * ElevenLabs actualiza character_count de forma asincrona: leerlo justo
- * despues de generar devuelve el valor anterior y la resta da cero. Aqui se
- * sondea hasta que se mueva; lo que no se hace es inventar un cero y guardarlo
- * como si fuera la tarifa real.
+ * ElevenLabs actualiza character_count de forma asincrona y, por lo visto, a
+ * plazos: pararse en el primer cambio devuelve un cobro parcial. Una medida
+ * parcial es peor que ninguna, porque parece valida y se guarda como tarifa.
+ *
+ * Asi que se espera a que el contador se mueva y luego a que deje de moverse
+ * durante `estables` sondeos seguidos. Devuelve `estable: false` si al agotar
+ * los intentos seguia subiendo, para que quien llame sepa que no puede fiarse.
  */
-export async function esperarConsumo(el, usadosAntes, { intentos = 20, esperaMs = 3000 } = {}) {
+export async function esperarConsumo(
+  el,
+  usadosAntes,
+  { intentos = 40, esperaMs = 3000, estables = 4 } = {}
+) {
   let ultima = null;
+  let anterior = usadosAntes;
+  let quietos = 0;
+  let movio = false;
+
   for (let i = 1; i <= intentos; i++) {
     await new Promise((r) => setTimeout(r, esperaMs));
     ultima = await el.suscripcion();
-    if (ultima.usados !== usadosAntes) {
-      return { sub: ultima, movio: true, segundos: (i * esperaMs) / 1000 };
+    const segundos = (i * esperaMs) / 1000;
+
+    if (ultima.usados !== anterior) {
+      movio = true;
+      quietos = 0;
+      anterior = ultima.usados;
+      continue;
+    }
+    if (!movio) continue;
+
+    // Ya se movio y lleva un rato quieto: damos el valor por definitivo.
+    if (++quietos >= estables) {
+      return { sub: ultima, movio: true, estable: true, segundos };
     }
   }
-  return { sub: ultima, movio: false, segundos: (intentos * esperaMs) / 1000 };
+
+  return {
+    sub: ultima,
+    movio,
+    estable: false,
+    segundos: (intentos * esperaMs) / 1000,
+  };
 }

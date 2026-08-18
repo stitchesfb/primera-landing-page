@@ -145,7 +145,9 @@ async function cmdSonda() {
   const m1 = await esperarConsumo(el, antes.usados);
   const tras1 = m1.sub;
   const coste1 = tras1.usados - antes.usados;
-  console.log(m1.movio ? c.verde(`${m1.segundos}s`) : c.ambar('sin cambio'));
+  console.log(m1.estable ? c.verde(`estable en ${m1.segundos}s`)
+    : m1.movio ? c.ambar(`seguia subiendo tras ${m1.segundos}s`)
+    : c.ambar('sin cambio'));
 
   // Medida 2: mismo texto narrado, ahora con contexto vecino a ambos lados.
   process.stdout.write('Generando muestra con contexto…  ');
@@ -159,7 +161,9 @@ async function cmdSonda() {
   const m2 = await esperarConsumo(el, tras1.usados);
   const tras2 = m2.sub;
   const coste2 = tras2.usados - tras1.usados;
-  console.log(m2.movio ? c.verde(`${m2.segundos}s`) : c.ambar('sin cambio'));
+  console.log(m2.estable ? c.verde(`estable en ${m2.segundos}s`)
+    : m2.movio ? c.ambar(`seguia subiendo tras ${m2.segundos}s`)
+    : c.ambar('sin cambio'));
 
   // Duracion medida del archivo real, no deducida de la alineacion.
   const { mkdtempSync } = await import('node:fs');
@@ -169,11 +173,13 @@ async function cmdSonda() {
   writeFileSync(rutaMuestra, r1.audio);
   const segundos = await duracionSegundos(rutaMuestra);
 
-  if (!m1.movio || coste1 <= 0) {
+  if (!m1.movio || !m1.estable || coste1 <= 0) {
     titulo('No se pudo medir');
     console.log(c.rojo(
-      `El contador de consumo no se movio en ${m1.segundos}s pese a que el audio ` +
-      `si se genero (${segundos.toFixed(2)} s).`
+      m1.movio
+        ? `El contador seguia subiendo tras ${m1.segundos}s: la medida seria un cobro parcial.`
+        : `El contador no se movio en ${m1.segundos}s pese a que el audio si se genero ` +
+          `(${segundos.toFixed(2)} s).`
     ));
     console.log('ElevenLabs actualiza el consumo de forma asincrona y esta vez tardo mas de la cuenta.');
     console.log(c.dim('Vuelve a lanzar la sonda en unos minutos. No se guarda ninguna calibracion.'));

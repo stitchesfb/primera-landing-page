@@ -13,36 +13,43 @@ const check = (nombre, ok, detalle = '') => {
   if (!ok) fallos++;
 };
 
-// Cliente falso: el contador se mueve a la enesima consulta.
-const clienteFalso = (mueveEnConsulta, base = 1000, delta = 250) => {
+// Cliente falso: devuelve la secuencia de valores que se le pase, repitiendo
+// el ultimo. Sirve para simular un contador que sube a plazos.
+const clienteFalso = (secuencia) => {
   let consultas = 0;
   return {
     consultas: () => consultas,
     async suscripcion() {
+      const v = secuencia[Math.min(consultas, secuencia.length - 1)];
       consultas++;
-      return { usados: consultas >= mueveEnConsulta ? base + delta : base, limite: 131000 };
+      return { usados: v, limite: 131000 };
     },
   };
 };
 
-// 1. El contador se mueve a la tercera: debe detectarlo y devolver el valor nuevo.
-const a = clienteFalso(3);
-const r1 = await esperarConsumo(a, 1000, { intentos: 10, esperaMs: 5 });
-check('detecta el movimiento del contador', r1.movio === true);
-check('devuelve el consumo real', r1.sub.usados - 1000 === 250, `${r1.sub.usados - 1000}`);
-check('para en cuanto se mueve', a.consultas() === 3, `${a.consultas()} consultas`);
+const OPC = { intentos: 30, esperaMs: 1, estables: 3 };
 
-// 2. Nunca se mueve: no debe inventar un cero, debe declararlo.
-const b = clienteFalso(999);
-const r2 = await esperarConsumo(b, 1000, { intentos: 4, esperaMs: 5 });
-check('declara que no pudo medir', r2.movio === false);
-check('agota los intentos', b.consultas() === 4, `${b.consultas()} consultas`);
-check('informa cuanto espero', r2.segundos === 0.02, `${r2.segundos}s`);
+// 1. El caso que nos mordio: el cargo llega a plazos (75, luego 271 en total).
+//    Pararse en el primer cambio daria 75; hay que llegar a 271.
+const a = clienteFalso([1000, 1075, 1075, 1271, 1271, 1271, 1271, 1271]);
+const r1 = await esperarConsumo(a, 1000, OPC);
+check('espera a que el contador deje de subir', r1.estable === true);
+check('devuelve el cargo completo, no el parcial', r1.sub.usados - 1000 === 271, `${r1.sub.usados - 1000}`);
 
-// 3. Se mueve a la primera: el caso rapido tambien vale.
-const c = clienteFalso(1);
-const r3 = await esperarConsumo(c, 1000, { intentos: 10, esperaMs: 5 });
-check('caso rapido', r3.movio === true && c.consultas() === 1);
+// 2. Sube de una vez y se queda quieto.
+const b = clienteFalso([1000, 1271]);
+const r2 = await esperarConsumo(b, 1000, OPC);
+check('caso simple: sube una vez y se estabiliza', r2.estable === true && r2.sub.usados === 1271);
+
+// 3. Nunca se mueve: no debe inventar un cero.
+const c = clienteFalso([1000]);
+const r3 = await esperarConsumo(c, 1000, { intentos: 5, esperaMs: 1, estables: 3 });
+check('declara que no pudo medir', r3.movio === false && r3.estable === false);
+
+// 4. Sigue subiendo al agotar los intentos: no puede darse por buena.
+const d = clienteFalso(Array.from({ length: 40 }, (_, i) => 1000 + i * 10));
+const r4 = await esperarConsumo(d, 1000, { intentos: 6, esperaMs: 1, estables: 3 });
+check('marca como no estable si seguia subiendo', r4.movio === true && r4.estable === false);
 
 // 4. Humo del CLI: al ser esperarConsumo un import y no una funcion suelta,
 //    si falta o se renombra, CUALQUIER comando falla al cargar el modulo.
