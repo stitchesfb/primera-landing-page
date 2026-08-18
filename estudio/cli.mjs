@@ -107,7 +107,11 @@ async function cmdSonda() {
   const modelo = canal.voz.modelo;
   const ajustes = canal.voz.ajustes;
 
-  const TEXTO = 'Padre, gracias por este dia nuevo y por tu fidelidad constante.';
+  const TEXTO =
+    'Padre, gracias por este dia nuevo y por tu fidelidad constante. ' +
+    'Antes de que empiece lo que tengo por delante, quiero ponerlo en tus manos: ' +
+    'lo que me ilusiona y tambien lo que me pesa. Dame paz para lo que no puedo ' +
+    'resolver hoy, y diligencia para lo que si depende de mi.';
   const CONTEXTO = 'Antes de dormir, entrega a Dios lo que hoy te preocupa.';
 
   titulo('Sonda de creditos');
@@ -136,9 +140,12 @@ async function cmdSonda() {
     voiceId: voz, texto: TEXTO, modelo, ajustes,
     formatoSalida: canal.api.formato_salida,
   });
-  const tras1 = await el.suscripcion();
-  const coste1 = tras1.usados - antes.usados;
   console.log(c.verde('hecho'));
+  process.stdout.write('  esperando a que el contador se actualice… ');
+  const m1 = await esperarConsumo(el, antes.usados);
+  const tras1 = m1.sub;
+  const coste1 = tras1.usados - antes.usados;
+  console.log(m1.movio ? c.verde(`${m1.segundos}s`) : c.ambar('sin cambio'));
 
   // Medida 2: mismo texto narrado, ahora con contexto vecino a ambos lados.
   process.stdout.write('Generando muestra con contexto…  ');
@@ -147,9 +154,12 @@ async function cmdSonda() {
     formatoSalida: canal.api.formato_salida,
     previoTexto: CONTEXTO, siguienteTexto: CONTEXTO,
   });
-  const tras2 = await el.suscripcion();
-  const coste2 = tras2.usados - tras1.usados;
   console.log(c.verde('hecho'));
+  process.stdout.write('  esperando a que el contador se actualice… ');
+  const m2 = await esperarConsumo(el, tras1.usados);
+  const tras2 = m2.sub;
+  const coste2 = tras2.usados - tras1.usados;
+  console.log(m2.movio ? c.verde(`${m2.segundos}s`) : c.ambar('sin cambio'));
 
   // Duracion medida del archivo real, no deducida de la alineacion.
   const { mkdtempSync } = await import('node:fs');
@@ -158,6 +168,21 @@ async function cmdSonda() {
   const rutaMuestra = join(dirTmp, 'muestra.mp3');
   writeFileSync(rutaMuestra, r1.audio);
   const segundos = await duracionSegundos(rutaMuestra);
+
+  if (!m1.movio || coste1 <= 0) {
+    titulo('No se pudo medir');
+    console.log(c.rojo(
+      `El contador de consumo no se movio en ${m1.segundos}s pese a que el audio ` +
+      `si se genero (${segundos.toFixed(2)} s).`
+    ));
+    console.log('ElevenLabs actualiza el consumo de forma asincrona y esta vez tardo mas de la cuenta.');
+    console.log(c.dim('Vuelve a lanzar la sonda en unos minutos. No se guarda ninguna calibracion.'));
+    console.log(`\nPlan ${antes.plan} — usados ${miles(antes.usados)} de ${miles(antes.limite)}`);
+    console.log(`Ritmo medido (si es valido)  ${Math.round((TEXTO.length / segundos) * 60)} caracteres/minuto`);
+    rmSync(dirTmp, { recursive: true, force: true });
+    process.exitCode = 1;
+    return;
+  }
 
   const ratio = coste1 / TEXTO.length;
   const extra = coste2 - coste1;
@@ -186,7 +211,10 @@ async function cmdSonda() {
 
   console.log(`\nDuracion del audio         ${segundos.toFixed(2)} s`);
   console.log(`Ritmo medido               ${carPorMin} caracteres/minuto`);
-  console.log(c.dim(`  A este ritmo, 100.000 creditos ≈ ${(100000 / ratio / carPorMin).toFixed(0)} min de narracion`));
+  console.log(c.dim(
+    `  A este ritmo, los ${miles(antes.limite)} creditos del ciclo dan ` +
+    `${(antes.limite / ratio / carPorMin).toFixed(0)} min de narracion`
+  ));
 
   rmSync(dirTmp, { recursive: true, force: true });
 
@@ -783,11 +811,16 @@ async function cmdResumen(destino) {
   console.log(`Duracion del audio         ${s.duracion_audio_s.toFixed(2)} s`);
   console.log(`Ritmo                      ${s.caracteres_por_minuto} caracteres/minuto`);
 
-  const minutosPorCiclo = s.limite_del_ciclo / s.costo_por_caracter / s.caracteres_por_minuto;
+  const medible = s.costo_por_caracter > 0 && s.caracteres_por_minuto > 0;
   console.log('');
-  console.log(`Capacidad del ciclo        ${c.bold(minutosPorCiclo.toFixed(0))} minutos de narracion`);
-  console.log(c.dim(`  ≈ ${(minutosPorCiclo / 37).toFixed(1)} nocturnos de 37 min, o ` +
-    `${(minutosPorCiclo / 18).toFixed(1)} videos de manana de 20 min`));
+  if (medible) {
+    const minutosPorCiclo = s.limite_del_ciclo / s.costo_por_caracter / s.caracteres_por_minuto;
+    console.log(`Capacidad del ciclo        ${c.bold(minutosPorCiclo.toFixed(0))} minutos de narracion`);
+    console.log(c.dim(`  ≈ ${(minutosPorCiclo / 37).toFixed(1)} nocturnos de 37 min, o ` +
+      `${(minutosPorCiclo / 18).toFixed(1)} videos de manana de 20 min`));
+  } else {
+    console.log(c.ambar('Capacidad del ciclo        no calculable: la tarifa medida es cero'));
+  }
 
   if (destino) {
     writeFileSync(destino, JSON.stringify(limpio, null, 2) + '\n');
