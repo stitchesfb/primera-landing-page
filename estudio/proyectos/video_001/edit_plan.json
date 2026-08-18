@@ -3,7 +3,8 @@
   "pilar": "noche",
 
   "_limites": "Limites reales del guion final de cinco bloques, facilitados por el autor. NO deducidos: 'plan-auto' no toca este archivo porque ya existe.",
-  "_interludios": "Solo los cuatro huecos ENTRE bloques y el cierre. El validador avisara de que son 4 y el formato nocturno pide 7-9: es intencionado en esta primera importacion. Los internos se anaden despues, con los timestamps de la alineacion, una vez validada la sincronia.",
+  "_baseline": "edit_plan.baseline-31m55s.json conserva la version de 4 interludios que produjo la importacion aprobada de 31:55.",
+  "_criterio": "9 interludios estrategicos: los 4 cierres de bloque mas 5 internos. Los internos se colocan tras versiculo citado (6s) y tras el cierre de un movimiento tematico (10s). El tramo final, del parrafo 200 al 246, se deja correr sin interrupciones: es el descenso hacia el Amen y cortarlo romperia la caida.",
 
   "parrafos_esperados": 246,
 
@@ -12,10 +13,15 @@
   },
 
   "events": [
+    { "after": 8,   "type": "interlude", "seconds": 6,  "note": "tras Salmo 3:5 — «Yo me acosté y dormí, y desperté, porque Jehová me sustentaba»" },
     { "after": 33,  "type": "block_end", "seconds": 10, "block": 1, "note": "fin del bloque 1" },
-    { "after": 76,  "type": "block_end", "seconds": 10, "block": 2, "note": "fin del bloque 2" },
+    { "after": 44,  "type": "interlude", "seconds": 6,  "note": "tras Salmo 4:8 — «En paz me acostaré, y asimismo dormiré»" },
+    { "after": 76,  "type": "block_end", "seconds": 10, "block": 2, "note": "fin del bloque 2, justo tras Salmo 91:1-2" },
     { "after": 113, "type": "block_end", "seconds": 10, "block": 3, "note": "fin del bloque 3" },
+    { "after": 131, "type": "interlude", "seconds": 6,  "note": "tras Salmo 121:3-4 — «ni se dormirá el que te guarda»" },
     { "after": 159, "type": "block_end", "seconds": 10, "block": 4, "note": "fin del bloque 4" },
+    { "after": 163, "type": "interlude", "seconds": 6,  "note": "tras la recapitulación del Salmo 3:5, versículo ancla del video" },
+    { "after": 199, "type": "interlude", "seconds": 10, "note": "cierra el movimiento «Tú me sustentas», antes de la oración final" },
 
     { "at": "end", "type": "outro", "music_seconds": 25, "fade_out": 8 }
   ]

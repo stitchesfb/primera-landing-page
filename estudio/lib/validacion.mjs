@@ -16,6 +16,7 @@ export function validarImportacion({
   duracionesBloques,
   cues,
   duracionAudio,
+  colas: colasDadas = null,
   toleranciaS = 0.25,
 }) {
   const pruebas = [];
@@ -113,7 +114,9 @@ export function validarImportacion({
   // ese margen se iria haciendo negativo (la alineacion se sale del archivo) o
   // creceria bloque a bloque de forma sistematica. Un margen pequeño, positivo
   // y sin tendencia es lo que esperamos.
-  const colas = alineaciones.map((al, i) => {
+  // Cuando el audio se troceo en tramos, quien llama ya conoce la geometria y
+  // pasa las colas resueltas; si no, se deducen de la alineacion del bloque.
+  const colas = colasDadas ?? alineaciones.map((al, i) => {
     const fin = finAlineacion(al);
     return fin == null ? null : duracionesBloques[i] - fin;
   });

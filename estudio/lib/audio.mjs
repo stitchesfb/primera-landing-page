@@ -128,3 +128,66 @@ export async function montarNarracion({ segmentos, huecos, outro, salidaMp3, tmp
   rmSync(tmp, { recursive: true, force: true });
   return { duraciones, duracionTotal: total };
 }
+
+/**
+ * Monta la pista a partir de TRAMOS, que pueden ser un bloque entero o un
+ * trozo suyo delimitado por [desde, hasta].
+ *
+ * Cada bloque se decodifica a PCM una sola vez y de ahi se recortan sus
+ * tramos: sobre PCM el corte es exacto a la muestra, mientras que buscar una
+ * posicion dentro de un mp3 cae al fotograma mas cercano y correria los
+ * subtitulos unos milisegundos en cada corte.
+ */
+export async function montarTramos({ tramos, huecos, outro, salidaMp3, tmp }) {
+  mkdirSync(tmp, { recursive: true });
+  const ffmpeg = await rutaFfmpeg();
+
+  // Un WAV por bloque, reutilizado por todos sus tramos.
+  const wavDeBloque = new Map();
+  for (const t of tramos) {
+    if (wavDeBloque.has(t.archivo)) continue;
+    const wav = join(tmp, `b${wavDeBloque.size + 1}.wav`);
+    await aPcm(t.archivo, wav);
+    wavDeBloque.set(t.archivo, wav);
+  }
+
+  const piezas = [];
+  const duraciones = [];
+
+  for (const [i, t] of tramos.entries()) {
+    const trozo = join(tmp, `t${String(i + 1).padStart(3, '0')}.wav`);
+    await ejecutar(ffmpeg, [
+      '-y', '-loglevel', 'error',
+      '-i', wavDeBloque.get(t.archivo),
+      '-ss', t.desde.toFixed(4),
+      '-to', t.hasta.toFixed(4),
+      '-c:a', 'pcm_s16le',
+      trozo,
+    ]);
+    duraciones.push(await duracionSegundos(trozo));
+    piezas.push(trozo);
+
+    const hueco = huecos.find((h) => h.trasParrafo === i + 1);
+    if (hueco?.duracion > 0) {
+      piezas.push(await silencioPcm(hueco.duracion, join(tmp, `s${String(i + 1).padStart(3, '0')}.wav`)));
+    }
+  }
+
+  if (outro?.music_seconds > 0) {
+    piezas.push(await silencioPcm(outro.music_seconds, join(tmp, 'outro.wav')));
+  }
+
+  const lista = join(tmp, 'lista.txt');
+  writeFileSync(lista, piezas.map((p) => `file '${p.replace(/'/g, "'\\''")}'`).join('\n') + '\n');
+
+  await ejecutar(ffmpeg, [
+    '-y', '-loglevel', 'error',
+    '-f', 'concat', '-safe', '0', '-i', lista,
+    '-c:a', 'libmp3lame', '-b:a', '192k',
+    salidaMp3,
+  ]);
+
+  const total = await duracionSegundos(salidaMp3);
+  rmSync(tmp, { recursive: true, force: true });
+  return { duraciones, duracionTotal: total };
+}

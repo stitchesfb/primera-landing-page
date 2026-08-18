@@ -28,7 +28,8 @@ import { palabrasDesdeAlineacion, agruparEnSubtitulos, renderSRT } from './lib/s
 import { revisar, CHECKLIST } from './lib/revision.mjs';
 import { validarImportacion } from './lib/validacion.mjs';
 import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
-import { montarNarracion, duracionSegundos } from './lib/audio.mjs';
+import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } from './lib/troceo.mjs';
+import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
 
 const canal = cargarCanal();
@@ -653,7 +654,16 @@ async function cmdImportar(id) {
     .sort();
   if (!archivos.length) throw new Error(`No hay audio en ${dirFuente}`);
 
+  const validacionPlan = validarPlan(proyecto, canal);
+  if (validacionPlan.problemas.length) {
+    titulo('El plan de edicion tiene errores');
+    for (const x of validacionPlan.problemas) console.log(c.rojo(`  ✗ ${x}`));
+    process.exitCode = 1;
+    return;
+  }
+
   const bloques = repartirParrafosEnBloques(proyecto, archivos.length);
+  const finDeBloque = new Set(bloques.map((b) => b[b.length - 1] + 1));
 
   titulo(`Importar audio — ${proyecto.id}`);
   console.log(`Bloques de audio    ${archivos.length}`);
@@ -665,64 +675,130 @@ async function cmdImportar(id) {
   const el = cliente();
   const alineaciones = [];
   const duraciones = [];
-  const textos = [];
 
   for (const [i, archivo] of archivos.entries()) {
     process.stdout.write(`\r  alineando bloque ${i + 1}/${archivos.length}…    `);
     const ruta = join(dirFuente, archivo);
     const texto = bloques[i].map((idx) => proyecto.parrafos[idx]).join(' ');
-    textos.push(texto);
     alineaciones.push(await el.alinear({ audio: readFileSync(ruta), nombreArchivo: archivo, texto }));
     duraciones.push(await duracionSegundos(ruta));
   }
   console.log(`\r  ${archivos.length} bloques alineados.          `);
 
-  // Proyecto sintetico donde cada "parrafo" es un bloque completo, para que
-  // la linea de tiempo y los huecos se calculen con el mismo codigo.
-  const comoBloques = {
+  // Los huecos que NO caen en un final de bloque exigen partir el audio por
+  // dentro. La alineacion dice en que segundo termina cada parrafo, asi que el
+  // corte se lee en vez de estimarse.
+  const internos = (proyecto.plan.events ?? [])
+    .filter((e) => e.at !== 'end' && e.seconds > 0 && !finDeBloque.has(e.after))
+    .map((e) => e.after);
+
+  const tramos = [];
+  const palabrasPorTramo = [];
+  const detalleCortes = [];
+
+  bloques.forEach((b, k) => {
+    const textos = b.map((idx) => proyecto.parrafos[idx]);
+    const palabras = palabrasDesdeAlineacion(alineaciones[k], 0);
+    const tiempos = tiemposPorParrafo(palabras, textos);
+
+    const indices = internos
+      .filter((n) => b.includes(n - 1))
+      .map((n) => b.indexOf(n - 1));
+    const cortes = puntosDeCorte(tiempos, indices, duraciones[k]);
+
+    for (const corte of cortes) {
+      detalleCortes.push({
+        parrafo: b[corte.trasIndice] + 1,
+        bloque: k + 1,
+        en: corte.en,
+        silencioNatural: corte.silencioNatural,
+      });
+    }
+
+    for (const t of tramosDelBloque({
+      bloque: k + 1, archivo: join(dirFuente, archivos[k]),
+      parrafos: b, tiempos, cortes, duracion: duraciones[k],
+    })) {
+      tramos.push({ ...t, palabras });
+    }
+  });
+
+  if (internos.length) {
+    console.log(`  ${detalleCortes.length} corte(s) interno(s), en la frontera exacta entre parrafos:`);
+    for (const d of detalleCortes) {
+      console.log(c.dim(
+        `    tras el parrafo ${d.parrafo} (bloque ${d.bloque}) en ${mmss(d.en)} del bloque · ` +
+        `silencio natural ${d.silencioNatural.toFixed(2)}s`
+      ));
+    }
+  }
+
+  // Proyecto sintetico donde cada "parrafo" es un TRAMO, para que la linea de
+  // tiempo y los huecos se calculen con el mismo codigo de siempre.
+  const finDeTramo = new Map();
+  tramos.forEach((t, i) => finDeTramo.set(t.trasParrafoGlobal + 1, i + 1));
+
+  const eventos = [];
+  for (const ev of proyecto.plan.events ?? []) {
+    if (ev.at === 'end') { eventos.push(ev); continue; }
+    if (!(ev.seconds > 0)) continue;
+    const enTramo = finDeTramo.get(ev.after);
+    if (enTramo == null) {
+      console.log(c.rojo(`  ✗ El hueco tras el parrafo ${ev.after} no cae en ninguna frontera de tramo.`));
+      process.exitCode = 1;
+      return;
+    }
+    eventos.push({ ...ev, after: enTramo });
+  }
+
+  const comoTramos = {
     ...proyecto,
-    parrafos: textos,
-    plan: { ...proyecto.plan, events: eventosEntreBloques(proyecto, bloques) },
+    parrafos: tramos.map((t) => t.parrafos.map((i) => proyecto.parrafos[i]).join(' ')),
+    plan: { ...proyecto.plan, defaults: { pause_after_paragraph: 0 }, events: eventos },
   };
 
   const salida = asegurarSalida(proyecto);
-  const linea = construirLinea(comoBloques, canal, duraciones);
 
   process.stdout.write('  montando la pista…');
-  const { duracionTotal } = await montarNarracion({
-    segmentos: archivos.map((f, i) => ({ mp3: join(dirFuente, f), numero: i + 1 })),
-    huecos: linea.huecos,
-    outro: linea.outro,
+  const { duraciones: durTramos, duracionTotal } = await montarTramos({
+    tramos,
+    huecos: construirLinea(comoTramos, canal, tramos.map((t) => t.hasta - t.desde)).huecos,
+    outro: { music_seconds: proyecto.plan.events.find((e) => e.at === 'end')?.music_seconds ?? 0 },
     salidaMp3: join(salida, 'audio.mp3'),
     tmp: join(salida, '.tmp'),
   });
   console.log(' hecho.');
 
+  const linea = construirLinea(comoTramos, canal, durTramos);
+  linea.segmentos.forEach((seg, i) => {
+    palabrasPorTramo.push(palabrasDelTramo(tramos[i].palabras, tramos[i], seg.inicio));
+  });
+
   const resultado = escribirSincronizacion({
-    proyecto: comoBloques,
-    salida,
-    linea,
-    alineaciones,
+    proyecto: comoTramos, salida, linea,
+    palabrasPorSegmento: palabrasPorTramo,
     duracionTotal,
   });
 
-  // Validaciones obligatorias antes de dar la importacion por buena.
+  // Silencio de cola de cada tramo: cuanto audio queda tras su ultima palabra.
+  // Si la alineacion derivara, este margen se volveria negativo.
+  const colas = linea.segmentos.map((seg, i) => {
+    const ps = palabrasPorTramo[i];
+    return ps?.length ? seg.fin - ps[ps.length - 1].fin : null;
+  });
+
   const informe = validarImportacion({
-    archivos,
-    bloques,
-    proyecto,
-    plan: proyecto.plan,
-    linea,
-    alineaciones,
-    duracionesBloques: duraciones,
+    archivos, bloques, proyecto, plan: proyecto.plan, linea,
+    alineaciones: palabrasPorTramo.map((ps) => ({ palabras: ps })),
+    duracionesBloques: durTramos,
+    colas,
     cues: resultado.listaCues,
     duracionAudio: duracionTotal,
   });
 
   titulo('Validacion');
-  for (const p of informe.pruebas) {
-    const marca = p.ok ? c.verde('✓') : c.rojo('✗');
-    console.log(`  ${marca} ${p.id.padEnd(32)} ${c.dim(p.detalle)}`);
+  for (const x of informe.pruebas) {
+    console.log(`  ${x.ok ? c.verde('✓') : c.rojo('✗')} ${x.id.padEnd(32)} ${c.dim(x.detalle)}`);
   }
 
   writeFileSync(
@@ -730,19 +806,34 @@ async function cmdImportar(id) {
     JSON.stringify({ fecha: new Date().toISOString(), proyecto: proyecto.id, ...informe }, null, 2) + '\n'
   );
 
+  titulo('Interludios colocados');
+  for (const h of linea.huecos) {
+    const t = tramos[h.trasParrafo - 1];
+    const parrafo = t.trasParrafoGlobal + 1;
+    const frase = proyecto.parrafos[t.trasParrafoGlobal].replace(/\s+/g, ' ');
+    const ev = (proyecto.plan.events ?? []).find((e) => e.after === parrafo);
+    console.log(
+      `  ${mmss(h.inicio).padStart(6)}  ${String(h.duracion).padStart(4)}s  tras el parrafo ${parrafo}` +
+      (ev?.note ? c.dim(`  — ${ev.note}`) : '')
+    );
+    console.log(c.dim(`          «${frase.length > 96 ? frase.slice(0, 96) + '…' : frase}»`));
+  }
+  const cierre = linea.outro.music_seconds;
+  if (cierre > 0) {
+    console.log(`  ${mmss(linea.finNarracion).padStart(6)}  ${String(cierre).padStart(4)}s  cierre tras «${proyecto.parrafos[proyecto.parrafos.length - 1]}»`);
+  }
+
   titulo('Salida');
   console.log(`  audio.mp3       ${mmss(duracionTotal)}`);
   console.log(`  subtitles.srt   ${resultado.cues} subtitulos`);
-  console.log(`  timeline.json   ${linea.huecos.length} interludios + cierre de ${linea.outro.music_seconds}s`);
+  console.log(`  timeline.json   ${linea.huecos.length} interludios + cierre de ${cierre}s`);
   console.log(c.dim(`  alignment.json  ${resultado.palabras} palabras (fuente de sincronia)`));
-  console.log(c.dim('  validacion.json informe de las comprobaciones'));
 
   if (informe.ok) {
-    escribirEstado(proyecto, 'audio', `importado de ${archivos.length} bloques, validacion OK`);
+    escribirEstado(proyecto, 'audio', `${tramos.length} tramos, ${linea.huecos.length} interludios`);
     console.log(c.verde('\n✓ Las 8 comprobaciones pasan. Sin gasto de creditos de TTS.'));
-    console.log(c.bold('Revisa el audio y los subtitulos antes de pasar al renderer.'));
   } else {
-    console.log(c.rojo(`\n✗ ${informe.fallos} comprobacion(es) fallan. No marco la importacion como valida.`));
+    console.log(c.rojo(`\n✗ ${informe.fallos} comprobacion(es) fallan.`));
     process.exitCode = 1;
   }
 }
@@ -798,16 +889,19 @@ function eventosEntreBloques(proyecto, bloques) {
 
 // --- escritura de sincronizacion --------------------------------------
 
-function escribirSincronizacion({ proyecto, salida, linea, alineaciones, duracionTotal }) {
+function escribirSincronizacion({
+  proyecto, salida, linea, alineaciones, palabrasPorSegmento, duracionTotal,
+}) {
   // Los subtitulos se agrupan POR SEGMENTO, no sobre la palabra suelta de todo
   // el video. Asi ninguno puede cruzar una frontera de bloque ni alargarse
   // dentro de un interludio: cada uno queda encerrado en el audio del que sale.
   const palabras = [];
   const cues = [];
   linea.segmentos.forEach((seg, i) => {
-    const al = alineaciones[i];
-    if (!al) return;
-    const suyas = palabrasDesdeAlineacion(al, seg.inicio);
+    const suyas = palabrasPorSegmento
+      ? palabrasPorSegmento[i]
+      : alineaciones?.[i] && palabrasDesdeAlineacion(alineaciones[i], seg.inicio);
+    if (!suyas?.length) return;
     palabras.push(...suyas);
     cues.push(...agruparEnSubtitulos(suyas, canal.subtitulos, seg.fin));
   });
