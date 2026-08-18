@@ -27,6 +27,7 @@ import { estimar, comparar, mmss, miles } from './lib/estimacion.mjs';
 import { palabrasDesdeAlineacion, agruparEnSubtitulos, renderSRT } from './lib/srt.mjs';
 import { revisar, CHECKLIST } from './lib/revision.mjs';
 import { validarImportacion } from './lib/validacion.mjs';
+import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { montarNarracion, duracionSegundos } from './lib/audio.mjs';
 
 const canal = cargarCanal();
@@ -530,6 +531,67 @@ async function cmdVoz(id, opciones) {
   console.log(`  timeline.json   ${lineaReal.huecos.length} huecos, cierre de ${lineaReal.outro.music_seconds}s`);
 }
 
+// --- plan automatico --------------------------------------------------
+
+/**
+ * Genera edit_plan.json deduciendo los limites de bloque de los audios.
+ *
+ * Se niega a pisar un plan existente: si ya hay uno escrito a mano, esa es la
+ * verdad editorial y no la sobreescribe una heuristica.
+ */
+async function cmdPlanAuto(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const rutaPlan = join(proyecto.dir, 'edit_plan.json');
+
+  if (existsSync(rutaPlan) && !opciones.forzar) {
+    console.log(c.ambar(`${id}/edit_plan.json ya existe; no lo toco.`));
+    console.log(c.dim('  Usa --forzar para regenerarlo.'));
+    return;
+  }
+
+  const dirFuente = join(proyecto.dir, 'audio_fuente');
+  if (!existsSync(dirFuente)) throw new Error(`Falta ${id}/audio_fuente/`);
+  const archivos = readdirSync(dirFuente).filter((f) => /\.(mp3|wav|m4a)$/i.test(f)).sort();
+  if (!archivos.length) throw new Error(`No hay audio en ${dirFuente}`);
+
+  titulo(`Plan automatico — ${id}`);
+  const duraciones = [];
+  for (const f of archivos) duraciones.push(await duracionSegundos(join(dirFuente, f)));
+
+  const { bloques, diagnostico } = repartirPorDuracion(proyecto.parrafos, duraciones);
+  const pilar = opciones.pilar ?? 'noche';
+  const plan = construirPlan({ id, pilar, parrafos: proyecto.parrafos, bloques, canal });
+
+  console.log(`Parrafos ${proyecto.parrafos.length} · audios ${archivos.length} · pilar ${pilar}\n`);
+  console.log('  bloque  parrafos   audio     caracteres  vs esperado   car/min');
+  for (const d of diagnostico) {
+    const desvio = `${d.desvioPct >= 0 ? '+' : ''}${d.desvioPct.toFixed(1)}%`;
+    const marca = Math.abs(d.desvioPct) <= 12 ? c.verde('ok') : c.ambar('!!');
+    console.log(
+      `  ${String(d.bloque).padStart(6)}  ${`${d.parrafos[0]}-${d.parrafos[1]}`.padEnd(9)} ` +
+      `${mmss(d.segundos).padStart(6)}  ${String(d.caracteres).padStart(10)}  ` +
+      `${desvio.padStart(11)}   ${String(d.caracteresPorMinuto).padStart(7)} ${marca}`
+    );
+  }
+
+  const fuera = diagnostico.filter((d) => Math.abs(d.desvioPct) > 12);
+  if (fuera.length) {
+    console.log(c.ambar(
+      `\n  ! ${fuera.length} bloque(s) se desvian mas de un 12% de lo esperado por duracion.`
+    ));
+    console.log(c.dim('    La alineacion posterior lo confirmara: si un limite estuviera mal,'));
+    console.log(c.dim('    "sin_drift_acumulativo" fallaria. Revisa el reparto si eso ocurre.'));
+  }
+
+  const estrategicos = plan.events.filter((e) => e.seconds >= canal.reglas_edicion.interludio_versiculo_min).length;
+  writeFileSync(rutaPlan, JSON.stringify(plan, null, 2) + '\n');
+
+  console.log(`\n  ${plan.events.length - 1} eventos + cierre · ${estrategicos} interludios estrategicos`);
+  console.log(c.dim(`  Escrito en ${id}/edit_plan.json`));
+  console.log(c.dim('\n  En audio ya generado solo se insertan los interludios ENTRE bloques y el'));
+  console.log(c.dim('  cierre: las pausas internas ya vienen grabadas en cada mp3.'));
+}
+
 // --- importar audio ya existente --------------------------------------
 
 /**
@@ -865,7 +927,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('revisar')}  <proyecto>      Informe doctrinal asistido. No gasta nada
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
-  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
+  ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
   ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
@@ -888,6 +950,10 @@ async function principal() {
     case 'revisar': return cmdRevisar(exigeProyecto());
     case 'aprobar-audio': return cmdAprobarAudio(exigeProyecto(), resto.filter((r) => !r.startsWith('--')).join(' '));
     case 'voz': return cmdVoz(exigeProyecto(), opciones);
+    case 'plan-auto': return cmdPlanAuto(exigeProyecto(), {
+      forzar: resto.includes('--forzar'),
+      pilar: resto.includes('--pilar') ? resto[resto.indexOf('--pilar') + 1] : undefined,
+    });
     case 'importar': return cmdImportar(exigeProyecto());
     case 'resumen': {
       const i = process.argv.indexOf('--json');

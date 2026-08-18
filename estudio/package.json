@@ -9,7 +9,7 @@
   },
   "scripts": {
     "estudio": "node cli.mjs",
-    "test": "node test/api.test.mjs && node test/revision.test.mjs && node test/montaje.test.mjs && node test/validacion.test.mjs"
+    "test": "node test/api.test.mjs && node test/autoplan.test.mjs && node test/revision.test.mjs && node test/montaje.test.mjs && node test/validacion.test.mjs"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0",

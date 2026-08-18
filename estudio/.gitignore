@@ -1,10 +1,14 @@
 node_modules/
 .env
 
-# Material de produccion: pesado y no versionable
+# La salida se recoge como artifact del workflow, no se versiona.
 proyectos/*/output/
-proyectos/*/audio_fuente/
 proyectos/*/music/
+
+# audio_fuente/ SI se versiona: el runner de Actions solo ve lo que hay en el
+# repositorio, asi que los bloques ya grabados tienen que viajar con el. Son
+# unos 7 MB por bloque; conviene borrarlos una vez validada la importacion
+# para no engordar la historia del repositorio con cada video.
 proyectos/*/*.png
 proyectos/*/*.jpg
 !proyectos/ejemplo_noche/**

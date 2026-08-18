@@ -3,8 +3,8 @@
 # Se lanza a mano desde la pestana Actions con el boton "Run workflow".
 # No corre solo: no hay push, ni pull_request, ni schedule.
 #
-# Checkpoint 1 — solo mide. No genera voz nueva, ni video, ni miniaturas,
-# ni Shorts, y no publica nada.
+# Checkpoint 1 — mide y prepara. No genera video, ni miniaturas, ni Shorts,
+# y no publica nada.
 name: Estudio — Checkpoint 1
 
 on:
@@ -15,32 +15,41 @@ on:
         type: choice
         options:
           - sonda
-        default: sonda
+          - importar
+        default: importar
+      proyecto:
+        description: 'Solo para importar: carpeta bajo estudio/proyectos/ (ej. video_001)'
+        type: string
+        default: ''
       confirmar:
-        description: 'Escribe SI para confirmar. La sonda gasta ~130 creditos de ElevenLabs'
+        description: 'Escribe SI para confirmar'
         type: string
         required: true
 
-# Solo lectura del repositorio: el workflow no escribe nada de vuelta.
 permissions:
   contents: read
 
-# Dos ejecuciones a la vez podrian medir creditos la una sobre la otra.
 concurrency:
   group: estudio-checkpoint1
   cancel-in-progress: false
 
 jobs:
   checkpoint1:
-    name: Sonda de creditos
+    name: Checkpoint 1
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     steps:
-      - name: Confirmar el gasto
+      - name: Confirmar
         if: inputs.confirmar != 'SI'
         run: |
-          echo "::error::Escribe SI en el campo de confirmacion para ejecutar la sonda."
+          echo "::error::Escribe SI en el campo de confirmacion."
+          exit 1
+
+      - name: Comprobar que hay proyecto
+        if: inputs.modo == 'importar' && inputs.proyecto == ''
+        run: |
+          echo "::error::El modo importar necesita el nombre del proyecto."
           exit 1
 
       - name: Descargar el repositorio
@@ -57,8 +66,8 @@ jobs:
         working-directory: estudio
         run: npm ci
 
-      # Comprueba que los secretos llegaron, sin revelarlos. Imprime unicamente
-      # si existen y cuantos caracteres tienen: nunca el valor ni un fragmento.
+      # Comprueba que los secretos llegaron, sin revelarlos: solo si existen y
+      # cuantos caracteres tienen, nunca el valor ni un fragmento.
       - name: Comprobar que los secretos existen
         working-directory: estudio
         env:
@@ -80,8 +89,7 @@ jobs:
           '
 
       # Reachability sin autenticar: no mandamos la clave. Cualquier respuesta
-      # HTTP (401 incluido) demuestra que DNS, TLS y rutado funcionan, que es
-      # justo lo que fallaba en el entorno anterior.
+      # HTTP, incluido un 401, demuestra que DNS, TLS y rutado funcionan.
       - name: Comprobar acceso a api.elevenlabs.io
         run: |
           codigo=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 \
@@ -93,6 +101,8 @@ jobs:
           fi
           echo "Host alcanzable."
 
+      # ---------------------------------------------------------------- sonda
+
       - name: Ejecutar la sonda
         if: inputs.modo == 'sonda'
         working-directory: estudio
@@ -101,8 +111,6 @@ jobs:
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
         run: node cli.mjs sonda
 
-      # El resumen acorta el voice_id a sus ultimos 4 caracteres y no incluye
-      # la clave, que nunca llega a escribirse en disco.
       - name: Preparar el resumen publicable
         if: always() && inputs.confirmar == 'SI' && inputs.modo == 'sonda'
         working-directory: estudio
@@ -122,3 +130,65 @@ jobs:
           path: resultado/resumen-sonda.json
           if-no-files-found: ignore
           retention-days: 30
+
+      # ------------------------------------------------------------- importar
+
+      - name: Comprobar los archivos subidos
+        if: inputs.modo == 'importar'
+        working-directory: estudio/proyectos/${{ inputs.proyecto }}
+        run: |
+          echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
+          faltan=0
+          if [ ! -f narration.txt ]; then
+            echo "::error::Falta narration.txt"; faltan=1
+          else
+            echo "- narration.txt — $(wc -c < narration.txt) bytes, $(grep -c '^[[:space:]]*$' narration.txt) lineas en blanco" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          n=$(ls audio_fuente/*.mp3 2>/dev/null | wc -l)
+          if [ "$n" -eq 0 ]; then
+            echo "::error::No hay mp3 en audio_fuente/"; faltan=1
+          else
+            echo "- audio_fuente/ — $n archivos" >> "$GITHUB_STEP_SUMMARY"
+            ls -1 audio_fuente/*.mp3 | sed 's|^|  - |' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          exit $faltan
+
+      # Deduce los limites de bloque de las duraciones del audio. No pisa un
+      # edit_plan.json escrito a mano: ese seria la verdad editorial.
+      - name: Generar el plan de edicion
+        if: inputs.modo == 'importar'
+        working-directory: estudio
+        run: |
+          node cli.mjs plan-auto "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Importar y validar
+        if: inputs.modo == 'importar'
+        working-directory: estudio
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: |
+          node cli.mjs importar "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # Se suben tambien si la importacion fallo: el informe de validacion es
+      # justo lo que hace falta para saber por que.
+      - name: Guardar el resultado como artifact
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'importar'
+        uses: actions/upload-artifact@v4
+        with:
+          name: importacion-${{ inputs.proyecto }}
+          path: |
+            estudio/proyectos/${{ inputs.proyecto }}/output/audio.mp3
+            estudio/proyectos/${{ inputs.proyecto }}/output/subtitles.srt
+            estudio/proyectos/${{ inputs.proyecto }}/output/timeline.json
+            estudio/proyectos/${{ inputs.proyecto }}/output/validacion.json
+            estudio/proyectos/${{ inputs.proyecto }}/output/alignment.json
+            estudio/proyectos/${{ inputs.proyecto }}/edit_plan.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Fin
+        if: inputs.modo == 'importar'
+        run: |
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Checkpoint 1 terminado. El renderer no se ha ejecutado." >> "$GITHUB_STEP_SUMMARY"
