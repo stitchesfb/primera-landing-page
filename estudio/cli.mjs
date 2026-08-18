@@ -292,6 +292,7 @@ function analizar(id) {
 function imprimirValidacion(validacion) {
   for (const p of validacion.problemas) console.log(c.rojo(`  ✗ ${p}`));
   for (const a of validacion.avisos) console.log(c.ambar(`  ! ${a}`));
+  for (const n of validacion.notas ?? []) console.log(c.dim(`  · ${n}`));
   if (!validacion.problemas.length && !validacion.avisos.length) {
     console.log(c.verde('  ✓ Plan de edicion valido'));
   }

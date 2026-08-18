@@ -34,11 +34,28 @@ const estrategicos = plan.events.filter(
   (e) => e.at !== 'end' && e.seconds >= canal.reglas_edicion.interludio_versiculo_min
 ).length;
 const { interludios_estrategicos_min: min, interludios_estrategicos_max: max } = canal.formatos.noche;
-check('interludios estrategicos dentro de la horquilla',
-  estrategicos >= min && estrategicos <= max, `${estrategicos} (${min}-${max})`);
-check('sin aviso de interludios',
+// Salirse de la horquilla solo vale si el plan declara por que. Sin motivo
+// escrito vuelve a ser un aviso, para que la excepcion no se herede por
+// inercia en los proximos videos.
+const dentro = estrategicos >= min && estrategicos <= max;
+const declarada = Boolean(plan.excepciones?.interludios_estrategicos);
+check('la horquilla se respeta o la excepcion esta declarada',
+  dentro || declarada, `${estrategicos} (${min}-${max}), excepcion: ${declarada}`);
+check('sin avisos sin explicar',
   !v.avisos.some((a) => a.includes('interludios estrategicos')),
   v.avisos.join(' | ') || 'ninguno');
+if (!dentro) {
+  check('la excepcion queda anotada como nota', v.notas.some((n) => n.includes('excepcion declarada')));
+  check('el motivo cita el parrafo que la justifica',
+    /215|silencio/i.test(plan.excepciones.interludios_estrategicos));
+}
+
+// Sin la excepcion, la misma desviacion tiene que volver a avisar.
+const sinExcepcion = { ...plan };
+delete sinExcepcion.excepciones;
+const vSin = validarPlan({ id: 'x', parrafos: guion(246), plan: sinExcepcion }, canal);
+check('sin excepcion declarada, vuelve a avisar',
+  dentro || vSin.avisos.some((a) => a.includes('interludios estrategicos')));
 
 // Los internos van tras versiculo o cierre de movimiento, nunca tras el final
 // del guion, y cada uno lleva anotado por que esta ahi.

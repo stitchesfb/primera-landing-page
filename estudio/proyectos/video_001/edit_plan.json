@@ -4,7 +4,11 @@
 
   "_limites": "Limites reales del guion final de cinco bloques, facilitados por el autor. NO deducidos: 'plan-auto' no toca este archivo porque ya existe.",
   "_baseline": "edit_plan.baseline-31m55s.json conserva la version de 4 interludios que produjo la importacion aprobada de 31:55.",
-  "_criterio": "9 interludios estrategicos: los 4 cierres de bloque mas 5 internos. Los internos se colocan tras versiculo citado (6s) y tras el cierre de un movimiento tematico (10s). El tramo final, del parrafo 200 al 246, se deja correr sin interrupciones: es el descenso hacia el Amen y cortarlo romperia la caida.",
+  "_criterio": "10 interludios estrategicos: los 4 cierres de bloque mas 6 internos. Los internos se colocan tras versiculo citado (6s), al cerrar un movimiento tematico (10s) y, en el parrafo 215, donde la narracion pide el silencio en voz alta (12s). Del parrafo 216 al 246 se deja correr sin cortes: es el descenso hacia el Amen.",
+
+  "excepciones": {
+    "interludios_estrategicos": "el parrafo 215 dice «Puedo permanecer en silencio, escuchar la musica y sentir como mi respiracion...», asi que el silencio lo pide el propio texto. Decision editorial del autor, no un descuido: se acepta llegar a 10."
+  },
 
   "parrafos_esperados": 246,
 
@@ -22,6 +26,7 @@
     { "after": 159, "type": "block_end", "seconds": 10, "block": 4, "note": "fin del bloque 4" },
     { "after": 163, "type": "interlude", "seconds": 6,  "note": "tras la recapitulación del Salmo 3:5, versículo ancla del video" },
     { "after": 199, "type": "interlude", "seconds": 10, "note": "cierra el movimiento «Tú me sustentas», antes de la oración final" },
+    { "after": 215, "type": "interlude", "seconds": 12, "note": "el texto pide el silencio: «Puedo permanecer en silencio, escuchar la música y sentir cómo mi respiración…»" },
 
     { "at": "end", "type": "outro", "music_seconds": 25, "fade_out": 8 }
   ]

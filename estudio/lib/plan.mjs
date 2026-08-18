@@ -18,11 +18,12 @@ const TIPOS_CON_HUECO = new Set(['pause', 'interlude', 'block_end']);
 export function validarPlan(proyecto, canal) {
   const problemas = [];
   const avisos = [];
+  const notas = [];
   const plan = proyecto.plan;
 
   if (!plan) {
     problemas.push('Falta edit_plan.json');
-    return { problemas, avisos, plan: null };
+    return { problemas, avisos, notas, plan: null };
   }
 
   const nParrafos = proyecto.parrafos.length;
@@ -131,9 +132,14 @@ export function validarPlan(proyecto, canal) {
   if (formato) {
     const { interludios_estrategicos_min: min, interludios_estrategicos_max: max } = formato;
     if (estrategicos.length < min || estrategicos.length > max) {
-      avisos.push(
-        `${estrategicos.length} interludios estrategicos; el formato "${plan.pilar}" pide entre ${min} y ${max}`
-      );
+      // Salirse de la horquilla puede ser un descuido o una decision tomada a
+      // conciencia. Se distingue por si el plan la declara: una excepcion
+      // documentada deja de ser un aviso, pero sigue quedando escrita para que
+      // no se convierta en la norma por inercia.
+      const motivo = plan.excepciones?.interludios_estrategicos;
+      const cuantos = `${estrategicos.length} interludios estrategicos; el formato "${plan.pilar}" pide entre ${min} y ${max}`;
+      if (motivo) notas.push(`${cuantos} — excepcion declarada: ${motivo}`);
+      else avisos.push(cuantos);
     }
   }
 
@@ -144,7 +150,7 @@ export function validarPlan(proyecto, canal) {
     );
   }
 
-  return { problemas, avisos, plan, estrategicos: estrategicos.length, outro };
+  return { problemas, avisos, notas, plan, estrategicos: estrategicos.length, outro };
 }
 
 /**
