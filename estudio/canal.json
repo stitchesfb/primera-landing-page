@@ -64,5 +64,32 @@
     "creditos_por_caracter": 0.276,
     "caracteres_por_minuto": 794,
     "medido": true
+  },
+  "render": {
+    "ancho": 1920,
+    "alto": 1080,
+    "fps": 30,
+    "zoom_total": 0.04,
+    "_zoom": "4% repartido en todo el video: unos 2,4 px por minuto sobre 1920. La imagen se sobremuestrea x3 antes de mover el encuadre para que ese avance no se convierta en saltitos de un pixel.",
+    "foco": {
+      "x": 0.58,
+      "y": 0.42
+    },
+    "_foco": "Hacia la ventana y la luna, que tira del ojo hacia arriba y lejos de la figura dormida.",
+    "particulas": {
+      "cuantas": 46,
+      "periodo_s": 20
+    },
+    "musica": {
+      "bajo_voz_db": -26,
+      "en_interludio_db": -18,
+      "rampa_s": 1.5,
+      "fade_in_s": 4,
+      "_niveles": "Debajo de la voz va unos 20 dB por debajo de ella. En los interludios sube 8 dB, que es cuando tiene que sostener el silencio sola."
+    },
+    "crf": 20,
+    "preset": "medium",
+    "subtitulos_quemados": false,
+    "_subtitulos": "Pendiente de decision. En un video que se pone para dormir, texto permanente puede estorbar; el SRT aparte los deja opcionales en YouTube."
   }
 }

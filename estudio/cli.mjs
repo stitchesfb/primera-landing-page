@@ -14,7 +14,7 @@
  *   node cli.mjs estado   [proyecto]   Muestra el estado
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync, statSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
@@ -31,6 +31,9 @@ import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } from './lib/troceo.mjs';
 import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
+import { generarCama, nivelEn } from './lib/musica.mjs';
+import { generarLoop } from './lib/particulas.mjs';
+import { renderizar } from './lib/renderer.mjs';
 
 const canal = cargarCanal();
 const env = cargarEnv();
@@ -986,6 +989,104 @@ async function cmdPrevisualizar(id) {
   console.log(c.dim('  sirve para juzgar CUANDO aparece el texto, nada mas.'));
 }
 
+// --- muestra del renderer ---------------------------------------------
+
+/**
+ * Renderiza una ventana corta del video con todo lo que llevara el final:
+ * imagen con movimiento, particulas, voz y cama musical con su ducking.
+ *
+ * La ventana se elige alrededor de un interludio y con voz a los dos lados,
+ * porque lo que hay que juzgar no es un fotograma bonito sino la transicion:
+ * como sube la musica cuando calla la voz y como vuelve a bajar.
+ */
+async function cmdMuestra(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const voz = join(salida, 'audio.mp3');
+
+  if (!existsSync(rutaTimeline) || !existsSync(voz)) {
+    throw new Error(`Faltan ${id}/output/timeline.json o audio.mp3. Ejecuta antes: importar ${id}`);
+  }
+
+  const imagen = opciones.imagen ?? join(proyecto.dir, 'escena_nocturna.png');
+  if (!existsSync(imagen)) throw new Error(`No existe la imagen de fondo: ${imagen}`);
+
+  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const cfg = canal.render;
+
+  // Ventana: alrededor del interludio pedido, con voz antes y despues.
+  const largos = timeline.huecos.filter((h) => h.duracion >= 10);
+  const elegido = opciones.interludio != null
+    ? timeline.huecos[opciones.interludio - 1]
+    : (largos[0] ?? timeline.huecos[0]);
+  if (!elegido) throw new Error('El timeline no tiene interludios.');
+
+  const dur = opciones.duracion ?? 80;
+  const antes = Math.min(34, (dur - elegido.duracion) / 2);
+  const desde = opciones.desde ?? Math.max(0, elegido.inicio - antes);
+
+  titulo(`Muestra del renderer — ${id}`);
+  console.log(`Imagen          ${basename(imagen)}`);
+  console.log(`Ventana         ${mmss(desde)} → ${mmss(desde + dur)}  (${dur}s de ${mmss(timeline.duracion_total_s)})`);
+  console.log(`Interludio      ${elegido.duracion}s en ${mmss(elegido.inicio)}, tras el parrafo ${elegido.trasParrafo}`);
+  console.log(`Salida          ${cfg.ancho}x${cfg.alto} · ${cfg.fps} fps · crf ${cfg.crf}`);
+  if (opciones.recorrido) {
+    console.log(c.ambar('Modo recorrido  el zoom de los 32:41 comprimido en esta ventana'));
+    console.log(c.dim('                No es la velocidad real: sirve para ver cuanto viaja el encuadre.'));
+  }
+
+  const tmp = join(salida, '.tmp-muestra');
+  mkdirSync(tmp, { recursive: true });
+
+  process.stdout.write('\n  particulas…');
+  const loop = join(tmp, 'motas.mov');
+  const p = await generarLoop({
+    salida: loop, ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
+    periodo: cfg.particulas.periodo_s, cuantas: cfg.particulas.cuantas,
+  });
+  console.log(` ${p.motas} motas, bucle de ${p.periodo}s`);
+
+  process.stdout.write('  cama musical…');
+  const m = cfg.musica;
+  const envolvente = (t) => nivelEn(t, {
+    huecos: timeline.huecos,
+    finNarracion: timeline.fin_narracion_s,
+    cierre: {
+      fadeIn: m.fade_in_s,
+      fadeOut: timeline.cierre?.fade_out ?? 8,
+      duracionTotal: timeline.duracion_total_s,
+    },
+    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db, rampa: m.rampa_s,
+  });
+  const wav = join(tmp, 'cama.wav');
+  generarCama({ segundos: dur, offset: desde, envolvente, salidaWav: wav });
+  console.log(` ${m.bajo_voz_db} dB bajo la voz, ${m.en_interludio_db} dB en interludio`);
+
+  process.stdout.write('  render…');
+  const destino = join(salida, opciones.recorrido ? 'muestra-recorrido.mp4' : 'muestra.mp4');
+  await renderizar({
+    imagen, particulas: loop, voz, musica: wav, salida: destino,
+    desde, duracion: dur, duracionTotal: timeline.duracion_total_s,
+    ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
+    zoomTotal: cfg.zoom_total, foco: cfg.foco, crf: cfg.crf, preset: cfg.preset,
+    srt: canal.render.subtitulos_quemados ? join(salida, 'subtitles.srt') : null,
+    recorridoCompleto: Boolean(opciones.recorrido),
+  });
+  const bytes = statSync(destino).size;
+  console.log(` hecho · ${(bytes / 1048576).toFixed(1)} MB`);
+
+  rmSync(tmp, { recursive: true, force: true });
+
+  titulo('Que revisar');
+  console.log('  1. Nitidez de la imagen al ampliarla');
+  console.log('  2. Velocidad del movimiento: debe ser casi imperceptible');
+  console.log('  3. Particulas: deben insinuarse, no llamar la atencion');
+  console.log(`  4. Volumen de la cama bajo la voz`);
+  console.log(`  5. Como sube en el interludio de ${mmss(elegido.inicio - desde)} a ` +
+    `${mmss(elegido.inicio - desde + elegido.duracion)} de la muestra`);
+}
+
 // --- resumen seguro ---------------------------------------------------
 
 /**
@@ -1103,7 +1204,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1132,6 +1233,13 @@ async function principal() {
     });
     case 'importar': return cmdImportar(exigeProyecto());
     case 'previsualizar': return cmdPrevisualizar(exigeProyecto());
+    case 'muestra': {
+      const num = (f) => { const i = resto.indexOf(f); return i > -1 ? Number(resto[i + 1]) : undefined; };
+      return cmdMuestra(exigeProyecto(), {
+        desde: num('--desde'), duracion: num('--duracion'), interludio: num('--interludio'),
+        recorrido: resto.includes('--recorrido'),
+      });
+    }
     case 'resumen': {
       const i = process.argv.indexOf('--json');
       return cmdResumen(i > -1 ? process.argv[i + 1] : null);

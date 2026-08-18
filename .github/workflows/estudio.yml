@@ -16,9 +16,10 @@ on:
         options:
           - sonda
           - importar
-        default: importar
+          - muestra
+        default: muestra
       proyecto:
-        description: 'Solo para importar: carpeta bajo estudio/proyectos/ (ej. video_001)'
+        description: 'Para importar y muestra: carpeta bajo estudio/proyectos/ (ej. video_001)'
         type: string
         default: ''
       confirmar:
@@ -37,7 +38,7 @@ jobs:
   checkpoint1:
     name: Checkpoint 1
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Confirmar
@@ -47,7 +48,7 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: inputs.modo == 'importar' && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra') && inputs.proyecto == ''
         run: |
           echo "::error::El modo importar necesita el nombre del proyecto."
           exit 1
@@ -134,7 +135,7 @@ jobs:
       # ------------------------------------------------------------- importar
 
       - name: Comprobar los archivos subidos
-        if: inputs.modo == 'importar'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra'
         working-directory: estudio/proyectos/${{ inputs.proyecto }}
         run: |
           echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
@@ -156,13 +157,13 @@ jobs:
       # Deduce los limites de bloque de las duraciones del audio. No pisa un
       # edit_plan.json escrito a mano: ese seria la verdad editorial.
       - name: Generar el plan de edicion
-        if: inputs.modo == 'importar'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra'
         working-directory: estudio
         run: |
           node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
-        if: inputs.modo == 'importar'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra'
         working-directory: estudio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -173,15 +174,45 @@ jobs:
       # MP4 minimo para revisar la sincronia a ojo, sin montar un reproductor con
       # pistas externas. No es el renderer: negro, voz y subtitulos quemados.
       - name: Generar el video de revision
-        if: inputs.modo == 'importar'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra'
         working-directory: estudio
         run: |
           node cli.mjs previsualizar "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # ---------------------------------------------------------------- muestra
+
+      # Ventana corta con todo lo que llevara el video final: imagen con
+      # movimiento, particulas, voz y cama musical con su ducking.
+      - name: Renderizar la muestra
+        if: inputs.modo == 'muestra'
+        working-directory: estudio
+        run: |
+          node cli.mjs muestra "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # A velocidad real el encuadre viaja unos 3 px en 80 segundos, asi que la
+      # muestra no permite juzgar si el recorrido total es el adecuado. Este
+      # segundo clip comprime todo el viaje de los 32:41 para poder verlo.
+      - name: Renderizar el recorrido del zoom
+        if: inputs.modo == 'muestra'
+        working-directory: estudio
+        run: |
+          node cli.mjs muestra "${{ inputs.proyecto }}" --duracion 30 --recorrido | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar la muestra como artifact
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'muestra'
+        uses: actions/upload-artifact@v4
+        with:
+          name: muestra-${{ inputs.proyecto }}
+          path: |
+            estudio/proyectos/${{ inputs.proyecto }}/output/muestra.mp4
+            estudio/proyectos/${{ inputs.proyecto }}/output/muestra-recorrido.mp4
+          if-no-files-found: warn
+          retention-days: 30
+
       # Se suben tambien si la importacion fallo: el informe de validacion es
       # justo lo que hace falta para saber por que.
       - name: Guardar el resultado como artifact
-        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'importar'
+        if: always() && inputs.confirmar == 'SI' && (inputs.modo == 'importar' || inputs.modo == 'muestra')
         uses: actions/upload-artifact@v4
         with:
           name: importacion-${{ inputs.proyecto }}
@@ -197,7 +228,7 @@ jobs:
           retention-days: 30
 
       - name: Fin
-        if: inputs.modo == 'importar'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra'
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Checkpoint 1 terminado. El renderer no se ha ejecutado." >> "$GITHUB_STEP_SUMMARY"
+          echo "Terminado. No se ha publicado, ni hecho Shorts, ni miniatura." >> "$GITHUB_STEP_SUMMARY"
