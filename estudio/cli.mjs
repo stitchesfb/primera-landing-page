@@ -29,6 +29,7 @@ import { revisar, CHECKLIST } from './lib/revision.mjs';
 import { validarImportacion } from './lib/validacion.mjs';
 import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { montarNarracion, duracionSegundos } from './lib/audio.mjs';
+import { generarRevision } from './lib/previsualizar.mjs';
 
 const canal = cargarCanal();
 const env = cargarEnv();
@@ -851,6 +852,45 @@ function escribirSincronizacion({ proyecto, salida, linea, alineaciones, duracio
   return { cues: cues.length, palabras: palabras.length, listaCues: cues };
 }
 
+// --- video de revision ------------------------------------------------
+
+/**
+ * MP4 minimo para revisar la sincronia a ojo: negro, voz y subtitulos quemados.
+ * No es el renderer y no pretende parecerse al video final.
+ */
+async function cmdPrevisualizar(id) {
+  const proyecto = cargarProyecto(id);
+  const salida = proyecto.salida;
+
+  const audio = join(salida, 'audio.mp3');
+  const srt = join(salida, 'subtitles.srt');
+  const rutaTimeline = join(salida, 'timeline.json');
+
+  if (!existsSync(audio) || !existsSync(srt)) {
+    throw new Error(
+      `Faltan ${id}/output/audio.mp3 o subtitles.srt.\n` +
+      `  Ejecuta antes:  node cli.mjs importar ${id}`
+    );
+  }
+
+  const timeline = existsSync(rutaTimeline)
+    ? JSON.parse(readFileSync(rutaTimeline, 'utf8'))
+    : null;
+
+  titulo(`Video de revision — ${id}`);
+  process.stdout.write('  codificando…');
+  const r = await generarRevision({
+    audio, srt, timeline, salida: join(salida, 'revision.mp4'),
+  });
+  console.log(' hecho.');
+
+  const bytes = (await import('node:fs')).statSync(join(salida, 'revision.mp4')).size;
+  console.log(`  revision.mp4    ${mmss(r.segundos)} · ${(bytes / 1048576).toFixed(1)} MB`);
+  console.log(`  ${r.marcas} interludios marcados en pantalla`);
+  console.log(c.dim('\n  Negro, voz y subtitulos. Sin imagen, particulas, musica ni efectos:'));
+  console.log(c.dim('  sirve para juzgar CUANDO aparece el texto, nada mas.'));
+}
+
 // --- resumen seguro ---------------------------------------------------
 
 /**
@@ -968,7 +1008,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -996,6 +1036,7 @@ async function principal() {
       pilar: resto.includes('--pilar') ? resto[resto.indexOf('--pilar') + 1] : undefined,
     });
     case 'importar': return cmdImportar(exigeProyecto());
+    case 'previsualizar': return cmdPrevisualizar(exigeProyecto());
     case 'resumen': {
       const i = process.argv.indexOf('--json');
       return cmdResumen(i > -1 ? process.argv[i + 1] : null);

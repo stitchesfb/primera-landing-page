@@ -170,6 +170,14 @@ jobs:
         run: |
           node cli.mjs importar "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # MP4 minimo para revisar la sincronia a ojo, sin montar un reproductor con
+      # pistas externas. No es el renderer: negro, voz y subtitulos quemados.
+      - name: Generar el video de revision
+        if: inputs.modo == 'importar'
+        working-directory: estudio
+        run: |
+          node cli.mjs previsualizar "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
       # Se suben tambien si la importacion fallo: el informe de validacion es
       # justo lo que hace falta para saber por que.
       - name: Guardar el resultado como artifact
@@ -178,6 +186,7 @@ jobs:
         with:
           name: importacion-${{ inputs.proyecto }}
           path: |
+            estudio/proyectos/${{ inputs.proyecto }}/output/revision.mp4
             estudio/proyectos/${{ inputs.proyecto }}/output/audio.mp3
             estudio/proyectos/${{ inputs.proyecto }}/output/subtitles.srt
             estudio/proyectos/${{ inputs.proyecto }}/output/timeline.json

@@ -33,9 +33,9 @@ async function binario(paquete, nombre, cache) {
 export const rutaFfmpeg = () => binario('ffmpeg-static', 'ffmpeg', (cacheFfmpeg ??= {}));
 export const rutaFfprobe = () => binario('ffprobe-static', 'ffprobe', (cacheFfprobe ??= {}));
 
-export function ejecutar(bin, args) {
+export function ejecutar(bin, args, opciones = {}) {
   return new Promise((resolve, reject) => {
-    const p = spawn(bin, args, { stdio: ['ignore', 'pipe', 'pipe'] });
+    const p = spawn(bin, args, { stdio: ['ignore', 'pipe', 'pipe'], ...opciones });
     let salida = '';
     let error = '';
     p.stdout.on('data', (d) => (salida += d));
