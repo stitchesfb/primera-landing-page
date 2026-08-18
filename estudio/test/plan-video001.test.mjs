@@ -29,9 +29,42 @@ check('declara 246 parrafos', plan.parrafos_esperados === 246);
 const v = validarPlan(proyecto(246), canal);
 check('valida con 246 parrafos', v.problemas.length === 0, v.problemas.join(' | '));
 
-// 3. El aviso de interludios es esperado y NO bloquea.
-const avisoInterludios = v.avisos.find((a) => a.includes('interludios estrategicos'));
-check('avisa de los 4 interludios sin bloquear', Boolean(avisoInterludios), avisoInterludios ?? 'sin aviso');
+// 3. Los interludios estrategicos caen dentro de la horquilla del formato.
+const estrategicos = plan.events.filter(
+  (e) => e.at !== 'end' && e.seconds >= canal.reglas_edicion.interludio_versiculo_min
+).length;
+const { interludios_estrategicos_min: min, interludios_estrategicos_max: max } = canal.formatos.noche;
+check('interludios estrategicos dentro de la horquilla',
+  estrategicos >= min && estrategicos <= max, `${estrategicos} (${min}-${max})`);
+check('sin aviso de interludios',
+  !v.avisos.some((a) => a.includes('interludios estrategicos')),
+  v.avisos.join(' | ') || 'ninguno');
+
+// Los internos van tras versiculo o cierre de movimiento, nunca tras el final
+// del guion, y cada uno lleva anotado por que esta ahi.
+const internos = plan.events.filter(
+  (e) => e.at !== 'end' && e.type === 'interlude'
+);
+check('los internos no caen en un limite de bloque',
+  internos.every((e) => !cortes.includes(e.after)),
+  internos.map((e) => e.after).join(', '));
+check('los internos no caen tras el ultimo parrafo',
+  internos.every((e) => e.after < plan.parrafos_esperados));
+check('cada interludio explica su motivo',
+  plan.events.filter((e) => e.at !== 'end').every((e) => typeof e.note === 'string' && e.note.length > 8));
+
+// Duracion de cada tipo, segun la norma del canal.
+const r = canal.reglas_edicion;
+check('los internos tras versiculo duran 5-7s',
+  internos.filter((e) => /Salmo|vers/i.test(e.note)).every(
+    (e) => e.seconds >= r.interludio_versiculo_min && e.seconds <= r.interludio_versiculo_max));
+check('los cierres de bloque duran 8-12s',
+  plan.events.filter((e) => e.type === 'block_end').every(
+    (e) => e.seconds >= r.interludio_bloque_min && e.seconds <= r.interludio_bloque_max));
+const outro = plan.events.find((e) => e.at === 'end');
+check('el cierre dura 20-30s',
+  outro.music_seconds >= r.cierre_musica_min && outro.music_seconds <= r.cierre_musica_max,
+  `${outro.music_seconds}s`);
 
 // 4. Lo importante: si el texto trocea distinto, tiene que bloquear.
 for (const n of [245, 247, 200, 250]) {
