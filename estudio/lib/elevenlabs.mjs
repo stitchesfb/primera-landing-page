@@ -47,7 +47,11 @@ export class ElevenLabs {
 
         if (!res.ok) {
           const cuerpo = await res.text().catch(() => '');
-          const err = new ErrorAPI(`${res.status} ${res.statusText} en ${ruta}${pista(res.status, ruta)}`, res.status, cuerpo);
+          const err = new ErrorAPI(
+            `${res.status} ${res.statusText} en ${ruta}${pista(res.status, ruta, cuerpo)}`,
+            res.status,
+            cuerpo
+          );
           // 4xx que no sea 429 es culpa nuestra: reintentar no lo arregla.
           if (res.status !== 429 && res.status >= 400 && res.status < 500) throw err;
           ultimoError = err;
@@ -172,7 +176,16 @@ export class ElevenLabs {
  *   401 — la clave no vale: revocada, caducada, mal copiada o de otra cuenta.
  *   403 — la clave vale, pero no tiene permiso para ESE endpoint.
  */
-function pista(estado, ruta) {
+function pista(estado, ruta, cuerpo = '') {
+  // Un proxy de red por delante puede devolver 403 sin que ElevenLabs llegue a
+  // ver la peticion. Atribuirlo a los permisos de la clave manda a arreglar lo
+  // que no esta roto, asi que se distingue por el cuerpo de la respuesta.
+  if (/not in allowlist|egress|blocked by/i.test(cuerpo)) {
+    return (
+      '\n  Bloqueado por la red antes de salir, no por ElevenLabs.' +
+      '\n  El host no esta permitido en la politica de egreso de este entorno.'
+    );
+  }
   if (estado === 401) {
     return (
       '\n  La clave no es valida. Comprueba que sigue existiendo en ElevenLabs' +

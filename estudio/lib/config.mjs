@@ -4,7 +4,7 @@
  * calibracion.json guarda lo que hemos MEDIDO contra la API (creditos por
  * caracter, caracteres por minuto reales de esta voz). Arranca vacio y se
  * rellena solo. Mientras este vacio, las estimaciones salen de
- * `estimacion_inicial` de canal.json y se marcan como no calibradas.
+ * `constantes` de canal.json, que ya vienen medidas contra la API.
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -85,10 +85,14 @@ export function registrarMedida(cal, medida) {
 
 /** Constantes vigentes, indicando si vienen de medida real o de supuesto. */
 export function constantes(canal, cal) {
+  // canal.constantes.medido indica que esos valores salieron de una medicion
+  // real contra la API, no de un supuesto de partida. calibracion.json, cuando
+  // existe, manda sobre ellos porque es la medida mas reciente.
+  const base = canal.constantes;
   return {
-    creditosPorCaracter: cal.creditos_por_caracter ?? canal.estimacion_inicial.creditos_por_caracter,
-    caracteresPorMinuto: cal.caracteres_por_minuto ?? canal.estimacion_inicial.caracteres_por_minuto,
-    calibradoCreditos: cal.creditos_por_caracter != null,
-    calibradoRitmo: cal.caracteres_por_minuto != null,
+    creditosPorCaracter: cal.creditos_por_caracter ?? base.creditos_por_caracter,
+    caracteresPorMinuto: cal.caracteres_por_minuto ?? base.caracteres_por_minuto,
+    calibradoCreditos: cal.creditos_por_caracter != null || base.medido === true,
+    calibradoRitmo: cal.caracteres_por_minuto != null || base.medido === true,
   };
 }
