@@ -23,6 +23,14 @@ on:
         description: 'Para importar y muestra: carpeta bajo estudio/proyectos/ (ej. video_001)'
         type: string
         default: ''
+      extra:
+        description: 'Para muestra: segundo clip (piano = ventana con mas eventos de piano; recorrido = el zoom completo comprimido)'
+        type: choice
+        options:
+          - piano
+          - recorrido
+          - ninguno
+        default: piano
       confirmar:
         description: 'Escribe SI para confirmar'
         type: string
@@ -190,11 +198,21 @@ jobs:
         run: |
           node cli.mjs muestra "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # El piano suelta un grupo de notas cada medio minuto largo, asi que la
+      # ventana de arriba —elegida por el interludio— puede no traer ninguna.
+      # Este clip busca el tramo del video con mas eventos de piano: el peor
+      # caso, que es lo que hay que escuchar para aprobarlos.
+      - name: Renderizar la ventana con mas piano
+        if: inputs.modo == 'muestra' && inputs.extra == 'piano'
+        working-directory: estudio
+        run: |
+          node cli.mjs muestra "${{ inputs.proyecto }}" --duracion 90 --piano | tee -a "$GITHUB_STEP_SUMMARY"
+
       # A velocidad real el encuadre viaja unos 3 px en 80 segundos, asi que la
       # muestra no permite juzgar si el recorrido total es el adecuado. Este
       # segundo clip comprime todo el viaje de los 32:41 para poder verlo.
       - name: Renderizar el recorrido del zoom
-        if: inputs.modo == 'muestra'
+        if: inputs.modo == 'muestra' && inputs.extra == 'recorrido'
         working-directory: estudio
         run: |
           node cli.mjs muestra "${{ inputs.proyecto }}" --duracion 30 --recorrido | tee -a "$GITHUB_STEP_SUMMARY"
@@ -206,6 +224,7 @@ jobs:
           name: muestra-${{ inputs.proyecto }}
           path: |
             estudio/proyectos/${{ inputs.proyecto }}/output/muestra.mp4
+            estudio/proyectos/${{ inputs.proyecto }}/output/muestra-piano.mp4
             estudio/proyectos/${{ inputs.proyecto }}/output/muestra-recorrido.mp4
           if-no-files-found: warn
           retention-days: 30

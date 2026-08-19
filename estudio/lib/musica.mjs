@@ -38,6 +38,16 @@ const ACORDES = [
 const DURA_ACORDE = 108;
 const CRUCE = 26;
 
+// Por encima de este techo una nota pulsada deja de sonar a instrumento en un
+// video para dormir y empieza a sonar a alarma.
+export const TECHO_PIANO = 1000;
+// Cola de la nota de piano, en segundos.
+export const DECAE_PIANO = 7.5;
+// Techo de amplitud de una nota suelta, antes de la envolvente de la cama.
+export const AMP_PIANO_MAX = 0.085;
+// Constante del ataque: 1 - exp(-t*ATAQUE_PIANO). Cuanto mas baja, mas florece.
+const ATAQUE_PIANO = 14;
+
 const AMPS = [0.30, 0.24, 0.18, 0.11];
 const LFOS = [17.3, 23.7, 29.1, 31.9];
 
@@ -122,19 +132,32 @@ export function planearPiano({ duracionTotal, apertura, semilla = 20260818 }) {
     const { a, b, mezcla } = acordeEn(t);
     const tonos = (mezcla > 0.5 ? b : a).voces;
 
-    // Dos notas casi siempre; la tercera aparece mas cuando la cama esta
-    // abierta, que es cuando hay sitio para que se oiga.
-    const cuantas = r() < 0.30 + 0.35 * abierto ? 3 : 2;
+    // Registro medio. El multiplicador x4 llevaba notas hasta 2349 Hz, y ahi
+    // un tono pulsado deja de leerse como instrumento y se lee como aviso: los
+    // once momentos que se reportaron como timer contenian todos una nota por
+    // encima de 1 kHz. Se queda en x1 y x2, con tope en TECHO_PIANO.
+    const candidatas = [];
+    for (const base of tonos) {
+      for (const oct of [1, 2]) {
+        const hz = base * oct;
+        if (hz <= TECHO_PIANO) candidatas.push(hz);
+      }
+    }
+
+    // Dos notas casi siempre. La tercera es rara incluso con la cama abierta:
+    // un grupo denso llama mas la atencion que uno escueto.
+    const cuantas = r() < 0.12 + 0.16 * abierto ? 3 : 2;
     const notas = [];
     let anterior = -1;
     for (let i = 0; i < cuantas; i++) {
-      let k = Math.floor(r() * tonos.length);
-      if (k === anterior) k = (k + 1 + Math.floor(r() * (tonos.length - 1))) % tonos.length;
+      let k = Math.floor(r() * candidatas.length);
+      if (k === anterior) k = (k + 1 + Math.floor(r() * (candidatas.length - 1))) % candidatas.length;
       anterior = k;
       notas.push({
-        hz: tonos[k] * (r() < 0.55 ? 2 : 4),
-        retardo: i === 0 ? 0 : 0.18 + r() * 0.5,
-        amp: 0.16 + r() * 0.14,
+        hz: candidatas[k],
+        retardo: i === 0 ? 0 : 0.35 + r() * 0.7,
+        // Muy por debajo del pad: el piano tiene que asomar, no anunciarse.
+        amp: AMP_PIANO_MAX - 0.04 + r() * 0.04,
         pan: r(),
       });
     }
@@ -143,15 +166,46 @@ export function planearPiano({ duracionTotal, apertura, semilla = 20260818 }) {
 
     grupos.push({ t, notas });
 
-    // Con la cama abierta el piano habla mas seguido: de un grupo cada ~17 s a
-    // uno cada ~7 s. Es la evolucion que se pide notar en los interludios.
-    const espera = (17 - 10 * abierto) * (0.75 + r() * 0.5);
-    t += Math.max(4, espera);
+    // Con la cama abierta el piano habla algo mas seguido, pero mucho menos que
+    // antes: en los interludios no hay voz que lo tape y cualquier exceso se
+    // convierte en el elemento que mas se oye del video.
+    const espera = (26 - 11 * abierto) * (0.8 + r() * 0.4);
+    t += Math.max(9, espera);
   }
   return grupos;
 }
 
-const DECAE_PIANO = 5.5;
+/**
+ * Una nota de piano en el instante `desde` de su vida, amplitud 1.
+ *
+ * Vive aparte para que la muestra, el render completo y el test midan la misma
+ * curva: si el ataque vuelve a endurecerse, el test lo ve.
+ *
+ * Ataque que florece, no que golpea: unos 200 ms hasta el cuerpo de la nota.
+ * Con los 11 ms de antes el transitorio era lo unico que se oia, y un
+ * transitorio duro sobre un tono puro es un pitido.
+ *
+ * Los armonicos se apagan antes que el fundamental, como en una cuerda de
+ * verdad: la nota entra con algo de brillo y se redondea sola.
+ */
+export function muestraPiano(f, desde) {
+  if (desde < 0 || desde > DECAE_PIANO) return 0;
+  const ataque = 1 - Math.exp(-desde * ATAQUE_PIANO);
+  const cuerpo = Math.exp(-desde * (2.6 / DECAE_PIANO));
+  const arm2 = Math.exp(-desde * (7.0 / DECAE_PIANO));
+  const arm3 = Math.exp(-desde * (11.0 / DECAE_PIANO));
+  return ataque * (
+    cuerpo * Math.sin(2 * Math.PI * f * desde) +
+    0.10 * arm2 * Math.sin(4 * Math.PI * f * desde) +
+    0.028 * arm3 * Math.sin(6 * Math.PI * f * desde)
+  );
+}
+
+/** Envolvente de la nota (sin la portadora): el contorno que se oye. */
+export function envolventePiano(desde) {
+  if (desde < 0 || desde > DECAE_PIANO) return 0;
+  return (1 - Math.exp(-desde * ATAQUE_PIANO)) * Math.exp(-desde * (2.6 / DECAE_PIANO));
+}
 
 export function generarCama({
   segundos, offset = 0, envolvente, apertura, grupos = [], salidaWav,
@@ -239,15 +293,7 @@ export function generarCama({
       for (const nota of g.notas) {
         const desde = t - (g.t + nota.retardo);
         if (desde < 0 || desde > DECAE_PIANO) continue;
-        // Ataque corto y caida larga: sin percusion, pero con el pellizco que
-        // distingue una cuerda pulsada de otro pad.
-        const env = (1 - Math.exp(-desde * 90)) * Math.exp(-desde * (4.2 / DECAE_PIANO));
-        const f = nota.hz;
-        const s = env * nota.amp * (
-          Math.sin(2 * Math.PI * f * desde) +
-          0.30 * Math.sin(4 * Math.PI * f * desde) +
-          0.11 * Math.sin(6 * Math.PI * f * desde)
-        );
+        const s = nota.amp * muestraPiano(nota.hz, desde);
         izq += s * (1 - nota.pan * 0.55);
         der += s * (1 - (1 - nota.pan) * 0.55);
       }

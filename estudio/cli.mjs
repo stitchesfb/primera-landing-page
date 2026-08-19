@@ -31,7 +31,7 @@ import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } from './lib/troceo.mjs';
 import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
-import { generarCama, nivelEn, aperturaEn, planearPiano } from './lib/musica.mjs';
+import { generarCama, nivelEn, aperturaEn, planearPiano, DECAE_PIANO } from './lib/musica.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
 
@@ -999,6 +999,27 @@ async function cmdPrevisualizar(id) {
  * porque lo que hay que juzgar no es un fotograma bonito sino la transicion:
  * como sube la musica cuando calla la voz y como vuelve a bajar.
  */
+/**
+ * Instante de arranque que mete mas notas de piano en una ventana de `dur`.
+ *
+ * El piano es el elemento mas escaso de la cama: pasa medio minuto callado
+ * entre grupo y grupo. Una ventana elegida por el interludio puede no traer
+ * ninguna nota, y entonces la muestra no sirve para aprobar el piano. Esto
+ * busca el peor caso, que es lo que hay que escuchar.
+ *
+ * Una nota que empieza antes de la ventana pero cuya cola entra en ella no
+ * cuenta: lo que se juzga es el ataque.
+ */
+function ventanaConMasPiano(grupos, dur, duracionTotal) {
+  let mejor = 0;
+  let cuantos = -1;
+  for (let desde = 0; desde + dur <= duracionTotal; desde += 1) {
+    const n = grupos.filter((g) => g.t >= desde && g.t + DECAE_PIANO <= desde + dur).length;
+    if (n > cuantos) { cuantos = n; mejor = desde; }
+  }
+  return mejor;
+}
+
 async function cmdMuestra(id, opciones = {}) {
   const proyecto = cargarProyecto(id);
   const salida = asegurarSalida(proyecto);
@@ -1020,6 +1041,24 @@ async function cmdMuestra(id, opciones = {}) {
   const pre = base.presets[pilar] ?? base.presets.noche;
   const cfg = { ...base, ...pre };
 
+  // La cama se planifica antes de elegir la ventana, porque una de las formas
+  // de elegirla es "donde mas habla el piano".
+  const m = cfg.musica;
+  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
+  const apertura = (t) => aperturaEn(t, forma);
+  const envolvente = (t) => nivelEn(t, {
+    ...forma,
+    cierre: {
+      fadeIn: m.fade_in_s,
+      fadeOut: timeline.cierre?.fade_out ?? 8,
+      duracionTotal: timeline.duracion_total_s,
+    },
+    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
+  });
+  // El piano se planifica para el video entero antes de sintetizar: asi una
+  // ventana recortada trae las notas que sonaran ahi en el render completo.
+  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
+
   // Ventana: alrededor del interludio pedido, con voz antes y despues.
   const largos = timeline.huecos.filter((h) => h.duracion >= 10);
   const elegido = opciones.interludio != null
@@ -1029,7 +1068,10 @@ async function cmdMuestra(id, opciones = {}) {
 
   const dur = opciones.duracion ?? 80;
   const antes = Math.min(34, (dur - elegido.duracion) / 2);
-  const desde = opciones.desde ?? Math.max(0, elegido.inicio - antes);
+  const porInterludio = Math.max(0, elegido.inicio - antes);
+  const desde = opciones.desde ?? (opciones.piano
+    ? ventanaConMasPiano(grupos, dur, timeline.duracion_total_s)
+    : porInterludio);
 
   // Sin esto, una ventana que se sale del audio muere dentro de ffmpeg con
   // "Could not open encoder before EOF", que no dice nada de la causa real.
@@ -1043,7 +1085,9 @@ async function cmdMuestra(id, opciones = {}) {
   titulo(`Muestra del renderer — ${id}`);
   console.log(`Imagen          ${basename(imagen)}`);
   console.log(`Ventana         ${mmss(desde)} → ${mmss(desde + dur)}  (${dur}s de ${mmss(timeline.duracion_total_s)})`);
-  console.log(`Interludio      ${elegido.duracion}s en ${mmss(elegido.inicio)}, tras el parrafo ${elegido.trasParrafo}`);
+  console.log(opciones.piano
+    ? `Criterio        ventana con mas eventos de piano de todo el video`
+    : `Interludio      ${elegido.duracion}s en ${mmss(elegido.inicio)}, tras el parrafo ${elegido.trasParrafo}`);
   console.log(`Salida          ${cfg.ancho}x${cfg.alto} · ${cfg.fps} fps · crf ${cfg.crf}`);
   console.log(`Preset          ${pilar} · ${cfg.movimiento} ${(cfg.zoom_total * 100).toFixed(0)}%`);
   if (opciones.recorrido) {
@@ -1063,29 +1107,25 @@ async function cmdMuestra(id, opciones = {}) {
   console.log(` ${p.motas} motas, bucle de ${p.periodo}s`);
 
   process.stdout.write('  cama musical…');
-  const m = cfg.musica;
-  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
-  const apertura = (t) => aperturaEn(t, forma);
-  const envolvente = (t) => nivelEn(t, {
-    ...forma,
-    cierre: {
-      fadeIn: m.fade_in_s,
-      fadeOut: timeline.cierre?.fade_out ?? 8,
-      duracionTotal: timeline.duracion_total_s,
-    },
-    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
-  });
-
-  // El piano se planifica para el video entero antes de sintetizar: asi una
-  // ventana recortada trae las notas que sonaran ahi en el render completo.
-  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
   const wav = join(tmp, 'cama.wav');
   const cama = generarCama({ segundos: dur, offset: desde, envolvente, apertura, grupos, salidaWav: wav });
   console.log(` ${m.bajo_voz_db} dB bajo voz → ${m.en_interludio_db} dB en interludio · ` +
     `${cama.gruposEnVentana} grupos de piano en la ventana (${grupos.length} en todo el video)`);
 
+  const enVentana = grupos.filter((g) => g.t >= desde && g.t <= desde + dur);
+  if (enVentana.length) {
+    console.log(c.dim('\n  Eventos de piano de esta muestra (minuto del video → minuto de la muestra):'));
+    for (const g of enVentana) {
+      const hz = g.notas.map((n) => `${Math.round(n.hz)}`).join(' · ');
+      console.log(c.dim(`    ${mmss(g.t)} → ${mmss(g.t - desde)}   ${g.notas.length} notas   ${hz} Hz`));
+    }
+    const agudo = Math.max(...enVentana.flatMap((g) => g.notas.map((n) => n.hz)));
+    console.log(c.dim(`  Nota mas aguda de la ventana: ${Math.round(agudo)} Hz`));
+  }
+
   process.stdout.write('  render…');
-  const destino = join(salida, opciones.recorrido ? 'muestra-recorrido.mp4' : 'muestra.mp4');
+  const sufijo = opciones.recorrido ? '-recorrido' : (opciones.piano ? '-piano' : '');
+  const destino = join(salida, `muestra${sufijo}.mp4`);
   await renderizar({
     imagen, particulas: loop, voz, musica: wav, salida: destino,
     desde, duracion: dur, duracionTotal: timeline.duracion_total_s,
@@ -1100,12 +1140,21 @@ async function cmdMuestra(id, opciones = {}) {
   rmSync(tmp, { recursive: true, force: true });
 
   titulo('Que revisar');
-  console.log('  1. Nitidez de la imagen al ampliarla');
-  console.log('  2. Velocidad del movimiento: debe ser casi imperceptible');
-  console.log('  3. Particulas: perceptibles sin distraer, con profundidad');
-  console.log(`  4. Volumen y textura de la cama bajo la voz`);
-  console.log(`  5. Como sube en el interludio de ${mmss(elegido.inicio - desde)} a ` +
-    `${mmss(elegido.inicio - desde + elegido.duracion)} de la muestra`);
+  if (opciones.piano) {
+    console.log('  1. Las notas de piano no deben leerse como aviso ni como timer');
+    console.log('  2. Deben sonar redondas: entran creciendo, no de golpe');
+    console.log('  3. Deben quedar por debajo del pad, asomando sin anunciarse');
+    console.log('  4. Deben aparecer de vez en cuando, no gotear');
+  } else {
+    console.log('  1. Nitidez de la imagen al ampliarla');
+    console.log('  2. Velocidad del movimiento: debe ser casi imperceptible');
+    console.log('  3. Particulas: perceptibles sin distraer, con profundidad');
+    console.log('  4. Volumen y textura de la cama bajo la voz');
+  }
+  if (elegido.inicio >= desde && elegido.inicio <= desde + dur) {
+    console.log(`  5. Como sube en el interludio de ${mmss(elegido.inicio - desde)} a ` +
+      `${mmss(elegido.inicio - desde + elegido.duracion)} de la muestra`);
+  }
 }
 
 // --- render completo --------------------------------------------------
@@ -1318,7 +1367,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1356,6 +1405,7 @@ async function principal() {
       return cmdMuestra(exigeProyecto(), {
         desde: num('--desde'), duracion: num('--duracion'), interludio: num('--interludio'),
         recorrido: resto.includes('--recorrido'),
+        piano: resto.includes('--piano'),
       });
     }
     case 'resumen': {

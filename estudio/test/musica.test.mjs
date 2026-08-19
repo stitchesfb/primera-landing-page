@@ -3,7 +3,10 @@
  * solo suba, y que una ventana recortada suene igual que en el render
  * completo. Sin lo segundo, aprobar una muestra no significaria nada.
  */
-import { aperturaEn, nivelEn, planearPiano } from '../lib/musica.mjs';
+import {
+  aperturaEn, nivelEn, planearPiano, envolventePiano,
+  TECHO_PIANO, AMP_PIANO_MAX,
+} from '../lib/musica.mjs';
 
 let fallos = 0;
 const check = (n, ok, d = '') => { console.log(`${ok ? 'ok   ' : 'FALLO'} ${n}${d ? ' — ' + d : ''}`); if (!ok) fallos++; };
@@ -61,6 +64,73 @@ check('el piano habla mas seguido en los interludios',
 const firmas = a1.map((g) => g.notas.map((n) => n.hz.toFixed(1)).join('-'));
 const repetidasSeguidas = firmas.filter((f, i) => i > 0 && f === firmas[i - 1]).length;
 check('sin motivo que se repita de un grupo al siguiente', repetidasSeguidas === 0, `${repetidasSeguidas}`);
+
+
+// --------------------------------------------------------------------------
+// Que el piano no vuelva a sonar a timer.
+//
+// El fallo reportado fueron once momentos ("12:15, 17:50, 18:43...") que se
+// oian como una alarma domestica. Diagnostico: cada uno de ellos contenia una
+// nota por encima de 1 kHz, y el ataque era de 11 ms. Tono puro alto + golpe
+// seco = pitido. Estas comprobaciones fijan las cuatro condiciones que lo
+// evitan, medidas sobre un video de la duracion real (32:41), no sobre el
+// escenario corto de arriba.
+
+// Escenario con la forma real de video_001: 32:41, once interludios de 6 a 12
+// segundos y el cierre musical tras el Amen. El de arriba abre la cama a los
+// 900 s y la deja abierta, que sirve para probar rampas pero no densidad.
+const huecosReales = [
+  [497, 6], [640, 10], [738, 6], [908, 10], [1090, 10],
+  [1180, 6], [1350, 10], [1420, 6], [1690, 10], [1830, 12],
+];
+const formaLarga = {
+  huecos: huecosReales.map(([inicio, duracion]) => ({ inicio, duracion })),
+  finNarracion: 1936,
+  rampa: 1.5,
+};
+const apLarga = (t) => aperturaEn(t, formaLarga);
+const largo = planearPiano({ duracionTotal: 1961, apertura: apLarga });
+const notas = largo.flatMap((g) => g.notas);
+const agudas = notas.filter((n) => n.hz > TECHO_PIANO);
+
+check('ninguna nota por encima del techo del registro medio',
+  agudas.length === 0,
+  `max ${Math.max(...notas.map((n) => n.hz)).toFixed(0)} Hz de ${TECHO_PIANO}`);
+
+const sobre700 = notas.filter((n) => n.hz > 700).length;
+check('el registro medio manda sobre el agudo',
+  sobre700 / notas.length < 0.25,
+  `${((sobre700 / notas.length) * 100).toFixed(0)}% por encima de 700 Hz`);
+
+check('ninguna nota pasa el techo de amplitud',
+  notas.every((n) => n.amp <= AMP_PIANO_MAX + 1e-9),
+  `max ${Math.max(...notas.map((n) => n.amp)).toFixed(3)} de ${AMP_PIANO_MAX}`);
+
+// Un ataque corto es lo que convierte un tono en un aviso. Se mide sobre la
+// envolvente real que usa el render, no sobre una copia.
+let pico = 0;
+for (let t = 0; t <= 7.5; t += 0.001) pico = Math.max(pico, envolventePiano(t));
+let t90 = Infinity;
+for (let t = 0; t <= 7.5; t += 0.001) {
+  if (envolventePiano(t) >= 0.9 * pico) { t90 = t; break; }
+}
+check('la nota florece en vez de golpear', t90 >= 0.12,
+  `90% del pico a los ${(t90 * 1000).toFixed(0)} ms`);
+check('la nota tiene cola, no es un click', envolventePiano(3) > 0.15,
+  envolventePiano(3).toFixed(2));
+
+// Frecuencia: notas aisladas espaciadas, no un goteo constante.
+const sepLargo = largo.slice(1).map((g, i) => g.t - largo[i].t);
+check('nunca dos grupos a menos de nueve segundos', Math.min(...sepLargo) >= 9,
+  `minima ${Math.min(...sepLargo).toFixed(1)}s`);
+check('el piano no llega a tres grupos por minuto',
+  (largo.length / 1961) * 60 < 3,
+  `${((largo.length / 1961) * 60).toFixed(2)} grupos/min`);
+
+// Grupos de tres: la excepcion, no la norma. Un grupo denso llama la atencion.
+const tercias = largo.filter((g) => g.notas.length === 3).length;
+check('los grupos de tres notas son minoria',
+  tercias / largo.length < 0.35, `${tercias} de ${largo.length}`);
 
 console.log(`\n${fallos === 0 ? 'TODO OK' : fallos + ' FALLOS'}`);
 process.exit(fallos ? 1 : 0);
