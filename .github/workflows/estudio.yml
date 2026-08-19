@@ -49,6 +49,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 240
 
+    # Casi todos los pasos son "node cli.mjs ... | tee -a $GITHUB_STEP_SUMMARY".
+    # El shell por defecto de Actions es 'bash -e', sin pipefail: en una tuberia
+    # solo cuenta el codigo de salida del ULTIMO mandato, que es siempre tee y
+    # siempre vale 0. Sin esto, 'importar' podia fallar las 8 comprobaciones y
+    # el job seguir en verde.
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+
     steps:
       - name: Confirmar
         if: inputs.confirmar != 'SI'
