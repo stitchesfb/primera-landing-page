@@ -69,27 +69,51 @@
     "ancho": 1920,
     "alto": 1080,
     "fps": 30,
-    "zoom_total": 0.04,
-    "_zoom": "4% repartido en todo el video: unos 2,4 px por minuto sobre 1920. La imagen se sobremuestrea x3 antes de mover el encuadre para que ese avance no se convierta en saltitos de un pixel.",
-    "foco": {
-      "x": 0.58,
-      "y": 0.42
-    },
-    "_foco": "Hacia la ventana y la luna, que tira del ojo hacia arriba y lejos de la figura dormida.",
-    "particulas": {
-      "cuantas": 46,
-      "periodo_s": 20
-    },
-    "musica": {
-      "bajo_voz_db": -26,
-      "en_interludio_db": -18,
-      "rampa_s": 1.5,
-      "fade_in_s": 4,
-      "_niveles": "Debajo de la voz va unos 20 dB por debajo de ella. En los interludios sube 8 dB, que es cuando tiene que sostener el silencio sola."
-    },
     "crf": 20,
-    "preset": "medium",
+    "preset_x264": "medium",
     "subtitulos_quemados": false,
-    "_subtitulos": "Pendiente de decision. En un video que se pone para dormir, texto permanente puede estorbar; el SRT aparte los deja opcionales en YouTube."
+    "_subtitulos": "Decidido: NO se queman. El .srt se sube aparte a YouTube como subtitulos opcionales, para que quien pone el video para dormir pueda quitarlos.",
+    "_presets": "El preset lo elige el pilar del proyecto. 'noche' esta aprobado; 'manana' queda esbozado para cuando toque ese formato.",
+    "presets": {
+      "noche": {
+        "movimiento": "zoom",
+        "zoom_total": 0.04,
+        "_movimiento": "Empuje de 4% repartido en todo el video: unos 2,4 px por minuto sobre 1920, al borde de lo perceptible. Aprobado tras revisar la primera muestra: para un video que se pone para dormir, el movimiento debe notarse solo si se busca.",
+        "foco": {
+          "x": 0.58,
+          "y": 0.42
+        },
+        "particulas": {
+          "cuantas": 82,
+          "periodo_s": 24
+        },
+        "musica": {
+          "bajo_voz_db": -23,
+          "en_interludio_db": -15.5,
+          "rampa_s": 1.5,
+          "fade_in_s": 4
+        }
+      },
+      "manana": {
+        "movimiento": "pan",
+        "zoom_total": 0.02,
+        "_pendiente": "Sin estrenar. El formato de manana pide movimiento lateral perceptible en vez del empuje casi quieto del nocturno; los numeros se fijaran cuando se produzca el primer video de ese pilar.",
+        "pan_total": 0.1,
+        "foco": {
+          "x": 0.5,
+          "y": 0.45
+        },
+        "particulas": {
+          "cuantas": 40,
+          "periodo_s": 20
+        },
+        "musica": {
+          "bajo_voz_db": -23,
+          "en_interludio_db": -16,
+          "rampa_s": 1.2,
+          "fade_in_s": 3
+        }
+      }
+    }
   }
 }

@@ -31,7 +31,7 @@ import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } from './lib/troceo.mjs';
 import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
-import { generarCama, nivelEn } from './lib/musica.mjs';
+import { generarCama, nivelEn, aperturaEn, planearPiano } from './lib/musica.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
 
@@ -1013,7 +1013,12 @@ async function cmdMuestra(id, opciones = {}) {
   if (!existsSync(imagen)) throw new Error(`No existe la imagen de fondo: ${imagen}`);
 
   const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
-  const cfg = canal.render;
+  const base = canal.render;
+  // El preset lo elige el pilar: el nocturno casi no se mueve, el de manana
+  // llevara pan lateral perceptible. Son formatos distintos, no ajustes.
+  const pilar = proyecto.plan?.pilar ?? base.preset_por_defecto ?? 'noche';
+  const pre = base.presets[pilar] ?? base.presets.noche;
+  const cfg = { ...base, ...pre };
 
   // Ventana: alrededor del interludio pedido, con voz antes y despues.
   const largos = timeline.huecos.filter((h) => h.duracion >= 10);
@@ -1026,11 +1031,21 @@ async function cmdMuestra(id, opciones = {}) {
   const antes = Math.min(34, (dur - elegido.duracion) / 2);
   const desde = opciones.desde ?? Math.max(0, elegido.inicio - antes);
 
+  // Sin esto, una ventana que se sale del audio muere dentro de ffmpeg con
+  // "Could not open encoder before EOF", que no dice nada de la causa real.
+  const largoVoz = await duracionSegundos(voz);
+  if (desde + dur > largoVoz + 0.5) {
+    throw new Error(
+      `La ventana ${mmss(desde)}–${mmss(desde + dur)} se sale de audio.mp3, que dura ${mmss(largoVoz)}.`
+    );
+  }
+
   titulo(`Muestra del renderer — ${id}`);
   console.log(`Imagen          ${basename(imagen)}`);
   console.log(`Ventana         ${mmss(desde)} → ${mmss(desde + dur)}  (${dur}s de ${mmss(timeline.duracion_total_s)})`);
   console.log(`Interludio      ${elegido.duracion}s en ${mmss(elegido.inicio)}, tras el parrafo ${elegido.trasParrafo}`);
   console.log(`Salida          ${cfg.ancho}x${cfg.alto} · ${cfg.fps} fps · crf ${cfg.crf}`);
+  console.log(`Preset          ${pilar} · ${cfg.movimiento} ${(cfg.zoom_total * 100).toFixed(0)}%`);
   if (opciones.recorrido) {
     console.log(c.ambar('Modo recorrido  el zoom de los 32:41 comprimido en esta ventana'));
     console.log(c.dim('                No es la velocidad real: sirve para ver cuanto viaja el encuadre.'));
@@ -1049,19 +1064,25 @@ async function cmdMuestra(id, opciones = {}) {
 
   process.stdout.write('  cama musical…');
   const m = cfg.musica;
+  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
+  const apertura = (t) => aperturaEn(t, forma);
   const envolvente = (t) => nivelEn(t, {
-    huecos: timeline.huecos,
-    finNarracion: timeline.fin_narracion_s,
+    ...forma,
     cierre: {
       fadeIn: m.fade_in_s,
       fadeOut: timeline.cierre?.fade_out ?? 8,
       duracionTotal: timeline.duracion_total_s,
     },
-    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db, rampa: m.rampa_s,
+    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
   });
+
+  // El piano se planifica para el video entero antes de sintetizar: asi una
+  // ventana recortada trae las notas que sonaran ahi en el render completo.
+  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
   const wav = join(tmp, 'cama.wav');
-  generarCama({ segundos: dur, offset: desde, envolvente, salidaWav: wav });
-  console.log(` ${m.bajo_voz_db} dB bajo la voz, ${m.en_interludio_db} dB en interludio`);
+  const cama = generarCama({ segundos: dur, offset: desde, envolvente, apertura, grupos, salidaWav: wav });
+  console.log(` ${m.bajo_voz_db} dB bajo voz → ${m.en_interludio_db} dB en interludio · ` +
+    `${cama.gruposEnVentana} grupos de piano en la ventana (${grupos.length} en todo el video)`);
 
   process.stdout.write('  render…');
   const destino = join(salida, opciones.recorrido ? 'muestra-recorrido.mp4' : 'muestra.mp4');
@@ -1069,7 +1090,7 @@ async function cmdMuestra(id, opciones = {}) {
     imagen, particulas: loop, voz, musica: wav, salida: destino,
     desde, duracion: dur, duracionTotal: timeline.duracion_total_s,
     ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
-    zoomTotal: cfg.zoom_total, foco: cfg.foco, crf: cfg.crf, preset: cfg.preset,
+    zoomTotal: cfg.zoom_total, foco: cfg.foco, crf: cfg.crf, preset: cfg.preset_x264,
     srt: canal.render.subtitulos_quemados ? join(salida, 'subtitles.srt') : null,
     recorridoCompleto: Boolean(opciones.recorrido),
   });
@@ -1081,8 +1102,8 @@ async function cmdMuestra(id, opciones = {}) {
   titulo('Que revisar');
   console.log('  1. Nitidez de la imagen al ampliarla');
   console.log('  2. Velocidad del movimiento: debe ser casi imperceptible');
-  console.log('  3. Particulas: deben insinuarse, no llamar la atencion');
-  console.log(`  4. Volumen de la cama bajo la voz`);
+  console.log('  3. Particulas: perceptibles sin distraer, con profundidad');
+  console.log(`  4. Volumen y textura de la cama bajo la voz`);
   console.log(`  5. Como sube en el interludio de ${mmss(elegido.inicio - desde)} a ` +
     `${mmss(elegido.inicio - desde + elegido.duracion)} de la muestra`);
 }

@@ -26,22 +26,34 @@ function generador(semilla) {
 
 export function crearMotas({ cuantas, ancho, alto, semilla = 20260818 }) {
   const r = generador(semilla);
-  return Array.from({ length: cuantas }, () => ({
-    x: r() * ancho,
-    y: r() * alto,
-    radio: 0.9 + r() * 1.8,
-    // Deriva lenta y hacia arriba: el polvo en suspension sube con el aire
-    // tibio de la habitacion, no cae.
-    vx: (r() - 0.5) * 14,
-    vy: -(4 + r() * 12),
-    fase: r(),
-    // Ciclos distintos por mota para que no aparezcan y desaparezcan a la vez.
-    ciclos: 1 + Math.floor(r() * 3),
-    brillo: 0.05 + r() * 0.13,
-    // Un leve balanceo lateral, como si el aire no fuera del todo quieto.
-    vaiven: 6 + r() * 14,
-    periodoVaiven: 7 + r() * 11,
-  }));
+
+  return Array.from({ length: cuantas }, () => {
+    // Profundidad: las cercanas son mayores, mas nitidas y se mueven algo mas;
+    // las lejanas quedan pequenas, difusas y casi quietas. Es lo que separa
+    // una capa de puntos de un volumen con aire dentro.
+    const cerca = r();
+    const radio = 1.4 + cerca * 2.6;
+
+    return {
+      x: r() * ancho,
+      y: r() * alto,
+      radio,
+      // Difuminado independiente del tamano: algunas motas quedan fuera de
+      // foco aunque sean grandes, como pasa con la profundidad de campo real.
+      difuso: 1.5 + (1 - cerca) * 1.9 + r() * 0.7,
+      // Deriva sobre todo lateral. La vertical es una decima parte: flotan,
+      // no caen. Si cayeran pareceria nieve, y eso es lo que hay que evitar.
+      vx: (r() < 0.5 ? -1 : 1) * (5 + cerca * 9 + r() * 4),
+      vy: (r() - 0.5) * 2.4,
+      fase: r(),
+      ciclos: 1 + Math.floor(r() * 2),
+      // Opacidades muy repartidas: unas pocas se ven claras y el resto solo
+      // se insinua. Un brillo uniforme se lee como una retícula de puntos.
+      brillo: 0.16 + cerca * 0.34 + r() * 0.16,
+      vaiven: 4 + r() * 10,
+      periodoVaiven: 9 + r() * 13,
+    };
+  });
 }
 
 function dibujar(datos, ancho, alto, motas, t, periodo) {
@@ -57,24 +69,27 @@ function dibujar(datos, ancho, alto, motas, t, periodo) {
     const x = ((m.x + m.vx * t + Math.sin((2 * Math.PI * t) / m.periodoVaiven) * m.vaiven) % ancho + ancho) % ancho;
     const y = ((m.y + m.vy * t) % alto + alto) % alto;
 
-    const r = m.radio;
-    const desdeX = Math.max(0, Math.floor(x - r * 2));
-    const hastaX = Math.min(ancho - 1, Math.ceil(x + r * 2));
-    const desdeY = Math.max(0, Math.floor(y - r * 2));
-    const hastaY = Math.min(alto - 1, Math.ceil(y + r * 2));
+    const alcance = m.radio * m.difuso;
+    const desdeX = Math.max(0, Math.floor(x - alcance));
+    const hastaX = Math.min(ancho - 1, Math.ceil(x + alcance));
+    const desdeY = Math.max(0, Math.floor(y - alcance));
+    const hastaY = Math.min(alto - 1, Math.ceil(y + alcance));
 
     for (let py = desdeY; py <= hastaY; py++) {
       for (let px = desdeX; px <= hastaX; px++) {
         const d = Math.hypot(px - x, py - y);
-        if (d > r * 2) continue;
+        if (d > alcance) continue;
         // Caida gaussiana: borde difuso, sin el aliasing de un circulo duro.
-        const caida = Math.exp(-((d / r) ** 2));
+        // El divisor lleva el difuminado, asi que dos motas del mismo tamano
+        // pueden estar una enfocada y otra no.
+        const caida = Math.exp(-((d / (m.radio * m.difuso * 0.45)) ** 2));
         const a = Math.round(op * caida * 255);
         if (a <= 0) continue;
         const i = (py * ancho + px) * 4;
+        // Blanco, no gris: son motas luminosas suspendidas en el aire, no
+        // polvo. El difuminado ya se encarga de que no parezcan puntos duros.
         if (a > datos[i + 3]) {
-          // Blanco calido, del color de la luz de los faroles.
-          datos[i] = 255; datos[i + 1] = 248; datos[i + 2] = 232; datos[i + 3] = a;
+          datos[i] = 255; datos[i + 1] = 255; datos[i + 2] = 255; datos[i + 3] = a;
         }
       }
     }
@@ -87,7 +102,7 @@ function dibujar(datos, ancho, alto, motas, t, periodo) {
  * motas no arrastran los halos que dejaria un codec con perdida sobre alfa.
  */
 export async function generarLoop({
-  salida, ancho = 1920, alto = 1080, fps = 30, periodo = 20, cuantas = 46, semilla,
+  salida, ancho = 1920, alto = 1080, fps = 30, periodo = 24, cuantas = 82, semilla,
 }) {
   const ffmpeg = await rutaFfmpeg();
   const motas = crearMotas({ cuantas, ancho, alto, semilla });
