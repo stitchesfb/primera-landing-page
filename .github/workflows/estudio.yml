@@ -18,9 +18,14 @@ on:
           - importar
           - muestra
           - render
+          - remux
         default: muestra
       proyecto:
-        description: 'Para importar y muestra: carpeta bajo estudio/proyectos/ (ej. video_001)'
+        description: 'Para importar, muestra, render y remux: carpeta bajo estudio/proyectos/ (ej. video_001)'
+        type: string
+        default: ''
+      run_origen:
+        description: 'Solo para remux: numero del run cuyo artifact final-<proyecto> trae el video ya renderizado'
         type: string
         default: ''
       extra:
@@ -38,6 +43,8 @@ on:
 
 permissions:
   contents: read
+  # remux baja el artifact de un run anterior; leer artifacts pide este permiso.
+  actions: read
 
 concurrency:
   group: estudio-checkpoint1
@@ -66,9 +73,15 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render') && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux') && inputs.proyecto == ''
         run: |
-          echo "::error::El modo importar necesita el nombre del proyecto."
+          echo "::error::Ese modo necesita el nombre del proyecto."
+          exit 1
+
+      - name: Comprobar que hay run de origen
+        if: inputs.modo == 'remux' && inputs.run_origen == ''
+        run: |
+          echo "::error::El modo remux necesita el numero del run que produjo el video."
           exit 1
 
       - name: Descargar el repositorio
@@ -153,7 +166,7 @@ jobs:
       # ------------------------------------------------------------- importar
 
       - name: Comprobar los archivos subidos
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
         working-directory: estudio/proyectos/${{ inputs.proyecto }}
         run: |
           echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
@@ -175,13 +188,13 @@ jobs:
       # Deduce los limites de bloque de las duraciones del audio. No pisa un
       # edit_plan.json escrito a mano: ese seria la verdad editorial.
       - name: Generar el plan de edicion
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
         working-directory: estudio
         run: |
           node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
         working-directory: estudio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -191,6 +204,9 @@ jobs:
 
       # MP4 minimo para revisar la sincronia a ojo, sin montar un reproductor con
       # pistas externas. No es el renderer: negro, voz y subtitulos quemados.
+      #
+      # En remux no se genera: la sincronia ya esta aprobada sobre este mismo
+      # audio, y el propio remux la comprueba midiendo el desfase de la voz.
       - name: Generar el video de revision
         if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render'
         working-directory: estudio
@@ -249,8 +265,31 @@ jobs:
         run: |
           node cli.mjs render "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # ------------------------------------------------------------------ remux
+      #
+      # Cambiar solo la mezcla de audio de un render ya aprobado. Los 32:41
+      # cuestan hora y media de CPU, casi toda en zoompan; si la imagen no
+      # cambia, repetir ese trabajo no aporta nada y ademas produciria
+      # fotogramas nuevos sobre los que ya estaban aprobados.
+
+      - name: Traer el video ya renderizado
+        if: inputs.modo == 'remux'
+        uses: actions/download-artifact@v4
+        with:
+          name: final-${{ inputs.proyecto }}
+          path: origen
+          run-id: ${{ inputs.run_origen }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remuxar solo el audio
+        if: inputs.modo == 'remux'
+        working-directory: estudio
+        run: |
+          node cli.mjs remuxar "${{ inputs.proyecto }}" \
+            --video "$GITHUB_WORKSPACE/origen/video_final.mp4" | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Guardar el video final como artifact
-        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'render'
+        if: always() && inputs.confirmar == 'SI' && (inputs.modo == 'render' || inputs.modo == 'remux')
         uses: actions/upload-artifact@v4
         with:
           name: final-${{ inputs.proyecto }}
@@ -263,7 +302,7 @@ jobs:
       # Se suben tambien si la importacion fallo: el informe de validacion es
       # justo lo que hace falta para saber por que.
       - name: Guardar el resultado como artifact
-        if: always() && inputs.confirmar == 'SI' && (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render')
+        if: always() && inputs.confirmar == 'SI' && (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux')
         uses: actions/upload-artifact@v4
         with:
           name: importacion-${{ inputs.proyecto }}
@@ -279,7 +318,7 @@ jobs:
           retention-days: 30
 
       - name: Fin
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Terminado. No se ha publicado, ni hecho Shorts, ni miniatura." >> "$GITHUB_STEP_SUMMARY"

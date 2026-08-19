@@ -14,7 +14,7 @@
  *   node cli.mjs estado   [proyecto]   Muestra el estado
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync, statSync, renameSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
@@ -32,6 +32,7 @@ import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } f
 import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
 import { generarCama, nivelEn, aperturaEn, planearPiano, DECAE_PIANO } from './lib/musica.mjs';
+import { inspeccionarVideo, huellaVideo, remuxarAudio, desfaseAudio } from './lib/remux.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
 
@@ -842,6 +843,160 @@ async function cmdImportar(id) {
   }
 }
 
+// --- remux de audio ---------------------------------------------------
+
+/**
+ * Cambia la mezcla de audio de un video ya renderizado sin volver a generar
+ * un solo fotograma.
+ *
+ * El render de los 32:41 cuesta hora y media, y casi toda se va en zoompan.
+ * Cuando lo unico que ha cambiado es la cama musical, ese trabajo no aporta
+ * nada: el flujo de video se copia byte a byte y se le pega la mezcla nueva.
+ *
+ * Copiar no es opinable, se demuestra: se compara el MD5 del flujo de video
+ * antes y despues, y el desfase de la voz entre las dos mezclas.
+ */
+async function cmdRemuxar(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const voz = join(salida, 'audio.mp3');
+
+  if (!existsSync(rutaTimeline) || !existsSync(voz)) {
+    throw new Error(`Faltan ${id}/output/timeline.json o audio.mp3. Ejecuta antes: importar ${id}`);
+  }
+
+  const origen = opciones.video;
+  if (!origen) throw new Error('Falta --video <ruta al mp4 ya renderizado>.');
+  if (!existsSync(origen)) throw new Error(`No existe el video de origen: ${origen}`);
+
+  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const base = canal.render;
+  const pilar = proyecto.plan?.pilar ?? 'noche';
+  const cfg = { ...base, ...(base.presets[pilar] ?? base.presets.noche) };
+
+  titulo(`Remux de audio — ${id}`);
+  console.log(`Video de origen ${basename(origen)}  (${(statSync(origen).size / 1048576).toFixed(0)} MB)`);
+
+  // El video de origen tiene que ser el de ESTE proyecto. Remuxar una mezcla
+  // sobre una imagen de otro montaje daria un archivo perfectamente valido y
+  // completamente equivocado, asi que se rechaza antes de gastar nada.
+  const antes = await inspeccionarVideo(origen);
+  console.log(`                ${antes.ancho}x${antes.alto} · ${antes.fps.toFixed(0)} fps · ` +
+    `${mmss(antes.duracionContenedor)} · ${antes.fotogramas ?? '?'} fotogramas`);
+
+  const desajustes = [];
+  if (antes.ancho !== cfg.ancho || antes.alto !== cfg.alto) {
+    desajustes.push(`resolucion ${antes.ancho}x${antes.alto}, el preset pide ${cfg.ancho}x${cfg.alto}`);
+  }
+  if (Math.abs(antes.fps - cfg.fps) > 0.01) {
+    desajustes.push(`${antes.fps.toFixed(2)} fps, el preset pide ${cfg.fps}`);
+  }
+  const desvioOrigen = Math.abs(antes.duracionContenedor - timeline.duracion_total_s);
+  if (desvioOrigen > 0.5) {
+    desajustes.push(
+      `dura ${mmss(antes.duracionContenedor)} y el timeline pide ${mmss(timeline.duracion_total_s)} ` +
+      `(${desvioOrigen.toFixed(2)}s de diferencia)`
+    );
+  }
+  if (desajustes.length) {
+    throw new Error(
+      'El video de origen no corresponde a este montaje:\n    - ' + desajustes.join('\n    - ') +
+      '\n    Remuxar sobre el video equivocado daria un archivo valido y erroneo.'
+    );
+  }
+  console.log(c.verde(`  ✓ Corresponde al montaje: desvio de ${(desvioOrigen * 1000).toFixed(0)} ms sobre el timeline`));
+
+  const tmp = join(salida, '.tmp-remux');
+  mkdirSync(tmp, { recursive: true });
+
+  process.stdout.write('\n  huella del video de origen…');
+  const huellaAntes = await huellaVideo(origen);
+  console.log(` ${huellaAntes}`);
+
+  // Misma cama que el render completo: mismas constantes, misma semilla, misma
+  // funcion. Lo que se aprobo en la muestra es lo que entra aqui.
+  process.stdout.write('  cama musical…');
+  const t1 = Date.now();
+  const m = cfg.musica;
+  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
+  const apertura = (t) => aperturaEn(t, forma);
+  const envolvente = (t) => nivelEn(t, {
+    ...forma,
+    cierre: { fadeIn: m.fade_in_s, fadeOut: timeline.cierre?.fade_out ?? 8, duracionTotal: timeline.duracion_total_s },
+    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
+  });
+  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
+  const wav = join(tmp, 'cama.wav');
+  generarCama({
+    segundos: timeline.duracion_total_s, offset: 0, envolvente, apertura, grupos, salidaWav: wav,
+  });
+  const agudo = Math.max(...grupos.flatMap((g) => g.notas.map((n) => n.hz)));
+  console.log(` ${grupos.length} grupos de piano, nota mas aguda ${Math.round(agudo)} Hz ` +
+    `(${((Date.now() - t1) / 1000).toFixed(0)}s)`);
+
+  process.stdout.write('  remux…');
+  const t2 = Date.now();
+  const destino = join(salida, 'video_final.mp4');
+  // Si el origen ES el destino, ffmpeg leeria y escribiria el mismo archivo.
+  const provisional = join(tmp, 'salida.mp4');
+  await remuxarAudio({ video: origen, voz, musica: wav, salida: provisional });
+  console.log(` hecho en ${((Date.now() - t2) / 1000).toFixed(0)}s`);
+
+  // --- comprobaciones antes de dar el archivo por bueno -------------------
+  titulo('Comprobaciones');
+  let fallos = 0;
+  const comprobar = (nombre, ok, detalle) => {
+    console.log(`  ${ok ? c.verde('✓') : c.rojo('✗')} ${nombre}${detalle ? ' — ' + detalle : ''}`);
+    if (!ok) fallos++;
+  };
+
+  const huellaDespues = await huellaVideo(provisional);
+  comprobar('la imagen es identica, byte a byte', huellaDespues === huellaAntes,
+    huellaDespues === huellaAntes ? `MD5 ${huellaDespues}` : `${huellaAntes} → ${huellaDespues}`);
+
+  const despues = await inspeccionarVideo(provisional);
+  comprobar('mismos fotogramas', despues.fotogramas === antes.fotogramas,
+    `${despues.fotogramas ?? '?'} de ${antes.fotogramas ?? '?'}`);
+  comprobar('el video no se ha recodificado', despues.codec === antes.codec,
+    `${despues.codec}`);
+
+  const desvio = Math.abs(despues.duracionContenedor - timeline.duracion_total_s);
+  comprobar('la duracion cuadra con el timeline', desvio <= 0.5,
+    `${mmss(despues.duracionContenedor)}, desvio de ${(desvio * 1000).toFixed(0)} ms`);
+
+  // Lo que sostiene la sincronia de los subtitulos es que la voz caiga en el
+  // mismo sitio que antes. La envolvente de energia la domina la voz, asi que
+  // un desfase de cero lo demuestra sin tener que fiarse del montaje.
+  process.stdout.write(c.dim('  midiendo el desfase de la voz…'));
+  const lag = await desfaseAudio(origen, provisional);
+  process.stdout.write('\r' + ' '.repeat(40) + '\r');
+  comprobar('la voz no se ha movido respecto al render aprobado', Math.abs(lag) < 0.02,
+    `desfase de ${(lag * 1000).toFixed(0)} ms`);
+
+  const srt = join(salida, 'subtitles.srt');
+  comprobar('el .srt sigue aparte, sin quemar', existsSync(srt) && !cfg.subtitulos_quemados,
+    basename(srt));
+
+  const interludios = timeline.huecos.filter((h) => h.estrategico).length;
+  comprobar('los interludios siguen siendo los mismos', interludios === timeline.huecos.length,
+    `${timeline.huecos.length} + cierre de ${timeline.cierre?.music_seconds ?? 0}s`);
+
+  if (fallos) {
+    rmSync(tmp, { recursive: true, force: true });
+    throw new Error(`${fallos} comprobacion(es) fallan. No se ha tocado video_final.mp4.`);
+  }
+
+  renameSync(provisional, destino);
+  rmSync(tmp, { recursive: true, force: true });
+
+  const bytes = statSync(destino).size;
+  titulo('Video final');
+  console.log(`  video_final.mp4   ${mmss(despues.duracionContenedor)} · ${(bytes / 1048576).toFixed(0)} MB`);
+  console.log(`  subtitles.srt     aparte, sin quemar`);
+  console.log(c.dim('  Imagen, movimiento y particulas: los mismos bits del render aprobado.'));
+}
+
 /** Reparte los parrafos entre N bloques usando los block_end del plan. */
 function repartirParrafosEnBloques(proyecto, nBloques) {
   const cortes = (proyecto.plan?.events ?? [])
@@ -1367,7 +1522,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1407,6 +1562,10 @@ async function principal() {
         recorrido: resto.includes('--recorrido'),
         piano: resto.includes('--piano'),
       });
+    }
+    case 'remuxar': {
+      const i = resto.indexOf('--video');
+      return cmdRemuxar(exigeProyecto(), { video: i > -1 ? resto[i + 1] : undefined });
     }
     case 'resumen': {
       const i = process.argv.indexOf('--json');
