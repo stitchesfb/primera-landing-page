@@ -978,9 +978,12 @@ async function cmdRemuxar(id, opciones = {}) {
   comprobar('el .srt sigue aparte, sin quemar', existsSync(srt) && !cfg.subtitulos_quemados,
     basename(srt));
 
-  const interludios = timeline.huecos.filter((h) => h.estrategico).length;
-  comprobar('los interludios siguen siendo los mismos', interludios === timeline.huecos.length,
-    `${timeline.huecos.length} + cierre de ${timeline.cierre?.music_seconds ?? 0}s`);
+  // Lo que demuestra que los interludios no se han movido es el desfase de cero
+  // sobre el mismo audio y la duracion identica; esto solo deja escrito en el
+  // log cuantos y de que tipo son, para poder cotejarlo con el render anterior.
+  const cortos = timeline.huecos.filter((h) => !h.estrategico).length;
+  comprobar('los huecos del timeline son todos interludios', cortos === 0,
+    `${timeline.huecos.length} interludios + cierre de ${timeline.cierre?.music_seconds ?? 0}s`);
 
   if (fallos) {
     rmSync(tmp, { recursive: true, force: true });
