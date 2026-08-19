@@ -177,24 +177,49 @@ export function generarCama({
     let der = 0;
 
     // --- pad calido -----------------------------------------------------
+    //
+    // Los dos acordes suenan a la vez durante el cruce, cada uno a su altura
+    // fija, y lo que se cruza son sus VOLUMENES.
+    //
+    // Interpolar la frecuencia dentro de sin(2*pi*f*t) parece equivalente y no
+    // lo es: la frecuencia instantanea pasa a ser f + t*f', y ese segundo
+    // termino crece con el tiempo transcurrido. En el minuto siete, un cambio
+    // de 150 Hz repartido en medio minuto se convierte en un barrido de miles
+    // de hercios. Era el chirrido de grave a agudo que aparecia en cada cruce.
+    //
+    // Cruce de potencia constante: dos acordes distintos no se suman en fase,
+    // asi que la raiz mantiene el volumen percibido estable.
+    const gA = Math.sqrt(1 - mezcla);
+    const gB = Math.sqrt(mezcla);
+
     for (let v = 0; v < 4; v++) {
-      const hz = a.voces[v] * (1 - mezcla) + b.voces[v] * mezcla;
       const resp = 0.6 + 0.4 * (0.5 + 0.5 * Math.sin((2 * Math.PI * t) / LFOS[v]));
       const amp = AMPS[v] * resp;
       const d = 0.055 + v * 0.02;
       // Un armonico impar suave da cuerpo sin volverlo metalico.
       const w = (f) => Math.sin(2 * Math.PI * f * t) + 0.14 * Math.sin(6 * Math.PI * f * t);
-      izq += amp * w(hz - d);
-      der += amp * w(hz + d);
+
+      if (gA > 0) {
+        izq += amp * gA * w(a.voces[v] - d);
+        der += amp * gA * w(a.voces[v] + d);
+      }
+      if (gB > 0) {
+        izq += amp * gB * w(b.voces[v] - d);
+        der += amp * gB * w(b.voces[v] + d);
+      }
     }
 
     // Voz alta que solo entra cuando la cama se abre: cambia el color, no el
     // volumen, que es la diferencia entre respirar y subir el fader.
     if (abierto > 0.01) {
-      const hzAlto = (a.voces[1] * (1 - mezcla) + b.voces[1] * mezcla) * 4;
       const brillo = 0.05 * abierto * (0.6 + 0.4 * Math.sin((2 * Math.PI * t) / 13.1));
-      izq += brillo * Math.sin(2 * Math.PI * (hzAlto - 0.3) * t);
-      der += brillo * Math.sin(2 * Math.PI * (hzAlto + 0.3) * t);
+      const alto = (f, g) => {
+        if (g <= 0) return;
+        izq += brillo * g * Math.sin(2 * Math.PI * (f - 0.3) * t);
+        der += brillo * g * Math.sin(2 * Math.PI * (f + 0.3) * t);
+      };
+      alto(a.voces[1] * 4, gA);
+      alto(b.voces[1] * 4, gB);
     }
 
     // --- capa de aire ---------------------------------------------------

@@ -1108,6 +1108,99 @@ async function cmdMuestra(id, opciones = {}) {
     `${mmss(elegido.inicio - desde + elegido.duracion)} de la muestra`);
 }
 
+// --- render completo --------------------------------------------------
+
+/**
+ * Renderiza el video entero con la configuracion aprobada en la muestra.
+ *
+ * Misma ruta de codigo que 'muestra', solo que la ventana es el video
+ * completo: si la muestra se aprobo, el render no puede salir distinto.
+ */
+async function cmdRender(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const voz = join(salida, 'audio.mp3');
+
+  if (!existsSync(rutaTimeline) || !existsSync(voz)) {
+    throw new Error(`Faltan ${id}/output/timeline.json o audio.mp3. Ejecuta antes: importar ${id}`);
+  }
+
+  const imagen = opciones.imagen ?? join(proyecto.dir, 'escena_nocturna.png');
+  if (!existsSync(imagen)) throw new Error(`No existe la imagen de fondo: ${imagen}`);
+
+  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const base = canal.render;
+  const pilar = proyecto.plan?.pilar ?? 'noche';
+  const cfg = { ...base, ...(base.presets[pilar] ?? base.presets.noche) };
+
+  const total = opciones.duracion ?? timeline.duracion_total_s;
+  const largoVoz = await duracionSegundos(voz);
+
+  titulo(`Render completo — ${id}`);
+  console.log(`Imagen          ${basename(imagen)}`);
+  console.log(`Duracion        ${mmss(total)}`);
+  console.log(`Preset          ${pilar} · ${cfg.movimiento} ${(cfg.zoom_total * 100).toFixed(0)}%`);
+  console.log(`Salida          ${cfg.ancho}x${cfg.alto} · ${cfg.fps} fps · crf ${cfg.crf} · preset ${cfg.preset_x264}`);
+  console.log(`Subtitulos      ${cfg.subtitulos_quemados ? 'QUEMADOS' : 'aparte, en subtitles.srt'}`);
+  console.log(c.dim(`  voz: ${mmss(largoVoz)} · ${timeline.huecos.length} interludios + cierre de ${timeline.cierre?.music_seconds ?? 0}s`));
+
+  const tmp = join(salida, '.tmp-render');
+  mkdirSync(tmp, { recursive: true });
+  const t0 = Date.now();
+
+  process.stdout.write('\n  particulas…');
+  const loop = join(tmp, 'motas.mov');
+  const p = await generarLoop({
+    salida: loop, ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
+    periodo: cfg.particulas.periodo_s, cuantas: cfg.particulas.cuantas,
+  });
+  console.log(` ${p.motas} motas, bucle de ${p.periodo}s (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
+
+  process.stdout.write('  cama musical…');
+  const t1 = Date.now();
+  const m = cfg.musica;
+  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
+  const apertura = (t) => aperturaEn(t, forma);
+  const envolvente = (t) => nivelEn(t, {
+    ...forma,
+    cierre: { fadeIn: m.fade_in_s, fadeOut: timeline.cierre?.fade_out ?? 8, duracionTotal: timeline.duracion_total_s },
+    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
+  });
+  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
+  const wav = join(tmp, 'cama.wav');
+  generarCama({ segundos: total, offset: 0, envolvente, apertura, grupos, salidaWav: wav });
+  console.log(` ${grupos.length} grupos de piano (${((Date.now() - t1) / 1000).toFixed(0)}s)`);
+
+  process.stdout.write('  render…');
+  const t2 = Date.now();
+  const destino = join(salida, 'video_final.mp4');
+  await renderizar({
+    imagen, particulas: loop, voz, musica: wav, salida: destino,
+    desde: 0, duracion: total, duracionTotal: timeline.duracion_total_s,
+    ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
+    zoomTotal: cfg.zoom_total, foco: cfg.foco, crf: cfg.crf, preset: cfg.preset_x264,
+    srt: cfg.subtitulos_quemados ? join(salida, 'subtitles.srt') : null,
+  });
+  const minutos = (Date.now() - t2) / 60000;
+  const bytes = statSync(destino).size;
+  console.log(` hecho en ${minutos.toFixed(1)} min`);
+
+  rmSync(tmp, { recursive: true, force: true });
+
+  const real = await duracionSegundos(destino);
+  titulo('Video final');
+  console.log(`  video_final.mp4   ${mmss(real)} · ${(bytes / 1048576).toFixed(0)} MB`);
+  console.log(`  subtitles.srt     aparte, sin quemar`);
+  const desvio = Math.abs(real - timeline.duracion_total_s);
+  console.log(
+    desvio <= 0.5
+      ? c.verde(`  ✓ Duracion cuadra con el timeline (desvio ${(desvio * 1000).toFixed(0)} ms)`)
+      : c.rojo(`  ✗ Duracion no cuadra: ${real.toFixed(2)}s vs ${timeline.duracion_total_s.toFixed(2)}s`)
+  );
+  if (desvio > 0.5) process.exitCode = 1;
+}
+
 // --- resumen seguro ---------------------------------------------------
 
 /**
@@ -1225,7 +1318,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1254,6 +1347,10 @@ async function principal() {
     });
     case 'importar': return cmdImportar(exigeProyecto());
     case 'previsualizar': return cmdPrevisualizar(exigeProyecto());
+    case 'render': {
+      const i = resto.indexOf('--duracion');
+      return cmdRender(exigeProyecto(), { duracion: i > -1 ? Number(resto[i + 1]) : undefined });
+    }
     case 'muestra': {
       const num = (f) => { const i = resto.indexOf(f); return i > -1 ? Number(resto[i + 1]) : undefined; };
       return cmdMuestra(exigeProyecto(), {

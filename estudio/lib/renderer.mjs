@@ -13,6 +13,7 @@
  */
 
 import { rutaFfmpeg, ejecutar } from './audio.mjs';
+import { join, dirname } from 'node:path';
 
 /**
  * La imagen se amplia muy por encima de la resolucion de salida antes de
@@ -44,6 +45,18 @@ export async function renderizar({
   const ffmpeg = await rutaFfmpeg();
   const anchoGrande = ancho * SOBREMUESTREO;
 
+  // La ampliacion se hace UNA vez, a un archivo. Dentro del grafo, con la
+  // imagen en bucle, ffmpeg repetiria el escalado a 18,7 megapixeles en cada
+  // uno de los casi 59.000 fotogramas: medido, eso multiplicaba por tres el
+  // tiempo de render de media hora de video.
+  const grande = join(dirname(salida), '.escena-grande.png');
+  await ejecutar(ffmpeg, [
+    '-y', '-loglevel', 'error',
+    '-i', imagen,
+    '-vf', `scale=${anchoGrande}:-2:flags=lanczos,setsar=1`,
+    grande,
+  ]);
+
   // Tiempo absoluto del fotograma `on` de esta salida.
   const tAbs = `(${desde}+on/${fps})`;
   // A velocidad real, 80 segundos mueven el encuadre unos 3 pixeles: no hay
@@ -53,10 +66,13 @@ export async function renderizar({
     ? `1+${zoomTotal}*on/${Math.max(1, Math.round(duracion * fps) - 1)}`
     : `1+${zoomTotal}*${tAbs}/${duracionTotal}`;
 
+  // La imagen entra UNA sola vez y zoompan genera desde ella los fotogramas
+  // que hagan falta. Repetirla con -loop obligaba a ffmpeg a decodificar y
+  // reescalar 18,7 megapixeles en cada uno de los casi 59.000 fotogramas.
+  const totalFotogramas = Math.max(1, Math.round(duracion * fps));
   const filtros = [
-    `[0:v]scale=${anchoGrande}:-2:flags=lanczos,setsar=1[grande]`,
-    `[grande]zoompan=z='${z}':x='(iw-iw/zoom)*${foco.x}':y='(ih-ih/zoom)*${foco.y}':` +
-      `d=1:s=${ancho}x${alto}:fps=${fps}[escena]`,
+    `[0:v]zoompan=z='${z}':x='(iw-iw/zoom)*${foco.x}':y='(ih-ih/zoom)*${foco.y}':` +
+      `d=${totalFotogramas}:s=${ancho}x${alto}:fps=${fps}[escena]`,
     `[1:v]scale=${ancho}:${alto},format=rgba[motas]`,
     // El cielo nocturno es un degradado amplio en 8 bits, justo el material que
     // produce anillos de banding al codificar. gradfun los deshace con un grano
@@ -80,7 +96,7 @@ export async function renderizar({
 
   const args = [
     '-y', '-loglevel', 'error', '-stats',
-    '-loop', '1', '-framerate', String(fps), '-i', imagen,
+    '-i', grande,
     '-stream_loop', '-1', '-i', particulas,
     '-ss', desde.toFixed(3), '-t', duracion.toFixed(3), '-i', voz,
     '-i', musica,
@@ -95,5 +111,6 @@ export async function renderizar({
   ];
 
   await ejecutar(ffmpeg, args);
+  try { (await import('node:fs')).rmSync(grande, { force: true }); } catch {}
   return { desde, duracion };
 }
