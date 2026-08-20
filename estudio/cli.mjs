@@ -36,6 +36,7 @@ import { inspeccionarVideo, huellaVideo, remuxarAudio, desfaseAudio } from './li
 import {
   diagnosticar, repararContenedor, pruebaDecodificacion, decodificarTodo,
 } from './lib/diagnostico.mjs';
+import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
 
@@ -1163,6 +1164,117 @@ async function imprimirDiagnostico(ruta, d, { completo = false } = {}) {
   }
 }
 
+// --- Shorts -----------------------------------------------------------
+
+/**
+ * Propone los extractos verticales y ensena de que estan hechos.
+ *
+ * No renderiza: la decision de que trozo del video se convierte en Short es
+ * editorial, no tecnica, y hay que poder leerla antes de gastar nada. Para cada
+ * Short evalua los rangos de parrafos candidatos con las duraciones REALES del
+ * audio ya montado y dice cual cae dentro del objetivo.
+ */
+async function cmdShortsPlan(id) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const rutaAlignment = join(salida, 'alignment.json');
+  const rutaConfig = join(proyecto.dir, 'shorts.json');
+
+  for (const [ruta, quien] of [[rutaTimeline, 'timeline.json'], [rutaAlignment, 'alignment.json']]) {
+    if (!existsSync(ruta)) throw new Error(`Falta ${id}/output/${quien}. Ejecuta antes: importar ${id}`);
+  }
+  if (!existsSync(rutaConfig)) throw new Error(`Falta ${id}/shorts.json`);
+
+  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const alignment = JSON.parse(readFileSync(rutaAlignment, 'utf8'));
+  const cfg = JSON.parse(readFileSync(rutaConfig, 'utf8'));
+  const obj = cfg.objetivos ?? {};
+
+  titulo(`Plan de Shorts — ${id}`);
+  console.log(`Video largo     ${mmss(timeline.duracion_total_s)} · ${timeline.segmentos.length} parrafos`);
+  console.log(`Formato         ${obj.ancho}x${obj.alto} · interludios internos a ${obj.interludio_interno_s}s`);
+  console.log(`Cierre          ${obj.cta_s}s de rotulo sobre musica, sin voz`);
+  console.log(c.dim(`Sin TTS: todo sale de audio.mp3 y alignment.json (${alignment.palabras.length} palabras)`));
+
+  for (const corto of cfg.shorts) {
+    const [minimo, maximo] = corto.objetivo_s;
+    titulo(`${corto.id} — ${corto.tema}`);
+    console.log(`Objetivo        ${minimo}-${maximo}s\n`);
+
+    const evaluados = [];
+    for (const [desde, hasta] of corto.candidatos) {
+      let plan;
+      try {
+        plan = planearShort({
+          timeline, desde, hasta,
+          interludioInterno: obj.interludio_interno_s,
+          ctaSegundos: obj.cta_s,
+        });
+      } catch (e) {
+        console.log(c.rojo(`  parrafos ${desde}-${hasta}: ${redactar(e.message)}`));
+        continue;
+      }
+      const cabe = plan.duracion >= minimo && plan.duracion <= maximo;
+      evaluados.push({ plan, cabe });
+      console.log(
+        `  ${cabe ? c.verde('✓') : c.dim('·')} parrafos ${String(`${desde}-${hasta}`).padEnd(7)} ` +
+        `${plan.duracion.toFixed(1)}s  ` +
+        c.dim(`(voz ${plan.segundosVoz.toFixed(1)}s + silencios ${plan.segundosSilencio.toFixed(1)}s ` +
+          `+ entrada ${plan.entrada.toFixed(1)}s + salida ${plan.salida.toFixed(1)}s + cierre ${plan.ctaSegundos}s)`)
+      );
+    }
+
+    const elegido = (evaluados.find((e) => e.cabe) ?? evaluados[0])?.plan;
+    if (!elegido) { console.log(c.rojo('  Ningun candidato es viable.')); continue; }
+
+    console.log(`\n  Elegido: parrafos ${elegido.desde}-${elegido.hasta} · ${elegido.duracion.toFixed(1)}s`);
+    console.log(`\n  Corte de entrada`);
+    console.log(`    ${mmss(elegido.inicioEnVideo)} (${elegido.inicioEnVideo.toFixed(2)}s del video largo)`);
+    console.log(c.dim(`    ${elegido.entrada.toFixed(2)}s de respiro tomados del silencio de ` +
+      `${elegido.disponibleAntes.toFixed(1)}s que precede al parrafo ${elegido.desde}`));
+    console.log(`\n  Corte de salida`);
+    console.log(`    ${mmss(elegido.finEnVideo)} (${elegido.finEnVideo.toFixed(2)}s del video largo)`);
+    console.log(c.dim(`    ${elegido.salida.toFixed(2)}s de cola tomados del silencio de ` +
+      `${elegido.disponibleDespues.toFixed(1)}s que sigue al parrafo ${elegido.hasta}`));
+
+    if (elegido.recortes.length) {
+      console.log(`\n  Interludios acortados dentro del Short`);
+      for (const r of elegido.recortes) {
+        console.log(`    tras el parrafo ${r.trasParrafo}: ${r.recortadoDe}s → ${r.duracionDestino}s`);
+      }
+    }
+
+    console.log(`\n  Texto exacto`);
+    for (const t of elegido.texto) {
+      const s = timeline.segmentos.find((x) => x.numero === t.parrafo);
+      console.log(`    [${t.parrafo}] ${mmss(s.inicio)}–${mmss(s.fin)} (${s.duracion.toFixed(1)}s)`);
+      for (const linea of envolver(t.texto, 76)) console.log(`         ${linea}`);
+    }
+
+    const palabras = palabrasDelShort(elegido, alignment.palabras);
+    console.log(`\n  Subtitulos      ${palabras.length} palabras cuadran dentro del Short`);
+    console.log(c.dim(`    primera "${palabras[0]?.texto}" en ${palabras[0]?.inicio.toFixed(2)}s · ` +
+      `ultima "${palabras.at(-1)?.texto}" en ${palabras.at(-1)?.fin.toFixed(2)}s de ${elegido.duracion.toFixed(1)}s`));
+    console.log(`  Cierre          «${(corto.cta ?? []).join(' / ')}» sobre musica, sin voz`);
+  }
+
+  titulo('Siguiente paso');
+  console.log('  Nada renderizado y nada publicado. Estos extractos necesitan aprobacion.');
+}
+
+/** Parte un texto largo en lineas, sin cortar palabras. */
+function envolver(texto, ancho) {
+  const lineas = [];
+  let actual = '';
+  for (const palabra of texto.split(/\s+/)) {
+    if (actual && (actual + ' ' + palabra).length > ancho) { lineas.push(actual); actual = palabra; }
+    else actual = actual ? `${actual} ${palabra}` : palabra;
+  }
+  if (actual) lineas.push(actual);
+  return lineas;
+}
+
 /** Reparte los parrafos entre N bloques usando los block_end del plan. */
 function repartirParrafosEnBloques(proyecto, nBloques) {
   const cortes = (proyecto.plan?.events ?? [])
@@ -1688,7 +1800,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales. No renderiza ni publica\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1741,6 +1853,7 @@ async function principal() {
         salida: i > -1 ? resto[i + 1] : undefined,
       });
     }
+    case 'shorts': return cmdShortsPlan(exigeProyecto());
     case 'resumen': {
       const i = process.argv.indexOf('--json');
       return cmdResumen(i > -1 ? process.argv[i + 1] : null);

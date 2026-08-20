@@ -20,6 +20,7 @@ on:
           - render
           - remux
           - diagnostico
+          - shorts
         default: muestra
       proyecto:
         description: 'Para importar, muestra, render y remux: carpeta bajo estudio/proyectos/ (ej. video_001)'
@@ -74,7 +75,7 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico') && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts') && inputs.proyecto == ''
         run: |
           echo "::error::Ese modo necesita el nombre del proyecto."
           exit 1
@@ -167,7 +168,7 @@ jobs:
       # ------------------------------------------------------------- importar
 
       - name: Comprobar los archivos subidos
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
         working-directory: estudio/proyectos/${{ inputs.proyecto }}
         run: |
           echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
@@ -189,13 +190,13 @@ jobs:
       # Deduce los limites de bloque de las duraciones del audio. No pisa un
       # edit_plan.json escrito a mano: ese seria la verdad editorial.
       - name: Generar el plan de edicion
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
         working-directory: estudio
         run: |
           node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
         working-directory: estudio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -289,6 +290,17 @@ jobs:
           node cli.mjs remuxar "${{ inputs.proyecto }}" \
             --video "$GITHUB_WORKSPACE/origen/video_final.mp4" | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # ---------------------------------------------------------------- shorts
+
+      # Solo propone: que parrafos, que tiempos y donde caen los cortes. La
+      # decision de que trozo del video se convierte en Short es editorial y hay
+      # que poder leerla antes de renderizar nada.
+      - name: Proponer los Shorts
+        if: inputs.modo == 'shorts'
+        working-directory: estudio
+        run: |
+          node cli.mjs shorts "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
       # ------------------------------------------------------------ diagnostico
       #
       # Un MP4 puede decodificar entero y aun asi dejar al reproductor girando
@@ -343,7 +355,7 @@ jobs:
           retention-days: 30
 
       - name: Fin
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Terminado. No se ha publicado, ni hecho Shorts, ni miniatura." >> "$GITHUB_STEP_SUMMARY"

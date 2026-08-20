@@ -1,0 +1,27 @@
+{
+  "_nota": "Extractos verticales de video_001. Reutilizan su audio: ni un credito de TTS. Este archivo es la decision editorial; los tiempos exactos los calcula 'shorts --plan' a partir de timeline.json y alignment.json.",
+  "objetivos": {
+    "ancho": 1080,
+    "alto": 1920,
+    "interludio_interno_s": 2.5,
+    "_interludio": "Un interludio de 10s es un respiro en media hora y un agujero en cuarenta segundos. Dentro de un Short se acorta; el recorte queda anotado en el plan.",
+    "cta_s": 4.5,
+    "_cta": "Cierre solo visual, sobre la cama musical. Sin voz nueva."
+  },
+  "shorts": [
+    {
+      "id": "short_01",
+      "tema": "Salmo 4:8 — acostarse en paz, entregar lo que preocupa",
+      "objetivo_s": [35, 45],
+      "candidatos": [[43, 45], [43, 46], [42, 45], [43, 47]],
+      "cta": ["La oración completa", "en el canal"]
+    },
+    {
+      "id": "short_02",
+      "tema": "Salmo 91:1-2 — habitar al abrigo del Altísimo",
+      "objetivo_s": [40, 50],
+      "candidatos": [[75, 77], [75, 76], [74, 77], [75, 78]],
+      "cta": ["La oración completa", "en el canal"]
+    }
+  ]
+}
