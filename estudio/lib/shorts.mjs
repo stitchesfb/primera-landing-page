@@ -160,14 +160,29 @@ export function trasladar(plan, t) {
   return null;
 }
 
-/** Palabras del alignment que caen dentro del Short, ya en tiempo del Short. */
+/**
+ * Palabras del alignment que caen dentro del Short, ya en tiempo del Short.
+ *
+ * Solo cuentan las que caen en un tramo de VOZ. El respiro de entrada, la cola
+ * y sobre todo el cierre salen de instantes del video largo donde sigue
+ * hablando la voz, pero en el Short esos trozos van sin ella: el cierre es
+ * musica y rotulo. Traducir sus palabras metia en el Short subtitulos de
+ * parrafos que no forman parte del extracto.
+ */
 export function palabrasDelShort(plan, palabras) {
   const salida = [];
-  for (const p of palabras) {
-    const inicio = trasladar(plan, p.inicio);
-    const fin = trasladar(plan, p.fin);
-    if (inicio == null || fin == null || fin <= inicio) continue;
-    salida.push({ texto: p.texto, inicio, fin });
+  for (const tramo of plan.tramos) {
+    if (tramo.tipo !== 'voz') continue;
+    const fin = tramo.origen + tramo.duracionOrigen;
+    for (const p of palabras) {
+      if (p.inicio < tramo.origen || p.fin > fin) continue;
+      salida.push({
+        texto: p.texto,
+        parrafo: tramo.parrafo,
+        inicio: tramo.destino + (p.inicio - tramo.origen),
+        fin: tramo.destino + (p.fin - tramo.origen),
+      });
+    }
   }
-  return salida;
+  return salida.sort((a, b) => a.inicio - b.inicio);
 }

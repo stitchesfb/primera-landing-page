@@ -75,19 +75,32 @@ check('lo eliminado del interludio no se traslada', trasladar(plan, 31) === null
 
 // --- las palabras viajan con sus tiempos ----------------------------------
 const palabras = [
-  { texto: 'antes', inicio: 5,    fin: 6 },
-  { texto: 'Dos',   inicio: 13.2, fin: 13.8 },
-  { texto: 'Tres',  inicio: 33.5, fin: 34.1 },
-  { texto: 'lejos', inicio: 80,   fin: 81 },
+  { texto: 'antes',   inicio: 5,    fin: 6 },
+  { texto: 'Dos',     inicio: 13.2, fin: 13.8 },
+  { texto: 'Tres',    inicio: 33.5, fin: 34.1 },
+  { texto: 'Cuatro',  inicio: 44.5, fin: 45.1 },
+  // Cae dentro de la ventana del cierre: en el video largo ahi sigue hablando
+  // la voz, pero en el Short ese trozo va sin ella.
+  { texto: 'siguiente', inicio: 51.5, fin: 52.2 },
+  { texto: 'lejos',   inicio: 80,   fin: 81 },
 ];
 const dentro = palabrasDelShort(plan, palabras);
-check('solo viajan las palabras del Short', dentro.length === 2,
+check('solo viajan las palabras de los tramos de voz', dentro.length === 3,
   dentro.map((p) => p.texto).join(', '));
+check('el cierre no arrastra la voz que seguia en el video largo',
+  !dentro.some((p) => p.texto === 'siguiente'));
 check('las palabras llegan con el tiempo del Short',
   cerca(dentro[0].inicio, 0.8) && cerca(dentro[1].inicio, 13.6),
   dentro.map((p) => `${p.texto}@${p.inicio.toFixed(2)}`).join(' '));
+check('cada palabra sabe de que parrafo viene',
+  dentro.map((p) => p.parrafo).join(',') === '2,3,4');
 check('ninguna palabra se sale del Short',
   dentro.every((p) => p.fin <= plan.duracion));
+// La ultima palabra tiene que caer antes del cierre, o el rotulo saldria con
+// texto encima.
+const finVoz = plan.duracion - plan.ctaSegundos;
+check('ninguna palabra invade el cierre', dentro.every((p) => p.fin <= finVoz),
+  `ultima en ${dentro.at(-1).fin.toFixed(2)}s, el cierre empieza en ${finVoz.toFixed(2)}s`);
 
 // --- sin interludio largo por el medio no se recorta nada -----------------
 const simple = planearShort({ timeline, desde: 3, hasta: 4, ctaSegundos: 0 });
