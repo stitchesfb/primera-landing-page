@@ -38,7 +38,8 @@ import {
 } from './lib/diagnostico.mjs';
 import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
 import {
-  construirVoz, formaDelShort, construirAss, renderizarShort,
+  construirVoz, formaDelShort, construirAss, renderizarShort, fotogramasShort,
+  crearMedidor, disponerTexto, validarOverflow,
 } from './lib/shortsRender.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
@@ -1007,6 +1008,19 @@ async function cmdRemuxar(id, opciones = {}) {
   console.log(c.dim('  Imagen, movimiento y particulas: los mismos bits del render aprobado.'));
 }
 
+// --- maquetacion de los Shorts ----------------------------------------
+
+// Margen lateral intocable. YouTube superpone su interfaz sobre los bordes de
+// un Short, y un subtitulo pegado al borde se lee mal aunque no se corte.
+const MARGEN_SEGURO = 80;
+const anchoUtil = (ancho) => ancho - 2 * MARGEN_SEGURO;
+
+// Cuerpo de partida y minimo al que se permite bajar antes de anadir una linea.
+const TAMANO_VOZ = 76;
+const TAMANO_VOZ_MIN = 60;
+const TAMANO_CTA = 62;
+const TAMANO_CTA_MIN = 48;
+
 // --- diagnostico del contenedor ---------------------------------------
 
 const kib = (n) => (n / 1048576).toFixed(1) + ' MB';
@@ -1201,17 +1215,27 @@ async function cmdShortsRender(id, opciones = {}) {
   const { timeline, alignment, cfg, obj } = leerDatosShorts(
     proyecto, rutaTimeline, rutaAlignment, rutaConfig
   );
-  const imagen = join(proyecto.dir, 'escena_nocturna.png');
-  if (!existsSync(imagen)) throw new Error(`No existe la imagen de fondo: ${imagen}`);
+  // La escena vertical esta compuesta para 9:16: se usa entera. La horizontal
+  // solo entra si no hay vertical, y entonces sí hay que recortarla.
+  const vertical = join(proyecto.dir, 'escena_vertical.png');
+  const imagen = existsSync(vertical) ? vertical : join(proyecto.dir, 'escena_nocturna.png');
+  if (!existsSync(imagen)) {
+    throw new Error(
+      `No existe la imagen de fondo. Se busco ${basename(vertical)} y escena_nocturna.png en ${proyecto.dir}`
+    );
+  }
 
   const base = canal.render;
   const pre = base.presets[proyecto.plan?.pilar ?? 'noche'] ?? base.presets.noche;
   const ancho = obj.ancho ?? 1080;
   const alto = obj.alto ?? 1920;
+  const esVertical = imagen === vertical;
 
   titulo(`Render de Shorts — ${id}`);
   console.log(`Formato         ${ancho}x${alto} · ${base.fps} fps · crf ${base.crf}`);
-  console.log(`Escena          ${basename(imagen)} recortada a 9:16, sin deformar`);
+  console.log(`Escena          ${basename(imagen)}` +
+    (esVertical ? ' — compuesta en 9:16, se usa entera' : ' recortada a 9:16, sin deformar'));
+  console.log(`Area segura     ${MARGEN_SEGURO}px por lado · ancho util ${anchoUtil(ancho)}px`);
   console.log(c.dim('Sin TTS: la voz sale de audio.mp3; la musica, del generador aprobado.'));
 
   const dirShorts = join(salida, 'shorts');
@@ -1229,6 +1253,11 @@ async function cmdShortsRender(id, opciones = {}) {
     cuantas: Math.round(pre.particulas.cuantas * 0.6),
   });
   console.log(` ${p.motas} motas, bucle de ${p.periodo}s`);
+
+  // Un solo medidor para los dos Shorts: la cache se comparte y las palabras
+  // que se repiten entre extractos se miden una vez.
+  const anchoSeguro = anchoUtil(ancho);
+  const medir = crearMedidor({ ancho, tmp: join(tmpComun, 'medidas') });
 
   const hechos = [];
   for (const corto of cfg.shorts) {
@@ -1272,27 +1301,96 @@ async function cmdShortsRender(id, opciones = {}) {
     generarCama({ segundos: plan.duracion, offset: 0, envolvente, apertura, grupos, salidaWav: wav });
     console.log(` ${grupos.length} grupos de piano · ${m.bajo_voz_db} dB bajo voz`);
 
-    // Subtitulos: menos caracteres por linea que en horizontal, porque el
-    // ancho util es poco mas de la mitad.
+    // Subtitulos: menos caracteres por linea que en horizontal, porque el ancho
+    // util es poco mas de la mitad. El agrupador reparte las PALABRAS en
+    // rotulos; cuantas lineas ocupa cada rotulo y con que cuerpo lo decide
+    // despues la medida real.
     const palabras = palabrasDelShort(plan, alignment.palabras);
-    const cues = agruparEnSubtitulos(
+    const crudos = agruparEnSubtitulos(
       palabras,
-      { ...canal.subtitulos, max_caracteres_linea: 24, max_lineas: 3 },
+      { ...canal.subtitulos, max_caracteres_linea: 26, max_lineas: 3 },
       plan.duracion
     );
+
+    process.stdout.write('  maquetando…');
+    const cues = [];
+    for (const bruto of crudos) {
+      const d = await disponerTexto({
+        texto: bruto.texto, medir, anchoSeguro,
+        tamano: TAMANO_VOZ, tamanoMin: TAMANO_VOZ_MIN, maxLineas: 3,
+      });
+      if (d.desbordado) {
+        throw new Error(
+          `Un subtitulo del ${corto.id} no cabe ni al cuerpo minimo: «${bruto.texto}»`
+        );
+      }
+      cues.push({ ...bruto, lineas: d.lineas, tamano: d.tamano });
+    }
+    const reducidos = cues.filter((x) => x.tamano < TAMANO_VOZ).length;
+    console.log(` ${cues.length} rotulos` + (reducidos ? `, ${reducidos} con el cuerpo reducido` : ''));
+
     const ctaTramo = plan.tramos.find((t) => t.tipo === 'cta');
+    let cta = null;
+    if (ctaTramo && corto.cta?.length) {
+      const lineas = [];
+      let tamanoCta = TAMANO_CTA;
+      for (const linea of corto.cta) {
+        const d = await disponerTexto({
+          texto: linea, medir, anchoSeguro,
+          tamano: TAMANO_CTA, tamanoMin: TAMANO_CTA_MIN, maxLineas: 2,
+        });
+        lineas.push(...d.lineas);
+        tamanoCta = Math.min(tamanoCta, d.tamano);
+      }
+      cta = { inicio: ctaTramo.destino, fin: plan.duracion, lineas, tamano: tamanoCta };
+    }
+
     const ass = join(tmp, 'subs.ass');
-    writeFileSync(ass, construirAss({
-      cues, ancho, alto,
-      cta: ctaTramo && corto.cta?.length
-        ? { inicio: ctaTramo.destino, fin: plan.duracion, lineas: corto.cta }
-        : null,
-    }));
+    writeFileSync(ass, construirAss({ cues, cta, ancho, alto, margen: MARGEN_SEGURO }));
     console.log(`  subtitulos      ${cues.length} rotulos de ${palabras.length} palabras, quemados`);
 
     // Ningun subtitulo puede pisar el cierre: ahi manda el rotulo.
     const invasores = ctaTramo ? cues.filter((c2) => c2.fin > ctaTramo.destino + 0.01) : [];
     if (invasores.length) throw new Error(`${invasores.length} subtitulos invaden el cierre del ${corto.id}.`);
+
+    // Medir al repartir y comprobar al final no es lo mismo: entre una cosa y
+    // otra estan el escapado, la union de lineas y los estilos. Esto dibuja
+    // cada rotulo tal y como quedara y mira donde cae la tinta de verdad.
+    process.stdout.write('  comprobando margenes…');
+    const desbordes = await validarOverflow({
+      ass, cues, cta, ancho, alto, margen: MARGEN_SEGURO,
+    });
+    if (desbordes.length) {
+      throw new Error(
+        `${desbordes.length} rotulo(s) del ${corto.id} se salen del area segura:\n    ` +
+        desbordes.join('\n    ')
+      );
+    }
+    console.log(c.verde(` ✓ los ${cues.length + (cta ? 1 : 0)} rotulos caben dentro de ${MARGEN_SEGURO}px por lado`));
+
+    // Antes de gastar el render entero: unos fotogramas para juzgar donde cae
+    // el texto sobre la escena. Con una imagen compuesta —una cara, una
+    // ventana— eso no se decide con numeros, se mira.
+    if (opciones.fotograma) {
+      const conTexto = cues.length ? cues[Math.floor(cues.length / 2)] : null;
+      const momentos = [
+        cues[0] ? (cues[0].inicio + cues[0].fin) / 2 : 1,
+        conTexto ? (conTexto.inicio + conTexto.fin) / 2 : plan.duracion / 2,
+        cues.at(-1) ? (cues.at(-1).inicio + cues.at(-1).fin) / 2 : plan.duracion - 6,
+        ctaTramo ? ctaTramo.destino + 2 : plan.duracion - 1,
+      ];
+      process.stdout.write('  fotogramas…');
+      const patron = join(dirShorts, `${corto.id}-fotograma-%d.png`);
+      const f = await fotogramasShort({
+        imagen, particulas: loop, ass, salidaPatron: patron, momentos,
+        ancho, alto, fps: base.fps, zoomTotal: 0.05, foco: pre.foco,
+        duracion: plan.duracion, recortar: !esVertical,
+      });
+      console.log(` ${f.numeros.length} en ${momentos.map((t) => t.toFixed(1) + 's').join(', ')}`);
+      rmSync(tmp, { recursive: true, force: true });
+      hechos.push({ id: corto.id, fotogramas: f.numeros.length });
+      continue;
+    }
 
     process.stdout.write('  render…');
     const destino = join(dirShorts, `${corto.id}.mp4`);
@@ -1301,6 +1399,7 @@ async function cmdShortsRender(id, opciones = {}) {
       imagen, particulas: loop, voz, musica: wav, ass, salida: destino,
       ancho, alto, fps: base.fps, zoomTotal: 0.05, foco: pre.foco,
       crf: base.crf, preset: base.preset_x264, duracion: plan.duracion,
+      recortar: !esVertical,
     });
     console.log(` hecho en ${((Date.now() - t0) / 1000).toFixed(0)}s`);
 
@@ -1319,7 +1418,12 @@ async function cmdShortsRender(id, opciones = {}) {
 
   rmSync(tmpComun, { recursive: true, force: true });
 
-  titulo('Shorts');
+  titulo(opciones.fotograma ? 'Fotogramas para revisar' : 'Shorts');
+  if (opciones.fotograma) {
+    for (const h of hechos) console.log(`  ${h.id}    ${h.fotogramas} fotogramas PNG`);
+    console.log(c.dim('\n  Comprueba que el texto no tape las caras. Nada renderizado todavia.'));
+    return;
+  }
   for (const h of hechos) {
     console.log(`  ${h.id}.mp4    ${h.duracion.toFixed(1)}s · ${(h.bytes / 1048576).toFixed(1)} MB`);
   }
@@ -2036,10 +2140,11 @@ async function principal() {
         salida: i > -1 ? resto[i + 1] : undefined,
       });
     }
-    case 'shorts':
-      return resto.includes('--render')
-        ? cmdShortsRender(exigeProyecto())
-        : cmdShortsPlan(exigeProyecto());
+    case 'shorts': {
+      const fotograma = resto.includes('--fotograma');
+      if (!fotograma && !resto.includes('--render')) return cmdShortsPlan(exigeProyecto());
+      return cmdShortsRender(exigeProyecto(), { fotograma });
+    }
     case 'resumen': {
       const i = process.argv.indexOf('--json');
       return cmdResumen(i > -1 ? process.argv[i + 1] : null);

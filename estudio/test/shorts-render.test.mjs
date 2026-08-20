@@ -1,76 +1,110 @@
 /**
- * Lo que puede salir mal al montar un Short y no se ve hasta tener el MP4
- * delante: que el separador de linea acabe impreso como una barra, que un
- * rotulo largo se salga del cuadro, o que la cama musical no sepa donde
- * callarse.
+ * Lo que hay que garantizar del montaje vertical: que ningun caracter se salga
+ * del cuadro, que el cierre no lleve simbolos raros delante y que la cama se
+ * abra donde el Short no tiene voz.
+ *
+ * El desbordamiento se comprueba dibujando de verdad, no contando caracteres:
+ * contar caracteres es lo que dejo media "o" de «sino» fuera del borde derecho.
  */
-import { construirAss, repartirLineas, formaDelShort } from '../lib/shortsRender.mjs';
-import { planearShort } from '../lib/shorts.mjs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import {
+  construirAss, formaDelShort, crearMedidor, disponerTexto, validarOverflow,
+} from '../lib/shortsRender.mjs';
 
 let fallos = 0;
 const check = (n, ok, d = '') => { console.log(`${ok ? 'ok   ' : 'FALLO'} ${n}${d ? ' — ' + d : ''}`); if (!ok) fallos++; };
 
-// --- reparto en lineas -----------------------------------------------------
-const l = repartirLineas('Si algo difícil ocurre, tú estarás conmigo.', 24, 3);
-check('reparte sin partir palabras', l.every((x) => x.length <= 24) && l.join(' ').split(/\s+/).length === 7,
-  JSON.stringify(l));
-check('respeta el maximo de lineas',
-  repartirLineas('uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece', 12, 3).length === 3);
+const dir = mkdtempSync(join(tmpdir(), 'shortsrender-'));
+const ANCHO = 1080;
+const ALTO = 1920;
+const MARGEN = 80;
+const SEGURO = ANCHO - 2 * MARGEN;
+const medir = crearMedidor({ ancho: ANCHO, tmp: join(dir, 'medidas') });
 
-// --- ASS -------------------------------------------------------------------
-const ass = construirAss({
-  cues: [{ inicio: 1.5, fin: 4.25, texto: 'Si algo difícil ocurre, tú estarás conmigo.' }],
-  cta: { inicio: 10, fin: 14.5, lineas: ['🌙 Continúa con la oración completa', 'Mira el video relacionado'] },
-  ancho: 1080, alto: 1920,
+// --- la medida mide ---------------------------------------------------------
+const anchoM = await medir('m', 76);
+const anchoI = await medir('i', 76);
+check('la medida distingue el ancho real de cada letra', anchoM > anchoI * 1.5,
+  `"m" ${anchoM}px contra "i" ${anchoI}px`);
+
+// Esta es la frase exacta del segundo 20 del short_01. Con 24 caracteres por
+// linea daba «circunstancias perfectas, sino» y la "o" final se salia.
+const LINEA_QUE_SE_SALIA = 'perfectas, sino en la paz que';
+check('la linea que se salia se mide como demasiado ancha',
+  (await medir(LINEA_QUE_SE_SALIA, 76)) > SEGURO,
+  `${await medir(LINEA_QUE_SE_SALIA, 76)}px contra ${SEGURO}px de ancho seguro`);
+
+// --- el reparto respeta el ancho seguro -------------------------------------
+const frase = 'No en una paz fabricada por circunstancias perfectas, sino en la paz que nace de saber.';
+const puesto = await disponerTexto({
+  texto: frase, medir, anchoSeguro: SEGURO, tamano: 76, tamanoMin: 60, maxLineas: 3,
 });
+let anchoMaximo = 0;
+for (const l of puesto.lineas) anchoMaximo = Math.max(anchoMaximo, await medir(l, puesto.tamano));
+check('ninguna linea repartida supera el ancho seguro', anchoMaximo <= SEGURO,
+  `la mas ancha ${anchoMaximo}px de ${SEGURO}px, a cuerpo ${puesto.tamano}`);
+check('no se pierde ni una palabra al repartir',
+  puesto.lineas.join(' ').split(/\s+/).join(' ') === frase.split(/\s+/).join(' '));
 
-// El fallo real: escapar DESPUES de unir convertia el propio \N en una barra
-// literal, y el subtitulo salia con un "\" impreso al final de cada linea.
-const dialogos = ass.split('\n').filter((x) => x.startsWith('Dialogue:'));
-const cuerpo = (d) => d.split(',').slice(9).join(',');
-check('el separador de linea no se imprime como barra',
-  !/\\\\N/.test(cuerpo(dialogos[0])) && cuerpo(dialogos[0]).includes('\\N'),
-  cuerpo(dialogos[0]));
-check('los acentos viajan sin tocar', cuerpo(dialogos[0]).includes('difícil'));
-check('los tiempos salen en centesimas', dialogos[0].includes('0:00:01.50') && dialogos[0].includes('0:00:04.25'));
-
-// Un rotulo de 34 caracteres a cuerpo 62 se sale de 1080 px por los dos lados.
-const cta = cuerpo(dialogos.at(-1));
-const lineasCta = cta.replace(/\{[^}]*\}/g, '').split('\\N');
-check('el rotulo de cierre se reparte para caber',
-  lineasCta.every((x) => x.length <= 22), JSON.stringify(lineasCta));
-check('el rotulo conserva el emoji', cta.includes('🌙'));
-check('el rotulo entra con fundido', cta.includes('\\fad('));
-
-// Las llaves del texto no pueden abrir una etiqueta de libass.
-const conLlaves = construirAss({
-  cues: [{ inicio: 0, fin: 1, texto: 'texto {\\b1} peligroso' }], ancho: 1080, alto: 1920,
+// Una palabra sola larguisima no puede colarse: hay que bajar el cuerpo.
+const largo = await disponerTexto({
+  texto: 'incomprensiblementeinterminable', medir, anchoSeguro: SEGURO,
+  tamano: 76, tamanoMin: 40, maxLineas: 3,
 });
-check('el texto no puede inyectar etiquetas',
-  !/\{\\b1\}/.test(conLlaves.split('\n').find((x) => x.startsWith('Dialogue:'))));
+check('una palabra que no cabe baja de cuerpo en vez de salirse',
+  (await medir(largo.lineas[0], largo.tamano)) <= SEGURO,
+  `cuerpo ${largo.tamano}`);
 
-// --- forma de la cama ------------------------------------------------------
-const timeline = {
-  fin_narracion_s: 100,
-  segmentos: [
-    { numero: 1, texto: 'uno dos', inicio: 10, fin: 14, duracion: 4 },
-    { numero: 2, texto: 'tres cuatro', inicio: 17, fin: 22, duracion: 5 },
-    { numero: 3, texto: 'cinco seis', inicio: 34, fin: 40, duracion: 6 },
-    { numero: 4, texto: 'siete ocho', inicio: 43, fin: 48, duracion: 5 },
+// --- la validacion sobre el ASS final ---------------------------------------
+const cues = [
+  { inicio: 0, fin: 3, lineas: puesto.lineas, tamano: puesto.tamano },
+];
+const cta = { inicio: 3.2, fin: 6, lineas: ['SIGAMOS ORANDO', 'Mira la oración completa'], tamano: 62 };
+
+const ass = join(dir, 'sano.ass');
+writeFileSync(ass, construirAss({ cues, cta, ancho: ANCHO, alto: ALTO, margen: MARGEN }));
+const problemas = await validarOverflow({ ass, cues, cta, ancho: ANCHO, alto: ALTO, margen: MARGEN });
+check('el ASS bien maquetado no da ningun desbordamiento', problemas.length === 0,
+  problemas.join(' | ') || 'ninguno');
+
+// Control: si la validacion no detectara un desbordamiento de verdad, un cero
+// no significaria nada. Se fuerza uno metiendo una linea sin repartir.
+const malo = [{ inicio: 0, fin: 3, lineas: [frase], tamano: 76 }];
+const assMalo = join(dir, 'malo.ass');
+writeFileSync(assMalo, construirAss({ cues: malo, ancho: ANCHO, alto: ALTO, margen: MARGEN }));
+const detectados = await validarOverflow({
+  ass: assMalo, cues: malo, cta: null, ancho: ANCHO, alto: ALTO, margen: MARGEN,
+});
+check('una linea sin repartir SI se detecta (control)', detectados.length === 1,
+  detectados[0] ?? 'no se detecto nada');
+
+// --- el cierre ---------------------------------------------------------------
+const textoAss = construirAss({ cues, cta, ancho: ANCHO, alto: ALTO, margen: MARGEN });
+check('el cierre lleva el texto aprobado', textoAss.includes('SIGAMOS ORANDO'));
+check('el cierre no lleva ningun simbolo delante del texto',
+  !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(textoAss),
+  'sin emoji ni simbolos');
+check('los margenes laterales van escritos en el estilo',
+  textoAss.includes(`,${MARGEN},${MARGEN},`));
+
+// --- la cama se abre donde no hay voz ---------------------------------------
+const plan = {
+  duracion: 30,
+  tramos: [
+    { tipo: 'voz', destino: 0, duracionDestino: 10 },
+    { tipo: 'silencio', destino: 10, duracionDestino: 2.5 },
+    { tipo: 'voz', destino: 12.5, duracionDestino: 13 },
+    { tipo: 'cta', destino: 25.5, duracionDestino: 4.5 },
   ],
 };
-const plan = planearShort({ timeline, desde: 2, hasta: 3, interludioInterno: 2.5, ctaSegundos: 4.5 });
 const forma = formaDelShort(plan, 1.5);
+check('el interludio y el cierre son huecos de la cama', forma.huecos.length === 2,
+  JSON.stringify(forma.huecos));
+check('la narracion acaba donde acaba la ultima voz', forma.finNarracion === 25.5);
 
-check('la cama se abre en el interludio acortado y en el cierre',
-  forma.huecos.length === 2, JSON.stringify(forma.huecos.map((h) => +h.duracion.toFixed(2))));
-check('el cierre queda declarado como hueco',
-  Math.abs(forma.huecos.at(-1).duracion - 4.5) < 0.01);
-// Sin esto la cama seguiria en nivel de voz durante el rotulo, que es justo
-// cuando tiene que sostener el silencio sola.
-check('la narracion termina antes del cierre',
-  forma.finNarracion <= plan.duracion - 4.5 + 0.01,
-  `${forma.finNarracion.toFixed(2)}s de ${plan.duracion.toFixed(2)}s`);
-
-console.log(`\n${fallos === 0 ? 'TODO OK' : fallos + ' FALLOS'}`);
+rmSync(dir, { recursive: true, force: true });
+console.log(`\n${medir.estadisticas().medidas} medidas`);
+console.log(`${fallos === 0 ? 'TODO OK' : fallos + ' FALLOS'}`);
 process.exit(fallos ? 1 : 0);

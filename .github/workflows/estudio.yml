@@ -21,6 +21,7 @@ on:
           - remux
           - diagnostico
           - shorts
+          - shorts-fotograma
           - shorts-render
         default: muestra
       proyecto:
@@ -76,7 +77,7 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render') && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render') && inputs.proyecto == ''
         run: |
           echo "::error::Ese modo necesita el nombre del proyecto."
           exit 1
@@ -169,7 +170,7 @@ jobs:
       # ------------------------------------------------------------- importar
 
       - name: Comprobar los archivos subidos
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
         working-directory: estudio/proyectos/${{ inputs.proyecto }}
         run: |
           echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
@@ -191,13 +192,13 @@ jobs:
       # Deduce los limites de bloque de las duraciones del audio. No pisa un
       # edit_plan.json escrito a mano: ese seria la verdad editorial.
       - name: Generar el plan de edicion
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
         working-directory: estudio
         run: |
           node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
         working-directory: estudio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -296,6 +297,24 @@ jobs:
       # Solo propone: que parrafos, que tiempos y donde caen los cortes. La
       # decision de que trozo del video se convierte en Short es editorial y hay
       # que poder leerla antes de renderizar nada.
+      # Fotogramas sueltos con los subtitulos ya puestos sobre la escena. Donde
+      # cae el texto sobre una imagen compuesta —si tapa una cara, por ejemplo—
+      # no se decide con numeros: se mira antes de gastar el render.
+      - name: Fotogramas para revisar la composicion
+        if: inputs.modo == 'shorts-fotograma'
+        working-directory: estudio
+        run: |
+          node cli.mjs shorts "${{ inputs.proyecto }}" --fotograma | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar los fotogramas como artifact
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'shorts-fotograma'
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-fotogramas-${{ inputs.proyecto }}
+          path: estudio/proyectos/${{ inputs.proyecto }}/output/shorts/*.png
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Montar los Shorts
         if: inputs.modo == 'shorts-render'
         working-directory: estudio
@@ -371,7 +390,7 @@ jobs:
           retention-days: 30
 
       - name: Fin
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Terminado. No se ha publicado, ni hecho Shorts, ni miniatura." >> "$GITHUB_STEP_SUMMARY"

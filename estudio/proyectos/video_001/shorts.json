@@ -6,7 +6,9 @@
     "interludio_interno_s": 2.5,
     "_interludio": "Un interludio de 10s es un respiro en media hora y un agujero en cuarenta segundos. Dentro de un Short se acorta; el recorte queda anotado en el plan.",
     "cta_s": 4.5,
-    "_cta": "Cierre solo visual, sobre la cama musical. Sin voz nueva. Texto aprobado el 2026-08-20."
+    "_cta": "Cierre solo visual, sobre la cama musical. Sin voz nueva. Texto aprobado el 2026-08-20. Sin simbolos delante: el emoji anterior lo dibujaba libass en blanco monocromo, que no es lo que se veria al escribirlo en un movil.",
+    "margen_seguro_px": 80,
+    "_margen": "Ningun caracter puede salir de esta franja. El reparto de lineas no cuenta caracteres: mide la tinta dibujada por el mismo libass que hace el render, y antes de renderizar se comprueba rotulo a rotulo sobre el ASS definitivo."
   },
   "shorts": [
     {
@@ -35,8 +37,8 @@
         ]
       ],
       "cta": [
-        "🌙 Continúa con la oración completa",
-        "Mira el video relacionado"
+        "SIGAMOS ORANDO",
+        "Mira la oración completa"
       ],
       "parrafos": [
         43,
@@ -70,8 +72,8 @@
         ]
       ],
       "cta": [
-        "🌙 Continúa con la oración completa",
-        "Mira el video relacionado"
+        "SIGAMOS ORANDO",
+        "Mira la oración completa"
       ],
       "parrafos": [
         74,
