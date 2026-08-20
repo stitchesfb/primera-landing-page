@@ -1217,7 +1217,7 @@ async function cmdShortsRender(id, opciones = {}) {
   );
   // La escena vertical esta compuesta para 9:16: se usa entera. La horizontal
   // solo entra si no hay vertical, y entonces sí hay que recortarla.
-  const vertical = join(proyecto.dir, 'escena_vertical.png');
+  const vertical = join(proyecto.dir, obj.imagen ?? 'escena_vertical.png');
   const imagen = existsSync(vertical) ? vertical : join(proyecto.dir, 'escena_nocturna.png');
   if (!existsSync(imagen)) {
     throw new Error(
@@ -1346,7 +1346,9 @@ async function cmdShortsRender(id, opciones = {}) {
     }
 
     const ass = join(tmp, 'subs.ass');
-    writeFileSync(ass, construirAss({ cues, cta, ancho, alto, margen: MARGEN_SEGURO }));
+    writeFileSync(ass, construirAss({
+      cues, cta, ancho, alto, margen: MARGEN_SEGURO, bandaCta: obj.banda_cta ?? 0.19,
+    }));
     console.log(`  subtitulos      ${cues.length} rotulos de ${palabras.length} palabras, quemados`);
 
     // Ningun subtitulo puede pisar el cierre: ahi manda el rotulo.

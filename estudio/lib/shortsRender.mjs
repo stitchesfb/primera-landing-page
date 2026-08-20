@@ -262,6 +262,7 @@ const escaparAss = (t) => t.replace(/\\/g, '\\\\').replace(/\{/g, '(').replace(/
  */
 export function construirAss({
   cues, cta, ancho, alto, fuente = 'DejaVu Sans', contorno = 5, margen = 80,
+  bandaVoz = 0.16, bandaCta = 0.19,
 }) {
   const estilo = (nombre, tamano, alineacion, margenV) =>
     `Style: ${nombre},${fuente},${tamano},&H00FFFFFF,&H00FFFFFF,&HC8000000,&H00000000,` +
@@ -284,8 +285,11 @@ export function construirAss({
       'Shadow, Alignment, MarginL, MarginR, MarginV, Encoding',
     // Blanco con contorno negro grueso: el fondo es una escena nocturna con
     // zonas claras, y sin contorno el texto se pierde justo donde cae una.
-    estilo('Voz', 76, 2, Math.round(alto * 0.16)),
-    estilo('Cta', 62, 5, 0),
+    estilo('Voz', 76, 2, Math.round(alto * bandaVoz)),
+    // El cierre tambien va anclado abajo, no centrado. Centrado cae sobre las
+    // caras de la escena; abajo se apoya en la manta, que es la zona vacia, y
+    // ademas repite el sitio donde el espectador ya venia leyendo.
+    estilo('Cta', 62, 2, Math.round(alto * bandaCta)),
     '',
     '[Events]',
     'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text',
