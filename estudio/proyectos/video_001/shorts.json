@@ -6,22 +6,78 @@
     "interludio_interno_s": 2.5,
     "_interludio": "Un interludio de 10s es un respiro en media hora y un agujero en cuarenta segundos. Dentro de un Short se acorta; el recorte queda anotado en el plan.",
     "cta_s": 4.5,
-    "_cta": "Cierre solo visual, sobre la cama musical. Sin voz nueva."
+    "_cta": "Cierre solo visual, sobre la cama musical. Sin voz nueva. Texto aprobado el 2026-08-20."
   },
   "shorts": [
     {
       "id": "short_01",
       "tema": "Salmo 4:8 — acostarse en paz, entregar lo que preocupa",
-      "objetivo_s": [35, 45],
-      "candidatos": [[43, 45], [43, 46], [42, 45], [43, 47]],
-      "cta": ["La oración completa", "en el canal"]
+      "objetivo_s": [
+        35,
+        45
+      ],
+      "candidatos": [
+        [
+          43,
+          45
+        ],
+        [
+          43,
+          46
+        ],
+        [
+          42,
+          45
+        ],
+        [
+          43,
+          47
+        ]
+      ],
+      "cta": [
+        "🌙 Continúa con la oración completa",
+        "Mira el video relacionado"
+      ],
+      "parrafos": [
+        43,
+        46
+      ],
+      "_aprobado": "Aprobado 43-46 (~33.1s) por encima del rango 35-45: cerrar en «Si algo dificil ocurre, tu estaras conmigo» vale mas que estirar hasta el 47 y dejar la anafora de los parrafos 46-49 a medias."
     },
     {
       "id": "short_02",
       "tema": "Salmo 91:1-2 — habitar al abrigo del Altísimo",
-      "objetivo_s": [40, 50],
-      "candidatos": [[75, 77], [75, 76], [74, 77], [75, 78]],
-      "cta": ["La oración completa", "en el canal"]
+      "objetivo_s": [
+        40,
+        50
+      ],
+      "candidatos": [
+        [
+          75,
+          77
+        ],
+        [
+          75,
+          76
+        ],
+        [
+          74,
+          77
+        ],
+        [
+          75,
+          78
+        ]
+      ],
+      "cta": [
+        "🌙 Continúa con la oración completa",
+        "Mira el video relacionado"
+      ],
+      "parrafos": [
+        74,
+        77
+      ],
+      "_aprobado": "Aprobado 74-77 (~46.2s). Entra con «Descansar en tu cuidado.», mas suave que arrancar en «Padre, tu Palabra dice...»."
     }
   ]
 }

@@ -37,6 +37,9 @@ import {
   diagnosticar, repararContenedor, pruebaDecodificacion, decodificarTodo,
 } from './lib/diagnostico.mjs';
 import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
+import {
+  construirVoz, formaDelShort, construirAss, renderizarShort,
+} from './lib/shortsRender.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
 
@@ -1174,6 +1177,182 @@ async function imprimirDiagnostico(ruta, d, { completo = false } = {}) {
  * Short evalua los rangos de parrafos candidatos con las duraciones REALES del
  * audio ya montado y dice cual cae dentro del objetivo.
  */
+/**
+ * Renderiza los Shorts ya aprobados.
+ *
+ * Ni un credito de TTS: la voz se recorta del audio que ya existe. La musica
+ * se sintetiza de nuevo con el generador aprobado en vez de recortarse del
+ * video largo, porque el Short quita tiempo por dentro al acortar los
+ * interludios y empalmar dos trozos de una cama continua meteria un clic justo
+ * donde no hay voz que lo tape.
+ */
+async function cmdShortsRender(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const rutaAlignment = join(salida, 'alignment.json');
+  const rutaConfig = join(proyecto.dir, 'shorts.json');
+  const audio = join(salida, 'audio.mp3');
+
+  for (const [ruta, quien] of [[rutaTimeline, 'timeline.json'], [rutaAlignment, 'alignment.json'], [audio, 'audio.mp3']]) {
+    if (!existsSync(ruta)) throw new Error(`Falta ${id}/output/${basename(ruta)}. Ejecuta antes: importar ${id}`);
+  }
+
+  const { timeline, alignment, cfg, obj } = leerDatosShorts(
+    proyecto, rutaTimeline, rutaAlignment, rutaConfig
+  );
+  const imagen = join(proyecto.dir, 'escena_nocturna.png');
+  if (!existsSync(imagen)) throw new Error(`No existe la imagen de fondo: ${imagen}`);
+
+  const base = canal.render;
+  const pre = base.presets[proyecto.plan?.pilar ?? 'noche'] ?? base.presets.noche;
+  const ancho = obj.ancho ?? 1080;
+  const alto = obj.alto ?? 1920;
+
+  titulo(`Render de Shorts — ${id}`);
+  console.log(`Formato         ${ancho}x${alto} · ${base.fps} fps · crf ${base.crf}`);
+  console.log(`Escena          ${basename(imagen)} recortada a 9:16, sin deformar`);
+  console.log(c.dim('Sin TTS: la voz sale de audio.mp3; la musica, del generador aprobado.'));
+
+  const dirShorts = join(salida, 'shorts');
+  mkdirSync(dirShorts, { recursive: true });
+
+  // Las motas son las mismas de siempre, en vertical. Menos densidad: el
+  // lienzo tiene la mitad de ancho y la misma cantidad se veria como lluvia.
+  const tmpComun = join(dirShorts, '.tmp');
+  mkdirSync(tmpComun, { recursive: true });
+  process.stdout.write('\n  particulas verticales…');
+  const loop = join(tmpComun, 'motas.mov');
+  const p = await generarLoop({
+    salida: loop, ancho, alto, fps: base.fps,
+    periodo: pre.particulas.periodo_s,
+    cuantas: Math.round(pre.particulas.cuantas * 0.6),
+  });
+  console.log(` ${p.motas} motas, bucle de ${p.periodo}s`);
+
+  const hechos = [];
+  for (const corto of cfg.shorts) {
+    if (!corto.parrafos) {
+      console.log(c.ambar(`\n  ${corto.id}: sin rango aprobado en shorts.json, se salta.`));
+      continue;
+    }
+    const [desde, hasta] = corto.parrafos;
+    titulo(`${corto.id} — ${corto.tema}`);
+
+    const plan = planearShort({
+      timeline, desde, hasta,
+      interludioInterno: obj.interludio_interno_s,
+      ctaSegundos: obj.cta_s,
+    });
+    console.log(`Parrafos        ${desde}-${hasta} · ${plan.duracion.toFixed(1)}s`);
+    console.log(`Ventana         ${mmss(plan.inicioEnVideo)} → ${mmss(plan.finEnVideo)} del video largo`);
+
+    const tmp = join(dirShorts, `.tmp-${corto.id}`);
+    mkdirSync(tmp, { recursive: true });
+
+    process.stdout.write('  voz…');
+    const voz = join(tmp, 'voz.wav');
+    const v = await construirVoz({ audio, plan, salidaWav: voz, tmp: join(tmp, 'trozos') });
+    const desvioVoz = Math.abs(v.duracion - plan.duracion);
+    console.log(` ${v.piezas} tramos, ${v.duracion.toFixed(2)}s ` +
+      (desvioVoz <= 0.05 ? c.verde('✓') : c.rojo(`✗ ${desvioVoz.toFixed(2)}s fuera del plan`)));
+    if (desvioVoz > 0.05) throw new Error(`La voz del ${corto.id} no cuadra con el plan.`);
+
+    process.stdout.write('  cama musical…');
+    const m = pre.musica;
+    const forma = formaDelShort(plan, m.rampa_s);
+    const apertura = (t) => aperturaEn(t, forma);
+    const envolvente = (t) => nivelEn(t, {
+      ...forma,
+      cierre: { fadeIn: 1.5, fadeOut: 1.2, duracionTotal: plan.duracion },
+      bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
+    });
+    const grupos = planearPiano({ duracionTotal: plan.duracion, apertura });
+    const wav = join(tmp, 'cama.wav');
+    generarCama({ segundos: plan.duracion, offset: 0, envolvente, apertura, grupos, salidaWav: wav });
+    console.log(` ${grupos.length} grupos de piano · ${m.bajo_voz_db} dB bajo voz`);
+
+    // Subtitulos: menos caracteres por linea que en horizontal, porque el
+    // ancho util es poco mas de la mitad.
+    const palabras = palabrasDelShort(plan, alignment.palabras);
+    const cues = agruparEnSubtitulos(
+      palabras,
+      { ...canal.subtitulos, max_caracteres_linea: 24, max_lineas: 3 },
+      plan.duracion
+    );
+    const ctaTramo = plan.tramos.find((t) => t.tipo === 'cta');
+    const ass = join(tmp, 'subs.ass');
+    writeFileSync(ass, construirAss({
+      cues, ancho, alto,
+      cta: ctaTramo && corto.cta?.length
+        ? { inicio: ctaTramo.destino, fin: plan.duracion, lineas: corto.cta }
+        : null,
+    }));
+    console.log(`  subtitulos      ${cues.length} rotulos de ${palabras.length} palabras, quemados`);
+
+    // Ningun subtitulo puede pisar el cierre: ahi manda el rotulo.
+    const invasores = ctaTramo ? cues.filter((c2) => c2.fin > ctaTramo.destino + 0.01) : [];
+    if (invasores.length) throw new Error(`${invasores.length} subtitulos invaden el cierre del ${corto.id}.`);
+
+    process.stdout.write('  render…');
+    const destino = join(dirShorts, `${corto.id}.mp4`);
+    const t0 = Date.now();
+    await renderizarShort({
+      imagen, particulas: loop, voz, musica: wav, ass, salida: destino,
+      ancho, alto, fps: base.fps, zoomTotal: 0.05, foco: pre.foco,
+      crf: base.crf, preset: base.preset_x264, duracion: plan.duracion,
+    });
+    console.log(` hecho en ${((Date.now() - t0) / 1000).toFixed(0)}s`);
+
+    const real = await duracionSegundos(destino);
+    const desvio = Math.abs(real - plan.duracion);
+    const bytes = statSync(destino).size;
+    console.log(`  ${corto.id}.mp4    ${real.toFixed(2)}s · ${(bytes / 1048576).toFixed(1)} MB · ${ancho}x${alto}`);
+    console.log(desvio <= 0.15
+      ? c.verde(`  ✓ Duracion cuadra con el plan (desvio ${(desvio * 1000).toFixed(0)} ms)`)
+      : c.rojo(`  ✗ Duracion no cuadra: ${real.toFixed(2)}s frente a ${plan.duracion.toFixed(2)}s`));
+    if (desvio > 0.15) process.exitCode = 1;
+
+    rmSync(tmp, { recursive: true, force: true });
+    hechos.push({ id: corto.id, duracion: real, bytes });
+  }
+
+  rmSync(tmpComun, { recursive: true, force: true });
+
+  titulo('Shorts');
+  for (const h of hechos) {
+    console.log(`  ${h.id}.mp4    ${h.duracion.toFixed(1)}s · ${(h.bytes / 1048576).toFixed(1)} MB`);
+  }
+  console.log(c.dim('\n  Nada publicado. video_001 y sus artifacts finales, intactos.'));
+}
+
+/**
+ * Lee lo que necesitan tanto el plan como el render de Shorts.
+ *
+ * timeline.json guarda TRAMOS de audio —los trozos en que se corto cada bloque
+ * para meter los interludios—, no parrafos. Un Short se elige por parrafos,
+ * asi que los limites se reconstruyen de la alineacion: las palabras vienen
+ * con tiempo absoluto y el texto de cada parrafo dice cuantas le tocan.
+ */
+function leerDatosShorts(proyecto, rutaTimeline, rutaAlignment, rutaConfig) {
+  const timelineCrudo = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const alignment = JSON.parse(readFileSync(rutaAlignment, 'utf8'));
+  const cfg = JSON.parse(readFileSync(rutaConfig, 'utf8'));
+
+  const tiempos = tiemposPorParrafo(alignment.palabras, proyecto.parrafos);
+  const timeline = {
+    ...timelineCrudo,
+    segmentos: tiempos.map((t, i) => ({
+      numero: i + 1,
+      texto: proyecto.parrafos[i],
+      inicio: t.inicio,
+      fin: t.fin,
+      duracion: t.fin - t.inicio,
+    })),
+  };
+  return { timeline, alignment, cfg, obj: cfg.objetivos ?? {} };
+}
+
 async function cmdShortsPlan(id) {
   const proyecto = cargarProyecto(id);
   const salida = asegurarSalida(proyecto);
@@ -1186,26 +1365,9 @@ async function cmdShortsPlan(id) {
   }
   if (!existsSync(rutaConfig)) throw new Error(`Falta ${id}/shorts.json`);
 
-  const timelineCrudo = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
-  const alignment = JSON.parse(readFileSync(rutaAlignment, 'utf8'));
-  const cfg = JSON.parse(readFileSync(rutaConfig, 'utf8'));
-  const obj = cfg.objetivos ?? {};
-
-  // timeline.json guarda TRAMOS de audio —los trozos en que se corto cada
-  // bloque para meter los interludios—, no parrafos. Un Short se elige por
-  // parrafos, asi que los limites se reconstruyen de la alineacion: las
-  // palabras vienen con tiempo absoluto y el texto dice cuantas lleva cada uno.
-  const tiempos = tiemposPorParrafo(alignment.palabras, proyecto.parrafos);
-  const timeline = {
-    ...timelineCrudo,
-    segmentos: tiempos.map((t, i) => ({
-      numero: i + 1,
-      texto: proyecto.parrafos[i],
-      inicio: t.inicio,
-      fin: t.fin,
-      duracion: t.fin - t.inicio,
-    })),
-  };
+  const { timeline, alignment, cfg, obj } = leerDatosShorts(
+    proyecto, rutaTimeline, rutaAlignment, rutaConfig
+  );
 
   titulo(`Plan de Shorts — ${id}`);
   console.log(`Video largo     ${mmss(timeline.duracion_total_s)} · ${timeline.segmentos.length} parrafos`);
@@ -1218,8 +1380,13 @@ async function cmdShortsPlan(id) {
     titulo(`${corto.id} — ${corto.tema}`);
     console.log(`Objetivo        ${minimo}-${maximo}s\n`);
 
+    // Una vez aprobado un rango, el plan deja de buscar: reevaluar candidatos
+    // podria "mejorar" la eleccion por su cuenta y renderizar otra cosa.
+    const rangos = corto.parrafos ? [corto.parrafos] : corto.candidatos;
+    if (corto.parrafos) console.log(c.dim(`  Rango aprobado, sin buscar alternativas.\n`));
+
     const evaluados = [];
-    for (const [desde, hasta] of corto.candidatos) {
+    for (const [desde, hasta] of rangos) {
       let plan;
       try {
         plan = planearShort({
@@ -1816,7 +1983,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales. No renderiza ni publica\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales (--render los monta)\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1869,7 +2036,10 @@ async function principal() {
         salida: i > -1 ? resto[i + 1] : undefined,
       });
     }
-    case 'shorts': return cmdShortsPlan(exigeProyecto());
+    case 'shorts':
+      return resto.includes('--render')
+        ? cmdShortsRender(exigeProyecto())
+        : cmdShortsPlan(exigeProyecto());
     case 'resumen': {
       const i = process.argv.indexOf('--json');
       return cmdResumen(i > -1 ? process.argv[i + 1] : null);

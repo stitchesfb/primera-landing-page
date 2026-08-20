@@ -21,6 +21,7 @@ on:
           - remux
           - diagnostico
           - shorts
+          - shorts-render
         default: muestra
       proyecto:
         description: 'Para importar, muestra, render y remux: carpeta bajo estudio/proyectos/ (ej. video_001)'
@@ -75,7 +76,7 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts') && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render') && inputs.proyecto == ''
         run: |
           echo "::error::Ese modo necesita el nombre del proyecto."
           exit 1
@@ -168,7 +169,7 @@ jobs:
       # ------------------------------------------------------------- importar
 
       - name: Comprobar los archivos subidos
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
         working-directory: estudio/proyectos/${{ inputs.proyecto }}
         run: |
           echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
@@ -190,13 +191,13 @@ jobs:
       # Deduce los limites de bloque de las duraciones del audio. No pisa un
       # edit_plan.json escrito a mano: ese seria la verdad editorial.
       - name: Generar el plan de edicion
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
         working-directory: estudio
         run: |
           node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
         working-directory: estudio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -295,6 +296,21 @@ jobs:
       # Solo propone: que parrafos, que tiempos y donde caen los cortes. La
       # decision de que trozo del video se convierte en Short es editorial y hay
       # que poder leerla antes de renderizar nada.
+      - name: Montar los Shorts
+        if: inputs.modo == 'shorts-render'
+        working-directory: estudio
+        run: |
+          node cli.mjs shorts "${{ inputs.proyecto }}" --render | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar los Shorts como artifact
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'shorts-render'
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-${{ inputs.proyecto }}
+          path: estudio/proyectos/${{ inputs.proyecto }}/output/shorts/*.mp4
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Proponer los Shorts
         if: inputs.modo == 'shorts'
         working-directory: estudio
@@ -355,7 +371,7 @@ jobs:
           retention-days: 30
 
       - name: Fin
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-render'
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Terminado. No se ha publicado, ni hecho Shorts, ni miniatura." >> "$GITHUB_STEP_SUMMARY"
