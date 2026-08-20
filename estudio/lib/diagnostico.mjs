@@ -103,6 +103,7 @@ export async function diagnosticar(ruta) {
   const paqAudio = await primerosPaquetes(ruta, 'a:0');
 
   const anomalias = [];
+  const notas = [];
   const senal = (grave, texto, flags = []) => anomalias.push({ grave, texto, flags });
 
   // 1. Indice delante de los datos. Sin esto un reproductor web tiene que
@@ -116,29 +117,35 @@ export async function diagnosticar(ruta) {
       'el reproductor no puede empezar hasta bajar el archivo entero', ['-movflags +faststart']);
   }
 
-  // 2. Listas de edicion. Un desplazamiento distinto del recorte estandar del
-  //    AAC hace que cada reproductor arranque en un sitio distinto.
+  // 2. Listas de edicion.
+  //
+  //    CASI TODAS SON NORMALES, y confundirlas con un defecto es la forma mas
+  //    facil de "arreglar" un archivo sano hasta romperlo. Los dos casos
+  //    corrientes son compensaciones de retardo del codificador:
+  //
+  //      - video con fotogramas B: el primer DTS es negativo para que el primer
+  //        PTS sea 0, y la lista de edicion recorta ese adelanto. Con 3
+  //        fotogramas B y base 1/15360 a 30 fps son 1024 unidades: 67 ms.
+  //      - audio AAC: ~1024 muestras de precarga, 23 ms a 44,1 kHz.
+  //
+  //    Lo que sí desplaza el arranque de verdad es un hueco vacio (media_time
+  //    -1) o un recorte que no se explica por el retardo del codec.
+  const RETARDO_MAXIMO_S = 0.5;
   for (const p of moov.pistas) {
     if (!p.edicion || p.edicion.length === 0) continue;
-    if (p.edicion.length > 1) {
-      senal(true, `pista ${p.id} (${p.tipo}): lista de edicion con ${p.edicion.length} entradas`,
-        ['-ignore_editlist 1']);
-    }
-    for (const e of p.edicion) {
+    for (const [i, e] of p.edicion.entries()) {
       if (e.tiempoMedio === -1) {
-        senal(true, `pista ${p.id} (${p.tipo}): la lista de edicion empieza con un hueco vacio ` +
-          `de ${(e.duracion / (moov.mvhd?.escala ?? 1000)).toFixed(3)}s`, ['-ignore_editlist 1']);
-      } else if (p.tipo === 'vide' && e.tiempoMedio !== 0) {
-        senal(true, `pista ${p.id} (video): la lista de edicion desplaza el arranque ` +
-          `${e.tiempoMedio} unidades (${(e.tiempoMedio / p.escala).toFixed(3)}s)`, ['-ignore_editlist 1']);
-      } else if (p.tipo === 'soun' && e.tiempoMedio !== 0) {
-        // En audio AAC lo normal es un recorte de ~1024 muestras: el retardo
-        // del codificador. Solo llama la atencion si es mucho mayor.
-        const muestras = e.tiempoMedio;
-        if (muestras > 4096) {
-          senal(true, `pista ${p.id} (audio): la lista de edicion recorta ${muestras} muestras ` +
-            `(${(muestras / p.escala).toFixed(3)}s), muy por encima del retardo normal del AAC`,
-            ['-ignore_editlist 1']);
+        const hueco = e.duracion / (moov.mvhd?.escala ?? 1000);
+        senal(true, `pista ${p.id} (${p.tipo}): la lista de edicion abre con un hueco vacio ` +
+          `de ${hueco.toFixed(3)}s, que retrasa la pista frente a la otra`, ['-ignore_editlist 1']);
+      } else if (e.tiempoMedio > 0) {
+        const segundos = e.tiempoMedio / p.escala;
+        if (segundos > RETARDO_MAXIMO_S) {
+          senal(true, `pista ${p.id} (${p.tipo}): la lista de edicion recorta ${segundos.toFixed(3)}s, ` +
+            'muy por encima del retardo del codificador', ['-ignore_editlist 1']);
+        } else {
+          notas.push(`pista ${p.id} (${p.tipo}): entrada ${i} recorta ${e.tiempoMedio} unidades ` +
+            `(${segundos.toFixed(3)}s) — retardo del codificador, es lo normal`);
         }
       }
     }
@@ -155,6 +162,9 @@ export async function diagnosticar(ruta) {
   }
 
   // 4. Tiempos: arranque, negativos y monotonia.
+  //
+  //    start_time ya viene con la lista de edicion aplicada, asi que es la hora
+  //    a la que el reproductor vera el primer fotograma. Esa es la que importa.
   const inicioV = Number(video?.start_time ?? 0);
   const inicioA = Number(audio?.start_time ?? 0);
   if (Math.abs(inicioV) > 0.001) {
@@ -169,17 +179,36 @@ export async function diagnosticar(ruta) {
     senal(true, `video y audio no arrancan a la vez: ${inicioV.toFixed(3)}s contra ${inicioA.toFixed(3)}s`,
       ['-avoid_negative_ts make_zero']);
   }
-  // Un AAC siempre trae delante una trama de precarga con DTS negativo —el
-  // retardo del codificador, ~1024 muestras— que la lista de edicion recorta.
-  // Eso es lo normal en cualquier MP4; marcarlo daria la alarma en un archivo
-  // sano. Solo cuenta lo que va mas alla de esa trama.
-  const TOLERANCIA_DTS = { video: 0, audio: -0.05 };
+  // Un DTS negativo al principio NO es un defecto: es como se declara el
+  // retardo de reordenacion. Con fotogramas B el decodificador recibe las
+  // imagenes en otro orden del que las muestra, asi que los primeros DTS van
+  // por delante de cero para que el primer PTS caiga exactamente en cero. Lo
+  // mismo con la trama de precarga del AAC. Lo que sí seria un defecto es que
+  // el primer PTS —la hora a la que se VE— fuera negativo, o que el adelanto
+  // fuera tan grande que no lo explique ningun codec.
+  const ADELANTO_MAXIMO_S = 0.5;
+  const pistaPorTipo = { video: 'vide', audio: 'soun' };
   for (const [nombre, paquetes] of [['video', paqVideo], ['audio', paqAudio]]) {
-    const negativos = paquetes.filter((p) => Number(p.dts_time) < TOLERANCIA_DTS[nombre]);
-    if (negativos.length) {
-      senal(true, `${nombre}: ${negativos.length} de los primeros paquetes empiezan antes de cero ` +
-        `(el mas temprano en ${Math.min(...negativos.map((p) => Number(p.dts_time))).toFixed(3)}s)`,
+    if (!paquetes.length) continue;
+    // Cuanto recorta la lista de edicion de esta pista: es exactamente lo que
+    // puede haber por delante de cero sin que sea un defecto.
+    const pista = moov.pistas.find((p) => p.tipo === pistaPorTipo[nombre]);
+    const recorte = pista?.edicion?.find((e) => e.tiempoMedio > 0)
+      ? pista.edicion.find((e) => e.tiempoMedio > 0).tiempoMedio / pista.escala
+      : 0;
+    const primerPts = Math.min(...paquetes.map((p) => Number(p.pts_time)));
+    if (primerPts < -recorte - 0.001) {
+      senal(true, `${nombre}: el primer PTS es ${primerPts.toFixed(3)}s y la lista de edicion solo ` +
+        `recorta ${recorte.toFixed(3)}s: queda contenido antes del inicio`,
         ['-avoid_negative_ts make_zero']);
+    }
+    const masTemprano = Math.min(...paquetes.map((p) => Number(p.dts_time)));
+    if (masTemprano < -ADELANTO_MAXIMO_S) {
+      senal(true, `${nombre}: los DTS arrancan en ${masTemprano.toFixed(3)}s, ` +
+        'demasiado adelantados para ser retardo de codec', ['-avoid_negative_ts make_zero']);
+    } else if (masTemprano < 0) {
+      notas.push(`${nombre}: los DTS arrancan en ${masTemprano.toFixed(3)}s con el primer PTS en ` +
+        `${primerPts.toFixed(3)}s — retardo de reordenacion, es lo normal`);
     }
     for (let i = 1; i < paquetes.length; i++) {
       if (Number(paquetes[i].dts) < Number(paquetes[i - 1].dts)) {
@@ -212,7 +241,7 @@ export async function diagnosticar(ruta) {
 
   return {
     superiores: sup, ftyp, moov, probe, video, audio,
-    paqVideo, paqAudio, anomalias,
+    paqVideo, paqAudio, anomalias, notas,
     graves: anomalias.filter((a) => a.grave).length,
   };
 }

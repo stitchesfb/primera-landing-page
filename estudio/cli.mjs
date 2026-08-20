@@ -1045,6 +1045,20 @@ async function cmdDiagnosticar(ruta, opciones = {}) {
   const d2 = await diagnosticar(destino);
   await imprimirDiagnostico(destino, d2, { completo: opciones.completo });
 
+  // Una "reparacion" que deja el archivo peor que como estaba no se entrega.
+  // Reescribir el contenedor puede introducir problemas propios —un hueco vacio
+  // al principio, por ejemplo— y sin esta comprobacion se irian con el archivo.
+  if (d2.graves > d.graves) {
+    rmSync(destino, { force: true });
+    throw new Error(
+      `La reparacion EMPEORA el archivo: ${d.graves} anomalias graves antes, ${d2.graves} despues.\n` +
+      '    Se ha borrado el archivo corregido. El original queda como estaba.'
+    );
+  }
+  if (d2.graves > 0) {
+    console.log(c.ambar(`\n  Quedan ${d2.graves} anomalias graves sin resolver por remux.`));
+  }
+
   // El H.264 tiene que seguir siendo el mismo: reescribir el contenedor no
   // puede cambiar un solo bit de imagen.
   const [antes, despues] = [await huellaVideo(ruta), await huellaVideo(destino)];
@@ -1130,6 +1144,11 @@ async function imprimirDiagnostico(ruta, d, { completo = false } = {}) {
     console.log(` ${t.ok ? c.verde('✓ sin errores') : c.rojo('✗ con errores')} · ` +
       `${t.fotogramas} fotogramas en ${t.segundos.toFixed(0)}s`);
     for (const e of t.errores) console.log(c.rojo(`      ${e}`));
+  }
+
+  if (d.notas?.length) {
+    console.log(`\nMedido y normal`);
+    for (const n of d.notas) console.log(c.dim(`  · ${n}`));
   }
 
   titulo('Anomalias');
