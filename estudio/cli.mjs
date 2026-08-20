@@ -1186,10 +1186,26 @@ async function cmdShortsPlan(id) {
   }
   if (!existsSync(rutaConfig)) throw new Error(`Falta ${id}/shorts.json`);
 
-  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const timelineCrudo = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
   const alignment = JSON.parse(readFileSync(rutaAlignment, 'utf8'));
   const cfg = JSON.parse(readFileSync(rutaConfig, 'utf8'));
   const obj = cfg.objetivos ?? {};
+
+  // timeline.json guarda TRAMOS de audio —los trozos en que se corto cada
+  // bloque para meter los interludios—, no parrafos. Un Short se elige por
+  // parrafos, asi que los limites se reconstruyen de la alineacion: las
+  // palabras vienen con tiempo absoluto y el texto dice cuantas lleva cada uno.
+  const tiempos = tiemposPorParrafo(alignment.palabras, proyecto.parrafos);
+  const timeline = {
+    ...timelineCrudo,
+    segmentos: tiempos.map((t, i) => ({
+      numero: i + 1,
+      texto: proyecto.parrafos[i],
+      inicio: t.inicio,
+      fin: t.fin,
+      duracion: t.fin - t.inicio,
+    })),
+  };
 
   titulo(`Plan de Shorts — ${id}`);
   console.log(`Video largo     ${mmss(timeline.duracion_total_s)} · ${timeline.segmentos.length} parrafos`);

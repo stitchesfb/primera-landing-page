@@ -15,13 +15,22 @@
  * De esa lista salen a la vez el audio, los subtitulos y la duracion.
  */
 
-/** Silencio entre dos parrafos consecutivos en el audio ya montado. */
-function huecoEntre(timeline, numero) {
-  const h = timeline.huecos.find((x) => x.trasParrafo === numero);
-  return h ? { inicio: h.inicio, duracion: h.duracion, tipo: h.tipo } : null;
-}
-
 const seg = (timeline, numero) => timeline.segmentos.find((s) => s.numero === numero);
+
+/**
+ * Silencio real entre el parrafo `numero` y el siguiente.
+ *
+ * Se mide entre la ultima palabra de uno y la primera del otro, no se lee del
+ * plan de edicion. El plan dice lo que se pidio; la alineacion dice lo que hay,
+ * que incluye ademas la respiracion que trajo la propia grabacion.
+ */
+function huecoEntre(timeline, numero) {
+  const actual = seg(timeline, numero);
+  const siguiente = seg(timeline, numero + 1);
+  if (!actual || !siguiente) return null;
+  const duracion = siguiente.inicio - actual.fin;
+  return duracion > 0 ? { inicio: actual.fin, duracion } : null;
+}
 
 /**
  * Construye un Short a partir de un rango de parrafos.
@@ -49,6 +58,7 @@ export function planearShort({
   // Respiro de entrada: sale del silencio que precede al primer parrafo.
   const huecoAntes = huecoEntre(timeline, desde - 1);
   const disponibleAntes = huecoAntes ? huecoAntes.duracion : primero.inicio;
+  if (disponibleAntes < 0) throw new Error(`El parrafo ${desde} empieza antes de que acabe el anterior`);
   const entrada = Math.max(0, Math.min(entradaMax, disponibleAntes / 2));
 
   // Respiro de salida: del silencio que sigue al ultimo parrafo.
