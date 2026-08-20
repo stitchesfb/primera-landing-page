@@ -15,7 +15,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync, statSync, renameSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { join, basename, dirname } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 
@@ -33,6 +33,9 @@ import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs
 import { generarRevision } from './lib/previsualizar.mjs';
 import { generarCama, nivelEn, aperturaEn, planearPiano, DECAE_PIANO } from './lib/musica.mjs';
 import { inspeccionarVideo, huellaVideo, remuxarAudio, desfaseAudio } from './lib/remux.mjs';
+import {
+  diagnosticar, repararContenedor, pruebaDecodificacion, decodificarTodo,
+} from './lib/diagnostico.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
 
@@ -1000,6 +1003,147 @@ async function cmdRemuxar(id, opciones = {}) {
   console.log(c.dim('  Imagen, movimiento y particulas: los mismos bits del render aprobado.'));
 }
 
+// --- diagnostico del contenedor ---------------------------------------
+
+const kib = (n) => (n / 1048576).toFixed(1) + ' MB';
+
+/**
+ * Por que un MP4 que decodifica bien puede no arrancar en un reproductor web.
+ *
+ * Mira el contenedor, no los flujos: donde esta el indice, que dicen las listas
+ * de edicion, si el primer fotograma es llave, si los tiempos empiezan en cero.
+ * Con --reparar reescribe el contenedor sin tocar el H.264 y vuelve a medirlo
+ * todo sobre el archivo nuevo.
+ */
+async function cmdDiagnosticar(ruta, opciones = {}) {
+  if (!existsSync(ruta)) throw new Error(`No existe el archivo: ${ruta}`);
+
+  titulo(`Diagnostico del contenedor — ${basename(ruta)}`);
+  const d = await diagnosticar(ruta);
+  await imprimirDiagnostico(ruta, d, { completo: opciones.completo });
+
+  if (!opciones.reparar) return;
+
+  if (d.graves === 0) {
+    titulo('Reparacion');
+    console.log('  No hay nada que reparar a nivel de contenedor: no se toca el archivo.');
+    return;
+  }
+
+  const flags = [...new Set(d.anomalias.filter((a) => a.grave).flatMap((a) => a.flags))];
+  titulo('Reparacion');
+  console.log('  Se reescribe el contenedor copiando el H.264 tal cual.');
+  console.log(`  Opciones anadidas: ${flags.length ? flags.join(' ') : '(solo faststart)'}`);
+
+  const destino = opciones.salida ?? join(dirname(ruta), 'video_final_web.mp4');
+  const t0 = Date.now();
+  const { args } = await repararContenedor({ entrada: ruta, salida: destino, flags });
+  console.log(c.dim(`  ffmpeg ${args.filter((a) => a !== '-v' && a !== 'error').join(' ')}`));
+  console.log(`  Hecho en ${((Date.now() - t0) / 1000).toFixed(0)}s · ${kib(statSync(destino).size)}`);
+
+  titulo(`Comprobacion del archivo corregido — ${basename(destino)}`);
+  const d2 = await diagnosticar(destino);
+  await imprimirDiagnostico(destino, d2, { completo: opciones.completo });
+
+  // El H.264 tiene que seguir siendo el mismo: reescribir el contenedor no
+  // puede cambiar un solo bit de imagen.
+  const [antes, despues] = [await huellaVideo(ruta), await huellaVideo(destino)];
+  console.log('');
+  console.log(antes === despues
+    ? c.verde(`  ✓ La imagen no se ha tocado: MD5 del flujo de video ${despues}`)
+    : c.rojo(`  ✗ El flujo de video ha cambiado: ${antes} → ${despues}`));
+  if (antes !== despues) process.exitCode = 1;
+}
+
+async function imprimirDiagnostico(ruta, d, { completo = false } = {}) {
+  const { superiores, ftyp, moov, video, audio } = d;
+
+  console.log(`\nContenedor`);
+  console.log(`  tamano            ${kib(superiores.total)}`);
+  console.log(`  ftyp              ${ftyp?.marca} · compatibles: ${ftyp?.compatibles.join(', ')}`);
+  console.log(`  cajas             ${superiores.cajas.map((c) => c.tipo).join(' → ')}`);
+  for (const caja of superiores.cajas) {
+    console.log(c.dim(`    ${caja.tipo.padEnd(6)} offset ${String(caja.offset).padStart(12)}  ${kib(caja.tamano)}`));
+  }
+  const iMoov = superiores.cajas.findIndex((x) => x.tipo === 'moov');
+  const iMdat = superiores.cajas.findIndex((x) => x.tipo === 'mdat');
+  console.log(`  faststart         ${iMoov > -1 && iMdat > -1 && iMoov < iMdat
+    ? c.verde('si — moov antes de mdat') : c.rojo('NO — moov despues de mdat')}`);
+  console.log(`  escala de pelicula ${moov.mvhd?.escala} · duracion declarada ` +
+    `${(moov.mvhd.duracion / moov.mvhd.escala).toFixed(3)}s`);
+
+  console.log(`\nPistas del contenedor`);
+  for (const p of moov.pistas) {
+    console.log(`  pista ${p.id} (${p.tipo})`);
+    console.log(`    escala          ${p.escala} · duracion ${p.segundos?.toFixed(3)}s`);
+    console.log(`    lista edicion   ${p.edicion
+      ? p.edicion.map((e) => `[dur ${e.duracion}, media_time ${e.tiempoMedio}, ritmo ${e.ritmo}]`).join(' ')
+      : 'ninguna'}`);
+    console.log(`    fotogramas llave ${p.llaves.todas
+      ? 'todas las muestras'
+      : `${p.llaves.cuantas} · primeras: ${p.llaves.primeras.join(', ')}`}`);
+  }
+
+  console.log(`\nFlujos`);
+  for (const [nombre, s] of [['video', video], ['audio', audio]]) {
+    if (!s) { console.log(`  ${nombre}: no hay`); continue; }
+    console.log(`  ${nombre}`);
+    console.log(`    codec           ${s.codec_name} ${s.profile ?? ''} nivel ${s.level ?? '-'}`);
+    if (nombre === 'video') {
+      console.log(`    imagen          ${s.width}x${s.height} · ${s.pix_fmt} · ${s.r_frame_rate} fps`);
+      console.log(`    fotogramas      ${s.nb_frames ?? '?'}`);
+    } else {
+      console.log(`    audio           ${s.sample_rate} Hz · ${s.channels} canales · ${s.channel_layout ?? '?'}`);
+    }
+    console.log(`    time_base       ${s.time_base}`);
+    console.log(`    start_time      ${s.start_time} (start_pts ${s.start_pts})`);
+    console.log(`    duracion        ${s.duration}s`);
+    console.log(`    bitrate         ${s.bit_rate ? (Number(s.bit_rate) / 1000).toFixed(0) + ' kbps' : '?'}`);
+  }
+
+  console.log(`\nPrimeros paquetes`);
+  for (const [nombre, paquetes] of [['video', d.paqVideo], ['audio', d.paqAudio]]) {
+    const linea = paquetes.slice(0, 6)
+      .map((p) => `${p.dts_time}/${p.pts_time}${String(p.flags ?? '').includes('K') ? 'K' : ''}`)
+      .join('  ');
+    console.log(`  ${nombre.padEnd(6)} dts/pts: ${linea || '(ninguno)'}`);
+  }
+
+  console.log(`\nPruebas de reproduccion`);
+  const total = Number(d.probe.format?.duration ?? 0);
+  const puntos = [
+    { etiqueta: 'desde 0:00', desde: 0, segundos: 6 },
+    { etiqueta: `desde ${mmss(total / 2)} (mitad)`, desde: Math.floor(total / 2), segundos: 6 },
+    { etiqueta: `desde ${mmss(Math.max(0, total - 15))} (final)`, desde: Math.max(0, total - 15), segundos: 15 },
+  ];
+  for (const punto of puntos) {
+    const r = await pruebaDecodificacion(ruta, punto);
+    const ok = r.ok && r.fotogramas > 0 && r.problemas.length === 0;
+    console.log(`  ${ok ? c.verde('✓') : c.rojo('✗')} ${punto.etiqueta.padEnd(24)} ` +
+      `${r.fotogramas} fotogramas en ${(r.ms / 1000).toFixed(1)}s`);
+    for (const p of r.problemas) console.log(c.rojo(`      ${p}`));
+  }
+
+  if (completo) {
+    process.stdout.write('  decodificando el archivo entero…');
+    const t = await decodificarTodo(ruta);
+    console.log(` ${t.ok ? c.verde('✓ sin errores') : c.rojo('✗ con errores')} · ` +
+      `${t.fotogramas} fotogramas en ${t.segundos.toFixed(0)}s`);
+    for (const e of t.errores) console.log(c.rojo(`      ${e}`));
+  }
+
+  titulo('Anomalias');
+  if (d.anomalias.length === 0) {
+    console.log(c.verde('  Ninguna. El contenedor esta armado como espera un reproductor web.'));
+  } else {
+    for (const a of d.anomalias) {
+      console.log(`  ${a.grave ? c.rojo('GRAVE') : c.ambar('aviso')}  ${a.texto}`);
+    }
+    console.log('');
+    console.log(`  ${d.graves} de ${d.anomalias.length} pueden impedir el arranque por si solas.`);
+  }
+}
+
 /** Reparte los parrafos entre N bloques usando los block_end del plan. */
 function repartirParrafosEnBloques(proyecto, nBloques) {
   const cortes = (proyecto.plan?.events ?? [])
@@ -1525,7 +1669,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -1569,6 +1713,14 @@ async function principal() {
     case 'remuxar': {
       const i = resto.indexOf('--video');
       return cmdRemuxar(exigeProyecto(), { video: i > -1 ? resto[i + 1] : undefined });
+    }
+    case 'diagnosticar': {
+      const i = resto.indexOf('--salida');
+      return cmdDiagnosticar(arg, {
+        reparar: resto.includes('--reparar'),
+        completo: resto.includes('--completo'),
+        salida: i > -1 ? resto[i + 1] : undefined,
+      });
     }
     case 'resumen': {
       const i = process.argv.indexOf('--json');

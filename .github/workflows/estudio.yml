@@ -19,13 +19,14 @@ on:
           - muestra
           - render
           - remux
+          - diagnostico
         default: muestra
       proyecto:
         description: 'Para importar, muestra, render y remux: carpeta bajo estudio/proyectos/ (ej. video_001)'
         type: string
         default: ''
       run_origen:
-        description: 'Solo para remux: numero del run cuyo artifact final-<proyecto> trae el video ya renderizado'
+        description: 'Para remux y diagnostico: numero del run cuyo artifact final-<proyecto> trae el video'
         type: string
         default: ''
       extra:
@@ -73,13 +74,13 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux') && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico') && inputs.proyecto == ''
         run: |
           echo "::error::Ese modo necesita el nombre del proyecto."
           exit 1
 
       - name: Comprobar que hay run de origen
-        if: inputs.modo == 'remux' && inputs.run_origen == ''
+        if: (inputs.modo == 'remux' || inputs.modo == 'diagnostico') && inputs.run_origen == ''
         run: |
           echo "::error::El modo remux necesita el numero del run que produjo el video."
           exit 1
@@ -273,7 +274,7 @@ jobs:
       # fotogramas nuevos sobre los que ya estaban aprobados.
 
       - name: Traer el video ya renderizado
-        if: inputs.modo == 'remux'
+        if: inputs.modo == 'remux' || inputs.modo == 'diagnostico'
         uses: actions/download-artifact@v4
         with:
           name: final-${{ inputs.proyecto }}
@@ -287,6 +288,30 @@ jobs:
         run: |
           node cli.mjs remuxar "${{ inputs.proyecto }}" \
             --video "$GITHUB_WORKSPACE/origen/video_final.mp4" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # ------------------------------------------------------------ diagnostico
+      #
+      # Un MP4 puede decodificar entero y aun asi dejar al reproductor girando
+      # en 0:00: las causas viven en el contenedor, no en los flujos. Esto mira
+      # donde esta el indice, que dicen las listas de edicion, si el primer
+      # fotograma es llave y si los tiempos arrancan en cero; con --reparar
+      # reescribe el contenedor copiando el H.264 tal cual.
+      - name: Diagnosticar el contenedor
+        if: inputs.modo == 'diagnostico'
+        working-directory: estudio
+        run: |
+          node cli.mjs diagnosticar "$GITHUB_WORKSPACE/origen/video_final.mp4" \
+            --reparar --completo \
+            --salida "$GITHUB_WORKSPACE/origen/video_final_web.mp4" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar el video corregido como artifact
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'diagnostico'
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-${{ inputs.proyecto }}
+          path: origen/video_final_web.mp4
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Guardar el video final como artifact
         if: always() && inputs.confirmar == 'SI' && (inputs.modo == 'render' || inputs.modo == 'remux')

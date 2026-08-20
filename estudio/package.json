@@ -9,7 +9,7 @@
   },
   "scripts": {
     "estudio": "node cli.mjs",
-    "test": "node test/api.test.mjs && node test/musica.test.mjs && node test/loops.test.mjs && node test/autoplan.test.mjs && node test/troceo.test.mjs && node test/plan-video001.test.mjs && node test/subtitulos-bloques.test.mjs && node test/revision.test.mjs && node test/montaje.test.mjs && node test/remux.test.mjs && node test/validacion.test.mjs"
+    "test": "node test/api.test.mjs && node test/musica.test.mjs && node test/loops.test.mjs && node test/autoplan.test.mjs && node test/troceo.test.mjs && node test/plan-video001.test.mjs && node test/subtitulos-bloques.test.mjs && node test/revision.test.mjs && node test/montaje.test.mjs && node test/remux.test.mjs && node test/contenedor.test.mjs && node test/validacion.test.mjs"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0",
