@@ -1265,7 +1265,17 @@ async function cmdShortsRender(id, opciones = {}) {
   const medir = crearMedidor({ ancho, tmp: join(tmpComun, 'medidas') });
 
   const hechos = [];
+  const soloEstos = opciones.solo ? opciones.solo.split(',').map((x) => x.trim()).filter(Boolean) : null;
+  if (soloEstos) {
+    const desconocidos = soloEstos.filter((x) => !cfg.shorts.some((sh) => sh.id === x));
+    if (desconocidos.length) throw new Error(`No hay ningun Short con id: ${desconocidos.join(', ')}`);
+    console.log(c.ambar(`Solo se monta: ${soloEstos.join(', ')}`));
+  }
+
   for (const corto of cfg.shorts) {
+    // Rehacer un Short ya aprobado solo porque toca renderizar otro no aporta
+    // nada y produce un archivo nuevo donde habia uno revisado.
+    if (soloEstos && !soloEstos.includes(corto.id)) continue;
     if (!corto.parrafos) {
       console.log(c.ambar(`\n  ${corto.id}: sin rango aprobado en shorts.json, se salta.`));
       continue;
@@ -2180,7 +2190,8 @@ async function principal() {
     case 'shorts': {
       const fotograma = resto.includes('--fotograma');
       if (!fotograma && !resto.includes('--render')) return cmdShortsPlan(exigeProyecto());
-      return cmdShortsRender(exigeProyecto(), { fotograma });
+      const i = resto.indexOf('--solo');
+      return cmdShortsRender(exigeProyecto(), { fotograma, solo: i > -1 ? resto[i + 1] : undefined });
     }
     case 'resumen': {
       const i = process.argv.indexOf('--json');
