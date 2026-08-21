@@ -39,7 +39,7 @@ import {
 import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
 import {
   construirVoz, formaDelShort, construirAss, renderizarShort, fotogramasShort,
-  crearMedidor, disponerTexto, validarOverflow,
+  crearMedidor, disponerTexto, validarOverflow, validarSeparacion,
 } from './lib/shortsRender.mjs';
 import { generarLoop } from './lib/particulas.mjs';
 import { renderizar } from './lib/renderer.mjs';
@@ -1020,6 +1020,11 @@ const TAMANO_VOZ = 76;
 const TAMANO_VOZ_MIN = 60;
 const TAMANO_CTA = 62;
 const TAMANO_CTA_MIN = 48;
+// El gancho manda en el primer segundo: se le deja mas cuerpo que a la voz.
+const TAMANO_GANCHO = 96;
+const TAMANO_GANCHO_MIN = 72;
+// Aire minimo entre el gancho y el subtitulo mientras conviven en pantalla.
+const HUECO_GANCHO_PX = 120;
 
 // --- diagnostico del contenedor ---------------------------------------
 
@@ -1345,9 +1350,23 @@ async function cmdShortsRender(id, opciones = {}) {
       cta = { inicio: ctaTramo.destino, fin: plan.duracion, lineas, tamano: tamanoCta };
     }
 
+    // Gancho de apertura, solo si el Short lo declara. Se superpone al contenido
+    // desde el fotograma cero: no anade ni un segundo de duracion.
+    let gancho = null;
+    if (corto.gancho?.texto) {
+      const d = await disponerTexto({
+        texto: corto.gancho.texto, medir, anchoSeguro,
+        tamano: TAMANO_GANCHO, tamanoMin: TAMANO_GANCHO_MIN, maxLineas: 2,
+      });
+      if (d.desbordado) throw new Error(`El gancho del ${corto.id} no cabe: «${corto.gancho.texto}»`);
+      gancho = { inicio: 0, fin: corto.gancho.segundos ?? 2, lineas: d.lineas, tamano: d.tamano };
+      console.log(`  gancho          «${corto.gancho.texto}» ${gancho.fin}s, cuerpo ${d.tamano}`);
+    }
+
     const ass = join(tmp, 'subs.ass');
     writeFileSync(ass, construirAss({
-      cues, cta, ancho, alto, margen: MARGEN_SEGURO, bandaCta: obj.banda_cta ?? 0.19,
+      cues, cta, gancho, ancho, alto, margen: MARGEN_SEGURO,
+      bandaCta: obj.banda_cta ?? 0.19, bandaGancho: obj.banda_gancho ?? 0.07,
     }));
     console.log(`  subtitulos      ${cues.length} rotulos de ${palabras.length} palabras, quemados`);
 
@@ -1360,7 +1379,7 @@ async function cmdShortsRender(id, opciones = {}) {
     // cada rotulo tal y como quedara y mira donde cae la tinta de verdad.
     process.stdout.write('  comprobando margenes…');
     const desbordes = await validarOverflow({
-      ass, cues, cta, ancho, alto, margen: MARGEN_SEGURO,
+      ass, cues, cta, gancho, ancho, alto, margen: MARGEN_SEGURO,
     });
     if (desbordes.length) {
       throw new Error(
@@ -1368,14 +1387,30 @@ async function cmdShortsRender(id, opciones = {}) {
         desbordes.join('\n    ')
       );
     }
-    console.log(c.verde(` ✓ los ${cues.length + (cta ? 1 : 0)} rotulos caben dentro de ${MARGEN_SEGURO}px por lado`));
+    console.log(c.verde(` ✓ los ${cues.length + (cta ? 1 : 0) + (gancho ? 1 : 0)} rotulos caben dentro de ${MARGEN_SEGURO}px por lado`));
+
+    // El gancho entra en el fotograma cero y ahi la voz ya habla: los dos
+    // rotulos conviven. Que no se estorben no es que no coincidan en el tiempo
+    // —no pueden—, es que ocupen franjas distintas con aire entre ellas.
+    if (gancho) {
+      const sep = await validarSeparacion({
+        ass, ancho, alto, momento: Math.min(1, gancho.fin / 2), huecoMinimo: HUECO_GANCHO_PX,
+      });
+      if (!sep.ok) throw new Error(`El gancho del ${corto.id} estorba al subtitulo: ${sep.motivo}`);
+      console.log(c.verde(`  ✓ gancho y subtitulo separados por ${sep.hueco}px de aire`));
+    }
 
     // Antes de gastar el render entero: unos fotogramas para juzgar donde cae
     // el texto sobre la escena. Con una imagen compuesta —una cara, una
     // ventana— eso no se decide con numeros, se mira.
     if (opciones.fotograma) {
       const conTexto = cues.length ? cues[Math.floor(cues.length / 2)] : null;
-      const momentos = [
+      const momentos = gancho ? [
+        0,
+        1,
+        gancho.fin + 0.1,
+        ctaTramo ? ctaTramo.destino + 2 : plan.duracion - 1,
+      ] : [
         cues[0] ? (cues[0].inicio + cues[0].fin) / 2 : 1,
         conTexto ? (conTexto.inicio + conTexto.fin) / 2 : plan.duracion / 2,
         cues.at(-1) ? (cues.at(-1).inicio + cues.at(-1).fin) / 2 : plan.duracion - 6,

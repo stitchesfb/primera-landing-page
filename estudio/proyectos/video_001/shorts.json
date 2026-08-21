@@ -12,7 +12,9 @@
     "imagen": "escena_vertical.png",
     "_imagen": "Compuesta en 9:16 (941x1672). Se usa entera: no se recorta ni se deforma.",
     "banda_cta": 0.19,
-    "_banda_cta": "Altura del cierre, medida desde abajo. Centrado caia sobre las caras de la escena; a 0.19 se apoya en la manta y deja libres los dos rostros."
+    "_banda_cta": "Altura del cierre, medida desde abajo. Centrado caia sobre las caras de la escena; a 0.19 se apoya en la manta y deja libres los dos rostros.",
+    "banda_gancho": 0.07,
+    "_gancho": "Gancho visual de apertura, solo en los Shorts que lo declaren. Va anclado arriba, sobre el cielo y la cortina: la unica franja ancha de la escena sin una cara debajo. Se superpone al contenido, no anade duracion."
   },
   "shorts": [
     {
@@ -83,7 +85,12 @@
         74,
         77
       ],
-      "_aprobado": "Aprobado 74-77 (~46.2s). Entra con «Descansar en tu cuidado.», mas suave que arrancar en «Padre, tu Palabra dice...»."
+      "_aprobado": "Aprobado 74-77 (~46.2s). Entra con «Descansar en tu cuidado.», mas suave que arrancar en «Padre, tu Palabra dice...».",
+      "gancho": {
+        "texto": "¿NO PUEDES DORMIR?",
+        "segundos": 2.0
+      },
+      "_gancho": "Experimento contra el swipe: el short_01 retuvo al 30.4%. Solo se toca el arranque; contenido, audio, musica, subtitulos, duracion y cierre quedan como se aprobaron."
     }
   ]
 }

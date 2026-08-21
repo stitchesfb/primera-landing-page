@@ -124,19 +124,27 @@ function ejecutarBinario(bin, args) {
   });
 }
 
-/** Columnas con tinta en un fotograma en escala de grises. */
+/** Recuadro con tinta en un fotograma en escala de grises, y que filas la tienen. */
 function extremosConTinta(gris, ancho, alto, umbral = 24) {
   let izq = -1;
   let der = -1;
+  let arriba = -1;
+  let abajo = -1;
+  const filasConTinta = new Uint8Array(alto);
   for (let y = 0; y < alto; y++) {
     const fila = y * ancho;
     for (let x = 0; x < ancho; x++) {
       if (gris[fila + x] <= umbral) continue;
+      filasConTinta[y] = 1;
       if (izq === -1 || x < izq) izq = x;
       if (x > der) der = x;
+      if (arriba === -1) arriba = y;
+      abajo = y;
     }
   }
-  return izq === -1 ? null : { izq, der, ancho: der - izq + 1 };
+  return izq === -1
+    ? null
+    : { izq, der, ancho: der - izq + 1, arriba, abajo, filasConTinta };
 }
 
 /**
@@ -261,8 +269,8 @@ const escaparAss = (t) => t.replace(/\\/g, '\\\\').replace(/\{/g, '(').replace(/
  * se lee peor que dos cortas.
  */
 export function construirAss({
-  cues, cta, ancho, alto, fuente = 'DejaVu Sans', contorno = 5, margen = 80,
-  bandaVoz = 0.16, bandaCta = 0.19,
+  cues, cta, gancho, ancho, alto, fuente = 'DejaVu Sans', contorno = 5, margen = 80,
+  bandaVoz = 0.16, bandaCta = 0.19, bandaGancho = 0.07,
 }) {
   const estilo = (nombre, tamano, alineacion, margenV) =>
     `Style: ${nombre},${fuente},${tamano},&H00FFFFFF,&H00FFFFFF,&HC8000000,&H00000000,` +
@@ -290,6 +298,11 @@ export function construirAss({
     // caras de la escena; abajo se apoya en la manta, que es la zona vacia, y
     // ademas repite el sitio donde el espectador ya venia leyendo.
     estilo('Cta', 62, 2, Math.round(alto * bandaCta)),
+    // El gancho va anclado ARRIBA (alineacion 8), en la franja de cielo y
+    // cortina. Es la unica zona ancha de esta escena sin una cara debajo, y
+    // ademas deja el tercio inferior libre para los subtitulos, que empiezan
+    // casi a la vez.
+    estilo('Gancho', 96, 8, Math.round(alto * bandaGancho)),
     '',
     '[Events]',
     'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text',
@@ -305,6 +318,16 @@ export function construirAss({
     `{\\fs${c.tamano}}${componer(c.lineas)}`
   );
 
+  if (gancho?.lineas?.length) {
+    // Aparece en el fotograma cero, sin fundido de entrada: si tarda medio
+    // segundo en verse, ya no es un gancho. Se va con un fundido corto para no
+    // desaparecer de golpe mientras el espectador todavia lo esta leyendo.
+    eventos.push(
+      `Dialogue: 0,${centesimas(gancho.inicio)},${centesimas(gancho.fin)},Gancho,,0,0,0,,` +
+      `{\\fad(0,350)\\fs${gancho.tamano}}${componer(gancho.lineas)}`
+    );
+  }
+
   if (cta?.lineas?.length) {
     // Aparece con un fundido corto: un rotulo que entra de golpe rompe la
     // calma de todo lo anterior.
@@ -318,6 +341,59 @@ export function construirAss({
 }
 
 /**
+ * Comprueba que el gancho y los subtitulos no se pisen en pantalla.
+ *
+ * En un Short el gancho tiene que entrar en el fotograma cero, y ahi la voz ya
+ * esta hablando: los dos rotulos conviven durante un par de segundos. Que no
+ * "interfieran" no es que no coincidan en el tiempo —no pueden—, es que ocupen
+ * franjas distintas del cuadro con aire de sobra entre ellas.
+ *
+ * Se dibuja el fotograma y se miran las filas con tinta: tiene que haber un
+ * corredor vacio entre el bloque de arriba y el de abajo.
+ */
+export async function validarSeparacion({ ass, ancho, alto, momento, huecoMinimo = 120 }) {
+  const ffmpeg = await rutaFfmpeg();
+  const crudo = await ejecutarBinario(ffmpeg, [
+    '-v', 'error',
+    '-f', 'lavfi', '-i', `color=c=black:s=${ancho}x${alto}:d=${(momento + 2).toFixed(2)}`,
+    '-vf', `subtitles=${escaparRuta(ass)}`,
+    '-ss', momento.toFixed(3), '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'gray', '-',
+  ]);
+  const ext = extremosConTinta(crudo, ancho, alto);
+  if (!ext) return { ok: false, hueco: 0, motivo: `no se dibuja nada en ${momento.toFixed(2)}s` };
+
+  // El corredor vacio mas ancho entre la primera y la ultima fila con tinta.
+  let mejor = 0;
+  let corriendo = 0;
+  let finMejor = -1;
+  for (let y = ext.arriba; y <= ext.abajo; y++) {
+    if (ext.filasConTinta[y]) {
+      if (corriendo > mejor) { mejor = corriendo; finMejor = y; }
+      corriendo = 0;
+    } else {
+      corriendo++;
+    }
+  }
+  if (mejor === 0) {
+    return {
+      ok: false, hueco: 0,
+      motivo: `en ${momento.toFixed(2)}s solo hay un bloque de texto, de la fila ${ext.arriba} a la ${ext.abajo}`,
+    };
+  }
+  return {
+    ok: mejor >= huecoMinimo,
+    hueco: mejor,
+    arriba: ext.arriba,
+    abajo: ext.abajo,
+    corte: finMejor - mejor,
+    motivo: mejor >= huecoMinimo
+      ? null
+      : `en ${momento.toFixed(2)}s solo quedan ${mejor}px entre el gancho y el subtitulo, hacen falta ${huecoMinimo}`,
+  };
+}
+
+
+/**
  * Comprueba sobre el ARCHIVO ASS ya escrito que nada se sale del area segura.
  *
  * Medir al repartir las lineas y validar al final no es lo mismo: entre una
@@ -325,10 +401,11 @@ export function construirAss({
  * en linea. Esto dibuja cada rotulo tal y como quedara en el video y mira donde
  * cae la tinta de verdad.
  */
-export async function validarOverflow({ ass, cues, cta, ancho, alto, margen }) {
+export async function validarOverflow({ ass, cues, cta, gancho, ancho, alto, margen }) {
   const ffmpeg = await rutaFfmpeg();
   const rotulos = [...cues.map((c, i) => ({ etiqueta: `subtitulo ${i + 1}`, ...c }))];
   if (cta?.lineas?.length) rotulos.push({ etiqueta: 'cierre', ...cta });
+  if (gancho?.lineas?.length) rotulos.push({ etiqueta: 'gancho', ...gancho });
 
   const problemas = [];
   for (const r of rotulos) {
