@@ -16,6 +16,7 @@
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, rmSync, mkdirSync, statSync, renameSync } from 'node:fs';
 import { join, basename, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 
@@ -36,6 +37,9 @@ import { inspeccionarVideo, huellaVideo, remuxarAudio, desfaseAudio } from './li
 import {
   diagnosticar, repararContenedor, pruebaDecodificacion, decodificarTodo,
 } from './lib/diagnostico.mjs';
+import {
+  sonoridad, camaDesdeArchivo, mezclarMuestra, vozDeLaVentana,
+} from './lib/musicaArchivo.mjs';
 import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
 import {
   construirVoz, formaDelShort, construirAss, renderizarShort, fotogramasShort,
@@ -1006,6 +1010,142 @@ async function cmdRemuxar(id, opciones = {}) {
   console.log(`  video_final.mp4   ${mmss(despues.duracionContenedor)} · ${(bytes / 1048576).toFixed(0)} MB`);
   console.log(`  subtitles.srt     aparte, sin quemar`);
   console.log(c.dim('  Imagen, movimiento y particulas: los mismos bits del render aprobado.'));
+}
+
+// --- prueba de camas musicales ----------------------------------------
+
+// Las pistas viven junto al codigo del estudio, no en la raiz del repositorio:
+// ahi arriba esta la landing page que publica Vercel, y estos mp3 acabarian
+// servidos como archivos de la web.
+const DIR_MUSICA = fileURLToPath(new URL('./assets/music/', import.meta.url));
+
+const PISTAS_PRUEBA = [
+  { letra: 'A', archivo: 'one_step_closer.mp3',        titulo: 'One Step Closer', autor: 'Aakash Gandhi' },
+  { letra: 'B', archivo: 'alone_with_my_thoughts.mp3', titulo: 'No.7 Alone With My Thoughts', autor: 'Esther Abrami' },
+  { letra: 'C', archivo: 'touching_moment.mp3',        titulo: 'Touching Moment', autor: 'Wayne Jones' },
+];
+
+/**
+ * Tres muestras de audio con la MISMA voz y distinta cama.
+ *
+ * Todo lo que no sea la musica tiene que ser identico entre las tres, o la
+ * comparacion no dice nada: misma ventana, misma voz sin tocar, misma
+ * envolvente de ducking, mismos fundidos, mismo codificador.
+ *
+ * El nivel de cada pista se ajusta a la sonoridad que tiene la cama sintetizada
+ * aprobada en esa misma ventana. Sin ese paso la prueba mediria cual se
+ * masterizo mas alto, que no es lo que hay que decidir.
+ */
+async function cmdMusicaPrueba(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const audio = join(salida, 'audio.mp3');
+  if (!existsSync(rutaTimeline) || !existsSync(audio)) {
+    throw new Error(`Faltan ${id}/output/timeline.json o audio.mp3. Ejecuta antes: importar ${id}`);
+  }
+
+  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const base = canal.render;
+  const pre = base.presets[proyecto.plan?.pilar ?? 'noche'] ?? base.presets.noche;
+  const m = pre.musica;
+
+  // La misma ventana que la muestra ya revisada: un interludio largo con voz a
+  // los dos lados. Es donde se juzga lo unico que importa aqui — como suena la
+  // musica cuando la voz calla y como se retira cuando vuelve.
+  const largos = timeline.huecos.filter((h) => h.duracion >= 10);
+  const elegido = largos[0] ?? timeline.huecos[0];
+  if (!elegido) throw new Error('El timeline no tiene interludios.');
+  const dur = opciones.duracion ?? 80;
+  const desde = opciones.desde ?? Math.max(0, elegido.inicio - Math.min(34, (dur - elegido.duracion) / 2));
+
+  titulo(`Prueba de camas musicales — ${id}`);
+  console.log(`Ventana         ${mmss(desde)} → ${mmss(desde + dur)}  (${dur}s del video largo)`);
+  console.log(`Interludio      ${elegido.duracion}s en ${mmss(elegido.inicio)}, a ${mmss(elegido.inicio - desde)} de la muestra`);
+  console.log(`Ducking         ${m.bajo_voz_db} dB bajo voz → ${m.en_interludio_db} dB en interludio, rampa ${m.rampa_s}s`);
+
+  const tmp = join(salida, '.tmp-musica');
+  mkdirSync(tmp, { recursive: true });
+  const dirPruebas = join(salida, 'pruebas-musica');
+  mkdirSync(dirPruebas, { recursive: true });
+
+  // Envolvente en tiempo de MUESTRA: la ventana empieza en cero, pero se
+  // consulta la curva del video largo para que el ducking caiga donde toca.
+  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
+  const nivelAbsoluto = (t) => nivelEn(t, {
+    ...forma,
+    cierre: { fadeIn: m.fade_in_s, fadeOut: timeline.cierre?.fade_out ?? 8, duracionTotal: timeline.duracion_total_s },
+    bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
+  });
+  const envolvente = (t) => nivelAbsoluto(desde + t);
+
+  process.stdout.write('\n  voz de la ventana…');
+  const voz = join(tmp, 'voz.wav');
+  await vozDeLaVentana({ audio, desde, segundos: dur, salidaWav: voz });
+  console.log(` ${dur}s, sin tocar el nivel`);
+
+  // Referencia: la cama sintetizada aprobada, en esta misma ventana.
+  process.stdout.write('  cama sintetizada de referencia…');
+  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura: (t) => aperturaEn(t, forma) });
+  const refWav = join(tmp, 'referencia.wav');
+  generarCama({
+    segundos: dur, offset: desde, envolvente: nivelAbsoluto,
+    apertura: (t) => aperturaEn(t, forma), grupos, salidaWav: refWav,
+  });
+  const ref = await sonoridad(refWav);
+  console.log(` ${ref.lufs.toFixed(1)} LUFS`);
+  console.log(c.dim('    Es el objetivo de nivel: las tres pistas se ajustan a esa sonoridad.'));
+
+  const FADE_IN = 2;
+  const FADE_OUT = 3;
+  const hechas = [];
+
+  for (const pista of PISTAS_PRUEBA) {
+    const ruta = join(DIR_MUSICA, pista.archivo);
+    if (!existsSync(ruta)) throw new Error(`Falta la pista ${pista.archivo} en ${DIR_MUSICA}`);
+
+    titulo(`Prueba ${pista.letra} — ${pista.titulo}`);
+    const cruda = await sonoridad(ruta);
+    console.log(`  original        ${cruda.lufs.toFixed(1)} LUFS · rango ${cruda.rango?.toFixed(1) ?? '?'} LU · pico ${cruda.pico?.toFixed(1) ?? '?'} dBFS`);
+
+    const camaWav = join(tmp, `cama-${pista.letra}.wav`);
+    const hacerCama = (ganancia) => camaDesdeArchivo({
+      pista: ruta, desdeEnPista: 0, segundos: dur, envolvente,
+      salidaWav: camaWav, gananciaDb: ganancia, fadeIn: FADE_IN, fadeOut: FADE_OUT,
+    });
+
+    // Primera pasada sin corregir, para saber donde cae con el ducking puesto.
+    await hacerCama(0);
+    const sinCorregir = await sonoridad(camaWav);
+    const correccion = ref.lufs - sinCorregir.lufs;
+    const info = await hacerCama(correccion);
+    const final = await sonoridad(camaWav);
+    console.log(`  con ducking     ${sinCorregir.lufs.toFixed(1)} LUFS → correccion ${correccion >= 0 ? '+' : ''}${correccion.toFixed(2)} dB → ${final.lufs.toFixed(1)} LUFS`);
+    if (info.repetida) console.log(c.ambar('  la pista es mas corta que la ventana: se repite desde el principio'));
+
+    const destino = join(dirPruebas, `prueba_${pista.letra}_${pista.archivo}`);
+    await mezclarMuestra({ voz, musica: camaWav, salidaMp3: destino, segundos: dur, fadeIn: FADE_IN, fadeOut: FADE_OUT });
+    const mezcla = await sonoridad(destino);
+    const bytes = statSync(destino).size;
+    console.log(`  ${basename(destino)}  ${(bytes / 1048576).toFixed(1)} MB · mezcla a ${mezcla.lufs.toFixed(1)} LUFS`);
+    hechas.push({ ...pista, cruda, final, mezcla, destino, correccion });
+  }
+
+  rmSync(tmp, { recursive: true, force: true });
+
+  titulo('Las tres muestras');
+  console.log(`  Identico en las tres: ventana ${mmss(desde)}–${mmss(desde + dur)}, voz sin tocar,`);
+  console.log(`  ducking ${m.bajo_voz_db}/${m.en_interludio_db} dB, fundidos ${FADE_IN}s y ${FADE_OUT}s, mp3 192 kbps.`);
+  console.log('');
+  for (const h of hechas) {
+    console.log(`  ${h.letra}  ${basename(h.destino).padEnd(34)} ${h.titulo} — ${h.autor}`);
+  }
+  const dispersion = Math.max(...hechas.map((h) => h.mezcla.lufs)) - Math.min(...hechas.map((h) => h.mezcla.lufs));
+  console.log('');
+  console.log(dispersion <= 0.6
+    ? c.verde(`  ✓ Las tres mezclas quedan dentro de ${dispersion.toFixed(2)} LU entre si: se comparan a igualdad de volumen`)
+    : c.ambar(`  ! Las mezclas difieren ${dispersion.toFixed(2)} LU entre si`));
+  console.log(c.dim('\n  Nada elegido, nada renderizado, nada publicado.'));
 }
 
 // --- maquetacion de los Shorts ----------------------------------------
@@ -2134,7 +2274,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales (--render los monta)\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales (--render los monta)\n  ${c.cian('musica-prueba')} <proyecto> Tres muestras con la misma voz y distinta cama\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -2192,6 +2332,10 @@ async function principal() {
       if (!fotograma && !resto.includes('--render')) return cmdShortsPlan(exigeProyecto());
       const i = resto.indexOf('--solo');
       return cmdShortsRender(exigeProyecto(), { fotograma, solo: i > -1 ? resto[i + 1] : undefined });
+    }
+    case 'musica-prueba': {
+      const num = (f) => { const i = resto.indexOf(f); return i > -1 ? Number(resto[i + 1]) : undefined; };
+      return cmdMusicaPrueba(exigeProyecto(), { desde: num('--desde'), duracion: num('--duracion') });
     }
     case 'resumen': {
       const i = process.argv.indexOf('--json');

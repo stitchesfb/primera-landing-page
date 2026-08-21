@@ -22,6 +22,7 @@ on:
           - diagnostico
           - shorts
           - shorts-fotograma
+          - musica-prueba
           - shorts-render
         default: muestra
       proyecto:
@@ -81,7 +82,7 @@ jobs:
           exit 1
 
       - name: Comprobar que hay proyecto
-        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render') && inputs.proyecto == ''
+        if: (inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'diagnostico' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render' || inputs.modo == 'musica-prueba') && inputs.proyecto == ''
         run: |
           echo "::error::Ese modo necesita el nombre del proyecto."
           exit 1
@@ -174,7 +175,7 @@ jobs:
       # ------------------------------------------------------------- importar
 
       - name: Comprobar los archivos subidos
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render' || inputs.modo == 'musica-prueba'
         working-directory: estudio/proyectos/${{ inputs.proyecto }}
         run: |
           echo "## Archivos del proyecto \`${{ inputs.proyecto }}\`" >> "$GITHUB_STEP_SUMMARY"
@@ -196,13 +197,13 @@ jobs:
       # Deduce los limites de bloque de las duraciones del audio. No pisa un
       # edit_plan.json escrito a mano: ese seria la verdad editorial.
       - name: Generar el plan de edicion
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render' || inputs.modo == 'musica-prueba'
         working-directory: estudio
         run: |
           node cli.mjs plan-auto "${{ inputs.proyecto }}" --comparar | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Importar y validar
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render' || inputs.modo == 'musica-prueba'
         working-directory: estudio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -295,6 +296,26 @@ jobs:
         run: |
           node cli.mjs remuxar "${{ inputs.proyecto }}" \
             --video "$GITHUB_WORKSPACE/origen/video_final.mp4" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # -------------------------------------------------------- musica-prueba
+      #
+      # Tres muestras con la MISMA voz y distinta cama. Todo lo que no sea la
+      # musica es identico entre ellas, incluido el nivel: cada pista se ajusta
+      # a la sonoridad que tiene la cama sintetizada aprobada en esa ventana.
+      - name: Preparar las pruebas de musica
+        if: inputs.modo == 'musica-prueba'
+        working-directory: estudio
+        run: |
+          node cli.mjs musica-prueba "${{ inputs.proyecto }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar las pruebas como artifact
+        if: always() && inputs.confirmar == 'SI' && inputs.modo == 'musica-prueba'
+        uses: actions/upload-artifact@v4
+        with:
+          name: musica-${{ inputs.proyecto }}
+          path: estudio/proyectos/${{ inputs.proyecto }}/output/pruebas-musica/*.mp3
+          if-no-files-found: warn
+          retention-days: 30
 
       # ---------------------------------------------------------------- shorts
 
@@ -396,7 +417,7 @@ jobs:
           retention-days: 30
 
       - name: Fin
-        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render'
+        if: inputs.modo == 'importar' || inputs.modo == 'muestra' || inputs.modo == 'render' || inputs.modo == 'remux' || inputs.modo == 'shorts' || inputs.modo == 'shorts-fotograma' || inputs.modo == 'shorts-render' || inputs.modo == 'musica-prueba'
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Terminado. No se ha publicado, ni hecho Shorts, ni miniatura." >> "$GITHUB_STEP_SUMMARY"
