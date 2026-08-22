@@ -57,6 +57,37 @@ check('una palabra que no cabe baja de cuerpo en vez de salirse',
   (await medir(largo.lineas[0], largo.tamano)) <= SEGURO,
   `cuerpo ${largo.tamano}`);
 
+// --- el borde exacto --------------------------------------------------------
+//
+// El caso del short_03: «todo terminará mal, ayúdame» a cuerpo 64 mide 920px,
+// que es clavado el ancho seguro. El repartidor la daba por buena —920 no es
+// mayor que 920— y al dibujarla la tinta caia en 79..998, un pixel fuera por la
+// izquierda, porque el centrado va por el ancho de avance y la tinta no es
+// simetrica respecto a el. Lo cazaba el validador, con el Short ya maquetado.
+//
+// No se comprueba que la linea mida 920 exactos: eso depende de la version de
+// la fuente. Se comprueba lo que importa, que es que el reparto deje reserva y
+// que el rotulo dibujado no toque el area segura.
+const CUE_QUE_SE_SALIA = 'Cuando mi mente diga que todo terminará mal, ayúdame a no aceptar como';
+const borde = await disponerTexto({
+  texto: CUE_QUE_SE_SALIA, medir, anchoSeguro: SEGURO, tamano: 76, tamanoMin: 60, maxLineas: 3,
+});
+let bordeMax = 0;
+for (const l of borde.lineas) bordeMax = Math.max(bordeMax, await medir(l, borde.tamano));
+check('el reparto deja 2px de reserva y no agota el ancho seguro',
+  bordeMax <= SEGURO - 2,
+  `la mas ancha ${bordeMax}px de ${SEGURO - 2}px utiles, a cuerpo ${borde.tamano}`);
+
+const cueBorde = [{ inicio: 0, fin: 3, lineas: borde.lineas, tamano: borde.tamano }];
+const assBorde = join(dir, 'borde.ass');
+writeFileSync(assBorde, construirAss({ cues: cueBorde, ancho: ANCHO, alto: ALTO, margen: MARGEN }));
+const desbordesBorde = await validarOverflow({
+  ass: assBorde, cues: cueBorde, cta: null, ancho: ANCHO, alto: ALTO, margen: MARGEN,
+});
+check('el subtitulo del short_03 que se salia por 1px ya no se sale',
+  desbordesBorde.length === 0,
+  desbordesBorde[0] ?? `${borde.lineas.length} lineas a cuerpo ${borde.tamano}`);
+
 // --- la validacion sobre el ASS final ---------------------------------------
 const cues = [
   { inicio: 0, fin: 3, lineas: puesto.lineas, tamano: puesto.tamano },

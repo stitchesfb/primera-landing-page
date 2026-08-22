@@ -224,15 +224,34 @@ export async function disponerTexto({
   return { lineas, tamano: tamanoMin, reducido: true, desbordado: lineas.length > maxLineas };
 }
 
+// Dos pixeles que no se reparten.
+//
+// La medida centra la linea en el lienzo y lee la tinta; el render la centra
+// dentro del area segura. Los dos centran igual, pero el centrado va por el
+// ANCHO DE AVANCE de los glifos y la tinta no es simetrica respecto a el: los
+// laterales de la primera y la ultima letra no valen lo mismo. Una linea que
+// mide justo el ancho seguro puede caer un pixel a la izquierda al dibujarse.
+//
+// Paso con «todo terminará mal, ayúdame» a cuerpo 64: 920px clavados, o sea
+// exactamente el ancho seguro, y en pantalla la tinta iba de 79 a 998 con el
+// area en 80-1000. El repartidor la daba por buena —920 no es mayor que 920— y
+// la cazaba despues el validador, ya con el Short maquetado.
+//
+// La reserva se pone aqui, en quien decide, y no en quien comprueba: el
+// validador tiene que seguir midiendo contra el area de verdad, porque es la
+// unica red que queda si esta cuenta se vuelve a quedar corta.
+const GUARDA_CENTRADO = 2;
+
 /** Devuelve null si alguna linea sigue sin caber ni partiendo por palabras. */
 async function envolver(texto, anchoSeguro, medir, tamano) {
+  const limite = anchoSeguro - GUARDA_CENTRADO;
   const palabras = texto.split(/\s+/).filter(Boolean);
   const lineas = [];
   let actual = '';
 
   for (const palabra of palabras) {
     const tentativo = actual ? `${actual} ${palabra}` : palabra;
-    if (actual && (await medir(tentativo, tamano)) > anchoSeguro) {
+    if (actual && (await medir(tentativo, tamano)) > limite) {
       lineas.push(actual);
       actual = palabra;
     } else {
@@ -242,7 +261,7 @@ async function envolver(texto, anchoSeguro, medir, tamano) {
   if (actual) lineas.push(actual);
 
   for (const linea of lineas) {
-    if ((await medir(linea, tamano)) > anchoSeguro) return null;
+    if ((await medir(linea, tamano)) > limite) return null;
   }
   return lineas;
 }
