@@ -91,6 +91,47 @@
         "segundos": 2.0
       },
       "_gancho": "Experimento contra el swipe: el short_01 retuvo al 30.4%. Solo se toca el arranque; contenido, audio, musica, subtitulos, duracion y cierre quedan como se aprobaron."
+    },
+    {
+      "id": "short_03",
+      "tema": "La mente que no se detiene — soledad, catastrofe, pasado y futuro",
+      "objetivo_s": [
+        40,
+        50
+      ],
+      "candidatos": [
+        [
+          67,
+          73
+        ],
+        [
+          67,
+          72
+        ],
+        [
+          67,
+          71
+        ],
+        [
+          68,
+          73
+        ]
+      ],
+      "cta": [
+        "SIGAMOS ORANDO",
+        "Mira la oración completa"
+      ],
+      "parrafos": [
+        67,
+        73
+      ],
+      "_aprobado": "Aprobado 67-73 (~45.2s estimados). La anafora «Cuando mi mente…» recorre las cuatro formas en que la mente no para —soledad, catastrofe, pasado y futuro— y aterriza en «Por ahora, solo necesito estar aqui. / Respirar. / Orar.», que da el alivio dentro del propio Short. Termina en el 73 y el short_02 arranca en el 74: contiguos, sin solaparse.",
+      "_sin_interludios": "Unico de los tres que no cruza frontera de bloque ni pisa un interludio del plan: no hay recorte que anotar. El short_01 acorto el de 6.9s tras el parrafo 44 y el short_02 el de 10.4s tras el 76.",
+      "gancho": {
+        "texto": "¿TU MENTE NO SE DETIENE?",
+        "segundos": 2.0
+      },
+      "_gancho": "Segunda vuelta del experimento contra el swipe: short_01 sin gancho retuvo al 30.4%, short_02 con «¿NO PUEDES DORMIR?» al 42.1% (~660 vistas, datos tempranos). Se cambia SOLO el texto del gancho; escena, safe zones, subtitulos, posicion y estilo del gancho, CTA, musica y duracion quedan como en el short_02. Medido con el mismo libass del render: entra en 2 lineas con cuerpo 96, igual que el gancho anterior, asi que ni el tamano cambia."
     }
   ]
 }
