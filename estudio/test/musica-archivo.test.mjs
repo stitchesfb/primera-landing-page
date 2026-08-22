@@ -9,7 +9,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { rutaFfmpeg, ejecutar } from '../lib/audio.mjs';
 import { nivelEn } from '../lib/musica.mjs';
-import { sonoridad, camaDesdeArchivo, mezclarMuestra } from '../lib/musicaArchivo.mjs';
+import { sonoridad, camaDesdeArchivo, mezclarMuestra, regionUtil } from '../lib/musicaArchivo.mjs';
+import { readFileSync } from 'node:fs';
 
 let fallos = 0;
 const check = (n, ok, d = '') => { console.log(`${ok ? 'ok   ' : 'FALLO'} ${n}${d ? ' — ' + d : ''}`); if (!ok) fallos++; };
@@ -66,16 +67,74 @@ check('y en el objetivo pedido',
   finales.every((x) => Math.abs(x.lufs - OBJETIVO) <= 0.6),
   finales.map((x) => x.lufs.toFixed(1)).join(', '));
 
-// --- una pista mas corta que la ventana se repite, no se corta --------------
-const corta = join(dir, 'corta.wav');
+// --- el bucle de las pistas largas ------------------------------------------
+//
+// Una pieza de dos minutos y medio bajo un video de media hora da doce vueltas.
+// Si la costura se nota, se nota doce veces y acompasada, que es justo el tipo
+// de patron que el oido encuentra solo.
+
+// Pista de prueba con los fundidos que trae cualquier pieza publicada: entra
+// desde el silencio y se apaga. Sin quitarlos, cruzar la cola con la cabeza es
+// cruzar dos zonas mudas.
+const conFundidos = join(dir, 'confundidos.wav');
 await ejecutar(ffmpeg, ['-y', '-loglevel', 'error', '-f', 'lavfi',
-  '-i', 'sine=frequency=300:duration=5', '-ar', '44100', '-ac', '2', corta]);
-const r = await camaDesdeArchivo({
-  pista: corta, segundos: DUR, envolvente: nivel,
-  salidaWav: join(dir, 'rep.wav'), gananciaDb: 0, fadeIn: 1, fadeOut: 1,
+  '-i', 'sine=frequency=330:duration=12',
+  '-af', 'afade=t=in:st=0:d=2,afade=t=out:st=10:d=2',
+  '-ar', '44100', '-ac', '2', conFundidos]);
+
+// Cuanto recorta depende de la forma del fundido: aqui es lineal de 2s, y cae
+// por debajo del umbral solo en su ultimo cuarto de segundo. Lo que hay que
+// comprobar no es cuanto quita, sino que quita por los dos lados y deja dentro
+// el cuerpo de la pieza.
+const region = regionUtil(readFileSync(conFundidos).subarray(44));
+check('encuentra el tramo util, sin los fundidos de la pista',
+  region.recortado && region.entradaS > 0 && region.salidaS > 0 && region.fin > region.inicio,
+  `descarta ${region.entradaS?.toFixed(1)}s de entrada y ${region.salidaS?.toFixed(1)}s de salida`);
+
+const SEG = 40;
+const plano = () => 1;
+const bache = (wav, c) => {
+  const b = readFileSync(wav).subarray(44);
+  const rms = (t, w = 0.3) => {
+    const n = b.length >> 2;
+    const a = Math.max(0, Math.round((t - w / 2) * 44100));
+    const z = Math.min(n - 1, Math.round((t + w / 2) * 44100));
+    let s = 0;
+    for (let i = a; i <= z; i++) { const v = b.readInt16LE(i * 4) / 32768; s += v * v; }
+    return Math.sqrt(s / Math.max(1, z - a + 1));
+  };
+  const dBx = (x) => 20 * Math.log10(Math.max(1e-9, x));
+  const fuera = (dBx(rms(c - 3)) + dBx(rms(c + 3))) / 2;
+  let peor = 0;
+  for (let d = -1.5; d <= 1.5; d += 0.05) peor = Math.max(peor, fuera - dBx(rms(c + d)));
+  return peor;
+};
+
+const seco = join(dir, 'seco.wav');
+const rSeco = await camaDesdeArchivo({
+  pista: conFundidos, segundos: SEG, envolvente: plano, salidaWav: seco,
+  gananciaDb: 0, fadeIn: 0.01, fadeOut: 0.01, cruceLoop: 0,
 });
-check('avisa cuando ha tenido que repetir la pista', r.repetida === true);
-const rep = await sonoridad(join(dir, 'rep.wav'));
+const cruzado = join(dir, 'cruzado.wav');
+const rCruzado = await camaDesdeArchivo({
+  pista: conFundidos, segundos: SEG, envolvente: plano, salidaWav: cruzado,
+  gananciaDb: 0, fadeIn: 0.01, fadeOut: 0.01, cruceLoop: 2,
+});
+
+check('avisa cuando ha tenido que repetir la pista', rCruzado.repetida === true,
+  `${rCruzado.vueltas} vueltas, cruce de ${rCruzado.cruceSegundos}s`);
+check('deja constancia de lo que recorto', rCruzado.recorte !== null,
+  JSON.stringify(rCruzado.recorte));
+
+// Control: sin cruce la costura tiene que verse, o medir cero no diria nada.
+const bacheSeco = bache(seco, rSeco.costuras[0]);
+const bacheCruzado = bache(cruzado, rCruzado.costuras[0]);
+check('sin cruce la costura SI deja un bajon (control)', bacheSeco > 6,
+  `${bacheSeco.toFixed(1)} dB`);
+check('el cruce lo hace mucho menor', bacheCruzado < bacheSeco / 2,
+  `${bacheCruzado.toFixed(1)} dB frente a ${bacheSeco.toFixed(1)} dB`);
+
+const rep = await sonoridad(cruzado);
 check('la ventana repetida suena de principio a fin', Number.isFinite(rep.lufs) && rep.lufs > -70,
   `${rep.lufs.toFixed(1)} LUFS`);
 

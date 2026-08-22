@@ -1148,6 +1148,118 @@ async function cmdMusicaPrueba(id, opciones = {}) {
   console.log(c.dim('\n  Nada elegido, nada renderizado, nada publicado.'));
 }
 
+/**
+ * A/B de cuanto sube la cama en los interludios, con la misma pista.
+ *
+ * Lo unico que cambia entre las dos muestras es el nivel de la musica cuando
+ * calla la voz. Y hay una trampa que evitar: si cada variante se normalizara
+ * por separado, la que menos sube en los interludios saldria con MAS ganancia
+ * para compensar, y acabaria sonando mas alta bajo la voz — que es justo lo que
+ * no debe moverse. Asi que la correccion se calcula UNA vez, con la referencia
+ * aprobada, y se aplica igual a las dos.
+ */
+async function cmdMusicaInterludio(id, opciones = {}) {
+  const proyecto = cargarProyecto(id);
+  const salida = asegurarSalida(proyecto);
+  const rutaTimeline = join(salida, 'timeline.json');
+  const audio = join(salida, 'audio.mp3');
+  if (!existsSync(rutaTimeline) || !existsSync(audio)) {
+    throw new Error(`Faltan ${id}/output/timeline.json o audio.mp3. Ejecuta antes: importar ${id}`);
+  }
+
+  const timeline = JSON.parse(readFileSync(rutaTimeline, 'utf8'));
+  const base = canal.render;
+  const pre = base.presets[proyecto.plan?.pilar ?? 'noche'] ?? base.presets.noche;
+  const m = pre.musica;
+  const pista = join(DIR_MUSICA, 'one_step_closer.mp3');
+  if (!existsSync(pista)) throw new Error(`Falta one_step_closer.mp3 en ${DIR_MUSICA}`);
+
+  // Exactamente la misma ventana que la prueba anterior.
+  const largos = timeline.huecos.filter((h) => h.duracion >= 10);
+  const elegido = largos[0] ?? timeline.huecos[0];
+  const dur = opciones.duracion ?? 80;
+  const desde = opciones.desde ?? Math.max(0, elegido.inicio - Math.min(34, (dur - elegido.duracion) / 2));
+
+  const FADE_IN = 2;
+  const FADE_OUT = 3;
+  const forma = { huecos: timeline.huecos, finNarracion: timeline.fin_narracion_s, rampa: m.rampa_s };
+  const cierre = { fadeIn: m.fade_in_s, fadeOut: timeline.cierre?.fade_out ?? 8, duracionTotal: timeline.duracion_total_s };
+  const conNiveles = (bajoVoz, enInterludio) => (t) =>
+    nivelEn(desde + t, { ...forma, cierre, bajoVoz, enInterludio });
+
+  titulo(`A/B del interludio — ${id}`);
+  console.log(`Pista           one_step_closer.mp3 en las dos`);
+  console.log(`Ventana         ${mmss(desde)} → ${mmss(desde + dur)}  (${dur}s, la misma de la prueba anterior)`);
+  console.log(`Interludio      ${elegido.duracion}s en ${mmss(elegido.inicio)}, a ${mmss(elegido.inicio - desde)} de la muestra`);
+
+  const tmp = join(salida, '.tmp-interludio');
+  mkdirSync(tmp, { recursive: true });
+  const dirPruebas = join(salida, 'pruebas-musica');
+  mkdirSync(dirPruebas, { recursive: true });
+
+  process.stdout.write('\n  voz de la ventana…');
+  const voz = join(tmp, 'voz.wav');
+  await vozDeLaVentana({ audio, desde, segundos: dur, salidaWav: voz });
+  console.log(` ${dur}s, sin tocar el nivel`);
+
+  // La correccion de ganancia se calcula con la referencia aprobada y se
+  // congela: las dos variantes usan la misma, o dejarian de ser comparables.
+  process.stdout.write('  calibrando contra la cama aprobada…');
+  const refWav = join(tmp, 'referencia.wav');
+  generarCama({
+    segundos: dur, offset: desde, envolvente: (t) => nivelEn(t, { ...forma, cierre, bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db }),
+    apertura: (t) => aperturaEn(t, forma),
+    grupos: planearPiano({ duracionTotal: timeline.duracion_total_s, apertura: (t) => aperturaEn(t, forma) }),
+    salidaWav: refWav,
+  });
+  const ref = await sonoridad(refWav);
+  const tanteo = join(tmp, 'tanteo.wav');
+  await camaDesdeArchivo({
+    pista, segundos: dur, envolvente: conNiveles(m.bajo_voz_db, m.en_interludio_db),
+    salidaWav: tanteo, gananciaDb: 0, fadeIn: FADE_IN, fadeOut: FADE_OUT,
+  });
+  const ganancia = ref.lufs - (await sonoridad(tanteo)).lufs;
+  console.log(` referencia ${ref.lufs.toFixed(1)} LUFS → ganancia fija ${ganancia >= 0 ? '+' : ''}${ganancia.toFixed(2)} dB`);
+  console.log(c.dim('    La misma para las dos variantes: el nivel bajo la voz no se mueve.'));
+
+  const variantes = [
+    { letra: 'A', enInterludio: -20.5, archivo: 'prueba_A_interludio_-20.5dB.mp3', nota: 'sube 2,5 dB al callar la voz' },
+    { letra: 'B', enInterludio: m.bajo_voz_db, archivo: 'prueba_B_interludio_plano.mp3', nota: 'sin subida: la cama no se mueve' },
+  ];
+
+  const hechas = [];
+  for (const v of variantes) {
+    titulo(`Variante ${v.letra} — ${m.bajo_voz_db} dB bajo voz / ${v.enInterludio} dB en interludio`);
+    console.log(`  ${v.nota}`);
+    const camaWav = join(tmp, `cama-${v.letra}.wav`);
+    const info = await camaDesdeArchivo({
+      pista, segundos: dur, envolvente: conNiveles(m.bajo_voz_db, v.enInterludio),
+      salidaWav: camaWav, gananciaDb: ganancia, fadeIn: FADE_IN, fadeOut: FADE_OUT,
+    });
+    if (info.repetida) console.log(c.dim(`  la pista se repite: ${info.vueltas} vueltas con cruce de ${info.cruceSegundos}s`));
+    const cama = await sonoridad(camaWav);
+    const destino = join(dirPruebas, v.archivo);
+    await mezclarMuestra({ voz, musica: camaWav, salidaMp3: destino, segundos: dur, fadeIn: FADE_IN, fadeOut: FADE_OUT });
+    const mezcla = await sonoridad(destino);
+    console.log(`  cama sola       ${cama.lufs.toFixed(1)} LUFS`);
+    console.log(`  ${v.archivo}  ${(statSync(destino).size / 1048576).toFixed(1)} MB · mezcla a ${mezcla.lufs.toFixed(1)} LUFS`);
+    hechas.push({ ...v, cama, mezcla, destino });
+  }
+
+  rmSync(tmp, { recursive: true, force: true });
+
+  titulo('Las dos muestras');
+  console.log(`  Identico en las dos: pista, ventana ${mmss(desde)}–${mmss(desde + dur)}, voz sin tocar,`);
+  console.log(`  ganancia ${ganancia >= 0 ? '+' : ''}${ganancia.toFixed(2)} dB, ${m.bajo_voz_db} dB bajo la voz, fundidos ${FADE_IN}s y ${FADE_OUT}s, mp3 192 kbps.`);
+  console.log(`  Lo unico distinto: el nivel en el interludio.`);
+  console.log('');
+  for (const h of hechas) console.log(`  ${h.letra}  ${basename(h.destino).padEnd(34)} ${h.enInterludio} dB — ${h.nota}`);
+  const salto = hechas[0].cama.lufs - hechas[1].cama.lufs;
+  console.log('');
+  console.log(c.dim(`  Entre las dos camas hay ${salto.toFixed(2)} LU: es lo que aporta la subida en ese interludio de ${elegido.duracion}s.`));
+  console.log(c.dim('  Nada elegido, nada renderizado, nada publicado.'));
+}
+
 // --- maquetacion de los Shorts ----------------------------------------
 
 // Margen lateral intocable. YouTube superpone su interfaz sobre los bordes de
@@ -2274,7 +2386,7 @@ ${c.bold('Estudio — Oraciones Biblicas Diarias')}   ${c.dim('Checkpoint 1')}
   ${c.cian('aprobar-audio')} <proyecto> Marca APPROVED_FOR_AUDIO
   ${c.cian('voz')}      <proyecto>      Genera la voz. Exige aprobacion previa
   ${c.cian('plan-auto')} <proyecto>     Deduce edit_plan.json de las duraciones del audio\n  ${c.cian('importar')} <proyecto>      Alinea audio ya existente, sin generar voz
-  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales (--render los monta)\n  ${c.cian('musica-prueba')} <proyecto> Tres muestras con la misma voz y distinta cama\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
+  ${c.cian('previsualizar')} <proyecto> MP4 de revision: negro + voz + subtitulos\n  ${c.cian('muestra')}  <proyecto>      Ventana corta con imagen, movimiento, motas y musica\n                            --piano elige la ventana con mas eventos de piano\n  ${c.cian('render')}   <proyecto>      Video completo con la configuracion aprobada\n  ${c.cian('remuxar')}  <proyecto>      Cambia solo el audio de un render ya hecho (--video <mp4>)\n  ${c.cian('diagnosticar')} <mp4>       Estructura del contenedor para reproduccion web (--reparar)\n  ${c.cian('shorts')}   <proyecto>      Propone los extractos verticales (--render los monta)\n  ${c.cian('musica-prueba')} <proyecto> Tres muestras con la misma voz y distinta cama\n  ${c.cian('musica-interludio')} <proyecto> A/B de cuanto sube la cama al callar la voz\n  ${c.cian('resumen')}  [--json <ruta>] Calibracion en formato publicable
   ${c.cian('estado')}   [proyecto]      Muestra el estado
 
   Opciones:  --si    salta la confirmacion en 'voz'
@@ -2336,6 +2448,10 @@ async function principal() {
     case 'musica-prueba': {
       const num = (f) => { const i = resto.indexOf(f); return i > -1 ? Number(resto[i + 1]) : undefined; };
       return cmdMusicaPrueba(exigeProyecto(), { desde: num('--desde'), duracion: num('--duracion') });
+    }
+    case 'musica-interludio': {
+      const num = (f) => { const i = resto.indexOf(f); return i > -1 ? Number(resto[i + 1]) : undefined; };
+      return cmdMusicaInterludio(exigeProyecto(), { desde: num('--desde'), duracion: num('--duracion') });
     }
     case 'resumen': {
       const i = process.argv.indexOf('--json');
