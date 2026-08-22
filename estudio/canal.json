@@ -89,9 +89,11 @@
         },
         "musica": {
           "bajo_voz_db": -23,
-          "en_interludio_db": -15.5,
+          "en_interludio_db": -23,
           "rampa_s": 1.5,
-          "fade_in_s": 4
+          "fade_in_s": 4,
+          "_regla": "REGLA DEL PERFIL NOCTURNO, aprobada el 2026-08-22 tras una prueba A/B: la musica NO sube en los interludios. Se queda en -23 dB tanto bajo la narracion como cuando la voz calla. Quien pone esto para dormirse no deberia notar ningun cambio de volumen; la subida anterior de 7,5 dB llamaba la atencion justo en el momento de mas silencio. Los dos numeros tienen que seguir siendo iguales: hay una validacion que lo comprueba antes de generar nada.",
+          "fuente": "biblioteca"
         }
       },
       "manana": {
@@ -115,5 +117,40 @@
         }
       }
     }
+  },
+  "musica": {
+    "_nota": "Biblioteca aprobada para el perfil nocturno. Los archivos viven en estudio/assets/music/ y son material de origen: no se modifican ni se regeneran nunca.",
+    "normalizar": true,
+    "_normalizar": "Cada pista se ajusta a la sonoridad de referencia antes de mezclarse. Medido, las tres vienen entre -17.0 y -27.7 LUFS: 10,7 LU de diferencia. Sin igualarlas, cambiar de pista entre videos cambiaria el volumen del canal.",
+    "objetivo_lufs": -33.5,
+    "_objetivo": "Sonoridad de la cama, con el ducking ya aplicado, medida sobre la ventana de referencia. Es donde estaba la cama que se aprobo en video_001.",
+    "cruce_loop_s": 4,
+    "recorte_fundidos": true,
+    "_loop": "Las pistas duran dos minutos y medio y un video nocturno media hora: hay que dar vueltas. Se recortan los fundidos propios de la pista y se cruza la vuelta cuatro segundos. Medido sobre One Step Closer: el bajon en la costura pasa de 147 dB a 10,9 dB, dentro de lo que ya varia la propia pieza (6,7 a 15,3 dB).",
+    "rotacion": "libre",
+    "_rotacion": "No hace falta usar siempre la misma. Un proyecto puede nombrar la suya en su edit_plan.json con \"musica\": \"<archivo>\"; si no dice nada, se reparte por orden.",
+    "biblioteca": [
+      {
+        "archivo": "one_step_closer.mp3",
+        "titulo": "One Step Closer",
+        "autor": "Aakash Gandhi",
+        "lufs": -18.0,
+        "duracion_s": 132.0
+      },
+      {
+        "archivo": "alone_with_my_thoughts.mp3",
+        "titulo": "No.7 Alone With My Thoughts",
+        "autor": "Esther Abrami",
+        "lufs": -27.7,
+        "duracion_s": 142.1
+      },
+      {
+        "archivo": "touching_moment.mp3",
+        "titulo": "Touching Moment",
+        "autor": "Wayne Jones",
+        "lufs": -17.0,
+        "duracion_s": 148.2
+      }
+    ]
   }
 }

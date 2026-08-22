@@ -40,6 +40,7 @@ import {
 import {
   sonoridad, camaDesdeArchivo, mezclarMuestra, vozDeLaVentana,
 } from './lib/musicaArchivo.mjs';
+import { validarPerfilMusical, pistaDelProyecto } from './lib/perfilMusical.mjs';
 import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
 import {
   construirVoz, formaDelShort, construirAss, renderizarShort, fotogramasShort,
@@ -887,6 +888,7 @@ async function cmdRemuxar(id, opciones = {}) {
   const pilar = proyecto.plan?.pilar ?? 'noche';
   const cfg = { ...base, ...(base.presets[pilar] ?? base.presets.noche) };
 
+  exigirPerfilMusical(canal, pilar);
   titulo(`Remux de audio — ${id}`);
   console.log(`Video de origen ${basename(origen)}  (${(statSync(origen).size / 1048576).toFixed(0)} MB)`);
 
@@ -1010,6 +1012,23 @@ async function cmdRemuxar(id, opciones = {}) {
   console.log(`  video_final.mp4   ${mmss(despues.duracionContenedor)} · ${(bytes / 1048576).toFixed(0)} MB`);
   console.log(`  subtitles.srt     aparte, sin quemar`);
   console.log(c.dim('  Imagen, movimiento y particulas: los mismos bits del render aprobado.'));
+}
+
+/**
+ * Comprueba la regla musical del perfil antes de generar una sola muestra.
+ *
+ * La regla vive en canal.json, pero un archivo de configuracion no se defiende
+ * solo: basta que alguien mueva un numero para probar algo y se quede. Aqui se
+ * corta el paso.
+ */
+function exigirPerfilMusical(canalCfg, pilar) {
+  const { problemas, notas } = validarPerfilMusical(canalCfg, pilar);
+  if (problemas.length) {
+    throw new Error(
+      `El perfil musical "${pilar}" no cumple la regla del canal:\n    ` + problemas.join('\n    ')
+    );
+  }
+  for (const n of notas) console.log(c.dim(`Perfil musical  ${n}`));
 }
 
 // --- prueba de camas musicales ----------------------------------------
@@ -1488,6 +1507,7 @@ async function cmdShortsRender(id, opciones = {}) {
   const alto = obj.alto ?? 1920;
   const esVertical = imagen === vertical;
 
+  exigirPerfilMusical(canal, proyecto.plan?.pilar ?? 'noche');
   titulo(`Render de Shorts — ${id}`);
   console.log(`Formato         ${ancho}x${alto} · ${base.fps} fps · crf ${base.crf}`);
   console.log(`Escena          ${basename(imagen)}` +
@@ -2101,6 +2121,7 @@ async function cmdMuestra(id, opciones = {}) {
     );
   }
 
+  exigirPerfilMusical(canal, pilar);
   titulo(`Muestra del renderer — ${id}`);
   console.log(`Imagen          ${basename(imagen)}`);
   console.log(`Ventana         ${mmss(desde)} → ${mmss(desde + dur)}  (${dur}s de ${mmss(timeline.duracion_total_s)})`);
@@ -2205,6 +2226,7 @@ async function cmdRender(id, opciones = {}) {
   const total = opciones.duracion ?? timeline.duracion_total_s;
   const largoVoz = await duracionSegundos(voz);
 
+  exigirPerfilMusical(canal, pilar);
   titulo(`Render completo — ${id}`);
   console.log(`Imagen          ${basename(imagen)}`);
   console.log(`Duracion        ${mmss(total)}`);
