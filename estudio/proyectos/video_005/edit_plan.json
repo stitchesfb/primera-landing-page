@@ -1,0 +1,42 @@
+{
+  "id": "video_005",
+  "pilar": "noche",
+
+  "_fuente": "Guion_TTS_7_Bloques.md, version corregida (2 correcciones de articulacion aprobadas: parrafo global 44 en Bloque UNO, parrafos 386-387 en Bloque CUATRO). audio_fuente/1.mp3 y 4.mp3 son las versiones v2 regeneradas; 2,3,5,6,7 son las v1 originales aprobadas.",
+  "_bloques": "7 bloques de audio (no 5): canal.json > formatos.noche.bloques_esperados sigue en 5 sin tocar, por instruccion expresa. Los 6 block_end de este plan produciran el aviso no bloqueante correspondiente en validarPlan; se reporta, no se oculta.",
+
+  "parrafos_esperados": 726,
+
+  "defaults": {
+    "pause_after_paragraph": 3.0,
+    "_defaults": "Valor exigido por validarPlan (falla si falta) pero INERTE en modo importar: cmdImportar fuerza defaults.pause_after_paragraph a 0 en el proyecto sintetico de tramos. No se inserta ninguna pausa uniforme entre parrafos; solo existen los huecos declarados abajo. En todo lo demas queda el espaciado natural que la voz ya trae grabado."
+  },
+
+  "events": [
+    { "after": 76,  "type": "interlude",  "seconds": 6,    "note": "Bloque UNO — tras Salmo 4:8 — «En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado»" },
+    { "after": 103, "type": "block_end",  "seconds": 10,   "block": 1, "note": "fin del Bloque UNO" },
+
+    { "after": 149, "type": "interlude",  "seconds": 6,    "note": "Bloque DOS — tras Mateo 11:28 — «Venid a mí... y yo os haré descansar»" },
+    { "after": 170, "type": "block_end",  "seconds": 0.1,  "block": 2, "note": "frontera Bloque DOS→TRES: sin interludio por decision editorial, solo la transicion natural del corte de archivo. seconds al minimo tecnico que exige validarPlan (>0); ver informe — produce un aviso de rango no bloqueante." },
+
+    { "after": 176, "type": "interlude",  "seconds": 6,    "note": "Bloque TRES — tras Filipenses 4:6-7 — «...guardará vuestros corazones y vuestros pensamientos en Cristo Jesús»" },
+    { "after": 318, "type": "block_end",  "seconds": 10,   "block": 3, "note": "fin del Bloque TRES" },
+
+    { "after": 386, "type": "interlude",  "seconds": 6,    "note": "Bloque CUATRO — tras Isaías 26:3 — «...porque en ti ha confiado»" },
+    { "after": 437, "type": "block_end",  "seconds": 10,   "block": 4, "note": "fin del Bloque CUATRO" },
+
+    { "after": 525, "type": "interlude",  "seconds": 6,    "note": "Bloque CINCO — tras Salmo 55:22 — «Echa sobre Jehová tu carga, y él te sustentará»" },
+    { "after": 583, "type": "block_end",  "seconds": 10,   "block": 5, "note": "fin del Bloque CINCO" },
+
+    { "after": 619, "type": "interlude",  "seconds": 10,   "note": "Bloque SEIS — descanso profundo — «Señor... tú ya conoces esto.»" },
+    { "after": 637, "type": "interlude",  "seconds": 10,   "note": "Bloque SEIS — descanso profundo — «Por eso yo puedo cerrar los ojos.»" },
+    { "after": 661, "type": "interlude",  "seconds": 12,   "note": "Bloque SEIS — descanso profundo — «Puedo permanecer aquí... en silencio... delante de ti.»" },
+    { "after": 674, "type": "block_end",  "seconds": 12,   "block": 6, "note": "fin del Bloque SEIS" },
+
+    { "after": 696, "type": "interlude",  "seconds": 12,   "note": "Bloque SIETE — descanso profundo — «Padre... esto está en tus manos.»" },
+    { "after": 716, "type": "interlude",  "seconds": 15,   "note": "Bloque SIETE — descanso profundo — «Porque solo tú, Señor... me haces vivir confiado.» — excede interludio_bloque_max (12s), aviso no bloqueante esperado" },
+    { "after": 724, "type": "interlude",  "seconds": 15,   "note": "Bloque SIETE — descanso profundo — «Y descanso en ti.» — excede interludio_bloque_max (12s), aviso no bloqueante esperado" },
+
+    { "at": "end", "type": "outro", "music_seconds": 30, "note": "cierre tras «amén». Sin musica seleccionada todavia: este audio de revision lleva silencio puro en este tramo." }
+  ]
+}
