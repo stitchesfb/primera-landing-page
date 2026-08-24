@@ -29,9 +29,12 @@
  * queda inflado por estar pegado a una pausa larga) y hay que reubicar el
  * corte a mano dentro del silencio verdadero, en vez de confiar en el punto
  * que calcula la alineacion. Un evento con cut_offset_ms distinto de cero
- * ademas lleva un fundido tecnico corto (30ms) a cada lado del corte, para
- * no dejar un clic de discontinuidad de muestra — ver montarTramos() en
- * audio.mjs.
+ * ademas lleva 30ms de fundido tecnico a cada lado del corte por defecto,
+ * para no dejar un clic de discontinuidad de muestra — ver montarTramos()
+ * en audio.mjs. "fade_out_ms" / "fade_in_ms" declarados a mano en el evento
+ * fijan esa duracion (o la activan sin cut_offset_ms — p.ej. en la frontera
+ * entre dos archivos de audio distintos, donde no hay corte interior que
+ * reubicar pero igual conviene suavizar la union).
  */
 
 const TIPOS_CON_HUECO = new Set(['pause', 'interlude', 'block_end']);
@@ -129,6 +132,11 @@ export function validarPlan(proyecto, canal) {
       if (ev.cut_offset_ms != null && !Number.isFinite(ev.cut_offset_ms)) {
         problemas.push(`${donde}: cut_offset_ms tiene que ser un numero`);
       }
+      for (const campo of ['fade_out_ms', 'fade_in_ms']) {
+        if (ev[campo] != null && !(Number.isFinite(ev[campo]) && ev[campo] >= 0)) {
+          problemas.push(`${donde}: ${campo} tiene que ser un numero mayor o igual que cero`);
+        }
+      }
       const clave = `hueco:${ev.after}`;
       if (vistos.has(clave)) {
         problemas.push(
@@ -204,11 +212,18 @@ export function construirLinea(proyecto, canal, duraciones) {
     if (ev.at === 'end' && ev.type === 'outro') {
       outro = { music_seconds: ev.music_seconds ?? 0, fade_out: ev.fade_out ?? 0 };
     } else if (TIPOS_CON_HUECO.has(ev.type)) {
+      // Un evento con cut_offset_ms lleva 30ms de fundido a cada lado por
+      // defecto (para no dejar clic en el corte reubicado). fade_out_ms /
+      // fade_in_ms declarados a mano tienen prioridad y sirven tambien sin
+      // cut_offset_ms — p.ej. una frontera entre dos archivos de audio
+      // distintos, donde no hay corte interior que reubicar pero igual
+      // conviene suavizar la union.
       huecoTras.set(ev.after, {
         segundos: ev.seconds,
         tipo: ev.type,
         nota: ev.note ?? null,
-        fade: !!ev.cut_offset_ms,
+        fadeOutMs: ev.fade_out_ms ?? (ev.cut_offset_ms ? 30 : 0),
+        fadeInMs: ev.fade_in_ms ?? (ev.cut_offset_ms ? 30 : 0),
       });
     } else if (ev.type === 'image') {
       imagenTras.set(ev.after, ev);
@@ -244,7 +259,8 @@ export function construirLinea(proyecto, canal, duraciones) {
         tipo: explicito?.tipo ?? 'pause',
         estrategico: segundos >= canal.reglas_edicion.interludio_versiculo_min,
         nota: explicito?.nota ?? null,
-        fade: explicito?.fade ?? false,
+        fadeOutMs: explicito?.fadeOutMs ?? 0,
+        fadeInMs: explicito?.fadeInMs ?? 0,
       });
       t += segundos;
     }

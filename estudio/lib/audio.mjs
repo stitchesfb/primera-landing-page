@@ -138,9 +138,9 @@ export async function montarNarracion({ segmentos, huecos, outro, salidaMp3, tmp
  * posicion dentro de un mp3 cae al fotograma mas cercano y correria los
  * subtitulos unos milisegundos en cada corte.
  *
- * Un hueco con `fade: true` (ver construirLinea en plan.mjs, viene de un
- * evento con cut_offset_ms) lleva ademas un fundido tecnico de 30ms a cada
- * lado del corte, para no dejar un clic de discontinuidad de muestra.
+ * Un hueco con fadeOutMs/fadeInMs (ver construirLinea en plan.mjs) lleva
+ * ademas un fundido tecnico de esa duracion a cada lado del corte, para no
+ * dejar un clic de discontinuidad de muestra.
  */
 export async function montarTramos({ tramos, huecos, outro, salidaMp3, tmp }) {
   mkdirSync(tmp, { recursive: true });
@@ -158,25 +158,26 @@ export async function montarTramos({ tramos, huecos, outro, salidaMp3, tmp }) {
   const piezas = [];
   const duraciones = [];
 
-  // Un hueco marcado con fade lleva un corte reubicado a mano (cut_offset_ms)
-  // dentro de silencio real de sobra a ambos lados: se le aplica un fundido
-  // tecnico corto para no dejar un clic de discontinuidad de muestra en el
-  // punto exacto del corte, sin tocar ninguna palabra.
-  const FADE_S = 0.03;
-  let fadeInPendiente = false;
+  // Un hueco con fadeOutMs/fadeInMs > 0 lleva un fundido tecnico corto a ese
+  // lado del corte, para no dejar un clic de discontinuidad de muestra sin
+  // tocar ninguna palabra. Cada lado se declara por separado: la cola del
+  // tramo anterior al hueco (fadeOutMs) y la cabeza del tramo siguiente
+  // (fadeInMs) pueden llevar duraciones distintas.
+  let fadeInPendienteMs = 0;
 
   for (const [i, t] of tramos.entries()) {
     const trozo = join(tmp, `t${String(i + 1).padStart(3, '0')}.wav`);
     const hueco = huecos.find((h) => h.trasParrafo === i + 1);
-    const conFadeOut = hueco?.duracion > 0 && hueco.fade;
+    const fadeOutMs = hueco?.duracion > 0 ? (hueco.fadeOutMs ?? 0) : 0;
 
     const filtros = [];
-    if (fadeInPendiente) filtros.push(`afade=t=in:st=0:d=${FADE_S}`);
-    if (conFadeOut) {
+    if (fadeInPendienteMs > 0) filtros.push(`afade=t=in:st=0:d=${(fadeInPendienteMs / 1000).toFixed(4)}`);
+    if (fadeOutMs > 0) {
       const duracionTramo = t.hasta - t.desde;
-      filtros.push(`afade=t=out:st=${Math.max(0, duracionTramo - FADE_S).toFixed(4)}:d=${FADE_S}`);
+      const fadeOutS = fadeOutMs / 1000;
+      filtros.push(`afade=t=out:st=${Math.max(0, duracionTramo - fadeOutS).toFixed(4)}:d=${fadeOutS.toFixed(4)}`);
     }
-    fadeInPendiente = conFadeOut;
+    fadeInPendienteMs = hueco?.duracion > 0 ? (hueco.fadeInMs ?? 0) : 0;
 
     const args = [
       '-y', '-loglevel', 'error',
