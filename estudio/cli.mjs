@@ -708,7 +708,7 @@ async function cmdImportar(id) {
   // corte se lee en vez de estimarse.
   const internos = (proyecto.plan.events ?? [])
     .filter((e) => e.at !== 'end' && e.seconds > 0 && !finDeBloque.has(e.after))
-    .map((e) => e.after);
+    .map((e) => ({ after: e.after, offsetMs: e.cut_offset_ms }));
 
   const tramos = [];
   const palabrasPorTramo = [];
@@ -720,8 +720,8 @@ async function cmdImportar(id) {
     const tiempos = tiemposPorParrafo(palabras, textos);
 
     const indices = internos
-      .filter((n) => b.includes(n - 1))
-      .map((n) => b.indexOf(n - 1));
+      .filter((n) => b.includes(n.after - 1))
+      .map((n) => ({ indice: b.indexOf(n.after - 1), offsetMs: n.offsetMs }));
     const cortes = puntosDeCorte(tiempos, indices, duraciones[k]);
 
     for (const corte of cortes) {
@@ -730,6 +730,7 @@ async function cmdImportar(id) {
         bloque: k + 1,
         en: corte.en,
         silencioNatural: corte.silencioNatural,
+        offsetMs: corte.offsetMs,
       });
     }
 
@@ -746,7 +747,8 @@ async function cmdImportar(id) {
     for (const d of detalleCortes) {
       console.log(c.dim(
         `    tras el parrafo ${d.parrafo} (bloque ${d.bloque}) en ${mmss(d.en)} del bloque · ` +
-        `silencio natural ${d.silencioNatural.toFixed(2)}s`
+        `silencio natural ${d.silencioNatural.toFixed(2)}s` +
+        (d.offsetMs ? ` · corte desplazado ${d.offsetMs}ms` : '')
       ));
     }
   }

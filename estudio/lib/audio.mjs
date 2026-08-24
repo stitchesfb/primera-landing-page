@@ -137,6 +137,10 @@ export async function montarNarracion({ segmentos, huecos, outro, salidaMp3, tmp
  * tramos: sobre PCM el corte es exacto a la muestra, mientras que buscar una
  * posicion dentro de un mp3 cae al fotograma mas cercano y correria los
  * subtitulos unos milisegundos en cada corte.
+ *
+ * Un hueco con `fade: true` (ver construirLinea en plan.mjs, viene de un
+ * evento con cut_offset_ms) lleva ademas un fundido tecnico de 30ms a cada
+ * lado del corte, para no dejar un clic de discontinuidad de muestra.
  */
 export async function montarTramos({ tramos, huecos, outro, salidaMp3, tmp }) {
   mkdirSync(tmp, { recursive: true });
@@ -154,20 +158,39 @@ export async function montarTramos({ tramos, huecos, outro, salidaMp3, tmp }) {
   const piezas = [];
   const duraciones = [];
 
+  // Un hueco marcado con fade lleva un corte reubicado a mano (cut_offset_ms)
+  // dentro de silencio real de sobra a ambos lados: se le aplica un fundido
+  // tecnico corto para no dejar un clic de discontinuidad de muestra en el
+  // punto exacto del corte, sin tocar ninguna palabra.
+  const FADE_S = 0.03;
+  let fadeInPendiente = false;
+
   for (const [i, t] of tramos.entries()) {
     const trozo = join(tmp, `t${String(i + 1).padStart(3, '0')}.wav`);
-    await ejecutar(ffmpeg, [
+    const hueco = huecos.find((h) => h.trasParrafo === i + 1);
+    const conFadeOut = hueco?.duracion > 0 && hueco.fade;
+
+    const filtros = [];
+    if (fadeInPendiente) filtros.push(`afade=t=in:st=0:d=${FADE_S}`);
+    if (conFadeOut) {
+      const duracionTramo = t.hasta - t.desde;
+      filtros.push(`afade=t=out:st=${Math.max(0, duracionTramo - FADE_S).toFixed(4)}:d=${FADE_S}`);
+    }
+    fadeInPendiente = conFadeOut;
+
+    const args = [
       '-y', '-loglevel', 'error',
       '-i', wavDeBloque.get(t.archivo),
       '-ss', t.desde.toFixed(4),
       '-to', t.hasta.toFixed(4),
-      '-c:a', 'pcm_s16le',
-      trozo,
-    ]);
+    ];
+    if (filtros.length) args.push('-af', filtros.join(','));
+    args.push('-c:a', 'pcm_s16le', trozo);
+    await ejecutar(ffmpeg, args);
+
     duraciones.push(await duracionSegundos(trozo));
     piezas.push(trozo);
 
-    const hueco = huecos.find((h) => h.trasParrafo === i + 1);
     if (hueco?.duracion > 0) {
       piezas.push(await silencioPcm(hueco.duracion, join(tmp, `s${String(i + 1).padStart(3, '0')}.wav`)));
     }

@@ -11,6 +11,27 @@
  *   { "after": 12, "type": "image",     "src": "escena_02.png", "crossfade": 2 }
  *   { "after": 15, "type": "block_end", "seconds": 10, "block": 2 }
  *   { "at": "end", "type": "outro",     "music_seconds": 25, "fade_out": 8 }
+ *
+ * block_end admite ademas "seconds": 0: marca la frontera estructural entre
+ * dos bloques de audio (asi reparte los parrafos repartirParrafosEnBloques)
+ * sin insertar ningun silencio ahi. Es la unica forma de decir "aqui hay un
+ * corte de archivo, pero ninguna pausa editorial": no genera anullsrc, no
+ * anade hueco a la linea de tiempo. pause e interlude siguen exigiendo una
+ * duracion mayor que cero — una pausa de 0s no tiene sentido editorial.
+ *
+ * Un evento con hueco (pause/interlude/block_end) puede llevar ademas
+ * "cut_offset_ms": -500 para desplazar el corte interno dentro del bloque,
+ * en milisegundos, relativo al punto de corte calculado por defecto (el
+ * punto medio del silencio natural — ver puntosDeCorte() en troceo.mjs).
+ * Negativo lo adelanta, positivo lo atrasa; se recorta a los limites del
+ * audio del bloque. Sirve para cuando la alineacion automatica no localiza
+ * bien el final acustico real de la ultima palabra (p.ej. su timestamp
+ * queda inflado por estar pegado a una pausa larga) y hay que reubicar el
+ * corte a mano dentro del silencio verdadero, en vez de confiar en el punto
+ * que calcula la alineacion. Un evento con cut_offset_ms distinto de cero
+ * ademas lleva un fundido tecnico corto (30ms) a cada lado del corte, para
+ * no dejar un clic de discontinuidad de muestra — ver montarTramos() en
+ * audio.mjs.
  */
 
 const TIPOS_CON_HUECO = new Set(['pause', 'interlude', 'block_end']);
@@ -96,8 +117,17 @@ export function validarPlan(proyecto, canal) {
     }
 
     if (TIPOS_CON_HUECO.has(ev.type)) {
-      if (!(ev.seconds > 0)) {
-        problemas.push(`${donde}: ${ev.type} necesita "seconds" mayor que cero`);
+      // Solo block_end puede declarar seconds:0 — marca la frontera sin
+      // insertar silencio. pause/interlude siguen exigiendo una duracion real.
+      const ceroPermitido = ev.type === 'block_end' && ev.seconds === 0;
+      if (!(ev.seconds > 0) && !ceroPermitido) {
+        problemas.push(
+          `${donde}: ${ev.type} necesita "seconds" mayor que cero` +
+            (ev.type === 'block_end' ? ' (o exactamente 0, para no insertar pausa)' : '')
+        );
+      }
+      if (ev.cut_offset_ms != null && !Number.isFinite(ev.cut_offset_ms)) {
+        problemas.push(`${donde}: cut_offset_ms tiene que ser un numero`);
       }
       const clave = `hueco:${ev.after}`;
       if (vistos.has(clave)) {
@@ -174,7 +204,12 @@ export function construirLinea(proyecto, canal, duraciones) {
     if (ev.at === 'end' && ev.type === 'outro') {
       outro = { music_seconds: ev.music_seconds ?? 0, fade_out: ev.fade_out ?? 0 };
     } else if (TIPOS_CON_HUECO.has(ev.type)) {
-      huecoTras.set(ev.after, { segundos: ev.seconds, tipo: ev.type, nota: ev.note ?? null });
+      huecoTras.set(ev.after, {
+        segundos: ev.seconds,
+        tipo: ev.type,
+        nota: ev.note ?? null,
+        fade: !!ev.cut_offset_ms,
+      });
     } else if (ev.type === 'image') {
       imagenTras.set(ev.after, ev);
     }
@@ -209,6 +244,7 @@ export function construirLinea(proyecto, canal, duraciones) {
         tipo: explicito?.tipo ?? 'pause',
         estrategico: segundos >= canal.reglas_edicion.interludio_versiculo_min,
         nota: explicito?.nota ?? null,
+        fade: explicito?.fade ?? false,
       });
       t += segundos;
     }

@@ -35,28 +35,40 @@ export function tiemposPorParrafo(palabras, textosParrafo) {
 /**
  * Convierte "quiero un hueco tras el parrafo N" en un instante del audio.
  *
- * `indices` son posiciones dentro del bloque (0 = su primer parrafo). Se
- * descarta un corte tras el ultimo parrafo: ahi no hay silencio interior que
- * partir, ese hueco es el que va entre bloques.
+ * `indices` son posiciones dentro del bloque (0 = su primer parrafo). Cada
+ * elemento puede ser un numero simple (sin desplazamiento) o
+ * { indice, offsetMs }. Se descarta un corte tras el ultimo parrafo: ahi no
+ * hay silencio interior que partir, ese hueco es el que va entre bloques.
+ *
+ * El corte base va siempre al punto medio del silencio natural que ya trae la
+ * grabacion (o al final de la ultima palabra, si ese silencio es <= 0.06s:
+ * partir por el medio ahi partiria una palabra). `offsetMs` desplaza ese
+ * punto base — en milisegundos, puede ser negativo — para cuando la
+ * alineacion automatica no localiza bien el final acustico real (p.ej. cerca
+ * de una pausa larga, donde el ultimo timestamp de palabra puede quedar
+ * inflado). El resultado siempre se recorta a los limites del audio del
+ * bloque, nunca puede caer antes de 0 ni despues de su duracion.
  */
 export function puntosDeCorte(tiempos, indices, duracionBloque) {
   const cortes = [];
 
-  for (const idx of indices) {
+  for (const item of indices) {
+    const idx = typeof item === 'number' ? item : item.indice;
+    const offsetMs = (typeof item === 'number' ? 0 : item.offsetMs) ?? 0;
     if (idx < 0 || idx >= tiempos.length - 1) continue;
 
     const finActual = tiempos[idx].fin;
     const inicioSiguiente = tiempos[idx + 1].inicio;
     const silencio = inicioSiguiente - finActual;
 
-    // Si la voz encadena sin respirar, cortar por el medio partiria una palabra
-    // a la mitad. En ese caso el corte va justo al final de la ultima palabra.
-    const en = silencio > 0.06 ? finActual + silencio / 2 : finActual;
+    const base = silencio > 0.06 ? finActual + silencio / 2 : finActual;
+    const en = base + offsetMs / 1000;
 
     cortes.push({
       trasIndice: idx,
       en: Math.min(Math.max(en, 0), duracionBloque),
       silencioNatural: Math.max(0, silencio),
+      offsetMs,
     });
   }
 

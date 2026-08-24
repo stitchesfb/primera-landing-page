@@ -4,6 +4,7 @@
 
   "_fuente": "Guion_TTS_7_Bloques.md, version corregida (2 correcciones de articulacion aprobadas: parrafo global 44 en Bloque UNO, parrafos 386-387 en Bloque CUATRO). audio_fuente/1.mp3 y 4.mp3 son las versiones v2 regeneradas; 2,3,5,6,7 son las v1 originales aprobadas.",
   "_bloques": "7 bloques de audio (no 5): canal.json > formatos.noche.bloques_esperados sigue en 5 sin tocar, por instruccion expresa. Los 6 block_end de este plan produciran el aviso no bloqueante correspondiente en validarPlan; se reporta, no se oculta.",
+  "_revision_auditiva": "Tras escuchar el primer audio de revision, 4 cambios confirmados: (1) parrafo 170 pasa a seconds:0 real (block_end ya admite el valor exacto); (2) parrafo 661 eliminado; (3) parrafo 716 baja de 15s a 6s; (4) parrafo 724 eliminado. Los tres eventos de 6s tras versiculo (149/176/525) sonaban con un corte tardio (se alcanzaba a oir el arranque de la frase siguiente antes de la pausa). Se probo primero cut_strategy:previous_word_end (desplazamiento medido de 0-40ms, insuficiente) y despues fundidos de 250/500ms sobre el punto de corte original (mejoraban pero no resolvian del todo) — ambos intentos descartados. El analisis de forma de onda (RMS por bins de 1ms) encontro que el corte original caia sobre contenido todavia audible (-14 a -29 dBFS), no sobre silencio: la alineacion automatica ubicaba mal el final acustico real de la ultima palabra, pegada a una pausa larga. Se localizo en los tres puntos un valle de silencio acustico genuino (0.83-0.94s de ancho, umbral RMS<-50dB) unos 450-510ms antes del corte original, y se fijo el nuevo corte en su centro mediante cut_offset_ms (ver eventos 149/176/525 abajo), verificado con clips A/B/C/D antes de aplicarlo. cut_strategy/previous_word_end quedo retirado del codigo: no resolvio el problema y no se usa en ningun evento.",
 
   "parrafos_esperados": 726,
 
@@ -16,26 +17,24 @@
     { "after": 76,  "type": "interlude",  "seconds": 6,    "note": "Bloque UNO — tras Salmo 4:8 — «En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado»" },
     { "after": 103, "type": "block_end",  "seconds": 10,   "block": 1, "note": "fin del Bloque UNO" },
 
-    { "after": 149, "type": "interlude",  "seconds": 6,    "note": "Bloque DOS — tras Mateo 11:28 — «Venid a mí... y yo os haré descansar»" },
-    { "after": 170, "type": "block_end",  "seconds": 0.1,  "block": 2, "note": "frontera Bloque DOS→TRES: sin interludio por decision editorial, solo la transicion natural del corte de archivo. seconds al minimo tecnico que exige validarPlan (>0); ver informe — produce un aviso de rango no bloqueante." },
+    { "after": 149, "type": "interlude",  "seconds": 6,    "cut_offset_ms": -506.3, "note": "Bloque DOS — tras Mateo 11:28 — «Venid a mí... y yo os haré descansar» — corte reubicado dentro del silencio acustico real (ver _revision_auditiva)" },
+    { "after": 170, "type": "block_end",  "seconds": 0,    "block": 2, "note": "frontera Bloque DOS→TRES: sin interludio por decision editorial, solo la transicion natural del corte de archivo. seconds:0 real — no genera anullsrc, no inserta silencio." },
 
-    { "after": 176, "type": "interlude",  "seconds": 6,    "note": "Bloque TRES — tras Filipenses 4:6-7 — «...guardará vuestros corazones y vuestros pensamientos en Cristo Jesús»" },
+    { "after": 176, "type": "interlude",  "seconds": 6,    "cut_offset_ms": -494.8, "note": "Bloque TRES — tras Filipenses 4:6-7 — «...guardará vuestros corazones y vuestros pensamientos en Cristo Jesús» — corte reubicado dentro del silencio acustico real (ver _revision_auditiva)" },
     { "after": 318, "type": "block_end",  "seconds": 10,   "block": 3, "note": "fin del Bloque TRES" },
 
     { "after": 386, "type": "interlude",  "seconds": 6,    "note": "Bloque CUATRO — tras Isaías 26:3 — «...porque en ti ha confiado»" },
     { "after": 437, "type": "block_end",  "seconds": 10,   "block": 4, "note": "fin del Bloque CUATRO" },
 
-    { "after": 525, "type": "interlude",  "seconds": 6,    "note": "Bloque CINCO — tras Salmo 55:22 — «Echa sobre Jehová tu carga, y él te sustentará»" },
+    { "after": 525, "type": "interlude",  "seconds": 6,    "cut_offset_ms": -457.9, "note": "Bloque CINCO — tras Salmo 55:22 — «Echa sobre Jehová tu carga, y él te sustentará» — corte reubicado dentro del silencio acustico real (ver _revision_auditiva)" },
     { "after": 583, "type": "block_end",  "seconds": 10,   "block": 5, "note": "fin del Bloque CINCO" },
 
     { "after": 619, "type": "interlude",  "seconds": 10,   "note": "Bloque SEIS — descanso profundo — «Señor... tú ya conoces esto.»" },
     { "after": 637, "type": "interlude",  "seconds": 10,   "note": "Bloque SEIS — descanso profundo — «Por eso yo puedo cerrar los ojos.»" },
-    { "after": 661, "type": "interlude",  "seconds": 12,   "note": "Bloque SEIS — descanso profundo — «Puedo permanecer aquí... en silencio... delante de ti.»" },
     { "after": 674, "type": "block_end",  "seconds": 12,   "block": 6, "note": "fin del Bloque SEIS" },
 
     { "after": 696, "type": "interlude",  "seconds": 12,   "note": "Bloque SIETE — descanso profundo — «Padre... esto está en tus manos.»" },
-    { "after": 716, "type": "interlude",  "seconds": 15,   "note": "Bloque SIETE — descanso profundo — «Porque solo tú, Señor... me haces vivir confiado.» — excede interludio_bloque_max (12s), aviso no bloqueante esperado" },
-    { "after": 724, "type": "interlude",  "seconds": 15,   "note": "Bloque SIETE — descanso profundo — «Y descanso en ti.» — excede interludio_bloque_max (12s), aviso no bloqueante esperado" },
+    { "after": 716, "type": "interlude",  "seconds": 6,    "note": "Bloque SIETE — descanso profundo — «Porque solo tú, Señor... me haces vivir confiado.» — reducido de 15s a 6s tras revision auditiva." },
 
     { "at": "end", "type": "outro", "music_seconds": 30, "note": "cierre tras «amén». Sin musica seleccionada todavia: este audio de revision lleva silencio puro en este tramo." }
   ]

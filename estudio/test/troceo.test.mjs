@@ -47,6 +47,62 @@ check('sin silencio, corta al final de la palabra', cerca(cPegado[0].en, 1.0), `
 // Un corte tras el ultimo parrafo se descarta: ese hueco va entre bloques.
 check('descarta el corte tras el ultimo parrafo', puntosDeCorte(tiempos, [2], DURACION).length === 0);
 
+// --- cut_offset_ms: desplazar el corte respecto al punto base -----------
+//
+// Mismos tiempos que arriba: parrafo 1 termina en 1.6, hay 1s de silencio
+// natural, parrafo 2 empieza en 2.6. El corte por defecto (sin offset) cae
+// en 2.1 (el medio del silencio).
+
+// Sin el parametro, el comportamiento es identico al de siempre.
+const corteSinOffset = puntosDeCorte(tiempos, [0], DURACION);
+check('sin cut_offset_ms, el corte cae en el punto medio de siempre',
+  cerca(corteSinOffset[0].en, 2.1), `${corteSinOffset[0].en}`);
+check('sin cut_offset_ms, el offset reportado es 0',
+  corteSinOffset[0].offsetMs === 0);
+
+// { indice, offsetMs: undefined } tambien se comporta como si no hubiera offset.
+const corteObjetoSinOffset = puntosDeCorte(tiempos, [{ indice: 0 }], DURACION);
+check('un objeto sin offsetMs no desplaza el corte',
+  cerca(corteObjetoSinOffset[0].en, 2.1));
+
+// Un offset negativo adelanta el corte, en milisegundos exactos.
+const corteDesplazado = puntosDeCorte(tiempos, [{ indice: 0, offsetMs: -500 }], DURACION);
+check('offsetMs negativo adelanta el corte la cantidad exacta',
+  cerca(corteDesplazado[0].en, 1.6), `${corteDesplazado[0].en}`);
+check('el offset aplicado queda anotado en el corte',
+  corteDesplazado[0].offsetMs === -500);
+check('el silencio natural reportado no cambia con el offset',
+  cerca(corteDesplazado[0].silencioNatural, 1.0));
+
+// Un offset positivo atrasa el corte igual de exacto.
+const corteAdelante = puntosDeCorte(tiempos, [{ indice: 0, offsetMs: 300 }], DURACION);
+check('offsetMs positivo atrasa el corte la cantidad exacta',
+  cerca(corteAdelante[0].en, 2.4), `${corteAdelante[0].en}`);
+
+// No puede salirse de los limites del audio del bloque: un offset enorme se
+// recorta a 0 o a la duracion total, nunca produce un valor invalido.
+const corteFueraPorAbajo = puntosDeCorte(tiempos, [{ indice: 0, offsetMs: -999999 }], DURACION);
+check('un offset que se iria antes de 0 se recorta a 0',
+  cerca(corteFueraPorAbajo[0].en, 0), `${corteFueraPorAbajo[0].en}`);
+const corteFueraPorArriba = puntosDeCorte(tiempos, [{ indice: 0, offsetMs: 999999 }], DURACION);
+check('un offset que se iria mas alla de la duracion se recorta a esta',
+  cerca(corteFueraPorArriba[0].en, DURACION), `${corteFueraPorArriba[0].en}`);
+
+// Aplicar el offset no cambia la duracion de la pausa declarada: eso lo fija
+// el evento (seconds), puntosDeCorte solo mueve DONDE cae el corte interno.
+// Se comprueba indirectamente: el corte desplazado sigue siendo un solo
+// punto (no genera ni fusiona huecos), y el bloque se sigue partiendo en
+// exactamente dos tramos contiguos, sin solapes ni hueco de mas (drift).
+const tramosDesplazados = tramosDelBloque({
+  bloque: 1, archivo: 'b1.mp3', parrafos: [10, 11, 12], tiempos, cortes: corteDesplazado, duracion: DURACION,
+});
+check('con el corte desplazado, siguen siendo dos tramos', tramosDesplazados.length === 2);
+check('los tramos siguen contiguos sin solape ni hueco (sin drift)',
+  cerca(tramosDesplazados[0].hasta, tramosDesplazados[1].desde),
+  `${tramosDesplazados[0].hasta} vs ${tramosDesplazados[1].desde}`);
+check('los tramos siguen cubriendo el bloque completo, principio a fin',
+  cerca(tramosDesplazados[0].desde, 0) && cerca(tramosDesplazados[1].hasta, DURACION));
+
 // Tramos.
 const tramos = tramosDelBloque({
   bloque: 1, archivo: 'b1.mp3', parrafos: [10, 11, 12], tiempos, cortes, duracion: DURACION,
