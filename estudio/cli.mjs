@@ -30,7 +30,7 @@ import { revisar, CHECKLIST } from './lib/revision.mjs';
 import { validarImportacion } from './lib/validacion.mjs';
 import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } from './lib/troceo.mjs';
-import { montarNarracion, montarTramos, duracionSegundos } from './lib/audio.mjs';
+import { montarNarracion, montarTramos, duracionSegundos, rutaFfmpeg, ejecutar } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
 import { generarCama, nivelEn, aperturaEn, planearPiano, DECAE_PIANO } from './lib/musica.mjs';
 import { inspeccionarVideo, huellaVideo, remuxarAudio, desfaseAudio } from './lib/remux.mjs';
@@ -47,7 +47,7 @@ import {
   crearMedidor, disponerTexto, validarOverflow, validarSeparacion,
 } from './lib/shortsRender.mjs';
 import { generarLoop } from './lib/particulas.mjs';
-import { renderizar } from './lib/renderer.mjs';
+import { renderizar, renderizarLoopVisual, loopVisualHastaDuracion } from './lib/renderer.mjs';
 
 const canal = cargarCanal();
 const env = cargarEnv();
@@ -2232,13 +2232,15 @@ async function cmdRender(id, opciones = {}) {
   titulo(`Render completo — ${id}`);
   console.log(`Imagen          ${basename(imagen)}`);
   console.log(`Duracion        ${mmss(total)}`);
-  console.log(`Preset          ${pilar} · ${cfg.movimiento} ${(cfg.zoom_total * 100).toFixed(0)}%`);
+  console.log(`Preset          ${pilar} · ${cfg.movimiento}` +
+    (cfg.movimiento === 'imagen_fija_particulas' ? ' (bucle visual, sin zoom)' : ` ${(cfg.zoom_total * 100).toFixed(0)}%`));
   console.log(`Salida          ${cfg.ancho}x${cfg.alto} · ${cfg.fps} fps · crf ${cfg.crf} · preset ${cfg.preset_x264}`);
   console.log(`Subtitulos      ${cfg.subtitulos_quemados ? 'QUEMADOS' : 'aparte, en subtitles.srt'}`);
   console.log(c.dim(`  voz: ${mmss(largoVoz)} · ${timeline.huecos.length} interludios + cierre de ${timeline.cierre?.music_seconds ?? 0}s`));
 
   const tmp = join(salida, '.tmp-render');
   mkdirSync(tmp, { recursive: true });
+  const tiempos = {};
   const t0 = Date.now();
 
   process.stdout.write('\n  particulas…');
@@ -2247,7 +2249,8 @@ async function cmdRender(id, opciones = {}) {
     salida: loop, ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
     periodo: cfg.particulas.periodo_s, cuantas: cfg.particulas.cuantas,
   });
-  console.log(` ${p.motas} motas, bucle de ${p.periodo}s (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
+  tiempos.particulas_s = (Date.now() - t0) / 1000;
+  console.log(` ${p.motas} motas, bucle de ${p.periodo}s (${tiempos.particulas_s.toFixed(0)}s)`);
 
   process.stdout.write('  cama musical…');
   const t1 = Date.now();
@@ -2259,25 +2262,89 @@ async function cmdRender(id, opciones = {}) {
     cierre: { fadeIn: m.fade_in_s, fadeOut: timeline.cierre?.fade_out ?? 8, duracionTotal: timeline.duracion_total_s },
     bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
   });
-  const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
   const wav = join(tmp, 'cama.wav');
-  generarCama({ segundos: total, offset: 0, envolvente, apertura, grupos, salidaWav: wav });
-  console.log(` ${grupos.length} grupos de piano (${((Date.now() - t1) / 1000).toFixed(0)}s)`);
 
-  process.stdout.write('  render…');
-  const t2 = Date.now();
+  // Por defecto la cama es el pad sintetizado de siempre. opciones.musicaArchivo
+  // (una pista de assets/music/) la sustituye por una cama de biblioteca
+  // normalizada a opciones.objetivoLufs, con el mismo ducking — es lo que usa
+  // el workflow de GitHub Actions para este proyecto. Sin esa opcion, nada
+  // cambia frente al render de siempre.
+  if (opciones.musicaArchivo) {
+    const pista = join(DIR_MUSICA, opciones.musicaArchivo);
+    if (!existsSync(pista)) throw new Error(`Falta la pista ${opciones.musicaArchivo} en ${DIR_MUSICA}`);
+    const objetivo = opciones.objetivoLufs ?? -33.5;
+    await camaDesdeArchivo({ pista, desdeEnPista: 0, segundos: total, envolvente, salidaWav: wav, gananciaDb: 0, fadeIn: 2, fadeOut: 3 });
+    const sinCorregir = await sonoridad(wav);
+    const correccion = objetivo - sinCorregir.lufs;
+    await camaDesdeArchivo({ pista, desdeEnPista: 0, segundos: total, envolvente, salidaWav: wav, gananciaDb: correccion, fadeIn: 2, fadeOut: 3 });
+    const final = await sonoridad(wav);
+    tiempos.cama_s = (Date.now() - t1) / 1000;
+    tiempos.cama_lufs = final.lufs;
+    console.log(` ${basename(opciones.musicaArchivo)} a ${final.lufs.toFixed(1)} LUFS (objetivo ${objetivo}) (${tiempos.cama_s.toFixed(0)}s)`);
+  } else {
+    const grupos = planearPiano({ duracionTotal: timeline.duracion_total_s, apertura });
+    generarCama({ segundos: total, offset: 0, envolvente, apertura, grupos, salidaWav: wav });
+    tiempos.cama_s = (Date.now() - t1) / 1000;
+    console.log(` ${grupos.length} grupos de piano (${tiempos.cama_s.toFixed(0)}s)`);
+  }
+
   const destino = join(salida, 'video_final.mp4');
-  await renderizar({
-    imagen, particulas: loop, voz, musica: wav, salida: destino,
-    desde: 0, duracion: total, duracionTotal: timeline.duracion_total_s,
-    ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
-    zoomTotal: cfg.zoom_total, foco: cfg.foco, crf: cfg.crf, preset: cfg.preset_x264,
-    srt: cfg.subtitulos_quemados ? join(salida, 'subtitles.srt') : null,
-  });
-  const minutos = (Date.now() - t2) / 60000;
-  const bytes = statSync(destino).size;
-  console.log(` hecho en ${minutos.toFixed(1)} min`);
 
+  if (cfg.movimiento === 'imagen_fija_particulas') {
+    // Sin zoom, la unica variable visual en el tiempo son las particulas, que
+    // ya cierran en un bucle perfecto de particulas.periodo_s (generarLoop,
+    // ver lib/particulas.mjs). Renderizar UN segmento de ese periodo y
+    // repetirlo con -c copy evita picar 30fps*total fotogramas por zoompan.
+    const periodo = cfg.particulas.periodo_s;
+
+    process.stdout.write('  segmento visual (una vuelta)…');
+    const t2 = Date.now();
+    const segmento = join(tmp, 'segmento-visual.mp4');
+    await renderizarLoopVisual({
+      imagen, particulas: loop, salida: segmento, periodo,
+      ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps, crf: cfg.crf, preset: cfg.preset_x264,
+    });
+    tiempos.segmento_visual_s = (Date.now() - t2) / 1000;
+    console.log(` ${periodo}s (${tiempos.segmento_visual_s.toFixed(1)}s)`);
+
+    process.stdout.write('  repitiendo hasta la duracion…');
+    const t3 = Date.now();
+    const videoRepetido = join(tmp, 'video-repetido.mp4');
+    const rep = await loopVisualHastaDuracion({ segmento, duracionTotal: total, periodo, salida: videoRepetido, tmp: join(tmp, '.tmp-loop') });
+    tiempos.repeticion_s = (Date.now() - t3) / 1000;
+    console.log(` ${rep.vueltas} vueltas (${tiempos.repeticion_s.toFixed(1)}s)`);
+
+    process.stdout.write('  mux final (video sin recodificar)…');
+    const t4 = Date.now();
+    // remuxarAudio no recorta: si total es menor que la voz completa (--duracion
+    // de prueba), hay que recortar la voz aparte o el audio se alargaria mas
+    // alla del video repetido. En el render real total siempre es la duracion
+    // completa, asi que esto no hace nada de mas trabajo.
+    let vozParaMux = voz;
+    if (total < largoVoz - 0.05) {
+      vozParaMux = join(tmp, 'voz-recortada.mp4');
+      const ffmpeg = await rutaFfmpeg();
+      await ejecutar(ffmpeg, ['-y', '-loglevel', 'error', '-i', voz, '-t', total.toFixed(3), '-c', 'copy', vozParaMux]);
+    }
+    await remuxarAudio({ video: videoRepetido, voz: vozParaMux, musica: wav, salida: destino });
+    tiempos.mux_s = (Date.now() - t4) / 1000;
+    console.log(` (${tiempos.mux_s.toFixed(1)}s)`);
+    tiempos.render_video_s = tiempos.segmento_visual_s + tiempos.repeticion_s + tiempos.mux_s;
+  } else {
+    process.stdout.write('  render…');
+    const t2 = Date.now();
+    await renderizar({
+      imagen, particulas: loop, voz, musica: wav, salida: destino,
+      desde: 0, duracion: total, duracionTotal: timeline.duracion_total_s,
+      ancho: cfg.ancho, alto: cfg.alto, fps: cfg.fps,
+      zoomTotal: cfg.zoom_total, foco: cfg.foco, crf: cfg.crf, preset: cfg.preset_x264,
+      srt: cfg.subtitulos_quemados ? join(salida, 'subtitles.srt') : null,
+    });
+    tiempos.render_video_s = (Date.now() - t2) / 1000;
+    console.log(` hecho en ${(tiempos.render_video_s / 60).toFixed(1)} min`);
+  }
+
+  const bytes = statSync(destino).size;
   rmSync(tmp, { recursive: true, force: true });
 
   const real = await duracionSegundos(destino);
@@ -2291,6 +2358,10 @@ async function cmdRender(id, opciones = {}) {
       : c.rojo(`  ✗ Duracion no cuadra: ${real.toFixed(2)}s vs ${timeline.duracion_total_s.toFixed(2)}s`)
   );
   if (desvio > 0.5) process.exitCode = 1;
+
+  writeFileSync(join(salida, 'render_tiempos.json'), JSON.stringify({
+    ...tiempos, duracion_real_s: real, duracion_esperada_s: timeline.duracion_total_s, tamano_bytes: bytes,
+  }, null, 2) + '\n');
 }
 
 // --- resumen seguro ---------------------------------------------------
@@ -2441,7 +2512,13 @@ async function principal() {
     case 'previsualizar': return cmdPrevisualizar(exigeProyecto());
     case 'render': {
       const i = resto.indexOf('--duracion');
-      return cmdRender(exigeProyecto(), { duracion: i > -1 ? Number(resto[i + 1]) : undefined });
+      const iMusica = resto.indexOf('--musica');
+      const iLufs = resto.indexOf('--lufs');
+      return cmdRender(exigeProyecto(), {
+        duracion: i > -1 ? Number(resto[i + 1]) : undefined,
+        musicaArchivo: iMusica > -1 ? resto[iMusica + 1] : undefined,
+        objetivoLufs: iLufs > -1 ? Number(resto[iLufs + 1]) : undefined,
+      });
     }
     case 'muestra': {
       const num = (f) => { const i = resto.indexOf(f); return i > -1 ? Number(resto[i + 1]) : undefined; };

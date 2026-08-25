@@ -76,9 +76,9 @@
     "_presets": "El preset lo elige el pilar del proyecto. 'noche' esta aprobado; 'manana' queda esbozado para cuando toque ese formato.",
     "presets": {
       "noche": {
-        "movimiento": "zoom",
-        "zoom_total": 0.04,
-        "_movimiento": "Empuje de 4% repartido en todo el video: unos 2,4 px por minuto sobre 1920, al borde de lo perceptible. Aprobado tras revisar la primera muestra: para un video que se pone para dormir, el movimiento debe notarse solo si se busca.",
+        "movimiento": "imagen_fija_particulas",
+        "zoom_total": 0,
+        "_movimiento": "Decision cerrada (DECISIONES_CERRADAS #14): imagen fija + particulas, SIN zoompan continuo. El zoom anterior (4% repartido en todo el video) era casi imperceptible y zoompan disparaba el tiempo de render (un largo de ~33min tardaba ~98min). Con la imagen fija y las particulas ya periodicas (su ciclo es particulas.periodo_s, mas abajo), el video entero se reduce a repetir un segmento de ese periodo renderizado UNA vez: cmdRender usa renderizarLoopVisual + loopVisualHastaDuracion (lib/renderer.mjs) en vez de renderizar() cuando movimiento es 'imagen_fija_particulas'. No afecta al preset 'manana', que sigue en 'pan' con renderizar() normal.",
         "foco": {
           "x": 0.58,
           "y": 0.42

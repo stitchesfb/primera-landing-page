@@ -14,6 +14,7 @@
 
 import { rutaFfmpeg, ejecutar } from './audio.mjs';
 import { join, dirname } from 'node:path';
+import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 
 /**
  * La imagen se amplia muy por encima de la resolucion de salida antes de
@@ -113,4 +114,95 @@ export async function renderizar({
   await ejecutar(ffmpeg, args);
   try { (await import('node:fs')).rmSync(grande, { force: true }); } catch {}
   return { desde, duracion };
+}
+
+/**
+ * Cuantas vueltas de un segmento de `periodo` segundos hacen falta para
+ * cubrir (o pasarse de) `duracionTotal`. Pura, sin ffmpeg: la ultima vuelta
+ * sobra y se recorta despues, nunca se genera de menos.
+ */
+export function vueltasNecesarias(duracionTotal, periodo) {
+  if (!(periodo > 0)) throw new Error('periodo tiene que ser mayor que cero');
+  return Math.max(1, Math.ceil(duracionTotal / periodo));
+}
+
+/**
+ * Preset "imagen_fija_particulas": renderiza UN SOLO segmento de `periodo`
+ * segundos (imagen fija, sin zoom, particulas, sin audio) para repetirlo
+ * despues por fuera con -c copy, en vez de renderizar el video entero.
+ *
+ * Es el mismo grafo de filtros que renderizar() con zoomTotal=0 congelado
+ * (z='1', por eso x/y quedan fijos en 0: con zoom=1, (iw-iw/zoom) siempre da
+ * cero, el foco deja de importar). Se mantiene aparte de renderizar() en vez
+ * de meterle una rama, para no arriesgar el camino que SI sigue usando
+ * zoompan de verdad (video de manana).
+ *
+ * Las particulas ya duran exactamente `periodo` (generarLoop se construye
+ * para cerrar en ese punto): aqui se usan una sola vuelta, sin -stream_loop.
+ */
+export async function renderizarLoopVisual({
+  imagen, particulas, salida, periodo = 24,
+  ancho = 1920, alto = 1080, fps = 30, crf = 20, preset = 'medium',
+}) {
+  const ffmpeg = await rutaFfmpeg();
+  const anchoGrande = ancho * SOBREMUESTREO;
+
+  const grande = join(dirname(salida), '.escena-grande-loop.png');
+  await ejecutar(ffmpeg, [
+    '-y', '-loglevel', 'error',
+    '-i', imagen,
+    '-vf', `scale=${anchoGrande}:-2:flags=lanczos,setsar=1`,
+    grande,
+  ]);
+
+  const totalFotogramas = Math.max(1, Math.round(periodo * fps));
+  const filtros = [
+    `[0:v]zoompan=z='1':x='0':y='0':d=${totalFotogramas}:s=${ancho}x${alto}:fps=${fps}[escena]`,
+    `[1:v]scale=${ancho}:${alto},format=rgba[motas]`,
+    `[escena][motas]overlay=0:0:format=auto,gradfun=strength=1.2:radius=16,format=yuv420p[vid]`,
+  ];
+
+  await ejecutar(ffmpeg, [
+    '-y', '-loglevel', 'error',
+    '-i', grande,
+    '-i', particulas,
+    '-filter_complex', filtros.join(';'),
+    '-map', '[vid]',
+    '-t', periodo.toFixed(3),
+    '-an',
+    '-c:v', 'libx264', '-preset', preset, '-crf', String(crf),
+    '-pix_fmt', 'yuv420p', '-r', String(fps),
+    salida,
+  ]);
+
+  try { rmSync(grande, { force: true }); } catch {}
+  return { periodo, fotogramas: totalFotogramas };
+}
+
+/**
+ * Repite un segmento silencioso ya renderizado hasta cubrir `duracionTotal`,
+ * uniendolo por el contenedor (concat demuxer) y copiando el flujo de video
+ * tal cual: no hay una sola muestra que volver a codificar. La ultima vuelta
+ * sobrante se recorta con el mismo -c copy, en el mismo paso.
+ */
+export async function loopVisualHastaDuracion({ segmento, duracionTotal, periodo, salida, tmp }) {
+  const ffmpeg = await rutaFfmpeg();
+  mkdirSync(tmp, { recursive: true });
+
+  const vueltas = vueltasNecesarias(duracionTotal, periodo);
+  const lista = join(tmp, 'lista-loop-visual.txt');
+  writeFileSync(
+    lista,
+    Array.from({ length: vueltas }, () => `file '${segmento.replace(/'/g, "'\\''")}'`).join('\n') + '\n'
+  );
+
+  await ejecutar(ffmpeg, [
+    '-y', '-loglevel', 'error',
+    '-f', 'concat', '-safe', '0', '-i', lista,
+    '-t', duracionTotal.toFixed(3),
+    '-c', 'copy',
+    salida,
+  ]);
+
+  return { vueltas };
 }

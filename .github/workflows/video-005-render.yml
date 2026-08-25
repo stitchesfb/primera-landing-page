@@ -1,0 +1,91 @@
+# video_005 — render final (voz ya grabada + musica de biblioteca + loop
+# visual optimizado), entregado como artifact porque este entorno no tiene
+# `gh` instalado y el archivo (~200MB) supera el limite de adjuntos del chat.
+#
+# No genera voz nueva: "importar" solo reutiliza los 7 mp3 ya grabados y la
+# alineacion (forced-alignment, sin costo de creditos TTS). El video usa el
+# preset "imagen_fija_particulas" de canal.json: un segmento de
+# particulas.periodo_s se renderiza una vez y se repite con -c copy, en vez
+# de picar zoompan sobre 42 minutos — ver DECISIONES_CERRADAS #14 y #16 y
+# lib/renderer.mjs (renderizarLoopVisual / loopVisualHastaDuracion).
+name: video_005 — render final
+
+on:
+  push:
+    branches:
+      - claude/animated-videos-oraciones-diarias-66hr1i
+
+permissions:
+  contents: read
+
+concurrency:
+  group: video-005-render-final
+  cancel-in-progress: true
+
+jobs:
+  render:
+    name: Render final video_005
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: estudio/package-lock.json
+
+      - name: Instalar dependencias
+        working-directory: estudio
+        run: npm ci
+
+      - name: Ejecutar la suite de pruebas
+        working-directory: estudio
+        run: npm test | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # Solo forced-alignment (gratuito): reconstruye audio.mp3 y timeline.json
+      # a partir de audio_fuente/*.mp3, sin generar voz nueva.
+      - name: Reconstruir la narracion (sin generar voz, cero creditos TTS)
+        working-directory: estudio
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: |
+          node cli.mjs importar video_005 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # Musica de biblioteca (one_step_closer.mp3) normalizada a -35.5 LUFS con
+      # el mismo ducking plano nocturno, y video con el preset de bucle visual.
+      # cmdRender falla el paso solo si la duracion final no cuadra con el
+      # timeline (ver lib desvio > 0.5s en cli.mjs): esa es la validacion.
+      - name: Render final (musica -35.5 LUFS + video en bucle visual)
+        working-directory: estudio
+        run: |
+          node cli.mjs render video_005 --musica one_step_closer.mp3 --lufs -35.5 \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Preparar el archivo con su nombre de entrega
+        run: |
+          cp estudio/proyectos/video_005/output/video_final.mp4 \
+             estudio/proyectos/video_005/output/video_005_no_puedes_dormir_final.mp4
+
+      - name: Subir video_005_no_puedes_dormir_final.mp4
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-005-render-final
+          path: estudio/proyectos/video_005/output/video_005_no_puedes_dormir_final.mp4
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
+      - name: Fin
+        run: |
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact video-005-render-final subido. Nada publicado." >> "$GITHUB_STEP_SUMMARY"
