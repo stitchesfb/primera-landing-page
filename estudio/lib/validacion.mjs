@@ -18,6 +18,8 @@ export function validarImportacion({
   duracionAudio,
   colas: colasDadas = null,
   toleranciaS = 0.25,
+  tramos = null,
+  duracionesFuenteBloques = null,
 }) {
   const pruebas = [];
   const añadir = (id, ok, detalle) => pruebas.push({ id, ok, detalle });
@@ -134,6 +136,49 @@ export function validarImportacion({
         (negativas.length ? ` — ${negativas.length} negativos` : '')
       : 'sin datos de alineacion'
   );
+
+  // 9. Cobertura de tramos: la union de los tramos de cada bloque tiene que
+  //    cubrir su audio fuente de punta a punta, sin huecos entre cortes
+  //    consecutivos. Un hueco aqui significa PCM que se queda fuera del
+  //    montaje aunque su duracion siga contando en la linea de tiempo — la
+  //    imprecision del bloque cuadra, pero la voz que faltaba nunca suena.
+  if (tramos) {
+    const porBloque = new Map();
+    for (const t of tramos) {
+      if (!porBloque.has(t.bloque)) porBloque.set(t.bloque, []);
+      porBloque.get(t.bloque).push(t);
+    }
+    const TOL = 0.02;
+    const huecos = [];
+    for (const [bloque, ts] of porBloque) {
+      const ordenados = [...ts].sort((a, b) => a.desde - b.desde);
+      if (ordenados[0].desde > TOL) {
+        huecos.push(`bloque ${bloque}: empieza en ${ordenados[0].desde.toFixed(3)}s, no en 0`);
+      }
+      for (let i = 1; i < ordenados.length; i++) {
+        const gap = ordenados[i].desde - ordenados[i - 1].hasta;
+        if (Math.abs(gap) > TOL) {
+          huecos.push(
+            `bloque ${bloque}: entre el tramo que termina en ${ordenados[i - 1].hasta.toFixed(3)}s ` +
+              `y el que empieza en ${ordenados[i].desde.toFixed(3)}s hay ${gap.toFixed(3)}s sin cubrir`
+          );
+        }
+      }
+      const duracionBloque = duracionesFuenteBloques?.[bloque - 1];
+      const ultimo = ordenados[ordenados.length - 1];
+      if (duracionBloque != null && Math.abs(ultimo.hasta - duracionBloque) > TOL) {
+        huecos.push(
+          `bloque ${bloque}: el ultimo tramo termina en ${ultimo.hasta.toFixed(3)}s, ` +
+            `pero el audio fuente dura ${duracionBloque.toFixed(3)}s`
+        );
+      }
+    }
+    añadir(
+      'tramos_cubren_bloques',
+      huecos.length === 0,
+      huecos.length ? huecos.slice(0, 5).join(' | ') : `${porBloque.size} bloques, cobertura completa sin huecos`
+    );
+  }
 
   return {
     pruebas,

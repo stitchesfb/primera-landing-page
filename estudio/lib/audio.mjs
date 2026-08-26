@@ -8,7 +8,7 @@
  */
 
 import { spawn } from 'node:child_process';
-import { writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
+import { writeFileSync, mkdirSync, rmSync, existsSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
 
 let cacheFfmpeg = null;
@@ -46,6 +46,46 @@ export function ejecutar(bin, args, opciones = {}) {
       else reject(new Error(`${bin} salio con codigo ${codigo}:\n${error.slice(-2000)}`));
     });
   });
+}
+
+/**
+ * Detecta tramos de silencio en un audio y los compara contra los huecos
+ * DECLARADOS en la linea de tiempo (timeline.huecos). Un silencio real que no
+ * lo explica ningun hueco declarado es sospechoso: la duracion de un tramo
+ * puede seguir cuadrando en la linea de tiempo aunque el PCM que se monto ahi
+ * este mudo — asi se descubrio la omision de los parrafos 150-170 en
+ * video_005 (afade con el "st" mal referenciado silenciaba el tramo entero).
+ *
+ * Solo mira silencios de `umbralS` segundos o mas: las respiraciones y
+ * pausas normales entre parrafos quedan muy por debajo y no interesan aqui.
+ */
+export async function auditarSilenciosNoDeclarados(ruta, huecos, { umbralS = 15, ruidoDb = -40, margenS = 3, colchonS = 5 } = {}) {
+  const ffmpeg = await rutaFfmpeg();
+  const salida = await new Promise((resolve, reject) => {
+    const p = spawn(ffmpeg, ['-i', ruta, '-af', `silencedetect=noise=${ruidoDb}dB:d=0.3`, '-f', 'null', '-'], {
+      stdio: ['ignore', 'ignore', 'pipe'],
+    });
+    let error = '';
+    p.stderr.on('data', (d) => (error += d));
+    p.on('error', reject);
+    p.on('close', () => resolve(error));
+  });
+
+  const silencios = [];
+  const inicios = [...salida.matchAll(/silence_start:\s*([\d.]+)/g)].map((m) => Number(m[1]));
+  const finales = [...salida.matchAll(/silence_end:\s*([\d.]+)\s*\|\s*silence_duration:\s*([\d.]+)/g)]
+    .map((m) => ({ fin: Number(m[1]), duracion: Number(m[2]) }));
+  for (let i = 0; i < Math.min(inicios.length, finales.length); i++) {
+    if (finales[i].duracion >= umbralS) {
+      silencios.push({ inicio: inicios[i], fin: finales[i].fin, duracion: finales[i].duracion });
+    }
+  }
+
+  const sinExplicar = silencios.filter((s) => !huecos.some((h) =>
+    Math.abs(s.inicio - h.inicio) <= margenS && s.duracion <= h.duracion + colchonS
+  ));
+
+  return { silencios, sinExplicar, ok: sinExplicar.length === 0 };
 }
 
 export async function duracionSegundos(ruta) {
@@ -169,25 +209,47 @@ export async function montarTramos({ tramos, huecos, outro, salidaMp3, tmp }) {
     const trozo = join(tmp, `t${String(i + 1).padStart(3, '0')}.wav`);
     const hueco = huecos.find((h) => h.trasParrafo === i + 1);
     const fadeOutMs = hueco?.duracion > 0 ? (hueco.fadeOutMs ?? 0) : 0;
-
-    const filtros = [];
-    if (fadeInPendienteMs > 0) filtros.push(`afade=t=in:st=0:d=${(fadeInPendienteMs / 1000).toFixed(4)}`);
-    if (fadeOutMs > 0) {
-      const duracionTramo = t.hasta - t.desde;
-      const fadeOutS = fadeOutMs / 1000;
-      filtros.push(`afade=t=out:st=${Math.max(0, duracionTramo - fadeOutS).toFixed(4)}:d=${fadeOutS.toFixed(4)}`);
-    }
+    const fadeInMs = fadeInPendienteMs;
     fadeInPendienteMs = hueco?.duracion > 0 ? (hueco.fadeInMs ?? 0) : 0;
 
-    const args = [
+    // Extraccion SIEMPRE sin filtro: -ss/-to aqui son opciones de SALIDA (van
+    // detras de -i), y combinarlas con -af en el mismo comando deja el PTS
+    // del segmento arrancando donde arrancaba en el bloque entero (p.ej.
+    // ~157s), no en 0 — el "st" de afade se mide contra ese PTS, no contra el
+    // principio del segmento, y si "st" queda muy por detras de esos PTS el
+    // filtro apaga el tramo entero en vez de no hacer nada. Medido: silencio
+    // total del tramo. Por eso el fundido va SIEMPRE en un segundo paso,
+    // sobre un archivo ya recortado que arranca en PTS 0 de verdad — el mismo
+    // patron que ya usan los scripts de diagnostico de este proyecto.
+    await ejecutar(ffmpeg, [
       '-y', '-loglevel', 'error',
       '-i', wavDeBloque.get(t.archivo),
       '-ss', t.desde.toFixed(4),
       '-to', t.hasta.toFixed(4),
-    ];
-    if (filtros.length) args.push('-af', filtros.join(','));
-    args.push('-c:a', 'pcm_s16le', trozo);
-    await ejecutar(ffmpeg, args);
+      '-c:a', 'pcm_s16le', trozo,
+    ]);
+
+    if (fadeInMs > 0 || fadeOutMs > 0) {
+      // La duracion real del recorte puede quedar unos milisegundos por debajo
+      // de (hasta - desde) por redondeo de muestra: el "st" del fundido de
+      // salida se calcula sobre la duracion YA MEDIDA, nunca sobre la teorica,
+      // o podria caer mas alla del final real del audio.
+      const duracionReal = await duracionSegundos(trozo);
+      const filtros = [];
+      if (fadeInMs > 0) filtros.push(`afade=t=in:st=0:d=${(fadeInMs / 1000).toFixed(4)}`);
+      if (fadeOutMs > 0) {
+        const fadeOutS = fadeOutMs / 1000;
+        filtros.push(`afade=t=out:st=${Math.max(0, duracionReal - fadeOutS).toFixed(4)}:d=${fadeOutS.toFixed(4)}`);
+      }
+      const conFundido = join(tmp, `t${String(i + 1).padStart(3, '0')}-fundido.wav`);
+      await ejecutar(ffmpeg, [
+        '-y', '-loglevel', 'error',
+        '-i', trozo,
+        '-af', filtros.join(','),
+        '-c:a', 'pcm_s16le', conFundido,
+      ]);
+      renameSync(conFundido, trozo);
+    }
 
     duraciones.push(await duracionSegundos(trozo));
     piezas.push(trozo);

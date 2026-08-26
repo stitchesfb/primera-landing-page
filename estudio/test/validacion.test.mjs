@@ -2,11 +2,11 @@
  * Prueba las 8 comprobaciones de importacion con 5 bloques reales de audio,
  * primero en un caso sano y luego inyectando cada fallo por separado.
  */
-import { mkdirSync, mkdtempSync, rmSync, readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { construirLinea } from '../lib/plan.mjs';
-import { montarNarracion, ejecutar, rutaFfmpeg } from '../lib/audio.mjs';
+import { montarNarracion, montarTramos, ejecutar, rutaFfmpeg, duracionSegundos, auditarSilenciosNoDeclarados } from '../lib/audio.mjs';
 import { palabrasDesdeAlineacion, agruparEnSubtitulos } from '../lib/srt.mjs';
 import { validarImportacion } from '../lib/validacion.mjs';
 
@@ -150,6 +150,59 @@ esperar('drift: la alineacion excede el audio', validarImportacion({
 esperar('duracion descuadrada', validarImportacion({
   ...base, alineaciones: alSanas, cues: hacerCues(alSanas), duracionAudio: duracionTotal + 3,
 }), ['duracion_coincide']);
+
+// --- comprobacion 9: cobertura de tramos (bug real de video_005: un tramo
+// que no llega hasta el final de su bloque, aunque el resto siga cuadrando) --
+const tramosSanos = BLOQUES.map((_, i) => ({ bloque: i + 1, desde: 0, hasta: duraciones[i] }));
+esperar('caso sano con tramos: cobertura completa, sin comprobaciones nuevas que fallen', validarImportacion({
+  ...base, alineaciones: alSanas, cues: hacerCues(alSanas), tramos: tramosSanos, duracionesFuenteBloques: duraciones,
+}), []);
+
+const tramosConHueco = tramosSanos.map((t, i) => (i === 1 ? { ...t, hasta: t.hasta - 1 } : t));
+esperar('tramo que no llega hasta el final de su bloque (voz que se queda fuera)', validarImportacion({
+  ...base, alineaciones: alSanas, cues: hacerCues(alSanas), tramos: tramosConHueco, duracionesFuenteBloques: duraciones,
+}), ['tramos_cubren_bloques']);
+
+// --- comprobacion 10: silencios largos sin hueco declarado que los explique.
+// Reproduce el bug real: la duracion de un hueco declarado (2s) queda
+// correcta en la linea de tiempo, pero el PCM que se monto ahi es mucho mas
+// largo y mudo (aqui, 8s) porque un tramo entero se perdio en el montaje.
+{
+  const ffmpeg = await rutaFfmpeg();
+  const tono = join(BASE, 'tono-audit.mp3');
+  await ejecutar(ffmpeg, ['-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'sine=frequency=300:r=44100', '-t', '20', '-ac', '2', '-c:a', 'libmp3lame', '-b:a', '192k', tono]);
+
+  // Pista "sana": 5s de tono, 2s de hueco declarado, 13s de tono.
+  const sanaMp3 = join(BASE, 'audit-sana.mp3');
+  await montarTramos({
+    tramos: [
+      { bloque: 1, archivo: tono, desde: 0, hasta: 5 },
+      { bloque: 1, archivo: tono, desde: 5, hasta: 20 },
+    ],
+    huecos: [{ trasParrafo: 1, duracion: 2 }],
+    outro: null, salidaMp3: sanaMp3, tmp: join(BASE, '.tmp-audit-sana'),
+  });
+  const huecosDeclarados = [{ inicio: 5, duracion: 2 }];
+  const auditoriaSana = await auditarSilenciosNoDeclarados(sanaMp3, huecosDeclarados, { umbralS: 1 });
+  console.log(`${auditoriaSana.ok ? 'ok   ' : 'FALLO'} auditoria de silencios: pista sana, el hueco de 2s esta explicado`);
+  if (!auditoriaSana.ok) fallos++;
+
+  // Pista "rota": el segundo tramo (5-20) se pierde y queda mudo: el hueco
+  // declarado sigue siendo de 2s, pero el silencio real dura 17s.
+  const rotaMp3 = join(BASE, 'audit-rota.mp3');
+  const silencioLargo = join(BASE, 'silencio-17.wav');
+  await ejecutar(ffmpeg, ['-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', '-t', '17', '-ac', '2', '-c:a', 'pcm_s16le', silencioLargo]);
+  const tonoWav = join(BASE, 'tono-5.wav');
+  await ejecutar(ffmpeg, ['-y', '-loglevel', 'error', '-i', tono, '-t', '5', '-c:a', 'pcm_s16le', tonoWav]);
+  const lista = join(BASE, 'lista-rota.txt');
+  writeFileSync(lista, `file '${tonoWav}'\nfile '${silencioLargo}'\n`);
+  await ejecutar(ffmpeg, ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lista, '-c:a', 'libmp3lame', '-b:a', '192k', rotaMp3]);
+
+  const auditoriaRota = await auditarSilenciosNoDeclarados(rotaMp3, huecosDeclarados, { umbralS: 1 });
+  const detecto = !auditoriaRota.ok && auditoriaRota.sinExplicar.length === 1;
+  console.log(`${detecto ? 'ok   ' : 'FALLO'} auditoria de silencios: detecta el tramo perdido (17s de silencio real contra 2s declarados)`);
+  if (!detecto) fallos++;
+}
 
 console.log(`\n${fallos === 0 ? 'TODO OK' : fallos + ' FALLOS'}`);
 rmSync(typeof TMP !== 'undefined' ? TMP : BASE, { recursive: true, force: true });

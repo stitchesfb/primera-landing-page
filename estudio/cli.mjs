@@ -30,7 +30,7 @@ import { revisar, CHECKLIST } from './lib/revision.mjs';
 import { validarImportacion } from './lib/validacion.mjs';
 import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
 import { tiemposPorParrafo, puntosDeCorte, tramosDelBloque, palabrasDelTramo } from './lib/troceo.mjs';
-import { montarNarracion, montarTramos, duracionSegundos, rutaFfmpeg, ejecutar } from './lib/audio.mjs';
+import { montarNarracion, montarTramos, duracionSegundos, rutaFfmpeg, ejecutar, auditarSilenciosNoDeclarados } from './lib/audio.mjs';
 import { generarRevision } from './lib/previsualizar.mjs';
 import { generarCama, nivelEn, aperturaEn, planearPiano, DECAE_PIANO } from './lib/musica.mjs';
 import { inspeccionarVideo, huellaVideo, remuxarAudio, desfaseAudio } from './lib/remux.mjs';
@@ -814,7 +814,32 @@ async function cmdImportar(id) {
     colas,
     cues: resultado.listaCues,
     duracionAudio: duracionTotal,
+    tramos,
+    duracionesFuenteBloques: duraciones,
   });
+
+  // Silencio real de 15s o mas en la pista montada que ningun hueco declarado
+  // explica: la duracion de un tramo puede cuadrar en la linea de tiempo
+  // aunque el PCM que se monto ahi este mudo (asi se detecto la omision de
+  // los parrafos 150-170 en video_005). Se mira sobre el mp3 YA MONTADO, asi
+  // que hace falta ffmpeg y toca despues de escribir el audio final.
+  // El cierre (outro) tambien es silencio declarado, aunque no vive en
+  // linea.huecos: es el tramo final tras la narracion, sin musica todavia.
+  const huecosConCierre = linea.outro?.music_seconds > 0
+    ? [...linea.huecos, { inicio: linea.finNarracion, duracion: linea.outro.music_seconds }]
+    : linea.huecos;
+  const auditoria = await auditarSilenciosNoDeclarados(join(salida, 'audio.mp3'), huecosConCierre);
+  informe.pruebas.push({
+    id: 'sin_silencios_no_declarados',
+    ok: auditoria.ok,
+    detalle: auditoria.ok
+      ? `${auditoria.silencios.length} silencios largos (>=15s) en la pista, todos explicados por un hueco declarado`
+      : auditoria.sinExplicar.map((s) =>
+          `${mmss(s.inicio)}–${mmss(s.fin)} (${s.duracion.toFixed(1)}s) sin hueco declarado que lo explique`
+        ).join(' | '),
+  });
+  informe.ok = informe.ok && auditoria.ok;
+  informe.fallos = informe.pruebas.filter((p) => !p.ok).length;
 
   titulo('Validacion');
   for (const x of informe.pruebas) {
@@ -851,7 +876,7 @@ async function cmdImportar(id) {
 
   if (informe.ok) {
     escribirEstado(proyecto, 'audio', `${tramos.length} tramos, ${linea.huecos.length} interludios`);
-    console.log(c.verde('\n✓ Las 8 comprobaciones pasan. Sin gasto de creditos de TTS.'));
+    console.log(c.verde(`\n✓ Las ${informe.pruebas.length} comprobaciones pasan. Sin gasto de creditos de TTS.`));
   } else {
     console.log(c.rojo(`\n✗ ${informe.fallos} comprobacion(es) fallan.`));
     process.exitCode = 1;
