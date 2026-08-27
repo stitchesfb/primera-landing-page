@@ -1,0 +1,62 @@
+{
+  "_nota": "Extractos verticales de video_005. Reutilizan su audio: ni un credito de TTS. Este archivo es la decision editorial; los tiempos exactos los calcula 'shorts --plan' a partir de timeline.json y alignment.json.",
+  "objetivos": {
+    "ancho": 1080,
+    "alto": 1920,
+    "interludio_interno_s": 2.5,
+    "cta_s": 4.5,
+    "margen_seguro_px": 80,
+    "imagen": "escena_vertical.png",
+    "_imagen": "Recompuesta en 9:16 (941x1672, escalada a 1080x1920 con Lanczos). Se usa entera: no se recorta ni se deforma.",
+    "banda_cta": 0.19,
+    "banda_gancho": 0.07
+  },
+  "shorts": [
+    {
+      "id": "short_01",
+      "tema": "Filipenses 4 — cuerpo cansado, mente despierta, entregarlo a Dios",
+      "objetivo_s": [35, 45],
+      "tramos": [
+        { "parrafos": [2, 5] },
+        { "pausaMs": 850 },
+        { "parrafos": [13, 17] }
+      ],
+      "_aprobado": "Aprobado: tramo A parrafos 2-5 (0:09.360-0:22.140), pausa insertada de 850ms, tramo B parrafos 13-17 (0:46.640-1:11.200). Dos rangos no contiguos del video largo (salta los parrafos 6-12) unidos por silencio fabricado, no por audio recortado del original. Requiere planearShortMultiTramo (lib/shorts.mjs), capacidad añadida para este Short: shorts.json declara 'tramos' en vez de 'parrafos'.",
+      "cta": ["SIGAMOS ORANDO", "Mira la oración completa"],
+      "gancho": {
+        "texto": "¿NO PUEDES DORMIR?",
+        "segundos": 2.0
+      },
+      "_gancho": "Candidato aprobado '¿TIENES SUEÑO, PERO NO PUEDES DORMIR?' partido EXACTAMENTE en '¿TIENES SUEÑO,' / 'PERO NO PUEDES DORMIR?' no cabe: medido con libass, 'PERO NO PUEDES DORMIR?' por si sola ya necesita 2 lineas incluso a cuerpo 72 (el minimo), lo que haria 3 lineas en total. Sin probar otras reformulaciones, se usa el fallback autorizado '¿NO PUEDES DORMIR?' (cabe en 2 lineas a cuerpo 96 completo, sin reducir)."
+    },
+    {
+      "id": "short_02",
+      "tema": "Filipenses 4 — entregar esta noche lo que no puedo controlar",
+      "objetivo_s": [35, 50],
+      "parrafos": [158, 170],
+      "_aprobado": "Aprobado 158-170 (41.12s de voz, 9:38.796-10:19.916 del video largo) sobre output/audio.mp3 final corregido de f7798b6. Sin huecos internos: tramo continuo.",
+      "cta": ["SIGAMOS ORANDO", "Mira la oración completa"],
+      "gancho": {
+        "texto": "NO TIENES QUE RESOLVERLO TODO",
+        "segundos": 2.0
+      },
+      "_gancho": "El hook original 'NO TIENES QUE RESOLVERLO TODO ESTA NOCHE' media 3 lineas en todo el rango de cuerpo 72-96. Reemplazado por el texto aprobado 'NO TIENES QUE RESOLVERLO TODO': medido con libass, el auto-wrap lo parte exactamente en 'NO TIENES QUE' / 'RESOLVERLO TODO' a cuerpo 96 completo, sin reducir — coincide con el corte de 2 lineas pedido, no hizo falta el fallback 'NO TODO DEPENDE DE TI'.",
+      "cortes_forzados": [
+        { "parrafo": 161, "trasPalabra": "despierto" }
+      ],
+      "_corte_forzado": "El parrafo 161 («Tú no necesitas que permanezca despierto preocupándome para poder obrar.») no cabe en 3 lineas ni al cuerpo minimo (60): se divide a mano en dos rotulos usando la alineacion existente, sin tocar como se agrupan los demas parrafos."
+    },
+    {
+      "id": "short_03",
+      "tema": "Filipenses 4 — la mente que sigue despierta pensando en mañana",
+      "objetivo_s": [40, 50],
+      "parrafos": [89, 103],
+      "_aprobado": "Aprobado 89-103 (5:43.820-6:25.900 del video largo) sobre output/audio.mp3 final corregido de f7798b6.",
+      "cta": ["SIGAMOS ORANDO", "Mira la oración completa"],
+      "gancho": {
+        "texto": "¿SIGUES DESPIERTO PENSANDO EN MAÑANA?",
+        "segundos": 2.0
+      }
+    }
+  ]
+}

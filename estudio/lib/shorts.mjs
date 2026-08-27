@@ -136,6 +136,131 @@ export function planearShort({
 }
 
 /**
+ * Construye un Short de VARIOS rangos de parrafos no contiguos, unidos por
+ * pausas insertadas a proposito (no silencio real del video largo).
+ *
+ * Capacidad opcional: solo la usa quien la pide explicitamente pasando
+ * `tramos` en vez de `desde`/`hasta`. `planearShort` (arriba) no se toca, asi
+ * que un Short de un solo rango sigue construyendose exactamente igual que
+ * antes.
+ *
+ * `tramos` es una lista en orden de: `{ parrafos: [desde, hasta] }` para cada
+ * rango de voz, y `{ pausaMs }` para cada silencio insertado entre dos
+ * rangos. Cada rango de parrafos usa la MISMA logica que planearShort para
+ * sus interludios internos (los huecos reales del video largo se acortan
+ * igual); entre rangos NO hay hueco real que medir —los parrafos intermedios
+ * quedan fuera del Short—, asi que ahi se genera silencio autentico de
+ * exactamente `pausaMs` milisegundos, con origen de duracion cero: no viene
+ * de ningun punto del video largo, y por eso `trasladar` nunca hace que un
+ * instante del video caiga dentro de esta pausa.
+ */
+export function planearShortMultiTramo({
+  timeline, tramos, entradaMax = 0.6, salidaMax = 0.9,
+  interludioInterno = 2.5, recortarDesde = 5, ctaSegundos = 0,
+}) {
+  const rangos = tramos.filter((t) => t.parrafos);
+  if (rangos.length < 2) {
+    throw new Error('planearShortMultiTramo necesita al menos dos rangos de parrafos; un solo rango es planearShort');
+  }
+
+  const [primerDesde] = rangos[0].parrafos;
+  const [, ultimoHasta] = rangos[rangos.length - 1].parrafos;
+  const primero = seg(timeline, primerDesde);
+  const ultimo = seg(timeline, ultimoHasta);
+  if (!primero) throw new Error(`El timeline no tiene el parrafo ${primerDesde}`);
+  if (!ultimo) throw new Error(`El timeline no tiene el parrafo ${ultimoHasta}`);
+
+  const huecoAntes = huecoEntre(timeline, primerDesde - 1);
+  const disponibleAntes = huecoAntes ? huecoAntes.duracion : primero.inicio;
+  if (disponibleAntes < 0) throw new Error(`El parrafo ${primerDesde} empieza antes de que acabe el anterior`);
+  const entrada = Math.max(0, Math.min(entradaMax, disponibleAntes / 2));
+
+  const huecoDespues = huecoEntre(timeline, ultimoHasta);
+  const disponibleDespues = huecoDespues
+    ? huecoDespues.duracion
+    : Math.max(0, timeline.fin_narracion_s - ultimo.fin);
+  const salida = Math.max(0, Math.min(salidaMax, disponibleDespues / 2));
+
+  const salidaTramos = [];
+  let destino = 0;
+  let finReal = null; // ultimo punto real del video largo visto hasta ahora
+  const empujar = (t) => { salidaTramos.push({ ...t, destino }); destino += t.duracionDestino; };
+
+  empujar({
+    tipo: 'entrada', origen: primero.inicio - entrada,
+    duracionOrigen: entrada, duracionDestino: entrada,
+  });
+
+  for (const elemento of tramos) {
+    if (elemento.pausaMs != null) {
+      const duracionPausa = elemento.pausaMs / 1000;
+      // duracionOrigen 0: el intervalo [origen, origen) queda vacio, asi que
+      // ningun instante del video largo "cae dentro" de la pausa insertada.
+      empujar({
+        tipo: 'silencio', trasParrafo: null, origen: finReal,
+        duracionOrigen: 0, duracionDestino: duracionPausa,
+        insertado: true, esInterludio: false,
+      });
+      continue;
+    }
+
+    const [desde, hasta] = elemento.parrafos;
+    for (let n = desde; n <= hasta; n++) {
+      const s = seg(timeline, n);
+      if (!s) throw new Error(`El timeline no tiene el parrafo ${n}`);
+      empujar({
+        tipo: 'voz', parrafo: n, origen: s.inicio,
+        duracionOrigen: s.duracion, duracionDestino: s.duracion, texto: s.texto,
+      });
+      finReal = s.fin;
+
+      if (n === hasta) break;
+      const hueco = huecoEntre(timeline, n);
+      if (!hueco) continue;
+      const esInterludio = hueco.duracion >= recortarDesde;
+      const destinoHueco = esInterludio ? Math.min(hueco.duracion, interludioInterno) : hueco.duracion;
+      empujar({
+        tipo: 'silencio', trasParrafo: n, origen: hueco.inicio,
+        duracionOrigen: hueco.duracion, duracionDestino: destinoHueco,
+        recortadoDe: hueco.duracion, esInterludio,
+      });
+      finReal = hueco.inicio + hueco.duracion;
+    }
+  }
+
+  empujar({
+    tipo: 'salida', origen: ultimo.fin,
+    duracionOrigen: salida, duracionDestino: salida,
+  });
+
+  if (ctaSegundos > 0) {
+    empujar({
+      tipo: 'cta', origen: ultimo.fin + salida,
+      duracionOrigen: ctaSegundos, duracionDestino: ctaSegundos,
+    });
+  }
+
+  const voz = salidaTramos.filter((t) => t.tipo === 'voz');
+  return {
+    desde: primerDesde, hasta: ultimoHasta,
+    inicioEnVideo: primero.inicio - entrada,
+    finEnVideo: ultimo.fin + salida,
+    entrada, salida,
+    disponibleAntes, disponibleDespues,
+    tramos: salidaTramos,
+    duracion: destino,
+    segundosVoz: voz.reduce((s, t) => s + t.duracionDestino, 0),
+    segundosSilencio: salidaTramos.filter((t) => t.tipo === 'silencio')
+      .reduce((s, t) => s + t.duracionDestino, 0),
+    ctaSegundos,
+    recortes: salidaTramos.filter(
+      (t) => t.tipo === 'silencio' && !t.insertado && t.duracionDestino < t.duracionOrigen
+    ),
+    texto: voz.map((t) => ({ parrafo: t.parrafo, texto: t.texto })),
+  };
+}
+
+/**
  * Reubica un instante del video largo en el tiempo del Short.
  *
  * Devuelve null si cae en un trozo que no viaja al Short. Es lo que mantiene

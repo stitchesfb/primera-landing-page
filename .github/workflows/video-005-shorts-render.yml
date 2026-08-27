@@ -1,0 +1,135 @@
+# video_005 — Shorts verticales (voz ya grabada, cero creditos TTS nuevos),
+# entregados como artifact porque este entorno no tiene `gh` instalado y los
+# MP4 no se guardan en el repositorio.
+#
+# Reconstruye audio.mp3/timeline.json/alignment.json solo con forced-alignment
+# (igual que video-005-render.yml, cero costo de TTS), recompone la imagen
+# vertical 1080x1920 desde el original subido al repo, y renderiza los tres
+# Shorts aprobados con `shorts.json` (short_01: multi-tramo 2-5 + pausa 850ms
+# + 13-17; short_02: 158-170 con el corte forzado del parrafo 161; short_03:
+# 89-103). Ningun MP4 se commitea: todo sale por el artifact.
+name: video_005 — Shorts render final
+
+on:
+  push:
+    branches:
+      - claude/animated-videos-oraciones-diarias-66hr1i
+
+permissions:
+  contents: read
+
+concurrency:
+  group: video-005-shorts-render-final
+  cancel-in-progress: true
+
+jobs:
+  render:
+    name: Render Shorts video_005
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: estudio/package-lock.json
+
+      - name: Instalar dependencias
+        working-directory: estudio
+        run: npm ci
+
+      - name: Ejecutar la suite de pruebas
+        working-directory: estudio
+        run: npm test | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # Solo forced-alignment (gratuito): reconstruye audio.mp3 y timeline.json
+      # a partir de audio_fuente/*.mp3, sin generar voz nueva. Es el mismo
+      # audio.mp3 final corregido que ya se valido en el repo (f7798b6).
+      - name: Reconstruir la narracion (sin generar voz, cero creditos TTS)
+        working-directory: estudio
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: |
+          node cli.mjs importar video_005 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # La imagen vertical (1080x1920, Lanczos) no se guarda en git —
+      # proyectos/*/*.png esta en .gitignore—, asi que se recompone aqui desde
+      # el original que si esta versionado.
+      - name: Recomponer la escena vertical (Lanczos, sin recortar ni deformar)
+        working-directory: estudio
+        run: |
+          node_modules/ffmpeg-static/ffmpeg -y -loglevel error \
+            -i proyectos/video_005/escena_vertical_video_5.png \
+            -vf "scale=1080:1920:flags=lanczos" -pix_fmt rgb24 -frames:v 1 -update 1 \
+            proyectos/video_005/escena_vertical.png
+
+      - name: Renderizar los tres Shorts
+        working-directory: estudio
+        run: |
+          node cli.mjs shorts video_005 --render | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Preparar los archivos con su nombre de entrega
+        working-directory: estudio/proyectos/video_005/output/shorts
+        run: |
+          cp short_01.mp4 video_005_short_01_no_puedes_dormir.mp4
+          cp short_02.mp4 video_005_short_02_no_tienes_que_resolverlo_todo.mp4
+          cp short_03.mp4 video_005_short_03_pensando_en_manana.mp4
+
+      # Hoja de contacto 3x3 (fila = Short, columna = hook / subtitulo
+      # representativo / cierre), extraida de los MP4 ya renderizados —
+      # mismos instantes revisados y aprobados visualmente antes del render.
+      - name: Construir la hoja de contacto
+        working-directory: estudio/proyectos/video_005/output/shorts
+        run: |
+          FFMPEG=../../../../node_modules/ffmpeg-static/ffmpeg
+          extraer() { $FFMPEG -y -loglevel error -ss "$2" -i "$1" -frames:v 1 "$3"; }
+          extraer video_005_short_01_no_puedes_dormir.mp4          0.0 s01_hook.png
+          extraer video_005_short_01_no_puedes_dormir.mp4          7.0 s01_sub.png
+          extraer video_005_short_01_no_puedes_dormir.mp4         41.1 s01_cta.png
+          extraer video_005_short_02_no_tienes_que_resolverlo_todo.mp4 0.0 s02_hook.png
+          extraer video_005_short_02_no_tienes_que_resolverlo_todo.mp4 2.1 s02_sub.png
+          extraer video_005_short_02_no_tienes_que_resolverlo_todo.mp4 44.8 s02_cta.png
+          extraer video_005_short_03_pensando_en_manana.mp4        0.0 s03_hook.png
+          extraer video_005_short_03_pensando_en_manana.mp4        2.1 s03_sub.png
+          extraer video_005_short_03_pensando_en_manana.mp4       45.8 s03_cta.png
+          $FFMPEG -y -loglevel error \
+            -i s01_hook.png -i s01_sub.png -i s01_cta.png \
+            -i s02_hook.png -i s02_sub.png -i s02_cta.png \
+            -i s03_hook.png -i s03_sub.png -i s03_cta.png \
+            -filter_complex "
+            [0:v]scale=480:-1[a0];[1:v]scale=480:-1[a1];[2:v]scale=480:-1[a2];
+            [3:v]scale=480:-1[a3];[4:v]scale=480:-1[a4];[5:v]scale=480:-1[a5];
+            [6:v]scale=480:-1[a6];[7:v]scale=480:-1[a7];[8:v]scale=480:-1[a8];
+            [a0][a1][a2]hstack=3[r1];
+            [a3][a4][a5]hstack=3[r2];
+            [a6][a7][a8]hstack=3[r3];
+            [r1][r2][r3]vstack=3[out]
+            " -map "[out]" -frames:v 1 hoja_de_contacto.png
+
+      - name: Subir video-005-shorts-final
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-005-shorts-final
+          path: |
+            estudio/proyectos/video_005/output/shorts/video_005_short_01_no_puedes_dormir.mp4
+            estudio/proyectos/video_005/output/shorts/video_005_short_02_no_tienes_que_resolverlo_todo.mp4
+            estudio/proyectos/video_005/output/shorts/video_005_short_03_pensando_en_manana.mp4
+            estudio/proyectos/video_005/output/shorts/hoja_de_contacto.png
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
+      - name: Fin
+        run: |
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact video-005-shorts-final subido. Nada publicado." >> "$GITHUB_STEP_SUMMARY"

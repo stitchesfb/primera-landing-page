@@ -115,6 +115,62 @@ function separarSolapes(cues, huecoMin, durMin, limite) {
   return cues;
 }
 
+/**
+ * Fuerza un corte de rotulo justo tras una palabra concreta.
+ *
+ * Capacidad opcional y localizada para el puñado de frases donde el reparto
+ * automatico de agruparEnSubtitulos() no basta: una frase sin coma interna
+ * que, al medir la tinta de verdad, no cabe ni al cuerpo minimo en 3 lineas.
+ * No toca agruparEnSubtitulos ni su reparto por caracteres/pausas: recibe los
+ * rotulos ya agrupados y solo parte en dos el que se le pida, con la palabra
+ * exacta como frontera. Nada cambia para ningun otro rotulo ni otro Short.
+ *
+ * `palabras` tiene que ser la MISMA lista (mismas referencias) que produjo
+ * los `cues` — normalmente la salida de palabrasDelShort(), que ya trae cada
+ * palabra con su parrafo de origen y su tiempo YA TRASLADADO al Short.
+ */
+export function forzarCortes(cues, palabras, cortes) {
+  if (!cortes?.length) return cues;
+  return cortes.reduce((acc, corte) => aplicarCorte(acc, palabras, corte), cues);
+}
+
+const normalizarPalabra = (t) =>
+  t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\p{N}]/gu, '');
+
+function aplicarCorte(cues, palabras, { parrafo, trasPalabra }) {
+  const objetivo = normalizarPalabra(trasPalabra);
+  const palabra = palabras.find((p) => p.parrafo === parrafo && normalizarPalabra(p.texto) === objetivo);
+  if (!palabra) {
+    throw new Error(`forzarCortes: no se encontro la palabra "${trasPalabra}" en el parrafo ${parrafo}`);
+  }
+
+  const EPS = 0.005;
+  const i = cues.findIndex((c) => palabra.inicio >= c.inicio - EPS && palabra.fin <= c.fin + EPS);
+  if (i === -1) {
+    throw new Error(`forzarCortes: "${trasPalabra}" (parrafo ${parrafo}) no cae dentro de ningun rotulo ya agrupado`);
+  }
+  const cue = cues[i];
+
+  const delCue = palabras
+    .filter((p) => p.inicio >= cue.inicio - EPS && p.fin <= cue.fin + EPS)
+    .sort((a, b) => a.inicio - b.inicio);
+  const corteIdx = delCue.indexOf(palabra);
+  if (corteIdx === -1) {
+    throw new Error(`forzarCortes: "${trasPalabra}" (parrafo ${parrafo}) no aparece entre las palabras del rotulo`);
+  }
+  if (corteIdx === delCue.length - 1) {
+    // Ya es la ultima palabra del rotulo: no hay nada que partir.
+    return cues;
+  }
+
+  const antes = delCue.slice(0, corteIdx + 1);
+  const despues = delCue.slice(corteIdx + 1);
+  const rotulo1 = { inicio: antes[0].inicio, fin: antes.at(-1).fin, texto: antes.map((p) => p.texto).join(' ') };
+  const rotulo2 = { inicio: despues[0].inicio, fin: despues.at(-1).fin, texto: despues.map((p) => p.texto).join(' ') };
+
+  return [...cues.slice(0, i), rotulo1, rotulo2, ...cues.slice(i + 1)];
+}
+
 /** Parte el texto en como mucho `maxLineas` lineas equilibradas. */
 function repartirLineas(texto, maxLinea, maxLineas) {
   if (texto.length <= maxLinea) return [texto];

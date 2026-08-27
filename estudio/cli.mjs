@@ -25,7 +25,7 @@ import { ElevenLabs, esperarConsumo } from './lib/elevenlabs.mjs';
 import { cargarProyecto, listarProyectos, escribirEstado, exigirEstado, asegurarSalida } from './lib/proyecto.mjs';
 import { validarPlan, construirLinea } from './lib/plan.mjs';
 import { estimar, comparar, mmss, miles } from './lib/estimacion.mjs';
-import { palabrasDesdeAlineacion, agruparEnSubtitulos, renderSRT } from './lib/srt.mjs';
+import { palabrasDesdeAlineacion, agruparEnSubtitulos, renderSRT, forzarCortes } from './lib/srt.mjs';
 import { revisar, CHECKLIST } from './lib/revision.mjs';
 import { validarImportacion } from './lib/validacion.mjs';
 import { repartirPorDuracion, construirPlan } from './lib/autoplan.mjs';
@@ -41,7 +41,7 @@ import {
   sonoridad, camaDesdeArchivo, mezclarMuestra, vozDeLaVentana,
 } from './lib/musicaArchivo.mjs';
 import { validarPerfilMusical, pistaDelProyecto } from './lib/perfilMusical.mjs';
-import { planearShort, palabrasDelShort } from './lib/shorts.mjs';
+import { planearShort, planearShortMultiTramo, palabrasDelShort } from './lib/shorts.mjs';
 import {
   construirVoz, formaDelShort, construirAss, renderizarShort, fotogramasShort,
   crearMedidor, disponerTexto, validarOverflow, validarSeparacion,
@@ -1575,19 +1575,24 @@ async function cmdShortsRender(id, opciones = {}) {
     // Rehacer un Short ya aprobado solo porque toca renderizar otro no aporta
     // nada y produce un archivo nuevo donde habia uno revisado.
     if (soloEstos && !soloEstos.includes(corto.id)) continue;
-    if (!corto.parrafos) {
+    if (!corto.parrafos && !corto.tramos) {
       console.log(c.ambar(`\n  ${corto.id}: sin rango aprobado en shorts.json, se salta.`));
       continue;
     }
-    const [desde, hasta] = corto.parrafos;
     titulo(`${corto.id} — ${corto.tema}`);
 
-    const plan = planearShort({
-      timeline, desde, hasta,
-      interludioInterno: obj.interludio_interno_s,
-      ctaSegundos: obj.cta_s,
-    });
-    console.log(`Parrafos        ${desde}-${hasta} · ${plan.duracion.toFixed(1)}s`);
+    const plan = corto.tramos
+      ? planearShortMultiTramo({
+          timeline, tramos: corto.tramos,
+          interludioInterno: obj.interludio_interno_s,
+          ctaSegundos: obj.cta_s,
+        })
+      : planearShort({
+          timeline, desde: corto.parrafos[0], hasta: corto.parrafos[1],
+          interludioInterno: obj.interludio_interno_s,
+          ctaSegundos: obj.cta_s,
+        });
+    console.log(`Parrafos        ${plan.desde}-${plan.hasta} · ${plan.duracion.toFixed(1)}s`);
     console.log(`Ventana         ${mmss(plan.inicioEnVideo)} → ${mmss(plan.finEnVideo)} del video largo`);
 
     const tmp = join(dirShorts, `.tmp-${corto.id}`);
@@ -1620,11 +1625,17 @@ async function cmdShortsRender(id, opciones = {}) {
     // rotulos; cuantas lineas ocupa cada rotulo y con que cuerpo lo decide
     // despues la medida real.
     const palabras = palabrasDelShort(plan, alignment.palabras);
-    const crudos = agruparEnSubtitulos(
+    let crudos = agruparEnSubtitulos(
       palabras,
       { ...canal.subtitulos, max_caracteres_linea: 26, max_lineas: 3 },
       plan.duracion
     );
+    // Capacidad opcional: solo actua sobre el puñado de rotulos que
+    // shorts.json pida partir a mano (una frase sin coma interna que no cabe
+    // ni al cuerpo minimo). No cambia el reparto de ningun otro rotulo.
+    if (corto.cortes_forzados?.length) {
+      crudos = forzarCortes(crudos, palabras, corto.cortes_forzados);
+    }
 
     process.stdout.write('  maquetando…');
     const cues = [];
@@ -1830,35 +1841,65 @@ async function cmdShortsPlan(id) {
     titulo(`${corto.id} — ${corto.tema}`);
     console.log(`Objetivo        ${minimo}-${maximo}s\n`);
 
-    // Una vez aprobado un rango, el plan deja de buscar: reevaluar candidatos
-    // podria "mejorar" la eleccion por su cuenta y renderizar otra cosa.
-    const rangos = corto.parrafos ? [corto.parrafos] : corto.candidatos;
-    if (corto.parrafos) console.log(c.dim(`  Rango aprobado, sin buscar alternativas.\n`));
-
-    const evaluados = [];
-    for (const [desde, hasta] of rangos) {
-      let plan;
+    let elegido;
+    if (corto.tramos) {
+      // La combinacion de rangos y pausas insertadas ya es la decision
+      // editorial completa, igual que un rango aprobado: no hay candidatos
+      // que evaluar ni alternativas que buscar.
+      console.log(c.dim(`  Multiples tramos, sin buscar alternativas.\n`));
       try {
-        plan = planearShort({
-          timeline, desde, hasta,
+        elegido = planearShortMultiTramo({
+          timeline, tramos: corto.tramos,
           interludioInterno: obj.interludio_interno_s,
           ctaSegundos: obj.cta_s,
         });
       } catch (e) {
-        console.log(c.rojo(`  parrafos ${desde}-${hasta}: ${redactar(e.message)}`));
+        console.log(c.rojo(`  ${redactar(e.message)}`));
         continue;
       }
-      const cabe = plan.duracion >= minimo && plan.duracion <= maximo;
-      evaluados.push({ plan, cabe });
+      const cabe = elegido.duracion >= minimo && elegido.duracion <= maximo;
+      const etiqueta = corto.tramos
+        .filter((t) => t.parrafos)
+        .map((t) => t.parrafos.join('-'))
+        .join(' + pausa + ');
       console.log(
-        `  ${cabe ? c.verde('✓') : c.dim('·')} parrafos ${String(`${desde}-${hasta}`).padEnd(7)} ` +
-        `${plan.duracion.toFixed(1)}s  ` +
-        c.dim(`(voz ${plan.segundosVoz.toFixed(1)}s + silencios ${plan.segundosSilencio.toFixed(1)}s ` +
-          `+ entrada ${plan.entrada.toFixed(1)}s + salida ${plan.salida.toFixed(1)}s + cierre ${plan.ctaSegundos}s)`)
+        `  ${cabe ? c.verde('✓') : c.dim('·')} parrafos ${etiqueta}  ` +
+        `${elegido.duracion.toFixed(1)}s  ` +
+        c.dim(`(voz ${elegido.segundosVoz.toFixed(1)}s + silencios ${elegido.segundosSilencio.toFixed(1)}s ` +
+          `+ entrada ${elegido.entrada.toFixed(1)}s + salida ${elegido.salida.toFixed(1)}s + cierre ${elegido.ctaSegundos}s)`)
       );
-    }
+    } else {
+      // Una vez aprobado un rango, el plan deja de buscar: reevaluar
+      // candidatos podria "mejorar" la eleccion por su cuenta y renderizar
+      // otra cosa.
+      const rangos = corto.parrafos ? [corto.parrafos] : corto.candidatos;
+      if (corto.parrafos) console.log(c.dim(`  Rango aprobado, sin buscar alternativas.\n`));
 
-    const elegido = (evaluados.find((e) => e.cabe) ?? evaluados[0])?.plan;
+      const evaluados = [];
+      for (const [desde, hasta] of rangos) {
+        let plan;
+        try {
+          plan = planearShort({
+            timeline, desde, hasta,
+            interludioInterno: obj.interludio_interno_s,
+            ctaSegundos: obj.cta_s,
+          });
+        } catch (e) {
+          console.log(c.rojo(`  parrafos ${desde}-${hasta}: ${redactar(e.message)}`));
+          continue;
+        }
+        const cabe = plan.duracion >= minimo && plan.duracion <= maximo;
+        evaluados.push({ plan, cabe });
+        console.log(
+          `  ${cabe ? c.verde('✓') : c.dim('·')} parrafos ${String(`${desde}-${hasta}`).padEnd(7)} ` +
+          `${plan.duracion.toFixed(1)}s  ` +
+          c.dim(`(voz ${plan.segundosVoz.toFixed(1)}s + silencios ${plan.segundosSilencio.toFixed(1)}s ` +
+            `+ entrada ${plan.entrada.toFixed(1)}s + salida ${plan.salida.toFixed(1)}s + cierre ${plan.ctaSegundos}s)`)
+        );
+      }
+
+      elegido = (evaluados.find((e) => e.cabe) ?? evaluados[0])?.plan;
+    }
     if (!elegido) { console.log(c.rojo('  Ningun candidato es viable.')); continue; }
 
     console.log(`\n  Elegido: parrafos ${elegido.desde}-${elegido.hasta} · ${elegido.duracion.toFixed(1)}s`);
