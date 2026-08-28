@@ -28,40 +28,112 @@ const SOBREMUESTREO = 2;
 /**
  * Pista de voz del Short: los tramos hablados recortados del audio original,
  * con silencio real donde el Short no lleva voz.
+ *
+ * Corta por PIEZAS CONTINUAS, no parrafo a parrafo. Un tramo de voz y las
+ * pausas normales entre parrafos (sin acortar, sin insertar) son, en el
+ * audio fuente, un unico trozo ininterrumpido: cortarlos por separado y
+ * rellenar cada hueco con anullsrc tira la ambiencia/respiracion real de esa
+ * pausa (medida en video_005: -32.6 dB, nada que ver con los -91 dB de un
+ * silencio digital) y la sustituye por silencio absoluto — eso es lo que
+ * suena a cinta detenida y vuelta a arrancar en cada union de parrafo. Aqui
+ * solo se abre un corte de verdad donde hay una discontinuidad real: una
+ * pausa insertada a proposito (Short multi-tramo), un interludio real
+ * acortado, o el cierre. Dentro de cada pieza no hay fundidos ni reinicios;
+ * el PTS solo se reinicia al empezar cada pieza.
  */
-export async function construirVoz({ audio, plan, salidaWav, tmp }) {
+export async function construirVoz({ audio, plan, salidaWav, tmp, microfundeMs = 8 }) {
   mkdirSync(tmp, { recursive: true });
   const ffmpeg = await rutaFfmpeg();
 
-  // El audio completo a PCM una sola vez: de ahi se recortan todos los tramos.
+  // El audio completo a PCM una sola vez: de ahi se recorta cada pieza.
   const completo = join(tmp, 'completo.wav');
   await ejecutar(ffmpeg, [
     '-y', '-loglevel', 'error', '-i', audio,
     '-ar', '44100', '-ac', '2', '-c:a', 'pcm_s16le', completo,
   ]);
 
-  const piezas = [];
-  for (const [i, t] of plan.tramos.entries()) {
+  // Agrupa los tramos en bloques: 'audio' para cada tramo de voz/entrada/
+  // salida y cada silencio real sin acortar que en el audio fuente es
+  // continuo con el anterior (mismo origen+duracion enlazando exacto);
+  // 'silencio' para lo que de verdad es una discontinuidad (pausa
+  // insertada, interludio acortado, cierre).
+  const bloques = [];
+  for (const t of plan.tramos) {
     if (t.duracionDestino <= 0) continue;
-    const trozo = join(tmp, `v${String(i).padStart(3, '0')}.wav`);
-
-    if (t.tipo === 'voz' || t.tipo === 'entrada' || t.tipo === 'salida') {
-      await ejecutar(ffmpeg, [
-        '-y', '-loglevel', 'error', '-i', completo,
-        '-ss', t.origen.toFixed(4),
-        '-t', t.duracionDestino.toFixed(4),
-        '-c:a', 'pcm_s16le', trozo,
-      ]);
+    const esContinuo = t.tipo === 'entrada' || t.tipo === 'voz' || t.tipo === 'salida' ||
+      (t.tipo === 'silencio' && !t.insertado && !t.esInterludio);
+    const ultimo = bloques.at(-1);
+    if (esContinuo) {
+      if (ultimo?.tipo === 'audio' && Math.abs(ultimo.origen + ultimo.duracion - t.origen) < 1e-6) {
+        ultimo.duracion += t.duracionDestino;
+      } else {
+        bloques.push({ tipo: 'audio', origen: t.origen, duracion: t.duracionDestino });
+      }
     } else {
-      // Silencio de verdad, no el trozo del original: ahi el video largo puede
-      // llevar cola de reverberacion o el arranque del parrafo siguiente.
+      const insertado = t.tipo === 'silencio' && t.insertado === true;
+      if (ultimo?.tipo === 'silencio') {
+        ultimo.duracion += t.duracionDestino;
+        ultimo.insertado = ultimo.insertado || insertado;
+      } else {
+        bloques.push({ tipo: 'silencio', duracion: t.duracionDestino, insertado });
+      }
+    }
+  }
+
+  const piezas = [];
+  for (const [i, b] of bloques.entries()) {
+    const trozo = join(tmp, `b${String(i).padStart(3, '0')}.wav`);
+
+    if (b.tipo === 'silencio') {
       await ejecutar(ffmpeg, [
         '-y', '-loglevel', 'error',
         '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo',
-        '-t', t.duracionDestino.toFixed(4), '-c:a', 'pcm_s16le', trozo,
+        '-t', b.duracion.toFixed(4), '-c:a', 'pcm_s16le', trozo,
       ]);
+      piezas.push(trozo);
+      continue;
     }
-    piezas.push(trozo);
+
+    // Extraccion continua unica de la pieza completa: PTS a cero al
+    // empezar, nada por dentro.
+    await ejecutar(ffmpeg, [
+      '-y', '-loglevel', 'error', '-i', completo,
+      '-ss', b.origen.toFixed(4), '-t', b.duracion.toFixed(4),
+      '-c:a', 'pcm_s16le', trozo,
+    ]);
+
+    // Microfundido SOLO en los bordes que tocan una pausa insertada a
+    // proposito (el empalme especial de un Short multi-tramo, p.ej. el
+    // hueco entre los dos tramos del short_01): protege de un clic sin
+    // tocar nada entre parrafos internos, que ya viven dentro de la misma
+    // pieza y no se cortan por separado.
+    const antes = bloques[i - 1];
+    const despues = bloques[i + 1];
+    const fadeInMs = antes?.tipo === 'silencio' && antes.insertado ? microfundeMs : 0;
+    const fadeOutMs = despues?.tipo === 'silencio' && despues.insertado ? microfundeMs : 0;
+
+    if (fadeInMs > 0 || fadeOutMs > 0) {
+      // Dos pases, no uno: combinar -ss/-t de entrada grande con -af en el
+      // mismo comando corrompe "st" de afade cuando la pieza arranca lejos
+      // del principio del archivo (ver test/montaje-tramos.test.mjs). El
+      // fundido va sobre el archivo YA extraido (PTS en 0), con la duracion
+      // medida de verdad.
+      const durReal = await duracionSegundos(trozo);
+      const filtros = [];
+      if (fadeInMs > 0) filtros.push(`afade=t=in:st=0:d=${(fadeInMs / 1000).toFixed(4)}`);
+      if (fadeOutMs > 0) {
+        const inicio = Math.max(0, durReal - fadeOutMs / 1000);
+        filtros.push(`afade=t=out:st=${inicio.toFixed(4)}:d=${(fadeOutMs / 1000).toFixed(4)}`);
+      }
+      const conFundido = join(tmp, `b${String(i).padStart(3, '0')}-fundido.wav`);
+      await ejecutar(ffmpeg, [
+        '-y', '-loglevel', 'error', '-i', trozo,
+        '-af', filtros.join(','), '-c:a', 'pcm_s16le', conFundido,
+      ]);
+      piezas.push(conFundido);
+    } else {
+      piezas.push(trozo);
+    }
   }
 
   const lista = join(tmp, 'voz.txt');

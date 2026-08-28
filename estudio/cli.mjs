@@ -1609,16 +1609,33 @@ async function cmdShortsRender(id, opciones = {}) {
     process.stdout.write('  cama musical…');
     const m = pre.musica;
     const forma = formaDelShort(plan, m.rampa_s);
-    const apertura = (t) => aperturaEn(t, forma);
     const envolvente = (t) => nivelEn(t, {
       ...forma,
       cierre: { fadeIn: 1.5, fadeOut: 1.2, duracionTotal: plan.duracion },
       bajoVoz: m.bajo_voz_db, enInterludio: m.en_interludio_db,
     });
-    const grupos = planearPiano({ duracionTotal: plan.duracion, apertura });
     const wav = join(tmp, 'cama.wav');
-    generarCama({ segundos: plan.duracion, offset: 0, envolvente, apertura, grupos, salidaWav: wav });
-    console.log(` ${grupos.length} grupos de piano · ${m.bajo_voz_db} dB bajo voz`);
+    // Misma pista, mismo ducking y el mismo bucle/crossfade que el video
+    // largo aprobado (--musica one_step_closer.mp3 --lufs -35.5): la cama
+    // sintetizada (planearPiano/generarCama) sostiene un unico acorde 108s
+    // sin cambiar, y un Short de 40-50s nunca llega a oir el cruce de
+    // acordes — suena a nota de organo sostenida. Un archivo real con bucle
+    // de verdad no tiene ese problema.
+    const pistaMusica = join(DIR_MUSICA, 'one_step_closer.mp3');
+    if (!existsSync(pistaMusica)) throw new Error(`Falta la pista one_step_closer.mp3 en ${DIR_MUSICA}`);
+    const objetivoLufs = -35.5;
+    await camaDesdeArchivo({
+      pista: pistaMusica, desdeEnPista: 0, segundos: plan.duracion,
+      envolvente, salidaWav: wav, gananciaDb: 0, fadeIn: 2, fadeOut: 3,
+    });
+    const sinCorregirMusica = await sonoridad(wav);
+    const correccionMusica = objetivoLufs - sinCorregirMusica.lufs;
+    await camaDesdeArchivo({
+      pista: pistaMusica, desdeEnPista: 0, segundos: plan.duracion,
+      envolvente, salidaWav: wav, gananciaDb: correccionMusica, fadeIn: 2, fadeOut: 3,
+    });
+    const finalMusica = await sonoridad(wav);
+    console.log(` one_step_closer.mp3 a ${finalMusica.lufs.toFixed(1)} LUFS · ${m.bajo_voz_db} dB bajo voz`);
 
     // Subtitulos: menos caracteres por linea que en horizontal, porque el ancho
     // util es poco mas de la mitad. El agrupador reparte las PALABRAS en
