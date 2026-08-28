@@ -116,10 +116,10 @@ jobs:
             [r1][r2][r3]vstack=3[out]
             " -map "[out]" -frames:v 1 hoja_de_contacto.png
 
-      - name: Subir video-005-shorts-final
+      - name: Subir video-005-shorts-final-v2
         uses: actions/upload-artifact@v4
         with:
-          name: video-005-shorts-final
+          name: video-005-shorts-final-v2
           path: |
             estudio/proyectos/video_005/output/shorts/video_005_short_01_no_puedes_dormir.mp4
             estudio/proyectos/video_005/output/shorts/video_005_short_02_no_tienes_que_resolverlo_todo.mp4
@@ -132,4 +132,4 @@ jobs:
       - name: Fin
         run: |
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Artifact video-005-shorts-final subido. Nada publicado." >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact video-005-shorts-final-v2 subido. Nada publicado." >> "$GITHUB_STEP_SUMMARY"
