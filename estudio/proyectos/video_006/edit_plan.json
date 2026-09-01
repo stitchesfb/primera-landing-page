@@ -1,0 +1,709 @@
+{
+  "id": "video_006",
+  "pilar": "noche",
+  "_fuente": "VIDEO_6_PAQUETE_TECNICO_V2/edit_plan.json (paquete oficial de Orlando). Traduccion 1:1 al esquema del pipeline: los 114 puntos de pausa/interludio declarados en el paquete (61 normales a 3s, 47 importantes a 6s, 6 interludios de bloque a 6s) se listan aqui explicitamente. defaults.pause_after_paragraph se fija en 0 porque el paquete fuente NO declara pausa en los demas 427 saltos de parrafo: esos son cortes tipograficos dentro de la misma idea, sin silencio real, y la voz mantiene su cadencia natural via ElevenLabs (no reconstruccion tipo cmdImportar).",
+  "_correccion": "Version anterior (solo 47 importantes + 6 block_end, con pause_after_paragraph:3.0 como default) aplicaba 3s reales a los 427 saltos sin evento propio -> duracion estimada de 66-69 min, muy por encima del guion (45-60 min / 48-50 min estimados). Con esta version la estimacion baja a ~48-49 min, dentro de rango.",
+  "parrafos_esperados": 542,
+  "defaults": {
+    "pause_after_paragraph": 0
+  },
+  "events": [
+    {
+      "after": 3,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 10,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 13,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 20,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 24,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 28,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 35,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 40,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 47,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 57,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 60,
+      "type": "block_end",
+      "seconds": 6,
+      "block": 1,
+      "note": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)"
+    },
+    {
+      "after": 66,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 72,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 79,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 83,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 90,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 96,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 105,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 111,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 115,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 122,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 130,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 133,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 137,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 144,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 146,
+      "type": "block_end",
+      "seconds": 6,
+      "block": 2,
+      "note": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)"
+    },
+    {
+      "after": 152,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 158,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 164,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 169,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 172,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 179,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 184,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 190,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 197,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 203,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 208,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 215,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 219,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 223,
+      "type": "block_end",
+      "seconds": 6,
+      "block": 3,
+      "note": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)"
+    },
+    {
+      "after": 228,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 231,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 237,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 239,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 244,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 249,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 255,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 262,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 265,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 274,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 278,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 283,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 290,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 294,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 299,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 301,
+      "type": "block_end",
+      "seconds": 6,
+      "block": 4,
+      "note": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)"
+    },
+    {
+      "after": 304,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 308,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 312,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 317,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 322,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 325,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 328,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 333,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 335,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 340,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 344,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 346,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 350,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 355,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 357,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 361,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 366,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 370,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 371,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 373,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 376,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 382,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 389,
+      "type": "block_end",
+      "seconds": 6,
+      "block": 5,
+      "note": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)"
+    },
+    {
+      "after": 392,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 396,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 402,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 408,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 410,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 415,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 421,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 427,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 432,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 438,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 442,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 444,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 448,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 451,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 454,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 457,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 459,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 466,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 470,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 476,
+      "type": "block_end",
+      "seconds": 6,
+      "block": 6,
+      "note": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)"
+    },
+    {
+      "after": 480,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 486,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 491,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 497,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 504,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 506,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 509,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 512,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 514,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 521,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 526,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 531,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "after": 537,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 540,
+      "type": "pause",
+      "seconds": 3,
+      "note": "normal (2-4s)"
+    },
+    {
+      "after": 541,
+      "type": "pause",
+      "seconds": 6,
+      "note": "important (5-7s)"
+    },
+    {
+      "at": "end",
+      "type": "outro",
+      "music_seconds": 90,
+      "fade_out": 30,
+      "note": "cierre"
+    }
+  ]
+}
