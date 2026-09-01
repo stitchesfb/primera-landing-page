@@ -1,5 +1,5 @@
 {
-  "estado": "APPROVED_FOR_AUDIO",
+  "estado": "audio",
   "historial": [
     {
       "de": "draft",
@@ -12,6 +12,12 @@
       "a": "APPROVED_FOR_AUDIO",
       "fecha": "2026-09-01T01:53:25.983Z",
       "nota": "Aprobado por Orlando: parrafo 179 sin cambios, edit_plan.json corregido (pause_after_paragraph:0, 114 eventos, 47:21 estimado)"
+    },
+    {
+      "de": "APPROVED_FOR_AUDIO",
+      "a": "audio",
+      "fecha": "2026-09-01T02:02:05.591Z",
+      "nota": "7901 creditos"
     }
   ]
 }
