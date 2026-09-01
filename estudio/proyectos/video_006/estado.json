@@ -1,11 +1,17 @@
 {
-  "estado": "reviewed",
+  "estado": "APPROVED_FOR_AUDIO",
   "historial": [
     {
       "de": "draft",
       "a": "reviewed",
       "fecha": "2026-09-01T01:40:14.411Z",
       "nota": "0 altos, 1 medios"
+    },
+    {
+      "de": "reviewed",
+      "a": "APPROVED_FOR_AUDIO",
+      "fecha": "2026-09-01T01:53:25.983Z",
+      "nota": "Aprobado por Orlando: parrafo 179 sin cambios, edit_plan.json corregido (pause_after_paragraph:0, 114 eventos, 47:21 estimado)"
     }
   ]
 }
