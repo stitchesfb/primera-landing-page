@@ -1,0 +1,879 @@
+[
+  {
+    "n": 3,
+    "archivo": "proyectos/video_006/output/parrafos/003.mp3",
+    "dur": 5.616327,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 10,
+    "archivo": "proyectos/video_006/output/parrafos/010.mp3",
+    "dur": 7.288163,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 13,
+    "archivo": "proyectos/video_006/output/parrafos/013.mp3",
+    "dur": 2.821224,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 20,
+    "archivo": "proyectos/video_006/output/parrafos/020.mp3",
+    "dur": 6.687347,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 24,
+    "archivo": "proyectos/video_006/output/parrafos/024.mp3",
+    "dur": 5.929796,
+    "residuo": {
+      "t": 5.85,
+      "rms": -42.392693,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 28,
+    "archivo": "proyectos/video_006/output/parrafos/028.mp3",
+    "dur": 6.817959,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 35,
+    "archivo": "proyectos/video_006/output/parrafos/035.mp3",
+    "dur": 3.056327,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 40,
+    "archivo": "proyectos/video_006/output/parrafos/040.mp3",
+    "dur": 8.176327,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 47,
+    "archivo": "proyectos/video_006/output/parrafos/047.mp3",
+    "dur": 3.787755,
+    "residuo": {
+      "t": 3.65,
+      "rms": -40.950643,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 57,
+    "archivo": "proyectos/video_006/output/parrafos/057.mp3",
+    "dur": 3.526531,
+    "residuo": {
+      "t": 3.45,
+      "rms": -43.733909,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 60,
+    "archivo": "proyectos/video_006/output/parrafos/060.mp3",
+    "dur": 4.963265,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 66,
+    "archivo": "proyectos/video_006/output/parrafos/066.mp3",
+    "dur": 5.877551,
+    "residuo": {
+      "t": 3.65,
+      "rms": -14.187179,
+      "seQuedaAudible": false
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 72,
+    "archivo": "proyectos/video_006/output/parrafos/072.mp3",
+    "dur": 5.851429,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 79,
+    "archivo": "proyectos/video_006/output/parrafos/079.mp3",
+    "dur": 5.746939,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 83,
+    "archivo": "proyectos/video_006/output/parrafos/083.mp3",
+    "dur": 3.186939,
+    "residuo": {
+      "t": 3.1,
+      "rms": -40.529992,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 90,
+    "archivo": "proyectos/video_006/output/parrafos/090.mp3",
+    "dur": 2.272653,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 96,
+    "archivo": "proyectos/video_006/output/parrafos/096.mp3",
+    "dur": 3.94449,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 105,
+    "archivo": "proyectos/video_006/output/parrafos/105.mp3",
+    "dur": 6.452245,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 111,
+    "archivo": "proyectos/video_006/output/parrafos/111.mp3",
+    "dur": 4.623673,
+    "residuo": {
+      "t": 4.55,
+      "rms": -43.692571,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 115,
+    "archivo": "proyectos/video_006/output/parrafos/115.mp3",
+    "dur": 8.489796,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 122,
+    "archivo": "proyectos/video_006/output/parrafos/122.mp3",
+    "dur": 6.922449,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 130,
+    "archivo": "proyectos/video_006/output/parrafos/130.mp3",
+    "dur": 9.691429,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 133,
+    "archivo": "proyectos/video_006/output/parrafos/133.mp3",
+    "dur": 5.146122,
+    "residuo": {
+      "t": 5.05,
+      "rms": -39.621713,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 137,
+    "archivo": "proyectos/video_006/_pase1_pruebas/parrafos_recortados/137.mp3",
+    "dur": 9.377959,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 144,
+    "archivo": "proyectos/video_006/output/parrafos/144.mp3",
+    "dur": 4.310204,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 146,
+    "archivo": "proyectos/video_006/output/parrafos/146.mp3",
+    "dur": 5.146122,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 152,
+    "archivo": "proyectos/video_006/_pase1_pruebas/parrafos_recortados/152.mp3",
+    "dur": 6.713469,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 158,
+    "archivo": "proyectos/video_006/output/parrafos/158.mp3",
+    "dur": 4.127347,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 164,
+    "archivo": "proyectos/video_006/output/parrafos/164.mp3",
+    "dur": 6.269388,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 169,
+    "archivo": "proyectos/video_006/output/parrafos/169.mp3",
+    "dur": 4.91102,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 172,
+    "archivo": "proyectos/video_006/output/parrafos/172.mp3",
+    "dur": 7.836735,
+    "residuo": {
+      "t": 7.75,
+      "rms": -40.818763,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 179,
+    "archivo": "proyectos/video_006/output/parrafos/179.mp3",
+    "dur": 7.366531,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 184,
+    "archivo": "proyectos/video_006/output/parrafos/184.mp3",
+    "dur": 11.049796,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 190,
+    "archivo": "proyectos/video_006/output/parrafos/190.mp3",
+    "dur": 5.511837,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 197,
+    "archivo": "proyectos/video_006/output/parrafos/197.mp3",
+    "dur": 1.515102,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 203,
+    "archivo": "proyectos/video_006/output/parrafos/203.mp3",
+    "dur": 2.742857,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 208,
+    "archivo": "proyectos/video_006/output/parrafos/208.mp3",
+    "dur": 3.84,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 215,
+    "archivo": "proyectos/video_006/output/parrafos/215.mp3",
+    "dur": 5.198367,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 219,
+    "archivo": "proyectos/video_006/output/parrafos/219.mp3",
+    "dur": 5.250612,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 223,
+    "archivo": "proyectos/video_006/output/parrafos/223.mp3",
+    "dur": 3.787755,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 228,
+    "archivo": "proyectos/video_006/output/parrafos/228.mp3",
+    "dur": 2.220408,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 231,
+    "archivo": "proyectos/video_006/output/parrafos/231.mp3",
+    "dur": 5.877551,
+    "residuo": {
+      "t": 5.8,
+      "rms": -36.002949,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 237,
+    "archivo": "proyectos/video_006/output/parrafos/237.mp3",
+    "dur": 3.892245,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 239,
+    "archivo": "proyectos/video_006/output/parrafos/239.mp3",
+    "dur": 4.440816,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 244,
+    "archivo": "proyectos/video_006/output/parrafos/244.mp3",
+    "dur": 6.112653,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 249,
+    "archivo": "proyectos/video_006/output/parrafos/249.mp3",
+    "dur": 3.160816,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 255,
+    "archivo": "proyectos/video_006/output/parrafos/255.mp3",
+    "dur": 5.616327,
+    "residuo": {
+      "t": 5.55,
+      "rms": -44.027536,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 262,
+    "archivo": "proyectos/video_006/output/parrafos/262.mp3",
+    "dur": 6.269388,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 265,
+    "archivo": "proyectos/video_006/output/parrafos/265.mp3",
+    "dur": 6.164898,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 274,
+    "archivo": "proyectos/video_006/output/parrafos/274.mp3",
+    "dur": 9.874286,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 278,
+    "archivo": "proyectos/video_006/output/parrafos/278.mp3",
+    "dur": 8.385306,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 283,
+    "archivo": "proyectos/video_006/output/parrafos/283.mp3",
+    "dur": 7.105306,
+    "residuo": {
+      "t": 7,
+      "rms": -38.354922,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 290,
+    "archivo": "proyectos/video_006/output/parrafos/290.mp3",
+    "dur": 2.533878,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 294,
+    "archivo": "proyectos/video_006/output/parrafos/294.mp3",
+    "dur": 6.034286,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 299,
+    "archivo": "proyectos/video_006/output/parrafos/299.mp3",
+    "dur": 5.929796,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 301,
+    "archivo": "proyectos/video_006/output/parrafos/301.mp3",
+    "dur": 2.507755,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 304,
+    "archivo": "proyectos/video_006/output/parrafos/304.mp3",
+    "dur": 9.613061,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 308,
+    "archivo": "proyectos/video_006/output/parrafos/308.mp3",
+    "dur": 7.758367,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 312,
+    "archivo": "proyectos/video_006/output/parrafos/312.mp3",
+    "dur": 6.530612,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 317,
+    "archivo": "proyectos/video_006/output/parrafos/317.mp3",
+    "dur": 7.88898,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 322,
+    "archivo": "proyectos/video_006/output/parrafos/322.mp3",
+    "dur": 6.687347,
+    "residuo": {
+      "t": 6.6,
+      "rms": -40.715173,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 325,
+    "archivo": "proyectos/video_006/output/parrafos/325.mp3",
+    "dur": 10.161633,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 328,
+    "archivo": "proyectos/video_006/output/parrafos/328.mp3",
+    "dur": 5.32898,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 333,
+    "archivo": "proyectos/video_006/output/parrafos/333.mp3",
+    "dur": 9.038367,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 335,
+    "archivo": "proyectos/video_006/output/parrafos/335.mp3",
+    "dur": 8.254694,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 340,
+    "archivo": "proyectos/video_006/output/parrafos/340.mp3",
+    "dur": 5.564082,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 344,
+    "archivo": "proyectos/video_006/output/parrafos/344.mp3",
+    "dur": 4.728163,
+    "residuo": {
+      "t": 4.65,
+      "rms": -33.859877,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 346,
+    "archivo": "proyectos/video_006/output/parrafos/346.mp3",
+    "dur": 7.941224,
+    "residuo": {
+      "t": 7.85,
+      "rms": -24.475689,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 350,
+    "archivo": "proyectos/video_006/output/parrafos/350.mp3",
+    "dur": 9.221224,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 355,
+    "archivo": "proyectos/video_006/output/parrafos/355.mp3",
+    "dur": 5.694694,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 357,
+    "archivo": "proyectos/video_006/output/parrafos/357.mp3",
+    "dur": 9.221224,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 361,
+    "archivo": "proyectos/video_006/output/parrafos/361.mp3",
+    "dur": 9.848163,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 366,
+    "archivo": "proyectos/video_006/output/parrafos/366.mp3",
+    "dur": 5.459592,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 370,
+    "archivo": "proyectos/video_006/output/parrafos/370.mp3",
+    "dur": 5.982041,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 371,
+    "archivo": "proyectos/video_006/output/parrafos/371.mp3",
+    "dur": 2.533878,
+    "residuo": {
+      "t": 2.4,
+      "rms": -27.703779,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 373,
+    "archivo": "proyectos/video_006/output/parrafos/373.mp3",
+    "dur": 7.549388,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 376,
+    "archivo": "proyectos/video_006/output/parrafos/376.mp3",
+    "dur": 8.85551,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 382,
+    "archivo": "proyectos/video_006/output/parrafos/382.mp3",
+    "dur": 3.578776,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 389,
+    "archivo": "proyectos/video_006/output/parrafos/389.mp3",
+    "dur": 3.787755,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 392,
+    "archivo": "proyectos/video_006/output/parrafos/392.mp3",
+    "dur": 4.179592,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 396,
+    "archivo": "proyectos/video_006/output/parrafos/396.mp3",
+    "dur": 6.086531,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 402,
+    "archivo": "proyectos/video_006/output/parrafos/402.mp3",
+    "dur": 3.84,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 408,
+    "archivo": "proyectos/video_006/output/parrafos/408.mp3",
+    "dur": 4.623673,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 410,
+    "archivo": "proyectos/video_006/output/parrafos/410.mp3",
+    "dur": 4.022857,
+    "residuo": {
+      "t": 3.95,
+      "rms": -37.215393,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 415,
+    "archivo": "proyectos/video_006/output/parrafos/415.mp3",
+    "dur": 5.250612,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 421,
+    "archivo": "proyectos/video_006/output/parrafos/421.mp3",
+    "dur": 6.50449,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 427,
+    "archivo": "proyectos/video_006/output/parrafos/427.mp3",
+    "dur": 5.198367,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 432,
+    "archivo": "proyectos/video_006/output/parrafos/432.mp3",
+    "dur": 8.803265,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 438,
+    "archivo": "proyectos/video_006/output/parrafos/438.mp3",
+    "dur": 3.996735,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 442,
+    "archivo": "proyectos/video_006/output/parrafos/442.mp3",
+    "dur": 8.594286,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 444,
+    "archivo": "proyectos/video_006/output/parrafos/444.mp3",
+    "dur": 2.220408,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 448,
+    "archivo": "proyectos/video_006/output/parrafos/448.mp3",
+    "dur": 7.288163,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 451,
+    "archivo": "proyectos/video_006/output/parrafos/451.mp3",
+    "dur": 6.452245,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 454,
+    "archivo": "proyectos/video_006/output/parrafos/454.mp3",
+    "dur": 4.362449,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 457,
+    "archivo": "proyectos/video_006/output/parrafos/457.mp3",
+    "dur": 2.638367,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 459,
+    "archivo": "proyectos/video_006/output/parrafos/459.mp3",
+    "dur": 7.288163,
+    "residuo": {
+      "t": 7.2,
+      "rms": -37.029792,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 466,
+    "archivo": "proyectos/video_006/_pase1_pruebas/parrafos_recortados/466.mp3",
+    "dur": 3.866122,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 469,
+    "archivo": "proyectos/video_006/_pase1_pruebas/parrafos_recortados/469.mp3",
+    "dur": 2.586122,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 470,
+    "archivo": "proyectos/video_006/output/parrafos_regen_pase1/470.mp3",
+    "dur": 2.690612,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 476,
+    "archivo": "proyectos/video_006/output/parrafos/476.mp3",
+    "dur": 3.291429,
+    "residuo": {
+      "t": 3.2,
+      "rms": -40.140303,
+      "seQuedaAudible": true
+    },
+    "picoFinalDb": null
+  },
+  {
+    "n": 480,
+    "archivo": "proyectos/video_006/output/parrafos/480.mp3",
+    "dur": 3.004082,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 486,
+    "archivo": "proyectos/video_006/output/parrafos/486.mp3",
+    "dur": 2.037551,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 491,
+    "archivo": "proyectos/video_006/output/parrafos/491.mp3",
+    "dur": 2.272653,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 497,
+    "archivo": "proyectos/video_006/output/parrafos/497.mp3",
+    "dur": 1.854694,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 504,
+    "archivo": "proyectos/video_006/output/parrafos/504.mp3",
+    "dur": 3.474286,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 506,
+    "archivo": "proyectos/video_006/output/parrafos/506.mp3",
+    "dur": 3.526531,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 509,
+    "archivo": "proyectos/video_006/output/parrafos/509.mp3",
+    "dur": 1.802449,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 512,
+    "archivo": "proyectos/video_006/output/parrafos/512.mp3",
+    "dur": 2.533878,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 514,
+    "archivo": "proyectos/video_006/output/parrafos/514.mp3",
+    "dur": 2.742857,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 521,
+    "archivo": "proyectos/video_006/output/parrafos/521.mp3",
+    "dur": 3.160816,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 526,
+    "archivo": "proyectos/video_006/output/parrafos/526.mp3",
+    "dur": 3.186939,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 531,
+    "archivo": "proyectos/video_006/_pase1_pruebas/parrafos_recortados/531.mp3",
+    "dur": 3.265306,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 537,
+    "archivo": "proyectos/video_006/output/parrafos/537.mp3",
+    "dur": 4.205714,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 540,
+    "archivo": "proyectos/video_006/output/parrafos/540.mp3",
+    "dur": 2.76898,
+    "residuo": null,
+    "picoFinalDb": null
+  },
+  {
+    "n": 541,
+    "archivo": "proyectos/video_006/output/parrafos/541.mp3",
+    "dur": 1.750204,
+    "residuo": null,
+    "picoFinalDb": null
+  }
+]
