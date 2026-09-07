@@ -1,0 +1,137 @@
+# video_006 — entrega del maestro aprobado como asset de un Draft Release.
+#
+# No renderiza ni recodifica nada: reconstruye video_final.mp4 EXACTAMENTE
+# como indica video_final_chunks/RECONSTRUIR.md a partir de los fragmentos ya
+# persistidos, verifica que coincide con el maestro aprobado (resolucion,
+# duracion, sha256 exacto) y solo entonces lo sube como asset de un Release
+# en estado Draft (nunca publicado). Workflow temporal de entrega, no de
+# produccion.
+
+name: video_006 — entrega del maestro (Draft Release)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/animated-videos-oraciones-diarias-66hr1i
+    paths:
+      - '.github/workflows/video-006-delivery.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: video-006-delivery
+  cancel-in-progress: false
+
+env:
+  SHA_ESPERADO: a602473a851a8d78141bcebfd3c993df24f632267d00f7f037e5b31e898197fe
+  TAG: video-006-final-approved
+  TITULO: "Video 6 — Maestro aprobado"
+  ASSET: video_006_final_aprobado_1080p.mp4
+  CHUNKS_DIR: estudio/proyectos/video_006/output/video_final_chunks
+
+jobs:
+  deliver:
+    name: Reconstruir, verificar y publicar el Draft Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar ffmpeg (solo para verificar resolucion y duracion)
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+
+      - name: Reconstruir video_final.mp4 desde los fragmentos persistidos
+        working-directory: ${{ env.CHUNKS_DIR }}
+        run: |
+          cat video_final.mp4.part00 video_final.mp4.part01 video_final.mp4.part02 > video_final.mp4
+          sha256sum -c video_final.mp4.sha256
+          echo "Reconstruccion byte a byte verificada contra video_final.mp4.sha256."
+
+      - name: Verificar resolucion, duracion y hash exacto antes de subir nada
+        working-directory: ${{ env.CHUNKS_DIR }}
+        run: |
+          RUTA=video_final.mp4
+
+          SHA_REAL=$(sha256sum "$RUTA" | cut -d' ' -f1)
+          echo "SHA-256: $SHA_REAL"
+          if [ "$SHA_REAL" != "$SHA_ESPERADO" ]; then
+            echo "::error::SHA-256 no coincide con el maestro aprobado. Esperado $SHA_ESPERADO, obtenido $SHA_REAL"
+            exit 1
+          fi
+
+          RES=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "$RUTA")
+          echo "Resolucion: $RES"
+          if [ "$RES" != "1920,1080" ]; then
+            echo "::error::Resolucion no coincide. Esperada 1920,1080, obtenida $RES"
+            exit 1
+          fi
+
+          DUR=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$RUTA")
+          echo "Duracion: ${DUR}s"
+          DUR_OK=$(awk -v d="$DUR" 'BEGIN { diff = d - 2998.634; if (diff < 0) diff = -diff; print (diff < 1.0) ? 1 : 0 }')
+          if [ "$DUR_OK" != "1" ]; then
+            echo "::error::Duracion fuera de tolerancia. Esperada ~2998.634s (49:58.63), obtenida ${DUR}s"
+            exit 1
+          fi
+
+          echo "Todas las verificaciones (hash, resolucion, duracion) pasaron."
+
+      - name: Preparar el archivo con el nombre de entrega
+        working-directory: ${{ env.CHUNKS_DIR }}
+        run: cp video_final.mp4 "$ASSET"
+
+      - name: Crear o actualizar el Draft Release
+        working-directory: ${{ env.CHUNKS_DIR }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "El Draft Release ya existe -- subiendo el asset con --clobber."
+            gh release upload "$TAG" "$ASSET" --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            echo "Creando el Draft Release."
+            gh release create "$TAG" "$ASSET" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "$TITULO" \
+              --draft \
+              --notes "Render maestro completo del Video 6 (1920x1080, 49:58.63), aprobado por Orlando. No modificado: reconstruido byte a byte desde video_final_chunks/. SHA-256: ${SHA_ESPERADO}"
+          fi
+
+      - name: Volver a descargar el asset del Release y confirmar el hash
+        working-directory: ${{ env.CHUNKS_DIR }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p verificacion_descarga
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" -p "$ASSET" -D verificacion_descarga --clobber
+
+          SHA_DESCARGA=$(sha256sum "verificacion_descarga/$ASSET" | cut -d' ' -f1)
+          TAMANO=$(stat -c%s "verificacion_descarga/$ASSET")
+          echo "SHA-256 tras descargar del Release: $SHA_DESCARGA"
+          echo "Tamano del asset: $TAMANO bytes"
+
+          {
+            echo "## Entrega del maestro -- Video 6"
+            echo ""
+            echo "- Tag del Release: \`$TAG\` (Draft)"
+            echo "- Asset: \`$ASSET\`"
+            echo "- Tamano: $TAMANO bytes"
+            echo "- SHA-256 verificado tras subir y volver a descargar: \`$SHA_DESCARGA\`"
+            echo "- Coincide con el maestro aprobado: $([ "$SHA_DESCARGA" == "$SHA_ESPERADO" ] && echo 'SI' || echo 'NO')"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$SHA_DESCARGA" != "$SHA_ESPERADO" ]; then
+            echo "::error::El SHA-256 del asset descargado del Release NO coincide con el maestro aprobado."
+            exit 1
+          fi
+
+          rm -rf verificacion_descarga
+          echo "Verificacion post-subida OK: el asset del Release es identico byte a byte al maestro aprobado."
