@@ -60,6 +60,51 @@ el nivel es constante).
 - Verificado a nivel de medición: −46.3dB de media justo antes de la
   costura, −46.4dB justo después — sin salto de volumen perceptible.
 
+## Preview 3 — apertura con partículas (`previews/preview3_apertura_particulas_20s.mp4`)
+
+Corrección recibida: las partículas luminosas sí deben moverse (único
+movimiento ambiental permitido; imágenes 100% estáticas, sin Ken
+Burns/zoom/paneo). Se reutilizó el sistema de partículas ya aprobado en
+video_005 (`lib/particulas.mjs`, motas de polvo con canal alfa, mismo
+método de cierre de bucle), con los parámetros establecidos en
+`canal.json` (82 partículas, periodo de bucle de 24s) para la escena
+limpia, y una variante de densidad reducida (18 partículas, mismo periodo
+y método) solo para la ventana del hook, tal como se pidió.
+
+- **Partículas visibles simultáneamente** (con opacidad ≥0.02, es decir
+  fuera de su instante exacto de nacimiento/muerte): ~12–17 de las 18
+  durante el hook (densidad baja); ~65–73 de las 82 en la escena limpia
+  (densidad normal).
+- **Rango de tamaños**: radio base 1.4–4.0 px; con el desenfoque de borde
+  incluido (que varía por separado, para simular profundidad), el alcance
+  visual real es de ~4.9–8.9 px.
+- **Rango de opacidad**: 0 en el instante de nacer/morir hasta un pico por
+  partícula de entre 0.185 y 0.635 (nunca las 82 en su pico a la vez).
+- **Velocidad de desplazamiento**: deriva lateral dominante de 6.2–17.5
+  px/s (según profundidad simulada) con un vaivén senoidal suave
+  superpuesto; deriva vertical mínima de solo 0.01–1.18 px/s (flotan, no
+  caen ni suben con fuerza) — sin trayectorias largas ni pulsaciones
+  fuertes.
+- **Método contra saltos/repeticiones evidentes**: cada partícula vive un
+  número ENTERO de ciclos dentro del periodo de 24s: su opacidad es
+  matemáticamente cero exactamente al nacer y al morir (envolvente
+  sin²(πu)), y su posición de nacimiento depende solo de su identidad y del
+  número de ciclo (no del tiempo absoluto). Al completar el periodo y
+  volver a repetirse, cada partícula reaparece en el mismo punto con la
+  misma opacidad nula: el fotograma de cierre coincide con el de apertura,
+  así que la costura del bucle no se percibe. Es el mismo método ya medido
+  y aprobado en video_005.
+- Densidad baja durante el hook: partículas dispersas mayormente sobre las
+  zonas oscuras del fondo; ninguna cruza el área central del rostro ni el
+  bloque de texto de forma sostenida (son puntos pequeños y de opacidad
+  baja, no manchas). Tras el fundido a la escena limpia (mismo instante ya
+  aprobado, 4.866s→5.266s), la densidad sube a la normal establecida.
+- Audio: exactamente el mismo mix ya aprobado (voz real + cama musical a
+  −35.5 LUFS), recortado a 20s sin volver a mezclar nada.
+- Verificado: sha256 de `output/audio.mp3` sigue siendo
+  `9aac92ef7b6cd3811a54453330082413c1a6fe59357b830eb09a3acf407124f6`
+  (sin tocar).
+
 ## Confirmaciones pedidas
 
 - **Maestro de voz intacto**: sha256 de `output/audio.mp3` antes y después
