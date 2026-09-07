@@ -18,6 +18,38 @@
       "a": "audio",
       "fecha": "2026-09-01T02:02:05.591Z",
       "nota": "7901 creditos"
+    },
+    {
+      "de": "audio",
+      "a": "audio",
+      "fecha": "2026-09-07T01:22:09.000Z",
+      "nota": "Audio congelado: audio_final_v4 aprobado definitivamente por Orlando tras escuchar las 8 muestras. output/audio.mp3, alignment.json, timeline.json y subtitles.srt promovidos a v4 (calidad completa, no la copia comprimida). Master v1 original preservado como audio_v1_original.mp3 (+ trio de sincronizacion). Listo para produccion visual; ningun cambio futuro al maestro sin nueva autorizacion explicita de Orlando."
     }
-  ]
+  ],
+  "audio_final": {
+    "version_aprobada": "audio_final_v4",
+    "archivo": "output/audio.mp3",
+    "duracion_s": 2998.674286,
+    "duracion_legible": "49:58.67",
+    "formato": "mp3, 44100 Hz, stereo, 192 kb/s",
+    "sha256": "9aac92ef7b6cd3811a54453330082413c1a6fe59357b830eb09a3acf407124f6",
+    "fecha_aprobacion": "2026-09-07T01:22:09.000Z",
+    "aprobado_por": "Orlando",
+    "aprobacion_humana": true,
+    "congelado": true,
+    "prohibido_hasta_nueva_autorizacion": [
+      "generar TTS nuevo",
+      "sustituir o recortar parrafos",
+      "cambiar pausas",
+      "normalizar, procesar o recodificar el audio maestro"
+    ],
+    "sincronizacion_misma_version": {
+      "alignment": "output/alignment.json",
+      "timeline": "output/timeline.json",
+      "subtitles": "output/subtitles.srt"
+    },
+    "manifiesto_hashes": "output/manifiesto_fuentes_hashes.csv",
+    "informe_validacion": "output/informe_validacion.md",
+    "master_anterior_preservado": "output/audio_v1_original.mp3"
+  }
 }

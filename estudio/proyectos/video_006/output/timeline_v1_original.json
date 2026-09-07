@@ -1,0 +1,4950 @@
+{
+  "proyecto": "video_006",
+  "duracion_total_s": 3032.52898,
+  "fin_narracion_s": 2942.485346999996,
+  "segundos_narracion": 2441.4853469999994,
+  "segundos_silencio": 591,
+  "segmentos": [
+    {
+      "numero": 1,
+      "texto": "¿Estás acostado pensando en todo lo que podría salir mal mañana?",
+      "inicio": 0,
+      "fin": 4.690431,
+      "duracion": 4.690431
+    },
+    {
+      "numero": 2,
+      "texto": "Jesús te dice: no te afanes por el día de mañana.",
+      "inicio": 4.690431,
+      "fin": 9.055782,
+      "duracion": 4.365351
+    },
+    {
+      "numero": 3,
+      "texto": "Esta noche vamos a poner ese futuro en las manos de Dios y descansar.",
+      "inicio": 9.055782,
+      "fin": 14.628571,
+      "duracion": 5.572789
+    },
+    {
+      "numero": 4,
+      "texto": "Señor, tú conoces los pensamientos que ahora mismo no dejan descansar a esta persona.",
+      "inicio": 17.628571,
+      "fin": 24.083718,
+      "duracion": 6.455147
+    },
+    {
+      "numero": 5,
+      "texto": "Conoces aquello que teme recibir, perder, enfrentar o decidir cuando llegue un nuevo día.",
+      "inicio": 24.083718,
+      "fin": 32.257142,
+      "duracion": 8.173424
+    },
+    {
+      "numero": 6,
+      "texto": "Tú sabes qué conversación está imaginando.",
+      "inicio": 32.257142,
+      "fin": 36.343854,
+      "duracion": 4.086712
+    },
+    {
+      "numero": 7,
+      "texto": "Qué respuesta está esperando.",
+      "inicio": 36.343854,
+      "fin": 39.130249,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 8,
+      "texto": "Qué noticia teme recibir.",
+      "inicio": 39.130249,
+      "fin": 42.102403,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 9,
+      "texto": "Qué responsabilidad le parece demasiado pesada.",
+      "inicio": 42.102403,
+      "fin": 46.328435,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 10,
+      "texto": "Y qué pregunta continúa repitiéndose en su mente cuando todo a su alrededor ya está en silencio.",
+      "inicio": 46.328435,
+      "fin": 53.573060999999996,
+      "duracion": 7.244626
+    },
+    {
+      "numero": 11,
+      "texto": "Padre, tu Palabra nos recuerda en Mateo, capítulo seis, que no debemos vivir afanados por el día de mañana, porque cada día trae su propio cuidado.",
+      "inicio": 56.573060999999996,
+      "fin": 68.043719,
+      "duracion": 11.470658
+    },
+    {
+      "numero": 12,
+      "texto": "Por eso, en este momento, no queremos seguir viviendo por adelantado un día que todavía no ha llegado.",
+      "inicio": 68.043719,
+      "fin": 76.402903,
+      "duracion": 8.359184
+    },
+    {
+      "numero": 13,
+      "texto": "Queremos entregártelo.",
+      "inicio": 76.402903,
+      "fin": 79.189298,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 14,
+      "texto": "Tal vez mañana haya una decisión importante.",
+      "inicio": 85.189298,
+      "fin": 89.09025,
+      "duracion": 3.900952
+    },
+    {
+      "numero": 15,
+      "texto": "Tal vez haya una cuenta que pagar, una cita médica, una conversación difícil, una responsabilidad familiar o una situación de trabajo que no sabemos cómo resolver.",
+      "inicio": 89.09025,
+      "fin": 102.232744,
+      "duracion": 13.142494
+    },
+    {
+      "numero": 16,
+      "texto": "Tal vez no exista un problema definido.",
+      "inicio": 102.232744,
+      "fin": 105.251338,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 17,
+      "texto": "Tal vez lo que pesa es la incertidumbre.",
+      "inicio": 105.251338,
+      "fin": 108.316372,
+      "duracion": 3.065034
+    },
+    {
+      "numero": 18,
+      "texto": "Esa sensación de no saber qué va a pasar.",
+      "inicio": 108.316372,
+      "fin": 111.985125,
+      "duracion": 3.668753
+    },
+    {
+      "numero": 19,
+      "texto": "Esa necesidad de tener respuestas antes de cerrar los ojos.",
+      "inicio": 111.985125,
+      "fin": 117.04707499999999,
+      "duracion": 5.06195
+    },
+    {
+      "numero": 20,
+      "texto": "Esa lucha silenciosa por controlar con la mente lo que todavía no podemos tocar con nuestras manos.",
+      "inicio": 117.04707499999999,
+      "fin": 123.68798199999999,
+      "duracion": 6.640907
+    },
+    {
+      "numero": 21,
+      "texto": "Pero esta noche reconocemos algo sencillo y verdadero:",
+      "inicio": 126.68798199999999,
+      "fin": 130.91401399999998,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 22,
+      "texto": "pensar una y otra vez en el mañana no nos permite gobernarlo.",
+      "inicio": 130.91401399999998,
+      "fin": 136.06884399999998,
+      "duracion": 5.15483
+    },
+    {
+      "numero": 23,
+      "texto": "Imaginar cada resultado posible no nos da control sobre él.",
+      "inicio": 136.06884399999998,
+      "fin": 140.89859499999997,
+      "duracion": 4.829751
+    },
+    {
+      "numero": 24,
+      "texto": "Y permanecer despiertos no hace que estemos más preparados para enfrentarlo.",
+      "inicio": 140.89859499999997,
+      "fin": 146.79646299999996,
+      "duracion": 5.897868
+    },
+    {
+      "numero": 25,
+      "texto": "Señor, ayúdanos a diferenciar entre la responsabilidad y el afán.",
+      "inicio": 149.79646299999996,
+      "fin": 155.60145199999997,
+      "duracion": 5.804989
+    },
+    {
+      "numero": 26,
+      "texto": "Tú no nos llamas a ignorar nuestros deberes.",
+      "inicio": 155.60145199999997,
+      "fin": 158.71292599999995,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 27,
+      "texto": "No nos llamas a vivir sin prudencia ni preparación.",
+      "inicio": 158.71292599999995,
+      "fin": 162.93895799999996,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 28,
+      "texto": "Nos llamas a hacer lo que corresponde hoy, y a no cargar hoy también con todo el peso de mañana.",
+      "inicio": 162.93895799999996,
+      "fin": 169.71918499999995,
+      "duracion": 6.780227
+    },
+    {
+      "numero": 29,
+      "texto": "Hay cosas que podemos organizar.",
+      "inicio": 172.71918499999995,
+      "fin": 175.36625999999995,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 30,
+      "texto": "Hay llamadas que podemos hacer cuando llegue el momento.",
+      "inicio": 175.36625999999995,
+      "fin": 179.36009199999995,
+      "duracion": 3.993832
+    },
+    {
+      "numero": 31,
+      "texto": "Hay decisiones que podremos tomar con información que todavía no tenemos.",
+      "inicio": 179.36009199999995,
+      "fin": 184.32916199999994,
+      "duracion": 4.96907
+    },
+    {
+      "numero": 32,
+      "texto": "Hay pasos que serán posibles cuando amanezca.",
+      "inicio": 184.32916199999994,
+      "fin": 188.27655399999995,
+      "duracion": 3.947392
+    },
+    {
+      "numero": 33,
+      "texto": "Pero ahora es de noche.",
+      "inicio": 188.27655399999995,
+      "fin": 189.99483099999995,
+      "duracion": 1.718277
+    },
+    {
+      "numero": 34,
+      "texto": "Y en este momento, nuestro deber no es resolver el día de mañana.",
+      "inicio": 189.99483099999995,
+      "fin": 195.33542099999994,
+      "duracion": 5.34059
+    },
+    {
+      "numero": 35,
+      "texto": "Nuestro deber es descansar en ti.",
+      "inicio": 195.33542099999994,
+      "fin": 198.35401499999995,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 36,
+      "texto": "Padre, recibe esa lista invisible que esta persona lleva dentro.",
+      "inicio": 204.35401499999995,
+      "fin": 209.88036399999996,
+      "duracion": 5.526349
+    },
+    {
+      "numero": 37,
+      "texto": "Recibe los escenarios que ha imaginado.",
+      "inicio": 209.88036399999996,
+      "fin": 213.22403699999995,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 38,
+      "texto": "Recibe las preguntas que todavía no tienen respuesta.",
+      "inicio": 213.22403699999995,
+      "fin": 217.63582799999995,
+      "duracion": 4.411791
+    },
+    {
+      "numero": 39,
+      "texto": "Recibe la necesidad de saberlo todo antes de tiempo.",
+      "inicio": 217.63582799999995,
+      "fin": 222.14049899999995,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 40,
+      "texto": "Recibe el cansancio que produce tratar de sostener un futuro que solamente tú puedes ver por completo.",
+      "inicio": 222.14049899999995,
+      "fin": 230.26748299999994,
+      "duracion": 8.126984
+    },
+    {
+      "numero": 41,
+      "texto": "Esta noche no negamos lo que nos preocupa.",
+      "inicio": 233.26748299999994,
+      "fin": 236.56471699999994,
+      "duracion": 3.297234
+    },
+    {
+      "numero": 42,
+      "texto": "Lo nombramos delante de ti.",
+      "inicio": 236.56471699999994,
+      "fin": 238.93315199999995,
+      "duracion": 2.368435
+    },
+    {
+      "numero": 43,
+      "texto": "No fingimos que no duele.",
+      "inicio": 238.93315199999995,
+      "fin": 241.06938799999995,
+      "duracion": 2.136236
+    },
+    {
+      "numero": 44,
+      "texto": "No pretendemos que la incertidumbre sea fácil.",
+      "inicio": 241.06938799999995,
+      "fin": 244.87746099999995,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 45,
+      "texto": "Pero tampoco permitiremos que el temor tenga la última palabra.",
+      "inicio": 244.87746099999995,
+      "fin": 250.35736999999995,
+      "duracion": 5.479909
+    },
+    {
+      "numero": 46,
+      "texto": "Tu Palabra tendrá la última palabra.",
+      "inicio": 250.35736999999995,
+      "fin": 253.79392299999995,
+      "duracion": 3.436553
+    },
+    {
+      "numero": 47,
+      "texto": "Y tu Palabra nos invita a confiar.",
+      "inicio": 253.79392299999995,
+      "fin": 257.55555599999997,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 48,
+      "texto": "Respira lentamente.",
+      "inicio": 263.55555599999997,
+      "fin": 266.016871,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 49,
+      "texto": "No tienes que resolverlo todo ahora.",
+      "inicio": 266.016871,
+      "fin": 269.035465,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 50,
+      "texto": "No tienes que conocer cada detalle del camino.",
+      "inicio": 269.035465,
+      "fin": 272.518458,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 51,
+      "texto": "No tienes que fabricar una respuesta durante esta noche.",
+      "inicio": 272.518458,
+      "fin": 276.326531,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 52,
+      "texto": "Puedes presentarte ante Dios tal como estás.",
+      "inicio": 276.326531,
+      "fin": 280.599003,
+      "duracion": 4.272472
+    },
+    {
+      "numero": 53,
+      "texto": "Con preguntas.",
+      "inicio": 280.599003,
+      "fin": 281.85288099999997,
+      "duracion": 1.253878
+    },
+    {
+      "numero": 54,
+      "texto": "Con cansancio.",
+      "inicio": 281.85288099999997,
+      "fin": 284.22131599999994,
+      "duracion": 2.368435
+    },
+    {
+      "numero": 55,
+      "texto": "Con fe pequeña, si eso es lo único que ahora puedes ofrecer.",
+      "inicio": 284.22131599999994,
+      "fin": 289.42258599999997,
+      "duracion": 5.20127
+    },
+    {
+      "numero": 56,
+      "texto": "Él ya conoce aquello que te preocupa.",
+      "inicio": 289.42258599999997,
+      "fin": 292.766259,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 57,
+      "texto": "Y no necesitas esconderlo de su presencia.",
+      "inicio": 292.766259,
+      "fin": 296.249252,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 58,
+      "texto": "Señor, aquí está nuestro mañana.",
+      "inicio": 299.249252,
+      "fin": 301.989207,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 59,
+      "texto": "Todavía no sabemos cómo será.",
+      "inicio": 301.989207,
+      "fin": 304.91492100000005,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 60,
+      "texto": "Pero sabemos que, cuando llegue, tú seguirás siendo Dios.",
+      "inicio": 304.91492100000005,
+      "fin": 309.8375510000001,
+      "duracion": 4.92263
+    },
+    {
+      "numero": 61,
+      "texto": "Jesús comienza esta enseñanza llamando nuestra atención hacia la vida misma.",
+      "inicio": 315.8375510000001,
+      "fin": 321.4567800000001,
+      "duracion": 5.619229
+    },
+    {
+      "numero": 62,
+      "texto": "Nos recuerda que la vida es más que la comida y que el cuerpo es más que la ropa.",
+      "inicio": 321.4567800000001,
+      "fin": 327.7261680000001,
+      "duracion": 6.269388
+    },
+    {
+      "numero": 63,
+      "texto": "Antes de hablar de aquello que nos falta, nos invita a recordar el regalo que ya hemos recibido.",
+      "inicio": 327.7261680000001,
+      "fin": 334.7850340000001,
+      "duracion": 7.058866
+    },
+    {
+      "numero": 64,
+      "texto": "La vida.",
+      "inicio": 334.7850340000001,
+      "fin": 335.7602720000001,
+      "duracion": 0.975238
+    },
+    {
+      "numero": 65,
+      "texto": "El aliento.",
+      "inicio": 335.7602720000001,
+      "fin": 337.2463490000001,
+      "duracion": 1.486077
+    },
+    {
+      "numero": 66,
+      "texto": "La oportunidad de estar aquí, delante de Dios, en este momento.",
+      "inicio": 337.2463490000001,
+      "fin": 343.0977780000001,
+      "duracion": 5.851429
+    },
+    {
+      "numero": 67,
+      "texto": "Padre, cuando estamos preocupados, nuestra mirada se hace pequeña.",
+      "inicio": 346.0977780000001,
+      "fin": 351.02040800000015,
+      "duracion": 4.92263
+    },
+    {
+      "numero": 68,
+      "texto": "Solo vemos la cuenta pendiente.",
+      "inicio": 351.02040800000015,
+      "fin": 353.85324200000014,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 69,
+      "texto": "Solo vemos la fecha que se acerca.",
+      "inicio": 353.85324200000014,
+      "fin": 356.59319700000015,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 70,
+      "texto": "Solo vemos la puerta que parece cerrada.",
+      "inicio": 356.59319700000015,
+      "fin": 359.61179100000015,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 71,
+      "texto": "Solo vemos la posibilidad que nos asusta.",
+      "inicio": 359.61179100000015,
+      "fin": 363.04834400000016,
+      "duracion": 3.436553
+    },
+    {
+      "numero": 72,
+      "texto": "Y por unos momentos olvidamos todas las veces que nos has sostenido hasta hoy.",
+      "inicio": 363.04834400000016,
+      "fin": 368.85333300000013,
+      "duracion": 5.804989
+    },
+    {
+      "numero": 73,
+      "texto": "Esta noche queremos recordar.",
+      "inicio": 371.85333300000013,
+      "fin": 374.77904700000016,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 74,
+      "texto": "No para negar la necesidad presente, sino para mirar esa necesidad desde la historia de tu fidelidad.",
+      "inicio": 374.77904700000016,
+      "fin": 381.60571400000015,
+      "duracion": 6.826667
+    },
+    {
+      "numero": 75,
+      "texto": "Tú nos has acompañado en días que antes también parecían imposibles.",
+      "inicio": 381.60571400000015,
+      "fin": 386.48190400000016,
+      "duracion": 4.87619
+    },
+    {
+      "numero": 76,
+      "texto": "Nos diste fuerzas para atravesar momentos que no sabíamos cómo enfrentar.",
+      "inicio": 386.48190400000016,
+      "fin": 392.33333300000015,
+      "duracion": 5.851429
+    },
+    {
+      "numero": 77,
+      "texto": "Abriste caminos que no habíamos considerado.",
+      "inicio": 392.33333300000015,
+      "fin": 395.8163260000002,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 78,
+      "texto": "Nos sostuviste incluso cuando la respuesta no llegó de la manera que esperábamos.",
+      "inicio": 395.8163260000002,
+      "fin": 401.2962350000002,
+      "duracion": 5.479909
+    },
+    {
+      "numero": 79,
+      "texto": "Y cuando una etapa terminó, tu presencia continuó con nosotros.",
+      "inicio": 401.2962350000002,
+      "fin": 407.0083440000002,
+      "duracion": 5.712109
+    },
+    {
+      "numero": 80,
+      "texto": "Jesús nos invita a mirar las aves del cielo.",
+      "inicio": 410.0083440000002,
+      "fin": 414.2808160000002,
+      "duracion": 4.272472
+    },
+    {
+      "numero": 81,
+      "texto": "Ellas no siembran, no cosechan ni almacenan como lo hacen los seres humanos, y aun así reciben el alimento necesario para cada día.",
+      "inicio": 414.2808160000002,
+      "fin": 425.0084350000002,
+      "duracion": 10.727619
+    },
+    {
+      "numero": 82,
+      "texto": "Entonces Jesús hace una pregunta que alcanza directamente nuestro corazón:",
+      "inicio": 425.0084350000002,
+      "fin": 430.8598640000002,
+      "duracion": 5.851429
+    },
+    {
+      "numero": 83,
+      "texto": "¿No valen ustedes mucho más que ellas?",
+      "inicio": 430.8598640000002,
+      "fin": 434.0177780000002,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 84,
+      "texto": "Señor, cuando el temor nos hace sentir olvidados, recuérdanos cuánto valor tenemos delante de ti.",
+      "inicio": 440.0177780000002,
+      "fin": 447.95900200000017,
+      "duracion": 7.941224
+    },
+    {
+      "numero": 85,
+      "texto": "No somos un detalle perdido en un mundo demasiado grande.",
+      "inicio": 447.95900200000017,
+      "fin": 452.51011300000016,
+      "duracion": 4.551111
+    },
+    {
+      "numero": 86,
+      "texto": "No somos una preocupación insignificante que tú no quieres escuchar.",
+      "inicio": 452.51011300000016,
+      "fin": 457.5720630000002,
+      "duracion": 5.06195
+    },
+    {
+      "numero": 87,
+      "texto": "No somos una carga molesta para nuestro Padre.",
+      "inicio": 457.5720630000002,
+      "fin": 460.6835370000002,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 88,
+      "texto": "Somos personas conocidas por ti.",
+      "inicio": 460.6835370000002,
+      "fin": 463.6092510000002,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 89,
+      "texto": "Vistas por ti.",
+      "inicio": 463.6092510000002,
+      "fin": 465.7919270000002,
+      "duracion": 2.182676
+    },
+    {
+      "numero": 90,
+      "texto": "Amadas por ti.",
+      "inicio": 465.7919270000002,
+      "fin": 468.0210430000002,
+      "duracion": 2.229116
+    },
+    {
+      "numero": 91,
+      "texto": "Tú conoces nuestras necesidades reales.",
+      "inicio": 471.0210430000002,
+      "fin": 474.5969160000002,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 92,
+      "texto": "Conoces lo que hace falta en el hogar.",
+      "inicio": 474.5969160000002,
+      "fin": 478.3585490000002,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 93,
+      "texto": "Conoces lo que necesita nuestro cuerpo.",
+      "inicio": 478.3585490000002,
+      "fin": 481.70222200000023,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 94,
+      "texto": "Conoces las responsabilidades que descansan sobre nuestros hombros.",
+      "inicio": 481.70222200000023,
+      "fin": 486.34621300000026,
+      "duracion": 4.643991
+    },
+    {
+      "numero": 95,
+      "texto": "Conoces aquello que debemos enfrentar y también aquello que todavía no sabemos que necesitaremos.",
+      "inicio": 486.34621300000026,
+      "fin": 493.4050790000003,
+      "duracion": 7.058866
+    },
+    {
+      "numero": 96,
+      "texto": "Nada de eso llega a ti como una sorpresa.",
+      "inicio": 493.4050790000003,
+      "fin": 497.3060310000003,
+      "duracion": 3.900952
+    },
+    {
+      "numero": 97,
+      "texto": "Padre, danos sabiduría para no convertir esta enseñanza en una excusa para la pasividad.",
+      "inicio": 500.3060310000003,
+      "fin": 507.1326980000003,
+      "duracion": 6.826667
+    },
+    {
+      "numero": 98,
+      "texto": "Las aves salen y buscan el alimento que tú provees.",
+      "inicio": 507.1326980000003,
+      "fin": 511.3122900000003,
+      "duracion": 4.179592
+    },
+    {
+      "numero": 99,
+      "texto": "De la misma manera, nosotros queremos actuar con responsabilidad cuando llegue el día.",
+      "inicio": 511.3122900000003,
+      "fin": 517.0708390000003,
+      "duracion": 5.758549
+    },
+    {
+      "numero": 100,
+      "texto": "Queremos trabajar.",
+      "inicio": 517.0708390000003,
+      "fin": 519.3463950000004,
+      "duracion": 2.275556
+    },
+    {
+      "numero": 101,
+      "texto": "Queremos pedir ayuda cuando sea necesario.",
+      "inicio": 519.3463950000004,
+      "fin": 523.0151480000004,
+      "duracion": 3.668753
+    },
+    {
+      "numero": 102,
+      "texto": "Queremos organizar lo que podamos organizar.",
+      "inicio": 523.0151480000004,
+      "fin": 526.8232210000004,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 103,
+      "texto": "Queremos tomar decisiones prudentes.",
+      "inicio": 526.8232210000004,
+      "fin": 529.2380960000005,
+      "duracion": 2.414875
+    },
+    {
+      "numero": 104,
+      "texto": "Pero no queremos confundir responsabilidad con angustia.",
+      "inicio": 529.2380960000005,
+      "fin": 533.3248080000005,
+      "duracion": 4.086712
+    },
+    {
+      "numero": 105,
+      "texto": "No queremos creer que preocuparnos sin descanso es una forma de proteger a quienes amamos.",
+      "inicio": 533.3248080000005,
+      "fin": 539.7335150000006,
+      "duracion": 6.408707
+    },
+    {
+      "numero": 106,
+      "texto": "La preocupación nos dice que, si dejamos de pensar en el problema, algo malo ocurrirá.",
+      "inicio": 542.7335150000006,
+      "fin": 549.7923810000005,
+      "duracion": 7.058866
+    },
+    {
+      "numero": 107,
+      "texto": "Nos hace sentir que mantener la mente en alerta es la única manera de evitar una desgracia.",
+      "inicio": 549.7923810000005,
+      "fin": 556.5261680000006,
+      "duracion": 6.733787
+    },
+    {
+      "numero": 108,
+      "texto": "Pero Jesús nos muestra que el afán no añade seguridad a nuestra vida.",
+      "inicio": 556.5261680000006,
+      "fin": 561.7274380000006,
+      "duracion": 5.20127
+    },
+    {
+      "numero": 109,
+      "texto": "No puede extenderla.",
+      "inicio": 561.7274380000006,
+      "fin": 564.1887530000006,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 110,
+      "texto": "No puede controlar cada circunstancia.",
+      "inicio": 564.1887530000006,
+      "fin": 567.5324260000006,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 111,
+      "texto": "No puede producir por sí solo la respuesta que necesitamos.",
+      "inicio": 567.5324260000006,
+      "fin": 572.1299770000005,
+      "duracion": 4.597551
+    },
+    {
+      "numero": 112,
+      "texto": "Señor, hay una parte de nosotros que todavía cree que todo depende únicamente de nuestras fuerzas.",
+      "inicio": 578.1299770000005,
+      "fin": 586.1176410000005,
+      "duracion": 7.987664
+    },
+    {
+      "numero": 113,
+      "texto": "Perdónanos por las veces que hemos vivido como si estuviéramos solos.",
+      "inicio": 586.1176410000005,
+      "fin": 590.6223120000005,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 114,
+      "texto": "Perdónanos por buscar descanso solamente después de haber agotado todas nuestras posibilidades.",
+      "inicio": 590.6223120000005,
+      "fin": 597.3560990000005,
+      "duracion": 6.733787
+    },
+    {
+      "numero": 115,
+      "texto": "Perdónanos por hablar contigo como último recurso, cuando desde el principio tú estabas dispuesto a escucharnos.",
+      "inicio": 597.3560990000005,
+      "fin": 605.8081620000005,
+      "duracion": 8.452063
+    },
+    {
+      "numero": 116,
+      "texto": "Esta noche venimos a ti antes de que llegue el mañana.",
+      "inicio": 608.8081620000005,
+      "fin": 612.7091140000005,
+      "duracion": 3.900952
+    },
+    {
+      "numero": 117,
+      "texto": "No para pedir que nos reveles cada detalle.",
+      "inicio": 612.7091140000005,
+      "fin": 616.2849870000005,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 118,
+      "texto": "No para exigir una garantía sobre el resultado.",
+      "inicio": 616.2849870000005,
+      "fin": 620.0466200000004,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 119,
+      "texto": "Venimos para pedir tu presencia.",
+      "inicio": 620.0466200000004,
+      "fin": 623.0187740000005,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 120,
+      "texto": "Tu sabiduría.",
+      "inicio": 623.0187740000005,
+      "fin": 625.2014500000005,
+      "duracion": 2.182676
+    },
+    {
+      "numero": 121,
+      "texto": "Tu fortaleza.",
+      "inicio": 625.2014500000005,
+      "fin": 627.1983660000005,
+      "duracion": 1.996916
+    },
+    {
+      "numero": 122,
+      "texto": "La paz necesaria para dormir y la claridad necesaria para actuar cuando llegue el momento.",
+      "inicio": 627.1983660000005,
+      "fin": 634.0714730000005,
+      "duracion": 6.873107
+    },
+    {
+      "numero": 123,
+      "texto": "Padre, mira a la persona que está escuchando esta oración.",
+      "inicio": 637.0714730000005,
+      "fin": 641.5297040000005,
+      "duracion": 4.458231
+    },
+    {
+      "numero": 124,
+      "texto": "Tal vez lleva mucho tiempo siendo fuerte para los demás.",
+      "inicio": 641.5297040000005,
+      "fin": 645.0591370000005,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 125,
+      "texto": "Tal vez muchas personas dependen de ella.",
+      "inicio": 645.0591370000005,
+      "fin": 648.0777310000005,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 126,
+      "texto": "Tal vez siente que no puede mostrar cansancio porque alguien necesita verla firme.",
+      "inicio": 648.0777310000005,
+      "fin": 653.6969600000006,
+      "duracion": 5.619229
+    },
+    {
+      "numero": 127,
+      "texto": "Pero delante de ti no tiene que aparentar.",
+      "inicio": 653.6969600000006,
+      "fin": 656.8084340000006,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 128,
+      "texto": "Puede reconocer que está cansada.",
+      "inicio": 656.8084340000006,
+      "fin": 659.7341480000006,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 129,
+      "texto": "Puede admitir que tiene miedo.",
+      "inicio": 659.7341480000006,
+      "fin": 662.3347830000006,
+      "duracion": 2.600635
+    },
+    {
+      "numero": 130,
+      "texto": "Puede descansar sin abandonar a nadie, porque durante estas horas tú continúas cuidando aquello que ella no puede vigilar.",
+      "inicio": 662.3347830000006,
+      "fin": 671.9942840000006,
+      "duracion": 9.659501
+    },
+    {
+      "numero": 131,
+      "texto": "Mientras duerme, el mundo no queda sin Dios.",
+      "inicio": 677.9942840000006,
+      "fin": 681.4308370000006,
+      "duracion": 3.436553
+    },
+    {
+      "numero": 132,
+      "texto": "Mientras cierra los ojos, tu poder no disminuye.",
+      "inicio": 681.4308370000006,
+      "fin": 685.6104290000005,
+      "duracion": 4.179592
+    },
+    {
+      "numero": 133,
+      "texto": "Mientras su mente deja de trabajar, tú no dejas de ser fiel.",
+      "inicio": 685.6104290000005,
+      "fin": 690.7188190000005,
+      "duracion": 5.10839
+    },
+    {
+      "numero": 134,
+      "texto": "Señor, enséñanos a recibir el descanso como un acto de confianza.",
+      "inicio": 693.7188190000005,
+      "fin": 699.2451680000005,
+      "duracion": 5.526349
+    },
+    {
+      "numero": 135,
+      "texto": "Dormir no es decir que nada importa.",
+      "inicio": 699.2451680000005,
+      "fin": 702.4030820000005,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 136,
+      "texto": "Dormir es reconocer que somos criaturas limitadas y que tú eres el Creador que no se cansa.",
+      "inicio": 702.4030820000005,
+      "fin": 710.1121070000005,
+      "duracion": 7.709025
+    },
+    {
+      "numero": 137,
+      "texto": "Dormir es soltar por unas horas aquello que no podemos resolver y creer que mañana recibiremos la fuerza correspondiente a mañana.",
+      "inicio": 710.1121070000005,
+      "fin": 719.6322880000005,
+      "duracion": 9.520181
+    },
+    {
+      "numero": 138,
+      "texto": "Gracias por el alimento de hoy.",
+      "inicio": 722.6322880000005,
+      "fin": 725.4651220000005,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 139,
+      "texto": "Gracias por el techo de esta noche.",
+      "inicio": 725.4651220000005,
+      "fin": 728.2979560000006,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 140,
+      "texto": "Gracias por las personas que todavía podemos amar.",
+      "inicio": 728.2979560000006,
+      "fin": 732.9883870000006,
+      "duracion": 4.690431
+    },
+    {
+      "numero": 141,
+      "texto": "Gracias por cada evidencia sencilla de tu cuidado.",
+      "inicio": 732.9883870000006,
+      "fin": 736.9822190000006,
+      "duracion": 3.993832
+    },
+    {
+      "numero": 142,
+      "texto": "Y donde exista una necesidad verdadera, danos ayuda, dirección y una comunidad dispuesta a acompañarnos.",
+      "inicio": 736.9822190000006,
+      "fin": 745.9451210000005,
+      "duracion": 8.962902
+    },
+    {
+      "numero": 143,
+      "texto": "Muéstranos mañana el paso responsable que debemos dar.",
+      "inicio": 745.9451210000005,
+      "fin": 750.1711530000006,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 144,
+      "texto": "Pero esta noche, danos permiso interior para detenernos.",
+      "inicio": 750.1711530000006,
+      "fin": 754.4436250000006,
+      "duracion": 4.272472
+    },
+    {
+      "numero": 145,
+      "texto": "Nuestro valor no depende de cuánto controlamos.",
+      "inicio": 760.4436250000006,
+      "fin": 764.3910170000006,
+      "duracion": 3.947392
+    },
+    {
+      "numero": 146,
+      "texto": "Nuestro valor está afirmado por el Dios que nos creó y nos conoce.",
+      "inicio": 764.3910170000006,
+      "fin": 769.4994070000006,
+      "duracion": 5.10839
+    },
+    {
+      "numero": 147,
+      "texto": "Jesús también dirige nuestra mirada hacia los lirios del campo.",
+      "inicio": 775.4994070000006,
+      "fin": 780.1898380000006,
+      "duracion": 4.690431
+    },
+    {
+      "numero": 148,
+      "texto": "Nos invita a observar cómo crecen.",
+      "inicio": 780.1898380000006,
+      "fin": 783.3477520000006,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 149,
+      "texto": "No viven luchando por demostrar su valor.",
+      "inicio": 783.3477520000006,
+      "fin": 786.5521060000005,
+      "duracion": 3.204354
+    },
+    {
+      "numero": 150,
+      "texto": "No pasan la noche comparándose con la belleza de otra flor.",
+      "inicio": 786.5521060000005,
+      "fin": 790.9174570000006,
+      "duracion": 4.365351
+    },
+    {
+      "numero": 151,
+      "texto": "No se preguntan si mañana seguirán siendo dignos de ocupar un lugar bajo el cielo.",
+      "inicio": 790.9174570000006,
+      "fin": 796.6295660000006,
+      "duracion": 5.712109
+    },
+    {
+      "numero": 152,
+      "texto": "Reciben la vida que Dios les da y, durante el tiempo que les corresponde, reflejan la obra de sus manos.",
+      "inicio": 796.6295660000006,
+      "fin": 804.3850310000006,
+      "duracion": 7.755465
+    },
+    {
+      "numero": 153,
+      "texto": "Señor, muchas de nuestras preocupaciones sobre el mañana están unidas a preguntas más profundas.",
+      "inicio": 807.3850310000006,
+      "fin": 814.5367770000006,
+      "duracion": 7.151746
+    },
+    {
+      "numero": 154,
+      "texto": "¿Seré suficiente?",
+      "inicio": 814.5367770000006,
+      "fin": 816.2086140000006,
+      "duracion": 1.671837
+    },
+    {
+      "numero": 155,
+      "texto": "¿Podré con lo que viene?",
+      "inicio": 816.2086140000006,
+      "fin": 818.1126500000006,
+      "duracion": 1.904036
+    },
+    {
+      "numero": 156,
+      "texto": "¿Qué pensarán de mí si fracaso?",
+      "inicio": 818.1126500000006,
+      "fin": 821.0848040000006,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 157,
+      "texto": "¿Qué sucederá si no puedo responder como esperan?",
+      "inicio": 821.0848040000006,
+      "fin": 825.1250760000006,
+      "duracion": 4.040272
+    },
+    {
+      "numero": 158,
+      "texto": "¿Seguiré siendo amado si las cosas no salen bien?",
+      "inicio": 825.1250760000006,
+      "fin": 829.2117880000006,
+      "duracion": 4.086712
+    },
+    {
+      "numero": 159,
+      "texto": "El temor al mañana no siempre nace únicamente de lo que puede ocurrir.",
+      "inicio": 832.2117880000006,
+      "fin": 837.3201780000006,
+      "duracion": 5.10839
+    },
+    {
+      "numero": 160,
+      "texto": "A veces nace de lo que creemos que ese resultado dirá acerca de nosotros.",
+      "inicio": 837.3201780000006,
+      "fin": 842.9858470000006,
+      "duracion": 5.665669
+    },
+    {
+      "numero": 161,
+      "texto": "Si perdemos algo, pensamos que hemos perdido nuestro valor.",
+      "inicio": 842.9858470000006,
+      "fin": 847.3511980000006,
+      "duracion": 4.365351
+    },
+    {
+      "numero": 162,
+      "texto": "Si cometemos un error, pensamos que ya no merecemos otra oportunidad.",
+      "inicio": 847.3511980000006,
+      "fin": 852.5524680000007,
+      "duracion": 5.20127
+    },
+    {
+      "numero": 163,
+      "texto": "Si alguien nos rechaza, pensamos que hemos quedado solos.",
+      "inicio": 852.5524680000007,
+      "fin": 856.4998600000007,
+      "duracion": 3.947392
+    },
+    {
+      "numero": 164,
+      "texto": "Si nuestros planes cambian, sentimos que toda nuestra vida ha perdido dirección.",
+      "inicio": 856.4998600000007,
+      "fin": 862.7228080000007,
+      "duracion": 6.222948
+    },
+    {
+      "numero": 165,
+      "texto": "Pero, Padre, tú no mides nuestro valor por el resultado de mañana.",
+      "inicio": 865.7228080000007,
+      "fin": 870.6918780000007,
+      "duracion": 4.96907
+    },
+    {
+      "numero": 166,
+      "texto": "Nos conocías antes de esta decisión.",
+      "inicio": 870.6918780000007,
+      "fin": 873.5711520000007,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 167,
+      "texto": "Nos amabas antes de esta entrevista.",
+      "inicio": 873.5711520000007,
+      "fin": 876.3575470000006,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 168,
+      "texto": "Estabas presente antes de este diagnóstico, antes de esta deuda, antes de esta conversación y antes de esta incertidumbre.",
+      "inicio": 876.3575470000006,
+      "fin": 887.0387260000007,
+      "duracion": 10.681179
+    },
+    {
+      "numero": 169,
+      "texto": "Y seguirás siendo nuestro Dios después de que pase este momento.",
+      "inicio": 887.0387260000007,
+      "fin": 891.9149160000006,
+      "duracion": 4.87619
+    },
+    {
+      "numero": 170,
+      "texto": "Jesús recuerda que, si Dios viste la hierba del campo, que hoy existe y mañana se seca, con mayor razón cuidará de sus hijos.",
+      "inicio": 897.9149160000006,
+      "fin": 908.3174560000007,
+      "duracion": 10.40254
+    },
+    {
+      "numero": 171,
+      "texto": "Estas palabras no significan que nunca atravesaremos escasez, enfermedad, pérdida o pruebas.",
+      "inicio": 908.3174560000007,
+      "fin": 916.2586800000007,
+      "duracion": 7.941224
+    },
+    {
+      "numero": 172,
+      "texto": "Significan que ninguna de esas circunstancias puede colocarnos fuera de la mirada y la presencia de nuestro Padre.",
+      "inicio": 916.2586800000007,
+      "fin": 924.0605850000007,
+      "duracion": 7.801905
+    },
+    {
+      "numero": 173,
+      "texto": "Señor, líbranos de una fe que solamente descansa cuando recibe exactamente lo que esperaba.",
+      "inicio": 930.0605850000007,
+      "fin": 937.7231700000008,
+      "duracion": 7.662585
+    },
+    {
+      "numero": 174,
+      "texto": "Danos una confianza más profunda.",
+      "inicio": 937.7231700000008,
+      "fin": 940.9739640000008,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 175,
+      "texto": "Una confianza que pueda decir:",
+      "inicio": 940.9739640000008,
+      "fin": 943.9461180000009,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 176,
+      "texto": "no sé cómo será mañana, pero no lo atravesaré sin Dios.",
+      "inicio": 943.9461180000009,
+      "fin": 948.8223080000008,
+      "duracion": 4.87619
+    },
+    {
+      "numero": 177,
+      "texto": "No conozco todavía la respuesta, pero puedo pedir sabiduría.",
+      "inicio": 948.8223080000008,
+      "fin": 953.3269790000008,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 178,
+      "texto": "No puedo controlar la reacción de otras personas, pero puedo escoger actuar con verdad y amor.",
+      "inicio": 953.3269790000008,
+      "fin": 960.7573640000008,
+      "duracion": 7.430385
+    },
+    {
+      "numero": 179,
+      "texto": "No puedo garantizar que no habrá dolor, pero puedo creer que tu gracia me sostendrá en medio de él.",
+      "inicio": 960.7573640000008,
+      "fin": 968.0948700000008,
+      "duracion": 7.337506
+    },
+    {
+      "numero": 180,
+      "texto": "Padre, cuando la ansiedad hable con una voz fuerte, ayúdanos a responder con tu Palabra.",
+      "inicio": 971.0948700000008,
+      "fin": 978.1537360000008,
+      "duracion": 7.058866
+    },
+    {
+      "numero": 181,
+      "texto": "Cuando diga: estás solo, recuérdanos que tú estás presente.",
+      "inicio": 978.1537360000008,
+      "fin": 983.5872050000007,
+      "duracion": 5.433469
+    },
+    {
+      "numero": 182,
+      "texto": "Cuando diga: todo depende de ti, recuérdanos que podemos pedir tu dirección.",
+      "inicio": 983.5872050000007,
+      "fin": 990.2745520000008,
+      "duracion": 6.687347
+    },
+    {
+      "numero": 183,
+      "texto": "Cuando diga: no podrás soportarlo, recuérdanos que la fuerza necesaria llega para el paso que realmente debemos dar.",
+      "inicio": 990.2745520000008,
+      "fin": 999.6554140000007,
+      "duracion": 9.380862
+    },
+    {
+      "numero": 184,
+      "texto": "Cuando diga: si no conoces el resultado, no puedes descansar, recuérdanos que la paz bíblica no depende de conocer cada detalle.",
+      "inicio": 999.6554140000007,
+      "fin": 1010.6616730000007,
+      "duracion": 11.006259
+    },
+    {
+      "numero": 185,
+      "texto": "La fe no consiste en negar la realidad.",
+      "inicio": 1013.6616730000007,
+      "fin": 1016.9124670000008,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 186,
+      "texto": "La fe mira la realidad y también mira a Dios.",
+      "inicio": 1016.9124670000008,
+      "fin": 1020.9527390000007,
+      "duracion": 4.040272
+    },
+    {
+      "numero": 187,
+      "texto": "La fe reconoce el problema, pero no lo convierte en su único horizonte.",
+      "inicio": 1020.9527390000007,
+      "fin": 1026.2004490000008,
+      "duracion": 5.24771
+    },
+    {
+      "numero": 188,
+      "texto": "La fe hace planes, pero no adora sus propios planes.",
+      "inicio": 1026.2004490000008,
+      "fin": 1030.4264810000009,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 189,
+      "texto": "La fe trabaja, pero sabe detenerse.",
+      "inicio": 1030.4264810000009,
+      "fin": 1033.5843950000008,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 190,
+      "texto": "La fe llora cuando es necesario, pero no pierde la esperanza.",
+      "inicio": 1033.5843950000008,
+      "fin": 1039.0643040000007,
+      "duracion": 5.479909
+    },
+    {
+      "numero": 191,
+      "texto": "Señor, esta persona quizá se ha hablado con dureza durante todo el día.",
+      "inicio": 1045.0643040000007,
+      "fin": 1050.5906530000007,
+      "duracion": 5.526349
+    },
+    {
+      "numero": 192,
+      "texto": "Quizá ha repetido que debería ser más fuerte.",
+      "inicio": 1050.5906530000007,
+      "fin": 1054.0736460000007,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 193,
+      "texto": "Que debería haber resuelto esto antes.",
+      "inicio": 1054.0736460000007,
+      "fin": 1056.7671610000007,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 194,
+      "texto": "Que no debería sentirse preocupada.",
+      "inicio": 1056.7671610000007,
+      "fin": 1059.8321950000006,
+      "duracion": 3.065034
+    },
+    {
+      "numero": 195,
+      "texto": "Que otras personas enfrentan problemas mayores y que por eso no tiene derecho a sentirse cansada.",
+      "inicio": 1059.8321950000006,
+      "fin": 1067.0303810000007,
+      "duracion": 7.198186
+    },
+    {
+      "numero": 196,
+      "texto": "Pero tú no la invitas a esconderse.",
+      "inicio": 1067.0303810000007,
+      "fin": 1069.8632150000008,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 197,
+      "texto": "La invitas a venir.",
+      "inicio": 1069.8632150000008,
+      "fin": 1071.3492920000008,
+      "duracion": 1.486077
+    },
+    {
+      "numero": 198,
+      "texto": "Que pueda acercarse a ti sin vergüenza.",
+      "inicio": 1074.3492920000008,
+      "fin": 1077.6000860000008,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 199,
+      "texto": "Que pueda decirte la verdad.",
+      "inicio": 1077.6000860000008,
+      "fin": 1080.247161000001,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 200,
+      "texto": "Padre, tengo miedo.",
+      "inicio": 1080.247161000001,
+      "fin": 1082.383397000001,
+      "duracion": 2.136236
+    },
+    {
+      "numero": 201,
+      "texto": "Padre, estoy cansado.",
+      "inicio": 1082.383397000001,
+      "fin": 1084.844712000001,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 202,
+      "texto": "Padre, no sé qué hacer.",
+      "inicio": 1084.844712000001,
+      "fin": 1087.306027000001,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 203,
+      "texto": "Padre, necesito ayuda.",
+      "inicio": 1087.306027000001,
+      "fin": 1089.999542000001,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 204,
+      "texto": "Y después de decirlo, que pueda permanecer en tu presencia.",
+      "inicio": 1095.999542000001,
+      "fin": 1101.1543720000009,
+      "duracion": 5.15483
+    },
+    {
+      "numero": 205,
+      "texto": "Sin apresurarse a fabricar una emoción diferente.",
+      "inicio": 1101.1543720000009,
+      "fin": 1104.6838050000008,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 206,
+      "texto": "Sin sentirse obligado a demostrar una fe perfecta.",
+      "inicio": 1104.6838050000008,
+      "fin": 1109.1884760000007,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 207,
+      "texto": "La fe también puede comenzar con una petición sencilla:",
+      "inicio": 1109.1884760000007,
+      "fin": 1113.5073880000007,
+      "duracion": 4.318912
+    },
+    {
+      "numero": 208,
+      "texto": "Señor, ayuda mi falta de confianza.",
+      "inicio": 1113.5073880000007,
+      "fin": 1117.3154610000006,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 209,
+      "texto": "Padre, viste nuestro corazón con la seguridad que nace de pertenecerte.",
+      "inicio": 1120.3154610000006,
+      "fin": 1126.0740100000005,
+      "duracion": 5.758549
+    },
+    {
+      "numero": 210,
+      "texto": "Que nuestra identidad no dependa del éxito de mañana.",
+      "inicio": 1126.0740100000005,
+      "fin": 1130.1607220000005,
+      "duracion": 4.086712
+    },
+    {
+      "numero": 211,
+      "texto": "Que nuestra paz no dependa de la aprobación de alguien.",
+      "inicio": 1130.1607220000005,
+      "fin": 1133.8759150000005,
+      "duracion": 3.715193
+    },
+    {
+      "numero": 212,
+      "texto": "Que nuestra esperanza no descanse únicamente en una cuenta bancaria, una respuesta médica, un contrato, una relación o un plan humano.",
+      "inicio": 1133.8759150000005,
+      "fin": 1145.7645320000006,
+      "duracion": 11.888617
+    },
+    {
+      "numero": 213,
+      "texto": "Todas esas cosas importan.",
+      "inicio": 1145.7645320000006,
+      "fin": 1148.5044870000006,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 214,
+      "texto": "Y podemos presentártelas.",
+      "inicio": 1148.5044870000006,
+      "fin": 1150.9193620000005,
+      "duracion": 2.414875
+    },
+    {
+      "numero": 215,
+      "texto": "Pero ninguna de ellas puede ocupar el lugar que te corresponde a ti.",
+      "inicio": 1150.9193620000005,
+      "fin": 1156.0741920000005,
+      "duracion": 5.15483
+    },
+    {
+      "numero": 216,
+      "texto": "Tú eres nuestro Creador.",
+      "inicio": 1159.0741920000005,
+      "fin": 1161.6748270000005,
+      "duracion": 2.600635
+    },
+    {
+      "numero": 217,
+      "texto": "Tú eres nuestro Padre.",
+      "inicio": 1161.6748270000005,
+      "fin": 1163.6717430000006,
+      "duracion": 1.996916
+    },
+    {
+      "numero": 218,
+      "texto": "Tú eres la fuente de la sabiduría que necesitamos.",
+      "inicio": 1163.6717430000006,
+      "fin": 1167.4798160000005,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 219,
+      "texto": "Tú eres quien puede darnos paz aun antes de que cambie la circunstancia.",
+      "inicio": 1167.4798160000005,
+      "fin": 1172.6810860000005,
+      "duracion": 5.20127
+    },
+    {
+      "numero": 220,
+      "texto": "Esta noche no necesito demostrar mi valor.",
+      "inicio": 1178.6810860000005,
+      "fin": 1181.9783200000004,
+      "duracion": 3.297234
+    },
+    {
+      "numero": 221,
+      "texto": "No necesito resolver mi identidad.",
+      "inicio": 1181.9783200000004,
+      "fin": 1184.8111540000004,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 222,
+      "texto": "No necesito ganar el derecho a descansar.",
+      "inicio": 1184.8111540000004,
+      "fin": 1187.8761880000004,
+      "duracion": 3.065034
+    },
+    {
+      "numero": 223,
+      "texto": "Puedo recibir el descanso como un regalo de Dios.",
+      "inicio": 1187.8761880000004,
+      "fin": 1191.6378210000005,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 224,
+      "texto": "Después de hablar del alimento, la bebida y el vestido, Jesús nos recuerda que nuestro Padre celestial sabe que necesitamos todas estas cosas.",
+      "inicio": 1197.6378210000005,
+      "fin": 1207.5759620000006,
+      "duracion": 9.938141
+    },
+    {
+      "numero": 225,
+      "texto": "Él no minimiza nuestras necesidades.",
+      "inicio": 1207.5759620000006,
+      "fin": 1210.4552360000005,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 226,
+      "texto": "No se burla de nuestras preocupaciones.",
+      "inicio": 1210.4552360000005,
+      "fin": 1213.4273900000005,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 227,
+      "texto": "No dice que el alimento, la salud, el hogar o el trabajo carezcan de importancia.",
+      "inicio": 1213.4273900000005,
+      "fin": 1220.3933760000004,
+      "duracion": 6.965986
+    },
+    {
+      "numero": 228,
+      "texto": "Dice que el Padre ya sabe.",
+      "inicio": 1220.3933760000004,
+      "fin": 1222.5760520000003,
+      "duracion": 2.182676
+    },
+    {
+      "numero": 229,
+      "texto": "Antes de que encontremos las palabras correctas, él sabe.",
+      "inicio": 1228.5760520000003,
+      "fin": 1232.8485240000005,
+      "duracion": 4.272472
+    },
+    {
+      "numero": 230,
+      "texto": "Antes de que expliquemos por qué estamos preocupados, él sabe.",
+      "inicio": 1232.8485240000005,
+      "fin": 1237.8175940000006,
+      "duracion": 4.96907
+    },
+    {
+      "numero": 231,
+      "texto": "Antes de que amanezca y aparezcan nuevas responsabilidades, él sabe.",
+      "inicio": 1237.8175940000006,
+      "fin": 1243.6690230000006,
+      "duracion": 5.851429
+    },
+    {
+      "numero": 232,
+      "texto": "Señor, qué descanso produce recordar que no tenemos que informarte de algo que se te había escapado.",
+      "inicio": 1246.6690230000006,
+      "fin": 1254.2851680000006,
+      "duracion": 7.616145
+    },
+    {
+      "numero": 233,
+      "texto": "Nuestra oración no despierta tu atención.",
+      "inicio": 1254.2851680000006,
+      "fin": 1257.8146010000005,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 234,
+      "texto": "Nuestra oración responde a la atención que ya nos has dado.",
+      "inicio": 1257.8146010000005,
+      "fin": 1262.6907910000004,
+      "duracion": 4.87619
+    },
+    {
+      "numero": 235,
+      "texto": "Venimos porque tú ya nos ves.",
+      "inicio": 1262.6907910000004,
+      "fin": 1265.4771860000005,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 236,
+      "texto": "Hablamos porque tú ya estás escuchando.",
+      "inicio": 1265.4771860000005,
+      "fin": 1268.8672990000005,
+      "duracion": 3.390113
+    },
+    {
+      "numero": 237,
+      "texto": "Pedimos porque tú nos invitas a depender de ti.",
+      "inicio": 1268.8672990000005,
+      "fin": 1272.7218110000006,
+      "duracion": 3.854512
+    },
+    {
+      "numero": 238,
+      "texto": "Entonces Jesús nos muestra una prioridad capaz de ordenar el corazón:",
+      "inicio": 1275.7218110000006,
+      "fin": 1280.7373210000005,
+      "duracion": 5.01551
+    },
+    {
+      "numero": 239,
+      "texto": "buscar primero el reino de Dios y su justicia.",
+      "inicio": 1280.7373210000005,
+      "fin": 1285.1491120000005,
+      "duracion": 4.411791
+    },
+    {
+      "numero": 240,
+      "texto": "Padre, cuando la preocupación ocupa el primer lugar, todo lo demás se organiza alrededor del miedo.",
+      "inicio": 1291.1491120000005,
+      "fin": 1298.5330580000004,
+      "duracion": 7.383946
+    },
+    {
+      "numero": 241,
+      "texto": "Nos levantamos pensando en el problema.",
+      "inicio": 1298.5330580000004,
+      "fin": 1302.0160510000005,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 242,
+      "texto": "Trabajamos pensando en el problema.",
+      "inicio": 1302.0160510000005,
+      "fin": 1304.6631260000006,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 243,
+      "texto": "Hablamos con quienes amamos desde la tensión que produce el problema.",
+      "inicio": 1304.6631260000006,
+      "fin": 1309.2142370000006,
+      "duracion": 4.551111
+    },
+    {
+      "numero": 244,
+      "texto": "Y al acostarnos, seguimos entregándole al problema nuestros últimos pensamientos.",
+      "inicio": 1309.2142370000006,
+      "fin": 1315.2978650000007,
+      "duracion": 6.083628
+    },
+    {
+      "numero": 245,
+      "texto": "Esta noche queremos cambiar el centro.",
+      "inicio": 1318.2978650000007,
+      "fin": 1321.1771390000006,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 246,
+      "texto": "El problema existe, pero no será nuestro dios.",
+      "inicio": 1321.1771390000006,
+      "fin": 1324.7994520000007,
+      "duracion": 3.622313
+    },
+    {
+      "numero": 247,
+      "texto": "El mañana importa, pero no recibirá nuestra adoración.",
+      "inicio": 1324.7994520000007,
+      "fin": 1329.3041230000006,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 248,
+      "texto": "La incertidumbre está presente, pero no gobernará nuestro corazón.",
+      "inicio": 1329.3041230000006,
+      "fin": 1334.5518330000007,
+      "duracion": 5.24771
+    },
+    {
+      "numero": 249,
+      "texto": "Queremos buscarte primero a ti.",
+      "inicio": 1334.5518330000007,
+      "fin": 1337.6633070000007,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 250,
+      "texto": "Buscar tu reino significa preguntar cómo podemos reflejar tu voluntad aun en medio de esta situación.",
+      "inicio": 1343.6633070000007,
+      "fin": 1351.5116520000008,
+      "duracion": 7.848345
+    },
+    {
+      "numero": 251,
+      "texto": "Significa escoger la verdad cuando sería más fácil manipular.",
+      "inicio": 1351.5116520000008,
+      "fin": 1356.7129220000008,
+      "duracion": 5.20127
+    },
+    {
+      "numero": 252,
+      "texto": "Escoger la bondad cuando el temor nos vuelve impacientes.",
+      "inicio": 1356.7129220000008,
+      "fin": 1361.310473000001,
+      "duracion": 4.597551
+    },
+    {
+      "numero": 253,
+      "texto": "Escoger la responsabilidad sin convertirnos en esclavos de la ansiedad.",
+      "inicio": 1361.310473000001,
+      "fin": 1366.743942000001,
+      "duracion": 5.433469
+    },
+    {
+      "numero": 254,
+      "texto": "Escoger el perdón cuando llevamos una conversación difícil en la mente.",
+      "inicio": 1366.743942000001,
+      "fin": 1371.991652000001,
+      "duracion": 5.24771
+    },
+    {
+      "numero": 255,
+      "texto": "Escoger la integridad aunque no sepamos cuál será el resultado.",
+      "inicio": 1371.991652000001,
+      "fin": 1377.5644410000011,
+      "duracion": 5.572789
+    },
+    {
+      "numero": 256,
+      "texto": "Señor, mañana quizá no podamos controlar lo que suceda, pero con tu ayuda sí podemos decidir cómo responder.",
+      "inicio": 1380.5644410000011,
+      "fin": 1389.620223000001,
+      "duracion": 9.055782
+    },
+    {
+      "numero": 257,
+      "texto": "Podemos pedir sabiduría antes de hablar.",
+      "inicio": 1389.620223000001,
+      "fin": 1392.917457000001,
+      "duracion": 3.297234
+    },
+    {
+      "numero": 258,
+      "texto": "Podemos escuchar antes de reaccionar.",
+      "inicio": 1392.917457000001,
+      "fin": 1396.0753710000008,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 259,
+      "texto": "Podemos buscar consejo antes de tomar una decisión apresurada.",
+      "inicio": 1396.0753710000008,
+      "fin": 1400.9051220000008,
+      "duracion": 4.829751
+    },
+    {
+      "numero": 260,
+      "texto": "Podemos reconocer un error.",
+      "inicio": 1400.9051220000008,
+      "fin": 1403.412877000001,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 261,
+      "texto": "Podemos establecer un límite necesario.",
+      "inicio": 1403.412877000001,
+      "fin": 1407.0816300000008,
+      "duracion": 3.668753
+    },
+    {
+      "numero": 262,
+      "texto": "Podemos dar el siguiente paso correcto aunque todavía no veamos todo el camino.",
+      "inicio": 1407.0816300000008,
+      "fin": 1413.304578000001,
+      "duracion": 6.222948
+    },
+    {
+      "numero": 263,
+      "texto": "No necesitamos recibir esta noche la fuerza para todos los días futuros.",
+      "inicio": 1416.304578000001,
+      "fin": 1421.227208000001,
+      "duracion": 4.92263
+    },
+    {
+      "numero": 264,
+      "texto": "Necesitamos la gracia para este momento.",
+      "inicio": 1421.227208000001,
+      "fin": 1424.988841000001,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 265,
+      "texto": "Y cuando llegue mañana, podremos pedir la gracia correspondiente a mañana.",
+      "inicio": 1424.988841000001,
+      "fin": 1431.118909000001,
+      "duracion": 6.130068
+    },
+    {
+      "numero": 266,
+      "texto": "Padre, ordena nuestros deseos.",
+      "inicio": 1437.118909000001,
+      "fin": 1440.601902000001,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 267,
+      "texto": "Hay respuestas que anhelamos porque parecen ofrecernos seguridad.",
+      "inicio": 1440.601902000001,
+      "fin": 1444.920814000001,
+      "duracion": 4.318912
+    },
+    {
+      "numero": 268,
+      "texto": "Hay puertas que queremos ver abiertas.",
+      "inicio": 1444.920814000001,
+      "fin": 1447.707209000001,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 269,
+      "texto": "Hay resultados que consideramos indispensables.",
+      "inicio": 1447.707209000001,
+      "fin": 1451.236642000001,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 270,
+      "texto": "Podemos presentarte esos deseos con libertad.",
+      "inicio": 1451.236642000001,
+      "fin": 1454.440996000001,
+      "duracion": 3.204354
+    },
+    {
+      "numero": 271,
+      "texto": "Pero también queremos decir:",
+      "inicio": 1454.440996000001,
+      "fin": 1456.298592000001,
+      "duracion": 1.857596
+    },
+    {
+      "numero": 272,
+      "texto": "Señor, guíanos por el camino que sea verdadero y bueno.",
+      "inicio": 1456.298592000001,
+      "fin": 1461.128343000001,
+      "duracion": 4.829751
+    },
+    {
+      "numero": 273,
+      "texto": "No permitas que el miedo nos haga llamar bendición a algo que nos alejaría de ti.",
+      "inicio": 1461.128343000001,
+      "fin": 1466.933332000001,
+      "duracion": 5.804989
+    },
+    {
+      "numero": 274,
+      "texto": "No permitas que la desesperación nos empuje a decisiones que después dañen nuestra conciencia, nuestra familia o nuestro testimonio.",
+      "inicio": 1466.933332000001,
+      "fin": 1476.778593000001,
+      "duracion": 9.845261
+    },
+    {
+      "numero": 275,
+      "texto": "Danos paciencia para esperar cuando todavía no sea tiempo de actuar.",
+      "inicio": 1479.778593000001,
+      "fin": 1484.886983000001,
+      "duracion": 5.10839
+    },
+    {
+      "numero": 276,
+      "texto": "Danos valor para movernos cuando ya conozcamos el deber.",
+      "inicio": 1484.886983000001,
+      "fin": 1489.345214000001,
+      "duracion": 4.458231
+    },
+    {
+      "numero": 277,
+      "texto": "Danos humildad para pedir ayuda.",
+      "inicio": 1489.345214000001,
+      "fin": 1492.5960080000011,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 278,
+      "texto": "Danos discernimiento para reconocer la diferencia entre una puerta cerrada y un proceso que requiere perseverancia.",
+      "inicio": 1492.5960080000011,
+      "fin": 1500.955192000001,
+      "duracion": 8.359184
+    },
+    {
+      "numero": 279,
+      "texto": "Y si mañana nuestros planes cambian, ayúdanos a recordar que tu carácter no cambia.",
+      "inicio": 1503.955192000001,
+      "fin": 1511.246258000001,
+      "duracion": 7.291066
+    },
+    {
+      "numero": 280,
+      "texto": "Si recibimos una respuesta diferente de la esperada, acompáñanos en el ajuste.",
+      "inicio": 1511.246258000001,
+      "fin": 1517.283446000001,
+      "duracion": 6.037188
+    },
+    {
+      "numero": 281,
+      "texto": "Si llega una oportunidad, danos sabiduría para recibirla.",
+      "inicio": 1517.283446000001,
+      "fin": 1522.159636000001,
+      "duracion": 4.87619
+    },
+    {
+      "numero": 282,
+      "texto": "Si aparece una dificultad, danos serenidad para enfrentarla paso a paso.",
+      "inicio": 1522.159636000001,
+      "fin": 1528.521904000001,
+      "duracion": 6.362268
+    },
+    {
+      "numero": 283,
+      "texto": "Si el día transcurre de una manera ordinaria, ayúdanos a reconocer también allí tu cuidado.",
+      "inicio": 1528.521904000001,
+      "fin": 1535.5807700000012,
+      "duracion": 7.058866
+    },
+    {
+      "numero": 284,
+      "texto": "Señor, no queremos pasar la vida esperando que llegue un futuro perfecto para sentir paz.",
+      "inicio": 1541.5807700000012,
+      "fin": 1547.9430380000013,
+      "duracion": 6.362268
+    },
+    {
+      "numero": 285,
+      "texto": "Queremos aprender a encontrarte en este día real.",
+      "inicio": 1547.9430380000013,
+      "fin": 1552.7727890000012,
+      "duracion": 4.829751
+    },
+    {
+      "numero": 286,
+      "texto": "En esta habitación.",
+      "inicio": 1552.7727890000012,
+      "fin": 1555.0019050000012,
+      "duracion": 2.229116
+    },
+    {
+      "numero": 287,
+      "texto": "En esta noche.",
+      "inicio": 1555.0019050000012,
+      "fin": 1557.0452610000011,
+      "duracion": 2.043356
+    },
+    {
+      "numero": 288,
+      "texto": "En este cuerpo cansado.",
+      "inicio": 1557.0452610000011,
+      "fin": 1559.738776000001,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 289,
+      "texto": "En esta respiración.",
+      "inicio": 1559.738776000001,
+      "fin": 1562.5251710000011,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 290,
+      "texto": "En esta oración.",
+      "inicio": 1562.5251710000011,
+      "fin": 1565.0329260000012,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 291,
+      "texto": "Tu reino puede comenzar a ordenar ahora mismo nuestros pensamientos.",
+      "inicio": 1568.0329260000012,
+      "fin": 1573.0948760000012,
+      "duracion": 5.06195
+    },
+    {
+      "numero": 292,
+      "texto": "Tu verdad puede poner límites a nuestra imaginación.",
+      "inicio": 1573.0948760000012,
+      "fin": 1577.1351480000012,
+      "duracion": 4.040272
+    },
+    {
+      "numero": 293,
+      "texto": "Tu presencia puede recordarnos que no estamos abandonados.",
+      "inicio": 1577.1351480000012,
+      "fin": 1581.7791390000011,
+      "duracion": 4.643991
+    },
+    {
+      "numero": 294,
+      "texto": "Tu amor puede ayudarnos a dejar de medir el futuro solamente por aquello que tememos.",
+      "inicio": 1581.7791390000011,
+      "fin": 1587.769887000001,
+      "duracion": 5.990748
+    },
+    {
+      "numero": 295,
+      "texto": "Padre, queremos buscarte primero.",
+      "inicio": 1590.769887000001,
+      "fin": 1594.160000000001,
+      "duracion": 3.390113
+    },
+    {
+      "numero": 296,
+      "texto": "Antes que una explicación completa, buscamos tu sabiduría.",
+      "inicio": 1594.160000000001,
+      "fin": 1598.525351000001,
+      "duracion": 4.365351
+    },
+    {
+      "numero": 297,
+      "texto": "Antes que el control, buscamos tu voluntad.",
+      "inicio": 1598.525351000001,
+      "fin": 1602.937142000001,
+      "duracion": 4.411791
+    },
+    {
+      "numero": 298,
+      "texto": "Antes que una garantía humana, buscamos la firmeza de tu carácter.",
+      "inicio": 1602.937142000001,
+      "fin": 1607.999092000001,
+      "duracion": 5.06195
+    },
+    {
+      "numero": 299,
+      "texto": "Antes que continuar pensando sin descanso, escogemos permanecer contigo.",
+      "inicio": 1607.999092000001,
+      "fin": 1613.896960000001,
+      "duracion": 5.897868
+    },
+    {
+      "numero": 300,
+      "texto": "El mañana todavía no ha llegado.",
+      "inicio": 1619.896960000001,
+      "fin": 1622.7762340000008,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 301,
+      "texto": "Pero Dios ya está aquí.",
+      "inicio": 1622.7762340000008,
+      "fin": 1625.2375490000009,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 302,
+      "texto": "Ahora, delante de Dios, vamos a entregar de manera concreta aquello que ocupa la mente.",
+      "inicio": 1631.2375490000009,
+      "fin": 1637.599817000001,
+      "duracion": 6.362268
+    },
+    {
+      "numero": 303,
+      "texto": "No tienes que repetir cada palabra.",
+      "inicio": 1637.599817000001,
+      "fin": 1640.664851000001,
+      "duracion": 3.065034
+    },
+    {
+      "numero": 304,
+      "texto": "Puedes escuchar y, cuando una de estas preocupaciones se parezca a la tuya, presentarla silenciosamente al Señor.",
+      "inicio": 1640.664851000001,
+      "fin": 1650.2314720000008,
+      "duracion": 9.566621
+    },
+    {
+      "numero": 305,
+      "texto": "Padre, ponemos en tus manos nuestra familia.",
+      "inicio": 1653.2314720000008,
+      "fin": 1656.342946000001,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 306,
+      "texto": "Entregamos a nuestros hijos.",
+      "inicio": 1656.342946000001,
+      "fin": 1659.082901000001,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 307,
+      "texto": "Lo que están viviendo y no podemos resolver por ellos.",
+      "inicio": 1659.082901000001,
+      "fin": 1663.634012000001,
+      "duracion": 4.551111
+    },
+    {
+      "numero": 308,
+      "texto": "Sus decisiones, sus relaciones, su salud, su fe y el futuro que todavía no podemos ver.",
+      "inicio": 1663.634012000001,
+      "fin": 1671.343037000001,
+      "duracion": 7.709025
+    },
+    {
+      "numero": 309,
+      "texto": "Líbranos de creer que preocuparnos toda la noche es la mejor manera de amarlos.",
+      "inicio": 1674.343037000001,
+      "fin": 1679.822946000001,
+      "duracion": 5.479909
+    },
+    {
+      "numero": 310,
+      "texto": "Enséñanos a acompañarlos con oración, conversación, límites sabios y una presencia paciente.",
+      "inicio": 1679.822946000001,
+      "fin": 1688.925168000001,
+      "duracion": 9.102222
+    },
+    {
+      "numero": 311,
+      "texto": "Muéstranos mañana si existe algo que debemos preguntar, escuchar, corregir o hacer.",
+      "inicio": 1688.925168000001,
+      "fin": 1695.937594000001,
+      "duracion": 7.012426
+    },
+    {
+      "numero": 312,
+      "texto": "Pero durante esta noche, recuérdanos que nuestros hijos también están bajo tu mirada.",
+      "inicio": 1695.937594000001,
+      "fin": 1702.4391810000009,
+      "duracion": 6.501587
+    },
+    {
+      "numero": 313,
+      "texto": "Entregamos a nuestros padres y a los miembros de la familia que necesitan cuidado.",
+      "inicio": 1708.4391810000009,
+      "fin": 1714.383489000001,
+      "duracion": 5.944308
+    },
+    {
+      "numero": 314,
+      "texto": "Tú conoces las decisiones médicas, las limitaciones físicas, la distancia, el cansancio y las responsabilidades que esto puede traer.",
+      "inicio": 1714.383489000001,
+      "fin": 1726.1792260000009,
+      "duracion": 11.795737
+    },
+    {
+      "numero": 315,
+      "texto": "Danos compasión sin desesperación.",
+      "inicio": 1726.1792260000009,
+      "fin": 1729.430020000001,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 316,
+      "texto": "Fuerza sin dureza.",
+      "inicio": 1729.430020000001,
+      "fin": 1732.1235350000009,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 317,
+      "texto": "Sabiduría para reconocer lo que podemos hacer y humildad para aceptar lo que no podemos controlar.",
+      "inicio": 1732.1235350000009,
+      "fin": 1739.971880000001,
+      "duracion": 7.848345
+    },
+    {
+      "numero": 318,
+      "texto": "Padre, ponemos en tus manos nuestro matrimonio y nuestras relaciones.",
+      "inicio": 1742.971880000001,
+      "fin": 1748.312470000001,
+      "duracion": 5.34059
+    },
+    {
+      "numero": 319,
+      "texto": "Si existe una conversación pendiente, prepara nuestro corazón para hablar con verdad y escuchar con amor.",
+      "inicio": 1748.312470000001,
+      "fin": 1755.603536000001,
+      "duracion": 7.291066
+    },
+    {
+      "numero": 320,
+      "texto": "Si existe una herida, muéstranos el camino del arrepentimiento, el perdón y los límites saludables.",
+      "inicio": 1755.603536000001,
+      "fin": 1763.730520000001,
+      "duracion": 8.126984
+    },
+    {
+      "numero": 321,
+      "texto": "Si sentimos distancia, danos paciencia para reconstruir lo que pueda ser restaurado.",
+      "inicio": 1763.730520000001,
+      "fin": 1770.371427000001,
+      "duracion": 6.640907
+    },
+    {
+      "numero": 322,
+      "texto": "Y si una situación requiere consejo o ayuda responsable, danos valor para buscarla.",
+      "inicio": 1770.371427000001,
+      "fin": 1777.012334000001,
+      "duracion": 6.640907
+    },
+    {
+      "numero": 323,
+      "texto": "No prometemos controlar la respuesta de otra persona.",
+      "inicio": 1783.012334000001,
+      "fin": 1786.9132860000009,
+      "duracion": 3.900952
+    },
+    {
+      "numero": 324,
+      "texto": "Entregamos esa respuesta en tus manos.",
+      "inicio": 1786.9132860000009,
+      "fin": 1790.024760000001,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 325,
+      "texto": "Ayúdanos mañana a responder sin herir, sin decidir desde el pánico y sin callar por temor cuando debamos hablar con claridad.",
+      "inicio": 1790.024760000001,
+      "fin": 1800.148660000001,
+      "duracion": 10.1239
+    },
+    {
+      "numero": 326,
+      "texto": "Señor, ponemos delante de ti nuestro trabajo.",
+      "inicio": 1803.148660000001,
+      "fin": 1807.142492000001,
+      "duracion": 3.993832
+    },
+    {
+      "numero": 327,
+      "texto": "La entrevista, el turno que comienza temprano, el negocio que necesita clientes y el proyecto que todavía no está terminado.",
+      "inicio": 1807.142492000001,
+      "fin": 1817.034193000001,
+      "duracion": 9.891701
+    },
+    {
+      "numero": 328,
+      "texto": "La posibilidad de perder un empleo o la necesidad de encontrar uno.",
+      "inicio": 1817.034193000001,
+      "fin": 1822.328343000001,
+      "duracion": 5.29415
+    },
+    {
+      "numero": 329,
+      "texto": "Tú conoces el esfuerzo realizado.",
+      "inicio": 1825.328343000001,
+      "fin": 1828.439817000001,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 330,
+      "texto": "Conoces las puertas que hemos tocado.",
+      "inicio": 1828.439817000001,
+      "fin": 1831.2726510000011,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 331,
+      "texto": "Conoces la preparación, el cansancio y las veces que hemos tenido que comenzar otra vez.",
+      "inicio": 1831.2726510000011,
+      "fin": 1838.052878000001,
+      "duracion": 6.780227
+    },
+    {
+      "numero": 332,
+      "texto": "Danos diligencia para trabajar y paz para no convertir el trabajo en nuestra identidad.",
+      "inicio": 1838.052878000001,
+      "fin": 1844.7402250000011,
+      "duracion": 6.687347
+    },
+    {
+      "numero": 333,
+      "texto": "Danos favor cuando sea conforme a tu voluntad, pero sobre todo danos integridad cualquiera que sea el resultado.",
+      "inicio": 1844.7402250000011,
+      "fin": 1853.7495670000012,
+      "duracion": 9.009342
+    },
+    {
+      "numero": 334,
+      "texto": "Padre, ponemos en tus manos el dinero.",
+      "inicio": 1859.7495670000012,
+      "fin": 1863.2790000000011,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 335,
+      "texto": "Las cuentas, las deudas, los gastos inesperados y el temor de que no alcance para sostener el hogar.",
+      "inicio": 1863.2790000000011,
+      "fin": 1871.498864000001,
+      "duracion": 8.219864
+    },
+    {
+      "numero": 336,
+      "texto": "No te pedimos riquezas como prueba de fe.",
+      "inicio": 1874.498864000001,
+      "fin": 1877.238819000001,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 337,
+      "texto": "Te pedimos el pan necesario.",
+      "inicio": 1877.238819000001,
+      "fin": 1879.793014000001,
+      "duracion": 2.554195
+    },
+    {
+      "numero": 338,
+      "texto": "Te pedimos sabiduría para administrar.",
+      "inicio": 1879.793014000001,
+      "fin": 1883.229567000001,
+      "duracion": 3.436553
+    },
+    {
+      "numero": 339,
+      "texto": "Disciplina para cambiar hábitos, humildad para pedir orientación y oportunidades honestas para trabajar.",
+      "inicio": 1883.229567000001,
+      "fin": 1890.845712000001,
+      "duracion": 7.616145
+    },
+    {
+      "numero": 340,
+      "texto": "Y paz para no medir nuestro valor por la cantidad que aparece en una cuenta.",
+      "inicio": 1890.845712000001,
+      "fin": 1896.372061000001,
+      "duracion": 5.526349
+    },
+    {
+      "numero": 341,
+      "texto": "Muéstranos mañana el paso real que podemos dar.",
+      "inicio": 1902.372061000001,
+      "fin": 1906.1801340000009,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 342,
+      "texto": "Quizá sea hacer una llamada, revisar un gasto, buscar asesoría o reconocer que necesitamos ayuda.",
+      "inicio": 1906.1801340000009,
+      "fin": 1914.4464380000009,
+      "duracion": 8.266304
+    },
+    {
+      "numero": 343,
+      "texto": "No tenemos que resolver toda nuestra vida financiera esta noche.",
+      "inicio": 1914.4464380000009,
+      "fin": 1919.1368690000008,
+      "duracion": 4.690431
+    },
+    {
+      "numero": 344,
+      "texto": "Solo necesitamos recibir dirección para el siguiente paso.",
+      "inicio": 1919.1368690000008,
+      "fin": 1923.8273000000008,
+      "duracion": 4.690431
+    },
+    {
+      "numero": 345,
+      "texto": "Señor, ponemos en tus manos nuestra salud.",
+      "inicio": 1926.8273000000008,
+      "fin": 1930.6353730000008,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 346,
+      "texto": "El síntoma, el resultado que esperamos, la cita que se acerca y la salud de alguien que amamos.",
+      "inicio": 1930.6353730000008,
+      "fin": 1938.5301580000007,
+      "duracion": 7.894785
+    },
+    {
+      "numero": 347,
+      "texto": "No afirmamos que toda enfermedad desaparecerá de la manera que deseamos.",
+      "inicio": 1941.5301580000007,
+      "fin": 1947.0565070000007,
+      "duracion": 5.526349
+    },
+    {
+      "numero": 348,
+      "texto": "Pedimos atención adecuada, discernimiento, fortaleza y consuelo.",
+      "inicio": 1947.0565070000007,
+      "fin": 1953.6509740000006,
+      "duracion": 6.594467
+    },
+    {
+      "numero": 349,
+      "texto": "Guía a los profesionales que participen en el cuidado.",
+      "inicio": 1953.6509740000006,
+      "fin": 1958.1556450000005,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 350,
+      "texto": "Ayúdanos a no ignorar lo que requiere atención y a no convertir cada sensación en una sentencia anticipada.",
+      "inicio": 1958.1556450000005,
+      "fin": 1967.3507470000004,
+      "duracion": 9.195102
+    },
+    {
+      "numero": 351,
+      "texto": "Cuando la mente imagine el peor resultado, tráela de regreso a la verdad presente.",
+      "inicio": 1973.3507470000004,
+      "fin": 1979.5736950000005,
+      "duracion": 6.222948
+    },
+    {
+      "numero": 352,
+      "texto": "Ahora mismo estamos aquí.",
+      "inicio": 1979.5736950000005,
+      "fin": 1981.8492510000005,
+      "duracion": 2.275556
+    },
+    {
+      "numero": 353,
+      "texto": "Ahora mismo podemos respirar.",
+      "inicio": 1981.8492510000005,
+      "fin": 1984.8678450000004,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 354,
+      "texto": "Ahora mismo podemos orar.",
+      "inicio": 1984.8678450000004,
+      "fin": 1986.8183210000004,
+      "duracion": 1.950476
+    },
+    {
+      "numero": 355,
+      "texto": "Y cuando llegue el momento de actuar, podremos buscar la ayuda necesaria.",
+      "inicio": 1986.8183210000004,
+      "fin": 1992.4839900000004,
+      "duracion": 5.665669
+    },
+    {
+      "numero": 356,
+      "texto": "Padre, ponemos en tus manos las decisiones.",
+      "inicio": 1995.4839900000004,
+      "fin": 1999.0134230000003,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 357,
+      "texto": "La opción que parece correcta, la duda que permanece, el temor de equivocarnos y la presión de decidir con rapidez.",
+      "inicio": 1999.0134230000003,
+      "fin": 2008.2085250000002,
+      "duracion": 9.195102
+    },
+    {
+      "numero": 358,
+      "texto": "Danos sabiduría que sea limpia, pacífica y sincera.",
+      "inicio": 2011.2085250000002,
+      "fin": 2015.6203160000002,
+      "duracion": 4.411791
+    },
+    {
+      "numero": 359,
+      "texto": "Ayúdanos a examinar los motivos.",
+      "inicio": 2015.6203160000002,
+      "fin": 2018.6389100000001,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 360,
+      "texto": "A buscar consejo prudente y a no llamar dirección divina a un impulso nacido solamente del miedo o del deseo.",
+      "inicio": 2018.6389100000001,
+      "fin": 2028.205531,
+      "duracion": 9.566621
+    },
+    {
+      "numero": 361,
+      "texto": "Enséñanos a esperar cuando todavía falte información y a avanzar cuando el camino responsable ya sea suficientemente claro.",
+      "inicio": 2028.205531,
+      "fin": 2038.0043520000002,
+      "duracion": 9.798821
+    },
+    {
+      "numero": 362,
+      "texto": "Entregamos también aquello que no hemos contado a nadie.",
+      "inicio": 2044.0043520000002,
+      "fin": 2048.276824,
+      "duracion": 4.272472
+    },
+    {
+      "numero": 363,
+      "texto": "La preocupación que sentimos demasiado personal.",
+      "inicio": 2048.276824,
+      "fin": 2051.852697,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 364,
+      "texto": "La vergüenza que nos hace guardar silencio.",
+      "inicio": 2051.852697,
+      "fin": 2055.103491,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 365,
+      "texto": "La pregunta que tememos pronunciar.",
+      "inicio": 2055.103491,
+      "fin": 2058.075645,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 366,
+      "texto": "La lucha que hemos escondido detrás de una apariencia tranquila.",
+      "inicio": 2058.075645,
+      "fin": 2063.509114,
+      "duracion": 5.433469
+    },
+    {
+      "numero": 367,
+      "texto": "Señor, tú ya lo sabes.",
+      "inicio": 2066.509114,
+      "fin": 2068.970429,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 368,
+      "texto": "Y aun sabiéndolo, nos invitas a acercarnos.",
+      "inicio": 2068.970429,
+      "fin": 2072.592742,
+      "duracion": 3.622313
+    },
+    {
+      "numero": 369,
+      "texto": "Que esta persona pueda hablarte ahora en silencio.",
+      "inicio": 2072.592742,
+      "fin": 2076.818774,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 370,
+      "texto": "Que pueda decirte con sus propias palabras aquello que más teme del mañana.",
+      "inicio": 2076.818774,
+      "fin": 2082.763082,
+      "duracion": 5.944308
+    },
+    {
+      "numero": 371,
+      "texto": "Escucha su oración, Padre.",
+      "inicio": 2088.763082,
+      "fin": 2091.270837,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 372,
+      "texto": "Recibe lo que acaba de poner delante de ti.",
+      "inicio": 2097.270837,
+      "fin": 2100.84671,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 373,
+      "texto": "No necesariamente porque el problema haya desaparecido, sino porque ya no quiere cargarlo a solas.",
+      "inicio": 2100.84671,
+      "fin": 2108.3699749999996,
+      "duracion": 7.523265
+    },
+    {
+      "numero": 374,
+      "texto": "Entregamos las noticias que todavía no han llegado.",
+      "inicio": 2111.3699749999996,
+      "fin": 2115.5960069999996,
+      "duracion": 4.226032
+    },
+    {
+      "numero": 375,
+      "texto": "Las conversaciones que todavía no han ocurrido y los errores que todavía no hemos cometido.",
+      "inicio": 2115.5960069999996,
+      "fin": 2122.097594,
+      "duracion": 6.501587
+    },
+    {
+      "numero": 376,
+      "texto": "Los rechazos y las pérdidas que hemos sufrido muchas veces en la mente aunque nunca hayan sucedido en la realidad.",
+      "inicio": 2122.097594,
+      "fin": 2130.9211769999997,
+      "duracion": 8.823583
+    },
+    {
+      "numero": 377,
+      "texto": "Padre, cuánto cansancio produce sufrir repetidamente un futuro imaginado.",
+      "inicio": 2133.9211769999997,
+      "fin": 2140.2834449999996,
+      "duracion": 6.362268
+    },
+    {
+      "numero": 378,
+      "texto": "Devuélvenos a este momento.",
+      "inicio": 2140.2834449999996,
+      "fin": 2142.6518799999994,
+      "duracion": 2.368435
+    },
+    {
+      "numero": 379,
+      "texto": "A esta noche.",
+      "inicio": 2142.6518799999994,
+      "fin": 2144.6952359999996,
+      "duracion": 2.043356
+    },
+    {
+      "numero": 380,
+      "texto": "A esta cama.",
+      "inicio": 2144.6952359999996,
+      "fin": 2146.1348729999995,
+      "duracion": 1.439637
+    },
+    {
+      "numero": 381,
+      "texto": "A esta oración.",
+      "inicio": 2146.1348729999995,
+      "fin": 2147.9924689999993,
+      "duracion": 1.857596
+    },
+    {
+      "numero": 382,
+      "texto": "A tu presencia suficiente para ahora.",
+      "inicio": 2147.9924689999993,
+      "fin": 2151.5219019999995,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 383,
+      "texto": "Nuestro mañana está delante de ti.",
+      "inicio": 2157.5219019999995,
+      "fin": 2160.1689769999994,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 384,
+      "texto": "Nuestra familia está delante de ti.",
+      "inicio": 2160.1689769999994,
+      "fin": 2163.5590899999993,
+      "duracion": 3.390113
+    },
+    {
+      "numero": 385,
+      "texto": "Nuestro trabajo está delante de ti.",
+      "inicio": 2163.5590899999993,
+      "fin": 2166.3454849999994,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 386,
+      "texto": "Nuestras necesidades están delante de ti.",
+      "inicio": 2166.3454849999994,
+      "fin": 2169.6427189999995,
+      "duracion": 3.297234
+    },
+    {
+      "numero": 387,
+      "texto": "Nuestra salud está delante de ti.",
+      "inicio": 2169.6427189999995,
+      "fin": 2172.5684329999995,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 388,
+      "texto": "Nuestras decisiones están delante de ti.",
+      "inicio": 2172.5684329999995,
+      "fin": 2176.1907459999993,
+      "duracion": 3.622313
+    },
+    {
+      "numero": 389,
+      "texto": "Y nosotros también estamos delante de ti.",
+      "inicio": 2176.1907459999993,
+      "fin": 2179.9523789999994,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 390,
+      "texto": "Jesús concluye esta enseñanza recordándonos que no debemos afanarnos por el día de mañana.",
+      "inicio": 2185.9523789999994,
+      "fin": 2192.5468459999993,
+      "duracion": 6.594467
+    },
+    {
+      "numero": 391,
+      "texto": "El mañana traerá sus propios asuntos.",
+      "inicio": 2192.5468459999993,
+      "fin": 2195.7976399999993,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 392,
+      "texto": "Hoy ya tiene suficiente con lo que corresponde a hoy.",
+      "inicio": 2195.7976399999993,
+      "fin": 2199.930791999999,
+      "duracion": 4.133152
+    },
+    {
+      "numero": 393,
+      "texto": "Estas palabras colocan un límite misericordioso alrededor de nuestra mente.",
+      "inicio": 2205.930791999999,
+      "fin": 2211.317820999999,
+      "duracion": 5.387029
+    },
+    {
+      "numero": 394,
+      "texto": "No nos corresponde vivir todos los días al mismo tiempo.",
+      "inicio": 2211.317820999999,
+      "fin": 2215.915371999999,
+      "duracion": 4.597551
+    },
+    {
+      "numero": 395,
+      "texto": "No tenemos que sentir esta noche el peso completo de la próxima semana, del próximo mes o de los próximos años.",
+      "inicio": 2215.915371999999,
+      "fin": 2224.460314999999,
+      "duracion": 8.544943
+    },
+    {
+      "numero": 396,
+      "texto": "Solo estamos llamados a caminar con Dios en el día que realmente tenemos delante.",
+      "inicio": 2224.460314999999,
+      "fin": 2230.4975029999987,
+      "duracion": 6.037188
+    },
+    {
+      "numero": 397,
+      "texto": "Padre, enséñanos el ritmo de la confianza.",
+      "inicio": 2233.4975029999987,
+      "fin": 2237.4448949999987,
+      "duracion": 3.947392
+    },
+    {
+      "numero": 398,
+      "texto": "Recibir el día presente.",
+      "inicio": 2237.4448949999987,
+      "fin": 2240.231289999999,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 399,
+      "texto": "Hacer con fidelidad lo que corresponde.",
+      "inicio": 2240.231289999999,
+      "fin": 2243.667842999999,
+      "duracion": 3.436553
+    },
+    {
+      "numero": 400,
+      "texto": "Entregar lo que excede nuestras fuerzas.",
+      "inicio": 2243.667842999999,
+      "fin": 2246.965076999999,
+      "duracion": 3.297234
+    },
+    {
+      "numero": 401,
+      "texto": "Descansar cuando llega la noche.",
+      "inicio": 2246.965076999999,
+      "fin": 2249.937230999999,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 402,
+      "texto": "Y levantarnos para comenzar otra vez contigo.",
+      "inicio": 2249.937230999999,
+      "fin": 2253.745303999999,
+      "duracion": 3.808073
+    },
+    {
+      "numero": 403,
+      "texto": "Cuando amanezca, quizá la situación todavía esté allí.",
+      "inicio": 2256.745303999999,
+      "fin": 2261.389294999999,
+      "duracion": 4.643991
+    },
+    {
+      "numero": 404,
+      "texto": "Pero también habrá nueva luz.",
+      "inicio": 2261.389294999999,
+      "fin": 2263.571970999999,
+      "duracion": 2.182676
+    },
+    {
+      "numero": 405,
+      "texto": "Habrá información que esta noche no tenemos.",
+      "inicio": 2263.571970999999,
+      "fin": 2266.6834449999988,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 406,
+      "texto": "Habrá personas con quienes podremos hablar.",
+      "inicio": 2266.6834449999988,
+      "fin": 2269.8877989999987,
+      "duracion": 3.204354
+    },
+    {
+      "numero": 407,
+      "texto": "Habrá decisiones que podremos considerar con una mente más descansada.",
+      "inicio": 2269.8877989999987,
+      "fin": 2275.7392279999985,
+      "duracion": 5.851429
+    },
+    {
+      "numero": 408,
+      "texto": "Y habrá gracia para el paso que realmente deba darse.",
+      "inicio": 2275.7392279999985,
+      "fin": 2280.3367789999984,
+      "duracion": 4.597551
+    },
+    {
+      "numero": 409,
+      "texto": "No necesitamos resolver mañana desde la oscuridad de esta habitación.",
+      "inicio": 2286.3367789999984,
+      "fin": 2291.6309289999986,
+      "duracion": 5.29415
+    },
+    {
+      "numero": 410,
+      "texto": "Podemos esperar a que llegue con la luz correspondiente.",
+      "inicio": 2291.6309289999986,
+      "fin": 2295.6247609999987,
+      "duracion": 3.993832
+    },
+    {
+      "numero": 411,
+      "texto": "Señor, algunas personas llevan años intentando predecir cada peligro para sentirse seguras.",
+      "inicio": 2298.6247609999987,
+      "fin": 2305.7300669999986,
+      "duracion": 7.105306
+    },
+    {
+      "numero": 412,
+      "texto": "Tal vez aprendieron a mantenerse siempre alertas porque atravesaron momentos difíciles.",
+      "inicio": 2305.7300669999986,
+      "fin": 2311.9065749999986,
+      "duracion": 6.176508
+    },
+    {
+      "numero": 413,
+      "texto": "Tal vez la vida les enseñó que una noticia puede cambiarlo todo en pocos segundos.",
+      "inicio": 2311.9065749999986,
+      "fin": 2318.2224029999984,
+      "duracion": 6.315828
+    },
+    {
+      "numero": 414,
+      "texto": "Tú conoces esa historia.",
+      "inicio": 2318.2224029999984,
+      "fin": 2320.7301579999985,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 415,
+      "texto": "Conoces las heridas que existen detrás de esta necesidad de control.",
+      "inicio": 2320.7301579999985,
+      "fin": 2325.9314279999985,
+      "duracion": 5.20127
+    },
+    {
+      "numero": 416,
+      "texto": "Trata ese corazón con ternura.",
+      "inicio": 2328.9314279999985,
+      "fin": 2331.5320629999983,
+      "duracion": 2.600635
+    },
+    {
+      "numero": 417,
+      "texto": "No lo avergüences por tener miedo.",
+      "inicio": 2331.5320629999983,
+      "fin": 2334.225577999998,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 418,
+      "texto": "Enséñale lentamente que puede descansar en tu presencia.",
+      "inicio": 2334.225577999998,
+      "fin": 2338.9624489999983,
+      "duracion": 4.736871
+    },
+    {
+      "numero": 419,
+      "texto": "Que no todo pensamiento urgente requiere atención inmediata.",
+      "inicio": 2338.9624489999983,
+      "fin": 2344.024398999998,
+      "duracion": 5.06195
+    },
+    {
+      "numero": 420,
+      "texto": "Que no toda posibilidad es una profecía.",
+      "inicio": 2344.024398999998,
+      "fin": 2348.0646709999983,
+      "duracion": 4.040272
+    },
+    {
+      "numero": 421,
+      "texto": "Que no toda sensación de peligro significa que el peligro está ocurriendo ahora.",
+      "inicio": 2348.0646709999983,
+      "fin": 2354.5198179999984,
+      "duracion": 6.455147
+    },
+    {
+      "numero": 422,
+      "texto": "Padre, danos una mente sobria y un corazón confiado.",
+      "inicio": 2360.5198179999984,
+      "fin": 2365.3031289999985,
+      "duracion": 4.783311
+    },
+    {
+      "numero": 423,
+      "texto": "Si existe un deber concreto, recuérdanoslo cuando corresponda.",
+      "inicio": 2365.3031289999985,
+      "fin": 2369.9935599999985,
+      "duracion": 4.690431
+    },
+    {
+      "numero": 424,
+      "texto": "Si ya hicimos lo que estaba a nuestro alcance por hoy, ayúdanos a detenernos.",
+      "inicio": 2369.9935599999985,
+      "fin": 2375.9843079999987,
+      "duracion": 5.990748
+    },
+    {
+      "numero": 425,
+      "texto": "Si olvidamos algo, podremos atenderlo mañana.",
+      "inicio": 2375.9843079999987,
+      "fin": 2379.3279809999985,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 426,
+      "texto": "Si cometemos un error, podremos reconocerlo y buscar corregirlo.",
+      "inicio": 2379.3279809999985,
+      "fin": 2384.4363709999984,
+      "duracion": 5.10839
+    },
+    {
+      "numero": 427,
+      "texto": "No tenemos que mantenernos despiertos para merecer una nueva oportunidad.",
+      "inicio": 2384.4363709999984,
+      "fin": 2389.5912009999984,
+      "duracion": 5.15483
+    },
+    {
+      "numero": 428,
+      "texto": "Ahora soltamos la necesidad de ensayar cada conversación.",
+      "inicio": 2392.5912009999984,
+      "fin": 2397.3280719999984,
+      "duracion": 4.736871
+    },
+    {
+      "numero": 429,
+      "texto": "Soltamos las respuestas que hemos preparado para preguntas que nadie ha hecho.",
+      "inicio": 2397.3280719999984,
+      "fin": 2402.9473009999983,
+      "duracion": 5.619229
+    },
+    {
+      "numero": 430,
+      "texto": "Soltamos la defensa que nuestra mente construye contra ataques que quizá nunca lleguen.",
+      "inicio": 2402.9473009999983,
+      "fin": 2409.2166889999985,
+      "duracion": 6.269388
+    },
+    {
+      "numero": 431,
+      "texto": "Soltamos el deseo de revisar una vez más aquello que ya revisamos.",
+      "inicio": 2409.2166889999985,
+      "fin": 2414.3715189999984,
+      "duracion": 5.15483
+    },
+    {
+      "numero": 432,
+      "texto": "Soltamos la idea de que cinco minutos más de preocupación producirán la certeza que no encontramos durante todo el día.",
+      "inicio": 2414.3715189999984,
+      "fin": 2423.1486619999982,
+      "duracion": 8.777143
+    },
+    {
+      "numero": 433,
+      "texto": "Señor, ponemos límites a esta jornada.",
+      "inicio": 2429.1486619999982,
+      "fin": 2432.306575999998,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 434,
+      "texto": "Este día ha terminado.",
+      "inicio": 2432.306575999998,
+      "fin": 2434.628570999998,
+      "duracion": 2.321995
+    },
+    {
+      "numero": 435,
+      "texto": "Lo que hicimos bien, lo agradecemos.",
+      "inicio": 2434.628570999998,
+      "fin": 2437.507844999998,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 436,
+      "texto": "Lo que hicimos mal, lo reconocemos delante de ti.",
+      "inicio": 2437.507844999998,
+      "fin": 2441.5945569999976,
+      "duracion": 4.086712
+    },
+    {
+      "numero": 437,
+      "texto": "Lo que quedó incompleto, lo dejamos para el momento apropiado.",
+      "inicio": 2441.5945569999976,
+      "fin": 2445.5883889999977,
+      "duracion": 3.993832
+    },
+    {
+      "numero": 438,
+      "texto": "Lo que no pudimos controlar, lo entregamos.",
+      "inicio": 2445.5883889999977,
+      "fin": 2449.5357809999978,
+      "duracion": 3.947392
+    },
+    {
+      "numero": 439,
+      "texto": "Perdónanos por nuestros pecados.",
+      "inicio": 2452.5357809999978,
+      "fin": 2455.1828559999976,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 440,
+      "texto": "Limpia nuestra conciencia.",
+      "inicio": 2455.1828559999976,
+      "fin": 2457.6906109999977,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 441,
+      "texto": "Ayúdanos a reparar mañana lo que necesite reparación.",
+      "inicio": 2457.6906109999977,
+      "fin": 2461.8702029999977,
+      "duracion": 4.179592
+    },
+    {
+      "numero": 442,
+      "texto": "Y no permitas que la culpa nos mantenga despiertos cuando ya nos hemos acercado a ti con un corazón arrepentido.",
+      "inicio": 2461.8702029999977,
+      "fin": 2470.4151459999975,
+      "duracion": 8.544943
+    },
+    {
+      "numero": 443,
+      "texto": "Padre, tal vez la persona que escucha necesita una sola verdad para atravesar esta noche:",
+      "inicio": 2476.4151459999975,
+      "fin": 2482.1272549999976,
+      "duracion": 5.712109
+    },
+    {
+      "numero": 444,
+      "texto": "no está sola.",
+      "inicio": 2482.1272549999976,
+      "fin": 2484.3099309999975,
+      "duracion": 2.182676
+    },
+    {
+      "numero": 445,
+      "texto": "Tú estás presente.",
+      "inicio": 2487.3099309999975,
+      "fin": 2489.6783659999974,
+      "duracion": 2.368435
+    },
+    {
+      "numero": 446,
+      "texto": "No como una idea distante.",
+      "inicio": 2489.6783659999974,
+      "fin": 2492.5576399999973,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 447,
+      "texto": "No como una frase religiosa que evita el dolor.",
+      "inicio": 2492.5576399999973,
+      "fin": 2496.5050319999973,
+      "duracion": 3.947392
+    },
+    {
+      "numero": 448,
+      "texto": "Estás presente como el Dios que escucha, sostiene, corrige, guía y acompaña.",
+      "inicio": 2496.5050319999973,
+      "fin": 2503.7496579999975,
+      "duracion": 7.244626
+    },
+    {
+      "numero": 449,
+      "texto": "Aunque no pueda sentir una emoción intensa, puede confiar en tu promesa.",
+      "inicio": 2506.7496579999975,
+      "fin": 2513.0190459999976,
+      "duracion": 6.269388
+    },
+    {
+      "numero": 450,
+      "texto": "Aunque los pensamientos regresen, puede volver a entregarlos.",
+      "inicio": 2513.0190459999976,
+      "fin": 2517.5237169999978,
+      "duracion": 4.504671
+    },
+    {
+      "numero": 451,
+      "texto": "Aunque necesite repetir esta oración muchas veces, tu paciencia no se agota.",
+      "inicio": 2517.5237169999978,
+      "fin": 2523.932423999998,
+      "duracion": 6.408707
+    },
+    {
+      "numero": 452,
+      "texto": "Cada vez que vuelva la pregunta, ¿qué pasará mañana?, que pueda responder:",
+      "inicio": 2529.932423999998,
+      "fin": 2536.2482519999976,
+      "duracion": 6.315828
+    },
+    {
+      "numero": 453,
+      "texto": "mañana caminaré con la gracia de mañana.",
+      "inicio": 2536.2482519999976,
+      "fin": 2540.0098849999977,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 454,
+      "texto": "Esta noche recibo la paz necesaria para descansar.",
+      "inicio": 2540.0098849999977,
+      "fin": 2544.328796999998,
+      "duracion": 4.318912
+    },
+    {
+      "numero": 455,
+      "texto": "Cada vez que la mente diga, debes resolverlo ahora, que pueda responder:",
+      "inicio": 2550.328796999998,
+      "fin": 2556.505304999998,
+      "duracion": 6.176508
+    },
+    {
+      "numero": 456,
+      "texto": "si hay algo que debo hacer, Dios puede darme sabiduría cuando llegue el momento.",
+      "inicio": 2556.505304999998,
+      "fin": 2562.496052999998,
+      "duracion": 5.990748
+    },
+    {
+      "numero": 457,
+      "texto": "Ahora puedo detenerme.",
+      "inicio": 2562.496052999998,
+      "fin": 2565.096687999998,
+      "duracion": 2.600635
+    },
+    {
+      "numero": 458,
+      "texto": "Cada vez que el temor diga, no podrás soportarlo, que pueda responder:",
+      "inicio": 2571.096687999998,
+      "fin": 2577.319635999998,
+      "duracion": 6.222948
+    },
+    {
+      "numero": 459,
+      "texto": "no conozco todavía toda la fuerza que necesitaré, pero conozco al Dios a quien puedo pedirla.",
+      "inicio": 2577.319635999998,
+      "fin": 2584.564261999998,
+      "duracion": 7.244626
+    },
+    {
+      "numero": 460,
+      "texto": "Señor, que estas no sean afirmaciones vacías.",
+      "inicio": 2590.564261999998,
+      "fin": 2594.976052999998,
+      "duracion": 4.411791
+    },
+    {
+      "numero": 461,
+      "texto": "Que estén arraigadas en la enseñanza de Jesús.",
+      "inicio": 2594.976052999998,
+      "fin": 2598.644805999998,
+      "duracion": 3.668753
+    },
+    {
+      "numero": 462,
+      "texto": "El Padre conoce nuestras necesidades.",
+      "inicio": 2598.644805999998,
+      "fin": 2601.570519999998,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 463,
+      "texto": "Nuestra vida tiene valor delante de él.",
+      "inicio": 2601.570519999998,
+      "fin": 2604.356914999998,
+      "duracion": 2.786395
+    },
+    {
+      "numero": 464,
+      "texto": "El afán no puede gobernar el futuro.",
+      "inicio": 2604.356914999998,
+      "fin": 2608.397186999998,
+      "duracion": 4.040272
+    },
+    {
+      "numero": 465,
+      "texto": "Podemos buscar primero el reino de Dios.",
+      "inicio": 2608.397186999998,
+      "fin": 2611.4622209999984,
+      "duracion": 3.065034
+    },
+    {
+      "numero": 466,
+      "texto": "Y no tenemos que cargar hoy con todos los cuidados de mañana.",
+      "inicio": 2611.4622209999984,
+      "fin": 2615.8740119999984,
+      "duracion": 4.411791
+    },
+    {
+      "numero": 467,
+      "texto": "Si esta oración está acompañando tu noche, puedes dejar en los comentarios una petición breve para que podamos orar contigo.",
+      "inicio": 2621.8740119999984,
+      "fin": 2631.0691139999985,
+      "duracion": 9.195102
+    },
+    {
+      "numero": 468,
+      "texto": "Y si deseas seguir escuchando oraciones bíblicas para descansar, puedes suscribirte.",
+      "inicio": 2631.0691139999985,
+      "fin": 2637.5707009999987,
+      "duracion": 6.501587
+    },
+    {
+      "numero": 469,
+      "texto": "Ahora no necesitas hacer nada más.",
+      "inicio": 2637.5707009999987,
+      "fin": 2640.4499749999986,
+      "duracion": 2.879274
+    },
+    {
+      "numero": 470,
+      "texto": "Puedes seguir descansando.",
+      "inicio": 2640.4499749999986,
+      "fin": 2643.979407999999,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 471,
+      "texto": "Padre, dejamos atrás las palabras más largas.",
+      "inicio": 2649.979407999999,
+      "fin": 2654.437638999999,
+      "duracion": 4.458231
+    },
+    {
+      "numero": 472,
+      "texto": "No vamos a entrar en el silencio de manera brusca.",
+      "inicio": 2654.437638999999,
+      "fin": 2658.199271999999,
+      "duracion": 3.761633
+    },
+    {
+      "numero": 473,
+      "texto": "Continuaremos con palabras sencillas y espacios naturales para descansar.",
+      "inicio": 2658.199271999999,
+      "fin": 2663.957820999999,
+      "duracion": 5.758549
+    },
+    {
+      "numero": 474,
+      "texto": "Que la mente disminuya su velocidad.",
+      "inicio": 2663.957820999999,
+      "fin": 2667.069294999999,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 475,
+      "texto": "Que el cuerpo reconozca que puede descansar.",
+      "inicio": 2667.069294999999,
+      "fin": 2670.6451679999986,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 476,
+      "texto": "Que el corazón permanezca contigo.",
+      "inicio": 2670.6451679999986,
+      "fin": 2673.8959619999987,
+      "duracion": 3.250794
+    },
+    {
+      "numero": 477,
+      "texto": "Señor, aquí está nuestro mañana.",
+      "inicio": 2679.8959619999987,
+      "fin": 2682.2179569999985,
+      "duracion": 2.321995
+    },
+    {
+      "numero": 478,
+      "texto": "Lo ponemos en tus manos.",
+      "inicio": 2682.2179569999985,
+      "fin": 2684.0755529999983,
+      "duracion": 1.857596
+    },
+    {
+      "numero": 479,
+      "texto": "Aquí están nuestras preguntas.",
+      "inicio": 2684.0755529999983,
+      "fin": 2686.1653489999985,
+      "duracion": 2.089796
+    },
+    {
+      "numero": 480,
+      "texto": "No tenemos que responderlas ahora.",
+      "inicio": 2686.1653489999985,
+      "fin": 2689.1375029999986,
+      "duracion": 2.972154
+    },
+    {
+      "numero": 481,
+      "texto": "Aquí están las personas que amamos.",
+      "inicio": 2695.1375029999986,
+      "fin": 2698.1560969999987,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 482,
+      "texto": "Cuídalas y danos sabiduría para amarlas bien.",
+      "inicio": 2698.1560969999987,
+      "fin": 2702.5214479999986,
+      "duracion": 4.365351
+    },
+    {
+      "numero": 483,
+      "texto": "Aquí están nuestras necesidades.",
+      "inicio": 2702.5214479999986,
+      "fin": 2705.0292029999987,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 484,
+      "texto": "Tú las conoces.",
+      "inicio": 2705.0292029999987,
+      "fin": 2706.6545999999985,
+      "duracion": 1.625397
+    },
+    {
+      "numero": 485,
+      "texto": "Aquí está nuestro cansancio.",
+      "inicio": 2706.6545999999985,
+      "fin": 2709.3945549999985,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 486,
+      "texto": "Recíbelo.",
+      "inicio": 2709.3945549999985,
+      "fin": 2711.3914709999985,
+      "duracion": 1.996916
+    },
+    {
+      "numero": 487,
+      "texto": "Padre, aquieta la mente.",
+      "inicio": 2717.3914709999985,
+      "fin": 2720.4100649999987,
+      "duracion": 3.018594
+    },
+    {
+      "numero": 488,
+      "texto": "Relaja los pensamientos que han permanecido en alerta.",
+      "inicio": 2720.4100649999987,
+      "fin": 2724.682536999999,
+      "duracion": 4.272472
+    },
+    {
+      "numero": 489,
+      "texto": "Ayúdanos a respirar lentamente.",
+      "inicio": 2724.682536999999,
+      "fin": 2728.165529999999,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 490,
+      "texto": "A soltar los hombros.",
+      "inicio": 2728.165529999999,
+      "fin": 2730.394645999999,
+      "duracion": 2.229116
+    },
+    {
+      "numero": 491,
+      "texto": "A dejar que este día termine.",
+      "inicio": 2730.394645999999,
+      "fin": 2732.623761999999,
+      "duracion": 2.229116
+    },
+    {
+      "numero": 492,
+      "texto": "No sabemos todo lo que traerá mañana.",
+      "inicio": 2735.623761999999,
+      "fin": 2738.7352359999986,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 493,
+      "texto": "Pero sabemos que no dejarás de ser Dios.",
+      "inicio": 2738.7352359999986,
+      "fin": 2742.1253489999986,
+      "duracion": 3.390113
+    },
+    {
+      "numero": 494,
+      "texto": "No sabemos qué respuesta recibiremos.",
+      "inicio": 2742.1253489999986,
+      "fin": 2744.7724239999984,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 495,
+      "texto": "Pero podemos pedirte sabiduría.",
+      "inicio": 2744.7724239999984,
+      "fin": 2747.6052579999982,
+      "duracion": 2.832834
+    },
+    {
+      "numero": 496,
+      "texto": "No sabemos qué cambiará.",
+      "inicio": 2747.6052579999982,
+      "fin": 2750.716731999998,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 497,
+      "texto": "Pero tu carácter permanece.",
+      "inicio": 2750.716731999998,
+      "fin": 2752.5278879999983,
+      "duracion": 1.811156
+    },
+    {
+      "numero": 498,
+      "texto": "No sabemos cuánto podremos hacer.",
+      "inicio": 2758.5278879999983,
+      "fin": 2761.732241999998,
+      "duracion": 3.204354
+    },
+    {
+      "numero": 499,
+      "texto": "Pero no necesitamos hacerlo todo al mismo tiempo.",
+      "inicio": 2761.732241999998,
+      "fin": 2766.329792999998,
+      "duracion": 4.597551
+    },
+    {
+      "numero": 500,
+      "texto": "Un día.",
+      "inicio": 2766.329792999998,
+      "fin": 2767.676549999998,
+      "duracion": 1.346757
+    },
+    {
+      "numero": 501,
+      "texto": "Un paso.",
+      "inicio": 2767.676549999998,
+      "fin": 2769.441266999998,
+      "duracion": 1.764717
+    },
+    {
+      "numero": 502,
+      "texto": "Una decisión.",
+      "inicio": 2769.441266999998,
+      "fin": 2771.0666639999977,
+      "duracion": 1.625397
+    },
+    {
+      "numero": 503,
+      "texto": "Una oración.",
+      "inicio": 2771.0666639999977,
+      "fin": 2773.0171399999977,
+      "duracion": 1.950476
+    },
+    {
+      "numero": 504,
+      "texto": "Y ahora, una noche de descanso.",
+      "inicio": 2773.0171399999977,
+      "fin": 2776.4536929999977,
+      "duracion": 3.436553
+    },
+    {
+      "numero": 505,
+      "texto": "Señor, si algún pensamiento regresa, ayúdanos a no luchar desesperadamente contra él.",
+      "inicio": 2782.4536929999977,
+      "fin": 2789.8840779999978,
+      "duracion": 7.430385
+    },
+    {
+      "numero": 506,
+      "texto": "Que podamos reconocerlo y entregarlo otra vez.",
+      "inicio": 2789.8840779999978,
+      "fin": 2793.367070999998,
+      "duracion": 3.482993
+    },
+    {
+      "numero": 507,
+      "texto": "Esto me preocupa, Padre.",
+      "inicio": 2796.367070999998,
+      "fin": 2798.178226999998,
+      "duracion": 1.811156
+    },
+    {
+      "numero": 508,
+      "texto": "Pero no tengo que resolverlo ahora.",
+      "inicio": 2798.178226999998,
+      "fin": 2800.360902999998,
+      "duracion": 2.182676
+    },
+    {
+      "numero": 509,
+      "texto": "Te lo entrego.",
+      "inicio": 2800.360902999998,
+      "fin": 2802.125619999998,
+      "duracion": 1.764717
+    },
+    {
+      "numero": 510,
+      "texto": "Esto me da miedo, Señor.",
+      "inicio": 2808.125619999998,
+      "fin": 2809.843896999998,
+      "duracion": 1.718277
+    },
+    {
+      "numero": 511,
+      "texto": "Pero no estoy solo.",
+      "inicio": 2809.843896999998,
+      "fin": 2811.422853999998,
+      "duracion": 1.578957
+    },
+    {
+      "numero": 512,
+      "texto": "Permanece conmigo.",
+      "inicio": 2811.422853999998,
+      "fin": 2813.930608999998,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 513,
+      "texto": "Esto no tiene todavía una respuesta.",
+      "inicio": 2819.930608999998,
+      "fin": 2822.391923999998,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 514,
+      "texto": "Pero puedo esperar hasta mañana.",
+      "inicio": 2822.391923999998,
+      "fin": 2825.085438999998,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 515,
+      "texto": "Padre, permite que el sueño llegue sin presión.",
+      "inicio": 2828.085438999998,
+      "fin": 2831.6148719999983,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 516,
+      "texto": "No tenemos que obligarnos a dormir.",
+      "inicio": 2831.6148719999983,
+      "fin": 2834.1226269999984,
+      "duracion": 2.507755
+    },
+    {
+      "numero": 517,
+      "texto": "Solo permanecer quietos.",
+      "inicio": 2834.1226269999984,
+      "fin": 2837.0483409999983,
+      "duracion": 2.925714
+    },
+    {
+      "numero": 518,
+      "texto": "Seguros en tu presencia.",
+      "inicio": 2837.0483409999983,
+      "fin": 2839.5096559999984,
+      "duracion": 2.461315
+    },
+    {
+      "numero": 519,
+      "texto": "Con la respiración tranquila.",
+      "inicio": 2839.5096559999984,
+      "fin": 2841.9245309999983,
+      "duracion": 2.414875
+    },
+    {
+      "numero": 520,
+      "texto": "Con el mañana fuera de nuestras manos.",
+      "inicio": 2841.9245309999983,
+      "fin": 2844.6180459999982,
+      "duracion": 2.693515
+    },
+    {
+      "numero": 521,
+      "texto": "Y nuestra vida dentro de las tuyas.",
+      "inicio": 2844.6180459999982,
+      "fin": 2847.729519999998,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 522,
+      "texto": "Gracias por haber estado con nosotros durante este día.",
+      "inicio": 2853.729519999998,
+      "fin": 2857.816231999998,
+      "duracion": 4.086712
+    },
+    {
+      "numero": 523,
+      "texto": "Gracias porque podemos hablarte con sinceridad.",
+      "inicio": 2857.816231999998,
+      "fin": 2861.345664999998,
+      "duracion": 3.529433
+    },
+    {
+      "numero": 524,
+      "texto": "Gracias porque nuestra incertidumbre no te confunde.",
+      "inicio": 2861.345664999998,
+      "fin": 2865.339496999998,
+      "duracion": 3.993832
+    },
+    {
+      "numero": 525,
+      "texto": "Gracias porque conoces lo que necesitamos.",
+      "inicio": 2865.339496999998,
+      "fin": 2868.729609999998,
+      "duracion": 3.390113
+    },
+    {
+      "numero": 526,
+      "texto": "Gracias por la enseñanza de Jesús.",
+      "inicio": 2868.729609999998,
+      "fin": 2871.887523999998,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 527,
+      "texto": "La vida es más que aquello que nos preocupa.",
+      "inicio": 2874.887523999998,
+      "fin": 2878.231196999998,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 528,
+      "texto": "Tenemos valor delante de nuestro Padre.",
+      "inicio": 2878.231196999998,
+      "fin": 2881.3891109999977,
+      "duracion": 3.157914
+    },
+    {
+      "numero": 529,
+      "texto": "El afán no puede añadir control a nuestra vida.",
+      "inicio": 2881.3891109999977,
+      "fin": 2884.9649839999975,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 530,
+      "texto": "Podemos buscar primero el reino de Dios.",
+      "inicio": 2884.9649839999975,
+      "fin": 2888.0764579999973,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 531,
+      "texto": "Y podemos dejar el cuidado de mañana para mañana.",
+      "inicio": 2888.0764579999973,
+      "fin": 2891.930969999997,
+      "duracion": 3.854512
+    },
+    {
+      "numero": 532,
+      "texto": "Señor, danos un descanso reparador.",
+      "inicio": 2897.930969999997,
+      "fin": 2901.506842999997,
+      "duracion": 3.575873
+    },
+    {
+      "numero": 533,
+      "texto": "Y cuando llegue un nuevo día, danos claridad para reconocer el siguiente paso.",
+      "inicio": 2901.506842999997,
+      "fin": 2907.126071999997,
+      "duracion": 5.619229
+    },
+    {
+      "numero": 534,
+      "texto": "Danos fuerza para cumplir nuestros deberes.",
+      "inicio": 2907.126071999997,
+      "fin": 2910.4697449999967,
+      "duracion": 3.343673
+    },
+    {
+      "numero": 535,
+      "texto": "Humildad para recibir ayuda.",
+      "inicio": 2910.4697449999967,
+      "fin": 2913.5812189999965,
+      "duracion": 3.111474
+    },
+    {
+      "numero": 536,
+      "texto": "Paciencia para esperar.",
+      "inicio": 2913.5812189999965,
+      "fin": 2915.9960939999964,
+      "duracion": 2.414875
+    },
+    {
+      "numero": 537,
+      "texto": "Y fe para caminar sin conocer todos los detalles.",
+      "inicio": 2915.9960939999964,
+      "fin": 2920.1756859999964,
+      "duracion": 4.179592
+    },
+    {
+      "numero": 538,
+      "texto": "Esta noche descansamos en ti.",
+      "inicio": 2923.1756859999964,
+      "fin": 2925.8227609999963,
+      "duracion": 2.647075
+    },
+    {
+      "numero": 539,
+      "texto": "Nuestro mañana te pertenece.",
+      "inicio": 2925.8227609999963,
+      "fin": 2928.423395999996,
+      "duracion": 2.600635
+    },
+    {
+      "numero": 540,
+      "texto": "Nuestra esperanza está en ti.",
+      "inicio": 2928.423395999996,
+      "fin": 2931.163350999996,
+      "duracion": 2.739955
+    },
+    {
+      "numero": 541,
+      "texto": "En el nombre de Jesús.",
+      "inicio": 2934.163350999996,
+      "fin": 2935.881627999996,
+      "duracion": 1.718277
+    },
+    {
+      "numero": 542,
+      "texto": "Amén.",
+      "inicio": 2941.881627999996,
+      "fin": 2942.485346999996,
+      "duracion": 0.603719
+    }
+  ],
+  "huecos": [
+    {
+      "trasParrafo": 3,
+      "inicio": 14.628571,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 10,
+      "inicio": 53.573060999999996,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 13,
+      "inicio": 79.189298,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 20,
+      "inicio": 123.68798199999999,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 24,
+      "inicio": 146.79646299999996,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 28,
+      "inicio": 169.71918499999995,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 35,
+      "inicio": 198.35401499999995,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 40,
+      "inicio": 230.26748299999994,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 47,
+      "inicio": 257.55555599999997,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 57,
+      "inicio": 296.249252,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 60,
+      "inicio": 309.8375510000001,
+      "duracion": 6,
+      "tipo": "block_end",
+      "estrategico": true,
+      "nota": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 66,
+      "inicio": 343.0977780000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 72,
+      "inicio": 368.85333300000013,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 79,
+      "inicio": 407.0083440000002,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 83,
+      "inicio": 434.0177780000002,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 90,
+      "inicio": 468.0210430000002,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 96,
+      "inicio": 497.3060310000003,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 105,
+      "inicio": 539.7335150000006,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 111,
+      "inicio": 572.1299770000005,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 115,
+      "inicio": 605.8081620000005,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 122,
+      "inicio": 634.0714730000005,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 130,
+      "inicio": 671.9942840000006,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 133,
+      "inicio": 690.7188190000005,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 137,
+      "inicio": 719.6322880000005,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 144,
+      "inicio": 754.4436250000006,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 146,
+      "inicio": 769.4994070000006,
+      "duracion": 6,
+      "tipo": "block_end",
+      "estrategico": true,
+      "nota": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 152,
+      "inicio": 804.3850310000006,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 158,
+      "inicio": 829.2117880000006,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 164,
+      "inicio": 862.7228080000007,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 169,
+      "inicio": 891.9149160000006,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 172,
+      "inicio": 924.0605850000007,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 179,
+      "inicio": 968.0948700000008,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 184,
+      "inicio": 1010.6616730000007,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 190,
+      "inicio": 1039.0643040000007,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 197,
+      "inicio": 1071.3492920000008,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 203,
+      "inicio": 1089.999542000001,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 208,
+      "inicio": 1117.3154610000006,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 215,
+      "inicio": 1156.0741920000005,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 219,
+      "inicio": 1172.6810860000005,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 223,
+      "inicio": 1191.6378210000005,
+      "duracion": 6,
+      "tipo": "block_end",
+      "estrategico": true,
+      "nota": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 228,
+      "inicio": 1222.5760520000003,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 231,
+      "inicio": 1243.6690230000006,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 237,
+      "inicio": 1272.7218110000006,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 239,
+      "inicio": 1285.1491120000005,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 244,
+      "inicio": 1315.2978650000007,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 249,
+      "inicio": 1337.6633070000007,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 255,
+      "inicio": 1377.5644410000011,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 262,
+      "inicio": 1413.304578000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 265,
+      "inicio": 1431.118909000001,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 274,
+      "inicio": 1476.778593000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 278,
+      "inicio": 1500.955192000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 283,
+      "inicio": 1535.5807700000012,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 290,
+      "inicio": 1565.0329260000012,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 294,
+      "inicio": 1587.769887000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 299,
+      "inicio": 1613.896960000001,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 301,
+      "inicio": 1625.2375490000009,
+      "duracion": 6,
+      "tipo": "block_end",
+      "estrategico": true,
+      "nota": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 304,
+      "inicio": 1650.2314720000008,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 308,
+      "inicio": 1671.343037000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 312,
+      "inicio": 1702.4391810000009,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 317,
+      "inicio": 1739.971880000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 322,
+      "inicio": 1777.012334000001,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 325,
+      "inicio": 1800.148660000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 328,
+      "inicio": 1822.328343000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 333,
+      "inicio": 1853.7495670000012,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 335,
+      "inicio": 1871.498864000001,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 340,
+      "inicio": 1896.372061000001,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 344,
+      "inicio": 1923.8273000000008,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 346,
+      "inicio": 1938.5301580000007,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 350,
+      "inicio": 1967.3507470000004,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 355,
+      "inicio": 1992.4839900000004,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 357,
+      "inicio": 2008.2085250000002,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 361,
+      "inicio": 2038.0043520000002,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 366,
+      "inicio": 2063.509114,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 370,
+      "inicio": 2082.763082,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 371,
+      "inicio": 2091.270837,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 373,
+      "inicio": 2108.3699749999996,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 376,
+      "inicio": 2130.9211769999997,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 382,
+      "inicio": 2151.5219019999995,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 389,
+      "inicio": 2179.9523789999994,
+      "duracion": 6,
+      "tipo": "block_end",
+      "estrategico": true,
+      "nota": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 392,
+      "inicio": 2199.930791999999,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 396,
+      "inicio": 2230.4975029999987,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 402,
+      "inicio": 2253.745303999999,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 408,
+      "inicio": 2280.3367789999984,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 410,
+      "inicio": 2295.6247609999987,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 415,
+      "inicio": 2325.9314279999985,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 421,
+      "inicio": 2354.5198179999984,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 427,
+      "inicio": 2389.5912009999984,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 432,
+      "inicio": 2423.1486619999982,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 438,
+      "inicio": 2449.5357809999978,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 442,
+      "inicio": 2470.4151459999975,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 444,
+      "inicio": 2484.3099309999975,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 448,
+      "inicio": 2503.7496579999975,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 451,
+      "inicio": 2523.932423999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 454,
+      "inicio": 2544.328796999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 457,
+      "inicio": 2565.096687999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 459,
+      "inicio": 2584.564261999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 466,
+      "inicio": 2615.8740119999984,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 470,
+      "inicio": 2643.979407999999,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 476,
+      "inicio": 2673.8959619999987,
+      "duracion": 6,
+      "tipo": "block_end",
+      "estrategico": true,
+      "nota": "interludio experimental de 6s (block_interlude_seconds del paquete fuente)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 480,
+      "inicio": 2689.1375029999986,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 486,
+      "inicio": 2711.3914709999985,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 491,
+      "inicio": 2732.623761999999,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 497,
+      "inicio": 2752.5278879999983,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 504,
+      "inicio": 2776.4536929999977,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 506,
+      "inicio": 2793.367070999998,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 509,
+      "inicio": 2802.125619999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 512,
+      "inicio": 2813.930608999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 514,
+      "inicio": 2825.085438999998,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 521,
+      "inicio": 2847.729519999998,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 526,
+      "inicio": 2871.887523999998,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 531,
+      "inicio": 2891.930969999997,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 537,
+      "inicio": 2920.1756859999964,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 540,
+      "inicio": 2931.163350999996,
+      "duracion": 3,
+      "tipo": "pause",
+      "estrategico": false,
+      "nota": "normal (2-4s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    },
+    {
+      "trasParrafo": 541,
+      "inicio": 2935.881627999996,
+      "duracion": 6,
+      "tipo": "pause",
+      "estrategico": true,
+      "nota": "important (5-7s)",
+      "fadeOutMs": 0,
+      "fadeInMs": 0
+    }
+  ],
+  "imagenes": [],
+  "cierre": {
+    "music_seconds": 90,
+    "fade_out": 30
+  }
+}
