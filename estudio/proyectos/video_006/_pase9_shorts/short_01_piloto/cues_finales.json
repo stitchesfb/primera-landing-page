@@ -1,0 +1,15 @@
+[
+  {"inicio": 5.528, "fin": 9.290, "lineas": ["Jesús te dice: no te afanes", "por el día de mañana."], "tamano": 68, "resaltar": "afanes"},
+  {"inicio": 9.650, "fin": 11.589, "lineas": ["Esta noche vamos a", "poner ese futuro"], "tamano": 76},
+  {"inicio": 11.623, "fin": 13.980, "lineas": ["en las manos de Dios y", "descansar."], "tamano": 76, "resaltar": "descansar."},
+  {"inicio": 17.040, "fin": 19.705, "lineas": ["Señor, tú conoces los", "pensamientos"], "tamano": 76},
+  {"inicio": 19.763, "fin": 23.234, "lineas": ["que ahora mismo no dejan", "descansar a esta persona."], "tamano": 68, "resaltar": "persona."},
+  {"inicio": 23.722, "fin": 27.541, "lineas": ["Conoces aquello que", "teme recibir, perder,"], "tamano": 76},
+  {"inicio": 27.808, "fin": 31.660, "lineas": ["enfrentar o decidir cuando", "llegue un nuevo día."], "tamano": 68},
+  {"inicio": 31.660, "fin": 35.747, "lineas": ["Tú sabes qué conversación", "está imaginando."], "tamano": 68},
+  {"inicio": 35.747, "fin": 38.533, "lineas": ["Qué respuesta está", "esperando."], "tamano": 76},
+  {"inicio": 38.533, "fin": 41.505, "lineas": ["Qué noticia teme recibir."], "tamano": 76},
+  {"inicio": 41.505, "fin": 45.731, "lineas": ["Qué responsabilidad le", "parece demasiado pesada."], "tamano": 68},
+  {"inicio": 45.731, "fin": 48.587, "lineas": ["Y qué pregunta continúa", "repitiéndose en su mente"], "tamano": 72},
+  {"inicio": 48.645, "fin": 52.976, "lineas": ["cuando todo a su alrededor", "ya está en silencio."], "tamano": 68, "resaltar": "silencio."}
+]

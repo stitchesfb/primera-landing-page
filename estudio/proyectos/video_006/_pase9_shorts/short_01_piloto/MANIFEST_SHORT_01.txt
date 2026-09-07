@@ -1,0 +1,10 @@
+SHORT 01 PILOTO — IMÁGENES APROBADAS
+
+portada_hook_v2_1080x1920.png
+SHA-256: 58d98cb18a6a46eb325172af1dfe40f616ed968ff931f7deeb2a6c7270d40c6c
+
+fondo_limpio_1080x1920.png
+SHA-256: 24dec952193294a96bd1dbd8becf0b04e13b176f0988c57fc4b99ea652af8d44
+
+Dimensiones requeridas para ambas imágenes: 1080x1920.
+No sustituir, regenerar, recomprimir ni modificar estos archivos.
