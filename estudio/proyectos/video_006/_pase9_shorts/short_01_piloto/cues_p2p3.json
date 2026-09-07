@@ -1,0 +1,31 @@
+[
+  {
+    "inicio": 5.528,
+    "fin": 9.29,
+    "lineas": [
+      "Jesús te dice: no te afanes",
+      "por el día de mañana."
+    ],
+    "tamano": 68,
+    "resaltar": "afanes"
+  },
+  {
+    "inicio": 9.65,
+    "fin": 11.589,
+    "lineas": [
+      "Esta noche vamos a",
+      "poner ese futuro"
+    ],
+    "tamano": 76
+  },
+  {
+    "inicio": 11.623,
+    "fin": 13.98,
+    "lineas": [
+      "en las manos de Dios y",
+      "descansar."
+    ],
+    "tamano": 76,
+    "resaltar": "descansar."
+  }
+]

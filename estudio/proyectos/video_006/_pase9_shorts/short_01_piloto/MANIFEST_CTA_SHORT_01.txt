@@ -1,0 +1,7 @@
+SHORT 01 PILOTO — TARJETA CTA APROBADA
+
+Archivo: cta_final_v1_1080x1920.png
+Dimensiones: 1080x1920
+SHA-256: dc98017cd5e1aaccc23b2d60295acabd85d2d8d23179582e0853ef1135f131f9
+
+No sustituir, regenerar, recomprimir ni modificar este archivo.
