@@ -1,0 +1,90 @@
+[
+  {
+    "inicio": 2.321994999999788,
+    "fin": 4.179994999999963,
+    "lineas": [
+      "Lo ponemos en tus",
+      "manos."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 4.179590999999618,
+    "fin": 6.269590999999764,
+    "lineas": [
+      "Aquí están nuestras",
+      "preguntas."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 6.269386999999824,
+    "fin": 9.241387000000032,
+    "lineas": [
+      "No tenemos que",
+      "responderlas ahora."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 15.24154099999987,
+    "fin": 18.260540999999648,
+    "lineas": [
+      "Aquí están las personas",
+      "que amamos."
+    ],
+    "tamano": 76,
+    "resaltar": "amamos."
+  },
+  {
+    "inicio": 18.26013499999999,
+    "fin": 22.625134999999773,
+    "lineas": [
+      "Cuídalas y danos sabiduría",
+      "para amarlas bien."
+    ],
+    "tamano": 68,
+    "resaltar": null
+  },
+  {
+    "inicio": 22.62548599999991,
+    "fin": 25.13348599999972,
+    "lineas": [
+      "Aquí están nuestras",
+      "necesidades."
+    ],
+    "tamano": 76,
+    "resaltar": "necesidades."
+  },
+  {
+    "inicio": 25.133240999999998,
+    "fin": 26.758240999999998,
+    "lineas": [
+      "Tú las conoces."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 26.75863799999979,
+    "fin": 29.498637999999573,
+    "lineas": [
+      "Aquí está nuestro",
+      "cansancio."
+    ],
+    "tamano": 76,
+    "resaltar": "cansancio."
+  },
+  {
+    "inicio": 29.4985929999998,
+    "fin": 31.495592999999644,
+    "lineas": [
+      "Recíbelo."
+    ],
+    "tamano": 76,
+    "resaltar": "Recíbelo."
+  }
+]

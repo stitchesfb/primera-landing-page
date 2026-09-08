@@ -1,0 +1,24 @@
+VIDEO 6 — ASSETS VISUALES APROBABLES PARA SHORTS 02–05
+
+Formato: PNG, 1080x1920, vertical 9:16.
+
+Cada carpeta contiene:
+- fondo_limpio_1080x1920.png
+- portada_hook_1080x1920.png
+- cta_final_1080x1920.png
+
+Hooks exactos:
+- Short 02: NO TE AFANES / POR / MAÑANA + etiqueta MATEO 6
+- Short 03: MIRA LAS AVES / DEL / CIELO
+- Short 04: DIOS YA SABE / LO QUE / NECESITAS
+- Short 05: AQUÍ ESTÁ / NUESTRO / MAÑANA
+
+CTA común:
+¿NECESITAS DESCANSAR?
+ESCUCHA LA ORACIÓN COMPLETA EN EL VIDEO RELACIONADO
+
+Reglas de uso:
+- No regenerar ni reescribir el texto de estas imágenes.
+- No alterar el encuadre.
+- Añadir únicamente las partículas discretas ya aprobadas durante el render.
+- Mantener zonas seguras para la interfaz de YouTube Shorts.

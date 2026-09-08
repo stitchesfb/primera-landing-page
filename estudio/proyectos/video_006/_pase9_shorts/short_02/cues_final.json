@@ -1,0 +1,102 @@
+[
+  {
+    "inicio": 6.594466999999895,
+    "fin": 9.845467000000099,
+    "lineas": [
+      "El mañana traerá sus",
+      "propios asuntos."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 9.845260999999937,
+    "fin": 13.978260999999748,
+    "lineas": [
+      "Hoy ya tiene suficiente con",
+      "lo que corresponde a hoy."
+    ],
+    "tamano": 68,
+    "resaltar": "hoy."
+  },
+  {
+    "inicio": 19.97841299999982,
+    "fin": 22.950413000000026,
+    "lineas": [
+      "Estas palabras colocan",
+      "un límite misericordioso"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 22.997412999999597,
+    "fin": 25.36541299999999,
+    "lineas": [
+      "alrededor de nuestra",
+      "mente."
+    ],
+    "tamano": 76,
+    "resaltar": "mente."
+  },
+  {
+    "inicio": 25.365441999999803,
+    "fin": 29.96344199999976,
+    "lineas": [
+      "No nos corresponde vivir todos",
+      "los días al mismo tiempo."
+    ],
+    "tamano": 60,
+    "resaltar": null
+  },
+  {
+    "inicio": 29.962992999999642,
+    "fin": 31.854992999999467,
+    "lineas": [
+      "No tenemos que sentir",
+      "esta noche"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 31.87899299999981,
+    "fin": 34.40999299999976,
+    "lineas": [
+      "el peso completo de la",
+      "próxima semana,"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 34.64199299999973,
+    "fin": 38.507992999999715,
+    "lineas": [
+      "del próximo mes o de los",
+      "próximos años."
+    ],
+    "tamano": 76,
+    "resaltar": "años."
+  },
+  {
+    "inicio": 38.50793599999952,
+    "fin": 40.86493599999949,
+    "lineas": [
+      "Solo estamos llamados a",
+      "caminar con Dios"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 40.94593599999962,
+    "fin": 44.544935999999325,
+    "lineas": [
+      "en el día que realmente",
+      "tenemos delante."
+    ],
+    "tamano": 76,
+    "resaltar": "delante."
+  }
+]

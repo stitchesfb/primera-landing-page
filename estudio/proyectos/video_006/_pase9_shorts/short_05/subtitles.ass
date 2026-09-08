@@ -1,0 +1,22 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Voz,DejaVu Sans,72,&H00EBF7FA,&H00EBF7FA,&H00101010,&H80101010,-1,0,0,0,100,100,0,0,1,5,3,8,80,80,493,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:02.32,0:00:04.18,Voz,,0,0,0,,{\blur1\fs76}Lo ponemos en tus\Nmanos.
+Dialogue: 0,0:00:04.18,0:00:06.27,Voz,,0,0,0,,{\blur1\fs76}Aquí están nuestras\Npreguntas.
+Dialogue: 0,0:00:06.27,0:00:09.24,Voz,,0,0,0,,{\blur1\fs76}No tenemos que\Nresponderlas ahora.
+Dialogue: 0,0:00:15.24,0:00:18.26,Voz,,0,0,0,,{\blur1\fs76}Aquí están las personas\Nque {\c&H0040D1FF&}amamos.{\c&H00EBF7FA&}
+Dialogue: 0,0:00:18.26,0:00:22.63,Voz,,0,0,0,,{\blur1\fs68}Cuídalas y danos sabiduría\Npara amarlas bien.
+Dialogue: 0,0:00:22.63,0:00:25.13,Voz,,0,0,0,,{\blur1\fs76}Aquí están nuestras\N{\c&H0040D1FF&}necesidades.{\c&H00EBF7FA&}
+Dialogue: 0,0:00:25.13,0:00:26.76,Voz,,0,0,0,,{\blur1\fs76}Tú las conoces.
+Dialogue: 0,0:00:26.76,0:00:29.50,Voz,,0,0,0,,{\blur1\fs76}Aquí está nuestro\N{\c&H0040D1FF&}cansancio.{\c&H00EBF7FA&}
+Dialogue: 0,0:00:29.50,0:00:31.50,Voz,,0,0,0,,{\blur1\fs76}{\c&H0040D1FF&}Recíbelo.{\c&H00EBF7FA&}
