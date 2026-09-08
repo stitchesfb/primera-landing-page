@@ -1,0 +1,102 @@
+[
+  {
+    "inicio": 9.938141000000087,
+    "fin": 12.817414999999983,
+    "lineas": [
+      "Él no minimiza nuestras",
+      "necesidades."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 12.817414999999983,
+    "fin": 15.789569000000029,
+    "lineas": [
+      "No se burla de nuestras",
+      "preocupaciones."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 15.789569000000029,
+    "fin": 18.366569000000027,
+    "lineas": [
+      "No dice que el alimento,",
+      "la salud,"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 18.506569000000127,
+    "fin": 22.75555499999996,
+    "lineas": [
+      "el hogar o el trabajo",
+      "carezcan de importancia."
+    ],
+    "tamano": 72,
+    "resaltar": null
+  },
+  {
+    "inicio": 22.75555499999996,
+    "fin": 24.93823099999986,
+    "lineas": [
+      "Dice que el Padre ya",
+      "sabe."
+    ],
+    "tamano": 76,
+    "resaltar": "sabe."
+  },
+  {
+    "inicio": 30.93823099999986,
+    "fin": 35.21070299999997,
+    "lineas": [
+      "Antes de que encontremos las",
+      "palabras correctas, él sabe."
+    ],
+    "tamano": 60,
+    "resaltar": null
+  },
+  {
+    "inicio": 35.21070299999997,
+    "fin": 36.99870299999998,
+    "lineas": [
+      "Antes de que",
+      "expliquemos por qué"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 37.05670299999997,
+    "fin": 40.17977300000007,
+    "lineas": [
+      "estamos preocupados, él",
+      "sabe."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 40.17977300000007,
+    "fin": 42.01377300000013,
+    "lineas": [
+      "Antes de que amanezca",
+      "y aparezcan"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 42.14177300000006,
+    "fin": 45.18578200000002,
+    "lineas": [
+      "nuevas responsabilidades,",
+      "él sabe."
+    ],
+    "tamano": 68,
+    "resaltar": "sabe."
+  }
+]

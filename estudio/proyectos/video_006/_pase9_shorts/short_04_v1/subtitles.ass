@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Voz,DejaVu Sans,72,&H00EBF7FA,&H00EBF7FA,&H00101010,&H80101010,-1,0,0,0,100,100,0,0,1,5,3,8,80,80,280,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:09.94,0:00:12.82,Voz,,0,0,0,,{\blur1\fs76}Él no minimiza nuestras\Nnecesidades.
+Dialogue: 0,0:00:12.82,0:00:15.79,Voz,,0,0,0,,{\blur1\fs76}No se burla de nuestras\Npreocupaciones.
+Dialogue: 0,0:00:15.79,0:00:18.37,Voz,,0,0,0,,{\blur1\fs76}No dice que el alimento,\Nla salud,
+Dialogue: 0,0:00:18.51,0:00:22.76,Voz,,0,0,0,,{\blur1\fs72}el hogar o el trabajo\Ncarezcan de importancia.
+Dialogue: 0,0:00:22.76,0:00:24.94,Voz,,0,0,0,,{\blur1\fs76}Dice que el Padre ya\N{\c&H0040D1FF&}sabe.{\c&H00EBF7FA&}
+Dialogue: 0,0:00:30.94,0:00:35.21,Voz,,0,0,0,,{\blur1\fs60}Antes de que encontremos las\Npalabras correctas, él sabe.
+Dialogue: 0,0:00:35.21,0:00:36.100,Voz,,0,0,0,,{\blur1\fs76}Antes de que\Nexpliquemos por qué
+Dialogue: 0,0:00:37.06,0:00:40.18,Voz,,0,0,0,,{\blur1\fs76}estamos preocupados, él\Nsabe.
+Dialogue: 0,0:00:40.18,0:00:42.01,Voz,,0,0,0,,{\blur1\fs76}Antes de que amanezca\Ny aparezcan
+Dialogue: 0,0:00:42.14,0:00:45.19,Voz,,0,0,0,,{\blur1\fs68}nuevas responsabilidades,\Nél {\c&H0040D1FF&}sabe.{\c&H00EBF7FA&}

@@ -1,0 +1,22 @@
+[
+  {
+    "inicio": 6.594466999999895,
+    "fin": 9.845467000000099,
+    "lineas": [
+      "El mañana traerá sus",
+      "propios asuntos."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 9.845260999999937,
+    "fin": 13.978260999999748,
+    "lineas": [
+      "Hoy ya tiene suficiente con",
+      "lo que corresponde a hoy."
+    ],
+    "tamano": 68,
+    "resaltar": "hoy."
+  }
+]

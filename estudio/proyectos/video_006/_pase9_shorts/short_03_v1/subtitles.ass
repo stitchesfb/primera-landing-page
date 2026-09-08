@@ -1,0 +1,28 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Voz,DejaVu Sans,72,&H00EBF7FA,&H00EBF7FA,&H00101010,&H80101010,-1,0,0,0,100,100,0,0,1,5,3,8,80,80,493,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:04.27,0:00:07.19,Voz,,0,0,0,,{\blur1\fs76}Ellas no siembran, no\Ncosechan
+Dialogue: 0,0:00:07.45,0:00:10.26,Voz,,0,0,0,,{\blur1\fs72}ni almacenan como lo\Nhacen los seres humanos,
+Dialogue: 0,0:00:10.62,0:00:15.00,Voz,,0,0,0,,{\blur1\fs64}y aun así reciben el alimento\Nnecesario para cada día.
+Dialogue: 0,0:00:15.00,0:00:17.14,Voz,,0,0,0,,{\blur1\fs76}Entonces Jesús hace una\Npregunta
+Dialogue: 0,0:00:17.19,0:00:20.85,Voz,,0,0,0,,{\blur1\fs72}que alcanza directamente\Nnuestro corazón:
+Dialogue: 0,0:00:20.85,0:00:23.44,Voz,,0,0,0,,{\blur1\fs76}¿No valen ustedes\Nmucho más que ellas?
+Dialogue: 0,0:00:29.44,0:00:33.09,Voz,,0,0,0,,{\blur1\fs72}Señor, cuando el temor\Nnos hace sentir olvidados,
+Dialogue: 0,0:00:33.27,0:00:37.38,Voz,,0,0,0,,{\blur1\fs72}recuérdanos cuánto valor\Ntenemos delante de ti.
+Dialogue: 0,0:00:37.38,0:00:41.93,Voz,,0,0,0,,{\blur1\fs60}No somos un detalle perdido en\Nun mundo demasiado grande.
+Dialogue: 0,0:00:41.93,0:00:44.42,Voz,,0,0,0,,{\blur1\fs68}No somos una\Npreocupación insignificante
+Dialogue: 0,0:00:44.51,0:00:46.100,Voz,,0,0,0,,{\blur1\fs76}que tú no quieres\Nescuchar.
+Dialogue: 0,0:00:46.100,0:00:50.11,Voz,,0,0,0,,{\blur1\fs64}No somos una carga molesta\Npara nuestro Padre.
+Dialogue: 0,0:00:50.11,0:00:53.03,Voz,,0,0,0,,{\blur1\fs76}Somos personas\Nconocidas por ti.
+Dialogue: 0,0:00:53.03,0:00:55.22,Voz,,0,0,0,,{\blur1\fs76}Vistas por ti.
+Dialogue: 0,0:00:55.22,0:00:57.45,Voz,,0,0,0,,{\blur1\fs76}{\c&H0040D1FF&}Amadas{\c&H00EBF7FA&} por ti.

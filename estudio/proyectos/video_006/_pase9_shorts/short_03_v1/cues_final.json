@@ -1,0 +1,150 @@
+[
+  {
+    "inicio": 4.272471999999993,
+    "fin": 7.186471999999981,
+    "lineas": [
+      "Ellas no siembran, no",
+      "cosechan"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 7.453471999999977,
+    "fin": 10.263471999999979,
+    "lineas": [
+      "ni almacenan como lo",
+      "hacen los seres humanos,"
+    ],
+    "tamano": 72,
+    "resaltar": null
+  },
+  {
+    "inicio": 10.623471999999992,
+    "fin": 15.000090999999998,
+    "lineas": [
+      "y aun así reciben el alimento",
+      "necesario para cada día."
+    ],
+    "tamano": 64,
+    "resaltar": null
+  },
+  {
+    "inicio": 15.000090999999998,
+    "fin": 17.13609100000002,
+    "lineas": [
+      "Entonces Jesús hace una",
+      "pregunta"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 17.194091000000014,
+    "fin": 20.851519999999994,
+    "lineas": [
+      "que alcanza directamente",
+      "nuestro corazón:"
+    ],
+    "tamano": 72,
+    "resaltar": null
+  },
+  {
+    "inicio": 20.851519999999994,
+    "fin": 23.442518000000007,
+    "lineas": [
+      "¿No valen ustedes",
+      "mucho más que ellas?"
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 29.442518000000007,
+    "fin": 33.08851800000002,
+    "lineas": [
+      "Señor, cuando el temor",
+      "nos hace sentir olvidados,"
+    ],
+    "tamano": 72,
+    "resaltar": null
+  },
+  {
+    "inicio": 33.273518000000024,
+    "fin": 37.383741999999984,
+    "lineas": [
+      "recuérdanos cuánto valor",
+      "tenemos delante de ti."
+    ],
+    "tamano": 72,
+    "resaltar": null
+  },
+  {
+    "inicio": 37.383741999999984,
+    "fin": 41.934852999999976,
+    "lineas": [
+      "No somos un detalle perdido en",
+      "un mundo demasiado grande."
+    ],
+    "tamano": 60,
+    "resaltar": null
+  },
+  {
+    "inicio": 41.934852999999976,
+    "fin": 44.41985299999999,
+    "lineas": [
+      "No somos una",
+      "preocupación insignificante"
+    ],
+    "tamano": 68,
+    "resaltar": null
+  },
+  {
+    "inicio": 44.511852999999974,
+    "fin": 46.996803,
+    "lineas": [
+      "que tú no quieres",
+      "escuchar."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 46.996803,
+    "fin": 50.10827699999999,
+    "lineas": [
+      "No somos una carga molesta",
+      "para nuestro Padre."
+    ],
+    "tamano": 64,
+    "resaltar": null
+  },
+  {
+    "inicio": 50.10827699999999,
+    "fin": 53.033991000000015,
+    "lineas": [
+      "Somos personas",
+      "conocidas por ti."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 53.033991000000015,
+    "fin": 55.21666700000003,
+    "lineas": [
+      "Vistas por ti."
+    ],
+    "tamano": 76,
+    "resaltar": null
+  },
+  {
+    "inicio": 55.21666700000003,
+    "fin": 57.445783000000006,
+    "lineas": [
+      "Amadas por ti."
+    ],
+    "tamano": 76,
+    "resaltar": "Amadas"
+  }
+]
