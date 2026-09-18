@@ -1,287 +1,183 @@
-# VIDEO TEMPLATE --- ORACIONES BÍBLICAS DIARIAS
-
-**Uso:** crear una copia para cada nuevo video largo.\
-**Reglas globales:** consultar siempre
-`DECISIONES_CERRADAS_ORACIONES_BIBLICAS_DIARIAS.md`.
-
-# 1. Identificación
-
-**ID:**\
-**Fecha:**\
-**Estado:** Idea / Investigación / Guion / TTS / Visuales / Render /
-Revisión / Programado / Publicado
-
-# 2. Problema humano
-
-**¿Qué está viviendo la persona?**\
-\>
-
-**Situación concreta de reproducción:**\
-\>
-
-**Emoción principal:**\
-\>
-
-**Qué NO debemos prometer:**\
-\>
-
-# 3. Respuesta bíblica
-
-**Pasaje principal:**\
-\>
-
-**Pasajes de apoyo:**\
-\>
-
-**Principio bíblico central:**\
-\>
-
-**Límites doctrinales relevantes:**\
-\>
-
-# 4. Promesa editorial
-
-> Si una persona hace clic porque \_\_\_\_\_\_\_\_\_\_, este video le
-> ayudará a \_\_\_\_\_\_\_\_\_\_ mediante \_\_\_\_\_\_\_\_\_\_.
-
-**¿Título, miniatura y contenido cumplen la misma promesa?** Sí / No /
-Revisar
-
-# 5. Investigación de demanda
-
-**Consulta principal:**\
-\>
-
-**Consultas secundarias:**\
-\>
-
-**Autocomplete relevante:**\
-\>
-
-  --------------------------------------------------------------------------
-  Video/ángulo        Antigüedad          Vistas        Duración Señal útil
-  de referencia                                                  
-  -------------- --------------- --------------- --------------- -----------
-                                                                 
-
-  --------------------------------------------------------------------------
-
-**Competencia:** Baja / Media / Alta\
-**Oportunidad concreta:**\
-\>
-
-# 6. Título y miniatura
-
-**Título de trabajo:**\
-\>
-
-**Variantes:**\
-A.\
-B.\
-C.
-
-**Texto de miniatura:**\
-\>
-
-**Concepto visual:**\
-\>
-
--   [ ] Problema reconocible en \<1 segundo
--   [ ] Título + miniatura cuentan una sola historia
-
-# 7. Duración y experiencia
-
-**Duración objetivo:**\
-\>
-
-**Uso esperado:** oración activa / escuchar acostado / quedarse dormido
-/ mañana / otro
-
-**Curva emocional:**\
-\> problema → reconocimiento → entrega → Palabra → oración → confianza →
-descanso → silencio
-
-# 8. Estructura
-
-  Bloque   Objetivo   Base bíblica     Tiempo aprox.   Interludio
-  -------- ---------- -------------- --------------- ------------
-  1                                                  
-  2                                                  
-  3                                                  
-  4                                                  
-  5                                                  
-  6                                                  
-  7                                                  
-
-**Hook inicial:**\
-\>
-
-# 9. Checklist antes de TTS
-
--   [ ] Guion completo
--   [ ] Fidelidad bíblica revisada
--   [ ] Sin teología de prosperidad
--   [ ] Sin resultados garantizados no bíblicos
--   [ ] Redundancias eliminadas
--   [ ] Sin relleno artificial
--   [ ] Progresión emocional clara
--   [ ] Menor densidad verbal hacia el final nocturno
--   [ ] Pronunciación/números preparados
--   [ ] Sin fragmentos repetidos accidentalmente
--   [ ] Final no despierta al espectador
--   [ ] Duración estimada
--   [ ] Usuario aprobó guion
-
-**NO generar TTS antes de completar esto.**
-
-# 10. TTS
-
-**Modelo:** Flash v2.5 salvo decisión aprobada diferente\
-**Voz:**\
-**Créditos estimados:**\
-**Duración estimada:**\
-**Generación aprobada:** Sí / No\
-**Pronunciación revisada:** Sí / No
-
-# 11. Pausas e interludios
-
-Baseline nocturno: 2--4 s normales; 5--7 s tras momentos importantes;
-8--12 s entre grandes bloques.
-
-**Plan específico:**\
-\>
-
-# 12. Música
-
-Disponibles: - `one_step_closer.mp3` - `alone_with_my_thoughts.mp3` -
-`touching_moment.mp3`
-
-**Elegida:**\
-\>
-
-Preset nocturno: **−23 dB / −23 dB**. Usar normalización y
-loop/crossfade existentes.
-
-# 13. Visuales
-
-**Perfil:** Noche / Mañana / Otro
-
-Si es nocturno, baseline: **una imagen principal + partículas suaves +
-sin zoompan continuo.**
-
-**Imagen principal:**\
-\>
-
-**¿Imágenes adicionales?** No / Sí, porque:\
-\>
-
-# 14. Previsualización
-
--   [ ] Composición validada
--   [ ] Imagen aprobada
--   [ ] Texto/safe zones aprobados
--   [ ] Partículas aprobadas
--   [ ] Música aprobada
--   [ ] Sincronización aprobada
--   [ ] Fotogramas/muestra revisados
--   [ ] Sin procesamiento costoso sin beneficio visible
-
-**NO lanzar render largo antes de esta revisión.**
-
-# 15. Render
-
-**Resolución:**\
-**FPS:**\
-**Duración final:**\
-**Tiempo de render:**\
-**Tamaño:**\
-**Validaciones:**\
-\>
-
-# 16. Shorts derivados
-
-  Short   Hook/problema   Segmento     Duración Estado
-  ------- --------------- ---------- ---------- --------
-  1                                             
-  2                                             
-  3                                             
-
-Reglas: reutilizar audio del largo; 1080×1920; safe zone 80 px; hook
-desde frame 0; validar fotogramas antes de render.
-
-# 17. SEO y publicación
-
-**Título final:**\
-**Descripción:**\
-**Hashtags:**\
-**Tags:**\
-**Playlist:**\
-**Related video:**
-
--   [ ] People & Blogs
--   [ ] Spanish
--   [ ] Not made for kids
--   [ ] Playlist correcta
--   [ ] Related video cuando corresponda
--   [ ] AI/altered content revisado
--   [ ] Comentario fijado preparado
--   [ ] Fecha/hora decidida
-
-# 18. Métricas posteriores
-
-Registrar en momentos comparables: 12 h / 24 h / 48 h / 7 días.
-
-  ------------------------------------------------------------------------------
-  Momento        Views   Impressions        CTR   Avg view Watch time       Subs
-                                                  duration            
-  --------- ---------- ------------- ---------- ---------- ---------- ----------
-  12 h                                                                
-
-  24 h                                                                
-
-  48 h                                                                
-
-  7 d                                                                 
-  ------------------------------------------------------------------------------
-
-**Fuentes de tráfico:**\
-\>
-
-**Términos de búsqueda:**\
-\>
-
-**Retención/puntos de caída:**\
-\>
-
-Para Shorts registrar: views, engaged views, stayed/swiped, AVD, %
-viewed, subs, Shorts Feed %, Search % y términos.
-
-# 19. Aprendizajes
-
-**Funcionó:**\
-\>
-
-**No funcionó:**\
-\>
-
-**Hipótesis para probar:**\
-\>
-
-**No concluir todavía:**\
-\>
-
-# 20. Actualización del sistema
-
-Al terminar, preguntar:
-
-**¿Aprendimos algo reutilizable para producciones futuras?**
-
-Si no: no modificar decisiones cerradas.
-
-Si sí y fue aprobado:
-
-> **ACTUALIZAR DECISIONES CERRADAS**
-
-Registrar decisión, evidencia, qué reemplaza, fecha y nueva versión. No
-convertir una observación de un solo video en regla global sin evidencia
-suficiente.
+# Plantilla activa para videos — Oraciones Bíblicas Diarias
+
+**Usar junto con:** `SISTEMA_ACTIVO_ORACIONES_BIBLICAS_DIARIAS.md`  
+**Objetivo:** documentar cada video sin convertir decisiones temporales en reglas eternas.
+
+## 1. Identidad del proyecto
+
+- Número y nombre interno:
+- Fecha de inicio:
+- Responsable:
+- Estado: idea / guion / aprobado / producción / programado / publicado / medido
+- Video largo, Short o ambos:
+- Enlace publicado:
+
+## 2. Tipo de decisión
+
+- [ ] Usa el baseline activo.
+- [ ] Es un experimento limitado.
+- [ ] Propone cambiar un baseline.
+- [ ] Requiere aprobación por doctrina, gasto o licencia.
+
+Si es experimento:
+
+- Variable que cambia:
+- Hipótesis:
+- Alcance (cuántos videos):
+- Métrica de éxito:
+- Fecha de revisión:
+
+## 3. Problema humano y respuesta bíblica
+
+- Problema concreto de la persona:
+- Qué podría estar sintiendo o pensando:
+- Promesa emocional honesta del video:
+- Pasaje principal:
+- Pasajes de apoyo:
+- Verificación de citas completada: sí / no
+- Respuesta bíblica en una frase:
+
+## 4. Público y experiencia
+
+- Momento de escucha: noche / mañana / crisis / descanso / otro
+- Dispositivo probable: móvil / TV / ambos
+- Tono: sereno / protector / esperanzador / otro
+- Duración objetivo:
+- Riesgo de repetición o fatiga:
+- Adaptaciones de claridad, tamaño de texto o ritmo:
+
+## 5. Título y miniatura
+
+- Título principal:
+- Alternativa A:
+- Alternativa B:
+- Texto de miniatura:
+- Imagen o concepto visual:
+- Problema que promete resolver:
+- ¿Evita promesas garantizadas o sensacionalistas?: sí / no
+
+## 6. Estructura del guion
+
+| Bloque | Objetivo | Pasaje o idea | Duración aproximada |
+|---|---|---|---:|
+| Apertura | Nombrar el dolor y dar una razón para quedarse |  |  |
+| Presencia | Recordar que Dios está presente |  |  |
+| Palabra | Aplicar el texto bíblico |  |  |
+| Oración | Guiar la entrega |  |  |
+| Descanso | Bajar el ritmo y cerrar |  |  |
+
+Notas de transiciones y pausas:
+
+## 7. Revisión antes de voz
+
+- [ ] El guion fue aprobado por el creador.
+- [ ] Las referencias bíblicas fueron verificadas.
+- [ ] No hay promesas de resultados garantizados.
+- [ ] No hay relleno o repeticiones innecesarias.
+- [ ] La apertura presenta el problema en los primeros segundos.
+- [ ] La llamada a suscribirse es breve y natural.
+- [ ] Puntuación y pausas fueron revisadas para voz sintética.
+
+## 8. Voz, música y mezcla
+
+- Herramienta y modelo de voz:
+- Voz elegida:
+- Ajustes usados:
+- Muestra breve aprobada: sí / no
+- Música o ambiente:
+- Fuente y licencia:
+- Nivel aproximado de voz:
+- Nivel aproximado de música:
+- Prueba en móvil, TV o audífonos:
+
+Los valores exactos se toman del baseline activo y se confirman en la fecha de producción; no se copian automáticamente de un proyecto antiguo.
+
+## 9. Plan visual y licencias
+
+- Formato: imagen estática / varias imágenes / clips de video / combinación
+- Ambiente visual:
+- Frecuencia aproximada de cambios:
+- Prueba de 60–90 segundos aprobada: sí / no
+
+### Inventario de recursos
+
+| Recurso | Sitio o creador | Enlace | Licencia | Gratis/pago | Uso previsto | Aprobado |
+|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |
+
+Reglas:
+
+- Priorizar naturaleza nocturna gratuita cuando sea suficiente.
+- No depender de clips bíblicos o de Jesús, porque suelen ser de pago o restrictivos.
+- No comprar ni licenciar material sin autorización previa.
+- No usar recursos cuya procedencia o permiso no pueda documentarse.
+- Si se repite un clip corto, hacerlo con transiciones suaves y sin que resulte evidente o distractor.
+
+## 10. Producción y control de calidad
+
+- Resolución y relación de aspecto:
+- Frecuencia de cuadros:
+- Subtítulos: sí / no
+- Método de sincronización:
+- Archivo maestro:
+- Fecha del render:
+
+Control final:
+
+- [ ] No hay palabras cortadas ni silencios accidentales.
+- [ ] La música no compite con la voz.
+- [ ] Los cambios visuales no distraen.
+- [ ] No hay errores bíblicos, ortográficos o de subtítulos.
+- [ ] Todas las licencias están registradas.
+- [ ] El inicio y el final fueron revisados completos.
+
+## 11. Shorts derivados
+
+| Short | Gancho inicial | Duración | Fuente del audio | Relación con el largo | Estado |
+|---|---|---:|---|---|---|
+| 1 |  |  |  |  |  |
+| 2 |  |  |  |  |  |
+| 3 |  |  |  |  |  |
+
+Para cada Short:
+
+- [ ] Funciona sin haber visto el video largo.
+- [ ] El problema aparece desde el primer segundo.
+- [ ] Texto legible en móvil.
+- [ ] La llamada al video largo es natural.
+
+## 12. Publicación
+
+- Fecha y hora:
+- Descripción:
+- Comentario fijado:
+- Lista de reproducción:
+- Pantallas finales:
+- Tarjetas:
+- Subtítulos cargados y revisados:
+- Configuración de audiencia:
+
+## 13. Medición
+
+Registrar datos cuando estén disponibles:
+
+| Momento | Vistas | Impresiones | CTR | Retención 30 s | Duración media | % visto | Suscriptores | Tráfico sugerido |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 12 h |  |  |  |  |  |  |  |  |
+| 24 h |  |  |  |  |  |  |  |  |
+| 48 h |  |  |  |  |  |  |  |  |
+| 7 días |  |  |  |  |  |  |  |  |
+
+- Video de referencia:
+- Diferencia principal observada:
+- Comentarios cualitativos relevantes:
+- ¿La comparación está afectada por tema, título, miniatura o duración?:
+
+## 14. Conclusión
+
+- Resultado: adoptar / ajustar / descartar / inconcluso
+- Evidencia principal:
+- Qué se mantiene:
+- Qué cambia en el próximo video:
+- ¿Debe actualizarse el sistema activo?: sí / no
+- Fecha de la decisión:
