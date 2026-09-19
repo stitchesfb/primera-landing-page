@@ -1,6 +1,6 @@
 # Sistema activo — Oraciones Bíblicas Diarias
 
-**Versión:** 2.0  
+**Versión:** 2.1  
 **Fecha:** 18 de septiembre de 2026  
 **Función:** fuente principal para tomar decisiones del canal.  
 **Regla central:** conservar lo que funciona, probar una variable a la vez y actualizar el sistema con evidencia.
@@ -75,6 +75,11 @@ Consecuencia práctica: ritmo sereno, dicción clara, texto grande, contraste al
 - Pueden derivarse del video largo, pero deben funcionar por sí solos desde el primer segundo.
 - El gancho debe expresar el problema de inmediato.
 - No es obligatorio reutilizar exactamente el mismo audio si una adaptación mejora claridad o retención.
+- Los Shorts derivados se planifican **antes de cerrar el guion definitivo y antes de generar la narración** del video largo.
+- Para cada Short se define previamente: problema o gancho, pasaje o idea bíblica, duración aproximada, relación con el video largo y necesidad de una introducción adaptada.
+- Los segmentos aprovechables se integran de forma natural en el guion largo y se marcan como `[INICIO SHORT N]` y `[FIN SHORT N]`.
+- Cada segmento debe tener límites limpios de párrafo y pausas suficientes antes y después para poder extraerse sin palabras cortadas ni transiciones abruptas.
+- Cuando el audio largo esté aprobado, los Shorts pueden producirse desde el mismo paquete de narración y quedar listos junto con el video largo.
 
 ## 5. Política visual y de licencias
 

@@ -1,0 +1,13 @@
+{
+  "id": "video_007",
+  "pilar": "",
+  "titulo_trabajo": "",
+
+  "_nota": "Estructura inicial vacia. El guion (narration.txt) todavia no se ha escrito, asi que no hay parrafos a los que anclar eventos. Los Shorts derivados deben planificarse antes de cerrar el guion definitivo (ver SISTEMA_ACTIVO 4/Shorts y VIDEO_TEMPLATE seccion 11): marcar los segmentos aprovechables en el guion con [INICIO SHORT N] / [FIN SHORT N], con limites limpios de parrafo y pausa suficiente a cada lado.",
+
+  "defaults": {
+    "pause_after_paragraph": 3.0
+  },
+
+  "events": []
+}

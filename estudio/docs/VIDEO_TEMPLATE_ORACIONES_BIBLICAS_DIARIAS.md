@@ -68,6 +68,12 @@ Si es experimento:
 
 Notas de transiciones y pausas:
 
+Marcadores previstos de Shorts dentro del guion:
+
+- `[INICIO SHORT 1]` / `[FIN SHORT 1]`:
+- `[INICIO SHORT 2]` / `[FIN SHORT 2]`:
+- `[INICIO SHORT 3]` / `[FIN SHORT 3]`:
+
 ## 7. Revisión antes de voz
 
 - [ ] El guion fue aprobado por el creador.
@@ -77,6 +83,8 @@ Notas de transiciones y pausas:
 - [ ] La apertura presenta el problema en los primeros segundos.
 - [ ] La llamada a suscribirse es breve y natural.
 - [ ] Puntuación y pausas fueron revisadas para voz sintética.
+- [ ] Los Shorts derivados fueron definidos antes de cerrar el guion.
+- [ ] Sus segmentos y límites están marcados sin interrumpir la progresión del video largo.
 
 ## 8. Voz, música y mezcla
 
@@ -131,13 +139,15 @@ Control final:
 - [ ] Todas las licencias están registradas.
 - [ ] El inicio y el final fueron revisados completos.
 
-## 11. Shorts derivados
+## 11. Shorts planificados con el video largo
 
-| Short | Gancho inicial | Duración | Fuente del audio | Relación con el largo | Estado |
-|---|---|---:|---|---|---|
-| 1 |  |  |  |  |  |
-| 2 |  |  |  |  |  |
-| 3 |  |  |  |  |  |
+Completar esta sección **antes del guion definitivo y de la generación de voz**.
+
+| Short | Problema o gancho | Pasaje o idea | Duración | Fuente del audio | Marcadores en el largo | ¿Gancho adaptado? | Estado |
+|---|---|---|---:|---|---|---|---|
+| 1 |  |  |  |  |  |  |  |
+| 2 |  |  |  |  |  |  |  |
+| 3 |  |  |  |  |  |  |  |
 
 Para cada Short:
 
@@ -145,6 +155,9 @@ Para cada Short:
 - [ ] El problema aparece desde el primer segundo.
 - [ ] Texto legible en móvil.
 - [ ] La llamada al video largo es natural.
+- [ ] El inicio y el final tienen límites limpios de párrafo y pausas suficientes.
+- [ ] Puede extraerse sin palabras cortadas ni una transición abrupta.
+- [ ] Si reutiliza audio del largo, el fragmento conserva sentido completo por sí solo.
 
 ## 12. Publicación
 
