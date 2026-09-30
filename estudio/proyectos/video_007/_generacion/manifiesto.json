@@ -477,10 +477,10 @@
       ],
       "archivo_alineacion": "11.alignment.json",
       "creditos_estimados": 352.18,
-      "creditos_reales": 1895,
+      "creditos_reales": null,
       "creditos_antes": 10566,
       "creditos_despues": 12461,
-      "nota_creditos": "Medido por diferencia (12461 - 10566 = 1895) en la unica lectura autorizada, que sirvio a la vez de cierre del bloque 11 y apertura del bloque 24 (2026-09-30T22:00:48.031Z). AVISO: esta cifra es muy superior a lo esperado por la tarifa ya calibrada (~0.220 creditos/caracter => ~281 para 1276 caracteres) y al patron observado en los bloques 7 y 10 (256 y 372 creditos para 1162 y 1690 caracteres, misma tarifa). La diferencia (~1614 creditos) no se puede atribuir con certeza solo a la generacion del bloque 11: paso un intervalo largo (horas) entre el 429 anterior y esta lectura, tiempo durante el cual pudo haber otra actividad en la cuenta de ElevenLabs ajena a esta sesion. No se hizo ninguna llamada adicional para investigarlo (fuera del alcance autorizado). Se registra el valor tal como pide la formula instruida, con esta salvedad."
+      "nota_creditos": "La lectura del 2026-09-30T22:00:48Z dio una diferencia de 1895 creditos (12461-10566) para este bloque, muy por encima de lo esperado (~281-352 segun tarifa calibrada/conservadora, consistente con los bloques 7 y 10). Orlando decidio el 2026-09-30 tratar esa lectura como no atribuible de forma confiable a este bloque (posible actividad externa a la cuenta durante el intervalo de horas entre el 429 anterior y esta lectura) y usar en su lugar el estimado calibrado para efectos de presupuesto. creditos_reales queda en null; el valor bruto de la lectura (12461 usados totales en ese momento) se conserva en creditos_despues para referencia, pero no debe interpretarse como el costo real de este bloque."
     },
     {
       "bloque_tts": "12",
@@ -1043,13 +1043,13 @@
         "PAUSA IMPORTANTE 10 — duración por aprobar"
       ],
       "texto_sha256": "3672b4cffe6dd7df893e24d8f9a72231ba18c862889be4fb268ff80a3b512cc1",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "24.mp3",
+      "generado_en": "2026-09-30T22:07:55.095Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 99,
@@ -1091,7 +1091,13 @@
           "caracteres": 28,
           "texto_sha256": "da7a37a948767202994d826ec1123204e43d8e9fb766b320fe6039e35ddac715"
         }
-      ]
+      ],
+      "archivo_alineacion": "24.alignment.json",
+      "creditos_estimados": 248.95,
+      "creditos_reales": null,
+      "creditos_antes": 12461,
+      "creditos_despues": 14075,
+      "nota_creditos": "Lectura posterior (12461 -> 14075) dio una diferencia de 1614 creditos, otra vez muy por encima de lo esperado (~249 estimados, consistente con la tarifa calibrada). El valor de 12461 usado como \"antes\" se reutilizo de la lectura anterior (compartida con el cierre del bloque 11) en vez de hacer una lectura fresca inmediatamente antes de esta llamada, asi que tambien pudo acumular actividad externa a esta sesion durante el tiempo transcurrido entre esa lectura y esta generacion (incluyendo el tiempo de espera de la respuesta del usuario a la pregunta de la ronda anterior). Mismo patron que el bloque 11: se trata como no atribuible de forma confiable. creditos_reales queda en null; 14075 se conserva en creditos_despues solo como referencia del contador bruto en ese momento. El audio en si se genero y verifico correctamente; solo la telemetria de creditos es dudosa."
     }
   ]
 }
