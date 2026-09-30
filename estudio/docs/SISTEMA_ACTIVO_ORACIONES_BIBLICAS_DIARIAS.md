@@ -1,7 +1,7 @@
 # Sistema activo — Oraciones Bíblicas Diarias
 
-**Versión:** 2.1  
-**Fecha:** 18 de septiembre de 2026  
+**Versión:** 2.2  
+**Fecha:** 19 de septiembre de 2026  
 **Función:** fuente principal para tomar decisiones del canal.  
 **Regla central:** conservar lo que funciona, probar una variable a la vez y actualizar el sistema con evidencia.
 
@@ -63,6 +63,53 @@ Consecuencia práctica: ritmo sereno, dicción clara, texto grande, contraste al
 - La progresión emocional debe ir de la tensión al reposo sin repetir ideas solo para aumentar la duración.
 - La voz, velocidad, estabilidad y pausas actuales son un baseline. Se confirman antes de cada producción importante y pueden cambiar después de una prueba corta.
 - Antes de generar todo el audio, producir una muestra breve cuando se cambie voz, modelo, herramienta o puntuación.
+
+### TTS por bloques y control de costos
+
+- No generar una solicitud TTS independiente por cada párrafo. El baseline es agrupar la narración en bloques continuos y semánticamente completos.
+- Para un video largo de aproximadamente 45–60 minutos, el punto de partida es **20–30 bloques** de aproximadamente **1.200–2.000 caracteres**. Este rango se confirma mediante una prueba y puede ajustarse; no es un límite permanente.
+- Un bloque no debe dividir una frase, cita bíblica, oración completa ni segmento marcado para un Short.
+- La apertura debe generarse como un bloque suficientemente continuo para estabilizar ritmo, tono y timbre; no como varias frases breves aisladas.
+- Antes de gastar los créditos del audio completo, documentar: cantidad de bloques, caracteres facturables, créditos estimados, duración estimada, voz, modelo, ajustes y método de persistencia.
+- La generación completa requiere aprobación expresa del creador después de revisar una prueba que incluya: apertura, lectura o aplicación bíblica, tramo calmado del cierre, al menos una unión entre bloques y las pausas previstas.
+- Si un defecto daña una palabra o cambia claramente la voz, se regenera el bloque afectado desde su texto aprobado. No se inicia una cadena indefinida de recortes sobre la palabra.
+
+### Pausas y continuidad
+
+- Priorizar la puntuación y la respiración natural dentro de los bloques. No añadir una pausa digital después de cada párrafo por defecto.
+- Como punto de partida para una oración nocturna larga, usar aproximadamente **8–12 pausas importantes** en total, reservadas para citas, cierres emocionales y transiciones entre grandes secciones.
+- El plan debe detectar y evitar pausas importantes demasiado próximas entre sí o junto a un interludio de bloque.
+- Las cantidades y duraciones exactas se aprueban con la muestra de audio; no se heredan automáticamente de otro video.
+
+### Persistencia y fuente canónica
+
+- Cada bloque debe conservar: número, texto exacto, audio original, voz, modelo, ajustes, identificador de History cuando exista, hash de texto/configuración y estado de revisión.
+- Los bloques y el manifiesto deben guardarse de forma persistente durante la generación, no solamente al terminar. Un reinicio no debe provocar pérdida de trabajo aprobado.
+- Si texto, voz, modelo y ajustes no cambiaron, reutilizar el bloque existente en vez de gastar créditos nuevamente.
+- Mantener fuentes originales inmutables. Toda reconstrucción parte de esas fuentes, nunca de un maestro ya recortado o recomprimido.
+- Usar nombres y estados canónicos claros: `narracion_original`, `narracion_revision_NN` y `narracion_aprobada`. El manifiesto identifica exactamente qué bloques contiene cada versión.
+
+### Control de calidad del audio
+
+- La coincidencia de palabras es necesaria, pero no suficiente. También se revisan continuidad, timbre, velocidad, altura percibida, finales de palabras, residuos vocales y pausas.
+- Exportar y escuchar una muestra corta alrededor de **cada unión entre bloques** y de cada pausa importante antes de aprobar el maestro.
+- No aplicar recortes globales agresivos por RMS, silencio o alineación de caracteres sin una prueba comparativa aprobada que demuestre que no toca fonemas.
+- Decodificar las fuentes una sola vez para el montaje y evitar recomprimir durante correcciones intermedias. El archivo final se codifica después de aprobar el maestro.
+- No comenzar música, visuales ni render largo mientras la narración permanezca rechazada.
+
+### Puntos de aprobación de producción
+
+1. Tema, promesa, título, miniatura y pasajes.
+2. Estructura del video y Shorts planificados.
+3. Guion completo y citas verificadas.
+4. Plan de bloques TTS, pausas, costo y persistencia.
+5. Muestras TTS y uniones.
+6. Narración completa sin música.
+7. Prueba audiovisual de 60–90 segundos.
+8. Render final y control de calidad.
+9. Video largo y paquete de Shorts listos para publicación.
+
+Ninguna etapa costosa comienza si la etapa anterior no está aprobada.
 
 ### Música y mezcla
 

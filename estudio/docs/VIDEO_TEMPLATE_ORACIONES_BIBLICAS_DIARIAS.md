@@ -85,13 +85,28 @@ Marcadores previstos de Shorts dentro del guion:
 - [ ] Puntuación y pausas fueron revisadas para voz sintética.
 - [ ] Los Shorts derivados fueron definidos antes de cerrar el guion.
 - [ ] Sus segmentos y límites están marcados sin interrumpir la progresión del video largo.
+- [ ] El guion fue agrupado en bloques continuos; no se producirá una solicitud TTS por párrafo.
+- [ ] Ningún bloque divide una frase, cita bíblica, oración completa o segmento de Short.
+- [ ] El plan de pausas evita agrupaciones e interludios redundantes.
 
 ## 8. Voz, música y mezcla
 
 - Herramienta y modelo de voz:
 - Voz elegida:
 - Ajustes usados:
-- Muestra breve aprobada: sí / no
+- Cantidad prevista de bloques TTS:
+- Rango aproximado de caracteres por bloque:
+- Caracteres facturables estimados:
+- Créditos estimados:
+- Duración estimada:
+- Método de persistencia y recuperación:
+- Manifiesto canónico:
+- Muestra de apertura aprobada: sí / no
+- Muestra bíblica aprobada: sí / no
+- Muestra de cierre calmado aprobada: sí / no
+- Unión entre bloques aprobada: sí / no
+- Pausas de la muestra aprobadas: sí / no
+- Generación completa autorizada por el creador: sí / no
 - Música o ambiente:
 - Fuente y licencia:
 - Nivel aproximado de voz:
@@ -127,10 +142,29 @@ Reglas:
 - Frecuencia de cuadros:
 - Subtítulos: sí / no
 - Método de sincronización:
-- Archivo maestro:
+- Fuentes originales inmutables:
+- `narracion_original`:
+- `narracion_revision_NN`:
+- `narracion_aprobada`:
+- Copia persistente verificada: sí / no
+- Reanudación después de interrupción probada: sí / no
 - Fecha del render:
 
-Control final:
+### Control de narración antes de música y visuales
+
+- [ ] Texto y narración coinciden completamente.
+- [ ] Se revisaron apertura, citas bíblicas y cierre completo.
+- [ ] Se exportó y escuchó una muestra alrededor de cada unión entre bloques.
+- [ ] Se revisaron todas las pausas importantes y no existen agrupaciones innecesarias.
+- [ ] No hay cambios abruptos de voz, velocidad, timbre o altura percibida.
+- [ ] No hay barridos, vocalizaciones extrañas, residuos ni finales de palabras cortados.
+- [ ] No se aplicaron recortes globales agresivos sin prueba comparativa aprobada.
+- [ ] Cualquier bloque regenerado está identificado en el manifiesto.
+- [ ] El creador aprobó la narración completa sin música.
+
+**NO comenzar música, visuales ni render largo antes de esta aprobación.**
+
+### Control final audiovisual
 
 - [ ] No hay palabras cortadas ni silencios accidentales.
 - [ ] La música no compite con la voz.
