@@ -3,7 +3,7 @@
   "revision": 3,
   "unidad_de_persistencia": "bloque_tts",
   "guion_fuente": "VIDEO_007_GUION_APROBADO.md",
-  "guion_sha256": "170a6e946405783127b77b3b8bc46a47492818491dcef6b3325243bed777c928",
+  "guion_sha256": "80b0fab2f934ea4818339612ca38c35535e0bfe97a389813da9b489641efcbe1",
   "total_bloques_tts": 24,
   "total_bloques_editoriales_origen": 24,
   "total_caracteres": 35290,
@@ -268,13 +268,13 @@
         "FIN SHORT 2"
       ],
       "texto_sha256": "152e76c48af870b204517cdffe7ce6e73edb706da7f2d4a71f0693dfa99aad45",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "7.mp3",
+      "generado_en": "2026-09-30T21:49:40.850Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 22,
@@ -291,7 +291,12 @@
           "caracteres": 242,
           "texto_sha256": "233355f3c65e5e896ee42487fe8d0731739558b2ebde3ff7726b7dacf49581d8"
         }
-      ]
+      ],
+      "archivo_alineacion": "7.alignment.json",
+      "creditos_estimados": 320.71,
+      "creditos_reales": 256,
+      "creditos_antes": 9938,
+      "creditos_despues": 10194
     },
     {
       "bloque_tts": "8",
@@ -383,20 +388,18 @@
         10
       ],
       "parrafo_inicio": 33,
-      "parrafo_fin": 37,
-      "caracteres": 1788,
-      "palabras": 296,
-      "marcadores": [
-        "PAUSA IMPORTANTE 5 — transición de Palabra a oración"
-      ],
-      "texto_sha256": "a06303d8232c790a253d9279e60ef139ba6ee4f660fe08cc6fe02f0ffe76a050",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "parrafo_fin": 36,
+      "caracteres": 1690,
+      "palabras": 280,
+      "marcadores": [],
+      "texto_sha256": "1d7946d2d02ff7f74d49ff7c0ff83b1bbb6faccd17addd10579ecee46fdb065e",
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "10.mp3",
+      "generado_en": "2026-09-30T21:51:00.397Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 33,
@@ -417,33 +420,40 @@
           "numero": 36,
           "caracteres": 685,
           "texto_sha256": "18d6216c2105d4a0a802ddb231a28f08a78a8c077a00a41cdd246648d11b4e82"
-        },
-        {
-          "numero": 37,
-          "caracteres": 96,
-          "texto_sha256": "d75092c07a36fcd0455c6ce2ec4fc0c8f8e7bd0aae34b446db69d659326a6269"
         }
-      ]
+      ],
+      "archivo_alineacion": "10.alignment.json",
+      "creditos_estimados": 466.44,
+      "creditos_reales": 372,
+      "creditos_antes": 10194,
+      "creditos_despues": 10566
     },
     {
       "bloque_tts": "11",
       "bloques_editoriales_origen": [
         11
       ],
-      "parrafo_inicio": 38,
+      "parrafo_inicio": 37,
       "parrafo_fin": 41,
-      "caracteres": 1178,
-      "palabras": 197,
-      "marcadores": [],
-      "texto_sha256": "a2f60fd1e1f3dbf90c17409e137ee1ef3d1d2e8b251c95592b6801e07cb51c73",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "caracteres": 1276,
+      "palabras": 213,
+      "marcadores": [
+        "PAUSA IMPORTANTE 5 — transición de Palabra a oración"
+      ],
+      "texto_sha256": "689b72780f5ec74d5dfce8ca5ad705b8fd3631cd75993056c1e3fe33c0bc6082",
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "11.mp3",
+      "generado_en": "2026-09-30T21:52:01.917688Z",
       "parrafos_incluidos_metadato": [
+        {
+          "numero": 37,
+          "caracteres": 96,
+          "texto_sha256": "d75092c07a36fcd0455c6ce2ec4fc0c8f8e7bd0aae34b446db69d659326a6269"
+        },
         {
           "numero": 38,
           "caracteres": 318,
@@ -464,7 +474,13 @@
           "caracteres": 269,
           "texto_sha256": "3aa2e52f778adc5568a887e1ce9f155c5671bfe566d2ee375112b67f4b32e4c1"
         }
-      ]
+      ],
+      "archivo_alineacion": "11.alignment.json",
+      "creditos_estimados": 352.18,
+      "creditos_reales": null,
+      "creditos_antes": 10566,
+      "creditos_despues": null,
+      "nota_creditos": "El endpoint de suscripcion devolvio 429 (Too Many Requests) al medir el consumo posterior a esta llamada, por exceso de consultas de lectura en poco tiempo durante las mediciones de los bloques 7 y 10. La llamada de generacion en si se completo con exito (audio y alineacion guardados y verificados con ffprobe); solo la medicion de creditos reales de ESTE bloque no se pudo completar. No se reintento la medicion ni la llamada."
     },
     {
       "bloque_tts": "12",
@@ -822,13 +838,11 @@
         20
       ],
       "parrafo_inicio": 77,
-      "parrafo_fin": 81,
-      "caracteres": 1798,
-      "palabras": 298,
-      "marcadores": [
-        "PAUSA IMPORTANTE 8 — duración por aprobar"
-      ],
-      "texto_sha256": "f6cc2632983c5115af189e90c05e9436844881bbd191038e990f679b0118fa64",
+      "parrafo_fin": 80,
+      "caracteres": 1630,
+      "palabras": 272,
+      "marcadores": [],
+      "texto_sha256": "451a185193b7ff02fdef2e8f9a401c2e206cd2ac4d528e9848302203407717e2",
       "estado": "pendiente",
       "voice_id": null,
       "model_id": null,
@@ -856,11 +870,6 @@
           "numero": 80,
           "caracteres": 674,
           "texto_sha256": "f874eda8404464ecf1fb2f9e2e6b00484c17ec1adc917a883efd2c85e3a6760c"
-        },
-        {
-          "numero": 81,
-          "caracteres": 166,
-          "texto_sha256": "1fcc716fbcb8350614b1c1b7074b9ab1d8848e9d9dfa55d34bab80845e7f0c37"
         }
       ]
     },
@@ -869,12 +878,14 @@
       "bloques_editoriales_origen": [
         21
       ],
-      "parrafo_inicio": 82,
+      "parrafo_inicio": 81,
       "parrafo_fin": 85,
-      "caracteres": 1084,
-      "palabras": 177,
-      "marcadores": [],
-      "texto_sha256": "54562d2e7c532c1a7c118ad86744e7a215c5c28286b3d687226c45bf134412a2",
+      "caracteres": 1252,
+      "palabras": 203,
+      "marcadores": [
+        "PAUSA IMPORTANTE 8 — duración por aprobar"
+      ],
+      "texto_sha256": "a8ec30c2c093bb313c1e3b1aaad8509adfbc4b152938173f56df027be3beb89b",
       "estado": "pendiente",
       "voice_id": null,
       "model_id": null,
@@ -883,6 +894,11 @@
       "archivo_audio": null,
       "generado_en": null,
       "parrafos_incluidos_metadato": [
+        {
+          "numero": 81,
+          "caracteres": 166,
+          "texto_sha256": "1fcc716fbcb8350614b1c1b7074b9ab1d8848e9d9dfa55d34bab80845e7f0c37"
+        },
         {
           "numero": 82,
           "caracteres": 328,

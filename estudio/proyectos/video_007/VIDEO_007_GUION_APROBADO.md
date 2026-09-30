@@ -121,9 +121,9 @@ El valor no siempre se siente como seguridad. A veces el valor es permanecer qui
 
 [PAUSA IMPORTANTE 5 — transición de Palabra a oración]
 
-Ahora, con estas verdades en el corazón, llevemos ante Dios los temores concretos de esta noche.
-
 ## BLOQUE 11 — Oración por el miedo sin nombre
+
+Ahora, con estas verdades en el corazón, llevemos ante Dios los temores concretos de esta noche.
 
 Padre, comienzo entregándote ese miedo que no sé nombrar. Esa sensación de que algo no está bien, aunque no pueda señalar una causa precisa. Tú conoces mi cuerpo, mi mente y mi historia. Sabes si esta inquietud nació del cansancio, de experiencias pasadas, de una preocupación real o de varios días acumulando tensión.
 
@@ -239,9 +239,9 @@ Gracias por aquello que hoy funcionó sin que yo lo notara: por cada respiració
 
 [PAUSA IMPORTANTE 8 — duración por aprobar]
 
-Ahora dejo de acumular peticiones. Permito que la confianza tenga espacio. No necesito hablar sin detenerme. Puedo permanecer delante de ti y saber que has escuchado.
-
 ## BLOQUE 21 — Entrada al descanso progresivo
+
+Ahora dejo de acumular peticiones. Permito que la confianza tenga espacio. No necesito hablar sin detenerme. Puedo permanecer delante de ti y saber que has escuchado.
 
 La parte más activa de esta oración ha terminado. Ya no tienes que seguir cada frase con esfuerzo. Puedes dejar que las palabras pasen suavemente mientras tu cuerpo se prepara para dormir. Si tus ojos todavía están abiertos, puedes cerrarlos cuando te resulte cómodo. Si ya estaban cerrados, permite que permanezcan sin tensión.
 
