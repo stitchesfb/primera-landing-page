@@ -4,8 +4,8 @@
 **Miniatura:** DUERME SIN MIEDO · SALMO 91  
 **Duración objetivo:** 50–55 minutos con lectura serena y pausas aprobadas  
 **Traducción para citas breves:** Reina-Valera 1960  
-**Estado:** guion final aprobado por Orlando el 29 de septiembre de 2026; generación TTS completa todavía no autorizada  
-**Estructura técnica:** 24 bloques semánticos y 10 pausas importantes propuestas  
+**Estado:** guion final y revisión 3 aprobados por Orlando el 30 de septiembre de 2026; voz y bloque 1 aprobados; generación TTS completa todavía no autorizada  
+**Estructura técnica:** 24 bloques semánticos y 10 pausas importantes propuestas
 
 > Las indicaciones entre corchetes son marcas de producción y no forman parte de la narración.
 
@@ -73,6 +73,8 @@ La sombra del Omnipotente nos presenta cercanía. Para estar bajo la sombra de a
 
 Padre, enséñame a habitar contigo. Cuando mi pensamiento corra hacia el peor resultado, llámame de regreso. Cuando intente resolver lo que todavía no ha sucedido, recuérdame que este momento también te pertenece. Haz de tu presencia mi refugio y de tu verdad el lugar donde descansa mi mente.
 
+Más adelante, el salmo utiliza la imagen de alguien protegido bajo unas alas. Es una imagen de cercanía, ternura y pertenencia. No necesito imaginar a un Dios distante que solo observa si logro ser fuerte. Puedo acercarme como quien reconoce su necesidad y encuentra un lugar donde dejar de defenderse por un momento. Tu fidelidad no depende de que yo mantenga una apariencia de valentía. Puedo admitir que algo me asusta y, al mismo tiempo, esconder mi corazón en tu verdad. Señor, cuando me sienta expuesto, recuérdame que no estoy abandonado. Cuando las noticias, los recuerdos o mi propia imaginación me hagan sentir vulnerable, ayúdame a volver a tu carácter. Tú eres misericordioso, paciente y fiel. Que esa verdad cubra mis pensamientos como un abrigo durante esta noche.
+
 ## BLOQUE 07 — Short 2: refugio, no fórmula
 
 [INICIO SHORT 2]
@@ -114,6 +116,8 @@ En Isaías 41:10 escuchamos estas palabras: “No temas, porque yo estoy contigo
 Padre, cuando me sienta solo, recuérdame que estás conmigo. Cuando una habitación oscura parezca amplificar mis pensamientos, deja que esta verdad sea más fuerte: tú estás conmigo. Cuando mi mente pregunte quién me sostendrá si las cosas cambian, responde en mi interior: yo soy tu Dios.
 
 No quiero medir tu cercanía únicamente por lo que siento. Las emociones cambian. El cansancio puede hacerme sentir vulnerable. Una mala noticia puede nublar mi percepción. Pero tu carácter permanece. Aun cuando no perciba una respuesta inmediata, puedo seguir orando. Aun cuando la paz llegue poco a poco, puedo continuar descansando en tu promesa de presencia.
+
+El valor no siempre se siente como seguridad. A veces el valor es permanecer quieto cuando el impulso pide escapar, pedir ayuda cuando el orgullo quiere ocultarse o esperar hasta tener información clara antes de reaccionar. Esta noche no necesito demostrar nada. Puedo permitir que mi cuerpo se calme a su propio ritmo. Si todavía siento tensión, no significa que esta oración haya fallado. Tu presencia no se mide por la velocidad con la que cambian mis sensaciones. Dame paciencia mientras mi respiración se hace más lenta y mi mente aprende que puede bajar la guardia. Que cada minuto de calma, por pequeño que sea, sea recibido como un regalo y no como una prueba que debo superar.
 
 [PAUSA IMPORTANTE 5 — transición de Palabra a oración]
 
@@ -197,6 +201,8 @@ Cuando llegue mañana, tú ya estarás allí. No entraré solo en ese día. La p
 
 Señor, cierro por esta noche la conversación con el futuro. No porque el futuro no importe, sino porque lo pongo en manos más firmes que las mías. Si aparece nuevamente un pensamiento sobre mañana, responderé con suavidad: eso puede esperar; ahora es tiempo de descansar.
 
+Si mañana debo enfrentar una decisión grande, recuérdame que no necesito resolverla toda de una vez. Muéstrame el siguiente paso honesto y posible. Tal vez sea hacer una llamada, reunir información, pedir consejo, organizar un documento o simplemente esperar antes de responder. Líbrame de confundir urgencia emocional con verdadera urgencia. El miedo exige respuestas inmediatas, pero la sabiduría sabe detenerse. Prepara las circunstancias y también mi carácter. Ayúdame a reconocer aquello que sí depende de mí y a dejar en tus manos los resultados que no puedo controlar. Esta noche no ensayaré todas las conversaciones ni trataré de adivinar las reacciones de los demás. Cuando llegue el momento, dame la gracia necesaria. Por ahora, el siguiente paso es descansar.
+
 ## BLOQUE 18 — Oración contra pensamientos repetitivos
 
 Padre, conoces los pensamientos que regresan en círculos. A veces creo que si los repaso una vez más encontraré la solución. Sin embargo, después de muchos recorridos termino en el mismo lugar, más cansado y menos claro. Ayúdame a reconocer cuándo estoy reflexionando y cuándo solamente estoy rumiando el temor.
@@ -206,6 +212,8 @@ No necesito responder a cada pensamiento. No todo lo que aparece en mi mente mer
 Si el pensamiento es una acusación, recuérdame tu gracia y muéstrame cualquier paso verdadero de reparación. Si es una predicción catastrófica, ayúdame a recordar que no conozco el futuro. Si es una responsabilidad real, permite que la anote y la deje para el momento adecuado. Si es solamente ruido producido por el cansancio, dame libertad para no analizarlo.
 
 Que mi mente no sea un cuarto donde todas las voces hablan al mismo tiempo. Que tu verdad ocupe el centro. Tú estás conmigo. Puedo pedir ayuda. Puedo actuar mañana. Y ahora puedo descansar.
+
+Ayúdame a examinar con calma lo que pienso. ¿Es un hecho presente o una posibilidad? ¿Hay algo que pueda hacer ahora o solamente estoy recorriendo el mismo temor? ¿Este pensamiento me conduce a una acción sabia o me mantiene atrapado? No necesito responder estas preguntas con esfuerzo. Solo permiten que la verdad separe lo real de lo imaginado. Si hay un hecho, podré atenderlo. Si hay una posibilidad, no tengo que vivirla como si ya hubiera ocurrido. Si hay una responsabilidad, puedo anotarla. Si no existe ninguna acción útil para esta noche, tengo permiso para dejarla. Padre, que tu paz no dependa de que mi mente quede completamente vacía. Puede haber pensamientos y, aun así, puedo elegir no seguirlos. Puedo volver una y otra vez a tu presencia.
 
 ## BLOQUE 19 — Short 3: entrega de la mente
 
@@ -273,6 +281,8 @@ Tú permaneces despierto. Yo puedo cerrar los ojos.
 
 Tú conoces el camino. Yo puedo dar por terminado este día.
 
+El descanso es también una manera de reconocer que soy una criatura y no el Creador. Hay un límite bueno para mi trabajo, mis decisiones y mi capacidad de cuidar. Detenerme no significa abandonar mis responsabilidades. Significa aceptar que mi vida no se sostiene únicamente por mi esfuerzo. Mañana habrá tiempo para trabajar, servir, organizar y responder. Esta noche recibo el límite del día como un regalo. Padre, líbrame de sentir culpa por descansar. Enséñame que el reposo puede ser un acto de confianza. Mientras duermo, el mundo continúa sin que yo tenga que sostenerlo. Mis tareas pueden esperar. Las personas que amo permanecen en tus manos. Mi historia no se detiene porque cierre los ojos. Tú sigues obrando de maneras que no necesito vigilar.
+
 ## BLOQUE 24 — Cierre y amén
 
 Padre celestial, gracias por escuchar esta oración. Todo lo que pude nombrar y todo lo que quedó escondido en mi corazón está delante de ti. Recibe mis temores, mis preguntas y las personas que amo. Dame sabiduría para mañana y descanso para esta noche.
@@ -304,4 +314,4 @@ En el nombre de Jesús, amén.
 5. Después de aprobar el texto, agruparlo en el manifiesto técnico de 24 bloques sin dividir citas, frases ni segmentos de Shorts.
 6. La aprobación editorial de este guion no autoriza todavía la generación completa de TTS, música, montaje visual ni render.
 
-**Registro de aprobación editorial:** versión inicial aprobada por Orlando el 29 de septiembre de 2026. Ese mismo día Orlando autorizó ampliar el contenido para alcanzar 50–55 minutos y aprobó la revisión ampliada. La aprobación del guion no autoriza todavía la generación completa de TTS.
+**Registro de aprobación editorial:** versión inicial aprobada por Orlando el 29 de septiembre de 2026. Ese mismo día Orlando autorizó ampliar el contenido para alcanzar 50–55 minutos y aprobó la revisión ampliada. El 30 de septiembre aprobó la voz y el bloque TTS 1, incluida como aceptable la ligera prolongación de “noche” cerca del segundo 3. Ese mismo día aprobó la revisión 3 con 618 palabras adicionales fuera del bloque 1. La generación TTS completa continúa sin autorización.

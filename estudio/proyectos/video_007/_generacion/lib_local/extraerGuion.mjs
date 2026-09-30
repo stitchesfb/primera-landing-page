@@ -1,13 +1,23 @@
-// Extractor deterministico del guion aprobado de Video 7, agrupado en los
-// 23 bloques TTS ya validados en el preflight (24 bloques editoriales, con
-// el unico ajuste aprobado: 23+24 unidos). Reproduce en JS la misma logica
-// que el parser de preflight en Python, para poder verificar el hash de
-// cualquier bloque antes de enviarlo a la API.
+// Extractor deterministico del guion aprobado de Video 7 (revision 3),
+// agrupado en bloques TTS. Reproduce en JS la misma logica que el parser
+// de preflight, para poder verificar el hash de cualquier bloque antes de
+// enviarlo a la API.
 //
 // Descarta explicitamente: encabezados "## BLOQUE NN — titulo", marcadores
 // entre corchetes ([INICIO/FIN SHORT N], [PAUSA IMPORTANTE N...]), la nota
 // en blockquote del principio, separadores "---", y todo lo que va despues
 // de "## Notas para revision editorial" (metadato editorial, no narracion).
+//
+// Mapeo bloque TTS <- bloque editorial (revision 3): 1:1, sin uniones.
+// La revision 3 amplio varios bloques (6, 10, 17, 18, 23), lo que dejo a
+// los 24 bloques editoriales dentro o cerca del rango 1200-2000 caracteres
+// por si solos. La union 23+24 usada en la revision anterior (cuando el
+// bloque 23 era mas corto) ya no es viable: sumados darian ~2703
+// caracteres, por encima tanto del rango objetivo como del limite
+// configurado `canal.json:api.max_caracteres_por_peticion` (2000). El
+// bloque 24 (888 caracteres) queda corto pero no tiene con que unirse sin
+// romper ese limite, y es el cierre del video: se acepta como excepcion
+// de flexibilidad, igual que ya se acepto antes por el mismo motivo.
 
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -15,10 +25,7 @@ import { createHash } from 'node:crypto';
 const RE_BLOQUE = /^## BLOQUE (\d+) — (.+)$/;
 const RE_MARCADOR = /^\[(.+)\]$/;
 
-// Union aprobada: los bloques editoriales 23 y 24 se generan como un solo
-// bloque TTS. Ningun otro cambio frente a los 24 bloques editoriales.
 function bloqueTtsDe(bloqueEditorial) {
-  if (bloqueEditorial === 23 || bloqueEditorial === 24) return '23-24';
   return String(bloqueEditorial);
 }
 
