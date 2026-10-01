@@ -1049,7 +1049,7 @@
       "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
       "archivo_audio": "24.mp3",
-      "generado_en": "2026-09-30T22:07:55.095Z",
+      "generado_en": "2026-10-01T14:14:31.918Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 99,
@@ -1095,9 +1095,27 @@
       "archivo_alineacion": "24.alignment.json",
       "creditos_estimados": 248.95,
       "creditos_reales": null,
-      "creditos_antes": 12461,
-      "creditos_despues": 14075,
-      "nota_creditos": "Lectura posterior (12461 -> 14075) dio una diferencia de 1614 creditos, otra vez muy por encima de lo esperado (~249 estimados, consistente con la tarifa calibrada). El valor de 12461 usado como \"antes\" se reutilizo de la lectura anterior (compartida con el cierre del bloque 11) en vez de hacer una lectura fresca inmediatamente antes de esta llamada, asi que tambien pudo acumular actividad externa a esta sesion durante el tiempo transcurrido entre esa lectura y esta generacion (incluyendo el tiempo de espera de la respuesta del usuario a la pregunta de la ronda anterior). Mismo patron que el bloque 11: se trata como no atribuible de forma confiable. creditos_reales queda en null; 14075 se conserva en creditos_despues solo como referencia del contador bruto en ese momento. El audio en si se genero y verifico correctamente; solo la telemetria de creditos es dudosa."
+      "creditos_antes": 14075,
+      "creditos_despues": 15887,
+      "nota_creditos": "Version 2 (regenerada tras rechazo de la version 1 por error de pronunciacion). Sin lectura previa (instruccion explicita de no hacer polling); \"antes\" reutiliza el ultimo contador real confirmado. Lectura posterior: 15887 (diferencia 1812), muy alejada del estimado (248.95) — tratada como no confiable, mismo patron que las mediciones anteriores. Valor bruto conservado solo como referencia.",
+      "revisiones_rechazadas": [
+        {
+          "archivo_audio": "revisiones_rechazadas/24_rev1_rechazado_narracion.mp3",
+          "archivo_alineacion": "revisiones_rechazadas/24_rev1_rechazado_narracion.alignment.json",
+          "texto_sha256": "3672b4cffe6dd7df893e24d8f9a72231ba18c862889be4fb268ff80a3b512cc1",
+          "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+          "model_id": "eleven_flash_v2_5",
+          "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
+          "generado_en": "2026-09-30T22:07:55.095Z",
+          "creditos_estimados": 248.95,
+          "creditos_reales": null,
+          "creditos_antes": 12461,
+          "creditos_despues": 14075,
+          "estado": "rechazado",
+          "motivo_rechazo": "Error de pronunciacion de ElevenLabs: en el segundo ~44 la narracion sono como \"Esta noche a cal ha llegado\" en vez de \"Esta noche ha llegado el momento\". Verificado con el alignment guardado de esta misma version: el caracter de inicio de \"Esta noche ha llegado el momento\" en el texto facturable cae exactamente en el segundo 44.489, confirmando que es ese fragmento. El texto fuente ya era correcto (\"Esta noche ha llegado el momento de descansar.\"), verificado por hash sin cambios; no se modifico el guion. Rechazado por Orlando el 1 de octubre de 2026.",
+          "rechazado_en": "2026-10-01T14:13:52.445873Z"
+        }
+      ]
     }
   ]
 }
