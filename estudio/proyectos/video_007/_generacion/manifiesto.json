@@ -48,7 +48,10 @@
       "creditos_reales": 254,
       "creditos_antes": 6456,
       "creditos_despues": 6710,
-      "observacion_aceptada": "Ligera prolongación de \"noche\" cerca del segundo 3; aceptada por Orlando el 30 de septiembre de 2026; no requiere regeneración."
+      "observacion_aceptada": "Ligera prolongación de \"noche\" cerca del segundo 3; aceptada por Orlando el 30 de septiembre de 2026; no requiere regeneración.",
+      "duracion_segundos": 99.553,
+      "car_por_min": 694.9,
+      "pal_por_min": 114.5
     },
     {
       "bloque_tts": "2",
@@ -61,13 +64,13 @@
       "palabras": 186,
       "marcadores": [],
       "texto_sha256": "23213eb209ce86bc0613ffeebb704af12bc15a678e378085e10a8336f9527d73",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "2.mp3",
+      "generado_en": "2026-10-02T03:00:18.433Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 3,
@@ -84,7 +87,16 @@
           "caracteres": 392,
           "texto_sha256": "453d093539019c273bada6f830f5ce018b49f20be86fa7e799af80e40224b705"
         }
-      ]
+      ],
+      "archivo_alineacion": "2.alignment.json",
+      "tamano_bytes": 1468752,
+      "duracion_segundos": 91.768,
+      "car_por_min": 761.7,
+      "pal_por_min": 121.6,
+      "creditos_estimados_calibrado": 256.3,
+      "creditos_estimados_conservador": 321.54,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "3",
@@ -97,13 +109,13 @@
       "palabras": 184,
       "marcadores": [],
       "texto_sha256": "5ce1171df1c8d713d0e76c73fe7447732625ba9b7827d527797a38f0a0e95cbd",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "3.mp3",
+      "generado_en": "2026-10-02T03:00:20.679Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 6,
@@ -125,7 +137,16 @@
           "caracteres": 210,
           "texto_sha256": "9caa12b830164591845c981ac4e4377115d84d15240df5e05a298912b3fe7b2a"
         }
-      ]
+      ],
+      "archivo_alineacion": "3.alignment.json",
+      "tamano_bytes": 1447854,
+      "duracion_segundos": 90.462,
+      "car_por_min": 713.7,
+      "pal_por_min": 122,
+      "creditos_estimados_calibrado": 236.72,
+      "creditos_estimados_conservador": 296.98,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "4",
@@ -138,13 +159,13 @@
       "palabras": 177,
       "marcadores": [],
       "texto_sha256": "48fab1f7f737bf968f7f23812600ff36bd6e716891e2ac6b4163b03711f1f0a9",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "4.mp3",
+      "generado_en": "2026-10-02T03:00:22.535Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 10,
@@ -161,7 +182,16 @@
           "caracteres": 289,
           "texto_sha256": "425d88efed0b6c88fcab84849f86ad75baa694083930b1694786bdff56d09668"
         }
-      ]
+      ],
+      "archivo_alineacion": "4.alignment.json",
+      "tamano_bytes": 1286522,
+      "duracion_segundos": 80.379,
+      "car_por_min": 783,
+      "pal_por_min": 132.1,
+      "creditos_estimados_calibrado": 230.78,
+      "creditos_estimados_conservador": 289.52,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "5",
@@ -176,13 +206,13 @@
         "PAUSA IMPORTANTE 2 — duración por aprobar"
       ],
       "texto_sha256": "3207450a23346c9256003620e9614c094d1713b20ff038b930b6eada4d3d587b",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "5.mp3",
+      "generado_en": "2026-10-02T03:00:24.717Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 13,
@@ -204,7 +234,16 @@
           "caracteres": 173,
           "texto_sha256": "e9eca1776267fa190ea477ae6b2f0c987f2585f49891c9777025fc1adfeeb220"
         }
-      ]
+      ],
+      "archivo_alineacion": "5.alignment.json",
+      "tamano_bytes": 1413582,
+      "duracion_segundos": 88.32,
+      "car_por_min": 768.3,
+      "pal_por_min": 129.1,
+      "creditos_estimados_calibrado": 248.82,
+      "creditos_estimados_conservador": 312.16,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "6",
@@ -219,13 +258,13 @@
         "PAUSA IMPORTANTE 3 — duración por aprobar"
       ],
       "texto_sha256": "0aec8b1f18302c9630d0bbe0f0bea6e4fbbe3cfb8331da6cd262368cf62f872e",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "6.mp3",
+      "generado_en": "2026-10-02T03:00:28.395Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 17,
@@ -252,7 +291,16 @@
           "caracteres": 778,
           "texto_sha256": "06dac1cac892d91f05313235dedb135d60510e0f31240ff99e0febbb382ef306"
         }
-      ]
+      ],
+      "archivo_alineacion": "6.alignment.json",
+      "tamano_bytes": 2592226,
+      "duracion_segundos": 161.985,
+      "car_por_min": 741.5,
+      "pal_por_min": 122.2,
+      "creditos_estimados_calibrado": 440.44,
+      "creditos_estimados_conservador": 552.55,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "7",
@@ -296,7 +344,10 @@
       "creditos_estimados": 320.71,
       "creditos_reales": 256,
       "creditos_antes": 9938,
-      "creditos_despues": 10194
+      "creditos_despues": 10194,
+      "duracion_segundos": 97.515,
+      "car_por_min": 715.0,
+      "pal_por_min": 118.8
     },
     {
       "bloque_tts": "8",
@@ -311,13 +362,13 @@
         "PAUSA IMPORTANTE 4 — duración por aprobar"
       ],
       "texto_sha256": "32c80ccd8d4aad6eea7f23b7fb5c79d6d075a74085cf1ad9e4d69577f22a35c0",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "8.mp3",
+      "generado_en": "2026-10-02T03:00:32.239Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 25,
@@ -339,7 +390,16 @@
           "caracteres": 735,
           "texto_sha256": "4cad7c6b4c0a5050f8ee46269e2a7fda485f8aa0b4c65582737710296c6c0ef7"
         }
-      ]
+      ],
+      "archivo_alineacion": "8.alignment.json",
+      "tamano_bytes": 2505709,
+      "duracion_segundos": 156.578,
+      "car_por_min": 759.9,
+      "pal_por_min": 120.7,
+      "creditos_estimados_calibrado": 436.26,
+      "creditos_estimados_conservador": 547.31,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "9",
@@ -352,13 +412,13 @@
       "palabras": 301,
       "marcadores": [],
       "texto_sha256": "52a05d79ce4a9942600c3d85d749190d689e2093b6c028e40567d6a35589d09c",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "9.mp3",
+      "generado_en": "2026-10-02T03:00:35.575Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 29,
@@ -380,7 +440,16 @@
           "caracteres": 703,
           "texto_sha256": "9500f10821eb43088f788a1ee5138ff524f4f7f8112ae991bcbadf69c2681be8"
         }
-      ]
+      ],
+      "archivo_alineacion": "9.alignment.json",
+      "tamano_bytes": 2389098,
+      "duracion_segundos": 149.29,
+      "car_por_min": 747.1,
+      "pal_por_min": 121,
+      "creditos_estimados_calibrado": 408.98,
+      "creditos_estimados_conservador": 513.08,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "10",
@@ -426,7 +495,10 @@
       "creditos_estimados": 466.44,
       "creditos_reales": 372,
       "creditos_antes": 10194,
-      "creditos_despues": 10566
+      "creditos_despues": 10566,
+      "duracion_segundos": 138.423,
+      "car_por_min": 732.5,
+      "pal_por_min": 121.4
     },
     {
       "bloque_tts": "11",
@@ -480,7 +552,10 @@
       "creditos_reales": null,
       "creditos_antes": 10566,
       "creditos_despues": 12461,
-      "nota_creditos": "La lectura del 2026-09-30T22:00:48Z dio una diferencia de 1895 creditos (12461-10566) para este bloque, muy por encima de lo esperado (~281-352 segun tarifa calibrada/conservadora, consistente con los bloques 7 y 10). Orlando decidio el 2026-09-30 tratar esa lectura como no atribuible de forma confiable a este bloque (posible actividad externa a la cuenta durante el intervalo de horas entre el 429 anterior y esta lectura) y usar en su lugar el estimado calibrado para efectos de presupuesto. creditos_reales queda en null; el valor bruto de la lectura (12461 usados totales en ese momento) se conserva en creditos_despues para referencia, pero no debe interpretarse como el costo real de este bloque."
+      "nota_creditos": "La lectura del 2026-09-30T22:00:48Z dio una diferencia de 1895 creditos (12461-10566) para este bloque, muy por encima de lo esperado (~281-352 segun tarifa calibrada/conservadora, consistente con los bloques 7 y 10). Orlando decidio el 2026-09-30 tratar esa lectura como no atribuible de forma confiable a este bloque (posible actividad externa a la cuenta durante el intervalo de horas entre el 429 anterior y esta lectura) y usar en su lugar el estimado calibrado para efectos de presupuesto. creditos_reales queda en null; el valor bruto de la lectura (12461 usados totales en ese momento) se conserva en creditos_despues para referencia, pero no debe interpretarse como el costo real de este bloque.",
+      "duracion_segundos": 104.255,
+      "car_por_min": 734.4,
+      "pal_por_min": 122.6
     },
     {
       "bloque_tts": "12",
@@ -493,13 +568,13 @@
       "palabras": 291,
       "marcadores": [],
       "texto_sha256": "69e3b9b797fe869ac5d4f8cae1c845ee4a3ee08c61d8d073d113434bec1c4238",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "12.mp3",
+      "generado_en": "2026-10-02T03:00:38.853Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 42,
@@ -526,7 +601,16 @@
           "caracteres": 586,
           "texto_sha256": "1ce378c8260bea39295c7aeb04c7bafe25923662a59d5168f843f2042c0406c1"
         }
-      ]
+      ],
+      "archivo_alineacion": "12.alignment.json",
+      "tamano_bytes": 2308850,
+      "duracion_segundos": 144.274,
+      "car_por_min": 746.1,
+      "pal_por_min": 121,
+      "creditos_estimados_calibrado": 394.68,
+      "creditos_estimados_conservador": 495.14,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "13",
@@ -541,13 +625,13 @@
         "PAUSA IMPORTANTE 6 — duración por aprobar"
       ],
       "texto_sha256": "41650aa1a364652170876a36c211377a30708394782ebf68906564b6dd8c3c40",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "13.mp3",
+      "generado_en": "2026-10-02T03:00:41.141Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 47,
@@ -569,7 +653,16 @@
           "caracteres": 290,
           "texto_sha256": "bd6ac5d4251ee55e90b8870abd39e337c4c41e5e552686c2916731f88b40f8c4"
         }
-      ]
+      ],
+      "archivo_alineacion": "13.alignment.json",
+      "tamano_bytes": 1507204,
+      "duracion_segundos": 94.171,
+      "car_por_min": 756.9,
+      "pal_por_min": 124.2,
+      "creditos_estimados_calibrado": 261.36,
+      "creditos_estimados_conservador": 327.89,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "14",
@@ -582,13 +675,13 @@
       "palabras": 194,
       "marcadores": [],
       "texto_sha256": "99772c7265c4e882c3203081125aa613592e995386fe88775f7e22d8b6cae7ed",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "14.mp3",
+      "generado_en": "2026-10-02T03:00:43.343Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 51,
@@ -610,7 +703,16 @@
           "caracteres": 215,
           "texto_sha256": "3bd335616585668f28427587f191b497867da8fa172877ab004354ec292007fc"
         }
-      ]
+      ],
+      "archivo_alineacion": "14.alignment.json",
+      "tamano_bytes": 1553180,
+      "duracion_segundos": 97.045,
+      "car_por_min": 754.3,
+      "pal_por_min": 119.9,
+      "creditos_estimados_calibrado": 268.4,
+      "creditos_estimados_conservador": 336.72,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "15",
@@ -623,13 +725,13 @@
       "palabras": 290,
       "marcadores": [],
       "texto_sha256": "adc5d5c0465e9e143cc5996441f07c69cb3ca0b6fcded0ec9b85df985da0b621",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "15.mp3",
+      "generado_en": "2026-10-02T03:00:46.693Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 55,
@@ -656,7 +758,16 @@
           "caracteres": 708,
           "texto_sha256": "563a42827dfedd7cdb66d26ef33ec3d2f4f5b589ceeb89f1e43cfd2b29ec8eed"
         }
-      ]
+      ],
+      "archivo_alineacion": "15.alignment.json",
+      "tamano_bytes": 2342287,
+      "duracion_segundos": 146.364,
+      "car_por_min": 752.2,
+      "pal_por_min": 118.9,
+      "creditos_estimados_calibrado": 403.7,
+      "creditos_estimados_conservador": 506.46,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "16",
@@ -671,13 +782,13 @@
         "PAUSA IMPORTANTE 7 — duración por aprobar"
       ],
       "texto_sha256": "2c09305d69947b0c65190473801e0cbcdec5d8638cc91fbed13106b649d3b02d",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "16.mp3",
+      "generado_en": "2026-10-02T03:00:49.066Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 60,
@@ -699,7 +810,16 @@
           "caracteres": 258,
           "texto_sha256": "0fcc7af817d48eb0ef6c6558e52e72012dc90973fe94bd9eb4e9ae2623f71986"
         }
-      ]
+      ],
+      "archivo_alineacion": "16.alignment.json",
+      "tamano_bytes": 1496755,
+      "duracion_segundos": 93.518,
+      "car_por_min": 753.9,
+      "pal_por_min": 121.3,
+      "creditos_estimados_calibrado": 258.5,
+      "creditos_estimados_conservador": 324.3,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "17",
@@ -712,13 +832,13 @@
       "palabras": 296,
       "marcadores": [],
       "texto_sha256": "5a50b206cf900ac33ff5f52a0f8a5fb8cc6e37e926260cf131a804edcee70552",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "17.mp3",
+      "generado_en": "2026-10-02T03:00:52.591Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 64,
@@ -745,7 +865,16 @@
           "caracteres": 770,
           "texto_sha256": "eece5b29b1e47061ab6b8cb443e53bc8ebf6091f4d45ef30b58b241b54988b22"
         }
-      ]
+      ],
+      "archivo_alineacion": "17.alignment.json",
+      "tamano_bytes": 2414594,
+      "duracion_segundos": 150.883,
+      "car_por_min": 755.2,
+      "pal_por_min": 117.7,
+      "creditos_estimados_calibrado": 417.78,
+      "creditos_estimados_conservador": 524.12,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "18",
@@ -758,13 +887,13 @@
       "palabras": 309,
       "marcadores": [],
       "texto_sha256": "e84ee553638cfbf750290d4cd60f6e2b74159b825e656c08e6757eae4394a5cd",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "18.mp3",
+      "generado_en": "2026-10-02T03:00:56.025Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 69,
@@ -791,7 +920,16 @@
           "caracteres": 756,
           "texto_sha256": "92c34d66fc87cdfebdda961145625b0abd53c077c317a3f306bfa106cdf856a2"
         }
-      ]
+      ],
+      "archivo_alineacion": "18.alignment.json",
+      "tamano_bytes": 2456808,
+      "duracion_segundos": 153.522,
+      "car_por_min": 723.8,
+      "pal_por_min": 120.8,
+      "creditos_estimados_calibrado": 407.44,
+      "creditos_estimados_conservador": 511.15,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "19",
@@ -807,13 +945,13 @@
         "FIN SHORT 3"
       ],
       "texto_sha256": "733954c33dcd381271751db4716d681bda070c51dacf29eaa5d6937fa1e7ffbd",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "19.mp3",
+      "generado_en": "2026-10-02T03:00:58.340Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 74,
@@ -830,7 +968,16 @@
           "caracteres": 156,
           "texto_sha256": "4c34360edd82163ae5bf2029d0976f28bb392b109e8f4f388b6287403a302651"
         }
-      ]
+      ],
+      "archivo_alineacion": "19.alignment.json",
+      "tamano_bytes": 1519743,
+      "duracion_segundos": 94.955,
+      "car_por_min": 693.8,
+      "pal_por_min": 117.5,
+      "creditos_estimados_calibrado": 241.56,
+      "creditos_estimados_conservador": 303.05,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "20",
@@ -843,13 +990,13 @@
       "palabras": 272,
       "marcadores": [],
       "texto_sha256": "451a185193b7ff02fdef2e8f9a401c2e206cd2ac4d528e9848302203407717e2",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "20.mp3",
+      "generado_en": "2026-10-02T03:01:01.352Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 77,
@@ -871,7 +1018,16 @@
           "caracteres": 674,
           "texto_sha256": "f874eda8404464ecf1fb2f9e2e6b00484c17ec1adc917a883efd2c85e3a6760c"
         }
-      ]
+      ],
+      "archivo_alineacion": "20.alignment.json",
+      "tamano_bytes": 2062254,
+      "duracion_segundos": 128.862,
+      "car_por_min": 759,
+      "pal_por_min": 126.6,
+      "creditos_estimados_calibrado": 358.6,
+      "creditos_estimados_conservador": 449.88,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "21",
@@ -886,13 +1042,13 @@
         "PAUSA IMPORTANTE 8 — duración por aprobar"
       ],
       "texto_sha256": "a8ec30c2c093bb313c1e3b1aaad8509adfbc4b152938173f56df027be3beb89b",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "21.mp3",
+      "generado_en": "2026-10-02T03:01:03.785Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 81,
@@ -919,7 +1075,16 @@
           "caracteres": 241,
           "texto_sha256": "7bc43bdd61f7019b7c0ae43b05c0fb08d757dc13d11a990c97625d21b43d548a"
         }
-      ]
+      ],
+      "archivo_alineacion": "21.alignment.json",
+      "tamano_bytes": 1619217,
+      "duracion_segundos": 101.172,
+      "car_por_min": 742.5,
+      "pal_por_min": 120.4,
+      "creditos_estimados_calibrado": 275.44,
+      "creditos_estimados_conservador": 345.55,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "22",
@@ -934,13 +1099,13 @@
         "PAUSA IMPORTANTE 9 — antes del tramo final"
       ],
       "texto_sha256": "bed6010f43a9c7de50b2d7a3137be29212b4c95fd3fccf53f4ead31e08015288",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "22.mp3",
+      "generado_en": "2026-10-02T03:01:07.603Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 86,
@@ -972,7 +1137,16 @@
           "caracteres": 322,
           "texto_sha256": "0bdd76e2c8555e5cc062b4e4016211722073ee192ce7d9ca39187395ac3c17da"
         }
-      ]
+      ],
+      "archivo_alineacion": "22.alignment.json",
+      "tamano_bytes": 2672475,
+      "duracion_segundos": 167.001,
+      "car_por_min": 744.4,
+      "pal_por_min": 128.3,
+      "creditos_estimados_calibrado": 455.84,
+      "creditos_estimados_conservador": 571.87,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "23",
@@ -985,13 +1159,13 @@
       "palabras": 310,
       "marcadores": [],
       "texto_sha256": "32c3c83ff350d7e6848be88a56c43a38d6a3f9d5ffc98e5ee6669c5f0fb80dad",
-      "estado": "pendiente",
-      "voice_id": null,
-      "model_id": null,
-      "ajustes_sha256": null,
+      "estado": "generado",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_flash_v2_5",
+      "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
-      "archivo_audio": null,
-      "generado_en": null,
+      "archivo_audio": "23.mp3",
+      "generado_en": "2026-10-02T03:01:11.116Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 92,
@@ -1028,7 +1202,16 @@
           "caracteres": 755,
           "texto_sha256": "254745152e1eb734290d9f8b9d96d8b3128c7e2948ac4c7346e7c82ca0ba24bf"
         }
-      ]
+      ],
+      "archivo_alineacion": "23.alignment.json",
+      "tamano_bytes": 2441343,
+      "duracion_segundos": 152.555,
+      "car_por_min": 718.6,
+      "pal_por_min": 121.9,
+      "creditos_estimados_calibrado": 401.94,
+      "creditos_estimados_conservador": 504.25,
+      "creditos_reales": null,
+      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
     },
     {
       "bloque_tts": "24",
@@ -1115,7 +1298,10 @@
           "motivo_rechazo": "Error de pronunciacion de ElevenLabs: en el segundo ~44 la narracion sono como \"Esta noche a cal ha llegado\" en vez de \"Esta noche ha llegado el momento\". Verificado con el alignment guardado de esta misma version: el caracter de inicio de \"Esta noche ha llegado el momento\" en el texto facturable cae exactamente en el segundo 44.489, confirmando que es ese fragmento. El texto fuente ya era correcto (\"Esta noche ha llegado el momento de descansar.\"), verificado por hash sin cambios; no se modifico el guion. Rechazado por Orlando el 1 de octubre de 2026.",
           "rechazado_en": "2026-10-01T14:13:52.445873Z"
         }
-      ]
+      ],
+      "duracion_segundos": 74.58,
+      "car_por_min": 725.7,
+      "pal_por_min": 126.3
     }
   ]
 }
