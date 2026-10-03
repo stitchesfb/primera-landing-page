@@ -1,4 +1,9 @@
 {
-  "estado": "draft",
-  "historial": []
+  "estado": "narracion_revision_01",
+  "historial": [
+    {
+      "fecha": "2026-10-03",
+      "evento": "Montaje local de narracion_revision_01_sin_musica.mp3: los 24 bloques TTS aprobados, con el mapa definitivo de 10 pausas digitales (40s totales). Sin musica, visuales ni render. Pendiente de escucha y aprobacion de Orlando antes de pasar a narracion_aprobada."
+    }
+  ]
 }

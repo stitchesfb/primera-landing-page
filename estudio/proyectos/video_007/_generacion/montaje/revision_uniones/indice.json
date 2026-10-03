@@ -1,0 +1,350 @@
+[
+  {
+    "archivo": "pausa01_interna_bloque01_4s.mp3",
+    "bloques": [
+      "1"
+    ],
+    "pausa": 1,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "1:02.23",
+    "frase_anterior": "Recíbeme esta noche y enséñame a descansar bajo tu cuidado. Amén.",
+    "frase_siguiente": "Ahora, sin apresurarte, permite que tu respiración encuentre un ritmo tranquilo.",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 62.23
+  },
+  {
+    "archivo": "union_01_02.mp3",
+    "bloques": [
+      "1",
+      "2"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "1:43.52",
+    "frase_anterior": "Esta oración comienza exactamente donde estás.",
+    "frase_siguiente": "La noche suele hacer que las preocupaciones parezcan más grandes.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 103.52
+  },
+  {
+    "archivo": "union_02_03.mp3",
+    "bloques": [
+      "2",
+      "3"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "3:15.24",
+    "frase_anterior": "tás aprendiendo a descansar en Aquel que permanece despierto y atento.",
+    "frase_siguiente": "Padre celestial, en este momento reconozco tu presencia.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 195.24
+  },
+  {
+    "archivo": "union_03_04.mp3",
+    "bloques": [
+      "3",
+      "4"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "4:45.66",
+    "frase_anterior": "Puedo reconocer mis límites y descansar en tu presencia.",
+    "frase_siguiente": "Señor, te entrego lo que ocurrió hoy.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 285.66
+  },
+  {
+    "archivo": "union_04_05_pausa02_3s.mp3",
+    "bloques": [
+      "4",
+      "5"
+    ],
+    "pausa": 2,
+    "duracion_pausa_segundos": 3,
+    "timecode_en_narracion_completa": "6:06.00",
+    "frase_anterior": "o actuar, podré hacerlo con una mente más clara y un corazón renovado.",
+    "frase_siguiente": "Antes de continuar, si estas oraciones te ayudan a acercarte a Dios y ",
+    "duracion_muestra_segundos": 21,
+    "timecode_segundos": 366
+  },
+  {
+    "archivo": "union_05_06_pausa03_4s.mp3",
+    "bloques": [
+      "5",
+      "6"
+    ],
+    "pausa": 3,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "7:37.28",
+    "frase_anterior": "res de mi interior donde el miedo ha estado hablando demasiado fuerte.",
+    "frase_siguiente": "El Salmo 91 comienza diciendo: “El que habita al abrigo del Altísimo m",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 457.28
+  },
+  {
+    "archivo": "union_06_07.mp3",
+    "bloques": [
+      "6",
+      "7"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "10:23.22",
+    "frase_anterior": "e esa verdad cubra mis pensamientos como un abrigo durante esta noche.",
+    "frase_siguiente": "El Salmo 91 no comienza hablando del peligro, sino del lugar donde dec",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 623.22
+  },
+  {
+    "archivo": "union_07_08_pausa04_4s.mp3",
+    "bloques": [
+      "7",
+      "8"
+    ],
+    "pausa": 4,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "12:00.69",
+    "frase_anterior": "Sigues siendo fiel cuando mi visión es limitada.",
+    "frase_siguiente": "Señor, al leer palabras de protección, ayúdame a entenderlas con humil",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 720.69
+  },
+  {
+    "archivo": "union_08_09.mp3",
+    "bloques": [
+      "8",
+      "9"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "14:41.24",
+    "frase_anterior": "podré actuar desde la claridad en lugar de reaccionar desde el pánico.",
+    "frase_siguiente": "El Salmo 121 recuerda que el Guardián de Israel no se adormece ni duer",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 881.24
+  },
+  {
+    "archivo": "union_09_10.mp3",
+    "bloques": [
+      "9",
+      "10"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "17:10.50",
+    "frase_anterior": "vuelva, dale calma para no vivir cada minuto anticipando una tragedia.",
+    "frase_siguiente": "En Isaías 41:10 escuchamos estas palabras: “No temas, porque yo estoy ",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 1030.5
+  },
+  {
+    "archivo": "union_10_11_pausa05_4s.mp3",
+    "bloques": [
+      "10",
+      "11"
+    ],
+    "pausa": 5,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "19:28.89",
+    "frase_anterior": "ea, sea recibido como un regalo y no como una prueba que debo superar.",
+    "frase_siguiente": "Ahora, con estas verdades en el corazón, llevemos ante Dios los temore",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 1168.89
+  },
+  {
+    "archivo": "union_11_12.mp3",
+    "bloques": [
+      "11",
+      "12"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "21:17.10",
+    "frase_anterior": "Tú estás conmigo en este momento, y este momento es suficiente.",
+    "frase_siguiente": "Señor, te entrego a mi familia.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 1277.1
+  },
+  {
+    "archivo": "union_12_13_pausa06_4s.mp3",
+    "bloques": [
+      "12",
+      "13"
+    ],
+    "pausa": 6,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "23:41.35",
+    "frase_anterior": ", enséñame a cuidar sin asfixiar y a confiar sin volverme indiferente.",
+    "frase_siguiente": "Padre, pongo mi hogar delante de ti.",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 1421.35
+  },
+  {
+    "archivo": "union_13_14.mp3",
+    "bloques": [
+      "13",
+      "14"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "25:19.48",
+    "frase_anterior": "mi propia necesidad de paz no me haga olvidar el sufrimiento de otros.",
+    "frase_siguiente": "Señor, te entrego mi salud.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 1519.48
+  },
+  {
+    "archivo": "union_14_15.mp3",
+    "bloques": [
+      "14",
+      "15"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "26:56.49",
+    "frase_anterior": "Mañana recibiré la fuerza necesaria para enfrentar lo que corresponda.",
+    "frase_siguiente": "Padre, algunas personas llegan a esta oración después de recibir una n",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 1616.49
+  },
+  {
+    "archivo": "union_15_16_pausa07_4s.mp3",
+    "bloques": [
+      "15",
+      "16"
+    ],
+    "pausa": 7,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "29:22.82",
+    "frase_anterior": "te momento; mañana podré decidir el siguiente paso con mayor claridad.",
+    "frase_siguiente": "Señor, pongo delante de ti mis finanzas y mi trabajo.",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 1762.82
+  },
+  {
+    "archivo": "union_16_17.mp3",
+    "bloques": [
+      "16",
+      "17"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "31:00.31",
+    "frase_anterior": "no gobierne mis palabras, mis relaciones ni mi descanso de esta noche.",
+    "frase_siguiente": "Padre, te entrego el día de mañana antes de que comience.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 1860.31
+  },
+  {
+    "archivo": "union_17_18.mp3",
+    "bloques": [
+      "17",
+      "18"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "33:31.15",
+    "frase_anterior": "Por ahora, el siguiente paso es descansar.",
+    "frase_siguiente": "Padre, conoces los pensamientos que regresan en círculos.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 2011.15
+  },
+  {
+    "archivo": "union_18_19.mp3",
+    "bloques": [
+      "18",
+      "19"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "36:04.63",
+    "frase_anterior": "Puedo volver una y otra vez a tu presencia.",
+    "frase_siguiente": "Dios, esta noche te entrego aquello que mi mente no puede dejar de rep",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 2164.63
+  },
+  {
+    "archivo": "union_19_20.mp3",
+    "bloques": [
+      "19",
+      "20"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "37:39.55",
+    "frase_anterior": "Lo coloco en tus manos y vuelvo a la calma de este momento.",
+    "frase_siguiente": "Señor, durante esta oración te he pedido muchas cosas.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 2259.55
+  },
+  {
+    "archivo": "union_20_21_pausa08_4s.mp3",
+    "bloques": [
+      "20",
+      "21"
+    ],
+    "pausa": 8,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "39:48.38",
+    "frase_anterior": "itud puede ser pequeña y sincera; no necesita negar aquello que duele.",
+    "frase_siguiente": "Ahora dejo de acumular peticiones.",
+    "duracion_muestra_segundos": 22.02,
+    "timecode_segundos": 2388.38
+  },
+  {
+    "archivo": "union_21_22_pausa09_5s.mp3",
+    "bloques": [
+      "21",
+      "22"
+    ],
+    "pausa": 9,
+    "duracion_pausa_segundos": 5,
+    "timecode_en_narracion_completa": "41:33.52",
+    "frase_anterior": "La presencia de Dios es suficiente para este momento.",
+    "frase_siguiente": "Descansa bajo la imagen bíblica del abrigo del Altísimo.",
+    "duracion_muestra_segundos": 23.01,
+    "timecode_segundos": 2493.52
+  },
+  {
+    "archivo": "union_22_23.mp3",
+    "bloques": [
+      "22",
+      "23"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "44:25.47",
+    "frase_anterior": "a ti con la misma frase sencilla: aquí estoy, Dios; permanece conmigo.",
+    "frase_siguiente": "El Salmo 4:8 declara: “En paz me acostaré, y asimismo dormiré; porque ",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 2665.47
+  },
+  {
+    "archivo": "union_23_24.mp3",
+    "bloques": [
+      "23",
+      "24"
+    ],
+    "pausa": null,
+    "duracion_pausa_segundos": 0,
+    "timecode_en_narracion_completa": "46:57.98",
+    "frase_anterior": "Tú sigues obrando de maneras que no necesito vigilar.",
+    "frase_siguiente": "Padre celestial, gracias por escuchar esta oración.",
+    "duracion_muestra_segundos": 18,
+    "timecode_segundos": 2817.98
+  },
+  {
+    "archivo": "pausa10_interna_bloque24_4s.mp3",
+    "bloques": [
+      "24"
+    ],
+    "pausa": 10,
+    "duracion_pausa_segundos": 4,
+    "timecode_en_narracion_completa": "48:09.83",
+    "frase_anterior": "Puedo descansar en Dios.",
+    "frase_siguiente": "En el nombre de Jesús, amén.",
+    "duracion_muestra_segundos": 15.7,
+    "timecode_segundos": 2889.83
+  }
+]

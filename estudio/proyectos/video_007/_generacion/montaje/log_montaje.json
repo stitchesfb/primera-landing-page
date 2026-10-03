@@ -1,0 +1,52 @@
+{
+  "version": "narracion_revision_01",
+  "archivo": "narracion_revision_01_sin_musica.mp3",
+  "generado_en": "2026-10-03",
+  "fuente": "Los 24 MP3 originales aprobados en estudio/proyectos/video_007/_generacion/audio/bloques/ (bloque 24 = version 2 aprobada; version 1 rechazada permanece archivada aparte, no usada).",
+  "metodo": "Cada uno de los 24 MP3 se decodifico una sola vez a WAV (PCM, mono, 44100 Hz). Los bloques 1 y 24 se dividieron en dos partes cada uno, con cortes muestreados exactos (sin recodificar) en los puntos aprobados. Los silencios (3s/4s/5s) se generaron con ffmpeg anullsrc. Los 36 segmentos se unieron con el demuxer concat de ffmpeg en modo stream-copy (sin perdidas), y el WAV resultante se codifico UNA sola vez a mp3 mono 44100Hz 128kbps. Ningun MP3 original fue modificado, recortado, normalizado o recomprimido.",
+  "cortes_internos": {
+    "bloque_1": {
+      "metodo_de_localizacion": "ffmpeg silencedetect calibrado contra el hueco real conocido del bloque 24 (via alignment), ya que el bloque 1 nunca guardo su propio alignment/normalized_alignment. Dos candidatos presentados; Orlando escucho ambos y aprobo el candidato B.",
+      "punto_de_corte_segundos": 62.223,
+      "hueco_detectado_por_silencedetect": { "inicio": 60.332, "fin": 61.315, "nota": "este es el candidato A, descartado" },
+      "hueco_detectado_aprobado_candidato_B": { "inicio": 61.795, "fin": 62.651 },
+      "frase_anterior": "Recíbeme esta noche y enséñame a descansar bajo tu cuidado. Amén.",
+      "frase_siguiente": "Ahora, sin apresurarte, permite que tu respiración encuentre un ritmo tranquilo.",
+      "aprobado_por": "Orlando, 2026-10-03, candidato B"
+    },
+    "bloque_24": {
+      "metodo_de_localizacion": "alignment/normalized_alignment real del bloque 24 (version 2), con mapeo de indices corregido (ElevenLabs colapsa cada separador interno \"\\n\\n\" a un solo caracter en la alineacion).",
+      "punto_de_corte_segundos": 71.825,
+      "tiempo_fin_frase_anterior": 71.645,
+      "tiempo_inicio_frase_siguiente": 72.005,
+      "hueco_real_segundos": 0.36,
+      "frase_anterior": "Puedo descansar en Dios.",
+      "frase_siguiente": "En el nombre de Jesús, amén."
+    }
+  },
+  "mapa_de_pausas": [
+    { "numero": 1, "tipo": "interna", "bloque": 1, "segundos": 4, "timecode_narracion": "1:02.23" },
+    { "numero": 2, "tipo": "frontera", "bloques": [4, 5], "segundos": 3, "timecode_narracion": "6:06.00" },
+    { "numero": 3, "tipo": "frontera", "bloques": [5, 6], "segundos": 4, "timecode_narracion": "7:37.28" },
+    { "numero": 4, "tipo": "frontera", "bloques": [7, 8], "segundos": 4, "timecode_narracion": "12:00.69" },
+    { "numero": 5, "tipo": "frontera", "bloques": [10, 11], "segundos": 4, "timecode_narracion": "19:28.89", "nota": "ya aprobada previamente en la muestra C" },
+    { "numero": 6, "tipo": "frontera", "bloques": [12, 13], "segundos": 4, "timecode_narracion": "23:41.35" },
+    { "numero": 7, "tipo": "frontera", "bloques": [15, 16], "segundos": 4, "timecode_narracion": "29:22.82" },
+    { "numero": 8, "tipo": "frontera", "bloques": [20, 21], "segundos": 4, "timecode_narracion": "39:48.38" },
+    { "numero": 9, "tipo": "frontera", "bloques": [21, 22], "segundos": 5, "timecode_narracion": "41:33.52" },
+    { "numero": 10, "tipo": "interna", "bloque": 24, "segundos": 4, "timecode_narracion": "48:09.83" }
+  ],
+  "total_silencio_digital_segundos": 40,
+  "duracion_total_segundos": 2896.56,
+  "duracion_total_formato": "48:16.56",
+  "duracion_esperada_aprobada": "aproximadamente 48:17",
+  "verificaciones_realizadas": [
+    "Mapa de 10 pausas verificado programaticamente contra los marcadores reales del guion aprobado y el mapa de bloques TTS: sin discrepancias.",
+    "Los 24 bloques aparecen exactamente una vez y en orden (1 a 24).",
+    "Los 24 MP3 originales confirmados intactos (git status/diff sin cambios).",
+    "ffprobe sobre el archivo completo: mono, 44100 Hz, ~128 kbps, duracion 2896.56s.",
+    "Diferencia entre duracion esperada (suma de bloques + 40s) y duracion real del archivo final: 0.87s (0.03%), atribuible a redondeo de decodificacion/codificacion a traves de 24+2 archivos -- no material."
+  ],
+  "no_incluido": "Sin musica, ambiente, efectos, subtitulos ni visuales. Sin normalizacion ni compresion dinamica. Sin crossfades. Sin cambios de velocidad o tono. Las 15 uniones sin pausa importante son empalmes directos sin silencio arbitrario anadido.",
+  "estado_canonico": "narracion_revision_01 -- NO es narracion_aprobada todavia. Pendiente de escucha y aprobacion de Orlando."
+}
