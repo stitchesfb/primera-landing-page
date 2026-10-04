@@ -1,0 +1,33 @@
+{
+  "version": "narracion_revision_03",
+  "archivo": "narracion_revision_03_sin_musica.mp3",
+  "generado_en": "2026-10-05",
+  "basado_en": "Los 24 MP3 originales ACTIVOS (bloques 1, 18, 20, 23 en su version regenerada y aprobada auditivamente; los otros 20 sin cambios), decodificados a WAV sin perdida. No se partio desde narracion_revision_01 ni narracion_revision_02.",
+  "cambio_respecto_a_revision_02": "Sustituye el audio de los bloques 1, 18, 20 y 23 por sus versiones corregidas (defectos de pronunciacion de ElevenLabs). El bloque 24 sigue siendo la version 2 ya aprobada, sin cambios. El mapa de pausas (10 importantes + 15 normales de 1s) es identico al de la revision 02; solo cambia el punto de corte interno del bloque 1 porque su nueva version tiene una duracion distinta.",
+  "corte_interno_bloque_1_recalculado": {
+    "punto_de_corte_segundos": 60.1865,
+    "metodo": "alignment/normalized_alignment real del nuevo bloque 1, con el mapeo de indices corregido (ElevenLabs colapsa cada separador interno \"\\n\\n\" a un solo caracter).",
+    "tiempo_fin_frase_anterior": 59.908,
+    "tiempo_inicio_frase_siguiente": 60.465,
+    "hueco_real_segundos": 0.557,
+    "frase_anterior": "Recíbeme esta noche y enséñame a descansar bajo tu cuidado. Amén.",
+    "frase_siguiente": "Ahora, sin apresurarte, permite que tu respiración encuentre un ritmo tranquilo.",
+    "nota": "Distinto del punto usado en narracion_revision_01/02 (62.223s), porque la nueva version del bloque 1 tiene una duracion diferente (96.92s vs 99.55s de la version anterior). No se reutilizo el punto antiguo."
+  },
+  "corte_interno_bloque_24_sin_cambio": {
+    "punto_de_corte_segundos": 71.825,
+    "nota": "Version 2 aprobada, sin regenerar ni modificar. Mismo punto ya verificado en narracion_revision_01/02."
+  },
+  "metodo": "Los 24 MP3 activos se decodificaron a WAV (PCM, mono, 44100Hz). Bloques 1 y 24 divididos con cortes muestreados exactos (sin recodificar). Silencios de 1s/3s/4s/5s generados con anullsrc. 51 segmentos unidos con el demuxer concat en modo stream-copy. Una unica codificacion final a mp3 mono 44100Hz 128kbps. Sin ElevenLabs, sin normalizacion, sin crossfades, sin cambios de velocidad o tono.",
+  "duracion_total_segundos": 2906.91,
+  "duracion_total_formato": "48:26.91",
+  "duracion_esperada_aprobada": "aproximadamente 48:27",
+  "verificaciones_realizadas": [
+    "Los 24 bloques aparecen exactamente una vez y en orden (1 a 24).",
+    "Los 24 MP3 originales activos, narracion_revision_01 y narracion_revision_02 confirmados intactos (git diff sin cambios).",
+    "ffprobe sobre el archivo completo: mono, 44100 Hz, ~128 kbps, duracion 2906.91s.",
+    "Frases a ambos lados de la nueva pausa interna del bloque 1 verificadas programaticamente."
+  ],
+  "no_incluido": "Sin musica, visuales, Shorts, subtitulos ni render. Sin normalizacion, compresion dinamica, crossfades ni cambios de velocidad o tono.",
+  "estado_canonico": "narracion_revision_03 -- NO es narracion_aprobada todavia. Pendiente de aprobacion final de Orlando."
+}

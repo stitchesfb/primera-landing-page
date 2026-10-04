@@ -1,0 +1,98 @@
+[
+  {
+    "archivo": "pausa01_interna_bloque01_nueva_4s.mp3",
+    "descripcion": "Pausa interna del nuevo bloque 1 (Amén → Ahora, sin apresurarte)",
+    "timecode_centro": "1:00.23",
+    "timecode_centro_segundos": 60.23,
+    "ventana_inicio": "0:51.23",
+    "ventana_fin": "1:09.23"
+  },
+  {
+    "archivo": "union_01_02_1s.mp3",
+    "descripcion": "Unión 1→2 (1s)",
+    "timecode_centro": "1:40.92",
+    "timecode_centro_segundos": 100.92,
+    "ventana_inicio": "1:31.92",
+    "ventana_fin": "1:49.92"
+  },
+  {
+    "archivo": "union_17_18_1s.mp3",
+    "descripcion": "Unión 17→18 (1s)",
+    "timecode_centro": "33:38.54",
+    "timecode_centro_segundos": 2018.54,
+    "ventana_inicio": "33:29.54",
+    "ventana_fin": "33:47.54"
+  },
+  {
+    "archivo": "union_18_19_1s.mp3",
+    "descripcion": "Unión 18→19 (1s)",
+    "timecode_centro": "36:11.31",
+    "timecode_centro_segundos": 2171.31,
+    "ventana_inicio": "36:02.31",
+    "ventana_fin": "36:20.31"
+  },
+  {
+    "archivo": "union_19_20_1s.mp3",
+    "descripcion": "Unión 19→20 (1s)",
+    "timecode_centro": "37:47.23",
+    "timecode_centro_segundos": 2267.23,
+    "ventana_inicio": "37:38.23",
+    "ventana_fin": "37:56.23"
+  },
+  {
+    "archivo": "union_20_21_pausa08_4s.mp3",
+    "descripcion": "Unión 20→21 (pausa importante 8, 4s)",
+    "timecode_centro": "39:56.36",
+    "timecode_centro_segundos": 2396.36,
+    "ventana_inicio": "39:47.36",
+    "ventana_fin": "40:05.36"
+  },
+  {
+    "archivo": "union_22_23_1s.mp3",
+    "descripcion": "Unión 22→23 (1s)",
+    "timecode_centro": "44:33.46",
+    "timecode_centro_segundos": 2673.46,
+    "ventana_inicio": "44:24.46",
+    "ventana_fin": "44:42.46"
+  },
+  {
+    "archivo": "union_23_24_1s.mp3",
+    "descripcion": "Unión 23→24 (1s)",
+    "timecode_centro": "47:07.34",
+    "timecode_centro_segundos": 2827.34,
+    "ventana_inicio": "46:58.34",
+    "ventana_fin": "47:16.34"
+  },
+  {
+    "archivo": "pasaje_corregido_bloque01_noche.mp3",
+    "descripcion": "Pasaje corregido: \"noche\" (bloque 1)",
+    "timecode_centro": "0:02.07",
+    "timecode_centro_segundos": 2.07,
+    "ventana_inicio": "0:00.00",
+    "ventana_fin": "0:10.07"
+  },
+  {
+    "archivo": "pasaje_corregido_bloque18_solamente.mp3",
+    "descripcion": "Pasaje corregido: \"solamente\" (bloque 18)",
+    "timecode_centro": "34:00.67",
+    "timecode_centro_segundos": 2040.67,
+    "ventana_inicio": "33:51.67",
+    "ventana_fin": "34:09.67"
+  },
+  {
+    "archivo": "pasaje_corregido_bloque20_respuesta_a.mp3",
+    "descripcion": "Pasaje corregido: \"respuesta a\" (bloque 20)",
+    "timecode_centro": "38:39.85",
+    "timecode_centro_segundos": 2319.85,
+    "ventana_inicio": "38:30.85",
+    "ventana_fin": "38:48.85"
+  },
+  {
+    "archivo": "pasaje_corregido_bloque23_ocho.mp3",
+    "descripcion": "Pasaje corregido: \"4:8\" / \"ocho\" (bloque 23)",
+    "timecode_centro": "44:34.66",
+    "timecode_centro_segundos": 2674.66,
+    "ventana_inicio": "44:25.66",
+    "ventana_fin": "44:43.66"
+  }
+]

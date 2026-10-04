@@ -71,7 +71,9 @@
       "tamano_bytes": 1551926,
       "creditos_estimados_conservador": 318.23,
       "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
-      "pendiente_aprobacion_auditiva": true
+      "aprobado_auditivamente": true,
+      "aprobado_auditivamente_en": "2026-10-05",
+      "nota_aprobacion": "Orlando confirmo auditivamente que la pronunciacion defectuosa quedo corregida en esta version."
     },
     {
       "bloque_tts": "2",
@@ -965,7 +967,9 @@
         }
       ],
       "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
-      "pendiente_aprobacion_auditiva": true
+      "aprobado_auditivamente": true,
+      "aprobado_auditivamente_en": "2026-10-05",
+      "nota_aprobacion": "Orlando confirmo auditivamente que la pronunciacion defectuosa quedo corregida en esta version."
     },
     {
       "bloque_tts": "19",
@@ -1079,7 +1083,9 @@
         }
       ],
       "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
-      "pendiente_aprobacion_auditiva": true
+      "aprobado_auditivamente": true,
+      "aprobado_auditivamente_en": "2026-10-05",
+      "nota_aprobacion": "Orlando confirmo auditivamente que la pronunciacion defectuosa quedo corregida en esta version."
     },
     {
       "bloque_tts": "21",
@@ -1279,7 +1285,9 @@
         }
       ],
       "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
-      "pendiente_aprobacion_auditiva": true
+      "aprobado_auditivamente": true,
+      "aprobado_auditivamente_en": "2026-10-05",
+      "nota_aprobacion": "Orlando confirmo auditivamente que la pronunciacion defectuosa quedo corregida en esta version."
     },
     {
       "bloque_tts": "24",

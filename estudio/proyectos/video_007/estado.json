@@ -1,5 +1,5 @@
 {
-  "estado": "narracion_revision_02",
+  "estado": "narracion_revision_03",
   "historial": [
     {
       "fecha": "2026-10-03",
@@ -8,6 +8,10 @@
     {
       "fecha": "2026-10-04",
       "evento": "Montaje local de narracion_revision_02_sin_musica.mp3: identica a la revision 01 mas 1s de silencio digital en las 15 fronteras entre bloques sin pausa importante (las 10 pausas importantes no cambiaron). Duracion 48:31.56. Sin musica, visuales ni render. Pendiente de escucha y aprobacion de Orlando."
+    },
+    {
+      "fecha": "2026-10-05",
+      "evento": "Orlando rechazo la revision 02 como maestro definitivo por 4 defectos de pronunciacion de ElevenLabs (bloques 1, 18, 20, 23). Se regeneraron esos 4 bloques (1.783,51 creditos) y Orlando los aprobo auditivamente. Montaje de narracion_revision_03_sin_musica.mp3 con esos 4 bloques corregidos, el bloque 24 version 2 sin cambios, y el mismo mapa de pausas de la revision 02 (punto de corte interno del bloque 1 recalculado: 60.1865s). Duracion 48:26.91. Sin musica, visuales ni render. Pendiente de aprobacion final de Orlando."
     }
   ]
 }
