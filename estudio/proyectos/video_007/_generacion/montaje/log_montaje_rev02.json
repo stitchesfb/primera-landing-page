@@ -1,0 +1,55 @@
+{
+  "version": "narracion_revision_02",
+  "archivo": "narracion_revision_02_sin_musica.mp3",
+  "generado_en": "2026-10-04",
+  "basado_en": "narracion_revision_01_sin_musica.mp3 (misma estructura y fuentes), reconstruida desde cero a partir de los 24 MP3 originales decodificados a WAV sin perdida -- no se partio desde el MP3 de la revision 01.",
+  "cambio": "Se anadio exactamente 1 segundo de silencio digital en las 15 fronteras entre bloques que no tenian pausa importante. Las 10 pausas importantes (incluidas las 2 internas de los bloques 1 y 24) permanecen exactamente iguales en duracion y posicion relativa; solo sus timecodes absolutos se desplazan por los nuevos silencios insertados antes de cada una.",
+  "fronteras_con_1s_nuevo": ["1-2", "2-3", "3-4", "6-7", "8-9", "9-10", "11-12", "13-14", "14-15", "16-17", "17-18", "18-19", "19-20", "22-23", "23-24"],
+  "fronteras_sin_cambio_pausas_importantes": ["4-5 (3s)", "5-6 (4s)", "7-8 (4s)", "10-11 (4s)", "12-13 (4s)", "15-16 (4s)", "20-21 (4s)", "21-22 (5s)"],
+  "cortes_internos_sin_cambio": {
+    "bloque_1": { "punto_de_corte_segundos": 62.223, "nota": "identico a la revision 01, candidato B aprobado" },
+    "bloque_24": { "punto_de_corte_segundos": 71.825, "nota": "identico a la revision 01, calculado con alignment real" }
+  },
+  "metodo": "Los 24 MP3 se re-decodificaron a WAV (PCM, mono, 44100Hz). Los bloques 1 y 24 se dividieron en los mismos puntos exactos que la revision 01 (sin recodificar). Se generaron silencios de 1s/3s/4s/5s con anullsrc. Los 51 segmentos se unieron con el demuxer concat en modo stream-copy. Una unica codificacion final a mp3 mono 44100Hz 128kbps. Ningun MP3 original ni la revision 01 fueron modificados.",
+  "duracion_total_segundos": 2911.56,
+  "duracion_total_formato": "48:31.56",
+  "duracion_esperada_aprobada": "aproximadamente 48:31.56",
+  "diferencia_con_revision_01_segundos": 15,
+  "pausas_importantes_timecodes": [
+    { "numero": 1, "segundos": 4, "posicion": "interna bloque 1", "timecode": "1:02.23" },
+    { "numero": 2, "segundos": 3, "posicion": "frontera 4->5", "timecode": "6:09.00" },
+    { "numero": 3, "segundos": 4, "posicion": "frontera 5->6", "timecode": "7:40.28" },
+    { "numero": 4, "segundos": 4, "posicion": "frontera 7->8", "timecode": "12:04.69" },
+    { "numero": 5, "segundos": 4, "posicion": "frontera 10->11", "timecode": "19:34.89" },
+    { "numero": 6, "segundos": 4, "posicion": "frontera 12->13", "timecode": "23:48.35" },
+    { "numero": 7, "segundos": 4, "posicion": "frontera 15->16", "timecode": "29:31.82" },
+    { "numero": 8, "segundos": 4, "posicion": "frontera 20->21", "timecode": "40:01.38" },
+    { "numero": 9, "segundos": 5, "posicion": "frontera 21->22", "timecode": "41:46.52" },
+    { "numero": 10, "segundos": 4, "posicion": "interna bloque 24", "timecode": "48:24.83" }
+  ],
+  "pausas_normales_nuevas_timecodes": [
+    { "frontera": "1-2", "timecode": "1:43.52" },
+    { "frontera": "2-3", "timecode": "3:16.24" },
+    { "frontera": "3-4", "timecode": "4:47.66" },
+    { "frontera": "6-7", "timecode": "10:26.22" },
+    { "frontera": "8-9", "timecode": "14:45.24" },
+    { "frontera": "9-10", "timecode": "17:15.50" },
+    { "frontera": "11-12", "timecode": "21:23.10" },
+    { "frontera": "13-14", "timecode": "25:26.48" },
+    { "frontera": "14-15", "timecode": "27:04.49" },
+    { "frontera": "16-17", "timecode": "31:09.31" },
+    { "frontera": "17-18", "timecode": "33:41.15" },
+    { "frontera": "18-19", "timecode": "36:15.63" },
+    { "frontera": "19-20", "timecode": "37:51.55" },
+    { "frontera": "22-23", "timecode": "44:38.47" },
+    { "frontera": "23-24", "timecode": "47:11.98" }
+  ],
+  "verificaciones_realizadas": [
+    "narracion_revision_01_sin_musica.mp3 confirmada intacta (git diff sin cambios).",
+    "Los 24 MP3 originales confirmados intactos (git diff sin cambios).",
+    "Duracion final 2911.56s = 48:31.56, exactamente la esperada.",
+    "Diferencia con revision 01: +15.00s = 15 fronteras x 1s, consistente."
+  ],
+  "no_incluido": "Sin ElevenLabs, sin regeneracion de voz, sin normalizacion, sin recortes, sin cambios de velocidad, sin crossfades. Sin musica, visuales, Shorts ni render.",
+  "estado_canonico": "narracion_revision_02 -- NO es narracion_aprobada todavia. Pendiente de escucha y aprobacion de Orlando."
+}

@@ -1,9 +1,13 @@
 {
-  "estado": "narracion_revision_01",
+  "estado": "narracion_revision_02",
   "historial": [
     {
       "fecha": "2026-10-03",
       "evento": "Montaje local de narracion_revision_01_sin_musica.mp3: los 24 bloques TTS aprobados, con el mapa definitivo de 10 pausas digitales (40s totales). Sin musica, visuales ni render. Pendiente de escucha y aprobacion de Orlando antes de pasar a narracion_aprobada."
+    },
+    {
+      "fecha": "2026-10-04",
+      "evento": "Montaje local de narracion_revision_02_sin_musica.mp3: identica a la revision 01 mas 1s de silencio digital en las 15 fronteras entre bloques sin pausa importante (las 10 pausas importantes no cambiaron). Duracion 48:31.56. Sin musica, visuales ni render. Pendiente de escucha y aprobacion de Orlando."
     }
   ]
 }
