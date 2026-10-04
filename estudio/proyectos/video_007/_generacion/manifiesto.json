@@ -31,7 +31,7 @@
       "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
       "archivo_audio": "1.mp3",
-      "generado_en": "2026-09-30T04:05:51.541Z",
+      "generado_en": "2026-10-04T04:51:21.346Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 1,
@@ -45,13 +45,33 @@
         }
       ],
       "creditos_estimados": 318.23,
-      "creditos_reales": 254,
+      "creditos_reales": null,
       "creditos_antes": 6456,
       "creditos_despues": 6710,
       "observacion_aceptada": "Ligera prolongación de \"noche\" cerca del segundo 3; aceptada por Orlando el 30 de septiembre de 2026; no requiere regeneración.",
-      "duracion_segundos": 99.553,
-      "car_por_min": 694.9,
-      "pal_por_min": 114.5
+      "duracion_segundos": 96.967,
+      "car_por_min": 713.4,
+      "pal_por_min": 117.6,
+      "revisiones_rechazadas": [
+        {
+          "archivo_audio": "revisiones_rechazadas/1_rev1_rechazado_noche_alargada.mp3",
+          "archivo_alineacion": null,
+          "texto_sha256": "1c72d1556efbfd2944c48e7efe04fa59f67a8b0b37d1e3d67eed45d132e8c3b9",
+          "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+          "model_id": "eleven_flash_v2_5",
+          "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
+          "generado_en": "2026-09-30T04:05:51.541Z",
+          "estado": "rechazado",
+          "motivo_rechazo": "Defecto de pronunciacion de ElevenLabs: \"nocheee\" en vez de \"noche\", detectado por Orlando en Parte 1 00:02 de narracion_revision_02 (segundo 2 del bloque, confirmado dentro del cuerpo del bloque 1, lejos del punto de corte interno en 62.223s). El texto fuente ya decia correctamente \"noche\" (sin cambios). Esta version nunca tuvo alignment/normalized_alignment persistido (se genero antes de que el pipeline empezara a guardarlo).",
+          "rechazado_en": "2026-10-05"
+        }
+      ],
+      "archivo_alineacion": "1.alignment.json",
+      "nota_creditos": "No se consulto el contador de creditos (presupuesto controlado por caracteres, segun instruccion explicita de no hacer polling).",
+      "tamano_bytes": 1551926,
+      "creditos_estimados_conservador": 318.23,
+      "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
+      "pendiente_aprobacion_auditiva": true
     },
     {
       "bloque_tts": "2",
@@ -346,7 +366,7 @@
       "creditos_antes": 9938,
       "creditos_despues": 10194,
       "duracion_segundos": 97.515,
-      "car_por_min": 715.0,
+      "car_por_min": 715,
       "pal_por_min": 118.8
     },
     {
@@ -893,7 +913,7 @@
       "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
       "archivo_audio": "18.mp3",
-      "generado_en": "2026-10-02T03:00:56.025Z",
+      "generado_en": "2026-10-04T04:51:24.829Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 69,
@@ -922,14 +942,30 @@
         }
       ],
       "archivo_alineacion": "18.alignment.json",
-      "tamano_bytes": 2456808,
-      "duracion_segundos": 153.522,
-      "car_por_min": 723.8,
-      "pal_por_min": 120.8,
+      "tamano_bytes": 2429222,
+      "duracion_segundos": 151.798,
+      "car_por_min": 732,
+      "pal_por_min": 122.1,
       "creditos_estimados_calibrado": 407.44,
       "creditos_estimados_conservador": 511.15,
       "creditos_reales": null,
-      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
+      "nota_creditos": "No se consulto el contador de creditos (presupuesto controlado por caracteres, segun instruccion explicita de no hacer polling).",
+      "revisiones_rechazadas": [
+        {
+          "archivo_audio": "revisiones_rechazadas/18_rev1_rechazado_s_inicial_alargada.mp3",
+          "archivo_alineacion": "revisiones_rechazadas/18_rev1_rechazado_s_inicial_alargada.alignment.json",
+          "texto_sha256": "e84ee553638cfbf750290d4cd60f6e2b74159b825e656c08e6757eae4394a5cd",
+          "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+          "model_id": "eleven_flash_v2_5",
+          "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
+          "generado_en": "2026-10-02T03:00:56.025Z",
+          "estado": "rechazado",
+          "motivo_rechazo": "Defecto de pronunciacion de ElevenLabs: \"sssolamente\" en vez de \"solamente\", detectado por Orlando en Parte 2 11:00 de narracion_revision_02 (segundo 21.52 del bloque 18 segun su propio alignment, solidamente dentro del cuerpo del bloque). El texto fuente ya decia correctamente \"solamente\" (sin cambios).",
+          "rechazado_en": "2026-10-05"
+        }
+      ],
+      "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
+      "pendiente_aprobacion_auditiva": true
     },
     {
       "bloque_tts": "19",
@@ -996,7 +1032,7 @@
       "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
       "archivo_audio": "20.mp3",
-      "generado_en": "2026-10-02T03:01:01.352Z",
+      "generado_en": "2026-10-04T04:51:27.916Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 77,
@@ -1020,14 +1056,30 @@
         }
       ],
       "archivo_alineacion": "20.alignment.json",
-      "tamano_bytes": 2062254,
-      "duracion_segundos": 128.862,
-      "car_por_min": 759,
-      "pal_por_min": 126.6,
+      "tamano_bytes": 2050969,
+      "duracion_segundos": 128.157,
+      "car_por_min": 763.1,
+      "pal_por_min": 127.3,
       "creditos_estimados_calibrado": 358.6,
       "creditos_estimados_conservador": 449.88,
       "creditos_reales": null,
-      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
+      "nota_creditos": "No se consulto el contador de creditos (presupuesto controlado por caracteres, segun instruccion explicita de no hacer polling).",
+      "revisiones_rechazadas": [
+        {
+          "archivo_audio": "revisiones_rechazadas/20_rev1_rechazado_pronunciacion_respuesta_a.mp3",
+          "archivo_alineacion": "revisiones_rechazadas/20_rev1_rechazado_pronunciacion_respuesta_a.alignment.json",
+          "texto_sha256": "451a185193b7ff02fdef2e8f9a401c2e206cd2ac4d528e9848302203407717e2",
+          "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+          "model_id": "eleven_flash_v2_5",
+          "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
+          "generado_en": "2026-10-02T03:01:01.352Z",
+          "estado": "rechazado",
+          "motivo_rechazo": "Defecto de pronunciacion de ElevenLabs: \"respuestaca a\" en vez de \"respuesta a\", detectado por Orlando en Parte 2 14:57 de narracion_revision_02 (segundo 51.93 del bloque 20 segun su propio alignment, dentro del cuerpo del bloque). El texto fuente ya decia correctamente \"respuesta a\" (sin cambios).",
+          "rechazado_en": "2026-10-05"
+        }
+      ],
+      "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
+      "pendiente_aprobacion_auditiva": true
     },
     {
       "bloque_tts": "21",
@@ -1165,7 +1217,7 @@
       "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
       "history_item_id": null,
       "archivo_audio": "23.mp3",
-      "generado_en": "2026-10-02T03:01:11.116Z",
+      "generado_en": "2026-10-04T04:51:31.422Z",
       "parrafos_incluidos_metadato": [
         {
           "numero": 92,
@@ -1204,14 +1256,30 @@
         }
       ],
       "archivo_alineacion": "23.alignment.json",
-      "tamano_bytes": 2441343,
-      "duracion_segundos": 152.555,
-      "car_por_min": 718.6,
-      "pal_por_min": 121.9,
+      "tamano_bytes": 2447195,
+      "duracion_segundos": 152.921,
+      "car_por_min": 716.8,
+      "pal_por_min": 121.6,
       "creditos_estimados_calibrado": 401.94,
       "creditos_estimados_conservador": 504.25,
       "creditos_reales": null,
-      "nota_creditos": "No se consulto el contador de creditos para este bloque (presupuesto controlado por caracteres, por las lecturas contaminadas observadas anteriormente)."
+      "nota_creditos": "No se consulto el contador de creditos (presupuesto controlado por caracteres, segun instruccion explicita de no hacer polling).",
+      "revisiones_rechazadas": [
+        {
+          "archivo_audio": "revisiones_rechazadas/23_rev1_rechazado_o_inicial_alargada.mp3",
+          "archivo_alineacion": "revisiones_rechazadas/23_rev1_rechazado_o_inicial_alargada.alignment.json",
+          "texto_sha256": "32c3c83ff350d7e6848be88a56c43a38d6a3f9d5ffc98e5ee6669c5f0fb80dad",
+          "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+          "model_id": "eleven_flash_v2_5",
+          "ajustes_sha256": "173936e55c4de5947bc6fabd18b82fce890d98efd9d62eb6465b9b3e5ace974b",
+          "generado_en": "2026-10-02T03:01:11.116Z",
+          "estado": "rechazado",
+          "motivo_rechazo": "Defecto de pronunciacion de ElevenLabs: \"oocho\" al leer la cita \"4:8\" (pronunciada \"cuatro ocho\"), detectado por Orlando en Parte 2 20:52 de narracion_revision_02 (aprox. segundo 0.7-0.9 del bloque 23, justo al inicio de su propio texto \"El Salmo 4:8 declara\" -- confirmado via alignment que esta dentro del contenido propio del bloque, no en el limite con el bloque anterior). El texto fuente ya contenia correctamente la cifra \"4:8\"; no existe un error de texto que corregir, el defecto es solo de pronunciacion.",
+          "rechazado_en": "2026-10-05"
+        }
+      ],
+      "relacion_version_rechazada": "Reemplaza la version marcada como rechazada en revisiones_rechazadas (ver manifiesto para el motivo exacto).",
+      "pendiente_aprobacion_auditiva": true
     },
     {
       "bloque_tts": "24",
