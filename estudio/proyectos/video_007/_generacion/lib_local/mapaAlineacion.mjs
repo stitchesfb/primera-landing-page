@@ -1,12 +1,19 @@
 // ElevenLabs colapsa cada "\n\n" interno (separador entre parrafos de un
 // mismo bloque) a un unico caracter (normalmente un espacio) dentro de
 // `alignment`/`normalized_alignment`, y en algunos bloques antepone un
-// caracter extra (espacio) al inicio del stream de alineacion. Un indice
-// de caracter calculado directamente sobre el `texto` original (que si
-// conserva el "\n\n" de dos caracteres) NO corresponde 1:1 al indice en
-// `alignment.characters`. Esta funcion construye el mapeo real, caracter
-// por caracter, y falla ruidosamente si aparece cualquier otro desajuste
-// (en vez de adivinar), para no arriesgar un corte dentro de un fonema.
+// caracter extra (espacio) al inicio del stream de alineacion. Tambien
+// normaliza comillas curvas (“ ”) a comillas rectas ("). Un indice de
+// caracter calculado directamente sobre el `texto` original (que si
+// conserva el "\n\n" de dos caracteres y las comillas curvas) NO
+// corresponde 1:1 al indice en `alignment.characters`. Esta funcion
+// construye el mapeo real, caracter por caracter, y falla ruidosamente
+// si aparece cualquier otro desajuste (en vez de adivinar), para no
+// arriesgar un corte dentro de un fonema.
+
+const EQUIVALENTES_COMILLAS = new Map([
+  ['“', '"'], ['”', '"'], // “ ”
+  ['‘', "'"], ['’', "'"], // ‘ ’
+]);
 
 export function mapearIndicesTextoAAlineacion(textoOriginal, caracteresAlineacion) {
   const mapa = new Array(textoOriginal.length).fill(null);
@@ -31,6 +38,12 @@ export function mapearIndicesTextoAAlineacion(textoOriginal, caracteresAlineacio
       continue;
     }
     if (textoOriginal[oi] === caracteresAlineacion[ai]) {
+      mapa[oi] = ai;
+      oi += 1;
+      ai += 1;
+      continue;
+    }
+    if (EQUIVALENTES_COMILLAS.get(textoOriginal[oi]) === caracteresAlineacion[ai]) {
       mapa[oi] = ai;
       oi += 1;
       ai += 1;

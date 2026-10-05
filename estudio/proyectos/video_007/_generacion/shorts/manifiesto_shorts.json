@@ -1,0 +1,80 @@
+{
+  "proyecto": "video_007",
+  "fuente_canonica": "estudio/proyectos/video_007/_generacion/montaje/narracion_revision_03_sin_musica.mp3",
+  "estado_fuente": "narracion_aprobada",
+  "generado_en": "2026-10-06",
+  "metodo": "Los 3 segmentos [INICIO SHORT N]/[FIN SHORT N] se localizaron programaticamente en el guion aprobado (cada uno es exactamente el primer parrafo de su bloque TTS: bloque 1, bloque 7, bloque 19). Se mapearon al timeline real de narracion_revision_03 sumando el offset de inicio de cada bloque (tomado del log de montaje) con el tiempo de fin de 'Amen.' dentro de ese bloque (tomado de su alignment/normalized_alignment real, con el mapeo de indices corregido para comillas curvas y separadores \\n\\n). Se anadio un margen de ~0.3s de silencio natural tras cada 'Amen.' (dentro del hueco real medido, nunca tocando la siguiente palabra). Extraccion de audio directamente desde el MP3 aprobado, sin modificarlo, sin nueva voz.",
+  "shorts": [
+    {
+      "numero": 1,
+      "bloque_origen": "1",
+      "parrafo_origen": 1,
+      "estado": "audio_preliminar_extraido",
+      "texto_exacto": "Si el miedo no te deja dormir esta noche, no tienes que enfrentarlo a solas. Tal vez apagaste la luz, cerraste los ojos y trataste de descansar, pero tu mente sigue despierta. Quizá estás pensando en tu familia, en tu salud, en tu hogar o en algo que podría ocurrir mañana. En este momento, no tienes que resolverlo todo. Puedes respirar lentamente y recordar que Dios está cerca. Él conoce lo que te inquieta, incluso aquello que no sabes explicar con palabras. Quédate conmigo en esta oración. Vamos a entregar cada temor y a refugiarnos en la presencia de Dios. Padre, aquí estoy. Vengo como estoy, con mis pensamientos y mis preocupaciones. Recíbeme esta noche y enséñame a descansar bajo tu cuidado. Amén.",
+      "caracteres": 710,
+      "palabras": 123,
+      "timecode_inicio_video_largo": "0:00.000",
+      "timecode_fin_video_largo": "1:00.208",
+      "timecode_inicio_segundos": 0.0,
+      "timecode_fin_segundos": 60.208,
+      "duracion_segundos": 60.208,
+      "margen_aplicado": "Fin de 'Amén.' real en el segundo 59.908; se extiende hasta 60.208 (dentro del hueco natural de 0.557s antes de la siguiente frase) como margen de silencio de cola.",
+      "archivo_audio_preliminar": "shorts/audio_preliminar/short_01_preliminar.mp3",
+      "propuesta_titulo": "Si el Miedo No Te Deja Dormir Esta Noche",
+      "gancho_inicial": "Si el miedo no te deja dormir esta noche, no tienes que enfrentarlo a solas.",
+      "recomendacion_intro_outro": "No necesita intro ni outro exclusivos. El gancho nombra el problema en la primera frase y cierra con 'Amén.', una oración completa y autocontenida. Funciona sin haber visto el video largo. Opcional (no obligatorio): un CTA breve en pantalla al final invitando a suscribirse, sin tocar el audio."
+    },
+    {
+      "numero": 2,
+      "bloque_origen": "7",
+      "parrafo_origen": 22,
+      "estado": "audio_preliminar_extraido",
+      "texto_exacto": "El Salmo 91 no comienza hablando del peligro, sino del lugar donde decides permanecer. Dice: \"El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente\". Habitar en Dios no significa que nunca enfrentarás una prueba. Significa que el miedo no tiene que convertirse en tu hogar. Esta noche puedes llevar tus preguntas, tu cansancio y aquello que no controlas a la presencia de Dios. Padre, cuando mi mente corra hacia el peor resultado, llámame de regreso. Enséñame a permanecer cerca de ti. Que tu verdad hable más fuerte que mis temores y que mi corazón encuentre refugio en tu presencia. Amén.",
+      "caracteres": 612,
+      "palabras": 104,
+      "timecode_inicio_video_largo": "10:24.617",
+      "timecode_fin_video_largo": "11:14.410",
+      "timecode_inicio_segundos": 624.617,
+      "timecode_fin_segundos": 674.410,
+      "duracion_segundos": 49.793,
+      "margen_aplicado": "Fin de 'Amén.' real en el segundo 49.493 (local, dentro del bloque 7); se extiende 0.3s hasta 49.793 (dentro del hueco natural de 0.766s antes de la siguiente frase).",
+      "archivo_audio_preliminar": "shorts/audio_preliminar/short_02_preliminar.mp3",
+      "propuesta_titulo": "Salmo 91 No Es Una Fórmula, Es Un Refugio",
+      "gancho_inicial": "El Salmo 91 no comienza hablando del peligro, sino del lugar donde decides permanecer.",
+      "recomendacion_intro_outro": "No necesita intro exclusiva: reencuadra de inmediato una idea conocida (Salmo 91) de forma intrigante. Cierra con 'Amén.', autocontenido. Recomendación visual (no de audio): mostrar en pantalla el texto 'Salmo 91' al inicio para orientar a quien no conoce la referencia. No requiere outro exclusivo."
+    },
+    {
+      "numero": 3,
+      "bloque_origen": "19",
+      "parrafo_origen": 74,
+      "estado": "audio_preliminar_extraido",
+      "texto_exacto": "Dios, esta noche te entrego aquello que mi mente no puede dejar de repetir. Te entrego la conversación, la noticia, la cuenta pendiente y el temor por mañana. No necesito resolverlo todo antes de cerrar los ojos. Si existe un paso que debo dar, recuérdamelo con claridad cuando llegue el momento. Pero si este pensamiento solo está robando mi descanso, ayúdame a dejarlo pasar. Tu Palabra dice: \"En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado\". Esta noche elijo descansar, no porque todo esté resuelto, sino porque no estoy solo. Tú permaneces conmigo. Recibe mis preocupaciones, aquieta mi mente y sostén mi corazón. Amén.",
+      "caracteres": 664,
+      "palabras": 110,
+      "timecode_inicio_video_largo": "36:12.310",
+      "timecode_fin_video_largo": "37:10.567",
+      "timecode_inicio_segundos": 2172.310,
+      "timecode_fin_segundos": 2230.567,
+      "duracion_segundos": 58.257,
+      "margen_aplicado": "Fin de 'Amén.' real en el segundo 57.957 (local, dentro del bloque 19); se extiende 0.3s hasta 58.257 (dentro del hueco natural de 0.662s antes de la siguiente frase).",
+      "archivo_audio_preliminar": "shorts/audio_preliminar/short_03_preliminar.mp3",
+      "propuesta_titulo": "Entrega lo Que Tu Mente No Puede Dejar de Repetir",
+      "gancho_inicial": "Dios, esta noche te entrego aquello que mi mente no puede dejar de repetir.",
+      "recomendacion_intro_outro": "No necesita intro ni outro exclusivos. Gancho emocional inmediato y universal (pensamientos repetitivos antes de dormir); cierra con 'Amén.', autocontenido. Es el candidato más fuerte de los tres para retención por la especificidad del problema nombrado en la primera frase."
+    }
+  ],
+  "verificacion_checklist_sistema_activo": {
+    "funciona_sin_ver_el_largo": true,
+    "problema_en_primer_segundo": true,
+    "limites_limpios_de_parrafo": true,
+    "sin_palabras_cortadas": true,
+    "fragmento_con_sentido_completo": true,
+    "nota": "Los tres Shorts son la oracion completa de su parrafo, delimitada por los marcadores [INICIO SHORT N]/[FIN SHORT N] ya presentes en el guion aprobado desde antes de generar la voz, tal como exige SISTEMA_ACTIVO seccion 4/Shorts."
+  },
+  "pendiente": [
+    "Aprobacion de titulos y ganchos propuestos.",
+    "Decision sobre CTA/texto en pantalla (visual, no afecta el audio).",
+    "Produccion final de los Shorts (recorte definitivo, formato vertical, subtitulos) una vez aprobado el plan visual del video largo."
+  ],
+  "no_incluido": "Sin musica todavia. Sin formato vertical/9:16 todavia. Sin subtitulos. Sin render."
+}
