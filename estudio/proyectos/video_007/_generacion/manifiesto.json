@@ -1379,5 +1379,159 @@
       "car_por_min": 725.7,
       "pal_por_min": 126.3
     }
-  ]
+  ],
+  "narracion_aprobada": {
+    "estado": "narracion_aprobada",
+    "archivo": "montaje/narracion_revision_03_sin_musica.mp3",
+    "version_base": "narracion_revision_03",
+    "fecha_aprobacion": "2026-10-05",
+    "aprobada_por": "Orlando",
+    "duracion_segundos": 2906.91,
+    "duracion_formato": "48:26,91",
+    "bloques_activos_aprobados": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24"
+    ],
+    "bloques_corregidos_aprobados_auditivamente": [
+      "1",
+      "18",
+      "20",
+      "23"
+    ],
+    "bloque_24_version_aprobada": 2,
+    "pausas_importantes_aprobadas": [
+      {
+        "numero": 1,
+        "tipo": "interna",
+        "bloque": 1,
+        "segundos": 4,
+        "punto_de_corte_segundos": 60.1865
+      },
+      {
+        "numero": 2,
+        "tipo": "frontera",
+        "bloques": [
+          4,
+          5
+        ],
+        "segundos": 3
+      },
+      {
+        "numero": 3,
+        "tipo": "frontera",
+        "bloques": [
+          5,
+          6
+        ],
+        "segundos": 4
+      },
+      {
+        "numero": 4,
+        "tipo": "frontera",
+        "bloques": [
+          7,
+          8
+        ],
+        "segundos": 4
+      },
+      {
+        "numero": 5,
+        "tipo": "frontera",
+        "bloques": [
+          10,
+          11
+        ],
+        "segundos": 4
+      },
+      {
+        "numero": 6,
+        "tipo": "frontera",
+        "bloques": [
+          12,
+          13
+        ],
+        "segundos": 4
+      },
+      {
+        "numero": 7,
+        "tipo": "frontera",
+        "bloques": [
+          15,
+          16
+        ],
+        "segundos": 4
+      },
+      {
+        "numero": 8,
+        "tipo": "frontera",
+        "bloques": [
+          20,
+          21
+        ],
+        "segundos": 4
+      },
+      {
+        "numero": 9,
+        "tipo": "frontera",
+        "bloques": [
+          21,
+          22
+        ],
+        "segundos": 5
+      },
+      {
+        "numero": 10,
+        "tipo": "interna",
+        "bloque": 24,
+        "segundos": 4,
+        "punto_de_corte_segundos": 71.825
+      }
+    ],
+    "uniones_normales_aprobadas_1s": [
+      "1-2",
+      "2-3",
+      "3-4",
+      "6-7",
+      "8-9",
+      "9-10",
+      "11-12",
+      "13-14",
+      "14-15",
+      "16-17",
+      "17-18",
+      "18-19",
+      "19-20",
+      "22-23",
+      "23-24"
+    ],
+    "integridad_conservada": [
+      "24 MP3 originales activos",
+      "revisiones_rechazadas (todas las versiones rechazadas de 1, 18, 20, 23 y 24)",
+      "narracion_revision_01_sin_musica.mp3",
+      "narracion_revision_02_sin_musica.mp3"
+    ],
+    "nota": "Sin musica, visuales, Shorts, subtitulos ni render. Esos pasos requieren nueva autorizacion expresa de Orlando."
+  }
 }

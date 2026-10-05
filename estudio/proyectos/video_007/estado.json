@@ -1,5 +1,19 @@
 {
-  "estado": "narracion_revision_03",
+  "estado": "narracion_aprobada",
+  "narracion_aprobada": {
+    "archivo": "estudio/proyectos/video_007/_generacion/montaje/narracion_revision_03_sin_musica.mp3",
+    "version_base": "narracion_revision_03",
+    "fecha_aprobacion": "2026-10-05",
+    "aprobada_por": "Orlando",
+    "duracion_segundos": 2906.91,
+    "duracion_formato": "48:26,91",
+    "bloques_activos_aprobados": 24,
+    "bloques_corregidos_aprobados_auditivamente": [1, 18, 20, 23],
+    "bloque_24_version": 2,
+    "pausas_importantes_aprobadas": 10,
+    "uniones_normales_con_1s_aprobadas": 15,
+    "nota": "No incluye musica, visuales, Shorts, subtitulos ni render. Esos pasos requieren nueva autorizacion expresa."
+  },
   "historial": [
     {
       "fecha": "2026-10-03",
@@ -12,6 +26,10 @@
     {
       "fecha": "2026-10-05",
       "evento": "Orlando rechazo la revision 02 como maestro definitivo por 4 defectos de pronunciacion de ElevenLabs (bloques 1, 18, 20, 23). Se regeneraron esos 4 bloques (1.783,51 creditos) y Orlando los aprobo auditivamente. Montaje de narracion_revision_03_sin_musica.mp3 con esos 4 bloques corregidos, el bloque 24 version 2 sin cambios, y el mismo mapa de pausas de la revision 02 (punto de corte interno del bloque 1 recalculado: 60.1865s). Duracion 48:26.91. Sin musica, visuales ni render. Pendiente de aprobacion final de Orlando."
+    },
+    {
+      "fecha": "2026-10-05",
+      "evento": "Orlando aprobo narracion_revision_03_sin_musica.mp3 como la narracion definitiva del Video 7 (narracion_aprobada). Duracion final 48:26,91. Los 24 bloques activos, las 10 pausas importantes y las 15 uniones normales con 1s quedan aprobados. Bloques originales, versiones rechazadas y revisiones 01/02 conservados intactos. Musica, visuales, Shorts y render siguen sin autorizar."
     }
   ]
 }
