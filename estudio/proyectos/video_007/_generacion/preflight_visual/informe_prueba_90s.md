@@ -1,7 +1,10 @@
 # Video 7 — Prueba audiovisual de 90 segundos
 
-**Estado:** `prueba_audiovisual_90s_pendiente_aprobacion`
-**Fecha:** 2026-10-06
+**Estado:** `prueba_audiovisual_90s_RECHAZADA` (actualizado 2026-10-08)
+**Motivo del rechazo (comunicado por el usuario):** "los clips nocturnos eran demasiado genéricos y no representaban lo que decía la narración".
+**No se borró este archivo ni este informe** — se conserva como registro histórico. Sucesores: la investigación de candidatos humanos en `candidatos_humanos/`, la prueba `revision_02` (clips de video, construida pero no completada/entregada) y la prueba `revision_03_imagenes_ai/` (imágenes aprobadas con animación Ken Burns), marcada `prueba_audiovisual_90s_revision_03_pendiente_aprobacion`.
+
+**Fecha original:** 2026-10-06
 **Archivo:** `preflight_visual/prueba_audiovisual_90s_pendiente_aprobacion.mp4`
 
 ## Especificaciones técnicas

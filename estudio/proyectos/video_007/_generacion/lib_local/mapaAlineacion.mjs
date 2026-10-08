@@ -30,16 +30,20 @@ export function mapearIndicesTextoAAlineacion(textoOriginal, caracteresAlineacio
     if (ai >= caracteresAlineacion.length) {
       throw new Error(`Se agoto la alineacion en indice alineado ${ai} antes de cubrir el texto completo (indice original ${oi}).`);
     }
-    if (textoOriginal[oi] === '\n' && textoOriginal[oi + 1] === '\n') {
-      mapa[oi] = ai;
-      mapa[oi + 1] = ai;
-      oi += 2;
-      ai += 1;
-      continue;
-    }
     if (textoOriginal[oi] === caracteresAlineacion[ai]) {
       mapa[oi] = ai;
       oi += 1;
+      ai += 1;
+      continue;
+    }
+    // El colapso de "\n\n" a un unico caracter no ocurre en todos los
+    // bloques (en el bloque 1, por ejemplo, ambos saltos de linea quedan
+    // literales en la alineacion). Solo se aplica el colapso cuando la
+    // coincidencia directa de arriba fallo.
+    if (textoOriginal[oi] === '\n' && textoOriginal[oi + 1] === '\n' && caracteresAlineacion[ai] !== '\n') {
+      mapa[oi] = ai;
+      mapa[oi + 1] = ai;
+      oi += 2;
       ai += 1;
       continue;
     }
