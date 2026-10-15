@@ -1,5 +1,29 @@
 {
-  "estado": "narracion_aprobada",
+  "estado": "mapa_visual_pendiente_aprobacion",
+  "prueba_audiovisual_aprobada": {
+    "revision": "revision_04",
+    "archivo": "estudio/proyectos/video_007/_generacion/preflight_visual/revision_04_movimiento_particulas/prueba_audiovisual_90s_revision_04_pendiente_aprobacion.mp4",
+    "fecha_aprobacion": "2026-10-15",
+    "aprobada_por": "Orlando",
+    "aprobado": [
+      "imagenes y realismo",
+      "movimiento 7-8% por toma",
+      "tomas mas cortas y reencuadres",
+      "fundidos (0.875s mismo recurso / 1.75s recurso distinto)",
+      "particulas blancas con el preset nocturno aprobado (estudio/lib/particulas.mjs)",
+      "musica alone_with_my_thoughts.mp3 y nivel de mezcla",
+      "narracion (aprobada previamente, sin cambios)"
+    ],
+    "nota": "Esta aprobacion cubre unicamente el patron visual de 90s de la revision 04 (imagenes + candidatos humanos aun no usados en esta prueba + particulas + ritmo de movimiento/transiciones). No autoriza el render del video largo ni de los Shorts; eso requiere el mapa visual completo, ahora en estado mapa_visual_pendiente_aprobacion."
+  },
+  "mapa_visual_pendiente_aprobacion": {
+    "archivo_md": "estudio/proyectos/video_007/_generacion/mapa_visual/mapa_visual_completo_video_007.md",
+    "archivo_json": "estudio/proyectos/video_007/_generacion/mapa_visual/mapa_visual_completo_video_007.json",
+    "fecha": "2026-10-15",
+    "cubre": "24 bloques TTS + 10 pausas importantes + inventario de 15 recursos existentes + 16 imagenes nuevas propuestas (sin generar) + apendice de los 3 Shorts",
+    "total_tomas_estimadas": 189,
+    "nota": "Documento de planeacion. No se genero ninguna imagen nueva, no se descargo ningun recurso nuevo y no se rendirizo el video largo ni los Shorts."
+  },
   "narracion_aprobada": {
     "archivo": "estudio/proyectos/video_007/_generacion/montaje/narracion_revision_03_sin_musica.mp3",
     "version_base": "narracion_revision_03",
@@ -30,6 +54,10 @@
     {
       "fecha": "2026-10-05",
       "evento": "Orlando aprobo narracion_revision_03_sin_musica.mp3 como la narracion definitiva del Video 7 (narracion_aprobada). Duracion final 48:26,91. Los 24 bloques activos, las 10 pausas importantes y las 15 uniones normales con 1s quedan aprobados. Bloques originales, versiones rechazadas y revisiones 01/02 conservados intactos. Musica, visuales, Shorts y render siguen sin autorizar."
+    },
+    {
+      "fecha": "2026-10-15",
+      "evento": "Orlando aprobo definitivamente la prueba_audiovisual_90s_revision_04_pendiente_aprobacion (imagenes y realismo, movimiento 7-8%, tomas cortas y reencuadres, fundidos, particulas del preset nocturno, musica alone_with_my_thoughts.mp3 y su nivel, narracion ya aprobada). Registrada como prueba_audiovisual_aprobada. La revision 02 (clips de Pexels/Pixabay) permanece pausada e intacta. Se construyo el mapa_visual_completo_video_007 (24 bloques + 10 pausas + inventario de 15 recursos existentes + 16 imagenes nuevas propuestas sin generar + apendice de los 3 Shorts), estado mapa_visual_pendiente_aprobacion. No se genero ninguna imagen nueva, no se descargo ningun recurso nuevo y no se rendirizo el video largo ni los Shorts."
     }
   ]
 }

@@ -1,0 +1,557 @@
+{
+  "proyecto": "video_007",
+  "fecha": "2026-10-15",
+  "estado": "mapa_visual_pendiente_aprobacion",
+  "duracion_total_s": 2906.91,
+  "duracion_total_formato": "48:26,91",
+  "verificacion_timeline": {
+    "calculado_s": 2906.91,
+    "aprobado_s": 2906.91,
+    "diferencia_s": 0.0
+  },
+  "metodologia": "Mapa de planeacion a nivel de bloque (24 bloques TTS + 10 pausas). Las tomas_estimadas son un conteo aproximado (~15s/toma en contenido humano/biblico, 15-30s en naturaleza), no timecodes exactos por corte -- el corte fino se resuelve con la alineacion real de ElevenLabs en el momento de montar, igual que en las pruebas de 90s ya aprobadas.",
+  "patron_movimiento_global": "zoom 7-8% de cambio de escala total, direccion unica (nunca ida y vuelta), foco fijo que nunca corta ojos/manos/Biblia",
+  "patron_transiciones_global": {
+    "mismo_recurso_s": 0.875,
+    "recurso_distinto_s": 1.75,
+    "sin_pasar_por_negro": true
+  },
+  "particulas": {
+    "sistema": "estudio/lib/particulas.mjs",
+    "preset": "noche",
+    "cuantas": 82,
+    "periodo_s": 24
+  },
+  "bloques": [
+    {
+      "bloque": 1,
+      "inicio_s": 0.0,
+      "fin_s": 100.41,
+      "duracion_s": 100.41,
+      "idea_principal": "Si el miedo no te deja dormir esta noche... Padre, aquí estoy... Amén.",
+      "emocion": "preocupacion_a_entrega",
+      "visual_propuesto": "Mujer despierta/preocupada -> orando (ya aprobado, revision 04)",
+      "recurso": "IMG1->IMG2",
+      "tomas_estimadas": 6,
+      "pausa_importante": "pausa1_interna",
+      "short": "short1",
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 2,
+      "inicio_s": 101.41,
+      "fin_s": 193.178,
+      "duracion_s": 91.768,
+      "idea_principal": "La noche suele hacer que las preocupaciones parezcan mas grandes... llevarlos ante Dios",
+      "emocion": "inquietud_a_disposicion",
+      "visual_propuesto": "Mujer con ojos cerrados, respiracion, manta",
+      "recurso": "N1",
+      "tomas_estimadas": 6,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 3,
+      "inicio_s": 194.178,
+      "fin_s": 284.64,
+      "duracion_s": 90.462,
+      "idea_principal": "Padre celestial... Bajo los hombros. Aflojo las manos.",
+      "emocion": "vulnerabilidad_acercamiento",
+      "visual_propuesto": "Manos entrelazadas sobre el pecho, sin rostro",
+      "recurso": "N2",
+      "tomas_estimadas": 6,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 4,
+      "inicio_s": 285.64,
+      "fin_s": 366.019,
+      "duracion_s": 80.379,
+      "idea_principal": "Senor, te entrego lo que ocurrio hoy...",
+      "emocion": "entrega",
+      "visual_propuesto": "Mano sobre el corazon, mirada baja",
+      "recurso": "N3",
+      "tomas_estimadas": 5,
+      "pausa_importante": "pausa2_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 5,
+      "inicio_s": 369.019,
+      "fin_s": 457.339,
+      "duracion_s": 88.32,
+      "idea_principal": "...entremos en la Palabra. Senor, prepara mi corazon para escuchar.",
+      "emocion": "apertura_expectativa",
+      "visual_propuesto": "Biblia cerrada, mano acercandose -> abre hacia escena 6",
+      "recurso": "N4->IMG3_parcial",
+      "tomas_estimadas": 6,
+      "pausa_importante": "pausa3_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 6,
+      "inicio_s": 461.339,
+      "fin_s": 623.324,
+      "duracion_s": 161.985,
+      "idea_principal": "El que habita al abrigo del Altisimo... bajo unas alas (Salmo 91)",
+      "emocion": "refugio_cercania",
+      "visual_propuesto": "Biblia abierta + detalle del salmo marcado",
+      "recurso": "IMG3<->N5",
+      "tomas_estimadas": 11,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 7,
+      "inicio_s": 624.324,
+      "fin_s": 721.839,
+      "duracion_s": 97.515,
+      "idea_principal": "Dire yo a Jehova... en quien confiare",
+      "emocion": "confianza_decision",
+      "visual_propuesto": "Mujer con leve alivio, luz de luna marcada",
+      "recurso": "N6",
+      "tomas_estimadas": 7,
+      "pausa_importante": null,
+      "short": "short2",
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 8,
+      "inicio_s": 725.839,
+      "fin_s": 882.417,
+      "duracion_s": 156.578,
+      "idea_principal": "ninguna oscuridad podia separarlos... que la prudencia no se convierta en ansiedad",
+      "emocion": "proteccion_sabiduria",
+      "visual_propuesto": "Ventana con cortina y luna, interior difuso",
+      "recurso": "N7",
+      "tomas_estimadas": 10,
+      "pausa_importante": "pausa4_frontera_inicio",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 9,
+      "inicio_s": 883.417,
+      "fin_s": 1032.707,
+      "duracion_s": 149.29,
+      "idea_principal": "El Guardian de Israel no se adormece ni duerme (Salmo 121)",
+      "emocion": "vigilancia_soltar_control",
+      "visual_propuesto": "Telefono apagado en la mesilla + ventana",
+      "recurso": "N8<->N7",
+      "tomas_estimadas": 10,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 10,
+      "inicio_s": 1033.707,
+      "fin_s": 1172.13,
+      "duracion_s": 138.423,
+      "idea_principal": "No temas, porque yo estoy contigo (Isaias 41:10)",
+      "emocion": "presencia_valor",
+      "visual_propuesto": "Mujer con alivio + ojos cerrandose",
+      "recurso": "N6<->HUM6",
+      "tomas_estimadas": 9,
+      "pausa_importante": "pausa5_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 11,
+      "inicio_s": 1176.13,
+      "fin_s": 1280.385,
+      "duracion_s": 104.255,
+      "idea_principal": "comienzo entregandote ese miedo que no se nombrar",
+      "emocion": "entrega_corporal",
+      "visual_propuesto": "Mujer abrazando una almohada",
+      "recurso": "N9",
+      "tomas_estimadas": 7,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 12,
+      "inicio_s": 1281.385,
+      "fin_s": 1425.659,
+      "duracion_s": 144.274,
+      "idea_principal": "Senor, te entrego a mi familia...",
+      "emocion": "amor_entrega_otros",
+      "visual_propuesto": "Marco de fotos familiares + manos en oracion",
+      "recurso": "N10<->HUM9",
+      "tomas_estimadas": 10,
+      "pausa_importante": "pausa6_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 13,
+      "inicio_s": 1429.659,
+      "fin_s": 1523.83,
+      "duracion_s": 94.171,
+      "idea_principal": "Padre, pongo mi hogar delante de ti...",
+      "emocion": "gratitud_seguridad",
+      "visual_propuesto": "Puerta entornada, luz calida del pasillo",
+      "recurso": "N11",
+      "tomas_estimadas": 6,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 14,
+      "inicio_s": 1524.83,
+      "fin_s": 1621.875,
+      "duracion_s": 97.045,
+      "idea_principal": "Senor, te entrego mi salud...",
+      "emocion": "cuidado_vulnerabilidad",
+      "visual_propuesto": "Mano sobre el pecho/abdomen",
+      "recurso": "N12",
+      "tomas_estimadas": 6,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 15,
+      "inicio_s": 1622.875,
+      "fin_s": 1769.239,
+      "duracion_s": 146.364,
+      "idea_principal": "algunas personas llegan a esta oracion despues de recibir una noticia dificil",
+      "emocion": "duelo_consuelo",
+      "visual_propuesto": "Vela pequena consumiendose",
+      "recurso": "N13",
+      "tomas_estimadas": 10,
+      "pausa_importante": "pausa7_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 16,
+      "inicio_s": 1773.239,
+      "fin_s": 1866.757,
+      "duracion_s": 93.518,
+      "idea_principal": "Senor, pongo delante de ti mis finanzas y mi trabajo",
+      "emocion": "inquietud_practica_a_entrega",
+      "visual_propuesto": "Reloj analogico en la mesilla",
+      "recurso": "N14",
+      "tomas_estimadas": 6,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 17,
+      "inicio_s": 1867.757,
+      "fin_s": 2018.64,
+      "duracion_s": 150.883,
+      "idea_principal": "Padre, te entrego el dia de manana antes de que comience",
+      "emocion": "anticipacion_a_soltar",
+      "visual_propuesto": "Reloj (reencuadre) + manos sobre Biblia cerrada",
+      "recurso": "N14<->HUM13",
+      "tomas_estimadas": 10,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 18,
+      "inicio_s": 2019.64,
+      "fin_s": 2171.438,
+      "duracion_s": 151.798,
+      "idea_principal": "pensamientos que regresan en circulos... reconocer cuando estoy rumiando",
+      "emocion": "rumiacion_discernimiento",
+      "visual_propuesto": "Mujer ojos abiertos/cerrados + manta (reencuadre N1)",
+      "recurso": "HUM6<->N1",
+      "tomas_estimadas": 10,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 19,
+      "inicio_s": 2172.438,
+      "fin_s": 2267.393,
+      "duracion_s": 94.955,
+      "idea_principal": "esta noche te entrego aquello que mi mente no puede dejar de repetir (Salmo 4:8)",
+      "emocion": "entrega_final_pensamientos",
+      "visual_propuesto": "Manos pasando paginas de la Biblia",
+      "recurso": "HUM13",
+      "tomas_estimadas": 6,
+      "pausa_importante": null,
+      "short": "short3",
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 20,
+      "inicio_s": 2268.393,
+      "fin_s": 2396.55,
+      "duracion_s": 128.157,
+      "idea_principal": "quiero descansar tambien en quien tu eres... Gracias por...",
+      "emocion": "gratitud",
+      "visual_propuesto": "Mujer con la manta subida, cuerpo mas relajado",
+      "recurso": "N15",
+      "tomas_estimadas": 9,
+      "pausa_importante": "pausa8_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 21,
+      "inicio_s": 2400.55,
+      "fin_s": 2501.722,
+      "duracion_s": 101.172,
+      "idea_principal": "permite que tu respiracion encuentre un ritmo tranquilo... baja los hombros",
+      "emocion": "relajacion_fisica",
+      "visual_propuesto": "Reencuadre N15 + mujer cerrando los ojos",
+      "recurso": "N15<->HUM6",
+      "tomas_estimadas": 7,
+      "pausa_importante": "pausa9_frontera_final",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 22,
+      "inicio_s": 2506.722,
+      "fin_s": 2673.723,
+      "duracion_s": 167.001,
+      "idea_principal": "Descansa bajo la imagen biblica del abrigo del Altisimo...",
+      "emocion": "paz_profunda",
+      "visual_propuesto": "Mujer orando relajada (reencuadre) + lago y estrellas",
+      "recurso": "IMG2_reencuadre<->PIX6",
+      "tomas_estimadas": 11,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 23,
+      "inicio_s": 2674.723,
+      "fin_s": 2827.644,
+      "duracion_s": 152.921,
+      "idea_principal": "En paz me acostare, y asimismo dormire (Salmo 4:8)",
+      "emocion": "paz_confianza_final",
+      "visual_propuesto": "Plano amplio de la cama + via lactea/lago",
+      "recurso": "N16<->PIX2",
+      "tomas_estimadas": 10,
+      "pausa_importante": null,
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    },
+    {
+      "bloque": 24,
+      "inicio_s": 2828.644,
+      "fin_s": 2906.91,
+      "duracion_s": 78.266,
+      "idea_principal": "Padre celestial, gracias por escuchar esta oracion... Puedo descansar en Dios... Amen",
+      "emocion": "descanso_final",
+      "visual_propuesto": "Lago nocturno (cierre, ya aprobado) + reencuadre",
+      "recurso": "IMG4<->PIX6",
+      "tomas_estimadas": 5,
+      "pausa_importante": "pausa10_interna",
+      "short": null,
+      "movimiento": "zoom 7-8%, direccion unica, foco fijo sin cortar ojos/manos/Biblia",
+      "transicion_mismo_recurso_s": 0.875,
+      "transicion_recurso_distinto_s": 1.75
+    }
+  ],
+  "pausas_importantes": [
+    {
+      "numero": 1,
+      "tipo": "interna",
+      "bloque": 1,
+      "segundos": 4.0,
+      "inicio_s": 60.1865,
+      "fin_s": 64.1865
+    },
+    {
+      "numero": 2,
+      "tipo": "frontera",
+      "bloques": [
+        4,
+        5
+      ],
+      "segundos": 3.0,
+      "inicio_s": 363.019,
+      "fin_s": 366.019
+    },
+    {
+      "numero": 3,
+      "tipo": "frontera",
+      "bloques": [
+        5,
+        6
+      ],
+      "segundos": 4.0,
+      "inicio_s": 453.339,
+      "fin_s": 457.339
+    },
+    {
+      "numero": 4,
+      "tipo": "frontera",
+      "bloques": [
+        7,
+        8
+      ],
+      "segundos": 4.0,
+      "inicio_s": 717.839,
+      "fin_s": 721.839
+    },
+    {
+      "numero": 5,
+      "tipo": "frontera",
+      "bloques": [
+        10,
+        11
+      ],
+      "segundos": 4.0,
+      "inicio_s": 1168.13,
+      "fin_s": 1172.13
+    },
+    {
+      "numero": 6,
+      "tipo": "frontera",
+      "bloques": [
+        12,
+        13
+      ],
+      "segundos": 4.0,
+      "inicio_s": 1421.659,
+      "fin_s": 1425.659
+    },
+    {
+      "numero": 7,
+      "tipo": "frontera",
+      "bloques": [
+        15,
+        16
+      ],
+      "segundos": 4.0,
+      "inicio_s": 1765.239,
+      "fin_s": 1769.239
+    },
+    {
+      "numero": 8,
+      "tipo": "frontera",
+      "bloques": [
+        20,
+        21
+      ],
+      "segundos": 4.0,
+      "inicio_s": 2392.55,
+      "fin_s": 2396.55
+    },
+    {
+      "numero": 9,
+      "tipo": "frontera",
+      "bloques": [
+        21,
+        22
+      ],
+      "segundos": 5.0,
+      "inicio_s": 2496.722,
+      "fin_s": 2501.722
+    },
+    {
+      "numero": 10,
+      "tipo": "interna",
+      "bloque": 24,
+      "segundos": 4.0,
+      "inicio_s": 2900.469,
+      "fin_s": 2904.469
+    }
+  ],
+  "shorts": [
+    {
+      "numero": 1,
+      "bloque_origen": 1,
+      "inicio_video_largo_s": 0.0,
+      "fin_video_largo_s": 60.208,
+      "duracion_s": 60.208,
+      "tema": "apertura - nombrar el miedo, entregarlo, Amen",
+      "recurso_largo_reutilizable": [
+        "IMG1",
+        "IMG2"
+      ],
+      "ya_aprobado": true
+    },
+    {
+      "numero": 2,
+      "bloque_origen": 7,
+      "inicio_video_largo_s": 624.617,
+      "fin_video_largo_s": 674.41,
+      "duracion_s": 49.793,
+      "tema": "refugio, no formula - Salmo 91",
+      "recurso_largo_reutilizable": [
+        "N6"
+      ],
+      "ya_aprobado": false
+    },
+    {
+      "numero": 3,
+      "bloque_origen": 19,
+      "inicio_video_largo_s": 2172.31,
+      "fin_video_largo_s": 2230.567,
+      "duracion_s": 58.257,
+      "tema": "entrega de la mente - Salmo 4:8",
+      "recurso_largo_reutilizable": [
+        "HUM13"
+      ],
+      "ya_aprobado": false
+    }
+  ],
+  "total_tomas_estimadas": 189
+}
