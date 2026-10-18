@@ -1,6 +1,8 @@
-# Video 7 — Imágenes nuevas propuestas (descripción, sin generar)
+# Video 7 — Imágenes nuevas propuestas (histórico de diseño — ya generadas y aprobadas)
 
-**16 imágenes**, dentro del rango de 12–20 solicitado. Ninguna fue generada todavía. Todas comparten el mismo "mundo visual" que las 4 imágenes ya aprobadas (mismo dormitorio, misma mujer, misma paleta nocturna azul/cálida) para que al intercalarse con `IMG1`–`IMG4` no se note un salto de estilo. Numeradas N1–N16 en el orden en que aparecen en el mapa (sección 2 de `mapa_visual_completo_video_007.md`).
+**Actualización 2026-10-18: las 16 imágenes descritas aquí ya fueron generadas, aprobadas por Orlando e importadas sin modificar.** Este documento se conserva como el diseño original de cada escena (qué cuidar al generarla); los archivos finales y su verificación (hashes, dimensiones) están en `inventario_recursos.md` sección D y en `imagenes_N1_N16_aprobadas/`.
+
+**16 imágenes**, dentro del rango de 12–20 solicitado. Todas comparten el mismo "mundo visual" que las 4 imágenes ya aprobadas (mismo dormitorio, misma mujer, misma paleta nocturna azul/cálida) para que al intercalarse con `IMG1`–`IMG4` no se note un salto de estilo — confirmado visualmente en la hoja de contacto aprobada. Numeradas N1–N16 en el orden en que aparecen en el mapa (sección 2 de `mapa_visual_completo_video_007.md`).
 
 Para cada una: bloque(s) donde se usaría, qué se ve, encuadre sugerido, y qué cuidado especial pedir al generarla (consistente con las restricciones ya aprobadas: sin deformar rostro/manos/Biblia/luna/paisaje, sin texto ni efectos sobrenaturales, sin pantallas encendidas visibles salvo que se pida expresamente).
 

@@ -1,7 +1,7 @@
 {
   "proyecto": "video_007",
   "fecha": "2026-10-15",
-  "estado": "mapa_visual_pendiente_aprobacion",
+  "estado": "imagenes_N1_N16_aprobadas",
   "duracion_total_s": 2906.91,
   "duracion_total_formato": "48:26,91",
   "verificacion_timeline": {
@@ -553,5 +553,45 @@
       "ya_aprobado": false
     }
   ],
-  "total_tomas_estimadas": 189
+  "total_tomas_estimadas": 189,
+  "actualizado": "2026-10-18",
+  "imagenes_N1_N16_aprobadas": {
+    "aprobado_por": "Orlando",
+    "fecha_aprobacion": "2026-10-18",
+    "cantidad": 16,
+    "directorio": "estudio/proyectos/video_007/_generacion/mapa_visual/imagenes_N1_N16_aprobadas",
+    "verificacion": "16 PNG, nombres y contenido sin modificar, SHA-256 verificado contra SHA256SUMS.txt (coincide 16/16)",
+    "nota_dimension": "15 imagenes en 1672x941; N9_mujer_abrazando_almohada.png en 1671x941 (1px mas angosta) -- diferencia trivial, no afecta el encuadre 16:9",
+    "repeticiones_consecutivas_deliberadas": [
+      {
+        "recurso": "N7",
+        "bloques": [
+          8,
+          9
+        ],
+        "motivo": "continuidad narrativa intencional (vigilancia/ventana), no falta de variedad"
+      },
+      {
+        "recurso": "N14",
+        "bloques": [
+          16,
+          17
+        ],
+        "motivo": "continuidad narrativa intencional (reloj, finanzas -> manana)"
+      },
+      {
+        "recurso": "N15",
+        "bloques": [
+          20,
+          21
+        ],
+        "motivo": "continuidad narrativa intencional (relajacion, gratitud -> descanso progresivo)"
+      }
+    ]
+  },
+  "correcciones_documentales_2026_10_18": [
+    "El total exacto es 189 tomas (no un redondeo); ≈190 se usa solo como forma redondeada en prosa.",
+    "PIX6 se usa en los bloques 22 y 24, no en el bloque 6 (el bloque 6 usa IMG3<->N5).",
+    "N7, N14 y N15 se repiten deliberadamente en bloques consecutivos (8-9, 16-17, 20-21) como continuidad narrativa intencional, no por error de variedad."
+  ]
 }

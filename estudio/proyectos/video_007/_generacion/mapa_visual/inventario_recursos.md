@@ -1,9 +1,9 @@
 # Video 7 — Inventario completo de recursos visuales
 
-**Fecha:** 2026-10-15
-**Estado:** insumo para `mapa_visual_pendiente_aprobacion`
+**Fecha:** 2026-10-15 · actualizado 2026-10-18
+**Estado:** `imagenes_N1_N16_aprobadas`
 
-Todos los recursos aquí listados ya fueron verificados en sesiones anteriores (licencia, resolución, duración, inspección visual real de fotograma — no solo texto de la página). Este documento los reúne en un solo lugar para planear el video largo. **Ninguno de estos recursos fue descargado, combinado ni renderizado de nuevo en esta tarea.**
+Todos los recursos aquí listados ya fueron verificados (licencia, resolución, duración, inspección visual real de fotograma — no solo texto de la página). Este documento los reúne en un solo lugar para planear el video largo.
 
 ---
 
@@ -55,11 +55,43 @@ Ninguno de los 8 fue descargado de nuevo en esta tarea — los archivos ya verif
 
 ---
 
-## D. Resumen numérico
+## D. Imágenes nuevas N1–N16 — aprobadas e importadas (2026-10-18)
 
-| Categoría | Cantidad | Listos para 16:9 directo | Requieren recorte | Reales | Composición digital |
+Generadas, aprobadas visual y editorialmente por Orlando el 2026-10-18, importadas **sin modificar, reencodificar ni renombrar**. Verificación: 16/16 PNG, hashes SHA-256 coinciden con `SHA256SUMS.txt` (16/16 OK).
+
+| ID | Archivo | Dimensión | Bloque(s) | Short | Uso |
+|---|---|---|---|---|---|
+| N1 | `N1_mujer_aquietandose.png` | 1672×941 | 2, 18 | — | Mujer empezando a aquietarse |
+| N2 | `N2_manos_entrelazadas_pecho.png` | 1672×941 | 3 | — | Manos entrelazadas sobre el pecho (versión corregida y aprobada) |
+| N3 | `N3_mano_sobre_corazon.png` | 1672×941 | 4 | — | Mano sobre el corazón |
+| N4 | `N4_biblia_cerrada_antes_de_abrir.png` | 1672×941 | 5 | — | Biblia cerrada, antes de abrir |
+| N5 | `N5_biblia_abierta_salmo_91.png` | 1672×941 | 6 | — | Biblia abierta, Salmo 91 |
+| N6 | `N6_mujer_alivio_sutil.png` | 1672×941 | 7, 10 | **Short 2** | Mujer con alivio sutil — base visual prevista para el Short 2 (aún no renderizado) |
+| N7 | `N7_ventana_cortina_luna.png` | 1672×941 | 8, 9 | — | Ventana con cortina y luna — repetición consecutiva deliberada |
+| N8 | `N8_telefono_apagado_boca_abajo.png` | 1672×941 | 9 | — | Teléfono apagado boca abajo |
+| N9 | `N9_mujer_abrazando_almohada.png` | 1671×941 | 11 | — | Mujer abrazando una almohada |
+| N10 | `N10_marco_familiar_desenfocado.png` | 1672×941 | 12 | — | Marco familiar desenfocado |
+| N11 | `N11_puerta_entornada_luz_calida.png` | 1672×941 | 13 | — | Puerta entornada, luz cálida |
+| N12 | `N12_mano_pecho_abdomen.png` | 1672×941 | 14 | — | Mano sobre el pecho/abdomen |
+| N13 | `N13_vela_pequena.png` | 1672×941 | 15 | — | Vela pequeña |
+| N14 | `N14_reloj_analogico.png` | 1672×941 | 16, 17 | — | Reloj analógico — repetición consecutiva deliberada |
+| N15 | `N15_mujer_relajacion_intermedia.png` | 1672×941 | 20, 21 | — | Mujer, relajación intermedia — repetición consecutiva deliberada |
+| N16 | `N16_plano_amplio_cama.png` | 1672×941 | 23 | — | Plano amplio de la cama |
+
+**Nota de dimensión:** N9 mide 1671×941 (1px más angosta que el resto) — diferencia trivial, no afecta el encuadre 16:9 ni requiere corrección.
+
+**Estilo verificado:** mujer latina adulta con apariencia realista, continuidad visual nocturna, paleta azul con luz cálida moderada, sin texto incrustado, sin logotipos, sin deformidades visibles, sin representación de Jesús — consistente con el estilo aprobado en la revisión 04 y las 4 imágenes originales.
+
+Ubicación: `estudio/proyectos/video_007/_generacion/mapa_visual/imagenes_N1_N16_aprobadas/`.
+
+---
+
+## E. Resumen numérico
+
+| Categoría | Cantidad | Listos para 16:9 directo | Requieren recorte | Reales | Composición digital / IA |
 |---|---:|---:|---:|---:|---:|
-| Imágenes generadas aprobadas | 4 | 4 | 0 | 0 (son IA, sin deformidades) | 4 (IA) |
+| Imágenes generadas aprobadas (originales) | 4 | 4 | 0 | 0 (son IA, sin deformidades) | 4 (IA) |
+| Imágenes nuevas aprobadas (N1–N16) | 16 | 16 | 0 | 0 (son IA, sin deformidades) | 16 (IA) |
 | Candidatos humanos Pexels | 3 | 3 (recorte mínimo) | 0 | 3 | 0 |
 | Pixabay | 8 | 5 | 3 (1, 4, y 2 con recorte leve) | 3 (#2, #5, #6) | 4 (#1, #3, #7, #8) |
-| **Total recursos ya existentes** | **15** | | | | |
+| **Total recursos disponibles** | **31** | | | | |

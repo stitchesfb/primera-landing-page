@@ -1,5 +1,19 @@
 {
-  "estado": "mapa_visual_pendiente_aprobacion",
+  "estado": "imagenes_N1_N16_aprobadas",
+  "imagenes_N1_N16_aprobadas": {
+    "aprobado_por": "Orlando",
+    "fecha_aprobacion": "2026-10-18",
+    "cantidad": 16,
+    "directorio": "estudio/proyectos/video_007/_generacion/mapa_visual/imagenes_N1_N16_aprobadas",
+    "verificacion": "16/16 PNG, nombres y contenido sin modificar, SHA-256 verificado contra SHA256SUMS.txt",
+    "correcciones_documentales_aplicadas": [
+      "189 tomas exactas (no redondeo; ≈190 solo como forma redondeada en prosa)",
+      "PIX6 se usa en los bloques 22 y 24, no en el bloque 6 (bloque 6 = IMG3<->N5)",
+      "N7, N14 y N15 se repiten deliberadamente en bloques consecutivos (8-9, 16-17, 20-21) como continuidad narrativa intencional"
+    ],
+    "n6_short2": "N6 queda registrado como recurso previsto para el Short 2; los Shorts no se renderizaron en esta tarea.",
+    "nota": "No autoriza por si sola a publicar el video. No se modifico narracion, 24 bloques TTS, musica, particulas, Shorts, revision audiovisual 04 ni otros recursos ya aprobados."
+  },
   "prueba_audiovisual_aprobada": {
     "revision": "revision_04",
     "archivo": "estudio/proyectos/video_007/_generacion/preflight_visual/revision_04_movimiento_particulas/prueba_audiovisual_90s_revision_04_pendiente_aprobacion.mp4",
@@ -58,6 +72,10 @@
     {
       "fecha": "2026-10-15",
       "evento": "Orlando aprobo definitivamente la prueba_audiovisual_90s_revision_04_pendiente_aprobacion (imagenes y realismo, movimiento 7-8%, tomas cortas y reencuadres, fundidos, particulas del preset nocturno, musica alone_with_my_thoughts.mp3 y su nivel, narracion ya aprobada). Registrada como prueba_audiovisual_aprobada. La revision 02 (clips de Pexels/Pixabay) permanece pausada e intacta. Se construyo el mapa_visual_completo_video_007 (24 bloques + 10 pausas + inventario de 15 recursos existentes + 16 imagenes nuevas propuestas sin generar + apendice de los 3 Shorts), estado mapa_visual_pendiente_aprobacion. No se genero ninguna imagen nueva, no se descargo ningun recurso nuevo y no se rendirizo el video largo ni los Shorts."
+    },
+    {
+      "fecha": "2026-10-18",
+      "evento": "Orlando aprobo visual y editorialmente las 16 imagenes nuevas N1-N16 (video_007_imagenes_N1_N16_aprobadas.zip, version consolidada que sustituye los 4 ZIP de revision N1-N4/N5-N8/N9-N12/N13-N16; N2 es la version corregida, no la rechazada). Importadas sin modificar, reencodificar ni renombrar; verificadas 16/16 por SHA-256. Registrada la aprobacion en estado.json, inventario_recursos.md y mapa_visual_completo_video_007 (md+json). Se aplicaron las 3 correcciones documentales que senalo el propio paquete de aprobacion: 189 tomas exactas (no redondeo), PIX6 en bloques 22 y 24 (no en el 6), y N7/N14/N15 como repeticiones consecutivas deliberadas (continuidad narrativa, no error). N6 queda registrado como recurso previsto para el Short 2 (sin renderizar Shorts). No se modifico narracion, 24 bloques TTS, musica, particulas, Shorts, revision audiovisual 04 ni otros recursos ya aprobados."
     }
   ]
 }

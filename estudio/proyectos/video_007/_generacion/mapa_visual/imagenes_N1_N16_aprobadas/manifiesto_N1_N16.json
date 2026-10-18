@@ -1,0 +1,49 @@
+{
+  "proyecto": "video_007",
+  "estado": "imagenes_N1_N16_aprobadas",
+  "aprobado_por": "Orlando",
+  "fecha_aprobacion": "2026-10-18",
+  "cantidad": 16,
+  "paquete_sustituye": [
+    "video_007_imagenes_N1_N4.zip",
+    "video_007_imagenes_N5_N8.zip",
+    "video_007_imagenes_N9_N12.zip",
+    "video_007_imagenes_N13_N16.zip"
+  ],
+  "estilo_global": {
+    "personaje": "mujer latina adulta de apariencia realista",
+    "ambiente": "dormitorio y noche contemplativa",
+    "paleta": "azul nocturna con luz calida moderada",
+    "movimiento": "Ken Burns sereno, 7-8 por ciento de escala por toma",
+    "particulas": "sistema canonico del canal, particulas blancas",
+    "prohibiciones": [
+      "texto incrustado",
+      "logotipos",
+      "deformidades",
+      "representacion visible de Jesus"
+    ]
+  },
+  "imagenes": [
+    {"id":"N1","archivo":"N1_mujer_aquietandose.png","bloques":[2,18],"shorts":[]},
+    {"id":"N2","archivo":"N2_manos_entrelazadas_pecho.png","bloques":[3],"shorts":[],"nota":"version corregida y aprobada"},
+    {"id":"N3","archivo":"N3_mano_sobre_corazon.png","bloques":[4],"shorts":[]},
+    {"id":"N4","archivo":"N4_biblia_cerrada_antes_de_abrir.png","bloques":[5],"shorts":[]},
+    {"id":"N5","archivo":"N5_biblia_abierta_salmo_91.png","bloques":[6],"shorts":[]},
+    {"id":"N6","archivo":"N6_mujer_alivio_sutil.png","bloques":[7,10],"shorts":[2]},
+    {"id":"N7","archivo":"N7_ventana_cortina_luna.png","bloques":[8,9],"shorts":[]},
+    {"id":"N8","archivo":"N8_telefono_apagado_boca_abajo.png","bloques":[9],"shorts":[]},
+    {"id":"N9","archivo":"N9_mujer_abrazando_almohada.png","bloques":[11],"shorts":[]},
+    {"id":"N10","archivo":"N10_marco_familiar_desenfocado.png","bloques":[12],"shorts":[]},
+    {"id":"N11","archivo":"N11_puerta_entornada_luz_calida.png","bloques":[13],"shorts":[]},
+    {"id":"N12","archivo":"N12_mano_pecho_abdomen.png","bloques":[14],"shorts":[]},
+    {"id":"N13","archivo":"N13_vela_pequena.png","bloques":[15],"shorts":[]},
+    {"id":"N14","archivo":"N14_reloj_analogico.png","bloques":[16,17],"shorts":[]},
+    {"id":"N15","archivo":"N15_mujer_relajacion_intermedia.png","bloques":[20,21],"shorts":[]},
+    {"id":"N16","archivo":"N16_plano_amplio_cama.png","bloques":[23],"shorts":[]}
+  ],
+  "correcciones_documentales": [
+    "El total exacto es 189 tomas; aproximadamente 190 es solo redondeo.",
+    "PIX6 se usa en bloques 22 y 24, no en el bloque 6.",
+    "N7, N14 y N15 se repiten en bloques consecutivos como continuidad intencional."
+  ]
+}

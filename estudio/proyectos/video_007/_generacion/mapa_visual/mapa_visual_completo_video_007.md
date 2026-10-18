@@ -1,11 +1,11 @@
 # Video 7 — Mapa visual completo (48:26,91)
 
-**Estado:** `mapa_visual_pendiente_aprobacion`
-**Fecha:** 2026-10-15
+**Estado:** `imagenes_N1_N16_aprobadas` (actualizado 2026-10-18; estructura general del mapa aprobada, 16 imágenes nuevas aprobadas e importadas, render completo aún no autorizado)
+**Fecha:** 2026-10-15 (mapa original) · actualizado 2026-10-18 (importación N1–N16 + 3 correcciones documentales)
 **Fuente de narración:** `montaje/narracion_revision_03_sin_musica.mp3` (`narracion_aprobada`, 2906,91s)
 **Base de ritmo visual:** `revision_04_movimiento_particulas` (aprobada definitivamente)
 
-Este documento es un **mapa de planeación**, no una lista de edición cuadro a cuadro. No se generó ninguna imagen nueva, no se descargó ningún recurso nuevo y no se renderizó el video largo ni los Shorts. La narración, los 24 bloques TTS, la música, los Shorts preliminares, las imágenes aprobadas y las revisiones anteriores quedan intactos (ver confirmación en la sección 9).
+Este documento es un **mapa de planeación**. Las 16 imágenes nuevas (N1–N16) ya fueron generadas, aprobadas por Orlando el 2026-10-18 e importadas sin modificar — ver `imagenes_N1_N16_aprobadas/` (PNG originales, `LEEME_APROBACION.md`, `manifiesto_N1_N16.json`, `SHA256SUMS.txt`, hoja de contacto). No se descargó ningún recurso nuevo de pago y no se renderizó todavía el video largo a calidad final ni los Shorts. La narración, los 24 bloques TTS, la música, las partículas, los Shorts preliminares, las imágenes aprobadas anteriormente y las revisiones anteriores quedan intactos (ver confirmación en la sección 9).
 
 ---
 
@@ -61,7 +61,7 @@ Duración de cada bloque tomada de `manifiesto.json` (campo `duracion_segundos`,
 
 ## 3. Estimación total de tomas
 
-Sumando el conteo por bloque (sección 2): **≈190 tomas** a lo largo de los 48:26,91, con un promedio de ~15s por toma (dentro del rango 10–18s aprobado para contenido humano/bíblico; los pasajes de naturaleza contemplativa como el lago en los bloques 22–24 pueden extenderse a 20–30s, reduciendo ligeramente el conteo real). Es una estimación de planeación, no un número cerrado — el montaje fino puede ajustarlo ±10% al sincronizar con las frases reales.
+Sumando el conteo por bloque (sección 2): **189 tomas exactas** a lo largo de los 48:26,91 (el total real calculado, no un redondeo — "≈190" solo se usa en prosa como forma redondeada de referirse a la misma cifra). Promedio de ~15s por toma, dentro del rango 10–18s aprobado para contenido humano/bíblico; los pasajes de naturaleza contemplativa como el lago en los bloques 22–24 pueden extenderse a 20–30s, reduciendo ligeramente el conteo real en el montaje fino. Es una estimación de planeación — el montaje fino puede ajustarla ±10% al sincronizar con las frases reales.
 
 ## 4. Riesgos técnicos o visuales identificados
 
@@ -78,8 +78,8 @@ Sumando el conteo por bloque (sección 2): **≈190 tomas** a lo largo de los 48
 
 ## 5. Política de reutilización (ver detalle de imágenes nuevas en el apéndice `imagenes_nuevas_propuestas.md`)
 
-- Ningún recurso se repite en bloques consecutivos (verificado en la tabla de la sección 2).
-- Cada recurso reutilizado queda separado por varios minutos de otro contenido: `IMG2` aparece en el bloque 1 (~0–2 min) y vuelve a aparecer recién en el bloque 22 (~42 min) — veinte minutos de diferencia. `HUM6` aparece en los bloques 10, 18 y 21 (~17 min, ~34 min, ~40 min) — separado por 7–17 minutos cada vez. `PIX6` aparece en los bloques 6, 22 y 24 (~8 min, ~42 min, ~47 min).
+- **Corrección (2026-10-18):** la afirmación original de que "ningún recurso se repite en bloques consecutivos" era incorrecta. Hay **tres repeticiones consecutivas deliberadas**, documentadas como continuidad narrativa intencional (el mismo encuadre acompaña dos bloques seguidos porque la emoción/escena continúa sin corte de set, no porque falte variedad): `N7` en los bloques 8–9 (vigilancia/ventana), `N14` en los bloques 16–17 (reloj, finanzas→mañana) y `N15` en los bloques 20–21 (relajación, gratitud→descanso progresivo). Fuera de esas tres excepciones explícitas, ningún otro recurso se repite en bloques consecutivos.
+- Cada recurso reutilizado (fuera de esas tres continuidades) queda separado por varios minutos de otro contenido: `IMG2` aparece en el bloque 1 (~0–2 min) y vuelve a aparecer recién en el bloque 22 (~42 min) — veinte minutos de diferencia. `HUM6` aparece en los bloques 10, 18 y 21 (~17 min, ~34 min, ~40 min) — separado por 7–17 minutos cada vez. **Corrección (2026-10-18):** `PIX6` aparece en los bloques **22 y 24** (~42 min, ~47 min) — no en el bloque 6, que usa `IMG3 ⟷ N5` (Biblia abierta + detalle del Salmo 91).
 - Las lunas/estrellas genéricas (Pixabay compuestas) quedan deliberadamente fuera del mapa principal — el guion tiene contenido humano y bíblico específico de sobra para no necesitarlas.
 - El inicio aprobado de la revisión 04 (bloque 1 completo) no se modifica.
 - **Conteo de imágenes adicionales necesarias:** con los 4 existentes + 3 candidatos humanos + 3 Pixabay reales utilizables (2, 5 como respaldo de Biblia, 6) + **16 imágenes nuevas**, el mapa cubre los 24 bloques sin repetir ningún recurso en bloques consecutivos. Esto cae dentro del rango de 12–20 imágenes nuevas que diste como punto de partida.
