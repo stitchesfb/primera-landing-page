@@ -1,5 +1,31 @@
 {
-  "estado": "imagenes_N1_N16_aprobadas",
+  "estado": "video_largo_aprobado",
+  "video_largo_aprobado": {
+    "aprobado_por": "Orlando",
+    "fecha_aprobacion": "2026-10-19",
+    "plan_origen": "plan_tomas_v4.json (190 tomas: 6 protegidas de la revision 04 + 184 nuevas)",
+    "maestro": {
+      "nombre_archivo": "video_007_salmo91_master_720p.mp4",
+      "ubicacion": "scratchpad de la sesion que genero el render (no comiteado al repositorio por su tamano, 615,9 MB); entregado a Orlando dividido en 10 partes descargables de ~5 minutos cada una, mas una entrega recuperable binaria de partes de <=60MB con verificacion SHA-256",
+      "sha256": "8efcdbde6018cc3e8a15e664d2b93893ce2685e0c3e635c25680d3fc667cef1b",
+      "tamano_bytes": 615859391,
+      "resolucion": "1280x720",
+      "fps": 30,
+      "codec_video": "h264",
+      "codec_audio": "aac"
+    },
+    "duracion_final_segundos": 2906.9667,
+    "duracion_objetivo_segundos": 2906.91,
+    "delta_segundos": 0.0567,
+    "nota_duracion": "Diferencia de menos de 2 fotogramas (0,002%), inherente a la cuantizacion por fotograma de la tecnica zoompan/xfade -- no es un error de la formula de encadenado, ya validada exacta a nivel de float en plan_render_corregido_v3.md.",
+    "verificacion_tecnica": {
+      "decodificacion_completa_sin_errores": true,
+      "silencios_anomalos_mayores_6s": 0,
+      "narracion_o_musica_duplicada": false,
+      "metodo_verificacion_duplicacion": "SHA-256 de PCM crudo en 4 ventanas de audio muy separadas (5:00, 40:00, 1:31, 48:15), las 4 distintas entre si"
+    },
+    "nota": "Esta aprobacion cubre el video largo completo a 720p (resolucion de revision ya establecida, no es aun el render final de maxima calidad). No autoriza la produccion de los Shorts, que siguen pendientes. Se conservan intactos el maestro, los 19 grupos de encadenado, las 184 tomas individuales y los archivos de audio usados, a peticion expresa de Orlando, mientras dure o quede pendiente cualquier revision adicional."
+  },
   "imagenes_N1_N16_aprobadas": {
     "aprobado_por": "Orlando",
     "fecha_aprobacion": "2026-10-18",
@@ -76,6 +102,10 @@
     {
       "fecha": "2026-10-18",
       "evento": "Orlando aprobo visual y editorialmente las 16 imagenes nuevas N1-N16 (video_007_imagenes_N1_N16_aprobadas.zip, version consolidada que sustituye los 4 ZIP de revision N1-N4/N5-N8/N9-N12/N13-N16; N2 es la version corregida, no la rechazada). Importadas sin modificar, reencodificar ni renombrar; verificadas 16/16 por SHA-256. Registrada la aprobacion en estado.json, inventario_recursos.md y mapa_visual_completo_video_007 (md+json). Se aplicaron las 3 correcciones documentales que senalo el propio paquete de aprobacion: 189 tomas exactas (no redondeo), PIX6 en bloques 22 y 24 (no en el 6), y N7/N14/N15 como repeticiones consecutivas deliberadas (continuidad narrativa, no error). N6 queda registrado como recurso previsto para el Short 2 (sin renderizar Shorts). No se modifico narracion, 24 bloques TTS, musica, particulas, Shorts, revision audiovisual 04 ni otros recursos ya aprobados."
+    },
+    {
+      "fecha": "2026-10-19",
+      "evento": "Orlando aprobo el render largo completo del video 7 (720p), construido exactamente segun plan_tomas_v4.json: primeros 90s reutilizados directamente de la revision 04 (sin recomponer, sin duplicar particulas), partículas canonicas aplicadas solo desde 90s con fase de entrada 18s, 184 tomas nuevas renderizadas y encadenadas con los fundidos del plan. Duracion final 2906,9667s (delta +0,057s sobre el objetivo de 2906,910s, cuantizacion de fotograma). Verificacion tecnica: decodificacion completa sin errores, 0 silencios anomalos, sin narracion/musica duplicada. Entregado en 10 partes descargables de ~5 minutos. Registrado como video_largo_aprobado. No se produjeron los Shorts ni otro render."
     }
   ]
 }
