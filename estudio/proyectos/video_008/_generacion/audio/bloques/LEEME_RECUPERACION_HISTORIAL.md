@@ -5,6 +5,12 @@ directamente del historial de la cuenta de ElevenLabs (endpoint `/v1/history/{id
 `/v1/history/{id}/audio`), usando los History ID indicados por Orlando (bloque 19) o localizados
 por contenido/duración (bloques 1, 2, 18) — ver sección "Cómo se identificaron" más abajo.
 
+**Actualización 2026-10-24:** Orlando aportó el guion aprobado (`VIDEO_008_GUION_APROBADO.md`) y
+el plan técnico (`VIDEO_008_PLAN_TECNICO_PRE_TTS.md`), ahora persistidos en
+`estudio/proyectos/video_008/`. Se cotejó el texto completo de los 4 bloques contra ese guion —
+ver sección "Cotejo contra el guion aprobado" más abajo. **Los 3 bloques identificados por
+duración/contenido (1, 2 y 18) quedan confirmados exactos, ya no son una inferencia sin verificar.**
+
 ## Los 4 bloques recuperados
 
 | Bloque | Archivo | History ID | Modelo | Voz | Duración real (ffprobe) | SHA-256 |
@@ -19,13 +25,22 @@ Los 4 traen **alineación por carácter completa** (`character_start_times_secon
 `18.alignment.json` y `19.alignment.json`, mismo formato que `estudio/proyectos/video_007/_generacion/audio/bloques/*.alignment.json`
 (`{alignment, normalized_alignment}`, cada uno con `characters` + los dos arreglos de tiempos).
 
-**Nota sobre `character_end_times_seconds`:** en este endpoint de historial, ese arreglo contiene
-la **duración de cada carácter**, no un tiempo acumulado — hay que sumarlo para obtener la duración
-total (se verificó: la suma coincide con la duración real del MP3 en los 4 casos, con un margen de
-±0,1s). `character_start_times_seconds` sí es acumulado desde 0. Dejarlo documentado aquí para quien
-reutilice estos archivos de alineación — es distinto del formato que produce el endpoint de
-generación con timestamps (`vozConTiempos` en `estudio/lib/elevenlabs.mjs`), donde ambos arreglos
-son acumulados.
+**Nota sobre `character_end_times_seconds` (confirmado y corregido el 2026-10-24):** en este
+endpoint de historial, ese arreglo contiene la **duración de cada carácter**, no un tiempo
+acumulado — sumado da la duración total (verificado: coincide con la duración real del MP3 en los
+4 casos, margen de 0,04–0,05s). `character_start_times_seconds` sí es acumulado desde 0. Es
+distinto del formato que produce el endpoint de generación con timestamps (`vozConTiempos` en
+`estudio/lib/elevenlabs.mjs`), que usan los `*.alignment.json` de video_007, donde ambos arreglos
+ya son acumulados.
+
+Por eso cada bloque tiene ahora **dos** archivos de alineación:
+- `{N}.alignment_historial_crudo.json` — la respuesta cruda del historial, **sin tocar**, tal como
+  la devolvió la API (`character_end_times_seconds` = duración por carácter).
+- `{N}.alignment.json` — versión **normalizada** al formato que espera el proyecto (igual al de
+  video_007): `character_end_times_seconds` recalculado como tiempo absoluto acumulado
+  (`start[i] + duración[i]`). Incluye un bloque `_validacion` con la duración real del audio
+  (ffprobe), la duración según la alineación, el delta entre ambas, y la lista de errores de
+  `start<=end`/límites del audio (vacía en los 4 bloques).
 
 ## Texto, ajustes y configuración de cada bloque
 
@@ -52,24 +67,45 @@ son acumulados.
 - **Texto completo:** oración sobre misericordia, el día completo, familia y hogar — texto íntegro en `18.alignment.json` y en el JSON crudo.
 
 ### Bloque 19, revisión 04 — `WGMbjBfRYJ8TXSXk7RYT`
-- **Ajustes:** `{"stability":0.5}`
+- **Ajustes devueltos por el historial:** `{"stability":0.5}` — campo incompleto, el historial no confirma `similarity_boost` ni `speed`.
+- **Ajustes registrados durante la generación, según Orlando:** `stability: 0,50`, `similarity_boost: 0,75`, `speed: 1,00`. Se registran por separado en `manifiesto_recuperacion.json`, sin fusionarlos con lo que devuelve el historial ni darlos por confirmados de forma independiente — el historial incompleto ni los confirma ni los contradice.
 - **Fecha de generación:** 2026-10-21T01:50:51Z (en un lote distinto, posterior, solo con `eleven_v4`)
 - **Texto completo:** oración de cierre que referencia explícitamente "mi Pastor" y "tu bondad y tu misericordia" (Salmo 23:6), termina en "En el nombre de Jesús. Amén." — texto íntegro en `19.alignment.json`.
 - **Nota:** el campo `voice_id`/`voice_name` que devuelve la API para este item específico es `null` — no es una omisión de esta tarea, es lo que devuelve el endpoint de historial para ese item. El modelo (`eleven_v4`) y los ajustes sí se devolvieron con normalidad.
 
-Los JSON crudos completos devueltos por la API (con todos los campos, incluida la alineación sin recortar) se conservan en el scratchpad de esta sesión, no en el repositorio (son el material de trabajo de la recuperación, no un entregable del proyecto):
-`/tmp/.../scratchpad/video_008/historial_crudo/{history_item_id}.json`
+## Cotejo contra el guion aprobado (2026-10-24)
+
+Con `VIDEO_008_GUION_APROBADO.md` (SHA-256 `c339ca8e18d1...` — coincide exactamente con el que
+declara el plan técnico) ya disponible, se extrajo el texto exacto de cada bloque y se comparó
+carácter a carácter contra el texto reconstruido desde la alineación de cada audio:
+
+- **Bloque 1:** idéntico, 1.391/1.391 caracteres, cero diferencias.
+- **Bloque 2:** idéntico en contenido — las únicas diferencias del diff automático son 2 saltos de
+  línea dobles que caen exactamente en las posiciones de `[PAUSA P01]` y `[PAUSA P02]` del guion
+  (el audio tiene ahí una pausa real; el texto del guion tiene la etiqueta quitada antes de narrar).
+- **Bloque 18:** idéntico en contenido, mismo patrón en la posición de `[PAUSA P09]`.
+- **Bloque 19:** idéntico salvo **una** diferencia real, ya anticipada por Orlando: el guion escrito
+  dice *"Puede dejar de recorrer cada posibilidad"*, el audio aprobado (revisión 04, `eleven_v4`)
+  dice *"Puede descansar sin recorrer cada posibilidad"*. **Se conserva tal cual está en el audio
+  aprobado — no se trata como error.**
+
+Con esto, **la asignación bloque 1 = `Mu8NtZNgVrxj3UeFFWvi` y bloque 2 = `7J12nrwWWYC7BfsA4gO3` queda
+confirmada**, ya no es una inferencia pendiente de verificar.
+
+## Dónde están los JSON crudos completos del historial
+
+Persistidos en el repositorio en `historial_crudo/{history_item_id}.json` (copia exacta, verificada
+byte a byte, de lo que devolvió `/v1/history/{id}`). También quedan en el scratchpad de la sesión
+que los descargó, pero la copia que cuenta es la del repositorio.
 
 ## Cómo se identificaron los bloques 1, 2 y 18
 
-**No existe en este repositorio un guion aprobado ni un plan técnico del Video 8** (se buscó
-exhaustivamente: no hay carpeta `estudio/proyectos/video_008` previa, ningún archivo menciona
-"Salmo 23" ni "video_008" en todo el repositorio). Por lo tanto, **no fue posible contrastar el
-texto de cada bloque contra un guion aprobado local**, como pidió Orlando — este es exactamente
-el documento faltante que se informa aquí, sin intentar suplirlo generando o reconstruyendo un
-guion no autorizado.
-
-En su lugar, la identificación se hizo así:
+**Nota histórica (ya resuelta):** en el momento de esta recuperación (antes del 2026-10-24) no
+existía en este repositorio un guion aprobado ni un plan técnico del Video 8, así que la
+identificación de los bloques 1, 2 y 18 se hizo sin poder contrastar contra una fuente local — se
+documentó entonces como un vacío pendiente. Orlando aportó ambos documentos el 2026-10-24 y el
+cotejo de la sección anterior confirma que la identificación hecha en su momento fue correcta. El
+método que se usó, para que quede constancia:
 
 1. Se listó el historial completo de ElevenLabs filtrado por `voice_id=8mBRP99B2Ng2QwsJMFQl` (639
    items en total, paginado completo).
@@ -94,28 +130,25 @@ En su lugar, la identificación se hizo así:
    Salmo 23 completo** — la secuencia narrativa (introducción → oración breve → lectura del salmo)
    es la que tiene sentido como bloque 1 seguido de bloque 2, no al revés.
 
-   **Esta asignación 1↔2 es una inferencia razonada a partir del contenido y la secuencia del lote
-   de generación, no una verificación contra un documento aprobado — porque ese documento no existe
-   en este repositorio.** Se señala aquí explícitamente para que Orlando la confirme o la corrija,
-   en vez de darla por hecha en silencio.
+   **Esta asignación 1↔2, hecha por inferencia de contenido en su momento, quedó confirmada exacta
+   el 2026-10-24 al cotejarla carácter a carácter contra el guion aprobado** — ver sección de cotejo
+   arriba.
 
-## Qué falta — documentos y permisos no disponibles en este repositorio
+## Qué falta todavía
 
-- **Guion aprobado del Video 8 (Salmo 23).** No existe ninguna versión en `estudio/proyectos/` ni
-  en ningún otro lugar de este repositorio. Sin él no se puede verificar el texto de cada bloque
-  palabra por palabra contra una fuente aprobada, ni confirmar cuántos bloques totales tiene el
-  guion, ni las pausas/transiciones planeadas.
-- **Plan técnico del Video 8** (equivalente al mapa visual o plan de render de los Video 6/7). No
-  existe tampoco.
-- **Los 15 bloques restantes** (de los 19 que aparentemente tiene el guion, a juzgar solo por que
-  el bloque 19 existe) no están en el historial de ElevenLabs bajo los criterios buscados — pueden
-  no haberse generado todavía, haberse generado con otra voz/modelo no buscado aquí, o requerir el
-  guion aprobado para saber exactamente qué texto generar. **No se generó nada para suplirlos**, tal
-  como se pidió. Quedan pendientes de producción con `eleven_v4`, después de que se apruebe su
-  presupuesto — explícitamente indicado por Orlando, no una decisión tomada aquí.
+- **Los 15 bloques restantes (3–17).** No están en el historial de ElevenLabs bajo los criterios
+  buscados — no se generó nada para suplirlos. Presupuesto propuesto (sin generar audio) en
+  `../../VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md`.
+- **`voice_id` y ajustes completos de `eleven_v4`** para esos 15 bloques: ni el guion ni el plan
+  técnico los traen (el plan técnico pide recuperarlos "del manifiesto canónico aprobado de Video 7",
+  que tampoco los tiene registrados en v4 — Video 7 usó Flash v2.5, no v4). Lo único disponible de
+  v4 es el bloque 19, con ajustes parciales (ver arriba). Sin esto no se puede armar el comando de
+  generación de los 15 bloques restantes.
+- **Tarifa real de `eleven_v4`** para esta cuenta: solo hay un dato observado (el propio bloque 19),
+  no una tarifa confirmada — ver el documento de presupuesto para el detalle y la recomendación de
+  confirmarla con un bloque de control antes de generar los 15.
 
-Ninguno de estos vacíos se llenó por inferencia, generación ni suposición — se dejan documentados
-para que Orlando aporte el documento que falte o confirme el camino a seguir.
+Ninguno de estos vacíos se llenó por inferencia, generación ni suposición.
 
 ## Qué se conservó intacto
 

@@ -1,25 +1,53 @@
 {
-  "estado": "audios_parciales_recuperados_de_historial",
-  "titulo_provisional": "Salmo 23",
-  "audios_parciales_recuperados_de_historial": {
-    "fecha": "2026-10-24",
+  "estado": "4_bloques_confirmados_presupuesto_pendiente_aprobacion",
+  "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
+  "guion_aprobado": {
+    "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
+    "sha256": "c339ca8e18d11764ccfac453f528056652090de395a0eb094d7c3acb4b14efa8",
+    "aprobado_por": "Orlando",
+    "fecha_aprobacion": "2026-10-07",
+    "nota": "\"apruebo el guion\" confirma el texto; no autoriza gasto completo de generacion.",
+    "total_bloques": 19,
+    "total_palabras": 4830,
+    "total_caracteres": 29496
+  },
+  "plan_tecnico_aprobado": {
+    "archivo": "estudio/proyectos/video_008/_generacion/VIDEO_008_PLAN_TECNICO_PRE_TTS.md",
+    "sha256": "02e2a8421444faaf7f3c90eaabf8cd884fa2832419706aee441732fcb3550a85"
+  },
+  "audios_confirmados": {
+    "fecha_recuperacion": "2026-10-24",
+    "fecha_cotejo_contra_guion": "2026-10-24",
     "fuente": "Historial de ElevenLabs (API), sin ejecutar ninguna generacion TTS nueva",
-    "bloques_recuperados": [1, 2, 18, 19],
+    "bloques": [1, 2, 18, 19],
     "directorio": "estudio/proyectos/video_008/_generacion/audio/bloques",
     "detalle": "estudio/proyectos/video_008/_generacion/audio/bloques/manifiesto_recuperacion.json",
-    "verificacion": "4/4 MP3 descargados y verificados por SHA-256 y duracion real (ffprobe) contra las duraciones aproximadas indicadas por Orlando (1:56, 1:56, 2:10, 1:37). Alineacion por caracter completa recuperada para los 4.",
-    "bloque_19": "History ID WGMbjBfRYJ8TXSXk7RYT dado directamente por Orlando, sin ambiguedad. Modelo eleven_v4. Se excluyeron explicitamente las pruebas cortas y versiones rechazadas de este bloque encontradas en el historial.",
-    "bloques_1_2_18": "Localizados por duracion + contenido dentro de un lote de 4 generaciones consecutivas (eleven_flash_v2_5, voz 8mBRP99B2Ng2QwsJMFQl) del 2026-10-18. La asignacion bloque 1 vs bloque 2 (duraciones casi identicas, 1:56 ambas) es una inferencia razonada por la secuencia narrativa del contenido, NO verificada contra un guion aprobado -- sin confirmar todavia por Orlando.",
-    "documentos_faltantes": [
-      "Guion aprobado del Video 8 (Salmo 23) -- no existe en este repositorio.",
-      "Plan tecnico/mapa visual del Video 8 -- no existe en este repositorio."
-    ],
-    "nota": "No se genero ningun audio nuevo. No se modifico el Video 7 (guion aprobado, render largo, maestro, grupos, tomas, audios), que permanece intacto. Los 15 bloques restantes del guion (asumiendo que tiene 19 como minimo, a juzgar por la existencia del bloque 19) siguen sin producir, pendientes de presupuesto aprobado para generarse con eleven_v4."
+    "verificacion": "4/4 MP3 verificados por SHA-256 y duracion real (ffprobe). Texto de los 4 cotejado caracter a caracter contra el guion aprobado: bloques 1, 2 y 18 identicos; bloque 19 identico salvo la frase aprobada 'Puede descansar sin recorrer cada posibilidad' (variante de la revision 04, conservada tal cual por instruccion de Orlando).",
+    "alineacion": "Los 4 bloques tienen alineacion por caracter completa, en dos versiones: *.alignment_historial_crudo.json (respuesta cruda de la API, sin tocar) y *.alignment.json (normalizada al formato que usa el proyecto, con bloque _validacion: 0 errores en los 4 casos, delta de duracion menor a 0.06s).",
+    "json_crudos_historial": "estudio/proyectos/video_008/_generacion/audio/bloques/historial_crudo/{history_item_id}.json -- persistidos en el repositorio, no solo en scratchpad."
   },
+  "presupuesto_15_bloques_restantes": {
+    "estado": "propuesto_pendiente_aprobacion",
+    "archivo": "estudio/proyectos/video_008/VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md",
+    "bloques": "3 a 17",
+    "total_caracteres": 23617,
+    "modelo_propuesto": "eleven_v4",
+    "rango_estimado_creditos": "12002 (usando la tarifa v4 observada en el bloque 19, 0.4419 creditos/caracter) a 27160 (conservador, sin descuento, 1 credito/caracter), ambos con reserva del 15% para correcciones ya incluida",
+    "bloqueos": [
+      "voice_id y ajustes completos de eleven_v4 no confirmados (solo hay datos parciales del bloque 19)",
+      "tarifa real de eleven_v4 no confirmada de forma independiente, basada en un solo dato observado",
+      "presupuesto en si mismo pendiente de aprobacion de Orlando"
+    ]
+  },
+  "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
   "historial": [
     {
       "fecha": "2026-10-24",
-      "evento": "Primera tarea del Video 8. Se recuperaron del historial de ElevenLabs (sin generar nada nuevo) los 4 audios que Orlando senalo como ya aprobados: bloque 19 revision 04 (History ID WGMbjBfRYJ8TXSXk7RYT, eleven_v4, dado directamente) y bloques 1, 2 y 18 (eleven_flash_v2_5, voz 8mBRP99B2Ng2QwsJMFQl, localizados por duracion y contenido ante la ausencia de un guion aprobado local contra el cual contrastar el texto). Guardados en estudio/proyectos/video_008/_generacion/audio/bloques con sus alineaciones, SHA-256 y metadatos completos en manifiesto_recuperacion.json. Se informo explicitamente la falta del guion aprobado y del plan tecnico del Video 8 -- ningun documento faltante se suplio por generacion o suposicion. El Video 7 permanece intacto. Los demas bloques del guion quedan pendientes de produccion con eleven_v4 tras aprobacion de presupuesto."
+      "evento": "Primera tarea del Video 8. Se recuperaron del historial de ElevenLabs (sin generar nada nuevo) los 4 audios que Orlando senalo como ya aprobados: bloque 19 revision 04 (History ID WGMbjBfRYJ8TXSXk7RYT, eleven_v4, dado directamente) y bloques 1, 2 y 18 (eleven_flash_v2_5, voz 8mBRP99B2Ng2QwsJMFQl, localizados por duracion y contenido ante la ausencia de un guion aprobado local). Guardados con alineaciones, SHA-256 y metadatos. Se informo la falta del guion aprobado y del plan tecnico -- ningun documento faltante se suplio por generacion o suposicion."
+    },
+    {
+      "fecha": "2026-10-24",
+      "evento": "Segunda tarea. Orlando aporto el guion aprobado (VIDEO_008_GUION_APROBADO.md) y el plan tecnico (VIDEO_008_PLAN_TECNICO_PRE_TTS.md), ahora persistidos en el repositorio. Se cotejo el texto completo de los 4 bloques recuperados contra el guion: bloques 1, 2 y 18 identicos (confirmando la identificacion por inferencia de la tarea anterior); bloque 19 identico salvo la frase aprobada 'Puede descansar sin recorrer cada posibilidad', conservada tal cual por instruccion explicita de Orlando. Se corrigio la interpretacion de character_end_times_seconds del endpoint de historial (es duracion por caracter, no tiempo absoluto): se conservo la respuesta cruda sin tocar (*.alignment_historial_crudo.json) y se genero por separado una version normalizada (*.alignment.json) validada (0 errores en los 4 bloques). Se persistieron los JSON crudos completos del historial en el repositorio (antes solo estaban en el scratchpad de la sesion). Para el bloque 19 se registraron por separado los ajustes que devuelve el historial (incompletos, solo stability) y los que Orlando indico como realmente usados en la generacion (stability 0.50, similarity_boost 0.75, speed 1.00), sin fusionarlos. Se preparo el presupuesto de los 15 bloques restantes (3-17) con eleven_v4, usando como referencia el unico dato real disponible (la tarifa observada en el propio bloque 19), con un rango de 12.002 a 27.160 creditos segun el escenario, y se senalaron los bloqueos pendientes (voice_id/ajustes de v4 sin confirmar, tarifa sin confirmar de forma independiente). No se genero ningun audio. El Video 7 permanece intacto."
     }
   ]
 }

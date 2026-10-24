@@ -1,15 +1,33 @@
 {
   "fecha_recuperacion": "2026-10-24",
   "fuente": "ElevenLabs API, endpoint /v1/history (consulta, sin generar audio nuevo)",
-  "guion_aprobado_local": null,
-  "nota_guion": "No existe guion aprobado del Video 8 en este repositorio. El texto de cada bloque es el que devolvio la propia API de ElevenLabs (campo 'text' o reconstruido desde 'alignment.characters'), no se contrasto contra una fuente local porque esa fuente no existe.",
+  "guion_aprobado_local": {
+    "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
+    "sha256": "c339ca8e18d11764ccfac453f528056652090de395a0eb094d7c3acb4b14efa8",
+    "aprobado_por": "Orlando",
+    "fecha_aprobacion_guion": "2026-10-07 (\"apruebo el guion\" -- confirma el texto, no autoriza gasto completo)"
+  },
+  "plan_tecnico_aprobado_local": {
+    "archivo": "estudio/proyectos/video_008/_generacion/VIDEO_008_PLAN_TECNICO_PRE_TTS.md",
+    "sha256": "02e2a8421444faaf7f3c90eaabf8cd884fa2832419706aee441732fcb3550a85"
+  },
+  "nota_guion": "Ambos documentos fueron aportados por Orlando el 2026-10-24 y ya estan persistidos en el repositorio (ver arriba). El SHA-256 del guion coincide exactamente con el que declara el plan tecnico (c339ca8e...), confirmando que es el mismo archivo fuente.",
+  "cotejo_textual": {
+    "metodo": "Se extrajo el texto exacto de cada bloque (1, 2, 18, 19) del plan tecnico aprobado (seccion 'Bloques exactos'), se le quitaron los marcadores [PAUSA Pxx] (que no se narran), y se comparo caracter a caracter contra el texto reconstruido desde la alineacion de cada audio recuperado (campo 'characters').",
+    "bloque_1": "IDENTICO, 1391/1391 caracteres, sin ninguna diferencia.",
+    "bloque_2": "IDENTICO en contenido. El diff automatico solo marca 2 saltos de linea dobles que corresponden exactamente a las posiciones de [PAUSA P01] y [PAUSA P02] del guion (el audio tiene una pausa natural ahi, el texto del guion tiene la etiqueta removida) -- confirma ademas que las pausas quedaron en la posicion correcta.",
+    "bloque_18": "IDENTICO en contenido. Un salto de linea doble en la posicion exacta de [PAUSA P09], misma explicacion que el bloque 2.",
+    "bloque_19": "UNA diferencia de contenido real, ya conocida y confirmada por Orlando como parte de la revision 04 aprobada: el guion escrito dice 'Puede dejar de recorrer cada posibilidad' y el audio aprobado (eleven_v4, WGMbjBfRYJ8TXSXk7RYT) dice 'Puede descansar sin recorrer cada posibilidad'. Se conserva tal cual esta en el audio aprobado -- NO se trata como un error a corregir. El resto del bloque 19 es identico (incluido un salto de linea doble en la posicion de [PAUSA P10])."
+  },
   "bloques": [
     {
       "bloque": 1,
-      "estado": "recuperado_aprobado_segun_orlando",
+      "estado": "confirmado_identico_al_guion_aprobado",
       "history_item_id": "Mu8NtZNgVrxj3UeFFWvi",
       "archivo": "1.mp3",
-      "archivo_alineacion": "1.alignment.json",
+      "archivo_alineacion_normalizado": "1.alignment.json",
+      "archivo_alineacion_crudo": "1.alignment_historial_crudo.json",
+      "archivo_historial_crudo_completo": "historial_crudo/Mu8NtZNgVrxj3UeFFWvi.json",
       "modelo": "eleven_flash_v2_5",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "voice_name": "El Faraon - Full, Clear, Mellow",
@@ -17,16 +35,18 @@
       "fecha_generacion_utc": "2026-10-18T20:19:01.000Z",
       "duracion_real_s": 115.722449,
       "duracion_indicada_por_orlando": "1:56",
-      "sha256": "4d552096fcd2d7262cb6761b1d3ee4c827d5c0965455b8a273073125835539fe",
+      "sha256_audio": "4d552096fcd2d7262cb6761b1d3ee4c827d5c0965455b8a273073125835539fe",
       "tiene_alineacion": true,
-      "identificacion": "Duracion exacta + contenido (introduccion + anuncio del Salmo 23 + 'Vamos a orar'). Asignacion bloque 1 vs 2 es inferencia razonada por secuencia narrativa, no verificada contra guion -- ver LEEME_RECUPERACION_HISTORIAL.md"
+      "texto_verificado_contra_guion": true
     },
     {
       "bloque": 2,
-      "estado": "recuperado_aprobado_segun_orlando",
+      "estado": "confirmado_identico_al_guion_aprobado",
       "history_item_id": "7J12nrwWWYC7BfsA4gO3",
       "archivo": "2.mp3",
-      "archivo_alineacion": "2.alignment.json",
+      "archivo_alineacion_normalizado": "2.alignment.json",
+      "archivo_alineacion_crudo": "2.alignment_historial_crudo.json",
+      "archivo_historial_crudo_completo": "historial_crudo/7J12nrwWWYC7BfsA4gO3.json",
       "modelo": "eleven_flash_v2_5",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "voice_name": "El Faraon - Full, Clear, Mellow",
@@ -34,16 +54,18 @@
       "fecha_generacion_utc": "2026-10-18T20:19:04.000Z",
       "duracion_real_s": 116.192653,
       "duracion_indicada_por_orlando": "1:56",
-      "sha256": "a58247df6eb637362c3f13006da71be6a31d1a69ea6109f095b00f21145e9815",
+      "sha256_audio": "a58247df6eb637362c3f13006da71be6a31d1a69ea6109f095b00f21145e9815",
       "tiene_alineacion": true,
-      "identificacion": "Duracion exacta + contenido (lectura completa del Salmo 23, Reina-Valera 1909). Asignacion bloque 1 vs 2 es inferencia razonada por secuencia narrativa, no verificada contra guion -- ver LEEME_RECUPERACION_HISTORIAL.md"
+      "texto_verificado_contra_guion": true
     },
     {
       "bloque": 18,
-      "estado": "recuperado_aprobado_segun_orlando",
+      "estado": "confirmado_identico_al_guion_aprobado",
       "history_item_id": "kWHnNar2Dq2FKam5Onwr",
       "archivo": "18.mp3",
-      "archivo_alineacion": "18.alignment.json",
+      "archivo_alineacion_normalizado": "18.alignment.json",
+      "archivo_alineacion_crudo": "18.alignment_historial_crudo.json",
+      "archivo_historial_crudo_completo": "historial_crudo/kWHnNar2Dq2FKam5Onwr.json",
       "modelo": "eleven_flash_v2_5",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "voice_name": "El Faraon - Full, Clear, Mellow",
@@ -51,30 +73,53 @@
       "fecha_generacion_utc": "2026-10-18T20:19:07.000Z",
       "duracion_real_s": 130.168163,
       "duracion_indicada_por_orlando": "2:10",
-      "sha256": "9a4c4fe62569fac35342ad68f65ab57e09e26cb0b726847cd093a754991e7656",
+      "sha256_audio": "9a4c4fe62569fac35342ad68f65ab57e09e26cb0b726847cd093a754991e7656",
       "tiene_alineacion": true,
-      "identificacion": "Duracion exacta, sin ambiguedad (ningun otro candidato del mismo lote se le acerca)."
+      "texto_verificado_contra_guion": true
     },
     {
       "bloque": 19,
       "revision": "revision_04",
-      "estado": "recuperado_aprobado_segun_orlando",
+      "estado": "confirmado_aprobado_con_variante_hablada_conservada",
       "history_item_id": "WGMbjBfRYJ8TXSXk7RYT",
       "archivo": "19.mp3",
-      "archivo_alineacion": "19.alignment.json",
+      "archivo_alineacion_normalizado": "19.alignment.json",
+      "archivo_alineacion_crudo": "19.alignment_historial_crudo.json",
+      "archivo_historial_crudo_completo": "historial_crudo/WGMbjBfRYJ8TXSXk7RYT.json",
       "modelo": "eleven_v4",
       "voice_id": null,
       "voice_name": null,
       "nota_voice_id": "La API devuelve null en voice_id/voice_name para este item especifico; no es una omision de esta tarea.",
-      "ajustes": {"stability": 0.5},
+      "ajustes_devueltos_por_el_historial": {
+        "stability": 0.5,
+        "nota": "El historial de ElevenLabs solo devuelve 'stability' para este item. No confirma similarity_boost ni speed -- campo incompleto, no es un dato inventado ni omitido por esta tarea."
+      },
+      "ajustes_registrados_durante_la_generacion_segun_orlando": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "speed": 1.00,
+        "nota": "Valores que did Orlando indico como los realmente usados al generar este bloque, distintos de (y mas completos que) lo que devuelve el endpoint de historial. Se registran por separado, sin fusionarlos ni dar por hecho que son iguales -- el historial incompleto no los confirma ni los contradice (coincide en stability=0.5, no dice nada de similarity_boost ni speed)."
+      },
       "fecha_generacion_utc": "2026-10-21T01:50:51.000Z",
       "duracion_real_s": 97.149388,
       "duracion_indicada_por_orlando": "1:37",
-      "sha256": "69a3e173fea6a9503cfcc506957ad03b251fab1004da542acb482dc6ee76ce38",
+      "sha256_audio": "69a3e173fea6a9503cfcc506957ad03b251fab1004da542acb482dc6ee76ce38",
       "tiene_alineacion": true,
+      "texto_verificado_contra_guion": "identico salvo la frase aprobada 'Puede descansar sin recorrer cada posibilidad' (el guion escrito dice 'Puede dejar de recorrer cada posibilidad') -- conservada tal cual por instruccion explicita de Orlando, no es un error.",
       "identificacion": "History ID dado directamente por Orlando, sin ambiguedad. Se excluyeron explicitamente: 3 variantes/pruebas en eleven_flash_v2_5 del mismo texto (lDqtZwEIPdIfEzxXkIZI, ciEE7dcae4vRjtHXvr6p, tDmxqvg3MDZSfSo01rzQ) y 2 pruebas cortas (3cEYpNwfiGcdyhTesDJN de 8.5s, FEME3rMSfMsqXytqs9Oz de 7.9s)."
     }
   ],
-  "bloques_pendientes": "Los demas bloques del guion (al menos 15, a juzgar por que el bloque 19 existe) no se buscaron mas alla de los criterios de voz/modelo indicados por Orlando, y no se genero nada para suplirlos. Pendientes de produccion con eleven_v4 tras aprobacion de presupuesto.",
+  "formato_de_alineacion": {
+    "hallazgo": "El endpoint /v1/history/{id} de ElevenLabs devuelve 'character_end_times_seconds' como la DURACION de cada caracter, no como un tiempo absoluto acumulado -- a diferencia del endpoint de generacion con timestamps (el que usan los *.alignment.json de video_007), donde ese mismo campo ya es un tiempo absoluto acumulado. 'character_start_times_seconds' SI es acumulado en ambos casos.",
+    "verificacion": "Confirmado sumando el arreglo completo de 'character_end_times_seconds' del historial para cada uno de los 4 bloques: la suma coincide con la duracion real del MP3 (ffprobe) con un margen de 0,04-0,05s en los 4 casos -- consistente con ser duraciones por caracter, no tiempos absolutos (que habrian dado una suma sin sentido).",
+    "accion": "Los archivos *.alignment_historial_crudo.json conservan la respuesta cruda del historial SIN TOCAR (tal como la devolvio la API). Los archivos *.alignment.json fueron recalculados por separado como version normalizada: character_end_times_seconds = character_start_times_seconds + duracion_del_caracter, en el mismo formato que usan los alignment.json de video_007. Cada archivo normalizado incluye un bloque '_validacion' con: duracion real del audio (ffprobe), duracion segun la alineacion normalizada, delta entre ambas, y la lista de errores encontrados (vacia en los 4 casos) al comprobar que start<=end siempre y que ningun tiempo cae fuera de los limites del audio.",
+    "resultado_validacion": {
+      "bloque_1": {"delta_s": 0.041449, "errores": 0},
+      "bloque_2": {"delta_s": 0.045653, "errores": 0},
+      "bloque_18": {"delta_s": 0.044163, "errores": 0},
+      "bloque_19": {"delta_s": -0.050612, "errores": 0}
+    }
+  },
+  "bloques_pendientes": "Los 15 bloques restantes (3-17) no se generaron. Ver presupuesto propuesto en VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md en la carpeta del proyecto. No se genero nada para suplirlos.",
   "conservado_intacto": "Video 7 completo (guion aprobado, render largo, maestro, grupos, tomas, audios) -- no se toco nada. No se ejecuto ninguna generacion TTS nueva en esta tarea."
 }
