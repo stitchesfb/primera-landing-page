@@ -1,0 +1,25 @@
+{
+  "estado": "audios_parciales_recuperados_de_historial",
+  "titulo_provisional": "Salmo 23",
+  "audios_parciales_recuperados_de_historial": {
+    "fecha": "2026-10-24",
+    "fuente": "Historial de ElevenLabs (API), sin ejecutar ninguna generacion TTS nueva",
+    "bloques_recuperados": [1, 2, 18, 19],
+    "directorio": "estudio/proyectos/video_008/_generacion/audio/bloques",
+    "detalle": "estudio/proyectos/video_008/_generacion/audio/bloques/manifiesto_recuperacion.json",
+    "verificacion": "4/4 MP3 descargados y verificados por SHA-256 y duracion real (ffprobe) contra las duraciones aproximadas indicadas por Orlando (1:56, 1:56, 2:10, 1:37). Alineacion por caracter completa recuperada para los 4.",
+    "bloque_19": "History ID WGMbjBfRYJ8TXSXk7RYT dado directamente por Orlando, sin ambiguedad. Modelo eleven_v4. Se excluyeron explicitamente las pruebas cortas y versiones rechazadas de este bloque encontradas en el historial.",
+    "bloques_1_2_18": "Localizados por duracion + contenido dentro de un lote de 4 generaciones consecutivas (eleven_flash_v2_5, voz 8mBRP99B2Ng2QwsJMFQl) del 2026-10-18. La asignacion bloque 1 vs bloque 2 (duraciones casi identicas, 1:56 ambas) es una inferencia razonada por la secuencia narrativa del contenido, NO verificada contra un guion aprobado -- sin confirmar todavia por Orlando.",
+    "documentos_faltantes": [
+      "Guion aprobado del Video 8 (Salmo 23) -- no existe en este repositorio.",
+      "Plan tecnico/mapa visual del Video 8 -- no existe en este repositorio."
+    ],
+    "nota": "No se genero ningun audio nuevo. No se modifico el Video 7 (guion aprobado, render largo, maestro, grupos, tomas, audios), que permanece intacto. Los 15 bloques restantes del guion (asumiendo que tiene 19 como minimo, a juzgar por la existencia del bloque 19) siguen sin producir, pendientes de presupuesto aprobado para generarse con eleven_v4."
+  },
+  "historial": [
+    {
+      "fecha": "2026-10-24",
+      "evento": "Primera tarea del Video 8. Se recuperaron del historial de ElevenLabs (sin generar nada nuevo) los 4 audios que Orlando senalo como ya aprobados: bloque 19 revision 04 (History ID WGMbjBfRYJ8TXSXk7RYT, eleven_v4, dado directamente) y bloques 1, 2 y 18 (eleven_flash_v2_5, voz 8mBRP99B2Ng2QwsJMFQl, localizados por duracion y contenido ante la ausencia de un guion aprobado local contra el cual contrastar el texto). Guardados en estudio/proyectos/video_008/_generacion/audio/bloques con sus alineaciones, SHA-256 y metadatos completos en manifiesto_recuperacion.json. Se informo explicitamente la falta del guion aprobado y del plan tecnico del Video 8 -- ningun documento faltante se suplio por generacion o suposicion. El Video 7 permanece intacto. Los demas bloques del guion quedan pendientes de produccion con eleven_v4 tras aprobacion de presupuesto."
+    }
+  ]
+}
