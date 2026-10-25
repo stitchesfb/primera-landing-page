@@ -1,0 +1,85 @@
+{
+  "2": {
+    "pausas": [
+      "P01",
+      "P02"
+    ],
+    "indices_en_texto_reconstruido": [
+      426,
+      1094
+    ],
+    "longitud_total": 1481
+  },
+  "4": {
+    "pausas": [
+      "P03"
+    ],
+    "indices_en_texto_reconstruido": [
+      1679
+    ],
+    "longitud_total": 1681
+  },
+  "6": {
+    "pausas": [
+      "P04"
+    ],
+    "indices_en_texto_reconstruido": [
+      1132
+    ],
+    "longitud_total": 1496
+  },
+  "8": {
+    "pausas": [
+      "P05"
+    ],
+    "indices_en_texto_reconstruido": [
+      1392
+    ],
+    "longitud_total": 1798
+  },
+  "11": {
+    "pausas": [
+      "P06"
+    ],
+    "indices_en_texto_reconstruido": [
+      1075
+    ],
+    "longitud_total": 1790
+  },
+  "14": {
+    "pausas": [
+      "P07"
+    ],
+    "indices_en_texto_reconstruido": [
+      677
+    ],
+    "longitud_total": 1419
+  },
+  "16": {
+    "pausas": [
+      "P08"
+    ],
+    "indices_en_texto_reconstruido": [
+      742
+    ],
+    "longitud_total": 1481
+  },
+  "18": {
+    "pausas": [
+      "P09"
+    ],
+    "indices_en_texto_reconstruido": [
+      719
+    ],
+    "longitud_total": 1650
+  },
+  "19": {
+    "pausas": [
+      "P10"
+    ],
+    "indices_en_texto_reconstruido": [
+      1085
+    ],
+    "longitud_total": 1349
+  }
+}

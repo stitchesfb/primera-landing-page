@@ -1,0 +1,9 @@
+{
+  "text": "Si hoy me costó encontrar algo por lo que dar gracias, puedo empezar con algo pequeño. No necesito fingir alegría por lo que me duele. Puedo agradecer una ayuda concreta. Un gesto de paciencia. Una tarea compartida. Un momento en que pude escuchar o ser escuchado. Padre, abre mis ojos a esas formas de cuidado que a veces pasan inadvertidas cuando estoy agotado.\n\nTe agradezco también las personas que permanecen cerca. Algunas saben lo que estoy viviendo y otras me acompañan de maneras discretas. Dame disposición para expresarles mi gratitud. Ayúdame a no esperar hasta tener palabras perfectas. Una llamada, un mensaje sincero o una conversación tranquila pueden reconocer el bien que han hecho. Que aprendamos a cuidarnos con sencillez.\n\nPadre, recibo este momento de descanso como parte del cuidado que necesito. Mis asuntos siguen teniendo importancia, pero mi cuerpo y mi corazón también la tienen. Ayúdame a dejar de exigirles disponibilidad sin límite. Dame sabiduría para construir hábitos más atentos a mi salud, mis relaciones y mi vida espiritual. Guíame hacia lo que pueda hacer de manera constante y realista.\n\nTe entrego el impulso de llenar cada espacio con otra tarea. A veces, cuando todo se queda quieto, siento que debería estar haciendo algo más. Me cuesta aceptar que puedo detenerme. Enséñame a recibir el descanso sin usarlo para medir si hice suficiente. Quiero aprender a escuchar mis límites y a respetar los límites de las personas que viven conmigo.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

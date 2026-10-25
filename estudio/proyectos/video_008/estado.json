@@ -1,5 +1,5 @@
 {
-  "estado": "4_bloques_confirmados_presupuesto_pendiente_aprobacion",
+  "estado": "19_bloques_generados_narracion_completa_pendiente_revision_auditiva",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -26,33 +26,35 @@
     "alineacion": "Los 4 bloques tienen alineacion por caracter completa, en dos versiones: *.alignment_historial_crudo.json (respuesta cruda de la API, sin tocar) y *.alignment.json (normalizada al formato que usa el proyecto, con bloque _validacion: 0 errores en los 4 casos, delta de duracion menor a 0.06s).",
     "json_crudos_historial": "estudio/proyectos/video_008/_generacion/audio/bloques/historial_crudo/{history_item_id}.json -- persistidos en el repositorio, no solo en scratchpad."
   },
-  "presupuesto_15_bloques_restantes": {
-    "estado": "propuesto_pendiente_aprobacion",
-    "archivo": "estudio/proyectos/video_008/VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md",
-    "bloques": "3 a 17",
-    "bloque_mas_largo": "08 (1800 caracteres) -- no el 03 (1700) como se escribio por error en la version anterior de este presupuesto",
-    "total_caracteres": 23617,
-    "configuracion_aprobada": {
+  "generacion_15_bloques_v4": {
+    "estado": "completado_pendiente_revision_auditiva",
+    "fecha_generacion": "2026-10-25",
+    "bloques": [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+    "detalle": "estudio/proyectos/video_008/_generacion/audio/bloques/manifiesto_generacion_v4.json",
+    "configuracion_usada": {
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "model_id": "eleven_v4",
       "stability": 0.50,
       "similarity_boost": 0.75,
       "speed": 1.00,
       "output_format": "mp3_44100_128",
-      "omitidos": ["style", "use_speaker_boost", "seed", "contexto (previous_text/next_text)"],
-      "nota": "No se requiere otra prueba independiente para confirmar esta configuracion."
+      "omitidos": ["style", "use_speaker_boost", "seed", "contexto (previous_text/next_text)"]
     },
-    "tarifa": {
-      "publicada": "1 credito/caracter para eleven_v4 (character_cost_multiplier=1, cost_discount_multiplier=1), consultada en GET /v1/models el 2026-10-25, guardada en historial_crudo/modelos_tarifas_2026-10-25.json. Es la tarifa usada para el presupuesto.",
-      "observada_bloque_19_no_garantizada": "597 creditos / 1356 caracteres reales (corregido de 1351) = 0.4403 creditos/caracter -- un solo dato, no se usa para presupuestar, solo como referencia."
-    },
-    "presupuesto_propuesto_creditos": 27160,
-    "forma_de_proceder_propuesta": "Generar primero un solo bloque de control (bloque 8 propuesto, o el 3 si Orlando lo prefiere), guardar su resultado y comprobar el cargo real antes de continuar con los 14 restantes.",
-    "bloqueos": [
-      "presupuesto pendiente de aprobacion de Orlando",
-      "confirmar cual bloque usar como primero de control (3 u 8)",
-      "aprobacion auditiva final de las duraciones de pausa P03-P08, todavia 'propuesta' en el plan tecnico"
-    ]
+    "metodo": "Una llamada HTTP por bloque, sin reintentos automaticos. Empezo por el bloque 3 (orden pedido por Orlando); todos los 15 pasaron validacion tecnica (texto alineado identico al enviado, decodificacion limpia, ritmo caracteres/segundo dentro de rango) y se continuo automaticamente sin pedir otra aprobacion, como se autorizo.",
+    "cargo_total_verificado_creditos": 9749,
+    "presupuesto_aprobado_creditos": 27160,
+    "nota_cargo": "9749 es el total telescopico (contador de la cuenta antes del bloque 3 vs. despues del bloque 17), la cifra fiable. Los cargos individuales por bloque en manifiesto_generacion_v4.json no son atribuciones fiables una por una (el contador parece acreditarse en lotes).",
+    "guardado_por_bloque": "audio (N.mp3), alineacion (N.alignment.json, ya en formato acumulado correcto desde el endpoint de generacion), payload enviado (N.payload_enviado.json) y History ID (dentro de N.meta_generacion.json)",
+    "hallazgo_no_corregido": "El ritmo real resulto ~137 palabras/min, mas rapido que el rango estimado del guion (100-115 ppm). Informado para la revision auditiva, no corregido -- la reserva del presupuesto no autoriza regeneraciones segun instruccion de Orlando."
+  },
+  "narracion_completa_sin_musica": {
+    "estado": "ensamblada_pendiente_revision_auditiva",
+    "archivo": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas.mp3",
+    "sha256": "2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62",
+    "duracion_s": 2178.481633,
+    "detalle": "estudio/proyectos/video_008/_generacion/montaje/LEEME_NARRACION_COMPLETA.md",
+    "pausas": "Las 10 pausas propuestas (P01-P02 5s, P03-P08 7s, P09-P10 8s) insertadas en su posicion real verificada contra el guion -- 9 de las 10 caen DENTRO de un bloque (no entre bloques), solo P03 es de frontera. Duraciones siguen siendo propuesta, no aprobadas.",
+    "verificacion_tecnica": "Decodificacion completa sin errores. silencedetect confirma 10 silencios en las posiciones y duraciones esperadas."
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
   "historial": [
@@ -67,6 +69,10 @@
     {
       "fecha": "2026-10-25",
       "evento": "Tercera tarea. Orlando aprobo la configuracion completa de eleven_v4 para los bloques 3-17 (voice_id 8mBRP99B2Ng2QwsJMFQl, stability 0.50, similarity_boost 0.75, speed 1.00, output_format mp3_44100_128, sin style/speaker_boost/seed/contexto) sin requerir otra prueba. Corrigio el denominador del bloque 19 a 1356 caracteres (el texto real generado, no el 1351 del guion escrito) y senalo que el bloque mas largo de los 15 es el 08 (1800 car.), no el 03 como se habia escrito por error. Se consulto GET /v1/models y se confirmo la tarifa PUBLICADA de eleven_v4: 1 credito/caracter, sin descuento (guardada en historial_crudo/modelos_tarifas_2026-10-25.json) -- distinta y mas alta que la tarifa observada en el bloque 19 (0.4403 creditos/caracter, un solo dato, ahora explicitamente marcada como no garantizada). Presupuesto corregido: 27.160 creditos (23.617 caracteres x 1 credito + 15% de reserva), usando la tarifa publicada. Se propuso generar primero un bloque de control (08 propuesto, o el 03 si Orlando lo prefiere) y comprobar el cargo real antes de continuar con los demas. No se genero ningun audio; presupuesto pendiente de aprobacion de Orlando."
+    },
+    {
+      "fecha": "2026-10-25",
+      "evento": "Cuarta tarea. Orlando aprobo hasta 27.160 creditos y pidio generar primero el bloque 3 (no el 8), guardar audio/alineacion/payload/History ID, verificar su cargo individual y, si pasaba validacion, continuar automaticamente con los 14 restantes -- una llamada por bloque, sin reintentos automaticos, deteniendose y conservando lo completado ante cualquier fallo. Los 15 bloques (3-17) se generaron correctamente, los 15 pasaron validacion (texto identico al enviado, decodificacion limpia, ritmo plausible). Cargo total verificado (telescopico, contador antes del bloque 3 vs. despues del bloque 17): 9.749 creditos, dentro del presupuesto. Se guardo audio, alineacion (ya en formato acumulado correcto), payload enviado y History ID de cada bloque. Se ensamblo la narracion completa de los 19 bloques (los 4 ya aprobados reutilizados sin tocar + los 15 nuevos) con las 10 pausas propuestas insertadas en su posicion real -- verificado que 9 de las 10 caen DENTRO de un bloque, no entre bloques, usando la alineacion para encontrar el punto de corte exacto. Entregada como video_008_narracion_completa_sin_musica_con_pausas.mp3 (36:18), verificada tecnicamente (decodificacion limpia, 10 silencios detectados en las posiciones/duraciones esperadas). Se informo, sin corregir, que el ritmo real (~137 ppm) resulto mas rapido que lo estimado en el guion -- la reserva del presupuesto no autoriza regenerar segun instruccion de Orlando; cualquier correccion se decide despues de la escucha. El Video 7 permanece intacto."
     }
   ]
 }

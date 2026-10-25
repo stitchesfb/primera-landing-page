@@ -1,0 +1,22 @@
+{
+  "bloque": 7,
+  "history_item_id": "o8UJDuhsaTV88eEAic22",
+  "request_id": "B7BGd4W1rm2CtzMc9FgO",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "model_id": "eleven_v4",
+  "ajustes": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "formato": "mp3_44100_128",
+  "caracteres_enviados": 1486,
+  "duracion_real_s": 109.635918,
+  "caracteres_antes": 15521,
+  "caracteres_despues": 16824,
+  "cargo_creditos": 1303,
+  "fecha_generacion_utc": "2026-10-25T18:21:16.000Z",
+  "sha256_audio": "b9215f13e7334ccc7b12d56d83d46d30bd77b497409c185377ab7c3a1dbadcfd",
+  "errores": [],
+  "ok": true
+}

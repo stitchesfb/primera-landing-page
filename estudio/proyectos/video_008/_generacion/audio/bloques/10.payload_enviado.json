@@ -1,0 +1,9 @@
+{
+  "text": "Señor, también necesito paciencia con el tiempo de las respuestas. A veces quiero entender todo para sentirme seguro. Me cuesta caminar cuando todavía hay detalles que desconozco. Ayúdame a buscar la información que puedo obtener y a aceptar que hay cosas que no están en mis manos. Dame un corazón atento a tu Palabra, dispuesto a aprender y abierto al consejo de personas prudentes.\n\nSi estoy postergando una conversación necesaria, prepara mis palabras. Enséñame a hablar con respeto y claridad. Si debo reconocer un límite, ayúdame a expresarlo sin dureza. Si necesito cambiar un hábito, muéstrame un paso posible y concreto. Quiero seguir tu dirección en las cosas cotidianas, donde mis decisiones afectan la manera en que trato a otros y cuido mi propia vida.\n\nHay caminos que no se parecen a los que imaginé. Tal vez esperaba una etapa más sencilla, una relación más cercana o un trabajo distinto. Ahora estoy aquí, con esta realidad. Padre, ayúdame a mirar lo que tengo delante sin perderme en la comparación con lo que debió haber sido. Dame libertad para lamentar lo que duele y disposición para reconocer las posibilidades que siguen abiertas.\n\nSi una puerta se cerró, ayúdame a examinar lo ocurrido con sensatez. Puede haber algo que aprender, algo que aceptar o algo que intentar de otra manera. No quiero atribuir a tu voluntad cada contratiempo sin comprenderlo. Quiero acercarme a ti con humildad y pedir sabiduría. Acompáñame mientras considero mis opciones y encuentro apoyo para los pasos que necesito dar.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

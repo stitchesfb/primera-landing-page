@@ -1,0 +1,9 @@
+{
+  "text": "Señor, te presento ese cansancio interior. El que no siempre se resuelve después de una noche de sueño. El que viene de tantas decisiones pequeñas, de permanecer disponible, de escuchar y sostener. Ayúdame a reconocerlo sin vergüenza. Dame libertad para recibir compañía, consejo y apoyo cuando lo necesite. Guíame hacia una forma de vivir que tenga espacio para la verdad de mi corazón.\n\nHay cosas que he llevado en silencio porque no quería preocupar a nadie. Temí que me juzgaran, que me dijeran que debería ser más fuerte o que no supieran qué hacer con mi dolor. Delante de ti puedo empezar a nombrarlas. Padre, esto me ha costado. Esta espera me ha desgastado. Esta responsabilidad me preocupa. Esta ausencia todavía me duele. Escucha mi oración y acompáñame.\n\nAyúdame a dejar de compararme con quienes parecen tener más energía o más respuestas. No conozco toda su historia. Tú conoces la mía. Sabes las etapas que he atravesado, las noches de preocupación y las decisiones que tomé con la información que tenía. Enséñame a recibir tu corrección y tu consuelo con humildad. Quiero crecer sin despreciar mi fragilidad.\n\nTe entrego lo que he confundido con fortaleza. La costumbre de no hablar de lo que siento. El impulso de decir que puedo con todo. La dificultad para reconocer que necesito compañía. Dame valentía para vivir con más honestidad. Que mi fe tenga lugar también para una petición sencilla de ayuda, para una conversación sincera y para aceptar el cuidado de otros.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

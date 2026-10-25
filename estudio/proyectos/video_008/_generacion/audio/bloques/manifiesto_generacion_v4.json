@@ -1,0 +1,179 @@
+{
+  "fecha_generacion": "2026-10-25",
+  "modelo": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "ajustes": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1.0
+  },
+  "formato": "mp3_44100_128",
+  "omitidos": [
+    "style",
+    "use_speaker_boost",
+    "seed",
+    "contexto (previous_text/next_text)"
+  ],
+  "metodo": "Una llamada HTTP por bloque a /v1/text-to-speech/{voice_id}/with-timestamps, sin reintentos automaticos. Se detiene el lote completo ante el primer fallo, conservando lo ya completado.",
+  "bloques_generados": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "total_bloques": 15,
+  "todos_ok": true,
+  "caracteres_antes_del_lote": 14036,
+  "caracteres_despues_del_lote": 23785,
+  "cargo_total_verificado_creditos": 9749,
+  "presupuesto_aprobado_creditos": 27160,
+  "nota_cargo_por_bloque": "El campo 'cargo_creditos' de cada N.meta_generacion.json individual no es una atribucion fiable por si solo (el contador de la cuenta parece acreditarse en lotes, no siempre al instante de cada llamada -- varios bloques muestran 0 y otros concentran el cargo de varios). La cifra confiable es el TOTAL telescopico (despues del ultimo bloque menos antes del primero), que coincide exactamente con la suma de todos los 'cargo_creditos' individuales: 9749 creditos.",
+  "detalle_por_bloque": [
+    {
+      "bloque": 3,
+      "history_item_id": "ywY9BveWq8eSltOtXThg",
+      "duracion_s": 117.96898,
+      "caracteres": 1696,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "169acb5504f36ef6c6967733e28b345d06f33fd35bd8b9da9300a2a30d8f7efe",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 4,
+      "history_item_id": "l0psQPAa1WBNaz2qr5HN",
+      "duracion_s": 115.226122,
+      "caracteres": 1679,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "bb1a36c7bfe8b3fc24924185bd913c55652d77808c5a4dc29812b4c53fcfa6d5",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 5,
+      "history_item_id": "mpmQZfJRI1vtr0xbOpmj",
+      "duracion_s": 105.560816,
+      "caracteres": 1466,
+      "cargo_creditos_reportado": 1485,
+      "sha256_audio": "1607d2b7f9023c3579870b6b2fe9055e6b2bb5cfa854c23cdbae822499f1c036",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 6,
+      "history_item_id": "59BA5CaHZalCRpURaMUz",
+      "duracion_s": 101.485714,
+      "caracteres": 1496,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "67c4ff6617911220074d01cd75fa933244746f31932809bf4fc9839101a650e4",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 7,
+      "history_item_id": "o8UJDuhsaTV88eEAic22",
+      "duracion_s": 109.635918,
+      "caracteres": 1486,
+      "cargo_creditos_reportado": 1303,
+      "sha256_audio": "b9215f13e7334ccc7b12d56d83d46d30bd77b497409c185377ab7c3a1dbadcfd",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 8,
+      "history_item_id": "nzrUxVfMn5SkG5MmJWkB",
+      "duracion_s": 135.88898,
+      "caracteres": 1798,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "facf1b643a4c52305642b5c48d8769e3b85fa7981b9bc963eb27a3505ff3ddaa",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 9,
+      "history_item_id": "wHEY0NedSZWrIJFtUciu",
+      "duracion_s": 117.472653,
+      "caracteres": 1676,
+      "cargo_creditos_reportado": 2182,
+      "sha256_audio": "03dbc9f4fe6f18a52f60b6f5ec9b46a9ec16ef3f80dfe54611030ff92bebae5f",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 10,
+      "history_item_id": "JPQSKihiKQY5RSE3Hy2f",
+      "duracion_s": 104.045714,
+      "caracteres": 1525,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "c11c35efb3fc3e8c0ead7f882581beee9a1e43a35e4f9a36625818ad17e24870",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 11,
+      "history_item_id": "eNAMcsyFlVvG1MpT5bSi",
+      "duracion_s": 123.245714,
+      "caracteres": 1790,
+      "cargo_creditos_reportado": 1459,
+      "sha256_audio": "86823c21037be38776b8a1e5bf8e155a5d6b22c85fba396e56aaaf2e6d8993b8",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 12,
+      "history_item_id": "H6GgKDDYqg1wwKom2uo0",
+      "duracion_s": 111.725714,
+      "caracteres": 1673,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "da417e26d5e9985169f595e17a8e9b9541ef01f88d6232e46fa1c948bb770d7e",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 13,
+      "history_item_id": "dZZa1FlkMq5zwFCZs2P9",
+      "duracion_s": 105.090612,
+      "caracteres": 1510,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "d5baddfcd5f763283bb8ff87000f16520e5ed22a616b852b74a44283fdfc6499",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 14,
+      "history_item_id": "JaCNTYVYeSRz9SOMMpE0",
+      "duracion_s": 101.564082,
+      "caracteres": 1419,
+      "cargo_creditos_reportado": 1400,
+      "sha256_audio": "332994ee56aef88476ef9992d0e759c3cad3281c4746bfe8694d5fba7e192a48",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 15,
+      "history_item_id": "Kz5ZYUa0TAx02sam66Uw",
+      "duracion_s": 100.362449,
+      "caracteres": 1463,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "e4d2e02c8edb33576465cb19f67b55f6b8c8c28bd8df8897edfead31c9e19e74",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 16,
+      "history_item_id": "bpzPnbzcRbSrxrkQyg4q",
+      "duracion_s": 100.754286,
+      "caracteres": 1481,
+      "cargo_creditos_reportado": 1920,
+      "sha256_audio": "1925be98b6fd7a639808adae3ef382a6d5c9a2fe399ec8e1c7fd881d78f8dce0",
+      "texto_verificado_identico_al_enviado": true
+    },
+    {
+      "bloque": 17,
+      "history_item_id": "G1WNdiRfC6iQtlzpyqMD",
+      "duracion_s": 101.955918,
+      "caracteres": 1439,
+      "cargo_creditos_reportado": 0,
+      "sha256_audio": "a4fea08c1560a9564a06dd4241474f73d9209cde81ea9e19bf18e66f869b574d",
+      "texto_verificado_identico_al_enviado": true
+    }
+  ]
+}

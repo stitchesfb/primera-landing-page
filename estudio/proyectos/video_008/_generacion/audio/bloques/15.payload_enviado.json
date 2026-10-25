@@ -1,0 +1,9 @@
+{
+  "text": "Padre, tú conoces el conflicto que traigo. Ayúdame a verlo con honestidad. Muéstrame dónde debo escuchar mejor, dónde necesito corregir algo y dónde corresponde establecer un límite. Dame prudencia para no responder desde el agotamiento. Si estoy alimentando una sospecha sin tener suficiente información, ayúdame a reconocerlo. Quiero tratar a los demás con justicia y cuidar también mi corazón.\n\nTe presento la necesidad de demostrar que tengo razón. A veces preparo argumentos una y otra vez, incluso cuando la otra persona ya no está delante de mí. Me cuesta dejar la conversación porque temo que mi silencio parezca una derrota. Ayúdame a reconocer cuándo hablar y cuándo esperar. Dame una voz clara, libre de la necesidad de herir para sentirme escuchado.\n\nSi he recibido un trato injusto, acompáñame a buscar una respuesta prudente. Dame valor para pedir ayuda y para cuidar los límites necesarios. Que el resentimiento no decida el rumbo de mi vida. Enséñame a procesar el dolor con honestidad. Quiero poder descansar sin negar lo ocurrido y sin seguir entregándole todas las horas de esta noche.\n\nSeñor, la mesa del salmo me recuerda tu cuidado. Esta noche te agradezco las cosas sencillas que sostienen nuestra vida. El alimento que tuvimos. La posibilidad de sentarnos un momento. La conversación que nos hizo bien. La persona que nos ayudó cuando no podíamos hacerlo solos. Ayúdame a reconocer lo recibido, aun en un día que también tuvo dificultades.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

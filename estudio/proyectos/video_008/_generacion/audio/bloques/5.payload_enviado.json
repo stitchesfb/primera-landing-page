@@ -1,0 +1,9 @@
+{
+  "text": "El salmo nos lleva ahora hacia pastos y aguas de reposo. Son imágenes de descanso y de alimento para la vida. Podemos escucharlas lentamente, dejando que nos recuerden el cuidado de Dios. Después de tantas horas de atención y esfuerzo, hay espacio para detenernos. Hay necesidades del alma que no se atienden trabajando un poco más.\n\nQuizá tu cuerpo ya está acostado, pero por dentro sigues intentando completar el día. Repasas una conversación y buscas una respuesta mejor. Recuerdas algo que olvidaste. Te preguntas si debiste haber hecho más. En esta oración puedes nombrar todo eso sin seguir discutiendo con cada pensamiento. El día ya tuvo sus horas. Ahora puedes presentar a Dios lo que quedó abierto.\n\nSeñor, te entrego las tareas inconclusas. Algunas necesitarán atención mañana. Otras pueden esperar. Ayúdame a reconocer la diferencia cuando llegue el momento. Esta noche quiero dejar de intentar resolverlas todas desde mi cama. Dame claridad para atender lo urgente y serenidad para permitir que el descanso tenga su lugar. Que mi mente pueda dejar la vigilancia del día poco a poco.\n\nTe presento también las palabras que todavía escucho por dentro. Lo que alguien dijo con dureza, lo que entendí como rechazo, lo que me dejó preocupado. Tú conoces la situación completa. Ayúdame a examinarla con honestidad cuando sea necesario. Mientras tanto, recibe el dolor que me produjo. Que una frase difícil no se convierta en la única voz que acompaña mi noche.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "text": "Si la dificultad está en una relación, danos sabiduría. Ayúdanos a reconocer lo que necesita reparación, lo que requiere límites y lo que no podemos cambiar por nuestra cuenta. Enséñanos a buscar apoyo cuando una situación nos supera. Que nuestra fe no nos lleve a callar lo que debe ser atendido. Dame valor para actuar con prudencia y respeto por la vida que me has dado.\n\nSeñor, te presento también el miedo que aparece cuando no sé cuánto durará una etapa. Me pregunto si tendré fuerzas, si encontraré ayuda, si podré seguir atendiendo las cosas de cada día. Recibe esas preguntas. Ayúdame a volver al paso que tengo delante. A la tarea posible. A la persona con quien puedo hablar. A lo que hoy necesita mi atención, sin intentar vivir de una vez todos los días que faltan.\n\nEn este valle, cuida mi manera de hablarme. A veces me reprocho sentir temor o tristeza. Pienso que debería tener una respuesta mejor porque creo en ti. Pero puedo acudir a ti con mi fragilidad. Puedo pedir consuelo mientras sigo sintiendo dolor. Puedo agradecer una ayuda pequeña aunque la situación continúe difícil. Enséñame a vivir mi fe con honestidad y paciencia.\n\nPadre, ayúdame a escuchar con compasión a otras personas que atraviesan su propio valle. Que no intente resolver su dolor con una frase rápida. Dame disposición para acompañar, escuchar y ofrecer ayuda concreta cuando sea posible. Si hoy yo necesito esa compañía, ayúdame a aceptarla. Permite que el amor tenga una forma cercana en esta etapa de nuestra vida.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}
