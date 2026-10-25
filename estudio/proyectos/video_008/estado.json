@@ -30,13 +30,28 @@
     "estado": "propuesto_pendiente_aprobacion",
     "archivo": "estudio/proyectos/video_008/VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md",
     "bloques": "3 a 17",
+    "bloque_mas_largo": "08 (1800 caracteres) -- no el 03 (1700) como se escribio por error en la version anterior de este presupuesto",
     "total_caracteres": 23617,
-    "modelo_propuesto": "eleven_v4",
-    "rango_estimado_creditos": "12002 (usando la tarifa v4 observada en el bloque 19, 0.4419 creditos/caracter) a 27160 (conservador, sin descuento, 1 credito/caracter), ambos con reserva del 15% para correcciones ya incluida",
+    "configuracion_aprobada": {
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "model_id": "eleven_v4",
+      "stability": 0.50,
+      "similarity_boost": 0.75,
+      "speed": 1.00,
+      "output_format": "mp3_44100_128",
+      "omitidos": ["style", "use_speaker_boost", "seed", "contexto (previous_text/next_text)"],
+      "nota": "No se requiere otra prueba independiente para confirmar esta configuracion."
+    },
+    "tarifa": {
+      "publicada": "1 credito/caracter para eleven_v4 (character_cost_multiplier=1, cost_discount_multiplier=1), consultada en GET /v1/models el 2026-10-25, guardada en historial_crudo/modelos_tarifas_2026-10-25.json. Es la tarifa usada para el presupuesto.",
+      "observada_bloque_19_no_garantizada": "597 creditos / 1356 caracteres reales (corregido de 1351) = 0.4403 creditos/caracter -- un solo dato, no se usa para presupuestar, solo como referencia."
+    },
+    "presupuesto_propuesto_creditos": 27160,
+    "forma_de_proceder_propuesta": "Generar primero un solo bloque de control (bloque 8 propuesto, o el 3 si Orlando lo prefiere), guardar su resultado y comprobar el cargo real antes de continuar con los 14 restantes.",
     "bloqueos": [
-      "voice_id y ajustes completos de eleven_v4 no confirmados (solo hay datos parciales del bloque 19)",
-      "tarifa real de eleven_v4 no confirmada de forma independiente, basada en un solo dato observado",
-      "presupuesto en si mismo pendiente de aprobacion de Orlando"
+      "presupuesto pendiente de aprobacion de Orlando",
+      "confirmar cual bloque usar como primero de control (3 u 8)",
+      "aprobacion auditiva final de las duraciones de pausa P03-P08, todavia 'propuesta' en el plan tecnico"
     ]
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
@@ -48,6 +63,10 @@
     {
       "fecha": "2026-10-24",
       "evento": "Segunda tarea. Orlando aporto el guion aprobado (VIDEO_008_GUION_APROBADO.md) y el plan tecnico (VIDEO_008_PLAN_TECNICO_PRE_TTS.md), ahora persistidos en el repositorio. Se cotejo el texto completo de los 4 bloques recuperados contra el guion: bloques 1, 2 y 18 identicos (confirmando la identificacion por inferencia de la tarea anterior); bloque 19 identico salvo la frase aprobada 'Puede descansar sin recorrer cada posibilidad', conservada tal cual por instruccion explicita de Orlando. Se corrigio la interpretacion de character_end_times_seconds del endpoint de historial (es duracion por caracter, no tiempo absoluto): se conservo la respuesta cruda sin tocar (*.alignment_historial_crudo.json) y se genero por separado una version normalizada (*.alignment.json) validada (0 errores en los 4 bloques). Se persistieron los JSON crudos completos del historial en el repositorio (antes solo estaban en el scratchpad de la sesion). Para el bloque 19 se registraron por separado los ajustes que devuelve el historial (incompletos, solo stability) y los que Orlando indico como realmente usados en la generacion (stability 0.50, similarity_boost 0.75, speed 1.00), sin fusionarlos. Se preparo el presupuesto de los 15 bloques restantes (3-17) con eleven_v4, usando como referencia el unico dato real disponible (la tarifa observada en el propio bloque 19), con un rango de 12.002 a 27.160 creditos segun el escenario, y se senalaron los bloqueos pendientes (voice_id/ajustes de v4 sin confirmar, tarifa sin confirmar de forma independiente). No se genero ningun audio. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-25",
+      "evento": "Tercera tarea. Orlando aprobo la configuracion completa de eleven_v4 para los bloques 3-17 (voice_id 8mBRP99B2Ng2QwsJMFQl, stability 0.50, similarity_boost 0.75, speed 1.00, output_format mp3_44100_128, sin style/speaker_boost/seed/contexto) sin requerir otra prueba. Corrigio el denominador del bloque 19 a 1356 caracteres (el texto real generado, no el 1351 del guion escrito) y senalo que el bloque mas largo de los 15 es el 08 (1800 car.), no el 03 como se habia escrito por error. Se consulto GET /v1/models y se confirmo la tarifa PUBLICADA de eleven_v4: 1 credito/caracter, sin descuento (guardada en historial_crudo/modelos_tarifas_2026-10-25.json) -- distinta y mas alta que la tarifa observada en el bloque 19 (0.4403 creditos/caracter, un solo dato, ahora explicitamente marcada como no garantizada). Presupuesto corregido: 27.160 creditos (23.617 caracteres x 1 credito + 15% de reserva), usando la tarifa publicada. Se propuso generar primero un bloque de control (08 propuesto, o el 03 si Orlando lo prefiere) y comprobar el cargo real antes de continuar con los demas. No se genero ningun audio; presupuesto pendiente de aprobacion de Orlando."
     }
   ]
 }

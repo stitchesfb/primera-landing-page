@@ -31,7 +31,13 @@
       "modelo": "eleven_flash_v2_5",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "voice_name": "El Faraon - Full, Clear, Mellow",
-      "ajustes": {"stability": 0.65, "similarity_boost": 0.88, "use_speaker_boost": true, "style": 0, "speed": 0.91},
+      "ajustes": {
+        "stability": 0.65,
+        "similarity_boost": 0.88,
+        "use_speaker_boost": true,
+        "style": 0,
+        "speed": 0.91
+      },
       "fecha_generacion_utc": "2026-10-18T20:19:01.000Z",
       "duracion_real_s": 115.722449,
       "duracion_indicada_por_orlando": "1:56",
@@ -50,7 +56,13 @@
       "modelo": "eleven_flash_v2_5",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "voice_name": "El Faraon - Full, Clear, Mellow",
-      "ajustes": {"stability": 0.65, "similarity_boost": 0.88, "use_speaker_boost": true, "style": 0, "speed": 0.91},
+      "ajustes": {
+        "stability": 0.65,
+        "similarity_boost": 0.88,
+        "use_speaker_boost": true,
+        "style": 0,
+        "speed": 0.91
+      },
       "fecha_generacion_utc": "2026-10-18T20:19:04.000Z",
       "duracion_real_s": 116.192653,
       "duracion_indicada_por_orlando": "1:56",
@@ -69,7 +81,13 @@
       "modelo": "eleven_flash_v2_5",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "voice_name": "El Faraon - Full, Clear, Mellow",
-      "ajustes": {"stability": 0.65, "similarity_boost": 0.88, "use_speaker_boost": true, "style": 0, "speed": 0.91},
+      "ajustes": {
+        "stability": 0.65,
+        "similarity_boost": 0.88,
+        "use_speaker_boost": true,
+        "style": 0,
+        "speed": 0.91
+      },
       "fecha_generacion_utc": "2026-10-18T20:19:07.000Z",
       "duracion_real_s": 130.168163,
       "duracion_indicada_por_orlando": "2:10",
@@ -95,9 +113,9 @@
         "nota": "El historial de ElevenLabs solo devuelve 'stability' para este item. No confirma similarity_boost ni speed -- campo incompleto, no es un dato inventado ni omitido por esta tarea."
       },
       "ajustes_registrados_durante_la_generacion_segun_orlando": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
-        "speed": 1.00,
+        "speed": 1.0,
         "nota": "Valores que did Orlando indico como los realmente usados al generar este bloque, distintos de (y mas completos que) lo que devuelve el endpoint de historial. Se registran por separado, sin fusionarlos ni dar por hecho que son iguales -- el historial incompleto no los confirma ni los contradice (coincide en stability=0.5, no dice nada de similarity_boost ni speed)."
       },
       "fecha_generacion_utc": "2026-10-21T01:50:51.000Z",
@@ -106,7 +124,15 @@
       "sha256_audio": "69a3e173fea6a9503cfcc506957ad03b251fab1004da542acb482dc6ee76ce38",
       "tiene_alineacion": true,
       "texto_verificado_contra_guion": "identico salvo la frase aprobada 'Puede descansar sin recorrer cada posibilidad' (el guion escrito dice 'Puede dejar de recorrer cada posibilidad') -- conservada tal cual por instruccion explicita de Orlando, no es un error.",
-      "identificacion": "History ID dado directamente por Orlando, sin ambiguedad. Se excluyeron explicitamente: 3 variantes/pruebas en eleven_flash_v2_5 del mismo texto (lDqtZwEIPdIfEzxXkIZI, ciEE7dcae4vRjtHXvr6p, tDmxqvg3MDZSfSo01rzQ) y 2 pruebas cortas (3cEYpNwfiGcdyhTesDJN de 8.5s, FEME3rMSfMsqXytqs9Oz de 7.9s)."
+      "identificacion": "History ID dado directamente por Orlando, sin ambiguedad. Se excluyeron explicitamente: 3 variantes/pruebas en eleven_flash_v2_5 del mismo texto (lDqtZwEIPdIfEzxXkIZI, ciEE7dcae4vRjtHXvr6p, tDmxqvg3MDZSfSo01rzQ) y 2 pruebas cortas (3cEYpNwfiGcdyhTesDJN de 8.5s, FEME3rMSfMsqXytqs9Oz de 7.9s).",
+      "caracteres_reales_generados": 1356,
+      "nota_caracteres": "1.356 es el conteo real del texto generado (incluida la frase aprobada 'Puede descansar sin recorrer cada posibilidad'), no el 1.351 del guion escrito usado antes para estimar la tarifa observada de v4 -- corregido el 2026-10-25.",
+      "tarifa_v4_observada_corregida": {
+        "delta_creditos": 597,
+        "caracteres": 1356,
+        "creditos_por_caracter": 0.4403,
+        "nota": "Un solo dato, no garantizado. Ver VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md para la tarifa PUBLICADA (oficial, 1 credito/caracter para eleven_v4), que es la que se usa para presupuestar."
+      }
     }
   ],
   "formato_de_alineacion": {
@@ -114,10 +140,22 @@
     "verificacion": "Confirmado sumando el arreglo completo de 'character_end_times_seconds' del historial para cada uno de los 4 bloques: la suma coincide con la duracion real del MP3 (ffprobe) con un margen de 0,04-0,05s en los 4 casos -- consistente con ser duraciones por caracter, no tiempos absolutos (que habrian dado una suma sin sentido).",
     "accion": "Los archivos *.alignment_historial_crudo.json conservan la respuesta cruda del historial SIN TOCAR (tal como la devolvio la API). Los archivos *.alignment.json fueron recalculados por separado como version normalizada: character_end_times_seconds = character_start_times_seconds + duracion_del_caracter, en el mismo formato que usan los alignment.json de video_007. Cada archivo normalizado incluye un bloque '_validacion' con: duracion real del audio (ffprobe), duracion segun la alineacion normalizada, delta entre ambas, y la lista de errores encontrados (vacia en los 4 casos) al comprobar que start<=end siempre y que ningun tiempo cae fuera de los limites del audio.",
     "resultado_validacion": {
-      "bloque_1": {"delta_s": 0.041449, "errores": 0},
-      "bloque_2": {"delta_s": 0.045653, "errores": 0},
-      "bloque_18": {"delta_s": 0.044163, "errores": 0},
-      "bloque_19": {"delta_s": -0.050612, "errores": 0}
+      "bloque_1": {
+        "delta_s": 0.041449,
+        "errores": 0
+      },
+      "bloque_2": {
+        "delta_s": 0.045653,
+        "errores": 0
+      },
+      "bloque_18": {
+        "delta_s": 0.044163,
+        "errores": 0
+      },
+      "bloque_19": {
+        "delta_s": -0.050612,
+        "errores": 0
+      }
     }
   },
   "bloques_pendientes": "Los 15 bloques restantes (3-17) no se generaron. Ver presupuesto propuesto en VIDEO_008_PRESUPUESTO_15_BLOQUES_V4.md en la carpeta del proyecto. No se genero nada para suplirlos.",
