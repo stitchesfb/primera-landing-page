@@ -1,0 +1,296 @@
+[
+  {
+    "tipo": "bloque",
+    "detalle": [
+      1,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      2,
+      null,
+      33.46
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      5.0,
+      "P01"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      2,
+      33.46,
+      88.341
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      5.0,
+      "P02"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      2,
+      88.341,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      3,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      4,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      7.0,
+      "P03"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      5,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      6,
+      null,
+      77.72
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      7.0,
+      "P04"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      6,
+      77.72,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      7,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      8,
+      null,
+      106.24
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      7.0,
+      "P05"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      8,
+      106.24,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      9,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      10,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      11,
+      null,
+      75.2
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      7.0,
+      "P06"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      11,
+      75.2,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      12,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      13,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      14,
+      null,
+      52.0
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      7.0,
+      "P07"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      14,
+      52.0,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      15,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      16,
+      null,
+      50.48
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      7.0,
+      "P08"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      16,
+      50.48,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      17,
+      null,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      18,
+      null,
+      56.726
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      8.0,
+      "P09"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      18,
+      56.726,
+      null
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      19,
+      null,
+      77.4
+    ]
+  },
+  {
+    "tipo": "silencio",
+    "detalle": [
+      8.0,
+      "P10"
+    ]
+  },
+  {
+    "tipo": "bloque",
+    "detalle": [
+      19,
+      77.4,
+      null
+    ]
+  }
+]

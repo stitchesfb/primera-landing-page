@@ -1,10 +1,34 @@
 # Video 8 — Narración completa sin música, con pausas propuestas (para revisión)
 
-**Archivo:** `video_008_narracion_completa_sin_musica_con_pausas.mp3`
+**Archivo vigente:** `video_008_narracion_completa_sin_musica_con_pausas_v2.mp3` (corregido, ver sección "Corrección 2026-10-27" abajo).
+**Archivo original, conservado sin tocar:** `video_008_narracion_completa_sin_musica_con_pausas.mp3` (v1 — tiene el defecto de corte que Orlando encontró; se deja intacto como referencia, no se usa para avanzar).
 **Estado:** para revisión auditiva de Orlando. **Las duraciones de pausa siguen siendo una propuesta, no están aprobadas.**
-**Fecha:** 2026-10-25
-**Duración total:** 2.178,48s (36:18)
-**SHA-256:** `2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62`
+**Fecha:** 2026-10-25 (v1) / 2026-10-27 (v2, corregido)
+**Duración total:** 2.178,48s (36:18) — igual en v1 y v2, el contenido es el mismo, solo cambió dónde exactamente cae el corte en 2 de las 9 pausas internas.
+**SHA-256 v2:** `ed8b7b4d6e0f3cd2e7b350347aa655bed091f6c35a26c0b00490c726b8acc1a6`
+**SHA-256 v1 (sin tocar):** `2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62`
+
+## Corrección 2026-10-27 — punto de inserción de P02 (y P10) movido
+
+Orlando reportó que en 3:29 la palabra "días" sonaba cortada ("día"), con la "s" apareciendo después del silencio en 3:34. Verificado: **cierto, era un error real.**
+
+**Causa encontrada:** el punto de corte de P02 se había calculado contando caracteres en un documento distinto (el plan técnico) y trasladando esa cuenta a la alineación del audio real. Esa cuenta quedó 2 caracteres corta: el corte caía exactamente entre la "a" y la "s" de "días" (verificado directamente en la alineación del bloque 2: carácter 1093 = "a", carácter 1094 = "s" — el corte usaba el índice 1094, justo en medio). Se repitió la revisión de **todos los 9 cortes internos** (no solo P02) buscando directamente, dentro de la propia alineación de cada bloque, el texto exacto que debe terminar justo antes de cada pausa — un método más confiable porque usa el audio real, no una cuenta de caracteres de otro documento. Resultado:
+
+| Pausa | Bloque | Estado |
+|---|---|---|
+| P01 | 2 | Ya estaba correcto — sin cambios |
+| **P02** | 2 | **Corregido**: el corte se movió de 88,051s a 88,341s dentro del bloque 2 (0,29s más tarde), ahora cae justo después de "días." y antes del silencio, nunca en medio de la palabra |
+| P04 | 6 | Ya estaba correcto — sin cambios |
+| P05 | 8 | Ya estaba correcto — sin cambios |
+| P06 | 11 | Ya estaba correcto — sin cambios |
+| P07 | 14 | Ya estaba correcto — sin cambios |
+| P08 | 16 | Ya estaba correcto — sin cambios |
+| P09 | 18 | Ya estaba correcto — sin cambios |
+| **P10** | 19 | **Corregido** (encontrado al revisar los demás, como pediste): el corte caía en medio de "Pastor" ("Pa" | "stor"), se movió de 76,6s a 77,4s dentro del bloque 19, ahora cae justo después de "Pastor." |
+
+Los archivos fuente (`1.mp3` … `19.mp3`, sus `.alignment.json`) **no se tocaron** — son los originales. Solo se recalculó dónde cortarlos al ensamblar la narración completa, y se generó `..._v2.mp3` como un archivo nuevo, sin sobrescribir el v1.
+
+Verificación de la muestra entregada (`video_008_muestra_P02_corregida.mp3`, 14s alrededor del nuevo punto de corte de P02): decodificación limpia, "días." completo antes del silencio.
 
 ## Qué contiene
 

@@ -1,5 +1,5 @@
 {
-  "estado": "19_bloques_generados_narracion_completa_pendiente_revision_auditiva",
+  "estado": "cortes_internos_corregidos_decision_de_ritmo_pendiente",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -19,7 +19,12 @@
     "fecha_recuperacion": "2026-10-24",
     "fecha_cotejo_contra_guion": "2026-10-24",
     "fuente": "Historial de ElevenLabs (API), sin ejecutar ninguna generacion TTS nueva",
-    "bloques": [1, 2, 18, 19],
+    "bloques": [
+      1,
+      2,
+      18,
+      19
+    ],
     "directorio": "estudio/proyectos/video_008/_generacion/audio/bloques",
     "detalle": "estudio/proyectos/video_008/_generacion/audio/bloques/manifiesto_recuperacion.json",
     "verificacion": "4/4 MP3 verificados por SHA-256 y duracion real (ffprobe). Texto de los 4 cotejado caracter a caracter contra el guion aprobado: bloques 1, 2 y 18 identicos; bloque 19 identico salvo la frase aprobada 'Puede descansar sin recorrer cada posibilidad' (variante de la revision 04, conservada tal cual por instruccion de Orlando).",
@@ -29,16 +34,37 @@
   "generacion_15_bloques_v4": {
     "estado": "completado_pendiente_revision_auditiva",
     "fecha_generacion": "2026-10-25",
-    "bloques": [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+    "bloques": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
     "detalle": "estudio/proyectos/video_008/_generacion/audio/bloques/manifiesto_generacion_v4.json",
     "configuracion_usada": {
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
       "model_id": "eleven_v4",
-      "stability": 0.50,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "speed": 1.00,
+      "speed": 1.0,
       "output_format": "mp3_44100_128",
-      "omitidos": ["style", "use_speaker_boost", "seed", "contexto (previous_text/next_text)"]
+      "omitidos": [
+        "style",
+        "use_speaker_boost",
+        "seed",
+        "contexto (previous_text/next_text)"
+      ]
     },
     "metodo": "Una llamada HTTP por bloque, sin reintentos automaticos. Empezo por el bloque 3 (orden pedido por Orlando); todos los 15 pasaron validacion tecnica (texto alineado identico al enviado, decodificacion limpia, ritmo caracteres/segundo dentro de rango) y se continuo automaticamente sin pedir otra aprobacion, como se autorizo.",
     "cargo_total_verificado_creditos": 9749,
@@ -48,13 +74,34 @@
     "hallazgo_no_corregido": "El ritmo real resulto ~137 palabras/min, mas rapido que el rango estimado del guion (100-115 ppm). Informado para la revision auditiva, no corregido -- la reserva del presupuesto no autoriza regeneraciones segun instruccion de Orlando."
   },
   "narracion_completa_sin_musica": {
-    "estado": "ensamblada_pendiente_revision_auditiva",
-    "archivo": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas.mp3",
-    "sha256": "2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62",
+    "estado": "corregida_pendiente_revision_auditiva",
+    "archivo_vigente": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v2.mp3",
+    "sha256_v2": "ed8b7b4d6e0f3cd2e7b350347aa655bed091f6c35a26c0b00490c726b8acc1a6",
+    "archivo_v1_original_conservado": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas.mp3",
+    "sha256_v1": "2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62",
     "duracion_s": 2178.481633,
     "detalle": "estudio/proyectos/video_008/_generacion/montaje/LEEME_NARRACION_COMPLETA.md",
     "pausas": "Las 10 pausas propuestas (P01-P02 5s, P03-P08 7s, P09-P10 8s) insertadas en su posicion real verificada contra el guion -- 9 de las 10 caen DENTRO de un bloque (no entre bloques), solo P03 es de frontera. Duraciones siguen siendo propuesta, no aprobadas.",
-    "verificacion_tecnica": "Decodificacion completa sin errores. silencedetect confirma 10 silencios en las posiciones y duraciones esperadas."
+    "verificacion_tecnica": "Decodificacion completa sin errores. silencedetect confirma 10 silencios en las posiciones y duraciones esperadas.",
+    "correccion_2026_10_27": {
+      "reportado_por": "Orlando: palabra 'dias' cortada en 3:29 (P02), la 's' sonaba en 3:34 tras el silencio",
+      "causa": "El punto de corte de P02 se calculo contando caracteres en el plan tecnico y trasladando ese indice a la alineacion del audio real -- quedo 2 caracteres corto, cayendo exactamente entre 'a' y 's' de 'dias'.",
+      "metodo_de_correccion": "Se recalcularon los 9 cortes internos buscando directamente en la alineacion de cada bloque el texto exacto que debe terminar justo antes de cada pausa (metodo basado en el audio real, no en conteo cruzado de documentos).",
+      "resultado": "P01, P04, P05, P06, P07, P08, P09 ya estaban correctos, sin cambios. P02 (bloque 2) corregido de 88.051s a 88.341s. P10 (bloque 19) tambien corregido (encontrado al revisar los demas, caia en medio de 'Pastor'), de 76.6s a 77.4s.",
+      "archivos_fuente_no_tocados": "1.mp3 ... 19.mp3 y sus *.alignment.json permanecen intactos -- solo se recalculo donde cortarlos al ensamblar.",
+      "muestra_verificacion": "estudio/proyectos/video_008/_generacion/montaje/video_008_muestra_P02_corregida.mp3"
+    }
+  },
+  "transicion_flash_a_v4": {
+    "estado": "confirmada_pendiente_decision",
+    "hallazgo": "El bloque 3 (primer bloque en eleven_v4) empieza en el segundo 241.915 (4:01.92) de la narracion -- coincide con el cambio de ritmo/interpretacion que reporto Orlando desde ~4:03. Confirma que el cambio percibido es el cambio de modelo (eleven_flash_v2_5 -> eleven_v4) y de ajustes, no una deriva gradual.",
+    "muestras_entregadas": {
+      "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestras_transicion_flash_v4",
+      "muestra_A_velocidad_original": "20s de Flash v2.5 (bloque 2, sin tocar) + 40s de v4 (bloque 3) a velocidad original",
+      "muestra_B_v4_al_90pct": "mismos 20s de Flash sin tocar + los mismos 40s de v4 ralentizados a 90% con atempo=0.9 (conserva el tono)",
+      "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestras_transicion_flash_v4/LEEME_MUESTRAS.md"
+    },
+    "nota": "No se genero audio nuevo para estas muestras (se recortaron/ralentizaron los archivos ya existentes). No se aplico ningun cambio global ni se regenero ningun bloque. Decision pendiente de Orlando: si basta ajustar speed en una futura regeneracion, o si tambien hay que revisar stability/similarity_boost."
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
   "historial": [
@@ -73,6 +120,10 @@
     {
       "fecha": "2026-10-25",
       "evento": "Cuarta tarea. Orlando aprobo hasta 27.160 creditos y pidio generar primero el bloque 3 (no el 8), guardar audio/alineacion/payload/History ID, verificar su cargo individual y, si pasaba validacion, continuar automaticamente con los 14 restantes -- una llamada por bloque, sin reintentos automaticos, deteniendose y conservando lo completado ante cualquier fallo. Los 15 bloques (3-17) se generaron correctamente, los 15 pasaron validacion (texto identico al enviado, decodificacion limpia, ritmo plausible). Cargo total verificado (telescopico, contador antes del bloque 3 vs. despues del bloque 17): 9.749 creditos, dentro del presupuesto. Se guardo audio, alineacion (ya en formato acumulado correcto), payload enviado y History ID de cada bloque. Se ensamblo la narracion completa de los 19 bloques (los 4 ya aprobados reutilizados sin tocar + los 15 nuevos) con las 10 pausas propuestas insertadas en su posicion real -- verificado que 9 de las 10 caen DENTRO de un bloque, no entre bloques, usando la alineacion para encontrar el punto de corte exacto. Entregada como video_008_narracion_completa_sin_musica_con_pausas.mp3 (36:18), verificada tecnicamente (decodificacion limpia, 10 silencios detectados en las posiciones/duraciones esperadas). Se informo, sin corregir, que el ritmo real (~137 ppm) resulto mas rapido que lo estimado en el guion -- la reserva del presupuesto no autoriza regenerar segun instruccion de Orlando; cualquier correccion se decide despues de la escucha. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-27",
+      "evento": "Quinta tarea. Orlando reporto dos problemas al revisar la narracion: (1) la palabra 'dias' cortada por P02 en 3:29, con la 's' sonando en 3:34; (2) un cambio de ritmo/interpretacion desde 4:03. Se confirmo el bug de P02 (el corte caia entre 'a' y 's' de 'dias' por un error de conteo de caracteres entre documentos distintos) y, al revisar los demas 8 cortes internos como se pidio, se encontro que P10 tenia el mismo problema (cortaba 'Pastor' en 'Pa'+'stor'); los otros 7 (P01,P04-P09) ya estaban correctos. Se recalcularon los 2 cortes usando directamente la alineacion real de cada bloque (metodo mas confiable) y se reensamblo la narracion completa como _v2.mp3, conservando el archivo v1 original sin tocar y sin modificar ningun .mp3/.alignment.json fuente. Se confirmo que el bloque 3 (primer bloque en eleven_v4) empieza en 4:01.92, coincidiendo con el cambio reportado -- confirma que es la transicion Flash v2.5 -> v4 + ajustes, no una deriva gradual. Se entregaron dos muestras A/B (20s Flash + 40s v4, una a velocidad original y otra con la parte de v4 ralentizada al 90% con atempo, conservando el tono) para que Orlando decida si basta ajustar la velocidad o tambien hace falta revisar la interpretacion. No se hicieron llamadas a ElevenLabs, no se regenero voz, no se aplico ningun cambio global. El Video 7 permanece intacto."
     }
   ]
 }
