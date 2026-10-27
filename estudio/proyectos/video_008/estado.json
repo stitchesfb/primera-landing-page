@@ -1,5 +1,5 @@
 {
-  "estado": "cortes_internos_corregidos_decision_de_ritmo_pendiente",
+  "estado": "muestra_cta_90pct_entregada_pendiente_aprobacion",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -93,7 +93,7 @@
     }
   },
   "transicion_flash_a_v4": {
-    "estado": "confirmada_pendiente_decision",
+    "estado": "acotada_al_CTA_del_bloque_4_muestra_90pct_entregada",
     "hallazgo": "El bloque 3 (primer bloque en eleven_v4) empieza en el segundo 241.915 (4:01.92) de la narracion -- coincide con el cambio de ritmo/interpretacion que reporto Orlando desde ~4:03. Confirma que el cambio percibido es el cambio de modelo (eleven_flash_v2_5 -> eleven_v4) y de ajustes, no una deriva gradual.",
     "muestras_entregadas": {
       "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestras_transicion_flash_v4",
@@ -101,7 +101,21 @@
       "muestra_B_v4_al_90pct": "mismos 20s de Flash sin tocar + los mismos 40s de v4 ralentizados a 90% con atempo=0.9 (conserva el tono)",
       "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestras_transicion_flash_v4/LEEME_MUESTRAS.md"
     },
-    "nota": "No se genero audio nuevo para estas muestras (se recortaron/ralentizaron los archivos ya existentes). No se aplico ningun cambio global ni se regenero ningun bloque. Decision pendiente de Orlando: si basta ajustar speed en una futura regeneracion, o si tambien hay que revisar stability/similarity_boost."
+    "correccion_2026_10_27_acotada_al_CTA": {
+      "reportado_por": "Orlando, tras escuchar: 'el resto esta bien. Solo la invitacion a suscribirse, entre 6:55 y 7:07 de la narracion v2, suena mas rapida y energetica.'",
+      "pasaje": "Bloque 4 -- 'Si esta oracion te acompana, puedes suscribirte a Oraciones Biblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.'",
+      "metodo_localizacion_de_limites": "Busqueda de frases ancla completas en la alineacion por caracter del propio bloque 4 (no en los tiempos aproximados dados de oido). Los tiempos globales resultantes (6:55.48 a 7:06.68) coinciden con el rango que reporto Orlando (6:55 a 7:07), confirmando el pasaje.",
+      "muestra_entregada": {
+        "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_90pct",
+        "archivo": "video_008_muestra_CTA_90pct.mp3",
+        "contenido": "~10s antes (frase completa, velocidad original) + la CTA completa ralentizada al 90% con atempo=0.9 (tono conservado, pasa de 11.23s a 12.46s) + ~9.6s despues (frase completa, velocidad original)",
+        "duracion_total_s": 32.078367,
+        "sha256": "e06d647c92e69cc242359b711f8916c1843fbc569538d6a002e270cdea21f55e",
+        "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_90pct/LEEME_MUESTRA_CTA.md"
+      },
+      "nota": "Se uso el archivo fuente 4.mp3 sin modificar. No se llamo a ElevenLabs, no se regenero voz, no se cambio la velocidad del resto de la narracion. NO se aplico ningun cambio todavia al archivo ensamblado completo (_v2.mp3) -- queda pendiente de que Orlando apruebe esta muestra."
+    },
+    "nota": "Decision pendiente de Orlando sobre esta muestra: si el ajuste de velocidad al 90% solo en la CTA del bloque 4 resuelve lo reportado, o si hace falta algo mas antes de aplicarlo al archivo completo."
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
   "historial": [
@@ -124,6 +138,10 @@
     {
       "fecha": "2026-10-27",
       "evento": "Quinta tarea. Orlando reporto dos problemas al revisar la narracion: (1) la palabra 'dias' cortada por P02 en 3:29, con la 's' sonando en 3:34; (2) un cambio de ritmo/interpretacion desde 4:03. Se confirmo el bug de P02 (el corte caia entre 'a' y 's' de 'dias' por un error de conteo de caracteres entre documentos distintos) y, al revisar los demas 8 cortes internos como se pidio, se encontro que P10 tenia el mismo problema (cortaba 'Pastor' en 'Pa'+'stor'); los otros 7 (P01,P04-P09) ya estaban correctos. Se recalcularon los 2 cortes usando directamente la alineacion real de cada bloque (metodo mas confiable) y se reensamblo la narracion completa como _v2.mp3, conservando el archivo v1 original sin tocar y sin modificar ningun .mp3/.alignment.json fuente. Se confirmo que el bloque 3 (primer bloque en eleven_v4) empieza en 4:01.92, coincidiendo con el cambio reportado -- confirma que es la transicion Flash v2.5 -> v4 + ajustes, no una deriva gradual. Se entregaron dos muestras A/B (20s Flash + 40s v4, una a velocidad original y otra con la parte de v4 ralentizada al 90% con atempo, conservando el tono) para que Orlando decida si basta ajustar la velocidad o tambien hace falta revisar la interpretacion. No se hicieron llamadas a ElevenLabs, no se regenero voz, no se aplico ningun cambio global. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-27",
+      "evento": "Sexta tarea. Tras escuchar las muestras A/B de la transicion, Orlando precisio: el resto de la narracion esta bien; solo la invitacion a suscribirse (bloque 4, 'Si esta oracion te acompana... cargas ante Dios', entre 6:55 y 7:07 de la v2) suena mas rapida y energetica. Se localizaron los limites reales del pasaje buscando frases completas en la alineacion del bloque 4 (no en los tiempos aproximados dados de oido): el resultado (6:55.48 a 7:06.68 en tiempo global) coincide con lo reportado. Se construyo una muestra de un solo archivo (video_008_muestra_CTA_90pct.mp3, 32.08s) a partir de 4.mp3 sin modificar: ~10s antes a velocidad original + la CTA completa extraida y luego ralentizada al 90% con atempo=0.9 (tono conservado, de 11.23s a 12.46s) + ~9.6s despues a velocidad original. No se llamo a ElevenLabs, no se regenero voz, no se cambio la velocidad del resto de la narracion, y no se aplico todavia ningun cambio al archivo ensamblado completo (_v2.mp3) -- queda pendiente de la aprobacion de Orlando sobre esta muestra. El Video 7 permanece intacto."
     }
   ]
 }

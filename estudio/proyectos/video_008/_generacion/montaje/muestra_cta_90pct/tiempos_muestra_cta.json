@@ -1,0 +1,38 @@
+{
+  "bloque_fuente": 4,
+  "archivo_fuente": "4.mp3",
+  "metodo_localizacion": "busqueda de frase ancla exacta en la alineacion por caracter del bloque 4 (character_start_times_seconds / character_end_times_seconds), no en tiempos aproximados dados de oido",
+  "offset_global_inicio_bloque_4_en_narracion_v2_segundos": 359.884082,
+  "tramos": {
+    "antes_original": {
+      "texto": "Que podamos reconocer también lo que sí está presente: una oportunidad, una mano cercana, el alimento de hoy, una palabra que nos anima a seguir.",
+      "t0_local": 44.64,
+      "t1_local": 54.64,
+      "t0_global": 404.524082,
+      "t1_global": 414.524082,
+      "velocidad": "original (sin tocar)"
+    },
+    "cta_90pct": {
+      "texto": "Si esta oración te acompaña, puedes suscribirte a Oraciones Bíblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.",
+      "t0_local": 55.6,
+      "t1_local": 66.8,
+      "t0_global": 415.484082,
+      "t1_global": 426.684082,
+      "duracion_original_segundos": 11.232653,
+      "duracion_al_90pct_segundos": 12.460408,
+      "velocidad": "90% (atempo=0.9, tono conservado)"
+    },
+    "despues_original": {
+      "texto": "Padre, mi vida necesita tu dirección. Quiero trabajar y cuidar lo que me has confiado sin convertir cada resultado en la medida de mi valor.",
+      "t0_local": 67.68,
+      "t1_local": 77.28,
+      "t0_global": 427.564082,
+      "t1_global": 437.164082,
+      "velocidad": "original (sin tocar)"
+    }
+  },
+  "archivo_resultado": "video_008_muestra_CTA_90pct.mp3",
+  "duracion_total_segundos": 32.078367,
+  "sha256": "e06d647c92e69cc242359b711f8916c1843fbc569538d6a002e270cdea21f55e",
+  "cambios_aplicados_a_narracion_completa": false
+}
