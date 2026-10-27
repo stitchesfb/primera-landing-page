@@ -1,0 +1,49 @@
+{
+  "bloque_fuente_contexto": 4,
+  "archivo_fuente_contexto": "4.mp3",
+  "archivo_cta_regenerada": "estudio/proyectos/video_008/_generacion/audio/regeneracion_cta_bloque4/cta_regenerada.mp3",
+  "ajustes_regeneracion": {
+    "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+    "model_id": "eleven_v4",
+    "stability": 0.60,
+    "similarity_boost": 0.75,
+    "speed": 0.85,
+    "output_format": "mp3_44100_128"
+  },
+  "texto_enviado": "Si esta oración te acompaña, puedes suscribirte a Oraciones Bíblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.",
+  "caracteres_enviados": 183,
+  "history_item_id": "uxejB7kjZjh5KDDLl4Nm",
+  "duracion_cta_regenerada_s": 11.807347,
+  "duracion_cta_original_speed1_s": 11.232653,
+  "costo": {
+    "tarifa_publicada_creditos": 183,
+    "delta_historial_observado": 81,
+    "delta_suscripcion_antes_despues": 0,
+    "nota": "ninguno de los dos deltas observados es confiable individualmente -- ruido ya documentado en este proyecto para cargos por llamada unica. Tarifa publicada usada como referencia."
+  },
+  "silencio_natural_detectado_en_4mp3_original": {
+    "antes_de_la_cta": {
+      "fin_frase_anterior_t": 54.64,
+      "inicio_cta_original_t": 55.6,
+      "duracion_s": 0.96
+    },
+    "despues_de_la_cta": {
+      "fin_cta_original_t": 66.8,
+      "inicio_frase_siguiente_t": 67.68,
+      "duracion_s": 0.88
+    }
+  },
+  "pausas_propuestas_para_integracion": {
+    "antes": {"natural_s": 0.96, "anadido_s": 0.54, "total_s": 1.50},
+    "despues": {"natural_s": 0.88, "anadido_s": 0.62, "total_s": 1.50}
+  },
+  "segmentos_contexto_extraidos_sin_modificar": {
+    "antes_original": {"archivo": "seg1_antes_original.mp3", "t0_local": 44.64, "t1_local": 55.6, "incluye_pausa_natural": true},
+    "despues_original": {"archivo": "seg3_despues_original.mp3", "t0_local": 66.8, "t1_local": 77.28, "incluye_pausa_natural": true}
+  },
+  "archivo_resultado": "video_008_muestra_CTA_regenerada_con_pausas.mp3",
+  "duracion_total_segundos": 34.403265,
+  "sha256": "f5701f4c734e6a41bf0a3e9628c9215b5033030fff546eba4bfb1983e6ac16b0",
+  "cambios_aplicados_a_narracion_completa": false,
+  "archivos_originales_no_modificados": ["4.mp3", "4.alignment.json", "video_008_narracion_completa_sin_musica_con_pausas_v2.mp3"]
+}

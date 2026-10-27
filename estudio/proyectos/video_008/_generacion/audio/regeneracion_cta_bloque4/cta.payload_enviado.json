@@ -1,0 +1,9 @@
+{
+  "text": "Si esta oración te acompaña, puedes suscribirte a Oraciones Bíblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.6,
+    "similarity_boost": 0.75,
+    "speed": 0.85
+  }
+}

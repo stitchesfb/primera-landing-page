@@ -1,5 +1,5 @@
 {
-  "estado": "muestra_cta_90pct_entregada_pendiente_aprobacion",
+  "estado": "cta_bloque4_regenerada_muestra_entregada_pendiente_aprobacion",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -93,7 +93,7 @@
     }
   },
   "transicion_flash_a_v4": {
-    "estado": "acotada_al_CTA_del_bloque_4_muestra_90pct_entregada",
+    "estado": "CTA_del_bloque_4_regenerada_con_nuevos_ajustes_muestra_entregada",
     "hallazgo": "El bloque 3 (primer bloque en eleven_v4) empieza en el segundo 241.915 (4:01.92) de la narracion -- coincide con el cambio de ritmo/interpretacion que reporto Orlando desde ~4:03. Confirma que el cambio percibido es el cambio de modelo (eleven_flash_v2_5 -> eleven_v4) y de ajustes, no una deriva gradual.",
     "muestras_entregadas": {
       "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestras_transicion_flash_v4",
@@ -115,7 +115,47 @@
       },
       "nota": "Se uso el archivo fuente 4.mp3 sin modificar. No se llamo a ElevenLabs, no se regenero voz, no se cambio la velocidad del resto de la narracion. NO se aplico ningun cambio todavia al archivo ensamblado completo (_v2.mp3) -- queda pendiente de que Orlando apruebe esta muestra."
     },
-    "nota": "Decision pendiente de Orlando sobre esta muestra: si el ajuste de velocidad al 90% solo en la CTA del bloque 4 resuelve lo reportado, o si hace falta algo mas antes de aplicarlo al archivo completo."
+    "regeneracion_2026_10_27_del_CTA": {
+      "reportado_por": "Orlando: la muestra al 90% con atempo seguia sonando rapida y energetica; ademas pidio mas separacion antes y despues.",
+      "decision": "En vez de ralentizar el audio existente con atempo, Orlando aprobo regenerar SOLO el parrafo de la CTA (no el bloque 4 completo) con la misma voz y eleven_v4, usando ajustes propios del motor para una lectura mas lenta y serena.",
+      "ajustes_aprobados": {
+        "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+        "model_id": "eleven_v4",
+        "stability": 0.60,
+        "similarity_boost": 0.75,
+        "speed": 0.85,
+        "output_format": "mp3_44100_128",
+        "nota_rango": "Rango oficial admitido de speed en ElevenLabs: 0.7-1.2 (por defecto 1.0); valores cercanos a los extremos pueden degradar calidad. Se eligio 0.85 por margen de seguridad, con 0.70 como limite si se necesitara mas reduccion."
+      },
+      "texto_enviado": "Si esta oracion te acompana, puedes suscribirte a Oraciones Biblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.",
+      "caracteres_enviados": 183,
+      "generacion": {
+        "llamadas": 1,
+        "reintentos": 0,
+        "history_item_id": "uxejB7kjZjh5KDDLl4Nm",
+        "duracion_resultante_s": 11.807347,
+        "duracion_anterior_speed1_s": 11.232653,
+        "verificacion": "Texto alineado devuelto por la API identico, caracter por caracter, al texto enviado. Decodificacion limpia.",
+        "costo_presupuestado_creditos": 183,
+        "costo_observado": "No confiable individualmente (delta de historial: 81 caracteres; delta de suscripcion antes/despues: 0) -- ruido ya documentado en este proyecto para cargos por llamada unica. Se usa la tarifa publicada (183 creditos) como referencia.",
+        "archivos": "estudio/proyectos/video_008/_generacion/audio/regeneracion_cta_bloque4/ (cta_regenerada.mp3, alineacion, payload enviado, item de historial crudo)"
+      },
+      "pausas_de_integracion_propuestas": {
+        "metodo": "Se detecto el silencio natural que la propia voz ya deja entre frases en 4.mp3 original (0.96s antes de la CTA, 0.88s despues) y se completo con silencio generado hasta llegar a ~1.5s de pausa total en cada union, sin duplicar el silencio ya existente.",
+        "antes": {"natural_s": 0.96, "anadido_s": 0.54, "total_s": 1.50},
+        "despues": {"natural_s": 0.88, "anadido_s": 0.62, "total_s": 1.50}
+      },
+      "muestra_entregada": {
+        "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_regenerada",
+        "archivo": "video_008_muestra_CTA_regenerada_con_pausas.mp3",
+        "contenido": "~11.0s de contexto anterior original (incluye su pausa natural) + 0.54s de silencio anadido + CTA regenerada (11.81s, stability 0.60/speed 0.85) + 0.62s de silencio anadido + ~10.5s de contexto posterior original (incluye su pausa natural)",
+        "duracion_total_s": 34.403265,
+        "sha256": "f5701f4c734e6a41bf0a3e9628c9215b5033030fff546eba4bfb1983e6ac16b0",
+        "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_regenerada/LEEME_CTA_REGENERADA.md"
+      },
+      "nota": "4.mp3, su alineacion y la narracion ensamblada _v2.mp3 permanecen intactos. La CTA anterior (velocidad original) tambien se conserva sin tocar. NO se incorporo todavia esta regeneracion al archivo ensamblado completo -- pendiente de que Orlando apruebe esta muestra."
+    },
+    "nota": "Decision pendiente de Orlando sobre la nueva muestra (CTA regenerada con stability 0.60/speed 0.85 y pausas de ~1.5s): si ya resuelve lo reportado, o si hace falta otro ajuste antes de incorporarla al archivo completo."
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
   "historial": [
@@ -142,6 +182,10 @@
     {
       "fecha": "2026-10-27",
       "evento": "Sexta tarea. Tras escuchar las muestras A/B de la transicion, Orlando precisio: el resto de la narracion esta bien; solo la invitacion a suscribirse (bloque 4, 'Si esta oracion te acompana... cargas ante Dios', entre 6:55 y 7:07 de la v2) suena mas rapida y energetica. Se localizaron los limites reales del pasaje buscando frases completas en la alineacion del bloque 4 (no en los tiempos aproximados dados de oido): el resultado (6:55.48 a 7:06.68 en tiempo global) coincide con lo reportado. Se construyo una muestra de un solo archivo (video_008_muestra_CTA_90pct.mp3, 32.08s) a partir de 4.mp3 sin modificar: ~10s antes a velocidad original + la CTA completa extraida y luego ralentizada al 90% con atempo=0.9 (tono conservado, de 11.23s a 12.46s) + ~9.6s despues a velocidad original. No se llamo a ElevenLabs, no se regenero voz, no se cambio la velocidad del resto de la narracion, y no se aplico todavia ningun cambio al archivo ensamblado completo (_v2.mp3) -- queda pendiente de la aprobacion de Orlando sobre esta muestra. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-27",
+      "evento": "Septima tarea. La muestra con atempo al 90% no convencio a Orlando (seguia sonando rapida y energetica) y pidio mas separacion antes/despues. En vez de ralentizar el audio existente, aprobo regenerar solo el parrafo de la CTA (no el bloque 4 completo) con la misma voz y eleven_v4, usando ajustes propios del motor (stability 0.60, speed 0.85, dentro del rango oficial 0.7-1.2) para una lectura mas lenta y serena; se presento texto, configuracion y costo (183 creditos por la tarifa publicada) antes de generar, y Orlando aprobo. Se hizo una sola llamada, sin reintentos: el texto alineado devuelto coincidio exactamente con el enviado. El cargo individual no fue medible de forma confiable (delta de historial 81 caracteres, delta de suscripcion 0) -- ruido ya conocido en este proyecto; se usa la tarifa publicada como referencia. Se armo una muestra con contexto integrando el audio original sin tocar antes y despues, detectando el silencio natural que la propia voz ya deja entre frases (0.96s antes, 0.88s despues) y completando con silencio generado hasta llegar a ~1.5s de pausa total en cada union, como pidio Orlando. 4.mp3, su alineacion y la narracion ensamblada _v2.mp3 permanecen intactos; la CTA anterior (velocidad original) tambien se conservo. No se incorporo todavia esta regeneracion al archivo completo -- pendiente de aprobacion de la nueva muestra. El Video 7 permanece intacto."
     }
   ]
 }
