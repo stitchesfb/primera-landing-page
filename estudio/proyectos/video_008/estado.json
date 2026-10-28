@@ -1,5 +1,5 @@
 {
-  "estado": "cta_bloque4_investigacion_shh_y_metadatos_clone_strength_pendiente_confirmacion",
+  "estado": "cta_bloque4_v2_regenerada_configuracion_verificada_sin_residuo_pendiente_aprobacion",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -174,6 +174,48 @@
         "archivos": "estudio/proyectos/video_008/_generacion/montaje/diagnostico_shh_cta/ (B_contexto_original_4mp3_53.5-57.5.mp3, C_union_muestra_entregada_9.5-13.5.mp3, D_inicio_cta_regenerada_0-1.2.mp3, E_cola_antes_original_usado_9.5-fin.mp3, LEEME_DIAGNOSTICO.md)"
       },
       "nota": "No se genero ningun audio nuevo en esta tarea. Pendiente de que Orlando resuelva la ambiguedad de 'Clone Strength' y confirme el texto original del CTA antes de la proxima generacion."
+    },
+    "resolucion_clone_strength_y_regeneracion_v2_2026_10_28": {
+      "resolucion_clone_strength": "Orlando envio una captura del panel real de ElevenLabs. Se verifico contra la documentacion oficial de la API: clone_strength es un campo real de voice_settings, exclusivo de professional voice clones afinados para v4 (coincide con esta voz). Rango 0 (low) a 1 (high), recomendado 0 para la mayoria de casos. La captura mostraba el control en el extremo izquierdo ('Low') -> equivalente verificado: clone_strength=0.0. De paso se confirmo via /v1/models que eleven_v4 tiene can_use_style:false y can_use_speaker_boost:false (el modelo no usa esos campos aunque aparecian en los ajustes guardados de la voz), y que language_code='es' es un campo valido de nivel superior soportado por eleven_v4 (no usado en llamadas anteriores).",
+      "ajustes_aprobados_por_orlando": {
+        "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+        "model_id": "eleven_v4",
+        "language_code": "es",
+        "stability": 0.65,
+        "similarity_boost": 0.88,
+        "clone_strength": 0.0,
+        "speed": 0.91,
+        "nota_speed": "Orlando confirmo explicitamente 0.91 como la velocidad elegida para esta prueba."
+      },
+      "texto_usado": "el texto original del CTA (el mismo de siempre), no el texto de prueba de Orlando",
+      "generacion": {
+        "llamadas": 1,
+        "reintentos": 0,
+        "history_item_id": "rdEARtBAxFAsRxD12Me0",
+        "duracion_resultante_s": 11.72898,
+        "verificacion": "Texto alineado identico, caracter por caracter, al enviado. Decodificacion limpia.",
+        "costo_presupuestado_creditos": 183,
+        "costo_observado": "no confiable individualmente (delta historial 81, delta suscripcion 0) -- mismo patron de ruido ya documentado",
+        "archivos": "estudio/proyectos/video_008/_generacion/audio/regeneracion_cta_bloque4/ (cta_v2_regenerada.mp3, alineacion, payload, historial crudo)"
+      },
+      "correccion_residuo_S": {
+        "diagnostico_previo": "el corte de antes_original en 55.6s (tiempo ETIQUETADO por la alineacion) se quedaba con 0.10-0.15s de la fricativa S de la CTA vieja, que en el audio real empieza a sonar en 55.42s",
+        "correccion": "se movio el corte de antes_original a 55.38s (dentro de la zona de silencio puro verificada con analisis de energia a 0.02s de resolucion)",
+        "verificacion": "la cola del nuevo fragmento y el punto de union en la muestra ensamblada quedaron con silencio limpio y continuo, sin ningun salto de energia -- el residuo ya no aparece",
+        "lado_despues_revisado_sin_cambios": "se verifico que el lado despues_original (corte en 66.8s) ya estaba a salvo de cualquier residuo (la CTA vieja termina limpiamente en 66.76s); no requirio ajuste. Se afino el calculo de pausa natural usando el inicio real del habla siguiente (67.40s, no 67.68s etiquetado)"
+      },
+      "pausas_de_integracion_recalculadas": {
+        "antes": {"natural_s": 0.83, "anadido_s": 0.67, "total_s": 1.50},
+        "despues": {"natural_s": 0.60, "anadido_s": 0.90, "total_s": 1.50}
+      },
+      "muestra_entregada": {
+        "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_v2_sin_residuo",
+        "archivo": "video_008_muestra_CTA_v2_sin_residuo_con_pausas.mp3",
+        "duracion_total_s": 34.507755,
+        "sha256": "21a6b8a39a1ea94d106e4dcf33c0683ca4e6c379adf1e84554f640023ac1d719",
+        "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_v2_sin_residuo/LEEME_CTA_V2.md"
+      },
+      "nota": "4.mp3, su alineacion, la narracion ensamblada _v2.mp3, y las dos CTAs anteriores (speed 1.00 original y speed 0.85/stability 0.60) permanecen intactas. NO se incorporo todavia esta regeneracion al archivo completo -- pendiente de aprobacion de Orlando."
     }
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
@@ -209,6 +251,10 @@
     {
       "fecha": "2026-10-28",
       "evento": "Octava tarea. Orlando confirmo que stability 0.60/speed 0.85 ya suena mas cercano al tono buscado (aunque probo con un texto distinto por su cuenta en ElevenLabs) y pidio, antes de generar: consultar los metadatos reales de esa prueba propia (especialmente clone strength, idioma y velocidad) sin asumir que el control visual corresponde a un parametro concreto de la API; preparar una propuesta para el texto original del CTA con stability 0.65/similarity 0.88 y el equivalente verificado de 'Clone strength Low'; y revisar si el 'shh' del segundo 11 de la muestra entregada viene de la CTA nueva, del contexto original o de la union -- comparando las fuentes por separado, sin generar todavia. Solo se hicieron lecturas de la API (historial y voz), ninguna llamada de generacion. Se encontraron los 2 items de historial de la prueba de Orlando: confirman stability 0.65 y similarity 0.88, pero sin campo 'speed' ni 'clone strength' en ese objeto; consultando la voz misma se encontraron ademas speed 0.91, style 0.0 y use_speaker_boost true guardados como ajustes actuales de la voz. Idioma confirmado como 'es'/es-AR, atributo de la voz, no parametro por llamada. Busque 'Clone Strength' en la documentacion oficial de ElevenLabs y no existe ningun parametro ni control con ese nombre -- el mas cercano documentado es similarity_boost, pero no se puede confirmar la equivalencia (0.88 leeria como similarity alta, no 'Low'), asi que se reporto como pendiente de aclaracion de Orlando en vez de asumir un valor. Sobre el 'shh': se aislo con analisis de energia en banda alta (>3.5kHz) comparando por separado la CTA regenerada sola, el bloque 4 original sin cortar, y el punto de union de la muestra entregada -- se determino que es un fragmento real de ~0.10-0.15s de la 'S' de la antigua CTA, presente de forma natural en el 4.mp3 original (la fricativa empieza a sonar en el segundo 55.45-55.50, antes del punto de corte 55.6s usado, que viene del tiempo ETIQUETADO por la alineacion, no del inicio acustico real). No es un artefacto de la CTA nueva ni de la concatenacion en si. Se entregaron 4 clips de comparacion y se propuso (sin aplicar) mover el corte a ~55.40-55.45s en la siguiente integracion. No se genero ni se modifico ningun audio en esta tarea. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-28",
+      "evento": "Novena tarea. Orlando envio una captura del panel real de ElevenLabs mostrando 'Clone strength' como control separado, en 'Low'. Se verifico contra la documentacion oficial: clone_strength es un campo real de voice_settings (rango 0-1, 0=low, recomendado 0 para la mayoria de casos), exclusivo de voice clones profesionales afinados para v4 -- coincide con esta voz. Equivalente verificado: clone_strength=0.0. Se confirmo ademas via /v1/models que eleven_v4 no usa style ni use_speaker_boost (can_use_style/can_use_speaker_boost en false) y que language_code='es' es valido y soportado por el modelo. Orlando aprobo generar una sola vez el texto original del CTA con stability 0.65, similarity_boost 0.88, clone_strength 0.0 y speed 0.91 (elegida explicitamente por el para esta prueba), hasta 183 creditos, sin reintentos, y pidio integrar la nueva CTA en una muestra eliminando por completo el residuo de 'S' detectado en la tarea anterior, con ~1.5s de pausa total antes y despues. Se hizo la llamada (1 sola, sin reintentos): texto alineado identico al enviado, decodificacion limpia, history_item_id rdEARtBAxFAsRxD12Me0. Para eliminar el residuo se midio con precision de 0.02s el verdadero inicio acustico de la fricativa S vieja (55.42s, no 55.6s etiquetado) y se movio el corte de antes_original a 55.38s, dentro de silencio puro verificado; se confirmo que el lado despues (corte en 66.8s) ya estaba a salvo y no requirio cambio, afinando el calculo de pausa natural con el inicio real de 'Padre' (67.40s). Se recalcularon las pausas (0.83s natural + 0.67s anadido antes; 0.60s natural + 0.90s anadido despues, ambas sumando 1.5s) y se reensamblo la muestra; se verifico con el mismo analisis de energia que la union quedo con silencio limpio y continuo, sin ningun residuo. 4.mp3, su alineacion, la narracion ensamblada _v2.mp3 y las dos CTAs anteriores permanecen intactas. No se incorporo todavia esta regeneracion al archivo completo -- pendiente de aprobacion de Orlando. El Video 7 permanece intacto."
     }
   ]
 }

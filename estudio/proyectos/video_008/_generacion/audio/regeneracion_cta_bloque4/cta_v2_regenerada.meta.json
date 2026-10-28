@@ -1,0 +1,23 @@
+{
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "model_id": "eleven_v4",
+  "language_code": "es",
+  "ajustes": {
+    "stability": 0.65,
+    "similarity_boost": 0.88,
+    "clone_strength": 0,
+    "speed": 0.91
+  },
+  "formato": "mp3_44100_128",
+  "texto": "Si esta oración te acompaña, puedes suscribirte a Oraciones Bíblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.",
+  "caracteres_enviados": 183,
+  "duracion_real_s": 11.72898,
+  "caracteres_antes": 34416,
+  "caracteres_despues": 34416,
+  "cargo_creditos": 0,
+  "request_id": "AijgNCAOxgNxqQ5tEw1t",
+  "fecha_generacion_utc": "2026-10-28T02:28:58.000Z",
+  "sha256_audio": "bd050a3c99a66fb282329d03e44dbd02e8f25f6e0fa96b530721906e37752f2a",
+  "errores": [],
+  "ok": true
+}

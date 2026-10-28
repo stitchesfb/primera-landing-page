@@ -1,0 +1,61 @@
+{
+  "bloque_fuente_contexto": 4,
+  "archivo_fuente_contexto": "4.mp3",
+  "archivo_cta_regenerada": "estudio/proyectos/video_008/_generacion/audio/regeneracion_cta_bloque4/cta_v2_regenerada.mp3",
+  "ajustes_regeneracion": {
+    "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+    "model_id": "eleven_v4",
+    "language_code": "es",
+    "stability": 0.65,
+    "similarity_boost": 0.88,
+    "clone_strength": 0.0,
+    "speed": 0.91
+  },
+  "texto_enviado": "Si esta oración te acompaña, puedes suscribirte a Oraciones Bíblicas Diarias para encontrar otras oraciones basadas en la Biblia. Ahora seguimos presentando nuestras cargas ante Dios.",
+  "caracteres_enviados": 183,
+  "history_item_id": "rdEARtBAxFAsRxD12Me0",
+  "duracion_cta_regenerada_s": 11.72898,
+  "costo": {
+    "tarifa_publicada_creditos": 183,
+    "delta_historial_observado": 81,
+    "delta_suscripcion_antes_despues": 0,
+    "nota": "ninguno de los dos deltas es confiable individualmente, ya documentado en este proyecto"
+  },
+  "correccion_residuo_S": {
+    "corte_anterior_55_6s": "incluia 0.10-0.15s de la fricativa S de la CTA vieja (empieza a sonar en 55.42s real, no 55.6s etiquetado)",
+    "nuevo_corte_antes_original": 55.38,
+    "verificado_silencio_limpio_desde": 55.40,
+    "lado_despues_sin_cambios": {
+      "corte_despues_original": 66.8,
+      "fin_real_silencio_cta_vieja": 66.76,
+      "inicio_real_habla_siguiente_Padre": 67.40,
+      "nota": "66.8s ya estaba a salvo del residuo; no requirio ajuste"
+    }
+  },
+  "silencio_natural_acustico_real": {
+    "antes_de_la_cta": {
+      "fin_real_habla_anterior_t": 54.60,
+      "nuevo_corte_antes_original_t": 55.38,
+      "duracion_s": 0.83
+    },
+    "despues_de_la_cta": {
+      "corte_despues_original_t": 66.8,
+      "inicio_real_habla_siguiente_t": 67.40,
+      "duracion_s": 0.60
+    }
+  },
+  "pausas_propuestas_para_integracion": {
+    "antes": {"natural_s": 0.83, "anadido_s": 0.67, "total_s": 1.50},
+    "despues": {"natural_s": 0.60, "anadido_s": 0.90, "total_s": 1.50}
+  },
+  "segmentos_contexto_extraidos_sin_modificar": {
+    "antes_original_v2": {"archivo": "seg1_antes_original_v2.mp3", "t0_local": 44.64, "t1_local": 55.38, "duracion_s": 10.788571},
+    "despues_original": {"archivo": "seg3_despues_original.mp3", "t0_local": 66.8, "t1_local": 77.28, "duracion_s": 10.527347}
+  },
+  "archivo_resultado": "video_008_muestra_CTA_v2_sin_residuo_con_pausas.mp3",
+  "duracion_total_segundos": 34.507755,
+  "sha256": "21a6b8a39a1ea94d106e4dcf33c0683ca4e6c379adf1e84554f640023ac1d719",
+  "verificacion_union_limpia": "analisis de energia >3.5kHz en ventanas de 0.05s confirma silencio puro y continuo entre 10.05s y 11.35s de la muestra, sin blip -- el residuo ya no aparece",
+  "cambios_aplicados_a_narracion_completa": false,
+  "archivos_originales_no_modificados": ["4.mp3", "4.alignment.json", "video_008_narracion_completa_sin_musica_con_pausas_v2.mp3", "cta_regenerada.mp3 (version anterior, stability 0.60/speed 0.85)"]
+}
