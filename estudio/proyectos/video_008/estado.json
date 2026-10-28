@@ -74,7 +74,13 @@
     "hallazgo_no_corregido": "El ritmo real resulto ~137 palabras/min, mas rapido que el rango estimado del guion (100-115 ppm). Informado para la revision auditiva, no corregido -- la reserva del presupuesto no autoriza regeneraciones segun instruccion de Orlando."
   },
   "narracion_completa_sin_musica": {
-    "estado": "v3_entregada_cta_eliminado_pendiente_revision_auditiva_final",
+    "estado": "aprobada_2026_10_28_incluidas_las_10_pausas",
+    "aprobacion": {
+      "fecha": "2026-10-28",
+      "version_aprobada": "v3",
+      "aprobado_por": "Orlando",
+      "nota": "Aprobada la narracion v3 (sin musica) y sus 10 pausas (P01-P02 5s, P03-P08 7s, P09-P10 8s) en sus posiciones verificadas."
+    },
     "archivo_vigente": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v3.mp3",
     "sha256_v3": "48b78ccd42c4914eb24b6305961c29333983c9d551e57d60725050a9887c56c7",
     "duracion_s_v3": 2166.439184,
@@ -103,6 +109,46 @@
       "archivos_fuente_no_tocados": "1.mp3 ... 19.mp3 y sus *.alignment.json permanecen intactos -- solo se recalculo donde cortarlos al ensamblar.",
       "muestra_verificacion": "estudio/proyectos/video_008/_generacion/montaje/video_008_muestra_P02_corregida.mp3"
     }
+  },
+  "shorts": {
+    "estado": "identificados_con_tiempos_v3_titulos_propuestos_pendiente_extraccion",
+    "fecha": "2026-10-28",
+    "fuente": "VIDEO_008_GUION_APROBADO.md (marcadores [INICIO SHORT N]/[FIN SHORT N]), confirmado contra VIDEO_008_PLAN_TECNICO_PRE_TTS.md para ubicar cada Short en su bloque TTS",
+    "metodo_tiempos": "texto exacto localizado en la alineacion por caracter del bloque TTS correspondiente; desplazamiento global de inicio del bloque recalculado tras la eliminacion del CTA en el bloque 4 (narracion v3), anclado a los 10 silencios de pausa verificados en el archivo final. Precision estimada +-1s, suficiente para planificacion.",
+    "detalle": "estudio/proyectos/video_008/_generacion/montaje/VIDEO_008_SHORTS_v3.md",
+    "lista": [
+      {
+        "numero": 1,
+        "bloque_tts": 3,
+        "tema": "El cansancio de cuidar de otros sin detenerse nunca; entregar al Pastor las responsabilidades que superan las propias fuerzas.",
+        "texto": "¿Estás cansado de cargar con todo? Tal vez cuidas de todos y, al llegar la noche, todavía sientes que no puedes detenerte. El Salmo veintitrés comienza recordándonos que tenemos un Pastor. Puedes confiarle a Dios lo que hoy supera tus fuerzas. Señor, te entrego mis responsabilidades y las personas que amo. Ayúdame a cumplir mi parte con sabiduría y a reconocer mis límites. Enséñame a recibir ayuda y a descansar bajo tu cuidado. Esta noche pongo delante de ti lo que no puedo resolver. Sostén mi corazón mientras descanso. Amén.",
+        "inicio_v3_s": 269.284,
+        "fin_v3_s": 307.364,
+        "duracion_s": 38.08,
+        "titulo_propuesto": "¿Cansado de Cargar con Todo? Oración Para Soltar tus Cargas"
+      },
+      {
+        "numero": 2,
+        "bloque_tts": 9,
+        "tema": "Pedir direccion y sabiduria de Dios ante una decision dificil, sin que el miedo o la prisa decidan en lugar de uno.",
+        "texto": "¿No sabes qué camino tomar? Cuando estás cansado, cada decisión puede sentirse más pesada. El Salmo veintitrés nos recuerda la dirección del Pastor. Puedes pedir sabiduría y dar el siguiente paso con humildad. Señor, tú conoces lo que debo decidir. Ayúdame a buscar información, escuchar buenos consejos y reconocer lo que es justo. Si necesito esperar, dame paciencia. Si debo actuar, dame valor. Que el temor y la prisa no decidan por mí. Esta noche te presento mi pregunta y descanso confiando en tu cuidado. Amén.",
+        "inicio_v3_s": 964.073,
+        "fin_v3_s": 1003.953,
+        "duracion_s": 39.88,
+        "titulo_propuesto": "¿No Sabes Qué Camino Tomar? Oración Por Dirección y Sabiduría"
+      },
+      {
+        "numero": 3,
+        "bloque_tts": 12,
+        "tema": "Atravesar un momento oscuro o doloroso (el valle del salmo) con la confianza puesta en la compania y la fortaleza de Dios.",
+        "texto": "¿Estás pasando por un momento oscuro? El Salmo veintitrés reconoce que hay valles difíciles. En medio de ellos, David dirige su confianza al Pastor que lo acompaña. Puedes traer a Dios tu dolor sin esconderlo. Señor, esta etapa me pesa y no tengo todas las respuestas. Acompáñame mientras la atravieso. Dame fortaleza para el paso de hoy y humildad para recibir ayuda. Sostén a las personas que amo. Esta noche pongo delante de ti lo que me duele y te pido consuelo. Ayúdame a descansar en tu presencia. Amén.",
+        "inicio_v3_s": 1288.006,
+        "fin_v3_s": 1325.046,
+        "duracion_s": 37.04,
+        "titulo_propuesto": "¿Estás en un Momento Oscuro? Oración de Consuelo en el Valle"
+      }
+    ],
+    "nota": "El guion estimaba 45-54s de voz por Short; las duraciones reales (37-40s) son mas cortas por el ritmo real de eleven_v4 en esta narracion. Ningun clip se ha extraido, recortado a 9:16, musicalizado ni renderizado todavia."
   },
   "transicion_flash_a_v4": {
     "estado": "CTA_del_bloque_4_regenerada_con_nuevos_ajustes_muestra_entregada",
@@ -290,6 +336,10 @@
     {
       "fecha": "2026-10-28",
       "evento": "Undecima tarea (final de esta fase). Orlando reporto que en la muestra de la CTA v2 al 80%, desde el segundo 27 hasta el final la voz sonaba mejor, y pidio identificar el contenido/procesamiento de ese tramo: si incluia la invitacion completa con ese ritmo, integrarla; si no, eliminar todo el parrafo del CTA (incluida 'Ahora seguimos presentando nuestras cargas ante Dios') y unir naturalmente 'seguir.' con 'Padre, mi vida necesita tu direccion...', autorizando ese montaje local sin mas pruebas ni llamadas a ElevenLabs, y entregar la narracion completa para revision final. Se identifico con precision que el tramo desde el segundo 27 corresponde exactamente a seg3_despues_original.mp3 (local 4.mp3 66.8s-77.28s) -- audio ORIGINAL sin ningun procesamiento, que NO incluye la invitacion a suscribirse en absoluto. Por tanto se aplico la segunda condicion: se elimino el parrafo completo del CTA del bloque 4. Se uso 4.mp3 original (sin tocar) y su alineacion para cortar en el fin real del habla de 'seguir.' (54.60s, medido acusticamente con analisis de energia de banda ancha, no el tiempo etiquetado) y continuar desde el inicio real de 'Padre' (67.38s), con 0.75s de silencio anadido -- se verifico que la pausa resultante es de 0.78s, consistente con las pausas de parrafo naturales medidas en el resto del bloque (0.80-0.96s etiquetados en otros 2 saltos de parrafo del mismo bloque). Se genero 4_sin_cta.mp3 (103.21s, vs 115.23s del original) sin modificar 4.mp3 ni su alineacion. Se reensamblo la narracion completa de los 19 bloques usando 4_sin_cta.mp3 solo para el bloque 4 -- el resto de bloques y las 10 pausas P01-P10 no cambiaron, mismos cortes corregidos de la v2. Resultado: video_008_narracion_completa_sin_musica_con_pausas_v3.mp3, 2166.44s (36:06), 12.04s mas corta que v1/v2 por la eliminacion del CTA. Verificado: decodificacion limpia, silencedetect confirma los 10 silencios esperados en las posiciones y duraciones correctas. v1 y v2 de la narracion completa, 4.mp3 original, y las tres CTAs generadas (speed 1.00, speed 0.91, 80%) se conservan todas intactas, sin usarse en la narracion final. Se entrego la narracion completa v3 para revision final de Orlando. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-28",
+      "evento": "Duodecima tarea. Orlando aprobo la narracion v3 y sus 10 pausas, y pidio recuperar del guion aprobado los tres Shorts integrados (bloques 3, 9 y 12 segun el plan tecnico), presentando para cada uno tema, texto exacto, inicio/fin en la narracion v3, duracion y titulo propuesto, usando los tiempos actualizados tras eliminar el CTA, sin renderizar. Se registro la aprobacion en estado.json. Se localizaron los 3 Shorts por sus marcadores [INICIO/FIN SHORT N] en VIDEO_008_GUION_APROBADO.md, confirmando en VIDEO_008_PLAN_TECNICO_PRE_TTS.md que caen en los bloques TTS 03, 09 y 12. Se calcularon sus tiempos en la narracion v3 localizando el texto exacto en la alineacion de cada bloque y sumando el desplazamiento global de inicio de ese bloque (recalculado tras la eliminacion del CTA, anclado a los 10 silencios de pausa verificados en el archivo v3). Resultados: Short 1 (bloque 3) 269.284s-307.364s (38.08s), tema del cansancio de cuidar a otros; Short 2 (bloque 9) 964.073s-1003.953s (39.88s), tema de direccion para decisiones dificiles; Short 3 (bloque 12) 1288.006s-1325.046s (37.04s), tema de consuelo en momentos oscuros (el valle). Se propuso un titulo para cada uno, basado en la pregunta de apertura ya presente en cada texto. Ningun clip se extrajo, recorto ni rendirizo. El Video 7 permanece intacto."
     }
   ]
 }
