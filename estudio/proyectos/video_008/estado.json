@@ -111,7 +111,26 @@
     }
   },
   "shorts": {
-    "estado": "identificados_con_tiempos_v3_titulos_propuestos_pendiente_extraccion",
+    "estado": "audio_preliminar_extraido_y_verificado_plan_visual_entregado",
+    "audio_preliminar": {
+      "fecha": "2026-10-28",
+      "metodo": "Extraido directamente de 3.mp3, 9.mp3 y 12.mp3 originales (sin tocar), usando el texto exacto localizado en la alineacion de cada bloque. Sin llamadas a ElevenLabs.",
+      "verificacion": "Analisis de energia en ventanas de 0.05s en el inicio y el final de cada clip (proxy de escucha, sin reproduccion de audio disponible en esta sesion): silencio limpio antes de la primera silaba y Amen completo sin cortes en los 3. Short 3 no tenia margen de silencio natural antes de la primera silaba (empieza en el caracter 0 de su bloque) -- se anadieron 0.3s de silencio digital al inicio, sin generar voz nueva.",
+      "archivos": {
+        "short1_preliminar.mp3": {"bloque": 3, "duracion_s": 38.948571, "sha256": "782735548b02e7b1dafc08379d286f13255f6202d52a11ca7f088c6b488451c9"},
+        "short2_preliminar.mp3": {"bloque": 9, "duracion_s": 40.751020, "sha256": "f8cdc183d2ebdc0aa5ed8e8562cdddcc7a4c66277d4a86a7c34bef333cb5e547"},
+        "short3_preliminar.mp3": {"bloque": 12, "duracion_s": 37.746939, "sha256": "1b3d9380ab7b44bd4ee40e2d690518baaef3482631b84c811235abb5b4d31409"}
+      },
+      "directorio": "estudio/proyectos/video_008/_generacion/shorts/audio_preliminar/",
+      "detalle": "estudio/proyectos/video_008/_generacion/shorts/audio_preliminar/LEEME_AUDIO_PRELIMINAR.md"
+    },
+    "plan_visual": {
+      "fecha": "2026-10-28",
+      "detalle": "estudio/proyectos/video_008/_generacion/mapa_visual/VIDEO_008_PLAN_VISUAL.md",
+      "resumen": "Mapa de los 19 bloques + 10 pausas con tiempos v3, respetando SISTEMA_ACTIVO_ORACIONES_BIBLICAS_DIARIAS.md y VIDEO_TEMPLATE_ORACIONES_BIBLICAS_DIARIAS.md. Decision pendiente de Orlando sobre movimiento visual (baseline canal.json imagen_fija_particulas vs. extender el experimento del Video 7, que el sistema limita solo a ese video hasta revisarlo con datos). Recursos reutilizables: solo 3 clips genericos de Pixabay del inventario del Video 7 (cielo estrellado, Biblia, naturaleza) -- las imagenes N1-N16 y las 4 originales son especificas de la protagonista del Video 7 y no se reutilizan. Imagineria propia del Salmo 23 (pastor, pastos, aguas de reposo, valle, mesa, copa) queda pendiente de generar, sin generarse todavia. Musica propuesta: touching_moment.mp3 (Wayne Jones), siguiente en la rotacion del canal tras one_step_closer (video_006) y alone_with_my_thoughts (video_007). Subtitulos: sin quemar en el video largo (srt aparte, igual que el baseline del canal); quemados en los 3 Shorts. Plan vertical 9:16 de los 3 Shorts con titulos propuestos, recursos pendientes de generar y ritmo visual (3 tomas, zoom 7-8%, fundidos 0.75-1s) siguiendo el patron ya usado en el Video 7.",
+      "nota": "Ningun recurso visual se genero ni se descargo. No se rendirizo nada."
+    },
+    "estado_anterior": "identificados_con_tiempos_v3_titulos_propuestos_pendiente_extraccion",
     "fecha": "2026-10-28",
     "fuente": "VIDEO_008_GUION_APROBADO.md (marcadores [INICIO SHORT N]/[FIN SHORT N]), confirmado contra VIDEO_008_PLAN_TECNICO_PRE_TTS.md para ubicar cada Short en su bloque TTS",
     "metodo_tiempos": "texto exacto localizado en la alineacion por caracter del bloque TTS correspondiente; desplazamiento global de inicio del bloque recalculado tras la eliminacion del CTA en el bloque 4 (narracion v3), anclado a los 10 silencios de pausa verificados en el archivo final. Precision estimada +-1s, suficiente para planificacion.",
@@ -340,6 +359,10 @@
     {
       "fecha": "2026-10-28",
       "evento": "Duodecima tarea. Orlando aprobo la narracion v3 y sus 10 pausas, y pidio recuperar del guion aprobado los tres Shorts integrados (bloques 3, 9 y 12 segun el plan tecnico), presentando para cada uno tema, texto exacto, inicio/fin en la narracion v3, duracion y titulo propuesto, usando los tiempos actualizados tras eliminar el CTA, sin renderizar. Se registro la aprobacion en estado.json. Se localizaron los 3 Shorts por sus marcadores [INICIO/FIN SHORT N] en VIDEO_008_GUION_APROBADO.md, confirmando en VIDEO_008_PLAN_TECNICO_PRE_TTS.md que caen en los bloques TTS 03, 09 y 12. Se calcularon sus tiempos en la narracion v3 localizando el texto exacto en la alineacion de cada bloque y sumando el desplazamiento global de inicio de ese bloque (recalculado tras la eliminacion del CTA, anclado a los 10 silencios de pausa verificados en el archivo v3). Resultados: Short 1 (bloque 3) 269.284s-307.364s (38.08s), tema del cansancio de cuidar a otros; Short 2 (bloque 9) 964.073s-1003.953s (39.88s), tema de direccion para decisiones dificiles; Short 3 (bloque 12) 1288.006s-1325.046s (37.04s), tema de consuelo en momentos oscuros (el valle). Se propuso un titulo para cada uno, basado en la pregunta de apertura ya presente en cada texto. Ningun clip se extrajo, recorto ni rendirizo. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-28",
+      "evento": "Decimotercera tarea. Orlando pidio: conservar textos y audios existentes de los 3 Shorts; usar los titulos ya propuestos; preparar el plan visual del Video 8 y sus versiones verticales respetando el Sistema Activo y la plantilla vigente del canal; incluir escenas, recursos reutilizables, musica propuesta y tratamiento de subtitulos para los Shorts; al extraer audio, verificar por escucha las primeras y ultimas silabas, incluido Amen completo; presentar el plan antes de generar recursos o renderizar. Se leyeron SISTEMA_ACTIVO_ORACIONES_BIBLICAS_DIARIAS.md v2.2, VIDEO_TEMPLATE_ORACIONES_BIBLICAS_DIARIAS.md y canal.json como fuentes del sistema/plantilla. Se extrajeron los 3 Shorts directamente de 3.mp3, 9.mp3 y 12.mp3 originales (sin llamadas a ElevenLabs) y se verificaron con analisis de energia (proxy de escucha, sin reproduccion de audio disponible): los 3 tienen Amen completo sin cortes; Short 3 no tenia margen de silencio natural antes de su primera silaba (empieza en el caracter 0 de su bloque) y se le anadieron 0.3s de silencio digital, sin generar voz nueva. Se construyo el plan visual completo (VIDEO_008_PLAN_VISUAL.md): mapa de los 19 bloques + 10 pausas con tiempos v3 y tema de cada uno; decision pendiente de Orlando sobre movimiento visual (baseline canal.json de imagen fija + particulas vs. extender el experimento del Video 7, que el propio sistema limita solo a ese video); recursos reutilizables del inventario del Video 7 identificados como solo 3 clips genericos de Pixabay (cielo, Biblia, naturaleza) -- las imagenes N1-N16 y las 4 originales son especificas de la protagonista del Video 7 y no se reutilizan, quedando pendiente generar imagineria propia del Salmo 23; musica propuesta touching_moment.mp3 por la rotacion del canal (siguiente tras one_step_closer y alone_with_my_thoughts, ya usadas en video_006 y video_007); subtitulos sin quemar en el largo (igual que el baseline) y quemados en los 3 Shorts; plan vertical 9:16 de cada Short con sus titulos, recursos pendientes de generar y ritmo visual siguiendo el patron ya usado en el Video 7. No se genero ni descargo ningun recurso visual, no se genero musica nueva, no se rendirizo nada. El Video 7 permanece intacto."
     }
   ]
 }
