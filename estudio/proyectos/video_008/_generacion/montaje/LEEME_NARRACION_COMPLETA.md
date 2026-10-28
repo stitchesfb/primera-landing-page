@@ -1,12 +1,23 @@
 # Video 8 — Narración completa sin música, con pausas propuestas (para revisión)
 
-**Archivo vigente:** `video_008_narracion_completa_sin_musica_con_pausas_v2.mp3` (corregido, ver sección "Corrección 2026-10-27" abajo).
-**Archivo original, conservado sin tocar:** `video_008_narracion_completa_sin_musica_con_pausas.mp3` (v1 — tiene el defecto de corte que Orlando encontró; se deja intacto como referencia, no se usa para avanzar).
-**Estado:** para revisión auditiva de Orlando. **Las duraciones de pausa siguen siendo una propuesta, no están aprobadas.**
-**Fecha:** 2026-10-25 (v1) / 2026-10-27 (v2, corregido)
-**Duración total:** 2.178,48s (36:18) — igual en v1 y v2, el contenido es el mismo, solo cambió dónde exactamente cae el corte en 2 de las 9 pausas internas.
+**Archivo vigente:** `video_008_narracion_completa_sin_musica_con_pausas_v3.mp3` (ver sección "Corrección 2026-10-28" abajo: el CTA del bloque 4 se eliminó por completo).
+**Archivos anteriores, conservados sin tocar:** `..._v2.mp3` (bloque 4 con el párrafo de CTA, voz original a speed 1,00) y `..._v1.mp3` (defecto de corte en P02/P10, histórico). Ninguno de los dos se usa para avanzar, se dejan como referencia.
+**Estado:** para revisión auditiva final de Orlando. **Las duraciones de pausa siguen siendo una propuesta, no están aprobadas.**
+**Fecha:** 2026-10-25 (v1) / 2026-10-27 (v2, corregido) / 2026-10-28 (v3, CTA eliminado)
+**Duración total v3:** 2.166,44s (36:06) — 12,04s menos que v1/v2 (2.178,48s / 36:18), por la eliminación completa del párrafo del CTA en el bloque 4.
+**SHA-256 v3:** `48b78ccd42c4914eb24b6305961c29333983c9d551e57d60725050a9887c56c7`
 **SHA-256 v2:** `ed8b7b4d6e0f3cd2e7b350347aa655bed091f6c35a26c0b00490c726b8acc1a6`
 **SHA-256 v1 (sin tocar):** `2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62`
+
+## Corrección 2026-10-28 — eliminado el párrafo del CTA en el bloque 4
+
+Orlando probó varias configuraciones para la invitación a suscribirse ("Si esta oración te acompaña...") sin quedar conforme con el tono. En la última muestra (CTA v2 al 80% de velocidad), reportó que el tramo desde el segundo 27 hasta el final sonaba mejor. Se identificó ese tramo con precisión: es exactamente `seg3_despues_original.mp3`, el audio **original sin ningún procesamiento** de "Padre, mi vida necesita tu dirección..." — **no contiene la invitación a suscribirse**.
+
+Como el tramo que gustó no incluye el CTA, se siguió la instrucción de Orlando: **se eliminó todo el párrafo del CTA** (incluida "Ahora seguimos presentando nuestras cargas ante Dios") y se unió "...una palabra que nos anima a seguir." directamente con "Padre, mi vida necesita tu dirección...", con una pausa natural de ~0,78s (medida acústicamente, no por tiempos etiquetados) entre ambas, consistente con las pausas de párrafo que la propia voz usa en el resto de este bloque.
+
+El bloque 4 editado (`4_sin_cta.mp3`, sin tocar el `4.mp3` original) está documentado en `estudio/proyectos/video_008/_generacion/audio/bloque4_cta_eliminada/LEEME_BLOQUE4_SIN_CTA.md`. Ningún otro bloque ni ninguna de las 10 pausas P01–P10 cambiaron — mismos puntos de corte corregidos de la v2.
+
+Las tres CTAs generadas (original a speed 1,00; v2 config. verificada a speed 0,91; v2 al 80% con atempo) se conservan todas, sin usarse en la narración final.
 
 ## Corrección 2026-10-27 — punto de inserción de P02 (y P10) movido
 
@@ -67,7 +78,7 @@ La duración total de la narración (36:18, de los cuales 68s son pausas = ~35:1
 
 ## Qué falta antes de esto ser definitivo
 
-1. Tu revisión auditiva completa (ritmo, pronunciación, las pausas en sus posiciones y duraciones).
+1. Tu revisión auditiva completa de la v3 (ritmo, pronunciación, las pausas en sus posiciones y duraciones, y la nueva unión en el bloque 4 sin el CTA).
 2. Aprobación o ajuste de las duraciones de pausa (siguen siendo "propuesta" del plan técnico).
-3. Decisión sobre el ritmo de habla (¿se acepta tal cual o se ajusta `speed` para los bloques 3–17 en una futura regeneración, si se decide que hace falta?).
+3. Decisión sobre si el ritmo general de los bloques 3–17 (fuera del bloque 4, ya resuelto) necesita algún ajuste.
 4. Música, visuales y render siguen sin empezar — fuera del alcance de esta tarea.

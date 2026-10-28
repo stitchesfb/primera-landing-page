@@ -1,5 +1,5 @@
 {
-  "estado": "cta_bloque4_v2_80pct_muestra_entregada_pendiente_aprobacion",
+  "estado": "cta_eliminada_narracion_completa_v3_entregada_para_revision_final",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -74,13 +74,25 @@
     "hallazgo_no_corregido": "El ritmo real resulto ~137 palabras/min, mas rapido que el rango estimado del guion (100-115 ppm). Informado para la revision auditiva, no corregido -- la reserva del presupuesto no autoriza regeneraciones segun instruccion de Orlando."
   },
   "narracion_completa_sin_musica": {
-    "estado": "corregida_pendiente_revision_auditiva",
-    "archivo_vigente": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v2.mp3",
+    "estado": "v3_entregada_cta_eliminado_pendiente_revision_auditiva_final",
+    "archivo_vigente": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v3.mp3",
+    "sha256_v3": "48b78ccd42c4914eb24b6305961c29333983c9d551e57d60725050a9887c56c7",
+    "duracion_s_v3": 2166.439184,
+    "archivo_v2_conservado": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v2.mp3",
     "sha256_v2": "ed8b7b4d6e0f3cd2e7b350347aa655bed091f6c35a26c0b00490c726b8acc1a6",
     "archivo_v1_original_conservado": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas.mp3",
     "sha256_v1": "2a014c316cd217d518dbf4f6d48a773c6c3fd040946b18464c81dc5600c21d62",
     "duracion_s": 2178.481633,
     "detalle": "estudio/proyectos/video_008/_generacion/montaje/LEEME_NARRACION_COMPLETA.md",
+    "correccion_2026_10_28_cta_eliminado": {
+      "reportado_por": "Orlando: en la muestra de CTA v2 al 80%, el tramo desde el segundo 27 hasta el final sonaba mejor.",
+      "diagnostico": "Ese tramo (seg3_despues_original.mp3) es el audio ORIGINAL sin procesar de 'Padre, mi vida necesita tu direccion...' -- no contiene la invitacion a suscribirse en absoluto.",
+      "decision": "Siguiendo la instruccion condicional de Orlando (como el tramo no incluye el CTA completo), se elimino todo el parrafo del CTA del bloque 4 (incluida 'Ahora seguimos presentando nuestras cargas ante Dios') y se unio naturalmente '...una palabra que nos anima a seguir.' con 'Padre, mi vida necesita tu direccion...'.",
+      "metodo": "Se corto 4.mp3 (original, sin tocar) en el fin real del habla de 'seguir.' (54.60s, medido acusticamente) y se continuo desde el inicio real del habla de 'Padre' (67.38s), con 0.75s de silencio anadido -- la pausa resultante verificada es de 0.78s, consistente con las pausas de parrafo naturales de la propia voz en el resto del bloque.",
+      "archivo_bloque4_editado": "estudio/proyectos/video_008/_generacion/audio/bloque4_cta_eliminada/4_sin_cta.mp3 (103.21s, vs 115.23s del 4.mp3 original)",
+      "detalle": "estudio/proyectos/video_008/_generacion/audio/bloque4_cta_eliminada/LEEME_BLOQUE4_SIN_CTA.md",
+      "nota": "4.mp3 y 4.alignment.json originales no se tocaron. Ningun otro bloque ni ninguna de las 10 pausas P01-P10 cambiaron. Las tres CTAs generadas (original speed 1.00, v2 config verificada speed 0.91, v2 al 80%) se conservan todas, sin usarse en la narracion final."
+    },
     "pausas": "Las 10 pausas propuestas (P01-P02 5s, P03-P08 7s, P09-P10 8s) insertadas en su posicion real verificada contra el guion -- 9 de las 10 caen DENTRO de un bloque (no entre bloques), solo P03 es de frontera. Duraciones siguen siendo propuesta, no aprobadas.",
     "verificacion_tecnica": "Decodificacion completa sin errores. silencedetect confirma 10 silencios en las posiciones y duraciones esperadas.",
     "correccion_2026_10_27": {
@@ -274,6 +286,10 @@
     {
       "fecha": "2026-10-28",
       "evento": "Decima tarea. Orlando reporto que la CTA v2 (config. verificada, speed 0.91) todavia suena demasiado rapida y pidio una muestra con esa misma CTA al 80% de su velocidad actual (conservando el tono), ralentizando solo la invitacion -- contexto antes/despues a velocidad original, manteniendo ~1.5s de pausa total en cada union, usando los archivos existentes, sin llamadas a ElevenLabs. Se aplico atempo=0.8 a cta_v2_regenerada.mp3 (de 11.73s a 14.63s) y se reensamblo reutilizando sin tocar los mismos fragmentos de contexto y los mismos tiempos de pausa ya calculados (0.83s natural + 0.67s anadido antes; 0.60s natural + 0.90s anadido despues). Se verifico con el mismo analisis de energia >3.5kHz que la union quedo con silencio limpio, sin ningun artefacto nuevo. No se genero ni modifico ningun audio con ElevenLabs. cta_v2_regenerada.mp3 (sin ralentizar), 4.mp3, su alineacion, la narracion completa _v2.mp3 y las CTAs anteriores permanecen intactas. No se incorporo nada al archivo completo -- pendiente de aprobacion de Orlando. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-28",
+      "evento": "Undecima tarea (final de esta fase). Orlando reporto que en la muestra de la CTA v2 al 80%, desde el segundo 27 hasta el final la voz sonaba mejor, y pidio identificar el contenido/procesamiento de ese tramo: si incluia la invitacion completa con ese ritmo, integrarla; si no, eliminar todo el parrafo del CTA (incluida 'Ahora seguimos presentando nuestras cargas ante Dios') y unir naturalmente 'seguir.' con 'Padre, mi vida necesita tu direccion...', autorizando ese montaje local sin mas pruebas ni llamadas a ElevenLabs, y entregar la narracion completa para revision final. Se identifico con precision que el tramo desde el segundo 27 corresponde exactamente a seg3_despues_original.mp3 (local 4.mp3 66.8s-77.28s) -- audio ORIGINAL sin ningun procesamiento, que NO incluye la invitacion a suscribirse en absoluto. Por tanto se aplico la segunda condicion: se elimino el parrafo completo del CTA del bloque 4. Se uso 4.mp3 original (sin tocar) y su alineacion para cortar en el fin real del habla de 'seguir.' (54.60s, medido acusticamente con analisis de energia de banda ancha, no el tiempo etiquetado) y continuar desde el inicio real de 'Padre' (67.38s), con 0.75s de silencio anadido -- se verifico que la pausa resultante es de 0.78s, consistente con las pausas de parrafo naturales medidas en el resto del bloque (0.80-0.96s etiquetados en otros 2 saltos de parrafo del mismo bloque). Se genero 4_sin_cta.mp3 (103.21s, vs 115.23s del original) sin modificar 4.mp3 ni su alineacion. Se reensamblo la narracion completa de los 19 bloques usando 4_sin_cta.mp3 solo para el bloque 4 -- el resto de bloques y las 10 pausas P01-P10 no cambiaron, mismos cortes corregidos de la v2. Resultado: video_008_narracion_completa_sin_musica_con_pausas_v3.mp3, 2166.44s (36:06), 12.04s mas corta que v1/v2 por la eliminacion del CTA. Verificado: decodificacion limpia, silencedetect confirma los 10 silencios esperados en las posiciones y duraciones correctas. v1 y v2 de la narracion completa, 4.mp3 original, y las tres CTAs generadas (speed 1.00, speed 0.91, 80%) se conservan todas intactas, sin usarse en la narracion final. Se entrego la narracion completa v3 para revision final de Orlando. El Video 7 permanece intacto."
     }
   ]
 }
