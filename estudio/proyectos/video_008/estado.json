@@ -1,5 +1,5 @@
 {
-  "estado": "cta_bloque4_v2_regenerada_configuracion_verificada_sin_residuo_pendiente_aprobacion",
+  "estado": "cta_bloque4_v2_80pct_muestra_entregada_pendiente_aprobacion",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -216,6 +216,21 @@
         "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_v2_sin_residuo/LEEME_CTA_V2.md"
       },
       "nota": "4.mp3, su alineacion, la narracion ensamblada _v2.mp3, y las dos CTAs anteriores (speed 1.00 original y speed 0.85/stability 0.60) permanecen intactas. NO se incorporo todavia esta regeneracion al archivo completo -- pendiente de aprobacion de Orlando."
+    },
+    "ralentizacion_posproduccion_2026_10_28_CTA_v2_al_80pct": {
+      "reportado_por": "Orlando: la CTA v2 (config. verificada, speed 0.91) todavia suena demasiado rapida.",
+      "metodo": "Sin llamadas a ElevenLabs. Se tomo cta_v2_regenerada.mp3 (ya generada y aprobada en cuanto a configuracion) y se ralentizo SOLO ella al 80% con atempo=0.8 (conserva el tono), de 11.73s a 14.63s. El contexto antes/despues (mismos archivos seg1_antes_original_v2.mp3 y seg3_despues_original.mp3 ya usados) se reutilizo sin tocar, a velocidad original.",
+      "pausas": "Se mantuvieron las mismas calculadas en la tarea anterior (0.83s natural + 0.67s anadido antes; 0.60s natural + 0.90s anadido despues; 1.5s total cada lado) -- no cambian porque el contexto no cambio.",
+      "verificacion": "Se repitio el analisis de energia >3.5kHz en la union antes->CTA: silencio limpio y continuo, sin ningun artefacto nuevo introducido por el cambio de velocidad. Decodificacion completa sin errores.",
+      "muestra_entregada": {
+        "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_v2_80pct",
+        "archivo": "video_008_muestra_CTA_v2_80pct_con_pausas.mp3",
+        "duracion_total_s": 37.433469,
+        "sha256": "01caad68a2e864d903f403ee6c744916a08f2e8495a3e282d42f0df4bd85a439",
+        "detalle": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_v2_80pct/LEEME_CTA_V2_80PCT.md"
+      },
+      "archivo_cta_80pct_conservado": "estudio/proyectos/video_008/_generacion/audio/regeneracion_cta_bloque4/cta_v2_regenerada_80pct.mp3 (cta_v2_regenerada.mp3 original, speed 0.91 sin ralentizar, se conserva intacta)",
+      "nota": "No se genero ni se modifico ningun audio con ElevenLabs. 4.mp3, su alineacion, la narracion completa _v2.mp3, y todas las CTAs anteriores permanecen intactas. NO se incorporo todavia nada al archivo completo -- pendiente de aprobacion de Orlando."
     }
   },
   "nota": "No se genero ningun audio nuevo en ninguna de las dos tareas de Video 8 hasta ahora. El Video 7 (guion, render largo, maestro, grupos, tomas, audios) permanece intacto en todo momento.",
@@ -255,6 +270,10 @@
     {
       "fecha": "2026-10-28",
       "evento": "Novena tarea. Orlando envio una captura del panel real de ElevenLabs mostrando 'Clone strength' como control separado, en 'Low'. Se verifico contra la documentacion oficial: clone_strength es un campo real de voice_settings (rango 0-1, 0=low, recomendado 0 para la mayoria de casos), exclusivo de voice clones profesionales afinados para v4 -- coincide con esta voz. Equivalente verificado: clone_strength=0.0. Se confirmo ademas via /v1/models que eleven_v4 no usa style ni use_speaker_boost (can_use_style/can_use_speaker_boost en false) y que language_code='es' es valido y soportado por el modelo. Orlando aprobo generar una sola vez el texto original del CTA con stability 0.65, similarity_boost 0.88, clone_strength 0.0 y speed 0.91 (elegida explicitamente por el para esta prueba), hasta 183 creditos, sin reintentos, y pidio integrar la nueva CTA en una muestra eliminando por completo el residuo de 'S' detectado en la tarea anterior, con ~1.5s de pausa total antes y despues. Se hizo la llamada (1 sola, sin reintentos): texto alineado identico al enviado, decodificacion limpia, history_item_id rdEARtBAxFAsRxD12Me0. Para eliminar el residuo se midio con precision de 0.02s el verdadero inicio acustico de la fricativa S vieja (55.42s, no 55.6s etiquetado) y se movio el corte de antes_original a 55.38s, dentro de silencio puro verificado; se confirmo que el lado despues (corte en 66.8s) ya estaba a salvo y no requirio cambio, afinando el calculo de pausa natural con el inicio real de 'Padre' (67.40s). Se recalcularon las pausas (0.83s natural + 0.67s anadido antes; 0.60s natural + 0.90s anadido despues, ambas sumando 1.5s) y se reensamblo la muestra; se verifico con el mismo analisis de energia que la union quedo con silencio limpio y continuo, sin ningun residuo. 4.mp3, su alineacion, la narracion ensamblada _v2.mp3 y las dos CTAs anteriores permanecen intactas. No se incorporo todavia esta regeneracion al archivo completo -- pendiente de aprobacion de Orlando. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-28",
+      "evento": "Decima tarea. Orlando reporto que la CTA v2 (config. verificada, speed 0.91) todavia suena demasiado rapida y pidio una muestra con esa misma CTA al 80% de su velocidad actual (conservando el tono), ralentizando solo la invitacion -- contexto antes/despues a velocidad original, manteniendo ~1.5s de pausa total en cada union, usando los archivos existentes, sin llamadas a ElevenLabs. Se aplico atempo=0.8 a cta_v2_regenerada.mp3 (de 11.73s a 14.63s) y se reensamblo reutilizando sin tocar los mismos fragmentos de contexto y los mismos tiempos de pausa ya calculados (0.83s natural + 0.67s anadido antes; 0.60s natural + 0.90s anadido despues). Se verifico con el mismo analisis de energia >3.5kHz que la union quedo con silencio limpio, sin ningun artefacto nuevo. No se genero ni modifico ningun audio con ElevenLabs. cta_v2_regenerada.mp3 (sin ralentizar), 4.mp3, su alineacion, la narracion completa _v2.mp3 y las CTAs anteriores permanecen intactas. No se incorporo nada al archivo completo -- pendiente de aprobacion de Orlando. El Video 7 permanece intacto."
     }
   ]
 }
