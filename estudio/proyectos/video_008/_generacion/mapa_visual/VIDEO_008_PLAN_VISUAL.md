@@ -49,40 +49,42 @@ Igual que el baseline del canal: predominio femenino, 55+, consumo en móvil y T
 
 ## 5. Escenas — mapa completo de los 19 bloques + 10 pausas (narración v3)
 
-Tiempos recalculados sobre la v3 (bloque 4 sin CTA). Precisión estimada ±1s por redondeos de codificación acumulados; suficiente para planear escenas, se ajusta al montar.
+**Actualizado 2026-10-29** con las 6 escenas aprobadas por Orlando (ver sección 12) — sustituyen el tratamiento conceptual anterior. Tiempos recalculados sobre la v3 (bloque 4 sin CTA). Precisión estimada ±1s por redondeos de codificación acumulados.
 
-| Bloque | Tiempo v3 | Sección del guion | Contenido / tema | Tratamiento visual propuesto |
+| Bloque | Tiempo v3 | Sección del guion | Contenido / tema | Escena asignada |
 |---|---|---|---|---|
-| 1 | 0:00–1:56 | §1 Apertura | Cansancio nocturno, invitación a orar, se anuncia el Salmo 23 | Imagen devocional nueva (persona/silueta en reposo nocturno) — apertura, debe sostener el gancho |
-| — | 1:56–2:01 | | **P01** (5s) | continuidad de la misma imagen |
-| 2 | 1:56–4:02 | §1 | Lectura completa del Salmo 23 (RVR 1909) + primera reflexión | Imagen de Biblia abierta / texto del salmo; cambio de imagen en la lectura |
-| — | 2:xx–2:xx | | **P02** (5s, dentro del bloque 2) | continuidad |
-| 3 | 4:02–6:00 | §1 | El Pastor que cuida, reconocer límites — **contiene Short 1** | Imagen de pastor/oveja o manos entregando una carga (naturaleza/pastoral) |
-| 4 | 6:00–7:43 | §1 | Entrega de responsabilidades e incertidumbre; CTA eliminado; transición directa a "Padre, mi vida necesita tu dirección" | Imagen de manos abiertas / entrega; sin corte visual brusco en el punto donde se unió el audio |
-| — | 7:43–7:50 | | **P03** (7s, frontera bloque 4→5) | cambio de escena hacia "Reposo y restauración" |
-| 5 | 7:50–9:36 | §2 Reposo | Pastos y aguas de reposo, tareas inconclusas | Agua tranquila / pastos verdes (clip de naturaleza nocturna o crepuscular) |
-| 6 | 9:36–11:24 | §2 | Palabras que hieren, pedir perdón | Imagen serena, luz cálida tenue |
+| 1 | 0:00–1:56 | §1 Apertura | Cansancio nocturno, invitación a orar, se anuncia el Salmo 23 | **E1 — Dormitorio nocturno** ✅ recibida |
+| — | 1:56–2:01 | | **P01** (5s) | continuidad de E1 |
+| 2 | 1:56–4:02 | §1 | Lectura completa del Salmo 23 (RVR 1909) + primera reflexión | **E1 — Dormitorio nocturno** (continúa; no hay escena de "libro" en la selección aprobada) |
+| — | | | **P02** (5s, dentro del bloque 2) | continuidad |
+| 3 | 4:02–6:00 | §1 | El Pastor que cuida, reconocer límites — **contiene Short 1** | **E2 — Pastor con ovejas** ⏳ pendiente |
+| 4 | 6:00–7:43 | §1 | Entrega de responsabilidades; CTA eliminado; transición a "Padre, mi vida necesita tu dirección" | **E2 — Pastor con ovejas** ⏳ pendiente |
+| — | 7:43–7:50 | | **P03** (7s, frontera bloque 4→5) | cambio de escena hacia "Reposo" |
+| 5 | 7:50–9:36 | §2 Reposo | Pastos y aguas de reposo, tareas inconclusas | **E3 — Aguas tranquilas** ✅ recibida |
+| 6 | 9:36–11:24 | §2 | Palabras que hieren, pedir perdón | **E3 — Aguas tranquilas** (continúa) |
 | — | | | **P04** (7s, dentro del bloque 6) | continuidad |
-| 7 | 11:24–13:14 | §2 | Alma confortada, cansancio invisible | Cielo estrellado / quietud |
-| 8 | 13:14–15:37 | §2 | Reconocer fragilidad, aprender a recibir cuidado | Imagen devocional, manos o vela |
-| — | | | **P05** (7s, dentro del bloque 8) | continuidad |
-| 9 | 15:37–17:34 | §3 Dirección | Dirección para decisiones difíciles — **contiene Short 2** | Camino / sendero nocturno, luz de luna |
-| 10 | 17:34–19:18 | §3 | Buscar lo justo, límites y responsabilidad | Continuidad del camino/sendero |
-| 11 | 19:18–21:28 | §3 | Paciencia con el tiempo, "el camino que todavía no veo completo" | Niebla suave / horizonte nocturno |
+| 7 | 11:24–13:14 | §2 | Alma confortada, cansancio invisible | **E3 — Aguas tranquilas** (continúa) |
+| 8 | 13:14–15:37 | §2 | Reconocer fragilidad, aprender a recibir cuidado | **E3 — Aguas tranquilas** (continúa) |
+| — | | | **P05** (7s, dentro del bloque 8) | cambio hacia "Dirección" |
+| 9 | 15:37–17:34 | §3 Dirección | Dirección para decisiones difíciles — **contiene Short 2** | **E4 — Sendero** ⏳ pendiente |
+| 10 | 17:34–19:18 | §3 | Buscar lo justo, límites y responsabilidad | **E4 — Sendero** ⏳ pendiente |
+| 11 | 19:18–21:28 | §3 | Paciencia con el tiempo, "el camino que todavía no veo completo" | **E4 — Sendero** ⏳ pendiente |
 | — | | | **P06** (7s, dentro del bloque 11) | cambio hacia "Compañía en momentos difíciles" |
-| 12 | 21:28–23:20 | §4 Compañía | El valle de sombra, momentos oscuros — **contiene Short 3** | Valle / montañas en penumbra, tono más oscuro pero no inquietante |
-| 13 | 23:20–25:05 | §4 | Enfermedad, pérdida, compañía en el dolor | Continuidad del valle, luz distante |
-| 14 | 25:05–26:54 | §4 | Oraciones sencillas, entrega del día | Imagen serena de cierre de sección |
-| — | | | **P07** (7s, dentro del bloque 14) | cambio hacia "Cuidado, dignidad y gratitud" |
-| 15 | 26:54–28:34 | §5 Gratitud | Mesa preparada, gratitud en medio del conflicto | Mesa / alimento sencillo, luz cálida |
-| 16 | 28:34–30:22 | §5 | Agradecer lo pequeño, cuidar relaciones | Continuidad cálida |
+| 12 | 21:28–23:20 | §4 Compañía | El valle de sombra, momentos oscuros — **contiene Short 3** | **E5 — Valle** ✅ recibida |
+| 13 | 23:20–25:05 | §4 | Enfermedad, pérdida, compañía en el dolor | **E5 — Valle** (continúa) |
+| 14 | 25:05–26:54 | §4 | Oraciones sencillas, entrega del día | **E5 — Valle** (continúa) |
+| — | | | **P07** (7s, dentro del bloque 14) | cambio hacia "Gratitud" |
+| 15 | 26:54–28:34 | §5 Gratitud | Mesa preparada, gratitud en medio del conflicto | **E6 — Mesa sencilla** ✅ recibida |
+| 16 | 28:34–30:22 | §5 | Agradecer lo pequeño, cuidar relaciones | **E6 — Mesa sencilla** (continúa) |
 | — | | | **P08** (7s, dentro del bloque 16) | continuidad |
-| 17 | 30:22–32:04 | §5→§6 | Gratitud; a mitad de bloque empieza "Bondad, misericordia y descanso final" | Transición suave de imagen hacia el cierre |
-| 18 | 32:04–34:22 | §6 Bondad y descanso | Misericordia, entrega del día completo | Imagen de descanso, cama o silueta dormida |
+| 17 | 30:22–32:04 | §5→§6 | Gratitud; a mitad de bloque empieza "Bondad, misericordia y descanso final" | **E6 — Mesa sencilla** (continúa) |
+| 18 | 32:04–34:22 | §6 Bondad y descanso | Misericordia, entrega del día completo | **E6 — Mesa sencilla** (continúa) |
 | — | | | **P09** (8s, dentro del bloque 18) | continuidad |
-| 19 | 34:22–36:07 | §6 | Descanso final, cierre con "Amén" — **contiene P10** (8s, dentro del bloque) | Plano amplio y quieto, último encuadre del video |
+| 19 | 34:22–36:07 | §6 | Descanso final, cierre con "Amén" — **contiene P10** (8s, dentro del bloque) | **E6 — Mesa sencilla** — último encuadre del video |
 
-**Nota importante:** a diferencia del Video 7 (protagonista única, mismo dormitorio), el Salmo 23 tiene imaginería propia muy marcada (pastor, ovejas, pastos, aguas de reposo, valle de sombra, mesa, copa rebosante, la casa de Jehová) que **no está cubierta por los recursos ya generados para el Video 7** (ver sección 6). El plan de escenas de arriba es conceptual; faltan por confirmar los recursos exactos antes de generar o descargar nada.
+**Secuencia de lunas:** E1, E3, E5 y E6 comparten la misma luna llena prominente. En este orden quedan separadas por E2 (pastor) y E4 (sendero) de por medio — no hay dos escenas con la misma luna consecutivas, siempre que E2/E4 no repitan la misma composición de luna (a verificar cuando lleguen).
+
+**Cada escena se sostiene varios minutos** (una sola imagen cubre 2–5 bloques) — de ahí la importancia del método de "tomas con reencuadre" aprobado en la sección 2: sin ese movimiento sutil, una misma imagen fija durante 5+ minutos se sentiría estática.
 
 ---
 
@@ -100,9 +102,9 @@ Según `estudio/proyectos/video_007/_generacion/mapa_visual/inventario_recursos.
 
 **No se reutilizan** las 4 imágenes originales ni las 16 imágenes N1–N16 del Video 7: están generadas específicamente para su protagonista ("mujer despertando ansiosa", mismo dormitorio) y su guion de Salmo 91 — no corresponden a la imaginería pastoral del Salmo 23, y la política de reutilización del propio Video 7 ya advertía no usarlas más de lo aprobado sin generar variantes nuevas.
 
-### Recursos nuevos que probablemente hacen falta
+### Recursos nuevos — resuelto con generación propia (IA)
 
-Imaginería específica del Salmo 23 sin cobertura actual: pastor/oveja, pastos verdes, aguas de reposo, vara y cayado, mesa preparada frente a los angustiadores, copa rebosante, "la casa de Jehová". Según la política de licencias del Sistema Activo (§5): las bibliotecas gratuitas rara vez tienen escenas bíblicas o de Jesús específicas — es más realista cubrir estas imágenes con **generación propia (IA)**, igual que se hizo con N1–N16 para el Video 7, con aprobación de estilo antes de usarlas. **No se genera ninguna hasta que Orlando apruebe este plan.**
+**Actualizado 2026-10-29.** Orlando generó y aprobó externamente (misma vía que N1–N16 del Video 7) una hoja de contacto con 6 escenas específicas del Salmo 23, que sustituye el enfoque de "evitar símbolos literales" propuesto inicialmente — incluye imaginería literal (pastor con ovejas, valle) por decisión del creador. Ver sección 12 y `estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/LEEME_ESCENAS_APROBADAS.md`. 4 de 6 escenas ya recibidas, verificadas e importadas; 2 pendientes (pastor con ovejas, sendero).
 
 ---
 
@@ -190,10 +192,21 @@ Archivos originales de bloque (`3.mp3`, `9.mp3`, `12.mp3`) y su alineación: **s
 
 ---
 
-## 12. Hoja de contacto — 6 imágenes representativas (ver aviso de capacidad)
+## 12. Hoja de contacto — 6 imágenes representativas
 
-**Importante — limitación de esta sesión:** esta sesión **no tiene acceso a ninguna herramienta de generación de imágenes**. Las 4 imágenes originales y las 16 N1–N16 del Video 7 no las generó Claude: Orlando las generó externamente y las entregó en un ZIP para verificación e importación (confirmado en `estudio/proyectos/video_007/_generacion/preflight_visual/revision_03_imagenes_ai/informe_revision_03.md`, sección 1). No puedo producir los 6 archivos de imagen en esta tarea sin fabricar o simular que existen.
+**Estado (actualizado 2026-10-29): 4 de 6 recibidas, verificadas e importadas. 2 pendientes.**
 
-Lo que sí puedo entregar ahora, para que el estilo se revise antes de generar nada, es la **especificación de las 6 imágenes** (briefs listos para pasarlos a la herramienta que Orlando use), con la estética nocturna, el criterio de "sin representar literalmente cada símbolo" y el margen de seguridad para recorte vertical ya incorporados. Ver `estudio/proyectos/video_008/_generacion/mapa_visual/hoja_contacto_6_imagenes/BRIEFS_6_IMAGENES.md`.
+Esta sesión no tiene herramienta de generación de imágenes propia — como en el Video 7, Orlando generó las imágenes externamente (en ChatGPT) y las trae para verificación e importación. **Esta selección sustituye los 6 briefs conceptuales anteriores** (`hoja_contacto_6_imagenes/BRIEFS_6_IMAGENES.md`, que pedían evitar símbolos literales) — Orlando optó por imaginería más literal del Salmo 23 (pastor con ovejas, valle), decisión del creador, no se regenera nada por esa diferencia.
 
-**Pendiente de Orlando:** generarlas con su herramienta habitual (la misma que usó para N1–N16) y traerlas de vuelta para importarlas, igual que en el Video 7 — o indicar si esta sesión debe intentar una vía distinta.
+| Escena | Bloques | Estado | Archivo |
+|---|---|---|---|
+| E1 — Dormitorio nocturno | 1–2 | ✅ recibida, verificada, recorte vertical OK | `escenas_aprobadas/originales/E1_dormitorio_nocturno.png` |
+| E2 — Pastor con ovejas | 3–4 (Short 1) | ⏳ pendiente de recibir | — |
+| E3 — Aguas tranquilas | 5–8 | ✅ recibida, verificada, recorte vertical OK | `escenas_aprobadas/originales/E3_aguas_tranquilas.png` |
+| E4 — Sendero | 9–11 (Short 2) | ⏳ pendiente de recibir | — |
+| E5 — Valle | 12–14 (Short 3) | ✅ recibida, verificada, recorte vertical OK | `escenas_aprobadas/originales/E5_valle.png` |
+| E6 — Mesa sencilla | 15–19 | ✅ recibida, verificada, recorte vertical funciona (pierde la vela y las aceitunas) | `escenas_aprobadas/originales/E6_mesa_sencilla.png` |
+
+Detalle completo (identificación de duplicados, verificación de recorte vertical individual) en `estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/LEEME_ESCENAS_APROBADAS.md`.
+
+**No se puede construir la prueba audiovisual de 60–90s (sección 11) hasta recibir E2 y E4** — faltaría cobertura visual para los bloques 3–4 y 9–11, que incluyen los Shorts 1 y 2.
