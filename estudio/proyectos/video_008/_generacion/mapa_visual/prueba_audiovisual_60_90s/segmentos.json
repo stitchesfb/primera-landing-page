@@ -1,0 +1,86 @@
+{
+  "gananciaNormalizarDb": 6.5,
+  "lufsMedido": -17,
+  "referenciaLufs": -10.5,
+  "zoomTotal": 0.035,
+  "subsegmentos": [
+    {
+      "grupo": "T1",
+      "escena": "E1",
+      "desde": 234.92,
+      "duracion": 7,
+      "musicaOffset": 4
+    },
+    {
+      "grupo": "T1",
+      "escena": "E2",
+      "desde": 241.92,
+      "duracion": 7,
+      "musicaOffset": 11
+    },
+    {
+      "grupo": "T2",
+      "escena": "E2",
+      "desde": 456.09,
+      "duracion": 7,
+      "musicaOffset": 20
+    },
+    {
+      "grupo": "T2",
+      "escena": "E3",
+      "desde": 463.09,
+      "duracion": 7,
+      "musicaOffset": 27
+    },
+    {
+      "grupo": "T2",
+      "escena": "E3",
+      "desde": 470.09,
+      "duracion": 7,
+      "musicaOffset": 34
+    },
+    {
+      "grupo": "T3",
+      "escena": "E3",
+      "desde": 929.67,
+      "duracion": 7,
+      "musicaOffset": 45
+    },
+    {
+      "grupo": "T3",
+      "escena": "E4",
+      "desde": 936.67,
+      "duracion": 7,
+      "musicaOffset": 52
+    },
+    {
+      "grupo": "T4",
+      "escena": "E4",
+      "desde": 1281.43,
+      "duracion": 7,
+      "musicaOffset": 63
+    },
+    {
+      "grupo": "T4",
+      "escena": "E5",
+      "desde": 1288.43,
+      "duracion": 7,
+      "musicaOffset": 70
+    },
+    {
+      "grupo": "T5",
+      "escena": "E5",
+      "desde": 1606.81,
+      "duracion": 7,
+      "musicaOffset": 81
+    },
+    {
+      "grupo": "T5",
+      "escena": "E6",
+      "desde": 1613.81,
+      "duracion": 7,
+      "musicaOffset": 88
+    }
+  ],
+  "duracionTotal": 77.02322
+}

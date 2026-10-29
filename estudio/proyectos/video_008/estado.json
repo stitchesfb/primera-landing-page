@@ -141,22 +141,48 @@
       },
       "hoja_contacto_6_imagenes": {
         "fecha": "2026-10-29",
-        "estado": "4_de_6_recibidas_verificadas_2_pendientes",
+        "estado": "6_de_6_recibidas_y_verificadas",
         "aviso_de_capacidad": "Esta sesion no tiene ninguna herramienta de generacion de imagenes disponible. Las imagenes del Video 7 (las 4 originales y N1-N16) las genero Orlando externamente y las entrego en ZIP para verificacion e importacion -- no las genero Claude.",
         "sustitucion_de_briefs": "Los 6 briefs conceptuales (BRIEFS_6_IMAGENES.md, que pedian evitar simbolos literales) fueron SUSTITUIDOS por Orlando: genero y aprobo en ChatGPT una hoja de contacto distinta con 6 escenas mas literales del Salmo 23 (dormitorio, pastor con ovejas, aguas tranquilas, sendero, valle, mesa sencilla). No se regenero nada por esa diferencia, por instruccion explicita.",
         "detalle": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/LEEME_ESCENAS_APROBADAS.md",
         "escenas": {
           "E1_dormitorio_nocturno": {"bloques": "1-2", "estado": "recibida_verificada", "recorte_vertical": "funciona bien, pierde lampara/velador", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E1_dormitorio_nocturno.png"},
-          "E2_pastor_con_ovejas": {"bloques": "3-4 (Short 1)", "estado": "pendiente_de_recibir"},
+          "E2_pastor_con_ovejas": {"bloques": "3-4 (Short 1)", "estado": "recibida_verificada", "recorte_vertical": "funciona bien, pastor completo con cayado y varias ovejas, pierde el disco de la luna (queda el resplandor)", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E2_pastor_con_ovejas.png"},
           "E3_aguas_tranquilas": {"bloques": "5-8", "estado": "recibida_verificada", "recorte_vertical": "funciona muy bien, luna/reflejo/arroyo alineados verticalmente", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E3_aguas_tranquilas.png"},
-          "E4_sendero": {"bloques": "9-11 (Short 2)", "estado": "pendiente_de_recibir"},
+          "E4_sendero": {"bloques": "9-11 (Short 2)", "estado": "recibida_verificada", "recorte_vertical": "funciona muy bien, sendero completo y luna entera conservados", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E4_sendero.png"},
           "E5_valle": {"bloques": "12-14 (Short 3)", "estado": "recibida_verificada", "recorte_vertical": "funciona bien, luna/rio/primer plano rocoso conservados", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E5_valle.png"},
-          "E6_mesa_sencilla": {"bloques": "15-19 (cierre)", "estado": "recibida_verificada", "recorte_vertical": "funciona, pero pierde la vela y el cuenco de aceitunas (quedan fuera del encuadre vertical)", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E6_mesa_sencilla.png"}
+          "E6_mesa_sencilla": {"bloques": "15-19 (cierre)", "estado": "recibida_verificada", "recorte_vertical": "no se necesita -- Orlando confirmo que se conserva completa en horizontal, ningun Short la usa", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E6_mesa_sencilla.png"}
         },
         "duplicado_resuelto": "Se recibieron 2 versiones del dormitorio; se conservo la indicada ('sin numero', sin marca visible en la esquina) y se descarto la otra (marca '1' visible + tapiz adicional en la pared).",
-        "secuencia_de_lunas": "E1, E3, E5 y E6 comparten la misma luna llena -- quedan separadas en la secuencia por E2 y E4 (pendientes), evitando escenas con la misma luna consecutivas.",
-        "pendiente_para_prueba_audiovisual": "No se puede construir la prueba de 60-90s hasta recibir E2 (pastor) y E4 (sendero) -- cubren los bloques con los Shorts 1 y 2.",
-        "nota": "No se genero ninguna imagen con IA en esta sesion -- solo se verificaron, convirtieron de WebP a PNG sin perdida adicional, y se probo el recorte vertical de las 4 imagenes ya recibidas. Narracion v3 verificada intacta (mismo SHA-256) antes y despues de esta tarea."
+        "secuencia_de_lunas": "E1, E3, E5 y E6 comparten la misma luna llena -- quedan separadas en la secuencia por E2 y E4, evitando escenas con la misma luna consecutivas.",
+        "nota": "No se genero ninguna imagen con IA en esta sesion -- solo se verificaron, convirtieron de WebP a PNG sin perdida adicional, y se probo el recorte vertical. Narracion v3 verificada intacta (mismo SHA-256) en todas las tareas."
+      },
+      "prueba_audiovisual_60_90s": {
+        "fecha": "2026-10-29",
+        "estado": "entregada_pendiente_aprobacion",
+        "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_audiovisual_60_90s/video_008_prueba_audiovisual_60_90s.mp4",
+        "sha256": "00516c343b65877f60eacfd19f079362557a7732182943196d8c28decf54087e",
+        "duracion_s": 77.02,
+        "formato": "1920x1080, 30fps, h264/aac",
+        "metodo": "11 sub-segmentos de 7s cada uno (uno por escena a cada lado de las 5 transiciones entre las 6 escenas), renderizados con estudio/lib/renderer.mjs (zoompan 3.5% en modo 'recorrido completo' -- el zoom completo se comprime en los 7s para poder evaluarlo, se vera mas lento en el video real donde cada escena dura varios minutos) + estudio/lib/particulas.mjs (82 particulas, periodo 24s, preset 'noche' de canal.json) + estudio/lib/musicaArchivo.mjs (cama musical con el ducking real: -23dB plano, igual bajo voz y en pausas) + narracion v3 real en cada tramo, despues concatenados.",
+        "transiciones_mostradas": [
+          {"t": "T1", "de": "E1 dormitorio", "a": "E2 pastor", "en_v3": "4:01.92", "nota": "corte visual durante narracion continua, sin pausa"},
+          {"t": "T2", "de": "E2 pastor", "a": "E3 aguas tranquilas", "en_v3": "7:43.09-7:50.09", "nota": "incluye la pausa P03 completa (7s), el corte de escena ocurre al iniciar la pausa"},
+          {"t": "T3", "de": "E3 aguas tranquilas", "a": "E4 sendero", "en_v3": "15:36.67", "nota": "corte visual durante narracion continua"},
+          {"t": "T4", "de": "E4 sendero", "a": "E5 valle", "en_v3": "21:28.43", "nota": "corte visual durante narracion continua"},
+          {"t": "T5", "de": "E5 valle", "a": "E6 mesa sencilla", "en_v3": "26:53.81", "nota": "corte visual durante narracion continua"}
+        ],
+        "musica": {
+          "pista": "touching_moment.mp3",
+          "lufs_medido": -17.0,
+          "ganancia_normalizacion_db": 6.5,
+          "referencia_antes_del_ducking_lufs": -10.5,
+          "objetivo_final_lufs": -33.5,
+          "ducking_db": -23,
+          "nota": "ducking plano, no sube en pausas, igual regla que el Video 7"
+        },
+        "detalle": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_audiovisual_60_90s/LEEME_PRUEBA_AUDIOVISUAL.md",
+        "nota_general": "No se hizo el render completo. No se toco la narracion aprobada ni ninguna escena. Narracion v3 verificada con el mismo SHA-256 antes y despues."
       }
     },
     "estado_anterior": "identificados_con_tiempos_v3_titulos_propuestos_pendiente_extraccion",
@@ -400,6 +426,10 @@
     {
       "fecha": "2026-10-29",
       "evento": "Decimoquinta tarea. Orlando envio 5 imagenes generadas y aprobadas en ChatGPT, explicando que sustituyen los 6 briefs anteriores: dormitorio nocturno, pastor con ovejas, aguas tranquilas, sendero, valle y mesa sencilla -- una seleccion mas literal del Salmo 23 que el criterio de evitar simbolos propuesto antes. Aclaro que los 5 archivos eran una seleccion incompleta con un dormitorio duplicado (enviaria pastor y sendero aparte) y pidio conservar solo el dormitorio 'final sin numero'. Pidio actualizar el plan con esta seleccion, verificar los encuadres verticales individualmente sin exigir recorte centrado senalando casos concretos que no funcionen, y -- una vez completos los 6 archivos -- preparar la prueba audiovisual de 60-90s con narracion aprobada, musica y reencuadres suaves, evitando encadenar composiciones similares con la luna, sin regenerar nada por diferencias con los briefs anteriores. Se identificaron los 5 archivos recibidos (images/2.webp a 6.webp): dormitorio (2.webp, sin marca de numero) y dormitorio duplicado (6.webp, con marca '1' visible y un tapiz adicional en la pared) -- se conservo 2.webp segun lo pedido y se descarto 6.webp; mesa con pan/copa/vela/aceitunas (3.webp); valle con rio y montanas (4.webp); arroyo con reflejo de luna (5.webp). Se convirtieron las 4 conservadas de WebP a PNG sin perdida adicional (mismo contenido, 1672x941) y se probo un recorte vertical 9:16 individual para cada una, sin centrar por defecto sino desplazado al punto de interes real: las 4 funcionan bien (E1 dormitorio, E3 aguas, E5 valle sin perdida relevante; E6 mesa funciona pero pierde la vela y las aceitunas, que quedan fuera del recorte). Se actualizo el mapa de escenas del plan visual (seccion 5) asignando las 6 escenas aprobadas a los 19 bloques, con nota de que E1/E3/E5/E6 comparten la misma luna pero quedan separadas por E2/E4 (pendientes) para no encadenar composiciones repetidas. Se registro que esta seleccion sustituye los 6 briefs anteriores sin regenerar nada por esa diferencia. Pendiente: Orlando debe enviar E2 (pastor con ovejas) y E4 (sendero) antes de poder construir la prueba audiovisual de 60-90s, ya que cubren los bloques de los Shorts 1 y 2. No se genero ninguna imagen con IA en esta sesion -- solo verificacion, conversion de formato sin perdida adicional y pruebas de recorte. Narracion v3 verificada con el mismo SHA-256, sin tocar. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-10-29",
+      "evento": "Decimosexta tarea (final de esta fase). Orlando envio las 2 escenas que faltaban (pastor con ovejas, sendero), aclaro que la mesa sencilla se conserva completa en horizontal sin necesitar version vertical (ningun Short la usa), y pidio verificar los encuadres verticales de las nuevas, y preparar la prueba audiovisual de 60-90s con narracion v3, musica y reencuadres suaves, pudiendo reunir fragmentos representativos para mostrar las transiciones, entregandola para revision antes del render completo. Se verifico el recorte vertical de E2 (funciona bien, pastor completo con cayado y varias ovejas, pierde el disco de la luna) y E4 (funciona muy bien, sendero y luna completos). Con las 6 escenas completas, se construyo la prueba reuniendo 11 sub-segmentos de 7s (uno por escena a cada lado de las 5 transiciones entre escenas: dormitorio-pastor en 4:01.92, pastor-aguas alrededor de la pausa P03 completa en 7:43-7:50, aguas-sendero en 15:36.67, sendero-valle en 21:28.43, valle-mesa en 26:53.81), usando directamente las librerias del proyecto (renderer.mjs con zoompan al 3.5% en modo 'recorrido completo' para poder evaluar el movimiento en un clip corto, particulas.mjs con el preset 'noche' de 82 particulas/24s, musicaArchivo.mjs con el ducking real -23dB plano) y la narracion v3 real en cada tramo, despues concatenados en un solo video de 77.02s (1920x1080, 30fps). Se midio la sonoridad real de touching_moment.mp3 (-17.0 LUFS, coincide con canal.json) y se calculo la ganancia de normalizacion necesaria para llegar a los -33.5 LUFS objetivo tras el ducking. Verificado: decodificacion limpia, niveles de audio estables. Entregada para revision de Orlando. No se hizo render completo, no se toco la narracion aprobada ni ninguna escena. Narracion v3 verificada con el mismo SHA-256 en todo momento. El Video 7 permanece intacto."
     }
   ]
 }
