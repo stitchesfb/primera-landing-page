@@ -16,14 +16,23 @@
 
 ## 2. Tipo de decisión (plantilla §2)
 
-- [x] **Usa el baseline activo** para música, subtítulos y estructura de producción.
-- [ ] Punto abierto sobre el **tratamiento del movimiento visual** (ver más abajo) — requiere que Orlando decida entre el baseline comprometido (`canal.json`) y extender el experimento del Video 7, que el propio Sistema Activo limita solo a ese video hasta revisarlo con datos.
+- [x] Usa el baseline activo para música, subtítulos y estructura de producción.
+- [x] **Es un experimento limitado** — movimiento visual.
 
-### Decisión pendiente: movimiento visual
+### Decisión aprobada (2026-10-29): movimiento visual — "tomas con reencuadre"
 
-`canal.json` → `render.presets.noche` es el **baseline comprometido**: imagen fija + partículas (82, periodo 24s), **sin zoompan continuo** (decisión cerrada, costo de render fue el motivo). El Video 7 añadió un **experimento** encima de eso — más "tomas" por imagen con reencuadres/zoom del 7-8% — pero el Sistema Activo dice expresamente: *"Alcance: solo el Video 7. No convierte automáticamente todos los videos futuros al mismo formato"*, y su revisión está prevista **después de publicar el Video 7 y recoger datos de 48h/7 días** — todavía no documentada aquí.
+Orlando aprobó salir del baseline puro de `canal.json` (`imagen_fija_particulas`, `zoom_total: 0`) para lograr un movimiento **suave y discreto, coherente con una oración nocturna**, sin reabrir el zoompan continuo que ya se descartó por costo de render (DECISIONES_CERRADAS #14).
 
-**Propuesta:** usar el baseline comprometido de `canal.json` (imagen fija + partículas, sin zoompan) para el Video 8, salvo que Orlando ya tenga datos del Video 7 y quiera extender el experimento. Esto evita asumir un resultado que el propio sistema marca como pendiente de revisión.
+Registrado en `estudio/proyectos/video_008/edit_plan.json` → `movimiento_visual`:
+
+- Variable que cambia: varias **tomas fijas** por imagen (recortes/zooms distintos de la misma imagen) encadenadas con fundidos cruzados — no es zoompan continuo, evita el cálculo por fotograma que disparó el costo de render en el experimento anterior.
+- Zoom por toma: **3–4 %** (más tenue que el 7–8 % del Video 7, para un efecto más suave y discreto).
+- Fundidos: 0,75–1,5s, igual que el Video 7.
+- Tomas más espaciadas que el Video 7 (cada encuadre dura más, menos cambios por minuto).
+- Partículas: se mantienen las del preset "noche" (82, periodo 24s).
+- Alcance: Video 8 (experimento, no cambia el baseline de `canal.json`).
+- Métrica de éxito: CTR, retención a 30s, duración media, % visto.
+- Fecha de revisión: tras publicar el Video 8 y recoger datos de 48h/7 días.
 
 ## 3. Problema humano y respuesta bíblica (plantilla §3)
 
@@ -171,10 +180,20 @@ Archivos originales de bloque (`3.mp3`, `9.mp3`, `12.mp3`) y su alineación: **s
 
 ## 11. Qué falta antes de generar o renderizar
 
-1. Aprobación de Orlando sobre el tratamiento de movimiento visual (baseline `canal.json` vs. extender el experimento del Video 7).
-2. Aprobación del listado de escenas y de qué imágenes nuevas generar (sección 5–6) — ninguna se ha generado todavía.
+1. ~~Aprobación de Orlando sobre el tratamiento de movimiento visual~~ — **aprobado 2026-10-29** (ver sección 2).
+2. Revisar y aprobar el estilo de la hoja de contacto de 6 imágenes (sección 12) antes de producir el resto de recursos.
 3. Confirmación de la música (`touching_moment.mp3`) y prueba de nivel antes del render completo.
 4. Aprobación del tratamiento de subtítulos (sin quemar en el largo, quemados en los Shorts).
 5. Prueba audiovisual de 60–90s (punto de aprobación 7 del Sistema Activo) antes de cualquier render completo — todavía no realizada.
 
 **No se generó ninguna imagen, clip ni pista de audio nueva en esta tarea. No se renderizó nada.**
+
+---
+
+## 12. Hoja de contacto — 6 imágenes representativas (ver aviso de capacidad)
+
+**Importante — limitación de esta sesión:** esta sesión **no tiene acceso a ninguna herramienta de generación de imágenes**. Las 4 imágenes originales y las 16 N1–N16 del Video 7 no las generó Claude: Orlando las generó externamente y las entregó en un ZIP para verificación e importación (confirmado en `estudio/proyectos/video_007/_generacion/preflight_visual/revision_03_imagenes_ai/informe_revision_03.md`, sección 1). No puedo producir los 6 archivos de imagen en esta tarea sin fabricar o simular que existen.
+
+Lo que sí puedo entregar ahora, para que el estilo se revise antes de generar nada, es la **especificación de las 6 imágenes** (briefs listos para pasarlos a la herramienta que Orlando use), con la estética nocturna, el criterio de "sin representar literalmente cada símbolo" y el margen de seguridad para recorte vertical ya incorporados. Ver `estudio/proyectos/video_008/_generacion/mapa_visual/hoja_contacto_6_imagenes/BRIEFS_6_IMAGENES.md`.
+
+**Pendiente de Orlando:** generarlas con su herramienta habitual (la misma que usó para N1–N16) y traerlas de vuelta para importarlas, igual que en el Video 7 — o indicar si esta sesión debe intentar una vía distinta.

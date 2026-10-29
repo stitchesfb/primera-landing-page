@@ -1,0 +1,35 @@
+{
+  "id": "video_008",
+  "pilar": "noche",
+  "titulo_trabajo": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
+
+  "narracion_aprobada": "estudio/proyectos/video_008/_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v3.mp3",
+
+  "musica": "touching_moment.mp3",
+  "_musica": "Siguiente en la rotacion libre de estudio/canal.json: one_step_closer.mp3 (video_006) y alone_with_my_thoughts.mp3 (video_007) ya usadas. Propuesta, pendiente de prueba de nivel antes del render completo.",
+
+  "movimiento_visual": {
+    "metodo": "tomas_con_reencuadre",
+    "_decision": "Aprobada por Orlando el 2026-10-29. Sale del baseline comprometido de canal.json (render.presets.noche.movimiento = 'imagen_fija_particulas', zoom_total 0) para lograr un movimiento suave y discreto, coherente con una oracion nocturna, sin reabrir el zoompan continuo que ya se descarto por costo de render (DECISIONES_CERRADAS #14: ~98min de render para un video de ~33min).",
+    "tecnica": "Varias tomas fijas por imagen (recortes/zooms distintos de la misma imagen), encadenadas con fundidos cruzados -- no es zoompan continuo, evita el calculo por fotograma que disparo el costo de render.",
+    "zoom_por_toma_pct": [3, 4],
+    "_zoom": "Mas tenue que el 7-8% usado en el experimento del Video 7, para un efecto mas suave y discreto segun lo pedido.",
+    "duracion_fundido_s": [0.75, 1.5],
+    "espaciado_tomas": "mayor que el Video 7 -- cada encuadre se sostiene mas tiempo, menos cambios por minuto",
+    "particulas": "se mantienen las del preset 'noche' de canal.json (82, periodo 24s)",
+    "alcance": "Video 8 (experimento, no cambia el baseline de canal.json)",
+    "metrica_de_exito": "CTR, retencion a 30s, duracion media, % visto -- mismas metricas usadas para el experimento del Video 7",
+    "fecha_de_revision": "despues de publicar el Video 8 y recoger datos de 48h/7 dias, mismo criterio que el Video 7"
+  },
+
+  "subtitulos": {
+    "video_largo": "sin quemar, .srt aparte (igual que el baseline del canal)",
+    "shorts": "quemados, sincronizados a cada Short"
+  },
+
+  "defaults": {
+    "pause_after_paragraph": 3.0
+  },
+
+  "events": []
+}
