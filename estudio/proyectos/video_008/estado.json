@@ -159,7 +159,8 @@
       },
       "prueba_audiovisual_60_90s": {
         "fecha": "2026-10-29",
-        "estado": "entregada_pendiente_aprobacion",
+        "estado": "metodo_corregido_ver_prueba_continua_90s",
+        "correccion_2026_11_01": "Esta prueba uso zoompan continuo (estudio/lib/renderer.mjs), que NO es el metodo aprobado en edit_plan.json ('tomas con reencuadre': encuadres fijos con fundidos cruzados, explicitamente sin zoompan continuo, para evitar el costo de render ya demostrado en el canal). Corregido en 'prueba_continua_90s' (ver mas abajo). Esta entrada se conserva como registro historico, no como el metodo vigente.",
         "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_audiovisual_60_90s/video_008_prueba_audiovisual_60_90s.mp4",
         "sha256": "00516c343b65877f60eacfd19f079362557a7732182943196d8c28decf54087e",
         "duracion_s": 77.02,
@@ -183,6 +184,27 @@
         },
         "detalle": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_audiovisual_60_90s/LEEME_PRUEBA_AUDIOVISUAL.md",
         "nota_general": "No se hizo el render completo. No se toco la narracion aprobada ni ninguna escena. Narracion v3 verificada con el mismo SHA-256 antes y despues."
+      },
+      "prueba_continua_90s": {
+        "fecha": "2026-11-01",
+        "estado": "entregada_pendiente_aprobacion_metodo_correcto",
+        "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_continua_90s/video_008_prueba_continua_90s.mp4",
+        "sha256": "c99fa4d6eb789dd8951d5c2c77a58d15bf9149d63864d785a62daeb4652d0964",
+        "duracion_s": 90.0,
+        "formato": "1920x1080, 30fps, h264/aac",
+        "metodo": "Tomas fijas con fundidos cruzados (xfade), SIN zoompan -- metodo real aprobado. 3 tomas estaticas de la escena E1 (dormitorio), zoom progresivo 0%/1.5%/3.0% sobre el mismo foco (ventana/luna), duraciones 31s/31s/30s con fundidos de 1.0s entre ellas (total exacto 90s, sin comprimir ni acelerar). Particulas (82, periodo 24s) superpuestas. Son los primeros 90s reales del bloque 1 (que dura 115.72s en total), mostrados en tiempo real, no una muestra comprimida.",
+        "contenido": "0:00-1:30 de la narracion v3, continuo sin cortes de audio -- el bloque 1 no tiene pausas. Narracion y musica en una sola pista continua de 90s.",
+        "musica": {
+          "pista": "touching_moment.mp3",
+          "lufs_medido": -17.0,
+          "ganancia_normalizacion_db": 6.5,
+          "objetivo_final_lufs": -33.5,
+          "ducking_db": -23,
+          "fade_in_aplicado_s": 4,
+          "nota": "fade-in de 4s aplicado por ser el minuto 0 real del video completo (canal.json musica.fade_in_s)"
+        },
+        "detalle": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_continua_90s/LEEME_PRUEBA_CONTINUA.md",
+        "nota_general": "No se hizo el render completo. No se genero ninguna imagen ni audio nuevo -- construido a partir de E1_dormitorio_nocturno.png y la narracion v3 ya existentes. Narracion v3 verificada con el mismo SHA-256."
       }
     },
     "estado_anterior": "identificados_con_tiempos_v3_titulos_propuestos_pendiente_extraccion",
@@ -430,6 +452,10 @@
     {
       "fecha": "2026-10-29",
       "evento": "Decimosexta tarea (final de esta fase). Orlando envio las 2 escenas que faltaban (pastor con ovejas, sendero), aclaro que la mesa sencilla se conserva completa en horizontal sin necesitar version vertical (ningun Short la usa), y pidio verificar los encuadres verticales de las nuevas, y preparar la prueba audiovisual de 60-90s con narracion v3, musica y reencuadres suaves, pudiendo reunir fragmentos representativos para mostrar las transiciones, entregandola para revision antes del render completo. Se verifico el recorte vertical de E2 (funciona bien, pastor completo con cayado y varias ovejas, pierde el disco de la luna) y E4 (funciona muy bien, sendero y luna completos). Con las 6 escenas completas, se construyo la prueba reuniendo 11 sub-segmentos de 7s (uno por escena a cada lado de las 5 transiciones entre escenas: dormitorio-pastor en 4:01.92, pastor-aguas alrededor de la pausa P03 completa en 7:43-7:50, aguas-sendero en 15:36.67, sendero-valle en 21:28.43, valle-mesa en 26:53.81), usando directamente las librerias del proyecto (renderer.mjs con zoompan al 3.5% en modo 'recorrido completo' para poder evaluar el movimiento en un clip corto, particulas.mjs con el preset 'noche' de 82 particulas/24s, musicaArchivo.mjs con el ducking real -23dB plano) y la narracion v3 real en cada tramo, despues concatenados en un solo video de 77.02s (1920x1080, 30fps). Se midio la sonoridad real de touching_moment.mp3 (-17.0 LUFS, coincide con canal.json) y se calculo la ganancia de normalizacion necesaria para llegar a los -33.5 LUFS objetivo tras el ducking. Verificado: decodificacion limpia, niveles de audio estables. Entregada para revision de Orlando. No se hizo render completo, no se toco la narracion aprobada ni ninguna escena. Narracion v3 verificada con el mismo SHA-256 en todo momento. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-11-01",
+      "evento": "Decimoseptima tarea. Orlando reporto que el adjunto de la prueba de 77s no le llego y pidio reenviarlo, con copia de revision en 720p si pesaba demasiado, usando el render ya existente sin regenerar nada -- se transcodifico una copia 720p (16.6MB) a partir del mp4 ya hecho y se entrego. Luego Orlando senalo que la muestra con fragmentos separados no permitia evaluar el ritmo real, y pidio una prueba CONTINUA de 90s desde el inicio del video, con la narracion v3 y la musica sin saltos de audio, usando el tratamiento visual real previsto para el video final (encuadres fijos unidos con fundidos suaves, sin comprimir ni acelerar el zoom), conservando audios/imagenes existentes sin generar recursos nuevos. Al revisar edit_plan.json se confirmo que la prueba anterior de 77s habia usado por error zoompan continuo (estudio/lib/renderer.mjs), que NO es el metodo aprobado -- el metodo real es 'tomas con reencuadre': encuadres FIJOS (estaticos) unidos con fundidos cruzados, explicitamente sin zoompan continuo, para evitar el costo de render que el zoompan ya demostro en el canal. Se corrigio el metodo: se construyeron 3 tomas estaticas (sin ningun fotograma animado) de la escena E1 (dormitorio, que cubre todo el primer minuto y medio del bloque 1), con zoom progresivo real 0%/1.5%/3.0% sobre el mismo foco, duraciones reales de 31s/31s/30s (sin comprimir), unidas con fundidos cruzados de 1.0s, mas particulas superpuestas. Audio: narracion v3 real de 0 a 90s mas la musica (con su fade-in de entrada de 4s real, por ser el minuto 0 del video completo), mezclados en una sola pista continua de 90s sin ningun corte -- el bloque 1 no tiene pausas. Resultado: 90.000s exactos, 1920x1080, decodificacion limpia, sin silencios anomalos. Se registro la correccion de metodo en la entrada de la prueba anterior (conservada como historico) y se entrego la nueva prueba continua como el metodo vigente. No se hizo render completo, no se genero ninguna imagen ni audio nuevo. Narracion v3 verificada con el mismo SHA-256. El Video 7 permanece intacto."
     }
   ]
 }

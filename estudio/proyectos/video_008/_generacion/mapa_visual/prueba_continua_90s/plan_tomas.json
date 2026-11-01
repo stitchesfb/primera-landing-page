@@ -1,0 +1,26 @@
+{
+  "imagen": "/home/user/primera-landing-page/estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E1_dormitorio_nocturno.png",
+  "foco": {
+    "x": 0.68,
+    "y": 0.42
+  },
+  "fundidoS": 1,
+  "duracionMuestra": 90,
+  "tomas": [
+    {
+      "zoom": 1,
+      "duracion": 31
+    },
+    {
+      "zoom": 1.015,
+      "duracion": 31
+    },
+    {
+      "zoom": 1.03,
+      "duracion": 30
+    }
+  ],
+  "gananciaNormalizarDb": 6.5,
+  "lufsMedido": -17,
+  "duracionFinal": 90
+}
