@@ -1,5 +1,5 @@
 {
-  "estado": "cta_eliminada_narracion_completa_v3_entregada_para_revision_final",
+  "estado": "render_completo_y_shorts_entregados_para_revision",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -57,7 +57,7 @@
       "model_id": "eleven_v4",
       "stability": 0.5,
       "similarity_boost": 0.75,
-      "speed": 1.0,
+      "speed": 1,
       "output_format": "mp3_44100_128",
       "omitidos": [
         "style",
@@ -117,9 +117,21 @@
       "metodo": "Extraido directamente de 3.mp3, 9.mp3 y 12.mp3 originales (sin tocar), usando el texto exacto localizado en la alineacion de cada bloque. Sin llamadas a ElevenLabs.",
       "verificacion": "Analisis de energia en ventanas de 0.05s en el inicio y el final de cada clip (proxy de escucha, sin reproduccion de audio disponible en esta sesion): silencio limpio antes de la primera silaba y Amen completo sin cortes en los 3. Short 3 no tenia margen de silencio natural antes de la primera silaba (empieza en el caracter 0 de su bloque) -- se anadieron 0.3s de silencio digital al inicio, sin generar voz nueva.",
       "archivos": {
-        "short1_preliminar.mp3": {"bloque": 3, "duracion_s": 38.948571, "sha256": "782735548b02e7b1dafc08379d286f13255f6202d52a11ca7f088c6b488451c9"},
-        "short2_preliminar.mp3": {"bloque": 9, "duracion_s": 40.751020, "sha256": "f8cdc183d2ebdc0aa5ed8e8562cdddcc7a4c66277d4a86a7c34bef333cb5e547"},
-        "short3_preliminar.mp3": {"bloque": 12, "duracion_s": 37.746939, "sha256": "1b3d9380ab7b44bd4ee40e2d690518baaef3482631b84c811235abb5b4d31409"}
+        "short1_preliminar.mp3": {
+          "bloque": 3,
+          "duracion_s": 38.948571,
+          "sha256": "782735548b02e7b1dafc08379d286f13255f6202d52a11ca7f088c6b488451c9"
+        },
+        "short2_preliminar.mp3": {
+          "bloque": 9,
+          "duracion_s": 40.75102,
+          "sha256": "f8cdc183d2ebdc0aa5ed8e8562cdddcc7a4c66277d4a86a7c34bef333cb5e547"
+        },
+        "short3_preliminar.mp3": {
+          "bloque": 12,
+          "duracion_s": 37.746939,
+          "sha256": "1b3d9380ab7b44bd4ee40e2d690518baaef3482631b84c811235abb5b4d31409"
+        }
       },
       "directorio": "estudio/proyectos/video_008/_generacion/shorts/audio_preliminar/",
       "detalle": "estudio/proyectos/video_008/_generacion/shorts/audio_preliminar/LEEME_AUDIO_PRELIMINAR.md"
@@ -146,12 +158,42 @@
         "sustitucion_de_briefs": "Los 6 briefs conceptuales (BRIEFS_6_IMAGENES.md, que pedian evitar simbolos literales) fueron SUSTITUIDOS por Orlando: genero y aprobo en ChatGPT una hoja de contacto distinta con 6 escenas mas literales del Salmo 23 (dormitorio, pastor con ovejas, aguas tranquilas, sendero, valle, mesa sencilla). No se regenero nada por esa diferencia, por instruccion explicita.",
         "detalle": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/LEEME_ESCENAS_APROBADAS.md",
         "escenas": {
-          "E1_dormitorio_nocturno": {"bloques": "1-2", "estado": "recibida_verificada", "recorte_vertical": "funciona bien, pierde lampara/velador", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E1_dormitorio_nocturno.png"},
-          "E2_pastor_con_ovejas": {"bloques": "3-4 (Short 1)", "estado": "recibida_verificada", "recorte_vertical": "funciona bien, pastor completo con cayado y varias ovejas, pierde el disco de la luna (queda el resplandor)", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E2_pastor_con_ovejas.png"},
-          "E3_aguas_tranquilas": {"bloques": "5-8", "estado": "recibida_verificada", "recorte_vertical": "funciona muy bien, luna/reflejo/arroyo alineados verticalmente", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E3_aguas_tranquilas.png"},
-          "E4_sendero": {"bloques": "9-11 (Short 2)", "estado": "recibida_verificada", "recorte_vertical": "funciona muy bien, sendero completo y luna entera conservados", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E4_sendero.png"},
-          "E5_valle": {"bloques": "12-14 (Short 3)", "estado": "recibida_verificada", "recorte_vertical": "funciona bien, luna/rio/primer plano rocoso conservados", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E5_valle.png"},
-          "E6_mesa_sencilla": {"bloques": "15-19 (cierre)", "estado": "recibida_verificada", "recorte_vertical": "no se necesita -- Orlando confirmo que se conserva completa en horizontal, ningun Short la usa", "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E6_mesa_sencilla.png"}
+          "E1_dormitorio_nocturno": {
+            "bloques": "1-2",
+            "estado": "recibida_verificada",
+            "recorte_vertical": "funciona bien, pierde lampara/velador",
+            "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E1_dormitorio_nocturno.png"
+          },
+          "E2_pastor_con_ovejas": {
+            "bloques": "3-4 (Short 1)",
+            "estado": "recibida_verificada",
+            "recorte_vertical": "funciona bien, pastor completo con cayado y varias ovejas, pierde el disco de la luna (queda el resplandor)",
+            "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E2_pastor_con_ovejas.png"
+          },
+          "E3_aguas_tranquilas": {
+            "bloques": "5-8",
+            "estado": "recibida_verificada",
+            "recorte_vertical": "funciona muy bien, luna/reflejo/arroyo alineados verticalmente",
+            "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E3_aguas_tranquilas.png"
+          },
+          "E4_sendero": {
+            "bloques": "9-11 (Short 2)",
+            "estado": "recibida_verificada",
+            "recorte_vertical": "funciona muy bien, sendero completo y luna entera conservados",
+            "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E4_sendero.png"
+          },
+          "E5_valle": {
+            "bloques": "12-14 (Short 3)",
+            "estado": "recibida_verificada",
+            "recorte_vertical": "funciona bien, luna/rio/primer plano rocoso conservados",
+            "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E5_valle.png"
+          },
+          "E6_mesa_sencilla": {
+            "bloques": "15-19 (cierre)",
+            "estado": "recibida_verificada",
+            "recorte_vertical": "no se necesita -- Orlando confirmo que se conserva completa en horizontal, ningun Short la usa",
+            "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/escenas_aprobadas/originales/E6_mesa_sencilla.png"
+          }
         },
         "duplicado_resuelto": "Se recibieron 2 versiones del dormitorio; se conservo la indicada ('sin numero', sin marca visible en la esquina) y se descarto la otra (marca '1' visible + tapiz adicional en la pared).",
         "secuencia_de_lunas": "E1, E3, E5 y E6 comparten la misma luna llena -- quedan separadas en la secuencia por E2 y E4, evitando escenas con la misma luna consecutivas.",
@@ -167,15 +209,45 @@
         "formato": "1920x1080, 30fps, h264/aac",
         "metodo": "11 sub-segmentos de 7s cada uno (uno por escena a cada lado de las 5 transiciones entre las 6 escenas), renderizados con estudio/lib/renderer.mjs (zoompan 3.5% en modo 'recorrido completo' -- el zoom completo se comprime en los 7s para poder evaluarlo, se vera mas lento en el video real donde cada escena dura varios minutos) + estudio/lib/particulas.mjs (82 particulas, periodo 24s, preset 'noche' de canal.json) + estudio/lib/musicaArchivo.mjs (cama musical con el ducking real: -23dB plano, igual bajo voz y en pausas) + narracion v3 real en cada tramo, despues concatenados.",
         "transiciones_mostradas": [
-          {"t": "T1", "de": "E1 dormitorio", "a": "E2 pastor", "en_v3": "4:01.92", "nota": "corte visual durante narracion continua, sin pausa"},
-          {"t": "T2", "de": "E2 pastor", "a": "E3 aguas tranquilas", "en_v3": "7:43.09-7:50.09", "nota": "incluye la pausa P03 completa (7s), el corte de escena ocurre al iniciar la pausa"},
-          {"t": "T3", "de": "E3 aguas tranquilas", "a": "E4 sendero", "en_v3": "15:36.67", "nota": "corte visual durante narracion continua"},
-          {"t": "T4", "de": "E4 sendero", "a": "E5 valle", "en_v3": "21:28.43", "nota": "corte visual durante narracion continua"},
-          {"t": "T5", "de": "E5 valle", "a": "E6 mesa sencilla", "en_v3": "26:53.81", "nota": "corte visual durante narracion continua"}
+          {
+            "t": "T1",
+            "de": "E1 dormitorio",
+            "a": "E2 pastor",
+            "en_v3": "4:01.92",
+            "nota": "corte visual durante narracion continua, sin pausa"
+          },
+          {
+            "t": "T2",
+            "de": "E2 pastor",
+            "a": "E3 aguas tranquilas",
+            "en_v3": "7:43.09-7:50.09",
+            "nota": "incluye la pausa P03 completa (7s), el corte de escena ocurre al iniciar la pausa"
+          },
+          {
+            "t": "T3",
+            "de": "E3 aguas tranquilas",
+            "a": "E4 sendero",
+            "en_v3": "15:36.67",
+            "nota": "corte visual durante narracion continua"
+          },
+          {
+            "t": "T4",
+            "de": "E4 sendero",
+            "a": "E5 valle",
+            "en_v3": "21:28.43",
+            "nota": "corte visual durante narracion continua"
+          },
+          {
+            "t": "T5",
+            "de": "E5 valle",
+            "a": "E6 mesa sencilla",
+            "en_v3": "26:53.81",
+            "nota": "corte visual durante narracion continua"
+          }
         ],
         "musica": {
           "pista": "touching_moment.mp3",
-          "lufs_medido": -17.0,
+          "lufs_medido": -17,
           "ganancia_normalizacion_db": 6.5,
           "referencia_antes_del_ducking_lufs": -10.5,
           "objetivo_final_lufs": -33.5,
@@ -190,13 +262,13 @@
         "estado": "entregada_pendiente_aprobacion_metodo_correcto",
         "archivo": "estudio/proyectos/video_008/_generacion/mapa_visual/prueba_continua_90s/video_008_prueba_continua_90s.mp4",
         "sha256": "c99fa4d6eb789dd8951d5c2c77a58d15bf9149d63864d785a62daeb4652d0964",
-        "duracion_s": 90.0,
+        "duracion_s": 90,
         "formato": "1920x1080, 30fps, h264/aac",
         "metodo": "Tomas fijas con fundidos cruzados (xfade), SIN zoompan -- metodo real aprobado. 3 tomas estaticas de la escena E1 (dormitorio), zoom progresivo 0%/1.5%/3.0% sobre el mismo foco (ventana/luna), duraciones 31s/31s/30s con fundidos de 1.0s entre ellas (total exacto 90s, sin comprimir ni acelerar). Particulas (82, periodo 24s) superpuestas. Son los primeros 90s reales del bloque 1 (que dura 115.72s en total), mostrados en tiempo real, no una muestra comprimida.",
         "contenido": "0:00-1:30 de la narracion v3, continuo sin cortes de audio -- el bloque 1 no tiene pausas. Narracion y musica en una sola pista continua de 90s.",
         "musica": {
           "pista": "touching_moment.mp3",
-          "lufs_medido": -17.0,
+          "lufs_medido": -17,
           "ganancia_normalizacion_db": 6.5,
           "objetivo_final_lufs": -33.5,
           "ducking_db": -23,
@@ -244,7 +316,45 @@
         "titulo_propuesto": "¿Estás en un Momento Oscuro? Oración de Consuelo en el Valle"
       }
     ],
-    "nota": "El guion estimaba 45-54s de voz por Short; las duraciones reales (37-40s) son mas cortas por el ritmo real de eleven_v4 en esta narracion. Ningun clip se ha extraido, recortado a 9:16, musicalizado ni renderizado todavia."
+    "nota": "El guion estimaba 45-54s de voz por Short; las duraciones reales (37-40s) son mas cortas por el ritmo real de eleven_v4 en esta narracion. Ningun clip se ha extraido, recortado a 9:16, musicalizado ni renderizado todavia.",
+    "render_final": {
+      "estado": "entregado_pendiente_aprobacion",
+      "fecha": "2026-11-01",
+      "metodo": "shortsRender.renderizarShort() (zoompan continuo 7.5% sobre la imagen vertical recortada, dentro del rango 7-8% propuesto en el plan visual seccion 9 -- el costo de zoompan por fotograma es insignificante en clips de ~40s, a diferencia del video largo de 36 min donde se evito por costo de render)",
+      "subtitulos": "quemados (ASS/libass), generados desde la alineacion por caracter original de cada bloque (3.alignment.json, 9.alignment.json, 12.alignment.json -- bloques sin ninguna edicion de CTA), localizando el texto exacto de cada Short y desplazandolo al tiempo local del audio preliminar ya aprobado. 42 car/linea, 2 lineas max, igual que el baseline del canal. Validados sin overflow (0 problemas en 32 rotulos, shortsRender.validarOverflow)",
+      "musica": "touching_moment.mp3, misma formula de normalizacion y ducking plano -23dB que el video largo, cama propia por Short (no recortada del video largo) para no heredar ningun corte",
+      "particulas": "bucle vertical propio (1080x1920, 82, periodo 24s) generado para esta tarea",
+      "items": [
+        {
+          "id": "short1",
+          "bloque": 3,
+          "escena": "E2_pastor_con_ovejas.png",
+          "titulo": "¿Cansado de Cargar con Todo? Oración Para Soltar tus Cargas",
+          "duracion_segundos": 38.933333,
+          "sha256": "8112e0264193fc7142b92575f951751c25e11660321daba084fcf6a6f8bdc531"
+        },
+        {
+          "id": "short2",
+          "bloque": 9,
+          "escena": "E4_sendero.png",
+          "titulo": "¿No Sabes Qué Camino Tomar? Oración Por Dirección y Sabiduría",
+          "duracion_segundos": 40.766667,
+          "sha256": "9dff0a996b51b019bd2dcdf584eeb0366648bf8f0841e18ac684ff56938198ae"
+        },
+        {
+          "id": "short3",
+          "bloque": 12,
+          "escena": "E5_valle.png",
+          "titulo": "¿Estás en un Momento Oscuro? Oración de Consuelo en el Valle",
+          "duracion_segundos": 37.733333,
+          "sha256": "88d183d59230106e6270f9ea6d70b4624066f908082c70d6af4a948987862033"
+        }
+      ],
+      "verificacion_tecnica": "Decodificacion completa sin errores en los 3; duracion y ultima palabra (\"Amen.\") consistentes con la verificacion auditiva previa del audio preliminar (seccion 10 del plan visual)",
+      "pendiente": [
+        "Aprobacion de Orlando sobre zoom/encuadre/subtitulos de cada Short"
+      ]
+    }
   },
   "transicion_flash_a_v4": {
     "estado": "CTA_del_bloque_4_regenerada_con_nuevos_ajustes_muestra_entregada",
@@ -275,7 +385,7 @@
       "ajustes_aprobados": {
         "voice_id": "8mBRP99B2Ng2QwsJMFQl",
         "model_id": "eleven_v4",
-        "stability": 0.60,
+        "stability": 0.6,
         "similarity_boost": 0.75,
         "speed": 0.85,
         "output_format": "mp3_44100_128",
@@ -296,8 +406,16 @@
       },
       "pausas_de_integracion_propuestas": {
         "metodo": "Se detecto el silencio natural que la propia voz ya deja entre frases en 4.mp3 original (0.96s antes de la CTA, 0.88s despues) y se completo con silencio generado hasta llegar a ~1.5s de pausa total en cada union, sin duplicar el silencio ya existente.",
-        "antes": {"natural_s": 0.96, "anadido_s": 0.54, "total_s": 1.50},
-        "despues": {"natural_s": 0.88, "anadido_s": 0.62, "total_s": 1.50}
+        "antes": {
+          "natural_s": 0.96,
+          "anadido_s": 0.54,
+          "total_s": 1.5
+        },
+        "despues": {
+          "natural_s": 0.88,
+          "anadido_s": 0.62,
+          "total_s": 1.5
+        }
       },
       "muestra_entregada": {
         "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_regenerada",
@@ -313,10 +431,25 @@
     "investigacion_2026_10_28_metadatos_y_shh": {
       "contexto": "Orlando reporto que la configuracion stability 0.60/speed 0.85 ya suena mas cercana al tono buscado, basado en una prueba propia (texto distinto) hecha en ElevenLabs. Pidio consultar los metadatos reales de esa prueba (especialmente clone strength, idioma y velocidad) sin asumir que el control visual usado corresponde a un parametro concreto de la API, preparar una propuesta con stability 0.65/similarity 0.88 y el equivalente verificado de 'Clone strength Low', y revisar si el 'shh' del segundo 11 de la muestra entregada viene de la CTA nueva, del contexto original o de la union. No se llamo a ElevenLabs en esta tarea -- solo lecturas de /v1/history y /v1/voices.",
       "metadatos_de_la_prueba_de_orlando": {
-        "history_item_ids": ["QBgguof2MIEp835fVnH9 (eleven_v4)", "YViOZ7diXpWhId4Gn4DE (eleven_v4_exp)"],
+        "history_item_ids": [
+          "QBgguof2MIEp835fVnH9 (eleven_v4)",
+          "YViOZ7diXpWhId4Gn4DE (eleven_v4_exp)"
+        ],
         "texto_usado": "distinto al CTA -- un cierre del Salmo 23 con otra invitacion a suscribirse",
-        "ajustes_verificados_en_el_historial": {"stability": 0.65, "similarity": 0.88, "text_boost": false, "focus": null, "speed": "no presente en este objeto"},
-        "ajustes_guardados_en_la_voz_8mBRP99B2Ng2QwsJMFQl": {"stability": 0.65, "similarity_boost": 0.88, "speed": 0.91, "style": 0.0, "use_speaker_boost": true},
+        "ajustes_verificados_en_el_historial": {
+          "stability": 0.65,
+          "similarity": 0.88,
+          "text_boost": false,
+          "focus": null,
+          "speed": "no presente en este objeto"
+        },
+        "ajustes_guardados_en_la_voz_8mBRP99B2Ng2QwsJMFQl": {
+          "stability": 0.65,
+          "similarity_boost": 0.88,
+          "speed": 0.91,
+          "style": 0,
+          "use_speaker_boost": true
+        },
         "idioma": "confirmado 'es' (espanol), locale 'es-AR' -- atributo de la voz (fine_tuning.language / labels.language / verified_languages), no un parametro por llamada en eleven_v4",
         "clone_strength": "NO existe ningun campo ni control documentado con ese nombre en la API ni en la documentacion oficial consultada. El mas cercano documentado es similarity_boost ('Similarity' / antes 'Clarity + Similarity Enhancement'), pero no se puede confirmar que sea el mismo control -- 0.88 leeria como similarity ALTA, no 'Low'. Pendiente de que Orlando precise en que pantalla vio 'Clone Strength' o apruebe generar solo con los campos verificados.",
         "archivos": "estudio/proyectos/video_008/_generacion/audio/regeneracion_cta_bloque4/historial_prueba_usuario_QBgguof2MIEp835fVnH9.json, historial_prueba_usuario_YViOZ7diXpWhId4Gn4DE.json, voz_detalle_8mBRP99B2Ng2QwsJMFQl.json"
@@ -337,7 +470,7 @@
         "language_code": "es",
         "stability": 0.65,
         "similarity_boost": 0.88,
-        "clone_strength": 0.0,
+        "clone_strength": 0,
         "speed": 0.91,
         "nota_speed": "Orlando confirmo explicitamente 0.91 como la velocidad elegida para esta prueba."
       },
@@ -359,8 +492,16 @@
         "lado_despues_revisado_sin_cambios": "se verifico que el lado despues_original (corte en 66.8s) ya estaba a salvo de cualquier residuo (la CTA vieja termina limpiamente en 66.76s); no requirio ajuste. Se afino el calculo de pausa natural usando el inicio real del habla siguiente (67.40s, no 67.68s etiquetado)"
       },
       "pausas_de_integracion_recalculadas": {
-        "antes": {"natural_s": 0.83, "anadido_s": 0.67, "total_s": 1.50},
-        "despues": {"natural_s": 0.60, "anadido_s": 0.90, "total_s": 1.50}
+        "antes": {
+          "natural_s": 0.83,
+          "anadido_s": 0.67,
+          "total_s": 1.5
+        },
+        "despues": {
+          "natural_s": 0.6,
+          "anadido_s": 0.9,
+          "total_s": 1.5
+        }
       },
       "muestra_entregada": {
         "directorio": "estudio/proyectos/video_008/_generacion/montaje/muestra_cta_v2_sin_residuo",
@@ -456,6 +597,128 @@
     {
       "fecha": "2026-11-01",
       "evento": "Decimoseptima tarea. Orlando reporto que el adjunto de la prueba de 77s no le llego y pidio reenviarlo, con copia de revision en 720p si pesaba demasiado, usando el render ya existente sin regenerar nada -- se transcodifico una copia 720p (16.6MB) a partir del mp4 ya hecho y se entrego. Luego Orlando senalo que la muestra con fragmentos separados no permitia evaluar el ritmo real, y pidio una prueba CONTINUA de 90s desde el inicio del video, con la narracion v3 y la musica sin saltos de audio, usando el tratamiento visual real previsto para el video final (encuadres fijos unidos con fundidos suaves, sin comprimir ni acelerar el zoom), conservando audios/imagenes existentes sin generar recursos nuevos. Al revisar edit_plan.json se confirmo que la prueba anterior de 77s habia usado por error zoompan continuo (estudio/lib/renderer.mjs), que NO es el metodo aprobado -- el metodo real es 'tomas con reencuadre': encuadres FIJOS (estaticos) unidos con fundidos cruzados, explicitamente sin zoompan continuo, para evitar el costo de render que el zoompan ya demostro en el canal. Se corrigio el metodo: se construyeron 3 tomas estaticas (sin ningun fotograma animado) de la escena E1 (dormitorio, que cubre todo el primer minuto y medio del bloque 1), con zoom progresivo real 0%/1.5%/3.0% sobre el mismo foco, duraciones reales de 31s/31s/30s (sin comprimir), unidas con fundidos cruzados de 1.0s, mas particulas superpuestas. Audio: narracion v3 real de 0 a 90s mas la musica (con su fade-in de entrada de 4s real, por ser el minuto 0 del video completo), mezclados en una sola pista continua de 90s sin ningun corte -- el bloque 1 no tiene pausas. Resultado: 90.000s exactos, 1920x1080, decodificacion limpia, sin silencios anomalos. Se registro la correccion de metodo en la entrada de la prueba anterior (conservada como historico) y se entrego la nueva prueba continua como el metodo vigente. No se hizo render completo, no se genero ninguna imagen ni audio nuevo. Narracion v3 verificada con el mismo SHA-256. El Video 7 permanece intacto."
+    },
+    {
+      "fecha": "2026-11-01",
+      "evento": "Decimoctava tarea. Orlando aprobo el audio, la musica y la discrecion de las particulas de la prueba continua de 90s, pidio conservar los encuadres fijos con fundidos suaves aplicando las seis escenas del mapa aprobado sin nuevas pruebas de zoom, y autorizo proceder con el render completo del Video 8 y los 3 Shorts con subtitulos sincronizados, para entrega antes de publicar. Se construyo el plan de 18 tomas (6 escenas x 3, zoom 0/1.5/3%, fundidos de 1.0s) extendiendo mecanicamente el patron ya aprobado en la prueba continua a la duracion real de cada una de las 6 escenas (fronteras de bloque ya verificadas en fases anteriores). Se detecto y corrigio un error de presupuesto de fundidos (la cadena completa de 18 tomas tiene 17 fundidos, no 12 como si cada escena fuera independiente -- la primera pasada salio 5.0s corta exactamente por eso) antes de aceptar el resultado. Audio completo: narracion v3 integra + musica (touching_moment.mp3) con el mismo ducking plano -23dB y normalizacion ya validados, sin cola adicional tras el \"Amen\" (duracion final = duracion de la narracion). Resultado: video_008_master.mp4, 1920x1080, 2166.467s (delta 0.027s sobre el objetivo), decodificacion limpia, sin silencios anomalos, narracion v3 y Video 7 verificados intactos. No se comiteo el master al repositorio por tamaño (266MB); se entrega una copia de revision en 720p dividida en 8 partes de ~5 min. Para los 3 Shorts (bloques 3, 9 y 12, ninguno afectado por la eliminacion del CTA del bloque 4) se localizo el texto exacto de cada uno en la alineacion original de su bloque, se generaron subtitulos quemados sincronizados (42 car/linea, validados sin desborde) y se renderizaron con shortsRender.mjs (zoompan continuo 7.5%, dentro del 7-8% ya propuesto para los Shorts, costo insignificante en clips de ~40s). Los 3 decodifican sin errores y conservan la duracion y el \"Amen\" completo ya verificados en el audio preliminar. Ningun recurso protegido (4.mp3, alineaciones originales, narracion v3, imagenes aprobadas) se modifico. El Video 7 permanece intacto. Entregado todo para revision de Orlando antes de publicar; el .srt del video largo (baseline sin quemar) queda pendiente, no se pidio explicitamente en esta tarea."
     }
-  ]
+  ],
+  "render_completo": {
+    "estado": "entregado_pendiente_aprobacion",
+    "fecha": "2026-11-01",
+    "autorizado_por": "Orlando",
+    "nota_autorizacion": "Orlando aprobo audio/musica/particulas de la prueba continua de 90s y pidio proceder con el render completo aplicando las 6 escenas del mapa aprobado, conservando encuadres fijos con fundidos suaves, sin nuevas pruebas de zoom.",
+    "metodo": "tomas_con_reencuadre (edit_plan.json): 6 escenas x 3 tomas fijas cada una (zoom 0% / 1.5% / 3%), unidas con fundidos cruzados de 1.0s -- sin zoompan continuo en ningun fotograma.",
+    "correccion_tecnica": "Al encadenar las 18 tomas en una sola secuencia, las 5 fronteras entre escenas (ademas de los 2 fundidos internos de cada escena) consumen 1 fundido mas cada una -- 17 fundidos en total, no 12. Se detecto por la duracion de la primera pasada (2161.439s vs objetivo 2166.439s, exactamente 5s de menos) y se corrigio sumando 1.0s a la ultima toma de cada escena salvo la ultima, sin tocar el estilo ni el zoom aprobados.",
+    "escenas": [
+      {
+        "id": "E1",
+        "nombre": "Dormitorio nocturno",
+        "bloques": "1-2",
+        "inicio_s": 0,
+        "fin_s": 241.92,
+        "foco": {
+          "x": 0.68,
+          "y": 0.42
+        }
+      },
+      {
+        "id": "E2",
+        "nombre": "Pastor con ovejas",
+        "bloques": "3-4",
+        "inicio_s": 241.92,
+        "fin_s": 470.09,
+        "foco": {
+          "x": 0.5,
+          "y": 0.42
+        }
+      },
+      {
+        "id": "E3",
+        "nombre": "Aguas tranquilas",
+        "bloques": "5-8",
+        "inicio_s": 470.09,
+        "fin_s": 936.67,
+        "foco": {
+          "x": 0.5,
+          "y": 0.42
+        }
+      },
+      {
+        "id": "E4",
+        "nombre": "Sendero",
+        "bloques": "9-11",
+        "inicio_s": 936.67,
+        "fin_s": 1288.43,
+        "foco": {
+          "x": 0.5,
+          "y": 0.42
+        }
+      },
+      {
+        "id": "E5",
+        "nombre": "Valle",
+        "bloques": "12-14",
+        "inicio_s": 1288.43,
+        "fin_s": 1613.81,
+        "foco": {
+          "x": 0.5,
+          "y": 0.42
+        }
+      },
+      {
+        "id": "E6",
+        "nombre": "Mesa sencilla",
+        "bloques": "15-19",
+        "inicio_s": 1613.81,
+        "fin_s": 2166.439184,
+        "foco": {
+          "x": 0.5,
+          "y": 0.42
+        }
+      }
+    ],
+    "audio": {
+      "narracion": "_generacion/montaje/video_008_narracion_completa_sin_musica_con_pausas_v3.mp3 (sin tocar, sha256 48b78ccd42c4914eb24b6305961c29333983c9d551e57d60725050a9887c56c7)",
+      "musica": "touching_moment.mp3, ducking plano -23dB bajo voz y en interludio (regla del perfil nocturno), normalizada a -33.5 LUFS objetivo tras ducking (ganancia +6.5dB sobre -17.0 LUFS medido), fade-in 4s al inicio, fade-out 4s al final, bucle con cruce de 4s",
+      "sin_cola_adicional": "La duracion del video es exactamente la de la narracion v3 (2166.439184s) -- no se añadio cola musical extra tras el \"Amen\", igual precedente que video_007 (duracion_final = duracion_narracion)"
+    },
+    "particulas": "preset noche (82, periodo 24s), discrecion aprobada en la prueba continua",
+    "subtitulos_video_largo": {
+      "estado": "pendiente",
+      "nota": "Baseline del canal: .srt aparte, sin quemar. No se genero en esta tarea -- el bloque 4 requiere remapear su alineacion original restando los 12.00s exactos de la CTA eliminada (corte en 54.60s, reanuda en 67.38s) y los demas 18 bloques requieren anclar sus offsets globales en v3 con la misma precision acustica usada en todo el proyecto. Se prioritizo el render y los Shorts, explicitamente pedidos; el .srt queda como pendiente del baseline, no como parte de esta entrega."
+    },
+    "master": {
+      "ubicacion": "scratchpad de la sesion (no comiteado al repositorio por su tamaño, 278813436 bytes / 266MB -- mismo criterio que video_007), entregado a Orlando como copia de revision en 720p dividida en 8 partes de ~5 min",
+      "resolucion": "1920x1080",
+      "fps": 30,
+      "codec_video": "h264",
+      "codec_audio": "aac",
+      "duracion_segundos": 2166.466667,
+      "duracion_objetivo_segundos": 2166.439184,
+      "delta_segundos": 0.027483,
+      "sha256": "6d971161f91bc4cec39822b22d0afc409f7712c138169e1726e813cfb1159fe6",
+      "tamano_bytes": 278813436
+    },
+    "verificacion_tecnica": {
+      "decodificacion_completa_sin_errores": true,
+      "silencios_anomalos_mayores_6s_en_el_audio_final": 0,
+      "nota_silencios": "La musica nunca cae a silencio digital bajo las pausas (ducking plano -23dB), asi que un silencedetect a -40dB no encuentra nada por encima de 6s -- resultado esperado, no una ausencia de verificacion",
+      "narracion_v3_verificada_sin_cambios": true,
+      "video_007_verificado_intacto": true
+    },
+    "copia_revision_720p": {
+      "resolucion": "1280x720",
+      "tamano_bytes": 119697627,
+      "sha256": "570686aed2affef795a0184503df3ba8ae03f7fe3c911b2a57e586050df175ee",
+      "partes": 8,
+      "segmento_s": 300,
+      "nota": "Dividido en 8 partes (~5 min, ~15-20MB cada una) por el mismo limite de tamaño de adjunto ya observado en este proyecto (una muestra de 35MB no llego a adjuntarse a Orlando el 2026-10-29); division por stream copy, sin recodificar."
+    },
+    "pendiente": [
+      "Aprobacion de Orlando sobre el render completo (ritmo de tomas, zoom, escenas, musica)",
+      "Subtitulos .srt del video largo (sin quemar, baseline del canal) -- pendiente, ver subtitulos_video_largo arriba",
+      "Tras aprobacion: render de maxima calidad si procede, miniaturas, metadatos de publicacion"
+    ]
+  }
 }

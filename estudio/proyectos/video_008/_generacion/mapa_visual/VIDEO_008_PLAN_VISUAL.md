@@ -180,15 +180,17 @@ Archivos originales de bloque (`3.mp3`, `9.mp3`, `12.mp3`) y su alineación: **s
 
 ---
 
-## 11. Qué falta antes de generar o renderizar
+## 11. Qué falta antes de publicar
 
 1. ~~Aprobación de Orlando sobre el tratamiento de movimiento visual~~ — **aprobado 2026-10-29** (ver sección 2).
-2. Revisar y aprobar el estilo de la hoja de contacto de 6 imágenes (sección 12) antes de producir el resto de recursos.
-3. Confirmación de la música (`touching_moment.mp3`) y prueba de nivel antes del render completo.
-4. Aprobación del tratamiento de subtítulos (sin quemar en el largo, quemados en los Shorts).
-5. Prueba audiovisual de 60–90s (punto de aprobación 7 del Sistema Activo) antes de cualquier render completo — todavía no realizada.
+2. ~~Revisar y aprobar el estilo de la hoja de contacto de 6 imágenes~~ — **completo** (sección 12).
+3. ~~Confirmación de la música (`touching_moment.mp3`) y prueba de nivel~~ — **aprobada 2026-11-01** (prueba continua de 90s).
+4. ~~Prueba audiovisual (punto de aprobación 7 del Sistema Activo)~~ — **aprobada 2026-11-01** (prueba continua de 90s: audio, música, discreción de partículas).
+5. ~~Render completo del video largo (6 escenas) y los 3 Shorts con subtítulos sincronizados~~ — **entregados 2026-11-01, pendientes de aprobación final de Orlando.** Ver `estudio/proyectos/video_008/estado.json` → `render_completo` y `shorts.render_final` para el detalle técnico completo.
+6. **Pendiente:** `.srt` del video largo (sin quemar, baseline del canal) — no se generó en la tarea del render completo; requiere remapear el bloque 4 (CTA eliminada, desplazamiento de -12.00s desde 67.38s) y anclar los offsets globales v3 de los 18 bloques restantes con la misma precisión acústica usada en todo el proyecto. No se pidió explícitamente junto al render.
+7. **Pendiente:** aprobación de Orlando sobre el render completo y los 3 Shorts antes de publicar nada.
 
-**No se generó ninguna imagen, clip ni pista de audio nueva en esta tarea. No se renderizó nada.**
+**El render completo y los 3 Shorts ya se generaron y se entregaron para revisión (ver estado.json). No se ha publicado nada.**
 
 ---
 
