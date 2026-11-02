@@ -1,5 +1,5 @@
 {
-  "estado": "render_completo_y_shorts_entregados_para_revision",
+  "estado": "video_largo_y_shorts_aprobados_paquete_publicacion_entregado",
   "titulo_provisional": "Salmo 23 para Dormir en Paz | Entrega Tus Cargas y Descansa en Dios",
   "guion_aprobado": {
     "archivo": "estudio/proyectos/video_008/VIDEO_008_GUION_APROBADO.md",
@@ -318,7 +318,7 @@
     ],
     "nota": "El guion estimaba 45-54s de voz por Short; las duraciones reales (37-40s) son mas cortas por el ritmo real de eleven_v4 en esta narracion. Ningun clip se ha extraido, recortado a 9:16, musicalizado ni renderizado todavia.",
     "render_final": {
-      "estado": "entregado_pendiente_aprobacion",
+      "estado": "aprobado",
       "fecha": "2026-11-01",
       "metodo": "shortsRender.renderizarShort() (zoompan continuo 7.5% sobre la imagen vertical recortada, dentro del rango 7-8% propuesto en el plan visual seccion 9 -- el costo de zoompan por fotograma es insignificante en clips de ~40s, a diferencia del video largo de 36 min donde se evito por costo de render)",
       "subtitulos": "quemados (ASS/libass), generados desde la alineacion por caracter original de cada bloque (3.alignment.json, 9.alignment.json, 12.alignment.json -- bloques sin ninguna edicion de CTA), localizando el texto exacto de cada Short y desplazandolo al tiempo local del audio preliminar ya aprobado. 42 car/linea, 2 lineas max, igual que el baseline del canal. Validados sin overflow (0 problemas en 32 rotulos, shortsRender.validarOverflow)",
@@ -353,7 +353,8 @@
       "verificacion_tecnica": "Decodificacion completa sin errores en los 3; duracion y ultima palabra (\"Amen.\") consistentes con la verificacion auditiva previa del audio preliminar (seccion 10 del plan visual)",
       "pendiente": [
         "Aprobacion de Orlando sobre zoom/encuadre/subtitulos de cada Short"
-      ]
+      ],
+      "fecha_aprobacion": "2026-11-02"
     }
   },
   "transicion_flash_a_v4": {
@@ -601,10 +602,14 @@
     {
       "fecha": "2026-11-01",
       "evento": "Decimoctava tarea. Orlando aprobo el audio, la musica y la discrecion de las particulas de la prueba continua de 90s, pidio conservar los encuadres fijos con fundidos suaves aplicando las seis escenas del mapa aprobado sin nuevas pruebas de zoom, y autorizo proceder con el render completo del Video 8 y los 3 Shorts con subtitulos sincronizados, para entrega antes de publicar. Se construyo el plan de 18 tomas (6 escenas x 3, zoom 0/1.5/3%, fundidos de 1.0s) extendiendo mecanicamente el patron ya aprobado en la prueba continua a la duracion real de cada una de las 6 escenas (fronteras de bloque ya verificadas en fases anteriores). Se detecto y corrigio un error de presupuesto de fundidos (la cadena completa de 18 tomas tiene 17 fundidos, no 12 como si cada escena fuera independiente -- la primera pasada salio 5.0s corta exactamente por eso) antes de aceptar el resultado. Audio completo: narracion v3 integra + musica (touching_moment.mp3) con el mismo ducking plano -23dB y normalizacion ya validados, sin cola adicional tras el \"Amen\" (duracion final = duracion de la narracion). Resultado: video_008_master.mp4, 1920x1080, 2166.467s (delta 0.027s sobre el objetivo), decodificacion limpia, sin silencios anomalos, narracion v3 y Video 7 verificados intactos. No se comiteo el master al repositorio por tamaño (266MB); se entrega una copia de revision en 720p dividida en 8 partes de ~5 min. Para los 3 Shorts (bloques 3, 9 y 12, ninguno afectado por la eliminacion del CTA del bloque 4) se localizo el texto exacto de cada uno en la alineacion original de su bloque, se generaron subtitulos quemados sincronizados (42 car/linea, validados sin desborde) y se renderizaron con shortsRender.mjs (zoompan continuo 7.5%, dentro del 7-8% ya propuesto para los Shorts, costo insignificante en clips de ~40s). Los 3 decodifican sin errores y conservan la duracion y el \"Amen\" completo ya verificados en el audio preliminar. Ningun recurso protegido (4.mp3, alineaciones originales, narracion v3, imagenes aprobadas) se modifico. El Video 7 permanece intacto. Entregado todo para revision de Orlando antes de publicar; el .srt del video largo (baseline sin quemar) queda pendiente, no se pidio explicitamente en esta tarea."
+    },
+    {
+      "fecha": "2026-11-02",
+      "evento": "Decimonovena tarea. Orlando aprobo el Video 8 completo y los 3 Shorts tal como se entregaron, sin pedir mas cambios ni renders. Pidio el MP4 maestro de 1080p en un solo archivo (no las partes divididas en 720p), el paquete de publicacion (titulo/descripcion/capitulos/etiquetas/comentario fijado del largo y de los 3 Shorts), confirmacion del estado de la miniatura, y el registro de una observacion suya para el proximo video: las imagenes permanecen demasiado tiempo y el movimiento casi no se percibe -- aclarando explicitamente que no es una correccion del Video 8. Se entrego el master de 1080p (278813436 bytes) como archivo unico via SendUserFile, y se dio ademas la ruta del scratchpad como via alternativa de descarga, por precedente de una entrega anterior de 35MB que no llego a adjuntarse en este proyecto. Se redacto el paquete completo de publicacion en VIDEO_008_PAQUETE_PUBLICACION.md siguiendo la plantilla del canal (SS5 y SS12): titulo principal + 2 alternativas, texto y concepto de miniatura, descripcion con 6 capitulos (los primeros 5 anclados en las fronteras de bloque v3 ya verificadas acusticamente; el sexto marcado explicitamente como aproximado, punto medio del bloque 17, sin ancla de palabra exacta), etiquetas, comentario fijado, y titulo/descripcion/etiquetas de cada Short. Se confirmo que la miniatura NO esta preparada -- esta sesion no tiene herramienta de generacion de imagenes, misma limitacion ya conocida de las 6 escenas del video, que Orlando genero externamente. Se registro la observacion de Orlando sobre el ritmo visual en SISTEMA_ACTIVO_ORACIONES_BIBLICAS_DIARIAS.md (nueva subseccion en SS6), dejando explicito que no se re-renderiza nada del Video 8 por esta nota y que es una hipotesis candidata (mas zoom hacia 4%, tomas mas cortas) para la proxima decision de movimiento visual. No se hizo ningun render, llamada a ElevenLabs ni cambio de imagen en esta tarea. El Video 7 permanece intacto y la narracion v3 sin cambios."
     }
   ],
   "render_completo": {
-    "estado": "entregado_pendiente_aprobacion",
+    "estado": "aprobado",
     "fecha": "2026-11-01",
     "autorizado_por": "Orlando",
     "nota_autorizacion": "Orlando aprobo audio/musica/particulas de la prueba continua de 90s y pidio proceder con el render completo aplicando las 6 escenas del mapa aprobado, conservando encuadres fijos con fundidos suaves, sin nuevas pruebas de zoom.",
@@ -719,6 +724,34 @@
       "Aprobacion de Orlando sobre el render completo (ritmo de tomas, zoom, escenas, musica)",
       "Subtitulos .srt del video largo (sin quemar, baseline del canal) -- pendiente, ver subtitulos_video_largo arriba",
       "Tras aprobacion: render de maxima calidad si procede, miniaturas, metadatos de publicacion"
-    ]
+    ],
+    "fecha_aprobacion": "2026-11-02"
+  },
+  "publicacion": {
+    "estado": "paquete_entregado_pendiente_decision_de_fecha_y_miniatura",
+    "fecha": "2026-11-02",
+    "archivo": "estudio/proyectos/video_008/_generacion/publicacion/VIDEO_008_PAQUETE_PUBLICACION.md",
+    "incluye": [
+      "titulo y alternativas",
+      "texto/concepto de miniatura",
+      "descripcion con capitulos",
+      "etiquetas",
+      "comentario fijado",
+      "titulo/descripcion/etiquetas de los 3 Shorts"
+    ],
+    "miniatura": {
+      "estado": "no_preparada",
+      "motivo": "Esta sesion no tiene herramienta propia de generacion de imagenes -- igual limitacion que para las 6 escenas del video, que se generaron externamente en ChatGPT. No se ha hecho ese paso para la miniatura.",
+      "siguiente_paso": "Generar externamente una imagen a partir del concepto propuesto (escena E1, texto SALMO 23 / PARA DORMIR EN PAZ) y traerla para componer/recortar, igual proceso que las 6 escenas."
+    },
+    "capitulo_aproximado": "El capitulo 6 (Bondad y descanso, ~31:00) usa el punto medio del bloque 17 (30:22-32:04), no un ancla de palabra exacta -- senalado explicitamente en el paquete de publicacion. Los otros 5 capitulos usan las fronteras de bloque v3 ya verificadas acusticamente."
+  },
+  "master_1080p_unico": {
+    "fecha": "2026-11-02",
+    "entregado_como": "archivo unico (sin dividir), por instruccion expresa de Orlando",
+    "archivo": "/tmp/claude-0/-home-user-primera-landing-page/185143c2-ce29-5ac0-9161-728285d92b8c/scratchpad/video_008/render_completo/video_008_master.mp4",
+    "nota_ruta": "Ruta dentro del scratchpad de esta sesion -- el cliente de Orlando puede abrir archivos de esta ruta ademas de recibirlo adjunto; se dio como via alternativa de descarga por si el adjunto de 266MB no llega, dado que un adjunto de 35MB fallo en una entrega anterior de este mismo proyecto (2026-10-29).",
+    "sha256": "6d971161f91bc4cec39822b22d0afc409f7712c138169e1726e813cfb1159fe6",
+    "tamano_bytes": 278813436
   }
 }

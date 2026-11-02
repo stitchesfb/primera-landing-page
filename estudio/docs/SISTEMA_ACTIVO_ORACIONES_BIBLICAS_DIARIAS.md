@@ -181,6 +181,15 @@ La imagen estática deja de ser una regla fija. Sigue siendo una opción válida
 
 No se debe atribuir todo cambio al movimiento: también influyen tema, título, miniatura, duración y hora de publicación.
 
+### Observación de Orlando tras aprobar el Video 8 (2026-11-02)
+
+**No es una corrección del Video 8** — el Video 8 ya está aprobado y entregado tal como está; esto es una entrada para la próxima revisión del experimento o para la decisión visual del próximo video.
+
+- **Qué notó:** las imágenes permanecen demasiado tiempo en pantalla y el movimiento de las tomas con reencuadre casi no se percibe.
+- **Lectura:** el Video 8 usó un paso de zoom más tenue (3–4 %) y tomas más espaciadas que el Video 7 (7–8 %), precisamente para lograr un efecto discreto en un video nocturno — pero el resultado puede haberse quedado por debajo del umbral de percepción, no solo "discreto".
+- **Hipótesis candidata para la próxima iteración:** subir el zoom por toma hacia el extremo del rango ya aprobado (3–4 %, probar más cerca de 4 %) y/o acortar la duración de cada toma (más cambios por minuto que los usados en el Video 8, sin llegar al ritmo del Video 7), para que el movimiento sea perceptible sin dejar de ser sereno.
+- **Alcance:** ningún video ya producido se re-renderiza por esta observación. Se evalúa en la próxima decisión de movimiento visual (siguiente video o siguiente revisión de este experimento), siguiendo el proceso de la sección 7.
+
 ## 7. Cómo se toma una decisión nueva
 
 Antes de cambiar un baseline, anotar:
