@@ -1,0 +1,97 @@
+{
+  "estado": "plan_de_bloques_tts_y_muestra_entregado_pendiente_aprobacion",
+  "titulo_provisional": "¿Cansado de cargar con todo? Descansa en Jesús esta noche | Mateo 11",
+  "guion": {
+    "archivo": "estudio/proyectos/video_009/VIDEO_009_GUION_COMPLETO_REV01.md",
+    "version": "revision 01",
+    "sha256": "8d52eca4aa591da8f6697dc19bc42bcc42ac95e2ebfd00617be3ea6c7d123acb",
+    "estado_segun_su_propio_encabezado": "paquete editorial aprobado; guion pendiente de revision de Orlando; no autorizado para TTS",
+    "pasaje_principal": "Mateo 11:28-30, RVR1909",
+    "fuente_verificacion": "https://www.bible.com/es/bible/1718/MAT.11.28-30.RVR09",
+    "palabras_narradas": 3753,
+    "caracteres_narrados_sin_separadores": 22661,
+    "secciones": 7,
+    "pausas_propuestas": 8,
+    "shorts_integrados": 3
+  },
+  "plan_bloques_tts": {
+    "estado": "entregado_pendiente_aprobacion",
+    "fecha": "2026-11-06",
+    "archivo_md": "estudio/proyectos/video_009/_generacion/VIDEO_009_PLAN_BLOQUES_TTS.md",
+    "archivo_json": "estudio/proyectos/video_009/_generacion/plan_bloques_tts.json",
+    "metodo": "Texto narrado extraido entre [INICIO NARRACION] y [FIN NARRACION], quitando encabezados '## N.' y marcas entre corchetes (segun indica el propio guion). Bloques formados por parrafos completos (nunca se divide una frase), limite de 2000 caracteres (canal.json -> api.max_caracteres_por_peticion), los 3 Shorts enteros dentro de un unico bloque cada uno, apertura como bloque continuo, cierre de baja densidad verbal (seccion 7 tras pausa 7) como un solo bloque.",
+    "total_bloques": 15,
+    "total_parrafos": 79,
+    "total_caracteres_con_separadores_internos": 22789,
+    "bloque_mas_grande": { "bloque": 11, "caracteres": 1984 },
+    "bloque_mas_pequeno": { "bloque": 2, "caracteres": 344, "nota": "cita biblica aislada a proposito, mismo criterio que el Salmo 23 del Video 8" },
+    "shorts": [
+      { "numero": 1, "bloque": 4, "caracteres_del_short": 443 },
+      { "numero": 2, "bloque": 6, "caracteres_del_short": 496 },
+      { "numero": 3, "bloque": 11, "caracteres_del_short": 469 }
+    ],
+    "pausas_en_frontera_de_bloque": [1, 2, 4, 5, 6, 7],
+    "pausas_embebidas_dentro_de_un_bloque": [
+      { "pausa": 3, "bloque": 6 },
+      { "pausa": 8, "bloque": 15 }
+    ],
+    "verificacion_texto": "Sin digitos, sin guiones largos, sin caracteres fuera de lo esperado en espanol (comprobado programaticamente sobre el texto completo). Unico fragmento senalado para escuchar con atencion: la cita biblica (conjugaciones de 'vosotros' y comillas «»), cubierta por la muestra 2."
+  },
+  "configuracion_de_voz": {
+    "estado": "comparacion_entregada_pendiente_decision_de_orlando",
+    "documentos_vigentes_canal_json_y_decisiones_cerradas": {
+      "coinciden_entre_si": true,
+      "modelo": "eleven_flash_v2_5",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "ajustes": { "stability": 0.65, "similarity_boost": 0.88, "style": 0, "use_speaker_boost": true, "speed": 0.91 }
+    },
+    "lo_realmente_aprobado_y_publicado_en_video_008": {
+      "bloques_1_2_18_de_19": { "modelo": "eleven_flash_v2_5", "ajustes": "identicos a canal.json" },
+      "bloques_3_17_y_19_de_19_16_de_19": {
+        "modelo": "eleven_v4",
+        "ajustes": { "stability": 0.5, "similarity_boost": 0.75, "speed": 1, "nota": "style/use_speaker_boost no aplican en v4" }
+      },
+      "nota_contradiccion": "canal.json nunca se actualizo tras ese cambio -- el 84% del contenido ya publicado del Video 8 (bloques 3-19) suena con eleven_v4, pero el archivo vigente sigue describiendo Flash v2.5. Es la contradiccion de jerarquia que el guion del Video 9 pide identificar.",
+      "nota_cta_descartada": "Las pruebas de v4 con clone_strength/language_code para el parrafo de la CTA del bloque 4 no cuentan como 'aprobado' -- ese parrafo se elimino de la narracion final v3 del Video 8."
+    },
+    "tarifas": {
+      "eleven_flash_v2_5": "0.276 creditos/caracter (medida, confiable, canal.json -> constantes)",
+      "eleven_v4": "1 credito/caracter (tarifa OFICIAL publicada, usada para presupuestar; un solo dato historico del Video 8 sugirio ~0.42-0.44 observado, sin garantia)"
+    },
+    "recomendacion": "eleven_flash_v2_5 con los ajustes de canal.json, uniforme en los 15 bloques: es el baseline vigente, cuesta 3.5-4x menos, y es lo que se uso en los bloques del Video 8 que Orlando nunca reporto como distintos. La alternativa real es adoptar eleven_v4 formalmente como nuevo baseline (continuidad con el sonido que ya escucho el publico en el 84% del Video 8) y actualizar canal.json en consecuencia -- decision de Orlando, no se asume.",
+    "pendiente": "Decision expresa de Orlando antes de generar la muestra."
+  },
+  "muestra_propuesta": {
+    "estado": "propuesta_pendiente_autorizacion",
+    "fragmentos": [
+      { "nombre": "apertura", "parrafos_indices": [0, 1], "caracteres": 693 },
+      { "nombre": "lectura_biblica_y_union_bloque_1_a_2", "parrafos_indices": [5, 7], "caracteres": 637 },
+      { "nombre": "cierre_calmado", "parrafos_indices": [74, 78], "caracteres": 633 }
+    ],
+    "total_caracteres_muestra": 1963,
+    "costo_estimado": {
+      "con_eleven_flash_v2_5": "~542 creditos (0.276/caracter)",
+      "con_eleven_v4": "~1963 creditos (1/caracter, tarifa oficial)"
+    },
+    "nota": "Costo de la muestra separado del presupuesto de la narracion completa; los mismos parrafos se regeneraran dentro de sus bloques normales si la muestra se aprueba."
+  },
+  "presupuesto_narracion_completa": {
+    "caracteres": 22789,
+    "con_eleven_flash_v2_5": "~6290 creditos (0.276/caracter)",
+    "con_eleven_v4": "~22789 creditos (1/caracter, tarifa oficial publicada, sin garantia de que el consumo real sea menor)",
+    "referencia_sin_garantia": "si v4 consumiera como en el Video 8 (~0.42-0.44/caracter observado), el gasto real rondaria 9500-10000 creditos -- no es la base del presupuesto formal"
+  },
+  "riesgo_de_duracion": "El guion estima 110-125 palabras/minuto (hipotesis de escritura, no medicion de esta voz). En el Video 8 el ritmo real resulto ~137 palabras/min. Con 3753 palabras, es razonable esperar que la duracion final quede en el extremo corto del rango 31-36 min sugerido por el guion, o algo por debajo, hasta confirmarlo con la muestra y la generacion real.",
+  "pendiente": [
+    "Aprobar o corregir la division en 15 bloques",
+    "Decidir la configuracion de voz (Flash v2.5 recomendado, o adoptar v4 formalmente)",
+    "Autorizar la muestra (~542 o ~1963 creditos segun el modelo elegido)",
+    "Tras escuchar la muestra: autorizar el gasto completo de la narracion"
+  ],
+  "historial": [
+    {
+      "fecha": "2026-11-06",
+      "evento": "Primera tarea del Video 9. Orlando adjunto VIDEO_009_GUION_COMPLETO_REV01.md (paquete editorial aprobado, guion pendiente de su propia revision) y pidio: dividir la narracion en bloques naturales con conteo exacto de caracteres, quitando instrucciones/marcas, manteniendo cada Short completo dentro de un bloque y las 8 pausas registradas aparte; proponer una configuracion de voz comparando lo realmente aprobado en el Video 8 contra canal.json; y seleccionar fragmentos de muestra (apertura, lectura biblica, cierre, al menos una union entre bloques) con su costo separado del presupuesto completo y la tarifa usada. Se extrajeron 79 parrafos narrados (22661 caracteres sin separadores) y se agruparon en 15 bloques (22789 caracteres con separadores internos), ninguno mayor a 2000 caracteres, ninguno dividiendo una frase/cita biblica/Short, los 3 Shorts enteros cada uno dentro de un bloque, apertura como bloque continuo, cierre de baja densidad verbal como un solo bloque. Se investigo a fondo el estado.json del Video 8 y se confirmo que canal.json y DECISIONES_CERRADAS coinciden entre si (eleven_flash_v2_5, stability 0.65/similarity 0.88/speed 0.91), pero que el Video 8 realmente publicado uso esa configuracion solo en 3 de 19 bloques (1,2,18) y eleven_v4 (stability 0.5/similarity 0.75/speed 1) en los 16 restantes (3-17,19) -- un cambio que Orlando autorizo en su momento pero que nunca se traslado a canal.json. Se presento esa contradiccion con cifras exactas y se recomendo Flash v2.5 (baseline vigente, 3.5-4x mas barato) dejando explicita la alternativa de adoptar v4 formalmente. Se diseno una muestra de 1963 caracteres (apertura + lectura biblica/union real bloque1-2 + cierre calmado) con costo separado (~542 creditos en Flash, ~1963 en v4) de el presupuesto completo (22789 caracteres: ~6290 creditos en Flash, ~22789 en v4 tarifa oficial). Se señalaron aparte dos observaciones de pronunciacion/continuidad (registro liturgico de la cita biblica con comillas «»; riesgo de repetir la discontinuidad de modelo del Video 8) sin tocar el texto. No se llamo a ElevenLabs ni se genero ningun audio. El Video 7 y el Video 8 permanecen intactos."
+    }
+  ]
+}

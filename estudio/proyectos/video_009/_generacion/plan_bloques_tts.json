@@ -1,0 +1,273 @@
+{
+  "bloques": [
+    {
+      "bloque": 1,
+      "parrafos_indices": [
+        0,
+        5
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1903,
+      "secciones": [
+        1
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 0,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Tal vez todos en casa ya descansan, pero tú sigues pendiente",
+      "ultimas_palabras": " recibir tu cuidado, aun cuando todavía me cueste detenerme."
+    },
+    {
+      "bloque": 2,
+      "parrafos_indices": [
+        6,
+        7
+      ],
+      "cantidad_parrafos": 2,
+      "caracteres": 344,
+      "secciones": [
+        2
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 1,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "En el evangelio según Mateo, capítulo once, versículos veint",
+      "ultimas_palabras": "vuestras almas. Porque mi yugo es fácil, y ligera mi carga»."
+    },
+    {
+      "bloque": 3,
+      "parrafos_indices": [
+        8,
+        13
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1816,
+      "secciones": [
+        2
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 2,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Escucha el comienzo de esa invitación: venid a mí. Jesús lla",
+      "ultimas_palabras": "ue deseo seguirte sin fingir que mis fuerzas son ilimitadas."
+    },
+    {
+      "bloque": 4,
+      "parrafos_indices": [
+        14,
+        19
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1930,
+      "secciones": [
+        2,
+        3
+      ],
+      "shorts_incluidos": [
+        1
+      ],
+      "pausa_que_lo_precede": 2,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Quédate conmigo mientras oro, Señor. Ayúdame a recibir tus p",
+      "ultimas_palabras": "ajenas, enséñame a acompañar sin intentar dirigir cada paso."
+    },
+    {
+      "bloque": 5,
+      "parrafos_indices": [
+        20,
+        24
+      ],
+      "cantidad_parrafos": 5,
+      "caracteres": 1685,
+      "secciones": [
+        3
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 2,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "También te presento la tristeza que a veces siento cuando na",
+      "ultimas_palabras": "ratitud y a dejar espacio para que otros también participen."
+    },
+    {
+      "bloque": 6,
+      "parrafos_indices": [
+        25,
+        29
+      ],
+      "cantidad_parrafos": 5,
+      "caracteres": 1632,
+      "secciones": [
+        3,
+        4
+      ],
+      "shorts_incluidos": [
+        2
+      ],
+      "pausa_que_lo_precede": 2,
+      "pausas_embebidas_dentro_del_bloque": [
+        3
+      ],
+      "primeras_palabras": "Señor, hay cariño detrás de mi esfuerzo. Quiero conservar es",
+      "ultimas_palabras": "ar sin seguir castigándome por lo que quedó pendiente. Amén."
+    },
+    {
+      "bloque": 7,
+      "parrafos_indices": [
+        30,
+        35
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1933,
+      "secciones": [
+        4
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 3,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Señor, te presento esa culpa que me acompaña al detenerme. A",
+      "ultimas_palabras": " pasos responsables, para mí y para quienes cuentan conmigo."
+    },
+    {
+      "bloque": 8,
+      "parrafos_indices": [
+        36,
+        38
+      ],
+      "cantidad_parrafos": 3,
+      "caracteres": 839,
+      "secciones": [
+        4
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 3,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Y cuando una expectativa solo exista en mi pensamiento, ayúd",
+      "ultimas_palabras": "ietud. Ayúdame a discernirla y acompáñame mientras descanso."
+    },
+    {
+      "bloque": 9,
+      "parrafos_indices": [
+        39,
+        44
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1950,
+      "secciones": [
+        5
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 4,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "En medio de su invitación, Jesús nos dice que aprendamos de ",
+      "ultimas_palabras": "to, con sus dificultades y sus pequeños motivos de gratitud."
+    },
+    {
+      "bloque": 10,
+      "parrafos_indices": [
+        45,
+        50
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1852,
+      "secciones": [
+        5
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 4,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Si hoy alguien tuvo paciencia conmigo, ayúdame a recordar es",
+      "ultimas_palabras": "me en mí una manera más humilde y serena de caminar contigo."
+    },
+    {
+      "bloque": 11,
+      "parrafos_indices": [
+        51,
+        56
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1984,
+      "secciones": [
+        6
+      ],
+      "shorts_incluidos": [
+        3
+      ],
+      "pausa_que_lo_precede": 5,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Quizá todavía hay un asunto que vuelve con más fuerza que lo",
+      "ultimas_palabras": "io puede acumular una familia durante una espera prolongada."
+    },
+    {
+      "bloque": 12,
+      "parrafos_indices": [
+        57,
+        61
+      ],
+      "cantidad_parrafos": 5,
+      "caracteres": 1498,
+      "secciones": [
+        6
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 5,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Por quienes están lejos, recibe mi oración. Hay distancias q",
+      "ultimas_palabras": "yo, necesitando descanso. Te pido que me acompañes en ambos."
+    },
+    {
+      "bloque": 13,
+      "parrafos_indices": [
+        62,
+        63
+      ],
+      "cantidad_parrafos": 2,
+      "caracteres": 674,
+      "secciones": [
+        6
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 5,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Si mañana debo hacer una llamada o buscar una orientación, a",
+      "ultimas_palabras": "atender con fidelidad lo que vaya encontrando delante de mí."
+    },
+    {
+      "bloque": 14,
+      "parrafos_indices": [
+        64,
+        68
+      ],
+      "cantidad_parrafos": 5,
+      "caracteres": 1326,
+      "secciones": [
+        7
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 6,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Ahora podemos dejar que las palabras se hagan más sencillas.",
+      "ultimas_palabras": "che que comienza y te pido reposo para mi cuerpo y mi mente."
+    },
+    {
+      "bloque": 15,
+      "parrafos_indices": [
+        69,
+        78
+      ],
+      "cantidad_parrafos": 10,
+      "caracteres": 1423,
+      "secciones": [
+        7
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 7,
+      "pausas_embebidas_dentro_del_bloque": [
+        8
+      ],
+      "primeras_palabras": "Señor, cuida a quienes amo. Dame sabiduría para acompañarlos",
+      "ultimas_palabras": "En tu nombre, Jesús. Amén."
+    }
+  ],
+  "totalChars": 22789,
+  "totalParrafos": 79
+}
