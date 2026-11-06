@@ -1,0 +1,47 @@
+{
+  "ventanaNarracion": {
+    "desde": 60,
+    "duracion": 90
+  },
+  "escena1": {
+    "imagen": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/originales/E_cansancio.png",
+    "foco": {
+      "x": 0.4,
+      "y": 0.3
+    },
+    "tomas": [
+      {
+        "duracion": 23.05966666666667,
+        "zoomDelta": 0.035
+      },
+      {
+        "duracion": 23.05966666666667,
+        "zoomDelta": 0.035
+      },
+      {
+        "duracion": 24.459666666666667,
+        "zoomDelta": 0.035
+      }
+    ],
+    "duracionNeta": 67.179
+  },
+  "escena2": {
+    "imagen": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/originales/E_biblia_abierta.png",
+    "foco": {
+      "x": 0.45,
+      "y": 0.68
+    },
+    "tomas": [
+      {
+        "duracion": 22.820999999999998,
+        "zoomDelta": 0.03
+      }
+    ],
+    "duracionNeta": 22.820999999999998
+  },
+  "fundidoInterno": 1,
+  "fundidoTransicion": 1.4,
+  "musica": "/home/user/primera-landing-page/estudio/assets/music/one_step_closer.mp3",
+  "duracionFinal": 90,
+  "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/video_009_prueba_mateo_90s.mp4"
+}

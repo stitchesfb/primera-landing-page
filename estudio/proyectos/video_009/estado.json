@@ -1,5 +1,5 @@
 {
-  "estado": "narracion_v1_ensamblada_entregada_pendiente_revision",
+  "estado": "prueba_visual_mateo_90s_entregada_pendiente_revision",
   "titulo_provisional": "¿Cansado de cargar con todo? Descansa en Jesús esta noche | Mateo 11",
   "guion": {
     "archivo": "estudio/proyectos/video_009/VIDEO_009_GUION_COMPLETO_REV01.md",
@@ -196,8 +196,8 @@
   },
   "riesgo_de_duracion": "El guion estima 110-125 palabras/minuto (hipotesis de escritura, no medicion de esta voz). En el Video 8 el ritmo real resulto ~137 palabras/min. Con 3753 palabras, es razonable esperar que la duracion final quede en el extremo corto del rango 31-36 min sugerido por el guion, o algo por debajo, hasta confirmarlo con la muestra y la generacion real.",
   "pendiente": [
-    "Revision de Orlando de la narracion completa v1 (ritmo, pausas, uniones)",
-    "Tras su aprobacion: plan visual, musica, Shorts y render -- ninguno iniciado todavia"
+    "Revision de Orlando de la prueba visual de 90s (zoom continuo, transicion, focos)",
+    "Tras su aprobacion: plan visual completo, Shorts y render -- ninguno iniciado todavia"
   ],
   "historial": [
     {
@@ -211,6 +211,10 @@
     {
       "fecha": "2026-11-06",
       "evento": "Tercera tarea del Video 9. Orlando aprobo las 3 muestras y pidio generar los 15 bloques completos con eleven_v4/stability 0.5/similarity_boost 0.75/speed 1 (una generacion por bloque, sin reintentos, presupuesto 22789 creditos), guardando cada bloque al terminar, y despues ensamblar la narracion con las 8 pausas revisando las uniones reales (en especial bloque1-bloque2), entregando el archivo completo sin musica con el consumo real. Se generaron los 15 bloques en 15 llamadas unicas (texto alineado identico al enviado en las 15), usando previous_text/next_text del guion real solo en las junturas de continuacion directa, omitiendolo en las 6 junturas con pausa real para no condicionar la prosodia hacia una continuacion inexistente. Consumo real medido por el contador de suscripcion: 9400 creditos para 22789 caracteres (0.4125/caracter), muy por debajo del presupuesto de 22789. Se midieron los bordes de cada bloque (silencedetect + alineacion por caracter: ningun bloque corta una palabra) y se ensamblo con silencio insertado en las 6 junturas con pausa real (objetivos de canal.json->reglas_edicion: 3s/6s/10s/10s/10s/11s), dejando las pausas 3 y 8 como las genero el propio modelo dentro de los bloques 6 y 15. Se verifico la union bloque1-bloque2 especificamente pedida (sin palabra cortada en ningun lado) y las otras 5 junturas con pausa, y se confirmo por silencedetect sobre el archivo final que aparecen exactamente los 6 silencios esperados, sin nada anomalo. Resultado: video_009_narracion_completa_sin_musica_v1.mp3, 1654.909s (27:34.91), decodificacion limpia. Duracion por debajo del rango 31-36min estimado por el guion -- ritmo real ~136 ppm, consistente con el ~137 ppm ya visto en el Video 8 con la misma combinacion de modelo/velocidad. Las pausas son una primera propuesta, no aprobadas definitivamente. canal.json no se modifico. El Video 7 y el Video 8 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-06",
+      "evento": "Cuarta tarea del Video 9. Orlando pidio una prueba continua de 60-90s alrededor de la entrada a Mateo 11, con dos imagenes nuevas (mujer cansada en la mesa, Biblia abierta en la sala), fundido suave al entrar la lectura, narracion y pausas v1 conservadas, musica suave, y movimiento de camara lento pero perceptible a la velocidad real del montaje final -- explicitamente para comprobar que se sintiera menos estatico que el Video 8. Se eligio la ventana 60.0-150.0s de la narracion v1 (90.0s), que cubre la cola del bloque 1, la pausa 1 completa y el inicio del bloque 2 (la cita biblica). Se construyo con zoompan CONTINUO real dentro de cada toma corta (3 tomas de ~23.1s para la escena de cansancio al 3.5%, 1 toma de 22.8s para la Biblia abierta al 3.0%), en vez de los pasos estaticos del Video 8 -- directamente motivado por la observacion ya registrada en SISTEMA_ACTIVO sobre que ese movimiento resultaba casi imperceptible. Se razono explicitamente por que esto no reabre el problema de costo de DECISIONES_CERRADAS #14: el zoompan queda acotado a cada toma corta (~23s), no se aplica sobre el video completo -- mismo principio que ya funciono en el Video 7. El fundido de cambio de escena (1.4s) se coloco dentro de la pausa 1 (3.18s) para que el cambio visual termine antes de que vuelva la voz. Musica: one_step_closer.mp3 (siguiente en la rotacion libre), tomada desde el punto real de la pista que sonaria en el minuto 1:00 del video completo, sin fundidos de apertura/cierre por no ser ese el verdadero inicio/fin del video. Resultado: 90.000s exactos, decodificacion limpia, 23.6MB. No se genero ninguna imagen nueva ni se hizo ningun render completo. canal.json no se modifico. El Video 7 y el Video 8 permanecen intactos."
     }
   ],
   "generacion_15_bloques": {
@@ -284,5 +288,50 @@
     "nota_duracion": "Duracion real 27:34.91, por debajo del rango 31-36 min estimado por el guion -- ritmo real ~136 palabras/min, casi igual al ~137 ppm observado en el Video 8 con la misma combinacion v4/speed 1. Confirma el riesgo ya señalado antes de generar.",
     "nota_pausas": "Las 8 pausas son una primera propuesta razonada (rangos de canal.json -> reglas_edicion), no aprobadas palabra por palabra todavia -- quedan abiertas a ajuste, igual que las del Video 8 se afinaron en varias rondas.",
     "pendiente": "Revision de Orlando de la narracion completa. No se ha generado musica, visuales ni render. canal.json no se modifico."
+  },
+  "prueba_visual_mateo": {
+    "estado": "entregada_pendiente_revision",
+    "fecha": "2026-11-06",
+    "archivo": "estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/video_009_prueba_mateo_90s.mp4",
+    "detalle": "estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/LEEME_PRUEBA_MATEO.md",
+    "ventana_narracion_v1": {
+      "desde_s": 60,
+      "duracion_s": 90
+    },
+    "metodo": "Zoompan continuo real dentro de cada toma corta (~23s), no pasos estaticos como el Video 8 -- motivado por la observacion ya registrada en SISTEMA_ACTIVO sobre que el movimiento del Video 8 resultaba casi imperceptible. Costo acotado por toma (igual principio que el Video 7), no zoompan de todo el video (eso sigue descartado por DECISIONES_CERRADAS #14).",
+    "escena1_cansancio": {
+      "imagen": "originales/E_cansancio.png",
+      "tomas": 3,
+      "duracion_por_toma_s": "~23.1",
+      "zoom_pct": 3.5,
+      "foco": {
+        "x": 0.4,
+        "y": 0.3
+      }
+    },
+    "escena2_biblia_abierta": {
+      "imagen": "originales/E_biblia_abierta.png",
+      "tomas": 1,
+      "duracion_s": 22.821,
+      "zoom_pct": 3,
+      "foco": {
+        "x": 0.45,
+        "y": 0.68
+      }
+    },
+    "fundido_interno_s": 1,
+    "fundido_transicion_s": 1.4,
+    "transicion_colocada_en": "pausa 1 (3.18s), el cambio visual termina antes de que vuelva la voz",
+    "musica": "one_step_closer.mp3 (siguiente en la rotacion libre), tomada desde el punto de la propia pista que sonaria en el minuto real (1:00) del video completo",
+    "verificacion_tecnica": {
+      "decodificacion_completa_sin_errores": true,
+      "duracion_exacta_s": 90,
+      "sha256": "c1e9f254dad5e55dfee50f009227a9b3ead0d3fd5c9917e0c53a4e8a1573e2d0",
+      "tamano_bytes": 23557100
+    },
+    "pendiente": [
+      "Aprobacion de Orlando sobre el ritmo del zoom, el fundido de transicion y los focos",
+      "Si se aprueba, decidir si este metodo reemplaza el de tomas estaticas del Video 8 para el resto de escenas del Video 9"
+    ]
   }
 }
