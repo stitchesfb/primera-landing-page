@@ -1,0 +1,9 @@
+{
+  "text": "En el evangelio según Mateo, capítulo once, versículos veintiocho al treinta, Jesús dice:\n\n«Venid a mí todos los que estáis trabajados y cargados, que yo os haré descansar. Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas. Porque mi yugo es fácil, y ligera mi carga».",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

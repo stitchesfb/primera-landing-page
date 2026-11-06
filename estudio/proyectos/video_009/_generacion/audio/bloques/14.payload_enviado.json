@@ -1,0 +1,9 @@
+{
+  "text": "Ahora podemos dejar que las palabras se hagan más sencillas. Ya hemos nombrado muchas cosas. El cansancio, las personas que amamos, la culpa, los límites y lo que sigue pendiente. Puedes permanecer en esta oración sin volver a recorrer toda la lista.\n\nSeñor Jesús, gracias por tu invitación. Me acerqué a ti con lo que tenía esta noche. Algunas preocupaciones todavía se sienten cerca. Te pido paciencia para recibir este momento tal como es. Acompáñame mientras mi cuerpo se acomoda y el día va quedando atrás.\n\nSi me ayuda, puedo aflojar las manos y dejar descansar los hombros. Puedo encontrar una posición más cómoda. No necesito forzar el sueño ni comprobar a cada instante si ya estoy más tranquilo. Puedo permanecer aquí, delante de ti, con una oración sencilla y una respiración natural.\n\nGracias por el cuidado que recibí hoy, incluso en detalles que pasaron desapercibidos. Por una palabra amable, por el alimento, por una ayuda pequeña. Gracias por las personas con quienes pude compartir algo de esta jornada. Ayúdame a reconocer esos momentos sin negar lo que fue difícil.\n\nTambién te entrego lo que quedó incompleto. Mi día tuvo límites, y mis fuerzas también. Quiero aprender de lo vivido y seguir adelante bajo tu dirección. Ahora pongo ante ti la noche que comienza y te pido reposo para mi cuerpo y mi mente.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  }
+}

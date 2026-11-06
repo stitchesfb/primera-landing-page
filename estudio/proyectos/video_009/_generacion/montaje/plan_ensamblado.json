@@ -1,0 +1,107 @@
+{
+  "secuencia": [
+    {
+      "tipo": "bloque",
+      "numero": 1
+    },
+    {
+      "tipo": "pausa",
+      "numero": 1,
+      "objetivo": 3,
+      "natural": 0.084,
+      "anadido": 2.916
+    },
+    {
+      "tipo": "bloque",
+      "numero": 2
+    },
+    {
+      "tipo": "pausa",
+      "numero": 2,
+      "objetivo": 6,
+      "natural": 0,
+      "anadido": 6
+    },
+    {
+      "tipo": "bloque",
+      "numero": 3
+    },
+    {
+      "tipo": "bloque",
+      "numero": 4
+    },
+    {
+      "tipo": "bloque",
+      "numero": 5
+    },
+    {
+      "tipo": "bloque",
+      "numero": 6
+    },
+    {
+      "tipo": "bloque",
+      "numero": 7
+    },
+    {
+      "tipo": "bloque",
+      "numero": 8
+    },
+    {
+      "tipo": "pausa",
+      "numero": 4,
+      "objetivo": 10,
+      "natural": 0,
+      "anadido": 10
+    },
+    {
+      "tipo": "bloque",
+      "numero": 9
+    },
+    {
+      "tipo": "bloque",
+      "numero": 10
+    },
+    {
+      "tipo": "pausa",
+      "numero": 5,
+      "objetivo": 10,
+      "natural": 0,
+      "anadido": 10
+    },
+    {
+      "tipo": "bloque",
+      "numero": 11
+    },
+    {
+      "tipo": "bloque",
+      "numero": 12
+    },
+    {
+      "tipo": "bloque",
+      "numero": 13
+    },
+    {
+      "tipo": "pausa",
+      "numero": 6,
+      "objetivo": 10,
+      "natural": 0.074,
+      "anadido": 9.926
+    },
+    {
+      "tipo": "bloque",
+      "numero": 14
+    },
+    {
+      "tipo": "pausa",
+      "numero": 7,
+      "objetivo": 11,
+      "natural": 0,
+      "anadido": 11
+    },
+    {
+      "tipo": "bloque",
+      "numero": 15
+    }
+  ],
+  "duracionFinalSegundos": 1654.909388
+}

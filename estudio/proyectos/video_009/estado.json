@@ -1,5 +1,5 @@
 {
-  "estado": "muestra_v4_generada_entregada_pendiente_revision_antes_de_los_15_bloques",
+  "estado": "narracion_v1_ensamblada_entregada_pendiente_revision",
   "titulo_provisional": "¿Cansado de cargar con todo? Descansa en Jesús esta noche | Mateo 11",
   "guion": {
     "archivo": "estudio/proyectos/video_009/VIDEO_009_GUION_COMPLETO_REV01.md",
@@ -196,8 +196,8 @@
   },
   "riesgo_de_duracion": "El guion estima 110-125 palabras/minuto (hipotesis de escritura, no medicion de esta voz). En el Video 8 el ritmo real resulto ~137 palabras/min. Con 3753 palabras, es razonable esperar que la duracion final quede en el extremo corto del rango 31-36 min sugerido por el guion, o algo por debajo, hasta confirmarlo con la muestra y la generacion real.",
   "pendiente": [
-    "Revision de Orlando de la muestra v4 (pronunciacion de Mateo 11:28-30, ritmo, union real bloque 1-2, cierre)",
-    "Tras su aprobacion: generar los 15 bloques completos con eleven_v4 / stability 0.5 / similarity_boost 0.75 / speed 1 (~22789 caracteres, tarifa oficial ~22789 creditos, posible consumo real menor segun lo observado en la muestra)"
+    "Revision de Orlando de la narracion completa v1 (ritmo, pausas, uniones)",
+    "Tras su aprobacion: plan visual, musica, Shorts y render -- ninguno iniciado todavia"
   ],
   "historial": [
     {
@@ -207,6 +207,82 @@
     {
       "fecha": "2026-11-06",
       "evento": "Segunda tarea del Video 9. Orlando confirmo eleven_v4 con los mismos ajustes de la narracion v4 realmente aprobada del Video 8 (voice_id 8mBRP99B2Ng2QwsJMFQl, stability 0.5, similarity_boost 0.75, speed 1), y pidio generar la muestra de 1963 caracteres ya propuesta (apertura, lectura biblica con la union real bloque 1-2, cierre tras la pausa 8), registrar v4 como decision de este video, conservar el guion aprobado y esperar su revision de la muestra antes de los 15 bloques completos. Se reconstruyeron los 3 fragmentos programaticamente desde el guion ya segmentado (no a mano) para garantizar coincidencia exacta de caracteres con el plan (693+637+633=1963). Se llamo a ElevenLabs con /v1/text-to-speech/{voice}/with-timestamps, model_id eleven_v4, los ajustes confirmados, incluyendo previous_text/next_text de parrafos vecinos reales (no narrados) para una prosodia natural en los bordes. Las 3 llamadas devolvieron texto alineado identico al enviado y audio sin errores de decodificacion (46.2s, 45.7s, 49.8s). Costo real medido por el contador de suscripcion: 585 creditos para 1963 caracteres (0.298/caracter), por debajo de la tarifa oficial de 1/caracter usada para presupuestar -- consistente con el patron ya visto en el Video 8. Se registro la decision de voz como alcance explicito del Video 9 (no se modifico canal.json). No se genero ningun bloque de los 15 definitivos ni se toco el guion. El Video 7 y el Video 8 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-06",
+      "evento": "Tercera tarea del Video 9. Orlando aprobo las 3 muestras y pidio generar los 15 bloques completos con eleven_v4/stability 0.5/similarity_boost 0.75/speed 1 (una generacion por bloque, sin reintentos, presupuesto 22789 creditos), guardando cada bloque al terminar, y despues ensamblar la narracion con las 8 pausas revisando las uniones reales (en especial bloque1-bloque2), entregando el archivo completo sin musica con el consumo real. Se generaron los 15 bloques en 15 llamadas unicas (texto alineado identico al enviado en las 15), usando previous_text/next_text del guion real solo en las junturas de continuacion directa, omitiendolo en las 6 junturas con pausa real para no condicionar la prosodia hacia una continuacion inexistente. Consumo real medido por el contador de suscripcion: 9400 creditos para 22789 caracteres (0.4125/caracter), muy por debajo del presupuesto de 22789. Se midieron los bordes de cada bloque (silencedetect + alineacion por caracter: ningun bloque corta una palabra) y se ensamblo con silencio insertado en las 6 junturas con pausa real (objetivos de canal.json->reglas_edicion: 3s/6s/10s/10s/10s/11s), dejando las pausas 3 y 8 como las genero el propio modelo dentro de los bloques 6 y 15. Se verifico la union bloque1-bloque2 especificamente pedida (sin palabra cortada en ningun lado) y las otras 5 junturas con pausa, y se confirmo por silencedetect sobre el archivo final que aparecen exactamente los 6 silencios esperados, sin nada anomalo. Resultado: video_009_narracion_completa_sin_musica_v1.mp3, 1654.909s (27:34.91), decodificacion limpia. Duracion por debajo del rango 31-36min estimado por el guion -- ritmo real ~136 ppm, consistente con el ~137 ppm ya visto en el Video 8 con la misma combinacion de modelo/velocidad. Las pausas son una primera propuesta, no aprobadas definitivamente. canal.json no se modifico. El Video 7 y el Video 8 permanecen intactos."
     }
-  ]
+  ],
+  "generacion_15_bloques": {
+    "estado": "completado",
+    "fecha": "2026-11-06",
+    "autorizado_por": "Orlando",
+    "metodo": "Una llamada HTTP por bloque, sin reintentos automaticos. Contexto previous_text/next_text solo en junturas de continuacion directa (sin pausa real entre medio); omitido en las junturas con pausa real (1,2,4,5,6,7), para no condicionar la prosodia hacia una continuacion que no existira.",
+    "modelo": "eleven_v4",
+    "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+    "ajustes": {
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "speed": 1
+    },
+    "caracteres_enviados": 22789,
+    "presupuesto_autorizado_creditos": 22789,
+    "consumo_real_creditos": 9400,
+    "tarifa_real_observada": 0.4125,
+    "verificacion": "Las 15 llamadas devolvieron texto alineado identico, caracter a caracter, al enviado. Cada bloque guardado (audio+alineacion+payload) inmediatamente al generarse.",
+    "directorio": "estudio/proyectos/video_009/_generacion/audio/bloques"
+  },
+  "ensamblado_narracion_v1": {
+    "estado": "entregado_pendiente_revision",
+    "fecha": "2026-11-06",
+    "archivo": "estudio/proyectos/video_009/_generacion/montaje/video_009_narracion_completa_sin_musica_v1.mp3",
+    "archivo_detalle": "estudio/proyectos/video_009/_generacion/VIDEO_009_GENERACION_Y_ENSAMBLADO.md",
+    "duracion_segundos": 1654.909388,
+    "tamano_bytes": 39718496,
+    "sha256": "c4f523363dfa0c8d29248b727309ce2d866b31aff419e855ff642dbe7a55b778",
+    "pausas": {
+      "1": {
+        "entre_bloques": "1-2",
+        "objetivo_s": 3,
+        "anadido_s": 2.916
+      },
+      "2": {
+        "entre_bloques": "2-3",
+        "objetivo_s": 6,
+        "anadido_s": 6
+      },
+      "3": {
+        "embebida_en_bloque": 6,
+        "nota": "generada por el propio modelo a partir de la linea en blanco del texto enviado, no se midio ni se ajusto por separado"
+      },
+      "4": {
+        "entre_bloques": "8-9",
+        "objetivo_s": 10,
+        "anadido_s": 10
+      },
+      "5": {
+        "entre_bloques": "10-11",
+        "objetivo_s": 10,
+        "anadido_s": 10
+      },
+      "6": {
+        "entre_bloques": "13-14",
+        "objetivo_s": 10,
+        "anadido_s": 9.926
+      },
+      "7": {
+        "entre_bloques": "14-15",
+        "objetivo_s": 11,
+        "anadido_s": 11
+      },
+      "8": {
+        "embebida_en_bloque": 15,
+        "nota": "igual criterio que la pausa 3"
+      }
+    },
+    "verificacion_uniones": "Las 6 junturas con pausa real se revisaron por alineacion (ningun bloque corta una palabra en sus bordes: el ultimo caracter no-espacio de cada bloque termina practicamente en el final real del archivo, el primero empieza en 0) y por silencedetect sobre el archivo ensamblado (exactamente 6 silencios >2s, en las posiciones y duraciones esperadas: 3.18/6.22/10.23/10.92/10.39/11.24s, nada anomalo). Union bloque1-bloque2 revisada especificamente por instruccion de Orlando: bloque 1 termina en frase completa (\"...aun cuando todavia me cueste detenerme.\"), bloque 2 empieza en frase completa (\"En el evangelio segun Mateo...\"), sin ninguna palabra cortada.",
+    "nota_duracion": "Duracion real 27:34.91, por debajo del rango 31-36 min estimado por el guion -- ritmo real ~136 palabras/min, casi igual al ~137 ppm observado en el Video 8 con la misma combinacion v4/speed 1. Confirma el riesgo ya señalado antes de generar.",
+    "nota_pausas": "Las 8 pausas son una primera propuesta razonada (rangos de canal.json -> reglas_edicion), no aprobadas palabra por palabra todavia -- quedan abiertas a ajuste, igual que las del Video 8 se afinaron en varias rondas.",
+    "pendiente": "Revision de Orlando de la narracion completa. No se ha generado musica, visuales ni render. canal.json no se modifico."
+  }
 }

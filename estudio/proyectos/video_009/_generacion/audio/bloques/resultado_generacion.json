@@ -1,0 +1,107 @@
+{
+  "modelo": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "ajustes": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "formato_salida": "mp3_44100_128",
+  "consumo_antes": 59571,
+  "consumo_despues": 68971,
+  "delta_creditos_contador_suscripcion": 9400,
+  "caracteres_totales_enviados": 22789,
+  "tarifa_real_observada": 0.41247970512089166,
+  "resultados": [
+    {
+      "numero": 1,
+      "bytes": 2038847,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 2,
+      "bytes": 397940,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 3,
+      "bytes": 1999141,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 4,
+      "bytes": 2256604,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 5,
+      "bytes": 1834047,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 6,
+      "bytes": 1890472,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 7,
+      "bytes": 2124529,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 8,
+      "bytes": 985590,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 9,
+      "bytes": 2179700,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 10,
+      "bytes": 2241140,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 11,
+      "bytes": 2177192,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 12,
+      "bytes": 1734155,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 13,
+      "bytes": 769087,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 14,
+      "bytes": 1425701,
+      "texto_identico": true,
+      "omitido": false
+    },
+    {
+      "numero": 15,
+      "bytes": 1643458,
+      "texto_identico": true,
+      "omitido": false
+    }
+  ]
+}

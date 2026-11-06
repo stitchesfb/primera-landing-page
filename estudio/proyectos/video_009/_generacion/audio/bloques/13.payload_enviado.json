@@ -1,0 +1,10 @@
+{
+  "text": "Si mañana debo hacer una llamada o buscar una orientación, ayúdame a recordar ese paso a su tiempo. Puedo dejarlo anotado si lo necesito y permitir que espere hasta la mañana. No hace falta ensayar ahora cada respuesta posible. Te pido prudencia para prepararme y serenidad para detener la preparación cuando por hoy sea suficiente.\n\nRecibe también mi incertidumbre acerca de cómo saldrán las cosas. Me gustaría tener una seguridad que cierre todas las preguntas. Esta noche te presento ese deseo y te pido confianza para caminar sin conocer cada resultado. Ayúdame a permanecer cerca de ti, a buscar compañía y a atender con fidelidad lo que vaya encontrando delante de mí.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "previous_text": "Por esta noche, dejo delante de ti ese asunto que no consigo cerrar. Lo conoces. No necesito describirlo de otra manera para que me escuches. Aquí está mi petición y aquí estoy yo, necesitando descanso. Te pido que me acompañes en ambos."
+}
