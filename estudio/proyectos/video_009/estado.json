@@ -290,7 +290,7 @@
     "pendiente": "Revision de Orlando de la narracion completa. No se ha generado musica, visuales ni render. canal.json no se modifico."
   },
   "prueba_visual_mateo": {
-    "estado": "entregada_pendiente_revision",
+    "estado": "corregida_zoom_sin_reinicio_entregado_clip_pendiente_revision",
     "fecha": "2026-11-06",
     "archivo": "estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/video_009_prueba_mateo_90s.mp4",
     "detalle": "estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/LEEME_PRUEBA_MATEO.md",
@@ -332,6 +332,17 @@
     "pendiente": [
       "Aprobacion de Orlando sobre el ritmo del zoom, el fundido de transicion y los focos",
       "Si se aprueba, decidir si este metodo reemplaza el de tomas estaticas del Video 8 para el resto de escenas del Video 9"
-    ]
+    ],
+    "correccion_2026_11_06": {
+      "reportado_por": "Orlando: particulas, paso entre imagenes y velocidad/intensidad del zoom aprobados; el zoom se notaba reiniciar dentro de la misma imagen (escena 1, 3 tomas independientes)",
+      "cambio": "Escena 1 paso de 3 tomas independientes a UN solo segmento continuo: el zoom sube una vez hasta el encuadre final (misma velocidad/intensidad: +3.5% en 23.06s) y luego se mantiene fijo en ese encuadre hasta el cambio de escena -- sin reiniciar ni seguir avanzando. Escena 2 sin cambios (ya era una sola toma). Fundido de transicion, particulas y audio reutilizados tal cual (cache), no se regeneraron.",
+      "archivo_regenerado": "estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/video_009_prueba_mateo_90s.mp4",
+      "sha256_nuevo": "cb27a1a06bb0ca0537fd8d283565a6fef28f31ef4475be3d112ceaa4effc72ca",
+      "clip_verificacion": {
+        "archivo": "estudio/proyectos/video_009/_generacion/mapa_visual/prueba_mateo/clip_correccion/video_009_prueba_mateo_clip_14_32s.mp4",
+        "ventana": "0:14-0:32 de la prueba (18.1s, stream copy sin recodificar)",
+        "motivo": "Cubre justo el punto donde antes se notaba el reinicio del zoom (toma1->toma2 original), ahora continuo y fijo"
+      }
+    }
   }
 }

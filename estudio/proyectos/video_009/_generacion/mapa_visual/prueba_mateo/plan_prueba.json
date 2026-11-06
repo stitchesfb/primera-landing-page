@@ -11,16 +11,9 @@
     },
     "tomas": [
       {
-        "duracion": 23.05966666666667,
-        "zoomDelta": 0.035
-      },
-      {
-        "duracion": 23.05966666666667,
-        "zoomDelta": 0.035
-      },
-      {
-        "duracion": 24.459666666666667,
-        "zoomDelta": 0.035
+        "duracion": 68.57900000000001,
+        "zoomDelta": 0.035,
+        "rampaDuracion": 23.05966666666667
       }
     ],
     "duracionNeta": 67.179

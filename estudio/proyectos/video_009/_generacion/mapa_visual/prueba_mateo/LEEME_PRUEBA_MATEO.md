@@ -31,6 +31,12 @@ Fundidos cruzados de **1,0s** entre las tomas de una misma escena (dentro del ra
 - **Música:** `one_step_closer.mp3` (siguiente en la rotación libre del canal, tras `alone_with_my_thoughts` en el Video 7 y `touching_moment` en el Video 8), tomada desde el punto de la propia pista que sonaría en el minuto real de la narración (1:00), no desde el principio — para que la muestra represente fielmente ese instante del video completo. Ducking plano −23dB bajo voz e interludio (regla del perfil nocturno), normalizada a −33,5 LUFS objetivo. Sin fundido de apertura/cierre, porque esta ventana no es ni el inicio ni el final del video.
 - **Partículas:** preset "noche" (82, periodo 24s).
 
+## Corrección 2026-11-06: el zoom ya no se reinicia dentro de la misma imagen
+
+Orlando aprobó las partículas, el paso entre imágenes y la velocidad/intensidad del zoom, pero señaló que dentro de la escena 1 se notaba el reinicio del zoom al pasar de una toma a la siguiente (volvía a 1.0 y empezaba de nuevo). La escena 1 pasó de ser 3 tomas independientes (cada una re-zoomeando desde cero) a **un solo segmento continuo**: el zoom sube una sola vez hasta su encuadre final (misma velocidad e intensidad de antes — +3,5% en 23,06s) y luego **se queda fijo en ese encuadre** hasta el cambio a la escena 2, sin reiniciar ni seguir avanzando. La escena 2 no cambió (ya era una sola toma). El fundido de cambio de escena, las partículas y el audio no se tocaron.
+
+`video_009_prueba_mateo_90s.mp4` se regeneró con esta corrección (mismo SHA-256 de archivo nuevo: `cb27a1a06bb0ca0537fd8d283565a6fef28f31ef4475be3d112ceaa4effc72ca`, 90,000s). Para verificar solo el punto corregido sin volver a revisar los 90s completos, se recortó (stream copy, sin recodificar) el tramo 0:14–0:32 de la prueba — justo donde antes se notaba el reinicio —: `clip_correccion/video_009_prueba_mateo_clip_14_32s.mp4` (18,1s).
+
 ## Qué falta decidir
 
 1. Si el ritmo del zoom (continuo, ~3-3,5% por toma de ~23s) se siente "lento pero perceptible" como se pidió, sin distraer de la oración.
