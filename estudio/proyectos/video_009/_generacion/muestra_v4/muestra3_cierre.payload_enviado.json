@@ -1,0 +1,10 @@
+{
+  "text": "Señor Jesús, en tus manos encomiendo esta noche. Lo que entiendo y lo que todavía me cuesta comprender. Las personas que amo. Las tareas que esperan. Mis fuerzas y mis límites.\n\nAyúdame a descansar en ti. Si el sueño tarda, acompáñame con tu paz. Si todavía hay inquietud, ayúdame a tratarme con paciencia. Recibe esta oración sencilla.\n\nGracias por escucharme. Gracias por tu Palabra. Enséñame a caminar contigo y a aprender de tu corazón manso y humilde.\n\nAquí dejo mi cansancio, Señor. Te encomiendo lo pendiente. Permite que mi cuerpo repose y que mi mente encuentre quietud mientras termina este día.\n\nEn tu nombre, Jesús. Amén.",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "previous_text": "Recibe mi gratitud por haberme acompañado hasta aquí. Aun con preguntas, puedo acercarme. Aun con cansancio, puedo orar. Tu invitación sigue siendo mi motivo para venir."
+}

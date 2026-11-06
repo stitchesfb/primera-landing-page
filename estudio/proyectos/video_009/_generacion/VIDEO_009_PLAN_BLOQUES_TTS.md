@@ -149,8 +149,24 @@ Un solo dato histórico del Video 8 (bloque 19) sugirió un consumo real más ba
 ## 5. Qué falta — puntos de aprobación pendientes (Sistema Activo §4)
 
 1. **Aprobar o corregir la división en 15 bloques** (sección 1).
-2. **Decidir la configuración de voz** entre las dos opciones de la sección 2 (o pedir una tercera).
-3. **Autorizar la muestra** de la sección 3, con la configuración elegida (≈542 créditos en Flash v2.5, ≈1.963 en v4, o ambas si se quiere comparar).
-4. Tras escuchar la muestra: **autorizar el gasto completo** de la narración (sección 4).
+2. ~~Decidir la configuración de voz~~ — **confirmada por Orlando el 2026-11-06: `eleven_v4`**, voice_id `8mBRP99B2Ng2QwsJMFQl`, `stability 0.5`, `similarity_boost 0.75`, `speed 1` (los mismos ajustes de la narración v4 realmente aprobada del Video 8). No se actualiza `canal.json` — es una decisión de alcance Video 9.
+3. ~~Autorizar y generar la muestra~~ — **generada el 2026-11-06.** Ver sección 6.
+4. Tras revisar la muestra: **autorizar el gasto completo** de la narración (sección 4).
 
-**No se ha llamado a ElevenLabs ni gastado ningún crédito en esta tarea.** El Video 7 y el Video 8 permanecen intactos.
+---
+
+## 6. Muestra generada — resultado real (2026-11-06)
+
+Se generaron los 3 fragmentos de la sección 3 con la configuración confirmada (`eleven_v4`, stability 0.5, similarity_boost 0.75, speed 1), reconstruidos programáticamente desde el guion ya segmentado para garantizar coincidencia exacta de caracteres con el plan, e incluyendo `previous_text`/`next_text` de los párrafos vecinos reales (no narrados, solo para que la prosodia no suene cortada en los bordes).
+
+| Fragmento | Caracteres | Duración real | Texto alineado idéntico al enviado |
+|---|---:|---:|---|
+| Apertura | 693 | 46,21s | sí |
+| Lectura bíblica + unión real bloque 1→2 | 637 | 45,71s | sí |
+| Cierre (tras pausa 8) | 633 | 49,79s | sí |
+
+**Costo real:** 585 créditos para 1.963 caracteres (0,298 créditos/carácter), medido por el contador de suscripción antes/después — por debajo de la tarifa oficial de 1/carácter usada para presupuestar, consistente con lo ya observado en el Video 8 (un solo dato, no garantizado como tarifa futura).
+
+Decodificación limpia en los 3 archivos. Archivos y metadatos (audio, alineación por carácter, payload enviado) en `estudio/proyectos/video_009/_generacion/muestra_v4/`.
+
+**No se ha generado ningún bloque de los 15 definitivos.** El guion no se tocó. El Video 7 y el Video 8 permanecen intactos.

@@ -1,0 +1,10 @@
+{
+  "text": "Tal vez todos en casa ya descansan, pero tú sigues pendiente de algo. De una cuenta, de una conversación, de alguien que necesita ayuda. Tu cuerpo llegó a la cama, aunque por dentro todavía sientes que el día no ha terminado. Si esta noche estás cansado de cargar con todo, acerquémonos a Jesús en oración. Puedes hablarle desde aquí, con las fuerzas que te quedan.\n\nQuizá hoy hiciste muchas cosas que nadie vio. Recordaste lo que faltaba, atendiste una llamada, resolviste un problema pequeño y después otro. Escuchaste a alguien cuando también necesitabas ser escuchado. Y ahora que hay silencio, aparece una pregunta que durante el día no tuvo espacio: ¿hasta cuándo voy a poder seguir así?",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "next_text": "No necesitas encontrar una respuesta antes de orar. Tampoco hace falta ordenar cada preocupación para presentársela a Dios. Puedes comenzar con una frase sencilla: Señor, estoy aquí y estoy cansado. Hay amor en lo que hago, pero también hay agotamiento. Hay personas que me importan y hay cosas que ya no sé cómo sostener."
+}
