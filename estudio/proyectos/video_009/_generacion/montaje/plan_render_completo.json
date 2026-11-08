@@ -1,0 +1,99 @@
+{
+  "duracionTotal": 1654.909388,
+  "rampaDuracion": 23.06,
+  "zoomDelta": 0.035,
+  "fundidos": [
+    1.4,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "escenas": [
+    {
+      "id": "E1",
+      "archivo": "E_cansancio.png",
+      "inicio": 0,
+      "fin": 130.361,
+      "foco": {
+        "x": 0.4,
+        "y": 0.3
+      },
+      "duracionNeta": 130.361,
+      "duracionSegmento": 131.761
+    },
+    {
+      "id": "E2",
+      "archivo": "E_biblia_abierta.png",
+      "inicio": 130.361,
+      "fin": 301.554,
+      "foco": {
+        "x": 0.45,
+        "y": 0.68
+      },
+      "duracionNeta": 171.19299999999998,
+      "duracionSegmento": 172.19299999999998
+    },
+    {
+      "id": "E03",
+      "archivo": "VIDEO_009_03_CUIDAR_DE_OTROS.png",
+      "inicio": 301.554,
+      "fin": 579.204,
+      "foco": {
+        "x": 0.42,
+        "y": 0.25
+      },
+      "duracionNeta": 277.65,
+      "duracionSegmento": 278.65
+    },
+    {
+      "id": "E04",
+      "archivo": "VIDEO_009_04_CULPA_AL_DESCANSAR.png",
+      "inicio": 579.204,
+      "fin": 863.835,
+      "foco": {
+        "x": 0.65,
+        "y": 0.3
+      },
+      "duracionNeta": 284.6310000000001,
+      "duracionSegmento": 285.6310000000001
+    },
+    {
+      "id": "E05",
+      "archivo": "VIDEO_009_05_MANSEDUMBRE.png",
+      "inicio": 863.835,
+      "fin": 1149.98,
+      "foco": {
+        "x": 0.58,
+        "y": 0.65
+      },
+      "duracionNeta": 286.145,
+      "duracionSegmento": 287.145
+    },
+    {
+      "id": "E06",
+      "archivo": "VIDEO_009_06_ENTREGAR_LO_PENDIENTE.png",
+      "inicio": 1149.98,
+      "fin": 1452.28,
+      "foco": {
+        "x": 0.48,
+        "y": 0.65
+      },
+      "duracionNeta": 302.29999999999995,
+      "duracionSegmento": 303.29999999999995
+    },
+    {
+      "id": "E07",
+      "archivo": "VIDEO_009_07_DEJAR_TERMINAR_EL_DIA.png",
+      "inicio": 1452.28,
+      "fin": 1654.909388,
+      "foco": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "duracionNeta": 202.62938800000006,
+      "duracionSegmento": 202.62938800000006
+    }
+  ]
+}

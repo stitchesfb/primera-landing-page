@@ -1,5 +1,5 @@
 {
-  "estado": "prueba_visual_mateo_90s_entregada_pendiente_revision",
+  "estado": "master_1080p_renderizado_entregado_pendiente_revision",
   "titulo_provisional": "¿Cansado de cargar con todo? Descansa en Jesús esta noche | Mateo 11",
   "guion": {
     "archivo": "estudio/proyectos/video_009/VIDEO_009_GUION_COMPLETO_REV01.md",
@@ -196,8 +196,8 @@
   },
   "riesgo_de_duracion": "El guion estima 110-125 palabras/minuto (hipotesis de escritura, no medicion de esta voz). En el Video 8 el ritmo real resulto ~137 palabras/min. Con 3753 palabras, es razonable esperar que la duracion final quede en el extremo corto del rango 31-36 min sugerido por el guion, o algo por debajo, hasta confirmarlo con la muestra y la generacion real.",
   "pendiente": [
-    "Revision de Orlando de la prueba visual de 90s (zoom continuo, transicion, focos)",
-    "Tras su aprobacion: plan visual completo, Shorts y render -- ninguno iniciado todavia"
+    "Revision de Orlando del master completo (1080p)",
+    "Produccion de los 3 Shorts del Video 9 (aparte)"
   ],
   "historial": [
     {
@@ -215,6 +215,10 @@
     {
       "fecha": "2026-11-06",
       "evento": "Cuarta tarea del Video 9. Orlando pidio una prueba continua de 60-90s alrededor de la entrada a Mateo 11, con dos imagenes nuevas (mujer cansada en la mesa, Biblia abierta en la sala), fundido suave al entrar la lectura, narracion y pausas v1 conservadas, musica suave, y movimiento de camara lento pero perceptible a la velocidad real del montaje final -- explicitamente para comprobar que se sintiera menos estatico que el Video 8. Se eligio la ventana 60.0-150.0s de la narracion v1 (90.0s), que cubre la cola del bloque 1, la pausa 1 completa y el inicio del bloque 2 (la cita biblica). Se construyo con zoompan CONTINUO real dentro de cada toma corta (3 tomas de ~23.1s para la escena de cansancio al 3.5%, 1 toma de 22.8s para la Biblia abierta al 3.0%), en vez de los pasos estaticos del Video 8 -- directamente motivado por la observacion ya registrada en SISTEMA_ACTIVO sobre que ese movimiento resultaba casi imperceptible. Se razono explicitamente por que esto no reabre el problema de costo de DECISIONES_CERRADAS #14: el zoompan queda acotado a cada toma corta (~23s), no se aplica sobre el video completo -- mismo principio que ya funciono en el Video 7. El fundido de cambio de escena (1.4s) se coloco dentro de la pausa 1 (3.18s) para que el cambio visual termine antes de que vuelva la voz. Musica: one_step_closer.mp3 (siguiente en la rotacion libre), tomada desde el punto real de la pista que sonaria en el minuto 1:00 del video completo, sin fundidos de apertura/cierre por no ser ese el verdadero inicio/fin del video. Resultado: 90.000s exactos, decodificacion limpia, 23.6MB. No se genero ninguna imagen nueva ni se hizo ningun render completo. canal.json no se modifico. El Video 7 y el Video 8 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-08",
+      "evento": "Quinta tarea del Video 9. Orlando aprobo la correccion del zoom (prueba Mateo) e integro las 5 escenas restantes (03-07, de VIDEO_009_IMAGENES_FINALES.zip) mas una miniatura JPG separada, ubicando cada cambio de escena por el inicio real de su seccion en la narracion v1 (secciones 2,5,6,7 en frontera de bloque ya verificada; secciones 3 y 4 localizadas por caracter exacto dentro de los bloques 4 y 6 via alineacion de ElevenLabs). Pidio renderizar directamente el master 1080p completo, conservando narracion v1 con sus 8 pausas, la mezcla de la prueba Mateo, particulas y fundidos suaves, con un solo zoom lento por imagen y encuadre fijo hasta el cambio de escena. Se extendio el metodo de rampa+sostenido ya corregido en la prueba Mateo a las 7 escenas completas: cada una construida como una rampa de zoompan real de 23.06s (+3.5%, el mismo ritmo aprobado) seguida de un sostenido ESTATICO (ultimo fotograma de la rampa, sin zoompan) durante el resto de la escena (1.8 a 4.7 minutos segun la escena) -- evitando asi aplicar zoompan a los ~27 minutos completos, que es exactamente lo que DECISIONES_CERRADAS #14 descarto por costo. El audio reconstruyo la misma mezcla de la prueba (one_step_closer.mp3, ducking plano -23dB) agregando el fade-in real de 4s en el minuto 0 y un fade-out simetrico de 4s al final real, ninguno de los dos presente en la prueba de 90s por no cubrir ni el inicio ni el final reales del video. Render ejecutado en segundo plano, resultado: video_009_master.mp4, 1654.933s (delta 0.024s sobre el objetivo), decodificacion limpia, 1920x1080. Se revisaron por fotograma el inicio, las 6 transiciones y el cierre -- todas correctas, con el fundido visible en curso en las capturas tomadas a mitad del cruce. No se comiteo el master al repositorio por tamano (174MB); se entrego directamente como ZIP (VIDEO_009_MASTER.zip) anticipando el mismo problema de reproductor-sin-descarga ya visto en entregas anteriores. Los 3 Shorts quedan pendientes, a entregarse aparte. canal.json no se modifico. El Video 7 y el Video 8 permanecen intactos."
     }
   ],
   "generacion_15_bloques": {
@@ -344,5 +348,96 @@
         "motivo": "Cubre justo el punto donde antes se notaba el reinicio del zoom (toma1->toma2 original), ahora continuo y fijo"
       }
     }
+  },
+  "escenas_finales": {
+    "estado": "importadas_e_integradas",
+    "fecha": "2026-11-08",
+    "origen": "VIDEO_009_IMAGENES_FINALES.zip (Orlando), 5 escenas (03-07) + miniatura JPG separada",
+    "directorio": "estudio/proyectos/video_009/_generacion/mapa_visual/escenas_aprobadas/originales",
+    "detalle": "estudio/proyectos/video_009/_generacion/mapa_visual/escenas_aprobadas/LEEME_ESCENAS_APROBADAS.md",
+    "miniatura": "estudio/proyectos/video_009/_generacion/publicacion/VIDEO_009_MINIATURA.jpg (separada del render, sin procesar)"
+  },
+  "render_completo": {
+    "estado": "entregado_pendiente_aprobacion",
+    "fecha": "2026-11-08",
+    "autorizado_por": "Orlando",
+    "metodo": "Cada escena = rampa de zoompan corta (23.06s, +3.5%, costo acotado) + sostenido estatico (ultimo fotograma de la rampa, congelado, sin zoompan) hasta el cambio de escena -- un solo zoom por imagen, sin reiniciar, mismo criterio ya corregido en la prueba de Mateo. Evita aplicar zoompan a los ~27 minutos completos (DECISIONES_CERRADAS #14 sigue vigente).",
+    "escenas": [
+      {
+        "id": "E1",
+        "archivo": "E_cansancio.png",
+        "inicio_s": 0,
+        "fin_s": 130.361
+      },
+      {
+        "id": "E2",
+        "archivo": "E_biblia_abierta.png",
+        "inicio_s": 130.361,
+        "fin_s": 301.554
+      },
+      {
+        "id": "E03",
+        "archivo": "VIDEO_009_03_CUIDAR_DE_OTROS.png",
+        "inicio_s": 301.554,
+        "fin_s": 579.204
+      },
+      {
+        "id": "E04",
+        "archivo": "VIDEO_009_04_CULPA_AL_DESCANSAR.png",
+        "inicio_s": 579.204,
+        "fin_s": 863.835
+      },
+      {
+        "id": "E05",
+        "archivo": "VIDEO_009_05_MANSEDUMBRE.png",
+        "inicio_s": 863.835,
+        "fin_s": 1149.98
+      },
+      {
+        "id": "E06",
+        "archivo": "VIDEO_009_06_ENTREGAR_LO_PENDIENTE.png",
+        "inicio_s": 1149.98,
+        "fin_s": 1452.28
+      },
+      {
+        "id": "E07",
+        "archivo": "VIDEO_009_07_DEJAR_TERMINAR_EL_DIA.png",
+        "inicio_s": 1452.28,
+        "fin_s": 1654.909388
+      }
+    ],
+    "fundidos": {
+      "E1_a_E2": 1.4,
+      "resto": 1
+    },
+    "audio": {
+      "narracion": "_generacion/montaje/video_009_narracion_completa_sin_musica_v1.mp3, sin tocar, sha256 c4f523363dfa0c8d29248b727309ce2d866b31aff419e855ff642dbe7a55b778",
+      "musica": "one_step_closer.mp3, misma mezcla de la prueba Mateo, con fade-in real de 4s en el minuto 0 y fade-out simetrico de 4s al final real (ninguno aplicaba en la prueba de 90s por no cubrir inicio/fin reales)"
+    },
+    "master": {
+      "ubicacion": "estudio/proyectos/video_009/_generacion/montaje/video_009_master.mp4 (NO comiteado al repositorio por tamaño, 182225307 bytes / 174MB -- mismo criterio que el Video 8)",
+      "resolucion": "1920x1080",
+      "fps": 30,
+      "codec_video": "h264",
+      "codec_audio": "aac",
+      "duracion_segundos": 1654.933333,
+      "duracion_objetivo_segundos": 1654.909388,
+      "delta_segundos": 0.023945,
+      "sha256": "80348fa385689417d804c3e72e609460297a9b73964028bbc255847869bd79cf",
+      "tamano_bytes": 182225307,
+      "entregado_como": "ZIP sin dividir (VIDEO_009_MASTER.zip, mismo archivo, sin recodificar), por el mismo motivo de reproductor-sin-descarga ya visto en entregas anteriores de este proyecto"
+    },
+    "verificacion_tecnica": {
+      "decodificacion_completa_sin_errores": true,
+      "fotogramas_revisados": "inicio, las 6 transiciones de escena y el cierre -- todas muestran la escena correcta, sin cuadros negros ni corrupcion, fundido visible en curso en los puntos de transicion",
+      "silencio_digital_absoluto_en_extremos": false,
+      "narracion_v1_verificada_sin_cambios": true,
+      "video_007_y_008_verificados_intactos": true,
+      "canal_json_sin_modificar": true
+    },
+    "pendiente": [
+      "Aprobacion de Orlando del master completo",
+      "Los 3 Shorts del Video 9 -- se entregan aparte, no incluidos en esta entrega"
+    ]
   }
 }
