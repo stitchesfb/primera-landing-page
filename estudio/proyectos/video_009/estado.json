@@ -1,5 +1,5 @@
 {
-  "estado": "master_1080p_renderizado_entregado_pendiente_revision",
+  "estado": "shorts_entregados_pendiente_revision_video_largo_ya_aprobado",
   "titulo_provisional": "¿Cansado de cargar con todo? Descansa en Jesús esta noche | Mateo 11",
   "guion": {
     "archivo": "estudio/proyectos/video_009/VIDEO_009_GUION_COMPLETO_REV01.md",
@@ -196,8 +196,7 @@
   },
   "riesgo_de_duracion": "El guion estima 110-125 palabras/minuto (hipotesis de escritura, no medicion de esta voz). En el Video 8 el ritmo real resulto ~137 palabras/min. Con 3753 palabras, es razonable esperar que la duracion final quede en el extremo corto del rango 31-36 min sugerido por el guion, o algo por debajo, hasta confirmarlo con la muestra y la generacion real.",
   "pendiente": [
-    "Revision de Orlando del master completo (1080p)",
-    "Produccion de los 3 Shorts del Video 9 (aparte)"
+    "Revision de Orlando de los 3 Shorts"
   ],
   "historial": [
     {
@@ -219,6 +218,10 @@
     {
       "fecha": "2026-11-08",
       "evento": "Quinta tarea del Video 9. Orlando aprobo la correccion del zoom (prueba Mateo) e integro las 5 escenas restantes (03-07, de VIDEO_009_IMAGENES_FINALES.zip) mas una miniatura JPG separada, ubicando cada cambio de escena por el inicio real de su seccion en la narracion v1 (secciones 2,5,6,7 en frontera de bloque ya verificada; secciones 3 y 4 localizadas por caracter exacto dentro de los bloques 4 y 6 via alineacion de ElevenLabs). Pidio renderizar directamente el master 1080p completo, conservando narracion v1 con sus 8 pausas, la mezcla de la prueba Mateo, particulas y fundidos suaves, con un solo zoom lento por imagen y encuadre fijo hasta el cambio de escena. Se extendio el metodo de rampa+sostenido ya corregido en la prueba Mateo a las 7 escenas completas: cada una construida como una rampa de zoompan real de 23.06s (+3.5%, el mismo ritmo aprobado) seguida de un sostenido ESTATICO (ultimo fotograma de la rampa, sin zoompan) durante el resto de la escena (1.8 a 4.7 minutos segun la escena) -- evitando asi aplicar zoompan a los ~27 minutos completos, que es exactamente lo que DECISIONES_CERRADAS #14 descarto por costo. El audio reconstruyo la misma mezcla de la prueba (one_step_closer.mp3, ducking plano -23dB) agregando el fade-in real de 4s en el minuto 0 y un fade-out simetrico de 4s al final real, ninguno de los dos presente en la prueba de 90s por no cubrir ni el inicio ni el final reales del video. Render ejecutado en segundo plano, resultado: video_009_master.mp4, 1654.933s (delta 0.024s sobre el objetivo), decodificacion limpia, 1920x1080. Se revisaron por fotograma el inicio, las 6 transiciones y el cierre -- todas correctas, con el fundido visible en curso en las capturas tomadas a mitad del cruce. No se comiteo el master al repositorio por tamano (174MB); se entrego directamente como ZIP (VIDEO_009_MASTER.zip) anticipando el mismo problema de reproductor-sin-descarga ya visto en entregas anteriores. Los 3 Shorts quedan pendientes, a entregarse aparte. canal.json no se modifico. El Video 7 y el Video 8 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-09",
+      "evento": "Sexta tarea del Video 9. Orlando pidio preparar y entregar los 3 Shorts en una sola tanda, usando el guion aprobado, la narracion v1 y las imagenes existentes, sin tocar el video largo ya aprobado ni generar voz nueva: Short 1 (seccion 3, rotulo ¿CUIDAS DE TODOS?), Short 2 (seccion 4, rotulo ¿DESCANSAS CON CULPA?), Short 3 (seccion 6, rotulo ¿SIGUES HACIENDO PLANES?), con cortes ubicados por alineacion, primera silaba y Amen completos verificados, vertical 1080x1920, subtitulos sincronizados legibles lejos de los controles de YouTube, reencuadre de las imagenes existentes con movimiento suave sin reinicios de zoom, musica del largo a nivel que deje clara la voz, invitacion visual de cierre sin locucion, miniaturas aparte sin insertar como placas. Se localizaron los 3 segmentos por los marcadores [INICIO/FIN SHORT N] del guion dentro de los bloques TTS 4, 6 y 11 (ninguno toca la CTA ni nada regenerado), se verificaron margenes de entrada/salida con silencedetect fino (silencio real antes/despues, sin voz cortada) y se extrajeron sin generar audio nuevo. Visualmente se reutilizaron las mismas imagenes de escena del largo (E03/E04/E06) recortadas a 9:16, con el mismo tratamiento de zoom ya corregido (rampa de 23.06s + encuadre fijo, sin reinicios). Primera corrida detecto que el rotulo inicial y el primer subtitulo de los 3 Shorts se salian del area segura (gancho sin pasar por disponerTexto, margen de medida insuficiente) -- se corrigio pasando el gancho por disponerTexto y ampliando el colchon de medida, confirmado con validarOverflow/validarSeparacion: 0 problemas en la segunda corrida. Se agrego la invitacion de cierre sin locucion y se conservaron las miniaturas fuera del render. Resultado: 3 MP4 verticales (35.567s/38.467s/34.267s), decodificacion limpia, entregados en un solo ZIP. No se publico ni programo nada. El video largo, canal.json, Video 7 y Video 8 permanecen intactos."
     }
   ],
   "generacion_15_bloques": {
@@ -439,5 +442,51 @@
       "Aprobacion de Orlando del master completo",
       "Los 3 Shorts del Video 9 -- se entregan aparte, no incluidos en esta entrega"
     ]
+  },
+  "shorts": {
+    "estado": "entregados_pendiente_revision",
+    "fecha": "2026-11-09",
+    "detalle": "estudio/proyectos/video_009/_generacion/shorts/LEEME_SHORTS.md",
+    "metodo": "Extraidos directamente de los bloques TTS originales (4, 6, 11), sin generar voz nueva. Texto localizado por los marcadores [INICIO/FIN SHORT N] del guion, ubicado por caracter exacto en la alineacion del bloque. Margenes de entrada/salida verificados con silencedetect de resolucion fina (silencio real, no voz).",
+    "items": [
+      {
+        "id": "short1",
+        "bloque": 4,
+        "extraccion": "59.833s-95.390s",
+        "duracion_segundos": 35.567,
+        "escena": "VIDEO_009_03_CUIDAR_DE_OTROS.png",
+        "gancho": "¿CUIDAS DE TODOS?",
+        "titulo": "¿Cuidas de todos y terminas agotado?",
+        "sha256": "e2cd0933de7711074cc7557a89138e894a06600fea5366f02ad050d147de08b5"
+      },
+      {
+        "id": "short2",
+        "bloque": 6,
+        "extraccion": "79.673s-118.126s (fin real del bloque)",
+        "duracion_segundos": 38.467,
+        "escena": "VIDEO_009_04_CULPA_AL_DESCANSAR.png",
+        "gancho": "¿DESCANSAS CON CULPA?",
+        "titulo": "¿Te sientes culpable cuando descansas?",
+        "sha256": "28d02bc5d778e79a2432ee67148f185c46bf6bdedb7f2f8c6eba6f05653a64e1"
+      },
+      {
+        "id": "short3",
+        "bloque": 11,
+        "extraccion": "39.300s-73.550s",
+        "duracion_segundos": 34.267,
+        "escena": "VIDEO_009_06_ENTREGAR_LO_PENDIENTE.png",
+        "gancho": "¿SIGUES HACIENDO PLANES?",
+        "titulo": "¿Sigues resolviendo problemas en la cama?",
+        "sha256": "c82e47ff99ab5ababe6a95d41151bb3a34b92b72e85359492c71e87bee5d92c3"
+      }
+    ],
+    "tratamiento_visual": "Mismas imagenes del largo (E03/E04/E06), recortadas a 9:16. Un solo zoom lento (+3.5% en 23.06s) y encuadre fijo hasta el final -- sin reinicios, mismo criterio ya corregido en el largo.",
+    "subtitulos": "Quemados, sincronizados palabra por palabra desde la alineacion del bloque de origen, 42 car/linea max 2 lineas, anclados abajo fuera de la zona de controles de YouTube Shorts. Validados con validarOverflow/validarSeparacion (shortsRender.mjs): 0 problemas en los 3, tras corregir un bug inicial (el rotulo/gancho y el primer subtitulo de los 3 salian del area segura por no pasar por disponerTexto con margen de medida conservador).",
+    "gancho_inicial": "Rotulo top-anchored 0-4s, medido y ajustado de tamano para no salirse del area segura",
+    "invitacion_cierre": "Ultimos ~4s, sin locucion: \"Mira la oracion completa en nuestro canal.\"",
+    "musica": "one_step_closer.mp3, misma pista/ducking del largo, cama propia por Short (no recortada del largo)",
+    "miniaturas": "No incluidas en los MP4 -- se suben aparte segun instruccion de Orlando. YouTube genera el fotograma de portada automaticamente.",
+    "verificacion_tecnica": "Decodificacion completa sin errores en los 3. 1080x1920, 30fps, h264/aac.",
+    "nota_video_largo": "El video largo (video_009_master.mp4) no se toco en esta tarea."
   }
 }

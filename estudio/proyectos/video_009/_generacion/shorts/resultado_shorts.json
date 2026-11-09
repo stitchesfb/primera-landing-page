@@ -1,0 +1,50 @@
+[
+  {
+    "id": "short1",
+    "titulo": "¿Cuidas de todos y terminas agotado?",
+    "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/shorts/video_009_short1.mp4",
+    "duracion": 35.566667,
+    "cues": 8,
+    "overflow": [],
+    "separacion": {
+      "ok": true,
+      "hueco": 1208,
+      "arriba": 149,
+      "abajo": 1612,
+      "corte": 308,
+      "motivo": null
+    }
+  },
+  {
+    "id": "short2",
+    "titulo": "¿Te sientes culpable cuando descansas?",
+    "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/shorts/video_009_short2.mp4",
+    "duracion": 38.466667,
+    "cues": 9,
+    "overflow": [],
+    "separacion": {
+      "ok": true,
+      "hueco": 1167,
+      "arriba": 149,
+      "abajo": 1611,
+      "corte": 308,
+      "motivo": null
+    }
+  },
+  {
+    "id": "short3",
+    "titulo": "¿Sigues resolviendo problemas en la cama?",
+    "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/shorts/video_009_short3.mp4",
+    "duracion": 34.266667,
+    "cues": 9,
+    "overflow": [],
+    "separacion": {
+      "ok": true,
+      "hueco": 1180,
+      "arriba": 148,
+      "abajo": 1603,
+      "corte": 294,
+      "motivo": null
+    }
+  }
+]
