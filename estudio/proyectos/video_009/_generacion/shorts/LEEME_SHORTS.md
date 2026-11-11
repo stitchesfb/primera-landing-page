@@ -1,18 +1,31 @@
 # Video 9 — Los 3 Shorts (vertical 1080×1920)
 
-**Estado:** entregados para revisión de Orlando. **No se publicó ni programó nada.**
-**Fecha:** 2026-11-09
+**Estado:** Short 1 y Short 2 corregidos (ver abajo); Short 3 aprobado sin cambios. **No se publicó ni programó nada.**
+**Fecha:** 2026-11-09 (entrega original) / **2026-11-11** (corrección de finales, Short 1 y 2)
 El video largo no se tocó. No se generó voz nueva — los 3 Shorts se extrajeron directamente de los bloques TTS ya aprobados (4, 6 y 11).
+
+## Corrección de finales — 2026-11-11
+
+Orlando reportó, al escuchar los 3 Shorts, que después del «Amén» se oía un residuo: en el Short 1, el arranque de «Señor,» (la frase siguiente del bloque 4 en el largo); en el Short 2, un sonido tipo «shh». El Short 3 quedó aprobado tal cual.
+
+**Causa:** la marca de fin de palabra de la alineación de ElevenLabs no coincide con el fin acústico real de la voz — puede sobrepasarlo hasta ~1s e incluir el arranque de la palabra siguiente. El corte original se calculó sobre esa marca de alineación (más un margen fijo), por lo que heredó el problema en los dos casos:
+
+| Short | Lo que marcaba la alineación | Lo que mostró el audio real (silencedetect en banda específica) | Corte anterior (con el problema) | Corte corregido |
+|---|---|---|---|---|
+| 1 (bloque 4) | "Amén." termina en 95,04s | Voz ya en silencio real desde 94,08s; "Señor," arranca genuinamente hacia 95,1–95,2s (banda vocal 1000–2000Hz) | 95,39s → alcanzaba a capturar el arranque de "Señor," | **94,45s** (dentro del silencio real 94,08–95,1s) |
+| 2 (bloque 6) | "Amén." termina en 118,16s (más allá de la duración real del bloque, 118,126s) | Voz decae hacia 117,1–117,3s; silencio limpio real hasta 117,9s; residuo nuevo tipo "shh" en 118,0–118,13s (banda >3500Hz) | fin del archivo (118,126s) → incluía el residuo completo | **117,65s** (dentro del silencio real 117,3–117,9s) |
+
+Se recortó cada voz dentro de su ventana de silencio real confirmada (sin tocar la narración v1 original, solo se releyó para extraer el fragmento) y se añadió una **cola de 3,0s de música sola** tras el fin de cada voz (partículas + invitación visual, sin locución), con el fundido final aplicado únicamente sobre esa cola musical — nunca sobre la voz. Verificación final de los últimos 5 segundos de cada MP4 corregido, en banda específica: Short 1 sin ninguna energía vocal (banda 1000–2000Hz) en toda la ventana; Short 2 sin ninguna energía de alta frecuencia en los últimos ~2,45s. Ambos decodifican limpio.
 
 ## Extracción de audio — carácter exacto + margen natural verificado
 
 Cada Short se localizó por el texto exacto marcado `[INICIO SHORT N]`/`[FIN SHORT N]` del guion aprobado, dentro de la alineación por carácter de su bloque de origen (ninguno de los tres toca el bloque 4 original de la CTA ni nada regenerado). Antes de cortar, se verificó con `silencedetect` a resolución fina que el margen de entrada y de salida fuera silencio real, no voz:
 
-| Short | Bloque | Extracción | Duración real | Primera sílaba | Última palabra |
-|---|---|---|---:|---|---|
-| 1 — ¿Cuidas de todos y terminas agotado? | 4 | 59,833s–95,390s | **35,567s** | "¿Cuidas" @ 0,300s, arranca tras silencio limpio | "Amén." termina @ 35,21s, silencio limpio después |
-| 2 — ¿Te sientes culpable cuando descansas? | 6 | 79,673s–118,126s (fin real del bloque) | **38,467s** | "¿Te" @ 0,300s, arranca tras silencio limpio | "Amén." termina @ 38,49s — el bloque 6 termina ahí mismo, no hay nada más que cortar |
-| 3 — ¿Sigues resolviendo problemas en la cama? | 11 | 39,300s–73,550s | **34,267s** | "Ya" @ 0,300s, arranca tras silencio limpio | "Amén." termina @ 33,90s, silencio limpio después |
+| Short | Bloque | Extracción (voz) | Cola musical | Duración total | Primera sílaba | Última palabra |
+|---|---|---|---:|---:|---|---|
+| 1 — ¿Cuidas de todos y terminas agotado? | 4 | 59,833s–94,450s | 3,0s | **37,633s** | "¿Cuidas" @ 0,300s, arranca tras silencio limpio | "Amén." termina @ 35,207s, cortado en silencio real (corregido) |
+| 2 — ¿Te sientes culpable cuando descansas? | 6 | 79,673s–117,650s | 3,0s | **40,977s** | "¿Te" @ 0,300s, arranca tras silencio limpio | "Amén." termina @ 38,487s, cortado en silencio real (corregido) |
+| 3 — ¿Sigues resolviendo problemas en la cama? | 11 | 39,300s–73,550s | — (sin cambios) | **34,267s** | "Ya" @ 0,300s, arranca tras silencio limpio | "Amén." termina @ 33,90s, silencio limpio después |
 
 Cada oración queda completa, sin ninguna palabra cortada en los bordes.
 
@@ -38,9 +51,9 @@ Decodificación completa sin errores en los 3. 1080×1920, 30fps, h264/aac.
 
 | Short | Duración | SHA-256 |
 |---|---:|---|
-| short1 | 35,567s | `e2cd0933de7711074cc7557a89138e894a06600fea5366f02ad050d147de08b5` |
-| short2 | 38,467s | `28d02bc5d778e79a2432ee67148f185c46bf6bdedb7f2f8c6eba6f05653a64e1` |
-| short3 | 34,267s | `c82e47ff99ab5ababe6a95d41151bb3a34b92b72e85359492c71e87bee5d92c3` |
+| short1 (corregido 2026-11-11) | 37,633s | `998780d3726725d1072a718ba92386f83c1392dbe191bdb9a478e4a7daec5842` |
+| short2 (corregido 2026-11-11) | 40,977s | `a201fbb9db2217142f8109bf2477a508457d8322a8b68426d30cfa7d05454da8` |
+| short3 (sin cambios) | 34,267s | `c82e47ff99ab5ababe6a95d41151bb3a34b92b72e85359492c71e87bee5d92c3` |
 
 ## Paquete de publicación (para copiar)
 

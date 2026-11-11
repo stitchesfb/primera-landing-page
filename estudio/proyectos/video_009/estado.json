@@ -1,5 +1,5 @@
 {
-  "estado": "shorts_entregados_pendiente_revision_video_largo_ya_aprobado",
+  "estado": "shorts_1_y_2_corregidos_pendiente_revision_short3_y_video_largo_ya_aprobados",
   "titulo_provisional": "¿Cansado de cargar con todo? Descansa en Jesús esta noche | Mateo 11",
   "guion": {
     "archivo": "estudio/proyectos/video_009/VIDEO_009_GUION_COMPLETO_REV01.md",
@@ -222,6 +222,10 @@
     {
       "fecha": "2026-11-09",
       "evento": "Sexta tarea del Video 9. Orlando pidio preparar y entregar los 3 Shorts en una sola tanda, usando el guion aprobado, la narracion v1 y las imagenes existentes, sin tocar el video largo ya aprobado ni generar voz nueva: Short 1 (seccion 3, rotulo ¿CUIDAS DE TODOS?), Short 2 (seccion 4, rotulo ¿DESCANSAS CON CULPA?), Short 3 (seccion 6, rotulo ¿SIGUES HACIENDO PLANES?), con cortes ubicados por alineacion, primera silaba y Amen completos verificados, vertical 1080x1920, subtitulos sincronizados legibles lejos de los controles de YouTube, reencuadre de las imagenes existentes con movimiento suave sin reinicios de zoom, musica del largo a nivel que deje clara la voz, invitacion visual de cierre sin locucion, miniaturas aparte sin insertar como placas. Se localizaron los 3 segmentos por los marcadores [INICIO/FIN SHORT N] del guion dentro de los bloques TTS 4, 6 y 11 (ninguno toca la CTA ni nada regenerado), se verificaron margenes de entrada/salida con silencedetect fino (silencio real antes/despues, sin voz cortada) y se extrajeron sin generar audio nuevo. Visualmente se reutilizaron las mismas imagenes de escena del largo (E03/E04/E06) recortadas a 9:16, con el mismo tratamiento de zoom ya corregido (rampa de 23.06s + encuadre fijo, sin reinicios). Primera corrida detecto que el rotulo inicial y el primer subtitulo de los 3 Shorts se salian del area segura (gancho sin pasar por disponerTexto, margen de medida insuficiente) -- se corrigio pasando el gancho por disponerTexto y ampliando el colchon de medida, confirmado con validarOverflow/validarSeparacion: 0 problemas en la segunda corrida. Se agrego la invitacion de cierre sin locucion y se conservaron las miniaturas fuera del render. Resultado: 3 MP4 verticales (35.567s/38.467s/34.267s), decodificacion limpia, entregados en un solo ZIP. No se publico ni programo nada. El video largo, canal.json, Video 7 y Video 8 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-11",
+      "evento": "Septima tarea del Video 9. Orlando escucho los 3 Shorts y reporto residuos audibles despues del 'Amen': en el Short 1 se alcanzaba a oir 'Señor,' (la palabra siguiente del bloque 4 en el largo); en el Short 2 quedaba un sonido tipo 'shh'. El Short 3 quedo aprobado sin cambios. Pidio corregir los finales del 1 y 2 desde el audio fuente aprobado, localizando el final acustico completo de 'Amen' (sin confiar en las marcas de alineacion, que pueden incluir el inicio de la palabra siguiente), conservando integra su ultima silaba, revisando los ultimos 5s de ambos a velocidad normal, y entregando los 2 MP4 corregidos juntos en un ZIP con los puntos de corte indicados. Se diagnostico cada caso con silencedetect de resolucion fina en banda especifica, contrastando contra la alineacion de ElevenLabs: en el Short 1 (bloque 4) la alineacion marcaba el fin de 'Amén.' en 95.04s, pero la energia vocal real (banda 1000-2000Hz) ya estaba en silencio desde 94.08s, con 'Señor,' empezando genuinamente hacia 95.1-95.2s -- el corte anterior (95.39s, fin de alineacion + margen fijo de 0.35s) caia dentro de ese arranque. En el Short 2 (bloque 6) la alineacion marcaba el fin de 'Amén.' en 118.16s, mas alla incluso de la duracion real del archivo (118.126s); la energia de alta frecuencia (>3500Hz) mostro la voz decayendo hacia 117.1-117.3s, silencio limpio real hasta 117.9s, y un residuo nuevo tipo 'shh' en 118.0-118.13s, justo en el ultimo tramo del archivo -- el corte anterior (fin del archivo) incluia ese residuo completo. Se recorto cada voz dentro de su ventana de silencio real confirmada (Short 1: voz hasta 94.45s; Short 2: voz hasta 117.65s), sin tocar la narracion v1 original (solo se releyo para la correccion). Se añadio una cola de 3.0s de musica sola (particulas + invitacion visual, sin locucion) tras el fin de cada voz, con el fundido final aplicado unicamente sobre esa cola musical (amix a duration=longest para que la musica no se recorte con la voz). Se verificaron los ultimos 5s de ambos MP4 corregidos con silencedetect en banda especifica: Short 1 sin ninguna energia vocal (banda 1000-2000Hz) en toda la ventana; Short 2 sin ninguna energia de alta frecuencia en los ultimos ~2.45s. Resultado: Short 1 corregido a 37.633s, Short 2 corregido a 40.977s, ambos con decodificacion limpia, entregados juntos en un ZIP. El Short 3, el video largo, canal.json, Video 7 y Video 8 permanecen intactos."
     }
   ],
   "generacion_15_bloques": {
@@ -445,29 +449,32 @@
   },
   "shorts": {
     "estado": "entregados_pendiente_revision",
-    "fecha": "2026-11-09",
+    "fecha": "2026-11-11",
     "detalle": "estudio/proyectos/video_009/_generacion/shorts/LEEME_SHORTS.md",
     "metodo": "Extraidos directamente de los bloques TTS originales (4, 6, 11), sin generar voz nueva. Texto localizado por los marcadores [INICIO/FIN SHORT N] del guion, ubicado por caracter exacto en la alineacion del bloque. Margenes de entrada/salida verificados con silencedetect de resolucion fina (silencio real, no voz).",
+    "correccion_2026-11-11": "Orlando reporto residuos audibles tras el 'Amen' en short1 ('Señor' de la frase siguiente) y short2 (un 'shh'). Diagnostico: la alineacion de ElevenLabs sobrepasa el fin acustico real de la voz hasta ~1s en ambos casos. Se verifico con silencedetect en banda especifica (vocal 1000Hz/w2000 para short1, >3500Hz para short2) y se recorto antes del residuo, dentro del silencio real confirmado. Se añadio una cola de musica sola de 3.0s (particulas + invitacion visual, sin locucion) tras el fin de la voz, con fundido final solo sobre la musica. short3 no se tocó (quedó aprobado tal cual).",
     "items": [
       {
         "id": "short1",
         "bloque": 4,
-        "extraccion": "59.833s-95.390s",
-        "duracion_segundos": 35.567,
+        "extraccion": "59.833s-94.450s (voz) + 3.0s cola musical",
+        "duracion_segundos": 37.633,
         "escena": "VIDEO_009_03_CUIDAR_DE_OTROS.png",
         "gancho": "¿CUIDAS DE TODOS?",
         "titulo": "¿Cuidas de todos y terminas agotado?",
-        "sha256": "e2cd0933de7711074cc7557a89138e894a06600fea5366f02ad050d147de08b5"
+        "sha256": "998780d3726725d1072a718ba92386f83c1392dbe191bdb9a478e4a7daec5842",
+        "diagnostico_correccion": "Alineacion marcaba fin de 'Amén.' en 95.04s; el audio real ya estaba en silencio desde 94.08s. 'Señor,' (palabra siguiente del bloque) empieza en ~95.1-95.2s. El corte anterior (95.39s) llegaba a capturar su arranque. Nuevo corte: 94.45s (dentro del silencio real 94.08-95.1s)."
       },
       {
         "id": "short2",
         "bloque": 6,
-        "extraccion": "79.673s-118.126s (fin real del bloque)",
-        "duracion_segundos": 38.467,
+        "extraccion": "79.673s-117.650s (voz) + 3.0s cola musical",
+        "duracion_segundos": 40.977,
         "escena": "VIDEO_009_04_CULPA_AL_DESCANSAR.png",
         "gancho": "¿DESCANSAS CON CULPA?",
         "titulo": "¿Te sientes culpable cuando descansas?",
-        "sha256": "28d02bc5d778e79a2432ee67148f185c46bf6bdedb7f2f8c6eba6f05653a64e1"
+        "sha256": "a201fbb9db2217142f8109bf2477a508457d8322a8b68426d30cfa7d05454da8",
+        "diagnostico_correccion": "Alineacion marcaba fin de 'Amén.' en 118.16s, mas alla de la duracion real del bloque (118.126s). La voz decae hacia 117.1-117.3s, sigue silencio limpio hasta 117.9s y aparece un residuo tipo 'shh' (banda >3.5kHz) en 118.0-118.13s, dentro del ultimo tramo del archivo. El corte anterior (fin del archivo, 118.126s) incluia ese residuo completo. Nuevo corte: 117.65s (dentro del silencio real 117.3-117.9s)."
       },
       {
         "id": "short3",

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "short1",
+    "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/shorts/video_009_short1.mp4",
+    "duracion": 37.633333,
+    "extraccionInicio": 59.833,
+    "extraccionFinVoz": 94.45,
+    "duracionVoz": 34.617000000000004,
+    "colaMusical": 3,
+    "diagnostico": "La alineacion marcaba el fin de \"Amén.\" en 95.04s, pero el audio real ya esta en silencio desde 94.08s -- \"Señor,\" (la palabra siguiente del bloque) empieza en 95.2s. El corte anterior (95.39s) caia dentro de ese margen y alcanzaba a capturar el arranque de \"Señor,\"."
+  },
+  {
+    "id": "short2",
+    "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_009/_generacion/shorts/video_009_short2.mp4",
+    "duracion": 40.977007,
+    "extraccionInicio": 79.673,
+    "extraccionFinVoz": 117.65,
+    "duracionVoz": 37.977000000000004,
+    "colaMusical": 3,
+    "diagnostico": "El bloque 6 termina en 118.126s y la alineacion marcaba \"Amén.\" hasta 118.16s (mas alla del propio archivo). La energia real muestra la voz terminando hacia 117.1-117.3s, silencio limpio hasta 117.9s, y un residuo \"shh\" nuevo (banda >3.5kHz) justo en los ultimos ~0.1-0.13s del archivo (118.0-118.13s) -- el corte anterior (fin real del archivo) incluia ese residuo completo."
+  }
+]
