@@ -1,0 +1,13 @@
+{
+  "model_id": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "output_format": "mp3_44100_128",
+  "text": "Ya apagaste la luz, pero tu mente sigue preguntando: ¿y si algo sale mal? Oremos juntos con el Salmo ciento veintiuno. Si hay una preocupación que vuelve cada vez que cierras los ojos, piensa un momento en ella. Vamos a ponerla delante de Dios. Escucha lo que dice el salmo: «Ni se dormirá el que te guarda».",
+  "previous_text": null,
+  "next_text": null
+}

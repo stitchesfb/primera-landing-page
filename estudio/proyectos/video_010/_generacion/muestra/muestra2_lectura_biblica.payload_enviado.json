@@ -1,0 +1,13 @@
+{
+  "model_id": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "output_format": "mp3_44100_128",
+  "text": "Escuchemos ahora el salmo completo.\n\n«Cántico gradual.\n\nAlzaré mis ojos a los montes, de donde vendrá mi socorro.\n\nMi socorro viene de Jehová, que hizo los cielos y la tierra.\n\nNo dará tu pie al resbaladero. Ni se dormirá el que te guarda.\n\nHe aquí, no se adormecerá ni dormirá el que guarda a Israel.\n\nJehová es tu guardador. Jehová es tu sombra a tu mano derecha.\n\nEl sol no te fatigará de día, ni la luna de noche.\n\nJehová te guardará de todo mal. Él guardará tu alma.\n\nJehová guardará tu salida y tu entrada, desde ahora y para siempre».",
+  "previous_text": null,
+  "next_text": null
+}

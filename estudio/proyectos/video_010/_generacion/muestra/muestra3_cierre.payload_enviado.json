@@ -1,0 +1,13 @@
+{
+  "model_id": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "output_format": "mp3_44100_128",
+  "text": "Cuida a quien amo, Señor. Acompáñame en esta noche. Dame fuerzas para mañana. Pon tu paz en mi corazón.\n\nCuando vuelva la luz, ayúdame a hacer con calma lo que esté en mis manos. Mientras tanto, recibo este momento de reposo. Gracias por sostenerme en lo que alcanzo a ver y en lo que todavía desconozco.\n\nTú guardas mi salida y mi entrada. También conoces esta hora en que me acuesto. Aquí estoy, Señor. En tus manos dejo lo que me inquieta.\n\nMi socorro viene de ti. Gracias por estar cerca.\n\nEn el nombre de Jesús. Amén.",
+  "previous_text": "Me quedo un rato con esta verdad del salmo. Mi socorro viene de ti. Las palabras pueden ser pocas ahora. Tú ya has escuchado la oración entera. También conoces lo que me guardé y lo que todavía no consigo decir. Quédate conmigo en el silencio que sigue.",
+  "next_text": null
+}

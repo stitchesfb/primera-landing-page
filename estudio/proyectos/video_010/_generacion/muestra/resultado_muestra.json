@@ -1,0 +1,38 @@
+{
+  "modelo": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "ajustes": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "formato_salida": "mp3_44100_128",
+  "excepcion_de_voz": "eleven_v4 con los ajustes exactos del Video 9, autorizado por Orlando como excepcion de alcance Video 10. canal.json no se modifico.",
+  "consumo_antes": 84197,
+  "consumo_despues": 84801,
+  "consumo_estable": true,
+  "segundos_esperados_estabilizacion": 27,
+  "delta_creditos_contador_suscripcion": 604,
+  "caracteres_totales_enviados": 1371,
+  "tarifa_real_observada": 0.44055433989788473,
+  "resultados": [
+    {
+      "id": "muestra1_apertura",
+      "caracteres": 308,
+      "bytes": 340261,
+      "texto_identico": true
+    },
+    {
+      "id": "muestra2_lectura_biblica",
+      "caracteres": 541,
+      "bytes": 667941,
+      "texto_identico": true
+    },
+    {
+      "id": "muestra3_cierre",
+      "caracteres": 522,
+      "bytes": 692183,
+      "texto_identico": true
+    }
+  ]
+}
