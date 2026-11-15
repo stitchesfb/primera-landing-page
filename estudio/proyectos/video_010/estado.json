@@ -1,0 +1,106 @@
+{
+  "estado": "plan_bloques_tts_entregado_pendiente_decision_de_voz_y_autorizacion_de_muestra",
+  "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
+  "guion": {
+    "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
+    "sha256": "7db9a40c0acd88025ca1c0379dc9b25a410d163e671ab75779c9d098e3ce5317",
+    "estado": "paquete editorial aprobado por Orlando -- su aprobacion reemplaza el 'pendiente de revision' del encabezado del propio guion",
+    "fecha_aprobacion": "2026-11-15"
+  },
+  "prioridad_del_proyecto": "Orlando indico que para el Video 10 se da prioridad a DECISIONES_CERRADAS ante cualquier conflicto con lo realmente usado en el Video 9.",
+  "configuracion_de_voz": {
+    "estado": "pendiente_decision_de_orlando",
+    "documentos_vigentes_canal_json_y_decisiones_cerradas": {
+      "coinciden_entre_si": true,
+      "modelo": "eleven_flash_v2_5",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "ajustes": {
+        "stability": 0.65,
+        "similarity_boost": 0.88,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 0.91
+      }
+    },
+    "lo_realmente_aprobado_en_video_009": {
+      "modelo": "eleven_v4",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "ajustes": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "uniformidad": "uniforme en los 15 bloques (a diferencia del Video 8, que mezclo dos configuraciones) -- verificado en resultado_generacion.json y en los payloads de los bloques 1, 8 y 15",
+      "alcance_declarado": "decision_video_009 en estado.json del Video 9 -- explicitamente de alcance de ese video, canal.json nunca se actualizo"
+    },
+    "contradiccion_senalada": "Esto contradice una decision cerrada: el Video 9 quedo aprobado con eleven_v4 (0.5/0.75/1) mientras canal.json y DECISIONES_CERRADAS siguen describiendo eleven_flash_v2_5 (0.65/0.88/0.91) como la voz del canal. La decision de v4 se registro como alcance exclusivo del Video 9, nunca como actualizacion permanente.",
+    "recomendacion": "eleven_flash_v2_5 con los ajustes de canal.json, por defecto, dado que Orlando dio prioridad a Decisiones Cerradas en este proyecto. Alternativa explicita: repetir eleven_v4 (0.5/0.75/1) para continuidad de tono con el Video 9, el mas reciente -- no se asume, queda a su decision.",
+    "dato_sin_verificar": "La tarifa real observada de eleven_v4 en el Video 9 (0.4125 creditos/caracter) es un solo dato historico con un texto distinto; no hay garantia de que se repita en el Video 10.",
+    "pendiente": "Decision expresa de Orlando antes de generar la muestra."
+  },
+  "plan_bloques_tts": {
+    "fecha": "2026-11-15",
+    "metodo": "Texto narrado extraido entre la segunda aparicion de [INICIO NARRACION] y [FIN NARRACION] (la primera aparicion de cada marca esta en las notas de produccion, entre comillas); encabezados ## N. y marcas entre corchetes excluidas. 62 parrafos, 15424 caracteres sin separadores (15526 con separadores internos de bloque). Agrupados en 11 bloques, ninguno mayor a 2000 caracteres (canal.json -> api.max_caracteres_por_peticion), ninguno dividiendo un parrafo. El Salmo 121 completo (introduccion + 8 versiculos RVR1909) queda aislado entero en el bloque 2, mismo criterio que la cita de Mateo 11 en el Video 9. Los 3 Shorts quedan enteros cada uno dentro de un unico bloque (bloques 3, 6 y 8).",
+    "total_bloques": 11,
+    "total_parrafos": 62,
+    "total_caracteres": 15526,
+    "archivo_datos": "estudio/proyectos/video_010/_generacion/plan_bloques_tts.json",
+    "shorts": [
+      { "id": "short1", "bloque": 3, "rotulo": "¿Y SI ALGO SALE MAL?", "pasaje": "Salmo 121:3-4" },
+      { "id": "short2", "bloque": 6, "rotulo": "¿TE PREOCUPA ALGUIEN?", "pasaje": "Salmo 121:2, 8" },
+      { "id": "short3", "bloque": 8, "rotulo": "¿DESPERTASTE DE MADRUGADA?", "pasaje": "Salmo 121:4-6" }
+    ],
+    "pausas": {
+      "total": 9,
+      "fronteras_reales_entre_bloques": [1, 2, 3, 4, 6, 8],
+      "embebidas_dentro_de_un_bloque": { "5": "dentro del bloque 6, tras el Short 2", "7": "dentro del bloque 8, tras el Short 3" },
+      "pausa_9": "cierre musical del video completo (10s, musica con fundido suave) -- no es costura entre bloques de voz, se construye en el montaje final",
+      "metodo_para_no_duplicar_silencio": "Se medira con silencedetect el silencio/aire real que ya exista en el borde de cada bloque antes de insertar la pausa objetivo, añadiendo solo la diferencia necesaria para alcanzar el objetivo del guion -- mismo metodo que el Video 9."
+    }
+  },
+  "muestra_propuesta": {
+    "estado": "propuesta_pendiente_de_autorizacion",
+    "fragmentos": [
+      { "id": "muestra1_apertura", "bloque_completo": 1, "caracteres": 308 },
+      { "id": "muestra2_lectura_biblica", "bloque_completo": 2, "caracteres": 541, "nota": "Escuchar muestra1 seguida de muestra2 cubre la union real bloque1-bloque2 con la pausa 1 (3s) de por medio, sin generar un fragmento aparte." },
+      { "id": "muestra3_cierre", "bloque": 11, "rango_parrafos": [57, 61], "caracteres": 514, "nota": "No es el bloque completo -- usara previous_text real del parrafo anterior dentro del mismo bloque para una prosodia de entrada natural." }
+    ],
+    "total_caracteres_muestra": 1363,
+    "costo_estimado": {
+      "eleven_flash_v2_5": 376,
+      "eleven_v4": 1363
+    },
+    "tarifas_usadas": {
+      "eleven_flash_v2_5": "0.276 creditos/caracter (medida, confiable, canal.json -> constantes)",
+      "eleven_v4": "1 credito/caracter (tarifa oficial publicada)"
+    }
+  },
+  "presupuesto_lote_completo": {
+    "caracteres": 15526,
+    "eleven_flash_v2_5": 4285,
+    "eleven_v4": 15526,
+    "referencia_sin_garantia_v4_observado_video_009": 6404,
+    "costo_tras_reutilizar_bloques_1_y_2_de_la_muestra": {
+      "caracteres_restantes": 14677,
+      "eleven_flash_v2_5": 4051,
+      "eleven_v4": 14677,
+      "nota": "A diferencia del Video 9, las muestras 1 y 2 son bloques completos e identicos a los del lote -- si se aprueban, sus audios se reutilizan sin regenerar y sin cobro adicional. La muestra 3 (cierre) es parcial y si se aprueba igual se regenera dentro del bloque 11 normal del lote."
+    },
+    "costo_combinado_real_muestra_mas_lote_tras_reuso": {
+      "eleven_flash_v2_5": 4427,
+      "eleven_v4": 16040
+    }
+  },
+  "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
+  "pendiente": [
+    "Decision de Orlando sobre la configuracion de voz (Flash v2.5 por defecto segun prioridad del proyecto, o v4 como alternativa explicita)",
+    "Autorizacion de Orlando para generar la muestra de 1363 caracteres",
+    "El lote completo de 11 bloques se decide despues de escuchar y aprobar la muestra"
+  ],
+  "historial": [
+    {
+      "fecha": "2026-11-15",
+      "evento": "Primera tarea del Video 10. Orlando adjunto VIDEO_010_GUION_COMPLETO_REV01.md (paquete editorial aprobado, basado en el Salmo 121) y pidio, dando prioridad a DECISIONES_CERRADAS para este proyecto ante cualquier conflicto con el Video 9: (1) verificar la configuracion de voz real del Video 9 contra el manifiesto/registros de su narracion final aprobada y senalar cualquier contradiccion con una decision cerrada; (2) dividir la narracion en bloques naturales con el conteo exacto de caracteres, conservando enteros el Salmo 121 completo y los 3 Shorts, y ubicar las 9 pausas explicando como se evitaria duplicar el silencio natural en las uniones; (3) proponer fragmentos de muestra (apertura, lectura biblica, cierre, al menos una union real entre bloques) con su costo separado del lote completo, la tarifa usada, y el costo adicional tras reutilizar los bloques aprobados de la muestra. Se confirmo que canal.json y DECISIONES_CERRADAS coinciden entre si (eleven_flash_v2_5, 0.65/0.88/0.91) pero que el Video 9 realmente aprobado uso eleven_v4 (0.5/0.75/1) de forma uniforme en sus 15 bloques -- una decision registrada explicitamente como de alcance solo del Video 9, nunca trasladada a canal.json. Se presento esa contradiccion con cifras exactas y se recomendo Flash v2.5 por defecto (documentado, vigente, 3.5-4x mas barato), dejando explicita la alternativa de v4 para continuidad de tono. Se extrajeron 62 parrafos narrados (15424 caracteres sin separadores) agrupados en 11 bloques (15526 caracteres con separadores internos), ninguno mayor a 2000 caracteres, el Salmo 121 completo aislado entero en el bloque 2 (mismo criterio que la cita de Mateo 11 en el Video 9) y los 3 Shorts enteros cada uno en un bloque. De las 9 pausas, 6 caen en frontera real entre bloques, 2 quedan embebidas (igual patron que las pausas 3 y 8 del Video 9) y la novena es el cierre musical del video, fuera de cualquier costura de bloques. Se diseno una muestra de 1363 caracteres usando los bloques 1 y 2 completos (apertura + Salmo 121 entero) mas un tramo del cierre (bloque 11), de forma que escuchar las muestras 1 y 2 en secuencia cubre la union real con pausa sin necesidad de un cuarto fragmento -- y, a diferencia del Video 9, si esa muestra se aprueba los audios de los bloques 1 y 2 se podran reutilizar directamente en el lote sin regenerarlos ni volver a cobrarlos. Se presento el costo de la muestra, del lote completo y del lote tras ese reuso, separados y con la tarifa de cada modelo indicada. Se señalo aparte una observacion menor de pronunciacion (registro liturgico de las comillas « », igual riesgo que en el Video 9) sin tocar el texto. No se llamo a ElevenLabs ni se genero ningun audio. Los Videos 7, 8 y 9 permanecen intactos."
+    }
+  ]
+}

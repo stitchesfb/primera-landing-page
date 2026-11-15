@@ -1,0 +1,204 @@
+{
+  "bloques": [
+    {
+      "bloque": 1,
+      "parrafos_indices": [
+        0,
+        0
+      ],
+      "cantidad_parrafos": 1,
+      "caracteres": 308,
+      "secciones": [
+        1
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": null,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Ya apagaste la luz, pero tu mente sigue",
+      "ultimas_palabras": "salmo: «Ni se dormirá el que te guarda»."
+    },
+    {
+      "bloque": 2,
+      "parrafos_indices": [
+        1,
+        10
+      ],
+      "cantidad_parrafos": 10,
+      "caracteres": 541,
+      "secciones": [
+        1
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 1,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Escuchemos ahora el salmo completo.",
+      "ultimas_palabras": "y tu entrada, desde ahora y para siempre»."
+    },
+    {
+      "bloque": 3,
+      "parrafos_indices": [
+        11,
+        14
+      ],
+      "cantidad_parrafos": 4,
+      "caracteres": 1215,
+      "secciones": [
+        1,
+        2
+      ],
+      "shorts_incluidos": [
+        1
+      ],
+      "pausa_que_lo_precede": 2,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Señor, aquí estoy. Tú conoces mi día, desde",
+      "ultimas_palabras": "que no puedo resolver. Ayúdame a descansar. Amén."
+    },
+    {
+      "bloque": 4,
+      "parrafos_indices": [
+        15,
+        20
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1971,
+      "secciones": [
+        2
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 3,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Tal vez ya sabes cuál es ese pensamiento.",
+      "ultimas_palabras": "me avergüenza, dame confianza para decirlo con honestidad."
+    },
+    {
+      "bloque": 5,
+      "parrafos_indices": [
+        21,
+        24
+      ],
+      "cantidad_parrafos": 4,
+      "caracteres": 1305,
+      "secciones": [
+        2
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": null,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "A veces el temor de mañana trae consigo",
+      "ultimas_palabras": "a confiar en ti mientras llega el día."
+    },
+    {
+      "bloque": 6,
+      "parrafos_indices": [
+        25,
+        29
+      ],
+      "cantidad_parrafos": 5,
+      "caracteres": 1744,
+      "secciones": [
+        3
+      ],
+      "shorts_incluidos": [
+        2
+      ],
+      "pausa_que_lo_precede": 4,
+      "pausas_embebidas_dentro_del_bloque": [
+        5
+      ],
+      "primeras_palabras": "¿Hay alguien que te preocupa tanto que esta",
+      "ultimas_palabras": "ayudar le haga sentir que su voz importa."
+    },
+    {
+      "bloque": 7,
+      "parrafos_indices": [
+        30,
+        35
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1896,
+      "secciones": [
+        3
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": null,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Cuando mi preocupación me lleve a hacer demasiadas",
+      "ultimas_palabras": "hacer el bien que esté en mis manos."
+    },
+    {
+      "bloque": 8,
+      "parrafos_indices": [
+        36,
+        41
+      ],
+      "cantidad_parrafos": 6,
+      "caracteres": 1824,
+      "secciones": [
+        4
+      ],
+      "shorts_incluidos": [
+        3
+      ],
+      "pausa_que_lo_precede": 6,
+      "pausas_embebidas_dentro_del_bloque": [
+        7
+      ],
+      "primeras_palabras": "¿Te despertaste de madrugada y tu mente ya",
+      "ultimas_palabras": "quedarme un instante en silencio después de decirlas."
+    },
+    {
+      "bloque": 9,
+      "parrafos_indices": [
+        42,
+        46
+      ],
+      "cantidad_parrafos": 5,
+      "caracteres": 1505,
+      "secciones": [
+        4
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": null,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Dejo que mis manos reposen donde están. Puedo",
+      "ultimas_palabras": "contigo en voz baja o escuchando en silencio."
+    },
+    {
+      "bloque": 10,
+      "parrafos_indices": [
+        47,
+        53
+      ],
+      "cantidad_parrafos": 7,
+      "caracteres": 1896,
+      "secciones": [
+        5
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": 8,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "Volvamos un momento a esa preocupación que teníamos",
+      "ultimas_palabras": "caminar por lo que todavía me cuesta entender."
+    },
+    {
+      "bloque": 11,
+      "parrafos_indices": [
+        54,
+        61
+      ],
+      "cantidad_parrafos": 8,
+      "caracteres": 1321,
+      "secciones": [
+        5
+      ],
+      "shorts_incluidos": [],
+      "pausa_que_lo_precede": null,
+      "pausas_embebidas_dentro_del_bloque": [],
+      "primeras_palabras": "El día de hoy llegó hasta aquí. Lo",
+      "ultimas_palabras": "En el nombre de Jesús. Amén."
+    }
+  ],
+  "totalChars": 15526,
+  "totalParrafos": 62
+}
