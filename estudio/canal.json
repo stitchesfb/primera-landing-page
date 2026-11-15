@@ -2,16 +2,15 @@
   "canal": "Oraciones Biblicas Diarias",
   "voz": {
     "nombre": "El Faraon - Full, Clear, Mellow",
-    "modelo": "eleven_flash_v2_5",
+    "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+    "modelo": "eleven_v4",
     "ajustes": {
-      "speed": 0.91,
-      "stability": 0.65,
-      "similarity_boost": 0.88,
-      "style": 0.0,
-      "use_speaker_boost": true
+      "speed": 1,
+      "stability": 0.5,
+      "similarity_boost": 0.75
     }
   },
-  "_nota_modelo": "Flash v2.5 aprobado tras prueba de calidad A/B contra Multilingual v2. El descuento real de creditos NO se asume: lo mide 'node cli.mjs sonda' contra la API y se guarda en calibracion.json.",
+  "_nota_modelo": "Eleven v4 aprobado como modelo predeterminado el 2026-11-14, con la configuracion uniforme aprobada en el Video 9.",
   "api": {
     "base": "https://api.elevenlabs.io",
     "formato_salida": "mp3_44100_128",
@@ -60,10 +59,16 @@
     "hueco_min_s": 0.08
   },
   "constantes": {
-    "_nota": "MEDIDOS contra la API el 2026-08-17, no supuestos. Confirmados por dos vias independientes: el contador de la suscripcion y el panel de Analytics (939 caracteres = 259 creditos en 5 peticiones). 'sonda' y 'voz' los siguen refinando en calibracion.json.",
-    "creditos_por_caracter": 0.276,
-    "caracteres_por_minuto": 794,
+    "_nota": "Estimacion inicial medida con la muestra del Video 10: 604 creditos, 1371 caracteres y 106.19 segundos de audio. El consumo puede variar.",
+    "modelo": "eleven_v4",
+    "creditos_por_caracter": 0.44055433989788473,
+    "caracteres_por_minuto": 775,
     "medido": true
+  },
+  "calibracion_historica_flash_v2_5": {
+    "_nota": "Medicion historica por API del 2026-08-17: 939 caracteres y 259 creditos en 5 peticiones.",
+    "creditos_por_caracter": 0.276,
+    "caracteres_por_minuto": 794
   },
   "render": {
     "ancho": 1920,
