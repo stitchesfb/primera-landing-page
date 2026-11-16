@@ -6,6 +6,8 @@
 **Se respeta:** `estudio/docs/SISTEMA_ACTIVO_ORACIONES_BIBLICAS_DIARIAS.md` (§4 Producción) y `estudio/docs/VIDEO_TEMPLATE_ORACIONES_BIBLICAS_DIARIAS.md`.
 **Prioridad para este proyecto (indicada por Orlando):** ante cualquier conflicto entre lo realmente usado en el Video 9 y una decisión cerrada, se presenta la diferencia para que decida — ver sección 1.
 
+**Actualización (2026-11-16):** la sección 1 de abajo quedó resuelta. El 2026-11-14 Orlando actualizó `canal.json` directamente para establecer `eleven_v4` (El Faraón, `stability 0.5`/`similarity_boost 0.75`/`speed 1`) como configuración **predeterminada del canal**, reemplazando `eleven_flash_v2_5`. Esto ocurrió ~11 minutos después de generarse la muestra de este video (sección 3), así que la muestra y la regeneración del bloque 1 (sección 3) quedaron, en los hechos, alineadas con el nuevo baseline del canal — ya no son una excepción. La sección 1 se conserva sin reescribir porque documenta con exactitud el análisis y la contradicción tal como se presentaron antes de esa decisión.
+
 ---
 
 ## 1. Configuración de voz — verificación contra el Video 9
@@ -158,7 +160,7 @@ Las Muestras 1 y 2 son, cada una, un **bloque completo e idéntico** al que se e
 
 ### Decisión de voz para esta muestra — excepción de alcance Video 10
 
-Orlando autorizó únicamente la muestra, con **`eleven_v4`, voz El Faraón (`8mBRP99B2Ng2QwsJMFQl`), y los ajustes exactos del Video 9** (`stability 0.5`, `similarity_boost 0.75`, `speed 1`), registrada como **excepción de este video** — no se actualizó `canal.json`, que sigue describiendo `eleven_flash_v2_5` como baseline del canal, igual criterio que la decisión equivalente del Video 9.
+Orlando autorizó únicamente la muestra, con **`eleven_v4`, voz El Faraón (`8mBRP99B2Ng2QwsJMFQl`), y los ajustes exactos del Video 9** (`stability 0.5`, `similarity_boost 0.75`, `speed 1`), registrada como **excepción de este video** — en el momento de generarla, `canal.json` todavía describía `eleven_flash_v2_5` como baseline del canal (lo actualizó minutos después, ver actualización arriba), igual criterio que la decisión equivalente del Video 9.
 
 ### Resultado real de la generación de la muestra
 
@@ -172,13 +174,13 @@ Consumo medido por el contador de suscripción (antes/después, estable): **604 
 
 ### Revisión del bloque 1 — regenerado (2026-11-16)
 
-Tras aprobar la muestra, Orlando pidió el cambio de texto de la sección anterior. Se regeneró **únicamente el bloque 1** (337 caracteres nuevos) con `eleven_v4`, voz El Faraón, los mismos ajustes (`stability 0.5`/`similarity_boost 0.75`/`speed 1`) — misma excepción de alcance Video 10, sin tocar `canal.json`. Texto alineado idéntico al enviado. Consumo medido por el contador de suscripción (antes/después, estable): **148 créditos para 337 caracteres** (0,4392 créditos/carácter, consistente con las demás mediciones de este video). Se unió con la lectura bíblica ya grabada (`muestra2_lectura_biblica.mp3`, sin regenerar): se midió el silencio real ya presente en ambos bordes (≈0,219 s al final del nuevo bloque 1, ≈0,105 s al inicio de la lectura) y se añadió solo la diferencia (2,6755 s) para llegar al objetivo de 3,0 s de la pausa 1 — verificado después con `silencedetect`: **2,97 s reales** en la unión, dentro de tolerancia. Archivo: `estudio/proyectos/video_010/_generacion/muestra/video_010_muestra_apertura_rev02_mas_salmo121.mp3` (67,42 s).
+Tras aprobar la muestra, Orlando pidió el cambio de texto de la sección anterior. Se regeneró **únicamente el bloque 1** (337 caracteres nuevos) con `eleven_v4`, voz El Faraón, los mismos ajustes (`stability 0.5`/`similarity_boost 0.75`/`speed 1`). Para esta fecha (2026-11-16), esta configuración ya era la predeterminada de `canal.json` (actualizada el 2026-11-14) — no una excepción. Texto alineado idéntico al enviado. Consumo medido por el contador de suscripción (antes/después, estable): **148 créditos para 337 caracteres** (0,4392 créditos/carácter, consistente con las demás mediciones de este video). Se unió con la lectura bíblica ya grabada (`muestra2_lectura_biblica.mp3`, sin regenerar): se midió el silencio real ya presente en ambos bordes (≈0,219 s al final del nuevo bloque 1, ≈0,105 s al inicio de la lectura) y se añadió solo la diferencia (2,6755 s) para llegar al objetivo de 3,0 s de la pausa 1 — verificado después con `silencedetect`: **2,97 s reales** en la unión, dentro de tolerancia. Archivo: `estudio/proyectos/video_010/_generacion/muestra/video_010_muestra_apertura_rev02_mas_salmo121.mp3` (67,42 s).
 
 ### Presupuesto del lote completo (11 bloques, 15.555 caracteres — incluye la revisión del bloque 1)
 
 | Si se genera con… | Caracteres | Tarifa usada | Créditos estimados |
 |---|---:|---|---:|
-| `eleven_flash_v2_5` (recomendado) | 15.555 | 0,276/carácter (medida, confiable) | **≈ 4.293** |
+| `eleven_flash_v2_5` (ya no es la opción predeterminada, ver actualización arriba) | 15.555 | 0,276/carácter (medida, confiable) | ≈ 4.293 |
 | `eleven_v4` | 15.555 | 1/carácter (tarifa oficial publicada) | **≈ 15.555** |
 | *Referencia sin garantía* | 15.526 | 0,4125/carácter (único dato observado en el Video 9, texto distinto) | ≈ 6.404 |
 
@@ -191,7 +193,7 @@ A diferencia del Video 9 (donde la muestra siempre se consideró aparte y todo e
 | `eleven_flash_v2_5` | 14.677 | ≈ 4.051 créditos |
 | `eleven_v4` | 14.677 | ≈ 14.677 créditos |
 
-Ya gastado hasta ahora, de forma real y medida (no estimada), independientemente de lo anterior: **604 créditos** (muestra original de 1.371 caracteres) + **148 créditos** (regeneración del bloque 1, 337 caracteres) = **752 créditos**. Ambos en `eleven_v4`, por la excepción de alcance Video 10. Esto ya se gastó y no se recupera ni se resta del presupuesto del lote; se informa aparte para que Orlando tenga el gasto acumulado real de este video.
+Ya gastado hasta ahora, de forma real y medida (no estimada), independientemente de lo anterior: **604 créditos** (muestra original de 1.371 caracteres) + **148 créditos** (regeneración del bloque 1, 337 caracteres) = **752 créditos**. Ambos en `eleven_v4`, la configuración ahora predeterminada del canal. Esto ya se gastó y no se recupera ni se resta del presupuesto del lote; se informa aparte para que Orlando tenga el gasto acumulado real de este video.
 
 La Muestra 3 (cierre) no es un bloque completo, así que no se puede reutilizar igual: sus 514 caracteres se generan una vez para la muestra y, si se aprueba, se vuelven a generar dentro del bloque 11 normal del lote — mismo criterio que el Video 9 para fragmentos parciales.
 
@@ -211,4 +213,4 @@ El Salmo 121 completo está en Reina-Valera 1909: conjugaciones como "vendrá", 
 
 ---
 
-**Me detengo aquí.** Falta la autorización de Orlando sobre: (a) qué configuración de voz usar (Flash v2.5 por defecto, según la prioridad indicada para este proyecto, o v4 como alternativa explícita) y (b) generar la muestra de 1.363 caracteres. El lote completo se decide después de escuchar y aprobar esa muestra.
+**Actualización final:** la elección de voz quedó resuelta el 2026-11-14 (`eleven_v4` predeterminado del canal). La muestra se generó y se aprobó (con la revisión del bloque 1 incluida). **Sigue pendiente únicamente la autorización expresa de Orlando para generar el lote completo de 11 bloques.**

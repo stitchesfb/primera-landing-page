@@ -1,5 +1,5 @@
 {
-  "estado": "bloque1_revisado_y_regenerado_pendiente_revision_de_orlando_antes_del_lote",
+  "estado": "bloque1_revisado_y_regenerado_con_v4_ahora_predeterminado_pendiente_autorizacion_del_lote",
   "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
   "guion": {
     "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
@@ -10,19 +10,7 @@
   },
   "prioridad_del_proyecto": "Orlando indico que para el Video 10 se da prioridad a DECISIONES_CERRADAS ante cualquier conflicto con lo realmente usado en el Video 9.",
   "configuracion_de_voz": {
-    "estado": "pendiente_decision_de_orlando",
-    "documentos_vigentes_canal_json_y_decisiones_cerradas": {
-      "coinciden_entre_si": true,
-      "modelo": "eleven_flash_v2_5",
-      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
-      "ajustes": {
-        "stability": 0.65,
-        "similarity_boost": 0.88,
-        "style": 0,
-        "use_speaker_boost": true,
-        "speed": 0.91
-      }
-    },
+    "estado": "eleven_v4_aprobado_como_configuracion_predeterminada_del_canal",
     "lo_realmente_aprobado_en_video_009": {
       "modelo": "eleven_v4",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
@@ -34,19 +22,47 @@
       "uniformidad": "uniforme en los 15 bloques (a diferencia del Video 8, que mezclo dos configuraciones) -- verificado en resultado_generacion.json y en los payloads de los bloques 1, 8 y 15",
       "alcance_declarado": "decision_video_009 en estado.json del Video 9 -- explicitamente de alcance de ese video, canal.json nunca se actualizo"
     },
-    "contradiccion_senalada": "Esto contradice una decision cerrada: el Video 9 quedo aprobado con eleven_v4 (0.5/0.75/1) mientras canal.json y DECISIONES_CERRADAS siguen describiendo eleven_flash_v2_5 (0.65/0.88/0.91) como la voz del canal. La decision de v4 se registro como alcance exclusivo del Video 9, nunca como actualizacion permanente.",
-    "recomendacion": "eleven_flash_v2_5 con los ajustes de canal.json, por defecto, dado que Orlando dio prioridad a Decisiones Cerradas en este proyecto. Alternativa explicita: repetir eleven_v4 (0.5/0.75/1) para continuidad de tono con el Video 9, el mas reciente -- no se asume, queda a su decision.",
-    "dato_sin_verificar": "La tarifa real observada de eleven_v4 en el Video 9 (0.4125 creditos/caracter) es un solo dato historico con un texto distinto; no hay garantia de que se repita en el Video 10.",
+    "contradiccion_senalada": "Diferencia histórica: el Video 9 usó Eleven v4 mientras la configuración general aún era Flash v2.5.",
+    "recomendacion": "Usar la configuración predeterminada de Eleven v4 aprobada por Orlando.",
+    "dato_sin_verificar": "La muestra del Video 10 midió 604 créditos para 1371 caracteres. El consumo del lote se confirmará con la generación autorizada.",
     "decision_video_010_excepcion_solo_para_la_muestra": {
       "fecha": "2026-11-15",
       "autorizado_por": "Orlando",
       "alcance": "Unicamente la muestra de 1371 caracteres -- el lote completo de 11 bloques NO esta autorizado todavia.",
       "modelo": "eleven_v4",
       "voice_id": "8mBRP99B2Ng2QwsJMFQl",
-      "ajustes": { "stability": 0.5, "similarity_boost": 0.75, "speed": 1 },
+      "ajustes": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
       "nota": "Mismos ajustes exactos del Video 9. Excepcion de alcance Video 10, igual criterio que el Video 9 -- canal.json no se modifico, sigue describiendo eleven_flash_v2_5 como baseline del canal."
     },
-    "pendiente": "Revision de Orlando de la muestra generada antes de autorizar el lote completo."
+    "pendiente": "Revisión de la muestra ya generada y autorización del lote.",
+    "configuracion_predeterminada_aprobada": {
+      "fecha_aprobacion": "2026-11-14",
+      "modelo": "eleven_v4",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "ajustes": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "formato_salida": "mp3_44100_128"
+    },
+    "configuracion_anterior_flash_v2_5": {
+      "coinciden_entre_si": true,
+      "modelo": "eleven_flash_v2_5",
+      "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+      "ajustes": {
+        "stability": 0.65,
+        "similarity_boost": 0.88,
+        "style": 0,
+        "use_speaker_boost": true,
+        "speed": 0.91
+      },
+      "cierre_historico": "Configuración vigente antes de aprobar Eleven v4 como predeterminado."
+    }
   },
   "plan_bloques_tts": {
     "fecha": "2026-11-15",
@@ -116,7 +132,7 @@
     "modelo": "eleven_v4",
     "voice_id": "8mBRP99B2Ng2QwsJMFQl",
     "ajustes": { "stability": 0.5, "similarity_boost": 0.75, "speed": 1 },
-    "excepcion": "Misma excepcion de alcance Video 10 ya registrada para la muestra -- canal.json no se modifico.",
+    "nota_configuracion": "Al momento de regenerar este bloque (2026-11-16), canal.json ya habia sido actualizado por Orlando el 2026-11-14 para establecer esta misma configuracion (eleven_v4, El Faraon, 0.5/0.75/1) como predeterminada del canal -- deja de ser una excepcion de alcance Video 10 y pasa a ser simplemente la configuracion vigente.",
     "archivo_audio": "estudio/proyectos/video_010/_generacion/muestra/muestra1_apertura_rev02.mp3",
     "texto_identico_al_enviado": true,
     "consumo_real": {
@@ -154,9 +170,8 @@
   },
   "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
   "pendiente": [
-    "Revision de Orlando de la muestra generada (eleven_v4, excepcion de alcance Video 10)",
-    "Decision de Orlando sobre la configuracion de voz del lote completo (Flash v2.5 por defecto segun prioridad del proyecto, o v4 como alternativa explicita -- la muestra en v4 no prejuzga la decision del lote)",
-    "El lote completo de 11 bloques se decide despues de escuchar y aprobar la muestra"
+    "Revisión de Orlando de la muestra ya generada con la configuración aprobada de Eleven v4.",
+    "Autorización expresa de Orlando para generar el lote completo."
   ],
   "historial": [
     {

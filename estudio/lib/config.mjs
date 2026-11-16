@@ -67,32 +67,34 @@ export function guardarCalibracion(cal) {
  */
 export function registrarMedida(cal, medida) {
   cal.medidas.push({ fecha: new Date().toISOString(), ...medida });
-
-  if (medida.creditos_por_caracter != null && Number.isFinite(medida.creditos_por_caracter)) {
-    cal.creditos_por_caracter = medida.creditos_por_caracter;
-  }
-
-  const conRitmo = cal.medidas.filter(
-    (m) => Number.isFinite(m.caracteres) && Number.isFinite(m.segundos) && m.segundos > 0
-  );
-  if (conRitmo.length) {
-    const caracteres = conRitmo.reduce((s, m) => s + m.caracteres, 0);
-    const segundos = conRitmo.reduce((s, m) => s + m.segundos, 0);
-    cal.caracteres_por_minuto = Math.round((caracteres / segundos) * 60);
-  }
+  Object.assign(cal, resumirMedidas(cal, medida.modelo));
   return cal;
 }
 
-/** Constantes vigentes, indicando si vienen de medida real o de supuesto. */
-export function constantes(canal, cal) {
-  // canal.constantes.medido indica que esos valores salieron de una medicion
-  // real contra la API, no de un supuesto de partida. calibracion.json, cuando
-  // existe, manda sobre ellos porque es la medida mas reciente.
-  const base = canal.constantes;
+function resumirMedidas(cal, modelo) {
+  const medidas = cal.medidas.filter((m) => m.modelo === modelo);
+  const ultimaTarifa = medidas.findLast(
+    (m) => Number.isFinite(m.creditos_por_caracter) && m.creditos_por_caracter > 0
+  );
+  const conRitmo = medidas.filter(
+    (m) => Number.isFinite(m.caracteres) && Number.isFinite(m.segundos) && m.segundos > 0
+  );
+  const caracteres = conRitmo.reduce((s, m) => s + m.caracteres, 0);
+  const segundos = conRitmo.reduce((s, m) => s + m.segundos, 0);
   return {
-    creditosPorCaracter: cal.creditos_por_caracter ?? base.creditos_por_caracter,
-    caracteresPorMinuto: cal.caracteres_por_minuto ?? base.caracteres_por_minuto,
-    calibradoCreditos: cal.creditos_por_caracter != null || base.medido === true,
-    calibradoRitmo: cal.caracteres_por_minuto != null || base.medido === true,
+    creditos_por_caracter: ultimaTarifa?.creditos_por_caracter ?? null,
+    caracteres_por_minuto: segundos > 0 ? Math.round((caracteres / segundos) * 60) : null,
+  };
+}
+
+/** Prioriza mediciones del modelo activo sobre las constantes del canal. */
+export function constantes(canal, cal) {
+  const base = canal.constantes;
+  const medida = base.modelo ? resumirMedidas(cal, canal.voz.modelo) : cal;
+  return {
+    creditosPorCaracter: medida.creditos_por_caracter ?? base.creditos_por_caracter,
+    caracteresPorMinuto: medida.caracteres_por_minuto ?? base.caracteres_por_minuto,
+    calibradoCreditos: medida.creditos_por_caracter != null || base.medido === true,
+    calibradoRitmo: medida.caracteres_por_minuto != null || base.medido === true,
   };
 }

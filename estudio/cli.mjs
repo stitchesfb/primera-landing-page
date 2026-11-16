@@ -4,7 +4,7 @@
  *
  * Checkpoint 1: todo lo anterior al render.
  *
- *   node cli.mjs sonda                 Mide el coste real de Flash v2.5 por API
+ *   node cli.mjs sonda                 Mide el coste real del modelo activo por API
  *   node cli.mjs voces                 Lista las voces y sus IDs
  *   node cli.mjs estimar  <proyecto>   Valida el plan y estima creditos (no gasta)
  *   node cli.mjs revisar  <proyecto>   Informe doctrinal asistido (no gasta)
@@ -96,7 +96,7 @@ function cliente() {
 }
 
 function vozId() {
-  const id = env.ELEVENLABS_VOICE_ID;
+  const id = env.ELEVENLABS_VOICE_ID || canal.voz.voice_id;
   if (!id) throw new Error('Falta ELEVENLABS_VOICE_ID en .env. Ejecuta "node cli.mjs voces" para verlo.');
   return id;
 }
@@ -114,9 +114,7 @@ async function preguntar(texto) {
  * Averigua, contra la API real, dos cosas que la documentacion publica no
  * deja claras y que cambian el presupuesto del canal entero:
  *
- *   1. Cuantos creditos descuenta de verdad Flash v2.5 por caracter. En la web
- *      se observo 1:1 (879 caracteres = 879 creditos); varias fuentes dicen
- *      que por API son 0,5. Aqui se mide, no se supone.
+ *   1. Cuantos creditos descuenta el modelo activo por caracter via API.
  *   2. Si el contexto de prosodia (previous_text / next_text) se factura. Si
  *      se facturara, generar parrafo a parrafo con contexto costaria hasta el
  *      triple, y habria que replantear la segmentacion.
@@ -220,13 +218,6 @@ async function cmdSonda() {
   console.log(`Creditos despues           ${miles(tras1.usados)}`);
   console.log(`Creditos consumidos        ${c.bold(String(coste1))}`);
   console.log(`Costo efectivo             ${c.bold(ratio.toFixed(3))} creditos/caracter`);
-  console.log(
-    ratio <= 0.6
-      ? c.verde('  → El descuento de Flash SI aplica por API. Capacidad mensual al doble.')
-      : ratio >= 0.9
-        ? c.ambar('  → Flash cobra 1:1 tambien por API, igual que en la web (879 = 879).')
-        : c.ambar('  → Ratio intermedio; conviene repetir la sonda con otro texto.')
-  );
 
   console.log(`\nCon contexto de prosodia   ${coste2} creditos (${extra >= 0 ? '+' : ''}${extra})`);
   console.log(

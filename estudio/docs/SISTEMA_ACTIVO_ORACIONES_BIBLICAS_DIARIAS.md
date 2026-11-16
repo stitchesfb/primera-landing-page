@@ -59,6 +59,9 @@ Consecuencia práctica: ritmo sereno, dicción clara, texto grande, contraste al
 
 ### Guion y voz
 
+- Configuración predeterminada aprobada por Orlando el 14 de noviembre de 2026: **Eleven v4** (`eleven_v4`), voz **El Faraón - Full, Clear, Mellow** (`8mBRP99B2Ng2QwsJMFQl`), velocidad `1.0`, estabilidad `0.50`, similitud `0.75` y salida `mp3_44100_128`. La configuración operativa está en `estudio/canal.json`.
+- Las estimaciones de costo y duración se basan en mediciones de v4. La calibración de Flash v2.5 es histórica.
+
 - Estructura recomendada: dolor concreto → presencia de Dios → Palabra → oración → entrega → descanso.
 - La progresión emocional debe ir de la tensión al reposo sin repetir ideas solo para aumentar la duración.
 - La voz, velocidad, estabilidad y pausas actuales son un baseline. Se confirman antes de cada producción importante y pueden cambiar después de una prueba corta.
