@@ -65,7 +65,7 @@ Se agruparon en **11 bloques continuos**, con las mismas reglas del Video 9 (Sis
 
 | Bloque | Párrafos | Caracteres | Sección(es) | Short | Pausa que lo precede | Pausa(s) embebida(s) dentro |
 |---|---:|---:|---|---|---|---|
-| 1 | 1 | 308 | 1 | — | apertura | — |
+| 1 | 1 | 337 | 1 | — | apertura | — |
 | 2 | 10 | 541 | 1 | — | P1 | — |
 | 3 | 4 | 1.215 | 1–2 | **Short 1** | P2 | — |
 | 4 | 6 | 1.971 | 2 | — | P3 | — |
@@ -77,7 +77,18 @@ Se agruparon en **11 bloques continuos**, con las mismas reglas del Video 9 (Sis
 | 10 | 7 | 1.896 | 5 | — | P8 | — |
 | 11 | 8 | 1.321 | 5 (cierre) | — | — (sigue del 10) | — |
 
-**Total: 11 bloques, 62 párrafos, 15.526 caracteres.** Máximo por bloque: 1.971 (bloque 4). Mínimo: 308 (bloque 1, la apertura, deliberadamente sola) — el bloque 2 (541 caracteres) es el Salmo 121 completo, aislado por el mismo motivo que la cita bíblica del Video 9.
+**Total: 11 bloques, 62 párrafos, 15.555 caracteres** (15.526 originales + 29 por la revisión del bloque 1 del 2026-11-16, ver más abajo). Máximo por bloque: 1.971 (bloque 4). El bloque 2 (541 caracteres) es el Salmo 121 completo, aislado por el mismo motivo que la cita bíblica del Video 9.
+
+### Revisión del bloque 1 (2026-11-16)
+
+Orlando aprobó la muestra de apertura y pidió sustituir las dos últimas frases del bloque 1 por un texto nuevo. Texto anterior → texto vigente:
+
+| | Texto | Caracteres |
+|---|---|---:|
+| Antes | "…piensa un momento en ella. Vamos a ponerla delante de Dios. Escucha lo que dice el salmo: «Ni se dormirá el que te guarda»." | 308 |
+| **Vigente** | "…piensa un momento en ella. «Vamos a confiarle esa preocupación a Dios. El salmo nos recuerda por qué podemos hacerlo: “Ni se dormirá el que te guarda”»." | **337** |
+
+Actualizado en `VIDEO_010_GUION_COMPLETO_REV01.md` (con nota de historial) y en `plan_bloques_tts.json`. El bloque 1 ya se regeneró con este texto (ver sección 3) — no requiere generarse de nuevo al autorizar el lote.
 
 Los tres Shorts:
 
@@ -159,22 +170,28 @@ Orlando autorizó únicamente la muestra, con **`eleven_v4`, voz El Faraón (`8m
 
 Consumo medido por el contador de suscripción (antes/después, estable): **604 créditos para 1.371 caracteres** (0,4406 créditos/carácter real observado — cercano al 0,4125 ya visto en el Video 9, confirma que no hay garantía de que la tarifa oficial de 1/carácter sea la que realmente se cobre).
 
-### Presupuesto del lote completo (11 bloques, 15.526 caracteres)
+### Revisión del bloque 1 — regenerado (2026-11-16)
+
+Tras aprobar la muestra, Orlando pidió el cambio de texto de la sección anterior. Se regeneró **únicamente el bloque 1** (337 caracteres nuevos) con `eleven_v4`, voz El Faraón, los mismos ajustes (`stability 0.5`/`similarity_boost 0.75`/`speed 1`) — misma excepción de alcance Video 10, sin tocar `canal.json`. Texto alineado idéntico al enviado. Consumo medido por el contador de suscripción (antes/después, estable): **148 créditos para 337 caracteres** (0,4392 créditos/carácter, consistente con las demás mediciones de este video). Se unió con la lectura bíblica ya grabada (`muestra2_lectura_biblica.mp3`, sin regenerar): se midió el silencio real ya presente en ambos bordes (≈0,219 s al final del nuevo bloque 1, ≈0,105 s al inicio de la lectura) y se añadió solo la diferencia (2,6755 s) para llegar al objetivo de 3,0 s de la pausa 1 — verificado después con `silencedetect`: **2,97 s reales** en la unión, dentro de tolerancia. Archivo: `estudio/proyectos/video_010/_generacion/muestra/video_010_muestra_apertura_rev02_mas_salmo121.mp3` (67,42 s).
+
+### Presupuesto del lote completo (11 bloques, 15.555 caracteres — incluye la revisión del bloque 1)
 
 | Si se genera con… | Caracteres | Tarifa usada | Créditos estimados |
 |---|---:|---|---:|
-| `eleven_flash_v2_5` (recomendado) | 15.526 | 0,276/carácter (medida, confiable) | **≈ 4.285** |
-| `eleven_v4` | 15.526 | 1/carácter (tarifa oficial publicada) | **≈ 15.526** |
+| `eleven_flash_v2_5` (recomendado) | 15.555 | 0,276/carácter (medida, confiable) | **≈ 4.293** |
+| `eleven_v4` | 15.555 | 1/carácter (tarifa oficial publicada) | **≈ 15.555** |
 | *Referencia sin garantía* | 15.526 | 0,4125/carácter (único dato observado en el Video 9, texto distinto) | ≈ 6.404 |
 
 ### Costo adicional si se reutilizan los bloques aprobados de la muestra
 
-A diferencia del Video 9 (donde la muestra siempre se consideró aparte y todo el lote se regeneraba completo), aquí las Muestras 1 y 2 son bloques completos: **si Orlando aprueba la muestra, los audios de los bloques 1 y 2 (849 caracteres en total) no se regenerarán** — se reutilizará directamente el archivo ya generado y aprobado, siempre que la llamada de muestra use exactamente los mismos parámetros que usaría el lote (mismo modelo/ajustes, y sin `previous_text`/`next_text` en los bordes de los bloques 1 y 2, porque ambos lados son pausas reales — pausa de apertura antes del bloque 1, pausa 1 y pausa 2 después). Eso deja, tras reutilizar:
+A diferencia del Video 9 (donde la muestra siempre se consideró aparte y todo el lote se regeneraba completo), aquí las Muestras 1 y 2 son bloques completos: **los audios de los bloques 1 (ya en su texto vigente, regenerado el 2026-11-16) y 2 (878 caracteres en total) no se regenerarán** al autorizar el lote — se reutilizarán directamente, siempre que la llamada use exactamente los mismos parámetros (mismo modelo/ajustes, y sin `previous_text`/`next_text` en sus bordes, porque ambos lados son pausas reales). Eso deja, tras reutilizar:
 
-| Si se genera con… | Caracteres restantes del lote (15.526 − 849) | Costo del lote restante | Costo combinado real (muestra + lote restante) | Costo si no se reutilizara nada (muestra + lote completo) |
-|---|---:|---:|---:|---:|
-| `eleven_flash_v2_5` | 14.677 | ≈ 4.051 créditos | **≈ 4.427 créditos** | ≈ 4.661 créditos |
-| `eleven_v4` | 14.677 | ≈ 14.677 créditos | **≈ 16.040 créditos** | ≈ 16.889 créditos |
+| Si se genera con… | Caracteres restantes del lote (15.555 − 878) | Costo del lote restante |
+|---|---:|---:|
+| `eleven_flash_v2_5` | 14.677 | ≈ 4.051 créditos |
+| `eleven_v4` | 14.677 | ≈ 14.677 créditos |
+
+Ya gastado hasta ahora, de forma real y medida (no estimada), independientemente de lo anterior: **604 créditos** (muestra original de 1.371 caracteres) + **148 créditos** (regeneración del bloque 1, 337 caracteres) = **752 créditos**. Ambos en `eleven_v4`, por la excepción de alcance Video 10. Esto ya se gastó y no se recupera ni se resta del presupuesto del lote; se informa aparte para que Orlando tenga el gasto acumulado real de este video.
 
 La Muestra 3 (cierre) no es un bloque completo, así que no se puede reutilizar igual: sus 514 caracteres se generan una vez para la muestra y, si se aprueba, se vuelven a generar dentro del bloque 11 normal del lote — mismo criterio que el Video 9 para fragmentos parciales.
 

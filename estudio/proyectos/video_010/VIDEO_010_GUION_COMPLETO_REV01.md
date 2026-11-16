@@ -4,6 +4,9 @@
 **Versión** · Revisión 01 del guion completo  
 **Estado** · Paquete editorial aprobado. Guion para revisión de Orlando.
 
+**Historial de cambios sobre esta misma revisión (REV01):**
+- 2026-11-16 · Orlando aprobó, tras escuchar la muestra, sustituir las dos últimas frases del primer párrafo (bloque 1, apertura) por un nuevo texto. Cambio aplicado abajo; el resto del guion no se tocó.
+
 **Título** · ¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche  
 **Miniatura** · **DIOS NO DUERME** · **SALMO 121**  
 **Promesa** · Acompañar a quien sigue en alerta al apagar la luz a poner su temor en manos de Dios y descansar confiando en su cuidado.
@@ -22,7 +25,7 @@
 
 ## 1. Cuando apagas la luz
 
-Ya apagaste la luz, pero tu mente sigue preguntando: ¿y si algo sale mal? Oremos juntos con el Salmo ciento veintiuno. Si hay una preocupación que vuelve cada vez que cierras los ojos, piensa un momento en ella. Vamos a ponerla delante de Dios. Escucha lo que dice el salmo: «Ni se dormirá el que te guarda».
+Ya apagaste la luz, pero tu mente sigue preguntando: ¿y si algo sale mal? Oremos juntos con el Salmo ciento veintiuno. Si hay una preocupación que vuelve cada vez que cierras los ojos, piensa un momento en ella. «Vamos a confiarle esa preocupación a Dios. El salmo nos recuerda por qué podemos hacerlo: “Ni se dormirá el que te guarda”».
 
 [PAUSA 1 — 3 segundos]
 

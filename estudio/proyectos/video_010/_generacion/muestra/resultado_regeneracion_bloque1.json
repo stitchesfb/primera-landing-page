@@ -1,0 +1,22 @@
+{
+  "fecha": "2026-11-16T21:59:40.227Z",
+  "motivo": "Revision aprobada del bloque 1 (apertura) del Video 10 -- sustitucion de las dos ultimas frases, autorizada por Orlando.",
+  "modelo": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "ajustes": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "speed": 1
+  },
+  "formato_salida": "mp3_44100_128",
+  "texto_nuevo": "Ya apagaste la luz, pero tu mente sigue preguntando: ¿y si algo sale mal? Oremos juntos con el Salmo ciento veintiuno. Si hay una preocupación que vuelve cada vez que cierras los ojos, piensa un momento en ella. «Vamos a confiarle esa preocupación a Dios. El salmo nos recuerda por qué podemos hacerlo: “Ni se dormirá el que te guarda”».",
+  "caracteres": 337,
+  "bytes_audio": 369518,
+  "texto_identico_al_enviado": true,
+  "consumo_antes": 0,
+  "consumo_despues": 148,
+  "consumo_estable": true,
+  "segundos_esperados_estabilizacion": 24,
+  "delta_creditos_contador_suscripcion": 148,
+  "tarifa_real_observada": 0.4391691394658754
+}

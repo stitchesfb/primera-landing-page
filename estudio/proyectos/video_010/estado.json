@@ -1,10 +1,11 @@
 {
-  "estado": "muestra_generada_con_v4_excepcion_pendiente_revision_de_orlando_antes_del_lote",
+  "estado": "bloque1_revisado_y_regenerado_pendiente_revision_de_orlando_antes_del_lote",
   "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
   "guion": {
     "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
-    "sha256": "7db9a40c0acd88025ca1c0379dc9b25a410d163e671ab75779c9d098e3ce5317",
-    "estado": "paquete editorial aprobado por Orlando -- su aprobacion reemplaza el 'pendiente de revision' del encabezado del propio guion",
+    "sha256": "9282d54e4e889f08aa9e775a98e01d77055081b2bd3362fcf467623b63221583",
+    "sha256_original_antes_de_la_revision_del_bloque1": "7db9a40c0acd88025ca1c0379dc9b25a410d163e671ab75779c9d098e3ce5317",
+    "estado": "paquete editorial aprobado por Orlando -- su aprobacion reemplaza el 'pendiente de revision' del encabezado del propio guion. Revisado el 2026-11-16: dos ultimas frases del bloque 1 sustituidas, con nota de historial dentro del propio archivo.",
     "fecha_aprobacion": "2026-11-15"
   },
   "prioridad_del_proyecto": "Orlando indico que para el Video 10 se da prioridad a DECISIONES_CERRADAS ante cualquier conflicto con lo realmente usado en el Video 9.",
@@ -52,7 +53,8 @@
     "metodo": "Texto narrado extraido entre la segunda aparicion de [INICIO NARRACION] y [FIN NARRACION] (la primera aparicion de cada marca esta en las notas de produccion, entre comillas); encabezados ## N. y marcas entre corchetes excluidas. 62 parrafos, 15424 caracteres sin separadores (15526 con separadores internos de bloque). Agrupados en 11 bloques, ninguno mayor a 2000 caracteres (canal.json -> api.max_caracteres_por_peticion), ninguno dividiendo un parrafo. El Salmo 121 completo (introduccion + 8 versiculos RVR1909) queda aislado entero en el bloque 2, mismo criterio que la cita de Mateo 11 en el Video 9. Los 3 Shorts quedan enteros cada uno dentro de un unico bloque (bloques 3, 6 y 8).",
     "total_bloques": 11,
     "total_parrafos": 62,
-    "total_caracteres": 15526,
+    "total_caracteres": 15555,
+    "nota_total_caracteres": "15526 originales + 29 por la revision del bloque 1 del 2026-11-16 (308 -> 337 caracteres).",
     "archivo_datos": "estudio/proyectos/video_010/_generacion/plan_bloques_tts.json",
     "shorts": [
       { "id": "short1", "bloque": 3, "rotulo": "¿Y SI ALGO SALE MAL?", "pasaje": "Salmo 121:3-4" },
@@ -103,20 +105,51 @@
     },
     "archivo_resultado": "estudio/proyectos/video_010/_generacion/muestra/resultado_muestra.json"
   },
+  "revision_bloque1_2026_11_16": {
+    "estado": "aprobada_y_regenerada",
+    "autorizado_por": "Orlando",
+    "motivo": "Tras aprobar la muestra, pidio sustituir las dos ultimas frases del bloque 1 (apertura).",
+    "texto_anterior": "Ya apagaste la luz, pero tu mente sigue preguntando: ¿y si algo sale mal? Oremos juntos con el Salmo ciento veintiuno. Si hay una preocupación que vuelve cada vez que cierras los ojos, piensa un momento en ella. Vamos a ponerla delante de Dios. Escucha lo que dice el salmo: «Ni se dormirá el que te guarda».",
+    "texto_vigente": "Ya apagaste la luz, pero tu mente sigue preguntando: ¿y si algo sale mal? Oremos juntos con el Salmo ciento veintiuno. Si hay una preocupación que vuelve cada vez que cierras los ojos, piensa un momento en ella. «Vamos a confiarle esa preocupación a Dios. El salmo nos recuerda por qué podemos hacerlo: “Ni se dormirá el que te guarda”».",
+    "caracteres_antes": 308,
+    "caracteres_despues": 337,
+    "modelo": "eleven_v4",
+    "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+    "ajustes": { "stability": 0.5, "similarity_boost": 0.75, "speed": 1 },
+    "excepcion": "Misma excepcion de alcance Video 10 ya registrada para la muestra -- canal.json no se modifico.",
+    "archivo_audio": "estudio/proyectos/video_010/_generacion/muestra/muestra1_apertura_rev02.mp3",
+    "texto_identico_al_enviado": true,
+    "consumo_real": {
+      "antes": 0,
+      "despues": 148,
+      "estable": true,
+      "delta_creditos": 148,
+      "tarifa_real_observada": 0.4392,
+      "nota": "El contador de suscripcion mostro 'antes=0' -- consistente con un reinicio de ciclo de facturacion entre sesiones, no con un error de medicion (el delta de 148 creditos para 337 caracteres es una medida limpia y estable, con la misma tarifa real ya vista en este video)."
+    },
+    "entrega_union_apertura_rev02_salmo": {
+      "archivo": "estudio/proyectos/video_010/_generacion/muestra/video_010_muestra_apertura_rev02_mas_salmo121.mp3",
+      "sha256": "1f2ec1658fd3a077f1c3f1d901203fe8a9818ca6ef6c780e0db2fe867c6a7061",
+      "duracion_segundos": 67.422041,
+      "metodo": "Bloque 1 regenerado completo + muestra2_lectura_biblica.mp3 sin cambios (reutilizada, no regenerada). Silencio natural medido en los bordes (~0.219s cola del nuevo bloque 1, ~0.105s inicio de la lectura, sin cambios) y se añadio solo la diferencia (2.6755s) para llegar a 3.0s. Verificado con silencedetect sobre el resultado: 2.97s reales en la union, dentro de tolerancia."
+    },
+    "gastado_hasta_ahora_en_v4_excepcion_video_010": {
+      "muestra_original_1371_caracteres": 604,
+      "revision_bloque1_337_caracteres": 148,
+      "total": 752,
+      "nota": "Gasto real, ya ejecutado, independiente del presupuesto del lote completo (que sigue sin autorizar). El bloque 1 regenerado no necesitara volver a generarse al autorizar el lote."
+    }
+  },
   "presupuesto_lote_completo": {
-    "caracteres": 15526,
-    "eleven_flash_v2_5": 4285,
-    "eleven_v4": 15526,
-    "referencia_sin_garantia_v4_observado_video_009": 6404,
-    "costo_tras_reutilizar_bloques_1_y_2_de_la_muestra": {
+    "caracteres": 15555,
+    "eleven_flash_v2_5": 4293,
+    "eleven_v4": 15555,
+    "referencia_sin_garantia_v4_observado_video_009": 6417,
+    "costo_tras_reutilizar_bloques_1_y_2": {
       "caracteres_restantes": 14677,
       "eleven_flash_v2_5": 4051,
       "eleven_v4": 14677,
-      "nota": "A diferencia del Video 9, las muestras 1 y 2 son bloques completos e identicos a los del lote -- si se aprueban, sus audios se reutilizan sin regenerar y sin cobro adicional. La muestra 3 (cierre) es parcial y si se aprueba igual se regenera dentro del bloque 11 normal del lote."
-    },
-    "costo_combinado_real_muestra_mas_lote_tras_reuso": {
-      "eleven_flash_v2_5": 4427,
-      "eleven_v4": 16040
+      "nota": "Bloques 1 (texto vigente, ya regenerado el 2026-11-16) y 2 (878 caracteres en total) no se regeneraran al autorizar el lote -- se reutilizan directamente. La muestra 3 (cierre) es parcial y si se aprueba igual se regenera dentro del bloque 11 normal del lote."
     }
   },
   "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
@@ -133,6 +166,10 @@
     {
       "fecha": "2026-11-15",
       "evento": "Segunda tarea del Video 10. Orlando autorizo unicamente la muestra de 1363 caracteres (cifra que resulto ser 1371 tras corregir un conteo de separadores de la muestra 3, diferencia señalada aparte, sin cambio de contenido), con eleven_v4, voz El Faraon y los ajustes exactos del Video 9 (stability 0.5/similarity 0.75/speed 1), registrada como excepcion de alcance Video 10 -- canal.json no se modifico. Pidio corregir el plan para dejar el recuento de pausas en seis en frontera real entre bloques, dos internas y una de cierre musical (el documento ya tenia la tabla correcta, pero un parrafo de texto decia por error 'siete' -- se corrigio), y dejar indicado como se mediria y completaria en el montaje cada pausa interna de 4s tras los Shorts 2 y 3 (ubicar por alineacion el fin real de 'Amen.' y el inicio de la palabra siguiente, medir el silencio real con silencedetect, e insertar o recortar hasta completar exactamente 4.0s, sin generar audio nuevo). Se generaron los 3 fragmentos de muestra con eleven_v4/El Faraon/0.5/0.75/1 (texto alineado identico al enviado en los 3). Consumo real medido por el contador de suscripcion, estable: 604 creditos para 1371 caracteres (0.4406 creditos/caracter, cercano al 0.4125 ya visto en el Video 9). Se entrego la apertura unida a la lectura completa del Salmo 121 con la pausa 1 real de por medio: se midio el silencio/aire natural ya presente en ambos bordes (~0.231s al final de la apertura, ~0.105s al inicio de la lectura) y se añadio solo la diferencia (2.664s) para llegar al objetivo de 3.0s -- verificado despues con silencedetect sobre el resultado: 2.97s reales, dentro de tolerancia. Se entrego tambien el fragmento de cierre por separado (bloque 11, con previous_text real del parrafo anterior). Ningun bloque del lote completo se generó todavia -- la decision de voz del lote (Flash v2.5 por defecto o v4) sigue pendiente, independiente de esta excepcion de muestra. Los Videos 7, 8 y 9 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-16",
+      "evento": "Tercera tarea del Video 10. Orlando aprobo la revision de la apertura y pidio sustituir las dos ultimas frases del bloque 1 por un texto nuevo ('«Vamos a confiarle esa preocupacion a Dios. El salmo nos recuerda por que podemos hacerlo: \"Ni se dormira el que te guarda\"».'), regenerar unicamente el bloque 1 con eleven_v4/El Faraon/stability 0.5/similarity 0.75/speed 1 (misma excepcion de alcance Video 10), unirlo a la lectura del Salmo 121 ya grabada (sin regenerarla) y verificar que la pausa total despues de 'te guarda' fuera de 3 segundos contando el silencio natural, ademas de actualizar el guion y el plan con el cambio. Se actualizo VIDEO_010_GUION_COMPLETO_REV01.md (con nota de historial dentro del propio archivo) y plan_bloques_tts.json/VIDEO_010_PLAN_BLOQUES_TTS.md (bloque 1: 308 -> 337 caracteres, total del lote: 15526 -> 15555). Se regenero el bloque 1 (texto alineado identico al enviado); consumo real medido por el contador de suscripcion, estable: 148 creditos para 337 caracteres (0.4392 creditos/caracter) -- el contador mostro 'antes=0', consistente con un reinicio de ciclo de facturacion entre sesiones, no con un error de medicion. Se unio el nuevo bloque 1 con la lectura biblica ya grabada (muestra2_lectura_biblica.mp3, sin cambios): se midio el silencio real en ambos bordes (~0.219s cola del nuevo bloque 1, ~0.105s inicio de la lectura, sin cambios) y se añadio solo la diferencia (2.6755s) para llegar al objetivo de 3.0s -- verificado con silencedetect sobre el resultado: 2.97s reales, dentro de tolerancia. Gasto real acumulado en esta excepcion v4 del Video 10 (muestra + esta revision): 604 + 148 = 752 creditos. El lote completo de 11 bloques sigue sin autorizarse, y la decision de voz para el lote (Flash v2.5 por defecto o v4) sigue pendiente. Los Videos 7, 8 y 9 permanecen intactos."
     }
   ]
 }

@@ -7,7 +7,7 @@
         0
       ],
       "cantidad_parrafos": 1,
-      "caracteres": 308,
+      "caracteres": 337,
       "secciones": [
         1
       ],
@@ -15,7 +15,7 @@
       "pausa_que_lo_precede": null,
       "pausas_embebidas_dentro_del_bloque": [],
       "primeras_palabras": "Ya apagaste la luz, pero tu mente sigue",
-      "ultimas_palabras": "salmo: «Ni se dormirá el que te guarda»."
+      "ultimas_palabras": "hacerlo: “Ni se dormirá el que te guarda”»."
     },
     {
       "bloque": 2,
@@ -199,6 +199,6 @@
       "ultimas_palabras": "En el nombre de Jesús. Amén."
     }
   ],
-  "totalChars": 15526,
+  "totalChars": 15555,
   "totalParrafos": 62
 }
