@@ -1,0 +1,30 @@
+{
+  "archivo": "/home/user/primera-landing-page/estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/video_010_prueba_apertura_salmo_68s.mp4",
+  "duracion_segundos": 68,
+  "imagen": "/home/user/primera-landing-page/estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/originales/E01_valle_nocturno.webp",
+  "pista_musical": "estudio/assets/music/alone_with_my_thoughts.mp3",
+  "lufs_medido": -27.7,
+  "ganancia_db_aplicada": 17.2,
+  "objetivo_lufs": -33.5,
+  "preset_visual": "noche (imagen_fija_particulas)",
+  "particulas": {
+    "cuantas": 82,
+    "periodo_s": 24
+  },
+  "musica_ducking": {
+    "bajo_voz_db": -23,
+    "en_interludio_db": -23,
+    "rampa_s": 1.5,
+    "fade_in_s": 4,
+    "_regla": "REGLA DEL PERFIL NOCTURNO, aprobada el 2026-08-22 tras una prueba A/B: la musica NO sube en los interludios. Se queda en -23 dB tanto bajo la narracion como cuando la voz calla. Quien pone esto para dormirse no deberia notar ningun cambio de volumen; la subida anterior de 7,5 dB llamaba la atencion justo en el momento de mas silencio. Los dos numeros tienen que seguir siendo iguales: hay una validacion que lo comprueba antes de generar nada.",
+    "fuente": "biblioteca"
+  },
+  "huecos_usados": [
+    {
+      "inicio": 22.8467,
+      "duracion": 2.9739000000000004
+    }
+  ],
+  "vueltas_loop_visual": 3,
+  "duracion_total_real_usada_para_el_envolvente": 1140.506122
+}

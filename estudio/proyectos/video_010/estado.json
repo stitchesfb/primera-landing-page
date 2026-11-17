@@ -1,5 +1,5 @@
 {
-  "estado": "narracion_v2_corregida_pendiente_revision_de_orlando_antes_del_montaje_audiovisual",
+  "estado": "prueba_audiovisual_apertura_salmo_entregada_pendiente_revision_de_orlando_antes_del_render_completo",
   "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
   "guion": {
     "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
@@ -224,8 +224,38 @@
   },
   "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
   "pendiente": [
-    "Revision de Orlando de la narracion v2 (corregida) antes de pasar al montaje audiovisual."
+    "Revision de Orlando de la prueba audiovisual de 68s (imagen, particulas y mezcla) antes del render completo del Video 10."
   ],
+  "prueba_audiovisual_apertura_salmo": {
+    "fecha": "2026-11-17",
+    "archivo": "estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/video_010_prueba_apertura_salmo_68s.mp4",
+    "sha256": "b226512af762325a9a9551ddd308bac75342236c417a746de1797a11f1c699e0",
+    "duracion_segundos": 68.0,
+    "cubre": "Bloque 1 (apertura revisada) + pausa 1 real (3s) + bloque 2 (Salmo 121 completo), hasta el cierre natural de la lectura.",
+    "audio_maestro": "video_010_narracion_completa_sin_musica_v2.mp3 (aprobada), sin modificar.",
+    "imagen_fondo": "estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/originales/E01_valle_nocturno.webp (la imagen sin texto de las 2 adjuntas)",
+    "miniatura_no_incluida": "estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/originales/VIDEO_010_MINIATURA.webp (la version con texto 'DIOS NO DUERME / SALMO 121') -- no insertada en el render, mismo criterio que videos anteriores (se sube aparte en YouTube). Se avisa en LEEME por si Orlando queria la miniatura como fondo del video.",
+    "estilo_visual": "Preset noche de canal.json (render.presets.noche): imagen fija sin zoom/paneo (movimiento: imagen_fija_particulas, zoom_total:0 -- el baseline cerrado, no el experimento de movimiento de los Videos 7/9), particulas 82/periodo 24s, 1920x1080/30fps.",
+    "musica": {
+      "pista": "alone_with_my_thoughts.mp3 (Esther Abrami)",
+      "motivo_de_la_eleccion": "Siguiente en la rotacion libre tras completar una vuelta: Video7=alone_with_my_thoughts, Video8=touching_moment, Video9=one_step_closer -- el Video 10 reabre el ciclo.",
+      "lufs_medido": -27.7,
+      "ganancia_db_aplicada": 17.2,
+      "formula": "objetivo(-33.5) + ducking(23dB) - lufs_medido",
+      "ducking": "Plano -23dB bajo voz y en interludios (regla del perfil nocturno, sin diferencia entre ambos) -- verificado con volumedetect en ventanas de 1s alrededor de la pausa 1: nivel estable -32 a -36dB en todo momento, sin salto.",
+      "fade_in": "4s real en el minuto 0 (es el inicio real del video) -- verificado: silencio total en t=0-1s, subida gradual hasta nivel estable hacia t=4-5s.",
+      "fade_out": "No aplica un fade-out real (68s no es el final del video); solo 1s de fundido corto al final de la pista para no cortar en seco el limite artificial de esta muestra."
+    },
+    "verificacion_empalmes_7_01_y_11_37": {
+      "pedido_aparte": "Re-verificacion sobre el audio maestro v2 (no sobre el video de prueba, que no llega a esos minutos).",
+      "pausa5_bloque6_s": 4.027,
+      "pausa7_bloque8_s": 3.972,
+      "resultado": "Ambas intactas, sin cambios desde la correccion de la tarea anterior, dentro de tolerancia del objetivo 4.0s."
+    },
+    "cierre_musical_final": "Instruccion anotada para el render completo (fundido suave tras el Amen final) -- esta prueba de 68s no llega al final del video (minuto 19), no aplica aqui.",
+    "archivo_datos": "estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/resultado_prueba.json",
+    "documentacion": "estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/LEEME_PRUEBA_APERTURA_SALMO.md"
+  },
   "historial": [
     {
       "fecha": "2026-11-15",
@@ -246,6 +276,10 @@
     {
       "fecha": "2026-11-17",
       "evento": "Quinta tarea del Video 10. Orlando escucho la narracion v1 y reporto dos cortes: 7:01-7:05 (pausa 5, bloque 6) con 'Amen' cortado al final y 'Senor' con el ataque cortado; 11:37-11:41 (pausa 7, bloque 8) el mismo defecto. Pidio escuchar primero los MP3 originales de los bloques 6 y 8 y, si las palabras estaban completas ahi, reconstruir ambos empalmes desde esos archivos conservando la terminacion natural de 'Amen' y el ataque completo de 'Senor', insertando solo el silencio adicional que faltara en el CENTRO de la pausa natural para acercarse a los 4 segundos, verificar los dos empalmes a velocidad normal en el MP3 final, y entregar un clip breve de cada correccion junto con la narracion completa como v2; avisar antes de gastar creditos si el defecto ya estaba en algun original. Se verifico con silencedetect fino (-40dB y -45dB, duracion 0.02-0.03s) que 'Amen.' y la palabra siguiente estan completos y limpios en los MP3 ORIGINALES sin editar de los bloques 6 y 8 -- el defecto no venia de ElevenLabs, sino del corte de v1, que usaba un umbral (-35dB/0.05s) que llamaba 'silencio' aproximadamente 0.06s antes del verdadero fin de la cola de 'Amen.'. No se gasto ningun credito adicional: no hizo falta regenerar nada. Se reconstruyeron ambos empalmes desde los originales, cortando esta vez en el CENTRO de la pausa natural (medida con el umbral mas estricto, -45dB/0.02s, dejando ~0.5s de margen real a cada lado) e insertando ahi solo el silencio adicional necesario (2.86649s y 2.87989s) para llegar a 4.0s -- medido en el resultado: 4.04048s y 4.02844s. Se verifico en banda fina sobre el archivo final ya ensamblado que la voz anterior decae de forma natural antes del silencio y que la voz siguiente arranca de forma natural despues, sin ningun indicio de corte, en ambas pausas. Las 6 pausas reales entre bloques y los bloques 1,2,3,4,5,7,9,10,11 no se tocaron -- identicos a v1. Resultado: video_010_narracion_completa_sin_musica_v2.mp3, 1140.506s (19:00.51), decodificacion limpia, mas dos clips breves de verificacion (uno por cada correccion, voz antes y despues de la pausa). El montaje audiovisual queda pendiente de la revision de Orlando de esta v2. canal.json no se modifico. Los Videos 7, 8 y 9 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-17",
+      "evento": "Sexta tarea del Video 10. Orlando aprobo la narracion v2 y pidio una prueba audiovisual de 60-90s con la narracion v2 como audio maestro, la imagen adjunta de fondo, el estilo nocturno de Decisiones Cerradas (imagen fija 16:9, particulas blancas suaves y discretas, musica baja y estable bajo voz y pausas), cubriendo la apertura, la pausa tras 'te guarda' y la lectura completa del Salmo 121, re-verificando ademas los empalmes de 7:01 y 11:37 y anotando la instruccion del fundido musical de cierre para el render completo. De las 2 imagenes adjuntas se uso la que no tiene texto (valle de montana al atardecer) como fondo del video y se trato la otra (miniatura 'DIOS NO DUERME / SALMO 121') como miniatura aparte, sin insertarla en el render -- mismo criterio que videos anteriores, señalado explicitamente en caso de que Orlando quisiera lo contrario. Se construyo con las librerias del proyecto: particulas.mjs (82 particulas/24s, preset noche), renderer.mjs en modo imagen_fija_particulas (sin zoom, DECISIONES_CERRADAS #14 vigente), musicaArchivo.mjs con el ducking real del timeline via nivelEn() de musica.mjs. Musica elegida: alone_with_my_thoughts.mp3, siguiente en la rotacion libre tras completar una vuelta completa (Video7/8/9 = alone_with_my_thoughts/touching_moment/one_step_closer). Sonoridad medida (no asumida): -27.7 LUFS, coincide con canal.json; ganancia aplicada +17.2dB (formula del canal). Verificado con volumedetect: ducking plano -23dB estable entre -32 y -36dB sin ningun salto al entrar o salir de la pausa 1, y fade-in real de 4s confirmado (silencio total en t=0-1s, subida gradual hasta t=4-5s). Se re-verifico sobre el audio maestro v2 (no sobre el video de prueba, que no llega a esos minutos) que las pausas 5 y 7 siguen intactas: 4.027s y 3.972s, sin cambios desde la correccion anterior. Resultado: video_010_prueba_apertura_salmo_68s.mp4, 1920x1080/30fps, 68.000s exactos, decodificacion limpia, frames revisados en 1s/30s/60s (particulas discretas y en movimiento, imagen fija sin zoom). No se renderizo el video largo ni los Shorts. El cierre musical del Amen final queda anotado para el render completo, fuera del alcance de esta prueba de 68s. Los Videos 7, 8 y 9 permanecen intactos; canal.json no se modifico."
     }
   ]
 }
