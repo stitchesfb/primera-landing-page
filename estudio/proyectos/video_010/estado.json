@@ -1,5 +1,5 @@
 {
-  "estado": "narracion_completa_sin_musica_entregada_pendiente_revision_de_orlando_antes_del_montaje_audiovisual",
+  "estado": "narracion_v2_corregida_pendiente_revision_de_orlando_antes_del_montaje_audiovisual",
   "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
   "guion": {
     "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
@@ -182,16 +182,32 @@
     }
   },
   "ensamblado_narracion_completa": {
-    "fecha": "2026-11-17",
-    "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v1.mp3",
-    "sha256": "37ac6a71c393635e6e08f23bbf86fa4d1cb92811a0de327a63dded4e73c6fd53",
-    "duracion_segundos": 1140.297143,
-    "duracion_legible": "19:00.30",
-    "decodificacion_completa_sin_errores": true,
-    "archivo_datos": "estudio/proyectos/video_010/_generacion/montaje/plan_ensamblado.json",
-    "pausas_reales_verificadas": { "1": 2.97388, "2": 5.98372, "3": 3.97476, "4": 8.97388, "6": 8.94909, "8": 9.97764, "objetivo": "todas dentro de +-0.05s del objetivo del guion (3,6,4,9,9,10s)" },
-    "pausas_internas_corregidas": { "5": 4.00333, "7": 4.00095, "nota": "Tras el 'Amen.' de los Shorts 2 y 3 -- cortadas y re-empalmadas en el silencio real, con un clip de silencio puro de 4.000s insertado, en vez de dejarlas como las genero el modelo." },
-    "verificacion_palabras_completas": "Las 11 alineaciones de bloque confirmaron texto_identico_al_enviado=true. Se revisaron una por una las primeras/ultimas palabras de los 11 bloques: ninguna cortada a mitad. En las 6 uniones con pausa real no se recorto ningun archivo (solo se inserto silencio), y en las 2 pausas internas se verifico por alineacion + silencedetect fino que 'Amen.' y la palabra siguiente quedan completos en ambos lados del corte.",
+    "version_vigente": "v2",
+    "v1": {
+      "fecha": "2026-11-17",
+      "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v1.mp3",
+      "sha256": "37ac6a71c393635e6e08f23bbf86fa4d1cb92811a0de327a63dded4e73c6fd53",
+      "duracion_segundos": 1140.297143,
+      "estado": "defectuoso -- conservado como historico, no usar. Orlando reporto 'Amen' y 'Senor' cortados en las pausas 5 (7:01-7:05) y 7 (11:37-11:41)."
+    },
+    "v2_correccion": {
+      "fecha": "2026-11-17",
+      "motivo": "Orlando escucho v1 y reporto los dos cortes. Se verifico primero en los MP3 originales de los bloques 6 y 8 (sin editar) que 'Amen.' y la palabra siguiente estaban completos ahi -- confirmando que el defecto lo introdujo el corte de v1 (umbral -35dB/0.05s que llamaba 'silencio' ~0.06s antes del verdadero fin de 'Amen.'), no la generacion de ElevenLabs. No hizo falta regenerar ningun audio.",
+      "metodo": "Se reconstruyeron ambos empalmes desde los originales, cortando esta vez en el CENTRO de la pausa natural (medida con umbral mas estricto, -45dB/0.02s, para maximo margen) e insertando ahi solo el silencio adicional que faltaba para llegar a 4.0s -- en vez de cortar en el borde del habla detectado.",
+      "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v2.mp3",
+      "sha256": "344fe162500ebafd801c69d7bdf995b86abc5dc5c5a6e86a85b292648f445d42",
+      "duracion_segundos": 1140.506122,
+      "duracion_legible": "19:00.51",
+      "decodificacion_completa_sin_errores": true,
+      "archivo_datos": "estudio/proyectos/video_010/_generacion/montaje/plan_ensamblado.json",
+      "pausas_reales_verificadas": { "1": 2.97388, "2": 5.98372, "3": 3.97476, "4": 8.97388, "6": 8.94816, "8": 9.97764, "objetivo": "todas dentro de +-0.05s del objetivo del guion (3,6,4,9,9,10s) -- sin cambios desde v1" },
+      "pausas_internas_corregidas": { "5": 4.04048, "7": 4.02844, "nota": "Reconstruidas desde los MP3 originales (no desde los editados de v1), cortando en el centro de la pausa natural en vez de en su borde." },
+      "verificacion_palabras_completas": "Verificado con silencedetect en banda fina (-45dB/0.02s) sobre el archivo v2 ya ensamblado: en ambas pausas la voz anterior ('Amen.') decae de forma natural y limpia antes del silencio, y la voz siguiente arranca de forma natural despues, sin ningun indicio de corte abrupto.",
+      "clips_de_verificacion_entregados": [
+        "estudio/proyectos/video_010/_generacion/montaje/clips_verificacion/video_010_correccion_pausa5_bloque6.mp3",
+        "estudio/proyectos/video_010/_generacion/montaje/clips_verificacion/video_010_correccion_pausa7_bloque8.mp3"
+      ]
+    },
     "pausa_9_cierre": "No incluida -- es musica con fundido, se añade en el montaje audiovisual. La narracion sin musica termina en el 'Amen.' final del bloque 11."
   },
   "presupuesto_lote_completo": {
@@ -208,7 +224,7 @@
   },
   "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
   "pendiente": [
-    "Revision de Orlando de la narracion completa sin musica (11 bloques) antes de pasar al montaje audiovisual."
+    "Revision de Orlando de la narracion v2 (corregida) antes de pasar al montaje audiovisual."
   ],
   "historial": [
     {
@@ -226,6 +242,10 @@
     {
       "fecha": "2026-11-17",
       "evento": "Cuarta tarea del Video 10. Orlando escucho y aprobo la apertura revisada unida al Salmo 121, y autorizo generar los 9 bloques restantes (3 al 11) con eleven_v4 y la configuracion de El Faraon vigente en canal.json (ya no una excepcion), reutilizando los bloques 1 y 2 ya aprobados, montar los 11 bloques con las pausas del guion, comprobar en especial los 4 segundos tras el Amen de los Shorts 2 y 3, y escuchar cada union para verificar palabras completas, entregando la narracion completa sin musica con su duracion y el consumo real. Se generaron los 9 bloques en 9 llamadas unicas, leyendo modelo/voz/ajustes/formato directamente de canal.json, con previous_text/next_text solo en las 4 junturas de continuacion directa (4-5, 6-7, 8-9, 10-11) y omitidos en las junturas con pausa real -- texto alineado identico al enviado en los 9. Consumo real medido por el contador de suscripcion, estable: 6457 creditos para 14677 caracteres (0.43994 creditos/caracter). Para las 2 pausas internas de 4s (bloques 6 y 8, tras el Amen de los Shorts 2 y 3): se ubico por alineacion el fin real de la voz y el inicio de la palabra siguiente dentro de cada archivo, se midio con silencedetect fino el silencio real que el modelo dejo (1.24s y 1.21s respectivamente, confirmando que ninguno llegaba al objetivo), se corto cada archivo en el fin real de la voz y se reinsertaron las dos partes con un clip de silencio puro de exactamente 4.000s entre medio -- medido despues sobre el resultado: 4.003s y 4.001s. Se ensamblaron los 11 bloques (reutilizando los bloques 1 y 2 ya aprobados sin regenerar) con las 6 pausas reales entre bloques (objetivos 3,6,4,9,9,10s), cada una calculada midiendo el silencio natural ya presente en los bordes de los bloques adyacentes y añadiendo solo la diferencia necesaria -- verificado despues sobre el archivo completo: las 6 midieron entre 2.974s y 9.978s, todas dentro de +-0.05s del objetivo, y las 2 internas confirmadas intactas dentro del archivo ensamblado. Se revisaron una por una las primeras y ultimas palabras de los 11 bloques (ninguna cortada a mitad) y se confirmo que, al no recortarse ningun archivo en las 6 uniones con pausa real (solo se inserto silencio), el contenido de voz de ambos lados queda intacto por construccion. Resultado: video_010_narracion_completa_sin_musica_v1.mp3, 1140.297s (19:00.30), decodificacion limpia. La pausa 9 (cierre musical con fundido) no se incluyo -- se añadira en el montaje audiovisual. Gasto total acumulado en el Video 10 hasta ahora: 604 (muestra) + 148 (revision bloque 1) + 6457 (lote 3-11) = 7209 creditos, todos en eleven_v4 (configuracion predeterminada del canal). canal.json no se modifico en esta tarea. Los Videos 7, 8 y 9 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-17",
+      "evento": "Quinta tarea del Video 10. Orlando escucho la narracion v1 y reporto dos cortes: 7:01-7:05 (pausa 5, bloque 6) con 'Amen' cortado al final y 'Senor' con el ataque cortado; 11:37-11:41 (pausa 7, bloque 8) el mismo defecto. Pidio escuchar primero los MP3 originales de los bloques 6 y 8 y, si las palabras estaban completas ahi, reconstruir ambos empalmes desde esos archivos conservando la terminacion natural de 'Amen' y el ataque completo de 'Senor', insertando solo el silencio adicional que faltara en el CENTRO de la pausa natural para acercarse a los 4 segundos, verificar los dos empalmes a velocidad normal en el MP3 final, y entregar un clip breve de cada correccion junto con la narracion completa como v2; avisar antes de gastar creditos si el defecto ya estaba en algun original. Se verifico con silencedetect fino (-40dB y -45dB, duracion 0.02-0.03s) que 'Amen.' y la palabra siguiente estan completos y limpios en los MP3 ORIGINALES sin editar de los bloques 6 y 8 -- el defecto no venia de ElevenLabs, sino del corte de v1, que usaba un umbral (-35dB/0.05s) que llamaba 'silencio' aproximadamente 0.06s antes del verdadero fin de la cola de 'Amen.'. No se gasto ningun credito adicional: no hizo falta regenerar nada. Se reconstruyeron ambos empalmes desde los originales, cortando esta vez en el CENTRO de la pausa natural (medida con el umbral mas estricto, -45dB/0.02s, dejando ~0.5s de margen real a cada lado) e insertando ahi solo el silencio adicional necesario (2.86649s y 2.87989s) para llegar a 4.0s -- medido en el resultado: 4.04048s y 4.02844s. Se verifico en banda fina sobre el archivo final ya ensamblado que la voz anterior decae de forma natural antes del silencio y que la voz siguiente arranca de forma natural despues, sin ningun indicio de corte, en ambas pausas. Las 6 pausas reales entre bloques y los bloques 1,2,3,4,5,7,9,10,11 no se tocaron -- identicos a v1. Resultado: video_010_narracion_completa_sin_musica_v2.mp3, 1140.506s (19:00.51), decodificacion limpia, mas dos clips breves de verificacion (uno por cada correccion, voz antes y despues de la pausa). El montaje audiovisual queda pendiente de la revision de Orlando de esta v2. canal.json no se modifico. Los Videos 7, 8 y 9 permanecen intactos."
     }
   ]
 }

@@ -1,36 +1,55 @@
 {
-  "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v1.mp3",
-  "sha256": "37ac6a71c393635e6e08f23bbf86fa4d1cb92811a0de327a63dded4e73c6fd53",
-  "duracion_segundos": 1140.297143,
-  "duracion_legible": "19:00.30",
+  "version_vigente": "v2",
+  "correccion_v2_2026_11_17": {
+    "motivo": "Orlando reporto, al escuchar v1, dos cortes: 7:01-7:05 (pausa 5, bloque 6) con 'Amen' cortado al final y 'Senor' con el ataque cortado; 11:37-11:41 (pausa 7, bloque 8) con el mismo defecto.",
+    "verificacion_de_los_originales": "Se escucharon (analisis acustico fino, -40dB y -45dB/0.02-0.03s) los MP3 originales sin editar de los bloques 6 y 8: 'Amen.' y la palabra siguiente estan completos y limpios en ambos originales. El defecto no viene de la generacion de ElevenLabs -- lo introdujo el corte de v1, que usaba un umbral (-35dB/0.05s) que llamaba 'silencio' a un punto todavia dentro de la cola de decaimiento de 'Amen.' (unos 0.06s antes del verdadero inicio del silencio). No fue necesario regenerar ningun audio.",
+    "metodo_v2": "En vez de cortar en el borde detectado del habla, se corto en el CENTRO de la pausa natural (medida con el umbral mas estricto, -45dB/0.02s, para dar maximo margen a ambos lados) y se inserto ahi unicamente el silencio adicional que faltaba para llegar a 4.0s. Esto deja el final natural de 'Amen.' y el ataque completo de 'Senor,' intactos en sus archivos originales, con margen de ~0.5s de silencio real a cada lado del punto de corte.",
+    "bloque6_pausa5": { "ventana_silencio_natural_estricta_s": [28.259, 29.393], "duracion_natural_s": 1.13351, "punto_de_corte_usado_s": 28.826, "silencio_adicional_insertado_s": 2.86649, "medido_en_resultado_final_s": 4.04048 },
+    "bloque8_pausa7": { "ventana_silencio_natural_estricta_s": [27.4934, 28.61351], "duracion_natural_s": 1.12011, "punto_de_corte_usado_s": 28.053405, "silencio_adicional_insertado_s": 2.87989, "medido_en_resultado_final_s": 4.02844 },
+    "verificacion_en_el_mp3_final_v2": "Se reviso con silencedetect en banda fina (-45dB/0.02s) el tramo inmediatamente antes y despues de cada pausa, en el archivo v2 ya ensamblado: en ambos casos la voz anterior ('Amen.') decae de forma natural y limpia antes del silencio, y la voz siguiente ('Senor,'/palabra equivalente) arranca de forma natural justo despues -- sin ningun indicio de corte abrupto. Las 8 pausas significativas del archivo completo (6 reales entre bloques + las 2 internas corregidas) se verificaron de nuevo con silencedetect de umbral 2s: todas dentro de +-0.05s del objetivo, en las mismas posiciones que en v1.",
+    "clips_de_verificacion_entregados": [
+      "estudio/proyectos/video_010/_generacion/montaje/clips_verificacion/video_010_correccion_pausa5_bloque6.mp3 (8.05s, voz antes + pausa + voz despues)",
+      "estudio/proyectos/video_010/_generacion/montaje/clips_verificacion/video_010_correccion_pausa7_bloque8.mp3 (8.05s, voz antes + pausa + voz despues)"
+    ],
+    "archivos_reemplazados": "audio/bloques/editados/6_editado.mp3 y 8_editado.mp3 (v1) sustituidos por 6_editado_v2.mp3 y 8_editado_v2.mp3. Los bloques 1,2,3,4,5,7,9,10,11 y las 6 pausas reales entre bloques no se tocaron -- idénticos a v1."
+  },
+  "archivo_v1_anterior": {
+    "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v1.mp3",
+    "sha256": "37ac6a71c393635e6e08f23bbf86fa4d1cb92811a0de327a63dded4e73c6fd53",
+    "duracion_segundos": 1140.297143,
+    "estado": "conservado como historico -- contenia el defecto de las pausas 5 y 7 reportado por Orlando. No usar para el montaje audiovisual."
+  },
+  "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v2.mp3",
+  "sha256": "344fe162500ebafd801c69d7bdf995b86abc5dc5c5a6e86a85b292648f445d42",
+  "duracion_segundos": 1140.506122,
+  "duracion_legible": "19:00.51",
   "decodificacion_completa_sin_errores": true,
   "bloques_usados": [
     { "bloque": 1, "fuente": "muestra/muestra1_apertura_rev02.mp3 (revision aprobada 2026-11-16, reutilizado sin regenerar)", "primeras_palabras": "Ya apagaste la luz,", "ultimas_palabras": "el que te guarda”»." },
     { "bloque": 2, "fuente": "muestra/muestra2_lectura_biblica.mp3 (reutilizado sin regenerar)", "primeras_palabras": "Escuchemos ahora el salmo", "ultimas_palabras": "ahora y para siempre»." },
-    { "bloque": 3, "fuente": "audio/bloques/3.mp3 (generado hoy)", "primeras_palabras": "Señor, aquí estoy. Tú", "ultimas_palabras": "Ayúdame a descansar. Amén." },
-    { "bloque": 4, "fuente": "audio/bloques/4.mp3 (generado hoy)", "primeras_palabras": "Tal vez ya sabes", "ultimas_palabras": "para decirlo con honestidad." },
-    { "bloque": 5, "fuente": "audio/bloques/5.mp3 (generado hoy)", "primeras_palabras": "A veces el temor", "ultimas_palabras": "mientras llega el día." },
-    { "bloque": 6, "fuente": "audio/bloques/editados/6_editado.mp3 (generado hoy, pausa 5 interna corregida a 4.0s)", "primeras_palabras": "¿Hay alguien que te", "ultimas_palabras": "que su voz importa." },
-    { "bloque": 7, "fuente": "audio/bloques/7.mp3 (generado hoy)", "primeras_palabras": "Cuando mi preocupación me", "ultimas_palabras": "esté en mis manos." },
-    { "bloque": 8, "fuente": "audio/bloques/editados/8_editado.mp3 (generado hoy, pausa 7 interna corregida a 4.0s)", "primeras_palabras": "¿Te despertaste de madrugada", "ultimas_palabras": "silencio después de decirlas." },
-    { "bloque": 9, "fuente": "audio/bloques/9.mp3 (generado hoy)", "primeras_palabras": "Dejo que mis manos", "ultimas_palabras": "o escuchando en silencio." },
-    { "bloque": 10, "fuente": "audio/bloques/10.mp3 (generado hoy)", "primeras_palabras": "Volvamos un momento a", "ultimas_palabras": "todavía me cuesta entender." },
-    { "bloque": 11, "fuente": "audio/bloques/11.mp3 (generado hoy)", "primeras_palabras": "El día de hoy", "ultimas_palabras": "nombre de Jesús. Amén." }
+    { "bloque": 3, "fuente": "audio/bloques/3.mp3 (sin cambios desde v1)", "primeras_palabras": "Señor, aquí estoy. Tú", "ultimas_palabras": "Ayúdame a descansar. Amén." },
+    { "bloque": 4, "fuente": "audio/bloques/4.mp3 (sin cambios desde v1)", "primeras_palabras": "Tal vez ya sabes", "ultimas_palabras": "para decirlo con honestidad." },
+    { "bloque": 5, "fuente": "audio/bloques/5.mp3 (sin cambios desde v1)", "primeras_palabras": "A veces el temor", "ultimas_palabras": "mientras llega el día." },
+    { "bloque": 6, "fuente": "audio/bloques/editados/6_editado_v2.mp3 (CORREGIDO 2026-11-17, pausa 5 reconstruida desde el original)", "primeras_palabras": "¿Hay alguien que te", "ultimas_palabras": "que su voz importa." },
+    { "bloque": 7, "fuente": "audio/bloques/7.mp3 (sin cambios desde v1)", "primeras_palabras": "Cuando mi preocupación me", "ultimas_palabras": "esté en mis manos." },
+    { "bloque": 8, "fuente": "audio/bloques/editados/8_editado_v2.mp3 (CORREGIDO 2026-11-17, pausa 7 reconstruida desde el original)", "primeras_palabras": "¿Te despertaste de madrugada", "ultimas_palabras": "silencio después de decirlas." },
+    { "bloque": 9, "fuente": "audio/bloques/9.mp3 (sin cambios desde v1)", "primeras_palabras": "Dejo que mis manos", "ultimas_palabras": "o escuchando en silencio." },
+    { "bloque": 10, "fuente": "audio/bloques/10.mp3 (sin cambios desde v1)", "primeras_palabras": "Volvamos un momento a", "ultimas_palabras": "todavía me cuesta entender." },
+    { "bloque": 11, "fuente": "audio/bloques/11.mp3 (sin cambios desde v1)", "primeras_palabras": "El día de hoy", "ultimas_palabras": "nombre de Jesús. Amén." }
   ],
-  "metodo_general": "Para cada bloque se verifico 'texto_identico_al_enviado: true' en su alineacion (el texto que ElevenLabs transcribe de vuelta coincide caracter por caracter con el enviado), lo que garantiza que cada bloque empieza y termina exactamente en el primer/ultimo caracter de su primer/ultimo parrafo -- ninguna palabra puede quedar cortada dentro de un bloque. Los 4 bloques en continuacion directa (4->5, 6->7, 8->9, 10->11) se concatenaron sin pausa, tal como indica el guion (la frase continua de un bloque al siguiente).",
+  "metodo_general": "Para cada bloque se verifico 'texto_identico_al_enviado: true' en su alineacion (el texto que ElevenLabs transcribe de vuelta coincide caracter por caracter con el enviado), lo que garantiza que cada bloque empieza y termina exactamente en el primer/ultimo caracter de su primer/ultimo parrafo -- ninguna palabra puede quedar cortada dentro de un bloque. Los 4 bloques en continuacion directa (4->5, 6->7, 8->9, 10->11) se concatenaron sin pausa, tal como indica el guion.",
   "pausas_reales_entre_bloques": [
-    { "pausa": 1, "entre": "bloque1-bloque2", "objetivo_s": 3.0, "silencio_natural_medido_s": 0.3245, "silencio_insertado_s": 2.6755, "medido_en_resultado_s": 2.97388 },
-    { "pausa": 2, "entre": "bloque2-bloque3", "objetivo_s": 6.0, "silencio_natural_medido_s": 0.2039, "silencio_insertado_s": 5.7961, "medido_en_resultado_s": 5.98372 },
-    { "pausa": 3, "entre": "bloque3-bloque4", "objetivo_s": 4.0, "silencio_natural_medido_s": 0.3446, "silencio_insertado_s": 3.655379, "medido_en_resultado_s": 3.97476 },
-    { "pausa": 4, "entre": "bloque5-bloque6", "objetivo_s": 9.0, "silencio_natural_medido_s": 0.6060, "silencio_insertado_s": 8.394037, "medido_en_resultado_s": 8.97388 },
-    { "pausa": 6, "entre": "bloque7-bloque8", "objetivo_s": 9.0, "silencio_natural_medido_s": 0.2995, "silencio_insertado_s": 8.700452, "medido_en_resultado_s": 8.94909 },
-    { "pausa": 8, "entre": "bloque9-bloque10", "objetivo_s": 10.0, "silencio_natural_medido_s": 0.4367, "silencio_insertado_s": 9.563293, "medido_en_resultado_s": 9.97764 }
+    { "pausa": 1, "entre": "bloque1-bloque2", "objetivo_s": 3.0, "medido_en_resultado_s": 2.97388 },
+    { "pausa": 2, "entre": "bloque2-bloque3", "objetivo_s": 6.0, "medido_en_resultado_s": 5.98372 },
+    { "pausa": 3, "entre": "bloque3-bloque4", "objetivo_s": 4.0, "medido_en_resultado_s": 3.97476 },
+    { "pausa": 4, "entre": "bloque5-bloque6", "objetivo_s": 9.0, "medido_en_resultado_s": 8.97388 },
+    { "pausa": 6, "entre": "bloque7-bloque8", "objetivo_s": 9.0, "medido_en_resultado_s": 8.94816 },
+    { "pausa": 8, "entre": "bloque9-bloque10", "objetivo_s": 10.0, "medido_en_resultado_s": 9.97764 }
   ],
-  "metodo_pausas_reales": "Se midio con silencedetect (highpass 150Hz, -35dB, duracion 0.05s) el silencio/aire real ya presente en la cola del bloque anterior y en el inicio del bloque siguiente, y se inserto solo la diferencia necesaria para llegar al objetivo del guion. Verificado despues sobre el archivo ya ensamblado completo (silencedetect con umbral de 2s para aislar solo las pausas significativas): las 6 pausas reales midieron entre 2.974s y 9.978s, todas dentro de +-0.05s del objetivo.",
-  "pausas_internas_corregidas_a_4s": [
-    { "pausa": 5, "bloque": 6, "ubicacion": "tras el 'Amén.' del Short 2, antes de 'Señor, cuando el salmo...'", "fin_real_de_voz_s_en_archivo_original": 28.1578, "inicio_real_de_voz_siguiente_s_en_archivo_original": 29.39848, "silencio_natural_previo_s": 1.24068, "metodo": "Se corto el archivo original del bloque 6 en el fin real de la voz, se descarto el silencio natural original, y se reinsertaron las dos partes con un clip de silencio puro de exactamente 4.000s entre medio.", "medido_en_resultado_s": 4.00333 },
-    { "pausa": 7, "bloque": 8, "ubicacion": "tras el 'Amén.' del Short 3, antes de 'Señor, esta parte de la noche...'", "fin_real_de_voz_s_en_archivo_original": 27.40302, "inicio_real_de_voz_siguiente_s_en_archivo_original": 28.6168, "silencio_natural_previo_s": 1.21379, "metodo": "Mismo metodo que la pausa 5, aplicado al bloque 8.", "medido_en_resultado_s": 4.00095 }
+  "pausas_internas_corregidas_a_4s_v2": [
+    { "pausa": 5, "bloque": 6, "ubicacion": "tras el 'Amén.' del Short 2, antes de 'Señor, cuando el salmo...'", "medido_en_resultado_s": 4.04048, "metodo": "ver correccion_v2_2026_11_17" },
+    { "pausa": 7, "bloque": 8, "ubicacion": "tras el 'Amén.' del Short 3, antes de 'Señor, esta parte de la noche...'", "medido_en_resultado_s": 4.02844, "metodo": "ver correccion_v2_2026_11_17" }
   ],
-  "verificacion_integridad_de_palabras": "Las 11 alineaciones de bloque reportaron texto_identico_al_enviado=true (ninguna discrepancia), lo que por construccion impide que una palabra quede cortada dentro de un bloque. En los 6 empalmes entre bloques (pausas reales) no se recorto ningun archivo -- solo se inserto silencio puro, asi que el contenido de voz de ambos lados queda intacto. En los 2 empalmes internos (pausas 5 y 7) se verifico por alineacion y por silencedetect de resolucion fina que el corte cae dentro de una ventana de silencio real (sin voz) tanto antes como despues, y que 'Amen.' y la palabra siguiente ('Senor,') quedan completos en el archivo editado. Primeras/ultimas palabras de cada uno de los 11 bloques revisadas una por una (ver bloques_usados arriba): todas corresponden a palabras completas, ninguna cortada a mitad.",
+  "verificacion_integridad_de_palabras": "Las 11 alineaciones de bloque reportaron texto_identico_al_enviado=true. En los 6 empalmes entre bloques (pausas reales) no se recorto ningun archivo -- solo se inserto silencio puro. En los 2 empalmes internos (pausas 5 y 7), reconstruidos en v2 desde los MP3 originales sin editar, se verifico con silencedetect en banda fina (-45dB/0.02s) sobre el archivo final que 'Amen.' decae de forma natural y limpia antes del silencio, y que la palabra siguiente arranca de forma natural despues -- sin ningun indicio de corte.",
   "pausa_9_cierre": "No incluida en esta entrega (narracion sin musica). El guion la describe como musica con fundido suave al final, que se añadira en el montaje audiovisual -- la narracion termina con el 'Amen.' final del bloque 11."
 }

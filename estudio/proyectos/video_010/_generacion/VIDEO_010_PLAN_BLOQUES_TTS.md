@@ -285,3 +285,28 @@ Ninguna cortada a mitad. En las 6 uniones con pausa real no se recortó ningún 
 Todo en `eleven_v4`, la configuración ahora predeterminada del canal.
 
 **Me detengo aquí** para que Orlando revise la narración completa antes de pasar al montaje audiovisual.
+
+---
+
+## 6. Corrección de las pausas 5 y 7 — v2 (2026-11-17)
+
+Orlando escuchó v1 y reportó dos cortes: 7:01–7:05 (pausa 5, bloque 6) con "Amén" cortado al final y "Señor" con el ataque cortado; 11:37–11:41 (pausa 7, bloque 8), el mismo defecto.
+
+**Verificación en los originales, antes de gastar nada:** se analizaron con `silencedetect` en banda fina (-40dB y -45dB, duración 0,02–0,03s) los MP3 originales sin editar de los bloques 6 y 8. "Amén." y la palabra siguiente están completos y limpios en **ambos originales**. El defecto no venía de ElevenLabs — lo introdujo el corte de v1, que usaba un umbral (-35dB/0,05s) que llamaba "silencio" a un punto todavía ~0,06s dentro de la cola de decaimiento de "Amén.". **No se gastó ningún crédito adicional**, no hizo falta regenerar nada.
+
+**Método de la corrección:** en vez de cortar en el borde del habla detectado, se cortó en el **centro de la pausa natural** (medida con el umbral más estricto, -45dB/0,02s, dejando ~0,5s de margen real a cada lado) y se insertó ahí únicamente el silencio adicional que faltaba para llegar a 4,0s:
+
+| Pausa | Bloque | Silencio natural real | Punto de corte usado | Silencio adicional insertado | Medido en el resultado final |
+|---|---|---:|---:|---:|---:|
+| 5 | 6 | 1,13351 s | 28,826 s | 2,86649 s | **4,04048 s** |
+| 7 | 8 | 1,12011 s | 28,053 s | 2,87989 s | **4,02844 s** |
+
+**Verificación a velocidad normal sobre el MP3 final v2:** se revisó con `silencedetect` en banda fina (-45dB/0,02s) el tramo inmediatamente antes y después de cada pausa, ya en el archivo ensamblado: en ambos casos la voz anterior decae de forma natural y limpia antes del silencio, y la voz siguiente arranca de forma natural justo después, sin ningún indicio de corte abrupto. Las 6 pausas reales entre bloques y los bloques 1, 2, 3, 4, 5, 7, 9, 10 y 11 no se tocaron — idénticos a v1.
+
+**Resultado:** `video_010_narracion_completa_sin_musica_v2.mp3` — 1.140,506 s (19:00,51), decodificación limpia. Más dos clips breves de verificación (voz antes y después de cada pausa corregida):
+- `estudio/proyectos/video_010/_generacion/montaje/clips_verificacion/video_010_correccion_pausa5_bloque6.mp3`
+- `estudio/proyectos/video_010/_generacion/montaje/clips_verificacion/video_010_correccion_pausa7_bloque8.mp3`
+
+`video_010_narracion_completa_sin_musica_v1.mp3` se conserva como histórico (contenía el defecto) — no usar para el montaje.
+
+**Me detengo aquí.** El montaje audiovisual queda pendiente de la revisión de Orlando de esta v2.
