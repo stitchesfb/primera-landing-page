@@ -1,0 +1,74 @@
+{
+  "modelo": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "ajustes": {
+    "speed": 1,
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "formato_salida": "mp3_44100_128",
+  "nota": "Configuracion vigente de canal.json (predeterminada del canal desde el 2026-11-14), bloques 3-11 del Video 10.",
+  "consumo_antes": 1762,
+  "consumo_despues": 8219,
+  "consumo_estable": true,
+  "segundos_esperados_estabilizacion": 18,
+  "delta_creditos_contador_suscripcion": 6457,
+  "caracteres_totales_enviados": 14677,
+  "tarifa_real_observada": 0.4399400422429652,
+  "resultados": [
+    {
+      "numero": 3,
+      "caracteres": 1215,
+      "bytes": 1302821,
+      "texto_identico": true
+    },
+    {
+      "numero": 4,
+      "caracteres": 1971,
+      "bytes": 2063089,
+      "texto_identico": true
+    },
+    {
+      "numero": 5,
+      "caracteres": 1305,
+      "bytes": 1557358,
+      "texto_identico": true
+    },
+    {
+      "numero": 6,
+      "caracteres": 1744,
+      "bytes": 2028398,
+      "texto_identico": true
+    },
+    {
+      "numero": 7,
+      "caracteres": 1896,
+      "bytes": 2214390,
+      "texto_identico": true
+    },
+    {
+      "numero": 8,
+      "caracteres": 1824,
+      "bytes": 2000395,
+      "texto_identico": true
+    },
+    {
+      "numero": 9,
+      "caracteres": 1505,
+      "bytes": 1741678,
+      "texto_identico": true
+    },
+    {
+      "numero": 10,
+      "caracteres": 1896,
+      "bytes": 2100287,
+      "texto_identico": true
+    },
+    {
+      "numero": 11,
+      "caracteres": 1321,
+      "bytes": 1502606,
+      "texto_identico": true
+    }
+  ]
+}

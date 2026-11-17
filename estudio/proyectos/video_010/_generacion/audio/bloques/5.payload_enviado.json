@@ -1,0 +1,13 @@
+{
+  "model_id": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "voice_settings": {
+    "speed": 1,
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "output_format": "mp3_44100_128",
+  "text": "A veces el temor de mañana trae consigo el recuerdo de una ocasión en que algo salió mal. Recuerdo cómo me sentí, lo solo que me pareció el camino o cuánto tardé en volver a levantarme. Tú conoces ese recuerdo. Permíteme mirarlo con compasión. Si aún me duele, dame el valor de contárselo a alguien de confianza cuando tenga la oportunidad.\n\nEl salmo me invita a alzar la mirada. Desde donde estoy acostado solo veo un poco de la habitación, quizá una línea de luz debajo de la puerta. Aun desde aquí puedo dirigir mi pensamiento hacia ti. Creador del cielo y de la tierra, tú sabes que esta noche necesito ayuda. Enséñame a pedírtela con la confianza de quien sabe que es escuchado.\n\nTe presento también el temor a cometer un error. Hay veces en que repaso una decisión tantas veces que termino más confundido. Dame permiso en mi corazón para hacer una pausa y buscar claridad cuando esté descansado. Si debo cambiar de opinión mañana, dame libertad para hacerlo. Si debo sostener una decisión difícil, dame mansedumbre y firmeza.\n\nSeñor, en este momento nombro ante ti lo que más me preocupa. Puedes escucharme aunque lo diga en silencio. Aquí está lo que pasó. Aquí está lo que temo. Aquí estoy yo, con todo lo que siento. Recibe esta parte de mi noche y enséñame a confiar en ti mientras llega el día.",
+  "previous_text": "Si lo que me inquieta tiene que ver con mi trabajo o con lo que hace falta en casa, tú sabes cuánto me cuesta dejar quieto ese asunto. Conoces lo que he hecho para salir adelante y las decisiones que todavía tengo que tomar. Dame buen juicio para revisar las cosas con calma. Si necesito pedir ayuda o hablar de algo que me avergüenza, dame confianza para decirlo con honestidad.",
+  "next_text": null
+}

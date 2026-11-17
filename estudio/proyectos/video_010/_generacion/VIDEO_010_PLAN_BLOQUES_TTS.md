@@ -214,3 +214,74 @@ El Salmo 121 completo está en Reina-Valera 1909: conjugaciones como "vendrá", 
 ---
 
 **Actualización final:** la elección de voz quedó resuelta el 2026-11-14 (`eleven_v4` predeterminado del canal). La muestra se generó y se aprobó (con la revisión del bloque 1 incluida). **Sigue pendiente únicamente la autorización expresa de Orlando para generar el lote completo de 11 bloques.**
+
+---
+
+## 5. Lote completo generado y ensamblado (2026-11-17)
+
+Orlando aprobó la transición de la apertura al Salmo 121 y autorizó generar los 9 bloques restantes (3–11) con `eleven_v4` y la configuración de El Faraón vigente en `canal.json` (ya no una excepción), reutilizando los bloques 1 y 2 ya aprobados.
+
+### Generación
+
+9 llamadas únicas (una por bloque), leyendo modelo/voz/ajustes/formato directamente de `canal.json`. `previous_text`/`next_text` solo en las 4 junturas de continuación directa (4→5, 6→7, 8→9, 10→11); omitidos en las junturas con pausa real. Texto alineado idéntico al enviado en los 9 bloques. Consumo real medido por el contador de suscripción, estable: **6.457 créditos para 14.677 caracteres** (0,43994 créditos/carácter).
+
+### Corrección de las dos pausas internas de 4 s (tras el Short 2 y el Short 3)
+
+| Pausa | Bloque | Silencio que dejó el modelo | Corrección aplicada | Medido en el resultado |
+|---|---|---:|---|---:|
+| 5 | 6 | 1,24068 s | Cortado en el fin real de la voz, re-empalmado con un clip de silencio puro de 4,000 s | 4,00333 s |
+| 7 | 8 | 1,21379 s | Mismo método | 4,00095 s |
+
+Ubicado por alineación el carácter exacto donde termina "Amén." y donde empieza la palabra siguiente dentro de cada archivo; medido con `silencedetect` fino el silencio real; como ambos quedaban muy por debajo del objetivo, se cortó cada archivo en el fin real de la voz y se volvieron a unir sus dos partes con un clip de silencio puro de exactamente 4,000 s entre medio — sin generar audio nuevo.
+
+### Ensamblado de los 11 bloques
+
+Las 6 pausas reales entre bloques se calcularon igual que la pausa 1 (sección 3): se midió el silencio natural ya presente en los bordes de los bloques adyacentes y se añadió solo la diferencia necesaria para llegar al objetivo del guion. Verificado después sobre el archivo completo ya ensamblado:
+
+| Pausa | Entre bloques | Objetivo | Medido |
+|---|---|---:|---:|
+| 1 | 1–2 | 3 s | 2,97388 s |
+| 2 | 2–3 | 6 s | 5,98372 s |
+| 3 | 3–4 | 4 s | 3,97476 s |
+| 4 | 5–6 | 9 s | 8,97388 s |
+| 6 | 7–8 | 9 s | 8,94909 s |
+| 8 | 9–10 | 10 s | 9,97764 s |
+
+Las 6 quedaron dentro de ±0,05 s del objetivo. Los bloques 4→5, 6→7, 8→9 y 10→11 se concatenaron sin pausa (continuación directa, tal como indica el guion).
+
+### Verificación de palabras completas en cada unión
+
+Las 11 alineaciones de bloque confirmaron `texto_identico_al_enviado: true` — cada bloque empieza y termina exactamente en el primer/último carácter de su primer/último párrafo, por lo que ninguna palabra puede quedar cortada *dentro* de un bloque. Se revisaron además, una por una, las primeras y últimas palabras de los 11 bloques:
+
+| Bloque | Primeras palabras | Últimas palabras |
+|---|---|---|
+| 1 | "Ya apagaste la luz," | "el que te guarda"»." |
+| 2 | "Escuchemos ahora el salmo" | "ahora y para siempre»." |
+| 3 | "Señor, aquí estoy. Tú" | "Ayúdame a descansar. Amén." |
+| 4 | "Tal vez ya sabes" | "para decirlo con honestidad." |
+| 5 | "A veces el temor" | "mientras llega el día." |
+| 6 | "¿Hay alguien que te" | "que su voz importa." |
+| 7 | "Cuando mi preocupación me" | "esté en mis manos." |
+| 8 | "¿Te despertaste de madrugada" | "silencio después de decirlas." |
+| 9 | "Dejo que mis manos" | "o escuchando en silencio." |
+| 10 | "Volvamos un momento a" | "todavía me cuesta entender." |
+| 11 | "El día de hoy" | "nombre de Jesús. Amén." |
+
+Ninguna cortada a mitad. En las 6 uniones con pausa real no se recortó ningún archivo (solo se insertó silencio), así que el contenido de voz de ambos lados queda intacto por construcción; en las 2 pausas internas (5 y 7) se verificó que "Amén." y la palabra siguiente quedan completos en ambos lados del corte.
+
+### Resultado
+
+**`video_010_narracion_completa_sin_musica_v1.mp3`** — **1.140,297 s (19:00,30)**, decodificación completa sin errores. Pausa 9 (cierre musical con fundido) no incluida — se añadirá en el montaje audiovisual; la narración termina en el "Amén." final del bloque 11. Archivo de datos: `estudio/proyectos/video_010/_generacion/montaje/plan_ensamblado.json`.
+
+### Gasto total acumulado del Video 10
+
+| Concepto | Caracteres | Créditos reales |
+|---|---:|---:|
+| Muestra (apertura + Salmo + cierre) | 1.371 | 604 |
+| Revisión del bloque 1 | 337 | 148 |
+| Lote (bloques 3–11) | 14.677 | 6.457 |
+| **Total** | **16.385** | **7.209** |
+
+Todo en `eleven_v4`, la configuración ahora predeterminada del canal.
+
+**Me detengo aquí** para que Orlando revise la narración completa antes de pasar al montaje audiovisual.

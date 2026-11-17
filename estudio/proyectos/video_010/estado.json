@@ -1,5 +1,5 @@
 {
-  "estado": "bloque1_revisado_y_regenerado_con_v4_ahora_predeterminado_pendiente_autorizacion_del_lote",
+  "estado": "narracion_completa_sin_musica_entregada_pendiente_revision_de_orlando_antes_del_montaje_audiovisual",
   "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
   "guion": {
     "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
@@ -156,6 +156,44 @@
       "nota": "Gasto real, ya ejecutado, independiente del presupuesto del lote completo (que sigue sin autorizar). El bloque 1 regenerado no necesitara volver a generarse al autorizar el lote."
     }
   },
+  "generacion_bloques_3_a_11": {
+    "fecha": "2026-11-17",
+    "autorizado_por": "Orlando",
+    "estado": "completado",
+    "metodo": "Una llamada HTTP por bloque, sin reintentos automaticos de contenido (los reintentos de red de canal.json->api.reintentos siguen activos para errores transitorios). Contexto previous_text/next_text solo en las 4 junturas de continuacion directa (4->5, 6->7, 8->9, 10->11), omitido en las junturas con pausa real.",
+    "modelo": "eleven_v4",
+    "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+    "ajustes": { "stability": 0.5, "similarity_boost": 0.75, "speed": 1 },
+    "configuracion": "Leida directamente de canal.json (predeterminada del canal desde el 2026-11-14) -- no es una excepcion.",
+    "formato_salida": "mp3_44100_128",
+    "consumo_antes": 1762,
+    "consumo_despues": 8219,
+    "consumo_estable": true,
+    "delta_creditos_contador_suscripcion": 6457,
+    "caracteres_totales_enviados": 14677,
+    "tarifa_real_observada": 0.43994,
+    "texto_identico_al_enviado_en_los_9_bloques": true,
+    "archivo_resultado": "estudio/proyectos/video_010/_generacion/audio/bloques/resultado_generacion_bloques_3_a_11.json",
+    "gasto_total_acumulado_video_010": {
+      "muestra_1371_caracteres": 604,
+      "revision_bloque1_337_caracteres": 148,
+      "lote_bloques_3_a_11_14677_caracteres": 6457,
+      "total": 7209
+    }
+  },
+  "ensamblado_narracion_completa": {
+    "fecha": "2026-11-17",
+    "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_narracion_completa_sin_musica_v1.mp3",
+    "sha256": "37ac6a71c393635e6e08f23bbf86fa4d1cb92811a0de327a63dded4e73c6fd53",
+    "duracion_segundos": 1140.297143,
+    "duracion_legible": "19:00.30",
+    "decodificacion_completa_sin_errores": true,
+    "archivo_datos": "estudio/proyectos/video_010/_generacion/montaje/plan_ensamblado.json",
+    "pausas_reales_verificadas": { "1": 2.97388, "2": 5.98372, "3": 3.97476, "4": 8.97388, "6": 8.94909, "8": 9.97764, "objetivo": "todas dentro de +-0.05s del objetivo del guion (3,6,4,9,9,10s)" },
+    "pausas_internas_corregidas": { "5": 4.00333, "7": 4.00095, "nota": "Tras el 'Amen.' de los Shorts 2 y 3 -- cortadas y re-empalmadas en el silencio real, con un clip de silencio puro de 4.000s insertado, en vez de dejarlas como las genero el modelo." },
+    "verificacion_palabras_completas": "Las 11 alineaciones de bloque confirmaron texto_identico_al_enviado=true. Se revisaron una por una las primeras/ultimas palabras de los 11 bloques: ninguna cortada a mitad. En las 6 uniones con pausa real no se recorto ningun archivo (solo se inserto silencio), y en las 2 pausas internas se verifico por alineacion + silencedetect fino que 'Amen.' y la palabra siguiente quedan completos en ambos lados del corte.",
+    "pausa_9_cierre": "No incluida -- es musica con fundido, se añade en el montaje audiovisual. La narracion sin musica termina en el 'Amen.' final del bloque 11."
+  },
   "presupuesto_lote_completo": {
     "caracteres": 15555,
     "eleven_flash_v2_5": 4293,
@@ -170,8 +208,7 @@
   },
   "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
   "pendiente": [
-    "Revisión de Orlando de la muestra ya generada con la configuración aprobada de Eleven v4.",
-    "Autorización expresa de Orlando para generar el lote completo."
+    "Revision de Orlando de la narracion completa sin musica (11 bloques) antes de pasar al montaje audiovisual."
   ],
   "historial": [
     {
@@ -185,6 +222,10 @@
     {
       "fecha": "2026-11-16",
       "evento": "Tercera tarea del Video 10. Orlando aprobo la revision de la apertura y pidio sustituir las dos ultimas frases del bloque 1 por un texto nuevo ('«Vamos a confiarle esa preocupacion a Dios. El salmo nos recuerda por que podemos hacerlo: \"Ni se dormira el que te guarda\"».'), regenerar unicamente el bloque 1 con eleven_v4/El Faraon/stability 0.5/similarity 0.75/speed 1 (misma excepcion de alcance Video 10), unirlo a la lectura del Salmo 121 ya grabada (sin regenerarla) y verificar que la pausa total despues de 'te guarda' fuera de 3 segundos contando el silencio natural, ademas de actualizar el guion y el plan con el cambio. Se actualizo VIDEO_010_GUION_COMPLETO_REV01.md (con nota de historial dentro del propio archivo) y plan_bloques_tts.json/VIDEO_010_PLAN_BLOQUES_TTS.md (bloque 1: 308 -> 337 caracteres, total del lote: 15526 -> 15555). Se regenero el bloque 1 (texto alineado identico al enviado); consumo real medido por el contador de suscripcion, estable: 148 creditos para 337 caracteres (0.4392 creditos/caracter) -- el contador mostro 'antes=0', consistente con un reinicio de ciclo de facturacion entre sesiones, no con un error de medicion. Se unio el nuevo bloque 1 con la lectura biblica ya grabada (muestra2_lectura_biblica.mp3, sin cambios): se midio el silencio real en ambos bordes (~0.219s cola del nuevo bloque 1, ~0.105s inicio de la lectura, sin cambios) y se añadio solo la diferencia (2.6755s) para llegar al objetivo de 3.0s -- verificado con silencedetect sobre el resultado: 2.97s reales, dentro de tolerancia. Gasto real acumulado en esta excepcion v4 del Video 10 (muestra + esta revision): 604 + 148 = 752 creditos. El lote completo de 11 bloques sigue sin autorizarse, y la decision de voz para el lote (Flash v2.5 por defecto o v4) sigue pendiente. Los Videos 7, 8 y 9 permanecen intactos."
+    },
+    {
+      "fecha": "2026-11-17",
+      "evento": "Cuarta tarea del Video 10. Orlando escucho y aprobo la apertura revisada unida al Salmo 121, y autorizo generar los 9 bloques restantes (3 al 11) con eleven_v4 y la configuracion de El Faraon vigente en canal.json (ya no una excepcion), reutilizando los bloques 1 y 2 ya aprobados, montar los 11 bloques con las pausas del guion, comprobar en especial los 4 segundos tras el Amen de los Shorts 2 y 3, y escuchar cada union para verificar palabras completas, entregando la narracion completa sin musica con su duracion y el consumo real. Se generaron los 9 bloques en 9 llamadas unicas, leyendo modelo/voz/ajustes/formato directamente de canal.json, con previous_text/next_text solo en las 4 junturas de continuacion directa (4-5, 6-7, 8-9, 10-11) y omitidos en las junturas con pausa real -- texto alineado identico al enviado en los 9. Consumo real medido por el contador de suscripcion, estable: 6457 creditos para 14677 caracteres (0.43994 creditos/caracter). Para las 2 pausas internas de 4s (bloques 6 y 8, tras el Amen de los Shorts 2 y 3): se ubico por alineacion el fin real de la voz y el inicio de la palabra siguiente dentro de cada archivo, se midio con silencedetect fino el silencio real que el modelo dejo (1.24s y 1.21s respectivamente, confirmando que ninguno llegaba al objetivo), se corto cada archivo en el fin real de la voz y se reinsertaron las dos partes con un clip de silencio puro de exactamente 4.000s entre medio -- medido despues sobre el resultado: 4.003s y 4.001s. Se ensamblaron los 11 bloques (reutilizando los bloques 1 y 2 ya aprobados sin regenerar) con las 6 pausas reales entre bloques (objetivos 3,6,4,9,9,10s), cada una calculada midiendo el silencio natural ya presente en los bordes de los bloques adyacentes y añadiendo solo la diferencia necesaria -- verificado despues sobre el archivo completo: las 6 midieron entre 2.974s y 9.978s, todas dentro de +-0.05s del objetivo, y las 2 internas confirmadas intactas dentro del archivo ensamblado. Se revisaron una por una las primeras y ultimas palabras de los 11 bloques (ninguna cortada a mitad) y se confirmo que, al no recortarse ningun archivo en las 6 uniones con pausa real (solo se inserto silencio), el contenido de voz de ambos lados queda intacto por construccion. Resultado: video_010_narracion_completa_sin_musica_v1.mp3, 1140.297s (19:00.30), decodificacion limpia. La pausa 9 (cierre musical con fundido) no se incluyo -- se añadira en el montaje audiovisual. Gasto total acumulado en el Video 10 hasta ahora: 604 (muestra) + 148 (revision bloque 1) + 6457 (lote 3-11) = 7209 creditos, todos en eleven_v4 (configuracion predeterminada del canal). canal.json no se modifico en esta tarea. Los Videos 7, 8 y 9 permanecen intactos."
     }
   ]
 }

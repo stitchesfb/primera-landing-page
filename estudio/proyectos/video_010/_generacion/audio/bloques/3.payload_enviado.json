@@ -1,0 +1,13 @@
+{
+  "model_id": "eleven_v4",
+  "voice_id": "8mBRP99B2Ng2QwsJMFQl",
+  "voice_settings": {
+    "speed": 1,
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "output_format": "mp3_44100_128",
+  "text": "Señor, aquí estoy. Tú conoces mi día, desde la hora en que me levanté hasta este momento de silencio. Sabes de dónde viene la inquietud que siento. Tal vez empezó con una noticia. Tal vez lleva tiempo conmigo y hoy pesa un poco más. Puedo hablarte de ella aquí, tal como la siento.\n\nMe hace bien escuchar que mi socorro viene de ti, que hiciste los cielos y la tierra. A esta hora, mi preocupación ocupa casi todo lo que puedo ver. Tú ves mi vida entera. Tú conoces a las personas que tengo en el corazón, las decisiones que me esperan y las preguntas para las que todavía me falta una respuesta.\n\nMientras escucho tu Palabra, ayúdame a reconocer que estoy en tu presencia. Puedo venir delante de ti con la voz baja, con pocas palabras, con el cansancio de este día. Recibe lo que alcanzo a decirte. También te entrego lo que siento y me cuesta explicar.\n\n¿Ya apagaste la luz y sigues pensando en todo lo que podría salir mal? El Salmo ciento veintiuno dice: «Ni se dormirá el que te guarda». Señor, tú sabes cuál es el pensamiento que vuelve cada vez que cierro los ojos. Dame claridad para atender mañana lo que esté a mi alcance. Esta noche pongo en tus manos lo que no puedo resolver. Ayúdame a descansar. Amén.",
+  "previous_text": null,
+  "next_text": null
+}
