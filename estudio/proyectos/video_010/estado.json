@@ -1,5 +1,5 @@
 {
-  "estado": "prueba_audiovisual_apertura_salmo_entregada_pendiente_revision_de_orlando_antes_del_render_completo",
+  "estado": "render_completo_entregado_pendiente_revision_de_orlando",
   "titulo_provisional": "¿El miedo no te deja dormir? Ora con el Salmo 121 esta noche",
   "guion": {
     "archivo": "estudio/proyectos/video_010/VIDEO_010_GUION_COMPLETO_REV01.md",
@@ -224,8 +224,56 @@
   },
   "observacion_pronunciacion": "Salmo 121 en RVR1909: conjugaciones como 'vendra', 'dormira', 'adormecera' son espanol estandar, sin riesgo real. Unico punto a vigilar, igual que en el Video 9: el registro liturgico con comillas « » puede sonar distinto en tono al resto -- cubierto por la muestra 2. No se modifico ninguna palabra del guion.",
   "pendiente": [
-    "Revision de Orlando de la prueba audiovisual de 68s (imagen, particulas y mezcla) antes del render completo del Video 10."
+    "Revision de Orlando del master completo (1080p) y del SRT antes de publicar."
   ],
+  "render_completo": {
+    "fecha": "2026-11-18",
+    "autorizado_por": "Orlando",
+    "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010_master.mp4",
+    "sha256": "56ae59a41dea4ca1f7f7528c1888c14b7e31dfe9085d9d05befab22f30fa6be1",
+    "duracion_segundos": 1150.479002,
+    "resolucion": "1920x1080",
+    "fps": 30,
+    "tamano_bytes": 91099345,
+    "decodificacion_completa_sin_errores": true,
+    "comiteado_al_repositorio": true,
+    "nota_tamano": "91MB, por debajo del limite de 100MB de GitHub -- a diferencia del master del Video 9 (174MB), este si se pudo comitear directamente, sin ZIP ni ruta alternativa.",
+    "narracion_base": "video_010_narracion_completa_sin_musica_v2.mp3 (aprobada) -- no se modifico en ningun momento, solo se le añadio musica por encima.",
+    "escenas": [
+      { "numero": 1, "imagen": "E01_valle_nocturno.webp", "entra_en_s": 0, "pausa_usada": "apertura (0:00)" },
+      { "numero": 2, "imagen": "E02_lago_nocturno.webp", "entra_en_s": 156.274, "pausa_usada": "pausa 3 (154.287-158.261s) -- mas cercana a 'cerca de 3:30' que a cualquier otra pausa real; no hay ninguna pausa entre 2:38 y 6:24 (bloques 4-5 en continuacion directa)" },
+      { "numero": 3, "imagen": "E03_mirador_montanas.webp", "entra_en_s": 422.9435, "pausa_usada": "pausa 5, interna del bloque 6 (420.930-424.957s)" },
+      { "numero": 4, "imagen": "E02_lago_nocturno.webp", "entra_en_s": 698.7435, "pausa_usada": "pausa 7, interna del bloque 8 (696.758-700.729s)" },
+      { "numero": 5, "imagen": "E01_valle_nocturno.webp", "entra_en_s": 910.4995, "pausa_usada": "pausa 8 (905.511-915.488s)" }
+    ],
+    "fundido_cruzado_s": 3.0,
+    "particulas": "82, periodo 24s, misma semilla (20260818) que la prueba de 68s ya aprobada -- continuas durante las 4 transiciones (capa independiente, superpuesta despues de construir el fondo con los fundidos)",
+    "movimiento_visual": "Imagen fija sin zoom/paneo, preset noche de canal.json (DECISIONES_CERRADAS #14 vigente) -- no el experimento de movimiento de los Videos 7/9",
+    "miniatura": "VIDEO_010_MINIATURA.webp, portada de YouTube, NO insertada en el render",
+    "musica": {
+      "pista": "alone_with_my_thoughts.mp3 (misma de la prueba de 68s)",
+      "lufs_medido": -27.7,
+      "ganancia_db_aplicada": 17.2,
+      "ducking": "Plano -23dB bajo voz y en interludios, en los 19 minutos completos",
+      "bucle": "9 vueltas con cruce de 4s (canal.json -> musica.cruce_loop_s)",
+      "cierre": "10s de musica tras el Amen final, fundido suave hasta silencio total (pausa 9 del guion) -- verificado con volumedetect: -18.8dB (con voz) a -87.3dB (silencio) en los ultimos 12s"
+    },
+    "verificacion_pedida": {
+      "apertura_completa": "'Ya apagaste la luz' integra -- sin silencios largos en los primeros 5s, solo pausas cortas normales del habla (0.05-0.27s)",
+      "empalme_7_01": "Nivel de la mezcla baja y sube de forma gradual (-18 a -40dB) alrededor de la pausa 5, sin salto ni artefacto",
+      "empalme_11_37": "Mismo patron, sin salto, alrededor de la pausa 7",
+      "fundido_musical_final": "Confirmado, ver 'cierre' arriba"
+    },
+    "incidencia_corregida": "Las imagenes de lago y mirador se guardaron invertidas en el primer intento (E02 tenia el mirador, E03 tenia el lago) -- detectado al revisar los fotogramas del primer render antes de entregarlo, corregido y vuelto a renderizar completo antes de cualquier entrega.",
+    "srt": {
+      "archivo": "estudio/proyectos/video_010/_generacion/montaje/video_010.srt",
+      "cues": 289,
+      "metodo": "Offsets de los 11 bloques anclados con silencedetect sobre las 6 pausas reales ya verificadas (no con duraciones nominales de archivo). Bloques en continuacion directa (5,7,9,11) usan offset_anterior + duracion nominal del bloque anterior. Palabras de los bloques 6 y 8 posteriores al corte de su pausa interna desplazadas por el mismo tiempo insertado ahi.",
+      "verificacion": "0 solapes entre cues (verificado programaticamente); primer cue en 0.000s; ultimo cue ('Amen.') termina en 1140.506s, el fin real de la narracion.",
+      "entregado_aparte_sin_quemar": true
+    },
+    "no_incluido": "Los 3 Shorts del Video 10 no se han preparado -- no se pidieron en esta tarea."
+  },
   "prueba_audiovisual_apertura_salmo": {
     "fecha": "2026-11-17",
     "archivo": "estudio/proyectos/video_010/_generacion/mapa_visual/prueba_apertura_salmo/video_010_prueba_apertura_salmo_68s.mp4",
@@ -280,6 +328,10 @@
     {
       "fecha": "2026-11-17",
       "evento": "Sexta tarea del Video 10. Orlando aprobo la narracion v2 y pidio una prueba audiovisual de 60-90s con la narracion v2 como audio maestro, la imagen adjunta de fondo, el estilo nocturno de Decisiones Cerradas (imagen fija 16:9, particulas blancas suaves y discretas, musica baja y estable bajo voz y pausas), cubriendo la apertura, la pausa tras 'te guarda' y la lectura completa del Salmo 121, re-verificando ademas los empalmes de 7:01 y 11:37 y anotando la instruccion del fundido musical de cierre para el render completo. De las 2 imagenes adjuntas se uso la que no tiene texto (valle de montana al atardecer) como fondo del video y se trato la otra (miniatura 'DIOS NO DUERME / SALMO 121') como miniatura aparte, sin insertarla en el render -- mismo criterio que videos anteriores, señalado explicitamente en caso de que Orlando quisiera lo contrario. Se construyo con las librerias del proyecto: particulas.mjs (82 particulas/24s, preset noche), renderer.mjs en modo imagen_fija_particulas (sin zoom, DECISIONES_CERRADAS #14 vigente), musicaArchivo.mjs con el ducking real del timeline via nivelEn() de musica.mjs. Musica elegida: alone_with_my_thoughts.mp3, siguiente en la rotacion libre tras completar una vuelta completa (Video7/8/9 = alone_with_my_thoughts/touching_moment/one_step_closer). Sonoridad medida (no asumida): -27.7 LUFS, coincide con canal.json; ganancia aplicada +17.2dB (formula del canal). Verificado con volumedetect: ducking plano -23dB estable entre -32 y -36dB sin ningun salto al entrar o salir de la pausa 1, y fade-in real de 4s confirmado (silencio total en t=0-1s, subida gradual hasta t=4-5s). Se re-verifico sobre el audio maestro v2 (no sobre el video de prueba, que no llega a esos minutos) que las pausas 5 y 7 siguen intactas: 4.027s y 3.972s, sin cambios desde la correccion anterior. Resultado: video_010_prueba_apertura_salmo_68s.mp4, 1920x1080/30fps, 68.000s exactos, decodificacion limpia, frames revisados en 1s/30s/60s (particulas discretas y en movimiento, imagen fija sin zoom). No se renderizo el video largo ni los Shorts. El cierre musical del Amen final queda anotado para el render completo, fuera del alcance de esta prueba de 68s. Los Videos 7, 8 y 9 permanecen intactos; canal.json no se modifico."
+    },
+    {
+      "fecha": "2026-11-18",
+      "evento": "Septima tarea del Video 10 (render completo). Orlando autorizo el render completo con tres paisajes nocturnos (el valle ya usado en la prueba, mas lago nocturno y mirador entre montañas, las 2 imagenes adjuntas), con 5 escenas: valle (0:00), lago (~3:30), mirador (~7:05), lago otra vez (~11:41), valle otra vez (~15:15), cada cambio ajustado a la pausa real mas cercana sin alterar el audio, fundidos cruzados de ~3s con particulas flotando durante las transiciones, miniatura 'DIOS NO DUERME' como portada de YouTube (no insertada), narracion v2 y musica alone_with_my_thoughts.mp3, verificando que 'Ya apagaste la luz' se oyera completa, que los empalmes cerca de 7:01 y 11:37 siguieran sonando naturales, y que la musica se desvaneciera suavemente tras el ultimo Amen; pidio el video largo en 1080p y el SRT aparte, sincronizado. Se genero primero el SRT completo (289 cues) anclando los offsets de los 11 bloques en las 6 pausas reales ya verificadas (no en duraciones nominales de archivo, que arrastran redondeo de cada concatenacion), sin solapes entre cues. Se construyo la mezcla de audio final (voz v2 + cama musical con el ducking real del perfil nocturno a lo largo de los 19 minutos completos, mas 10s de cierre con fundido suave) -- se encontro y corrigio un problema de medicion de duracion al exportar a .aac crudo (ADTS sin contenedor, que ffprobe mide mal); la solucion fue exportar a .m4a (contenedor MP4 propio), confirmando la duracion correcta. Se identifico que la pausa mas cercana a 'cerca de 3:30' era en realidad la pausa 3 (2:34-2:38), no una mas proxima a los 3:30 exactos -- no existe ninguna pausa real entre 2:38 y 6:24 (bloques 4-5 en continuacion directa) -- señalado explicitamente a Orlando. Se renderizo el fondo de 5 escenas con xfade (formula de offsets acumulados ya usada y verificada en este proyecto) y se superpuso la capa de particulas DESPUES, como capa independiente, para que no se interrumpiera en los cortes. **Incidencia detectada y corregida antes de entregar nada:** en el primer render, las imagenes de lago y mirador quedaron invertidas (se habian guardado con los nombres de archivo cruzados) -- se detecto al revisar los fotogramas, se corrigieron los archivos (con un commit aparte corrigiendo el error del commit anterior) y se rehizo el render visual completo desde cero con las imagenes correctas, verificado de nuevo por fotograma en las 5 escenas y una transicion antes de proceder. Se mezclo el video mudo con el audio final (amix duration=longest con padding explicito en vez de depender del calculo automatico de 'longest', que fallaba igual que el problema del .aac). Se verificaron los 3 puntos pedidos directamente sobre el MP4 final: apertura intacta (solo pausas cortas de habla en los primeros 5s), transiciones graduales sin salto alrededor de las pausas 5 y 7 (medido con volumedetect, ya con musica de fondo), y fundido final confirmado (-18.8dB con voz a -87.3dB silencio en los ultimos 12s). Resultado: video_010_master.mp4, 1920x1080/30fps, 1150.479s (19:10.48), decodificacion limpia, 91.099.345 bytes (~87MB) -- por debajo del limite de 100MB de GitHub, comiteado directamente al repositorio sin necesidad de ZIP. Los 3 Shorts no se prepararon, no se pidieron en esta tarea. canal.json no se modifico. Los Videos 7, 8 y 9 permanecen intactos."
     }
   ]
 }
